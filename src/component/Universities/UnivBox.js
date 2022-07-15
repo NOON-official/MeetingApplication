@@ -14,6 +14,7 @@ const Container= styled.div`
     top: 131px;
     width: 301px;
     overflow: scroll;
+    overflow-x:hidden;
 `
 const UnivHeader= styled(Stack)`
 border: solid #e5e5e5;

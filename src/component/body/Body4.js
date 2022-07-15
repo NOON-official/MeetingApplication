@@ -6,20 +6,49 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Fab } from "@mui/material";
 import Link from "@mui/material/Link";
+import CharactorContainer from "../Characters/CharactorContainer";
 const Container= styled.div`
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-align-items: center;
-position: absolute;
-height:80%;
-width: 100%;
+    left: 0;
+    overflow: scroll;
+    overflow-x:hidden;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    height: 75%;
+    padding: 0;
+        display: block;
 `
 const Title=styled.div`
-
+ top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    height: 27px;
+    left: calc(50% - 175px);
+    margin: 0;
+    color: #000;
+    
+    font-style: normal;
+    letter-spacing: -.015em;
+    line-height: 149.8%;
+    position: absolute;
+    text-align: center;
+    width: 350px;
 `
 const Contents= styled.div`
-
+top: 400px;
+    font-size: 18px;
+    font-weight: 400;
+    height: 27px;
+    left: calc(50% - 175px);
+    margin: 0;
+    color: #000;
+    
+    font-style: normal;
+    letter-spacing: -.015em;
+    line-height: 149.8%;
+    position: absolute;
+    text-align: center;
+    width: 350px;
 `
 const Warning= styled.div`
 color: red;
@@ -160,6 +189,7 @@ const Body4=()=>{
 
   <Container>
       <Title>우리 팀원을 소개해요</Title>
+      <CharactorContainer></CharactorContainer>
       <Modals>
         <ModalComedy></ModalComedy>
        <ModalModerator></ModalModerator>

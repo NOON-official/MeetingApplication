@@ -33,24 +33,32 @@ height:50%;
 width:100%;
 `
 const BackButton= styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-width: 50%;
-height: 100%;
+
 
 
 `
 const FrontButton= styled.div`
+
+background-color: #C4D7E0;
+
+`
+const StyledBackLink= styled(Link)`
+color:black;
 display: flex;
 align-items: center;
 justify-content: center;
 width: 50%;
-background-color: #C4D7E0;
 height: 100%;
+
 `
-const StyledLink= styled(Link)`
+const StyledFrontLink= styled(Link)`
 color:black;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 50%;
+height: 100%;
+background-color: #C4D7E0;
 `
 const Footer=()=>{
 const [nextPath, setNextPath]= useState("/");
@@ -86,9 +94,9 @@ else if(location ==="/Meeting4"){
 </Percentage>
 <BackAndFront>
   
-  <BackButton> <StyledLink to={prevPath}style={{ textDecoration: 'none' }}> 뒤로가기</StyledLink></BackButton>
+  <StyledBackLink to={prevPath}style={{ textDecoration: 'none' }}> <BackButton> 뒤로가기</BackButton></StyledBackLink>
   
-  <FrontButton><StyledLink to={nextPath}style={{ textDecoration: 'none' }}>다음으로  </StyledLink></FrontButton>
+ <StyledFrontLink to={nextPath}style={{ textDecoration: 'none' }}> <FrontButton>다음으로 </FrontButton> </StyledFrontLink>
  
   
 </BackAndFront>
