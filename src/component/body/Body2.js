@@ -3,6 +3,8 @@ import * as React from 'react';
 import { useState } from "react";
 import { Fab } from "@mui/material";
 import Slider from '@mui/material/Slider';
+import { useSelector, useDispatch } from "react-redux";
+
 const Container= styled.div`
 display: flex;
 flex-direction: column;
@@ -41,56 +43,53 @@ height:15%;
     left: 0;
     margin-left: 35%;
 `
-const GenderSelect=()=>{
-  
 
-  const [Gender, setGender]= useState(true); // 남자: true, 여자 : false
-function onFemaleChange(e){
-    setGender(false)
+const GenderSelect=()=>{
+ const dispatch =useDispatch()
+  const gender= useSelector(state=>state.gender)
+  const setmale=()=>{
+    dispatch({type:"SET_MALE"})
   }
-  function onMaleChange(e){
-    setGender(true)
+  const setfemale=()=>{
+    dispatch({type:"SET_FEMALE"})
   }
-  const ColorMale= Gender? "secondary": "white"
-  const ColorFemale= Gender? "white":"secondary"
+   // 남자: true, 여자 : false
+
+  const ColorMale= gender? "secondary": "transparent"
+  const ColorFemale= gender? "transparent":"secondary"
   
   return(
   <Contents>
         우리는 
-          <Fab variant="extended" size="small" color={ColorMale} aria-label="add" onClick={()=>onMaleChange()}>남자</Fab>
-          <Fab variant="extended" size="small" color= {ColorFemale} aria-label="add" onClick={()=>onFemaleChange()}>여자</Fab>
+          <Fab variant="extended" size="small" color={ColorMale} aria-label="add" onClick={()=>setmale()}>남자</Fab>
+          <Fab variant="extended" size="small" color= {ColorFemale} aria-label="add" onClick={()=>setfemale()}>여자</Fab>
           에요
       </Contents>
     
   )
 }
 const NumberSelect=()=>{
-  const [Number, setNumber]= useState("2명"); 
-  function onTwoChange(e){
-    setNumber("2명")
-  }
-  function onThreeChange(e){
-    setNumber("3명")
-  }
-  function onFourChange(e){
-    setNumber("4명")
-  }
+  const dispatch =useDispatch()
+    const number= useSelector(state=>state.number)
+  function setnumber(value){
+  dispatch({type:"NUMBER", payload: value})
+}
   return(<Contents>
         우리는  
-        <Fab variant="extended" size="small" color={Number=="2명"?"secondary":"white" }aria-label="add" onClick={()=>onTwoChange()}>2 명</Fab>
-        <Fab variant="extended" size="small" color={Number=="3명"?"secondary":"white" } aria-label="add" onClick={()=>onThreeChange()}>3 명</Fab>
-        <Fab variant="extended" size="small" color={Number=="4명"?"secondary":"white" } aria-label="add" onClick={()=>onFourChange()}>4 명</Fab>
+        <Fab variant="extended" size="small" color={number===2?"secondary":"white" }aria-label="add" onClick={()=>setnumber(2)}>2 명</Fab>
+        <Fab variant="extended" size="small" color={number===3?"secondary":"white" } aria-label="add" onClick={()=>setnumber(3)}>3 명</Fab>
+        <Fab variant="extended" size="small" color={number===4?"secondary":"white" } aria-label="add" onClick={()=>setnumber(4)}>4 명</Fab>
         이에요
       </Contents>
   )
 }
 const AgeSelect=()=>{
 
-  const [age, setAge] = React.useState(30);
-
+  const dispatch =useDispatch()
+    const age= useSelector(state=>state.age)
   const handleChange = (event, newValue) => {
     if (typeof newValue === 'number') {
-      setAge(newValue);
+      dispatch({type: "AGE", payload:newValue});
     }
   };
   return(
@@ -101,43 +100,45 @@ const AgeSelect=()=>{
   )
 }
 const JobSelect=()=>{
-  const [Job, setJob]= useState([{"대학생":false},{"취준생":false},{"대학원생":false},{"직장인":false}]); 
-  const [isUniv, setIsUniv]= useState(false)
-  const [isBusiness, setIsBusiness]= useState(false)
-  const [isBackSoo, setIsBackSoo]= useState(false)
-  const [isMiChin, setIsMiChin]= useState(false)
+  const dispatch =useDispatch()
+    const univ= useSelector(state=>state.univ)
+    const busi= useSelector(state=>state.busi)
+    const upper= useSelector(state=>state.upper)
+    const back= useSelector(state=>state.back)
+ 
   function onUnivChange(e){
-    setIsUniv(!isUniv)
+    dispatch({type: "JOBS_UNIV", payload:!univ});
+   
     
   }
   function onBusinessChange(e){
-    setIsBusiness(!isBusiness)
+    dispatch({type: "JOBS_BUSI", payload:!busi});
   }
   function onBackSooChange(e){
-    setIsBackSoo(!isBackSoo)
+    dispatch({type: "JOBS_BACK", payload:!back});
   }
   function onMiChinNoom(e){
-    setIsMiChin(!isMiChin)
+   dispatch({type: "JOBS_UPPER", payload:!upper});
   }
 
   return(
 <Contents>
   우리는 
-  <Fab variant="extended" size="small" color={isUniv?"secondary":"white" } aria-label="add" onClick={()=>onUnivChange()}>대학생</Fab>
-        <Fab variant="extended" size="small" color={isBusiness?"secondary":"white" } aria-label="add" onClick={()=>onBusinessChange()}>직장인</Fab>
-        <Fab variant="extended" size="small" color={isMiChin?"secondary":"white" }aria-label="add"onClick={()=>onMiChinNoom()}>대학원생</Fab>
-        <Fab variant="extended" size="small" color={isBackSoo?"secondary":"white" } aria-label="add" onClick={()=>onBackSooChange()}>취준생</Fab>
+  <Fab variant="extended" size="small" color={univ?"secondary":"white" } aria-label="add" onClick={()=>onUnivChange()}>대학생</Fab>
+        <Fab variant="extended" size="small" color={busi?"secondary":"white" } aria-label="add" onClick={()=>onBusinessChange()}>직장인</Fab>
+        <Fab variant="extended" size="small" color={upper?"secondary":"white" }aria-label="add"onClick={()=>onMiChinNoom()}>대학원생</Fab>
+        <Fab variant="extended" size="small" color={back?"secondary":"white" } aria-label="add" onClick={()=>onBackSooChange()}>취준생</Fab>
          이에요
         </Contents>
      
   )
 }
-const Body2=()=>{
+const Body2=( )=>{
   return(
 
-  <Container>
+  <Container >
       <Title>우리팀을 소개해 주세요</Title>
-      <GenderSelect/>
+      <GenderSelect />
       <NumberSelect/>
       <AgeSelect/>
       <JobSelect/>
@@ -145,8 +146,7 @@ const Body2=()=>{
       
 </Container>
       
-
+  
 )
-}
-
-export default Body2
+  }
+export default Body2;

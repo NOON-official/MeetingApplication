@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import * as React from 'react';
+import { useState } from "react";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -35,10 +36,10 @@ const Title=styled.div`
     width: 350px;
 `
 const Contents= styled.div`
-top: 400px;
+    top: 80%;
     font-size: 18px;
     font-weight: 400;
-    height: 27px;
+    height: 20px;
     left: calc(50% - 175px);
     margin: 0;
     color: #000;
@@ -190,12 +191,7 @@ const Body4=()=>{
   <Container>
       <Title>우리 팀원을 소개해요</Title>
       <CharactorContainer></CharactorContainer>
-      <Modals>
-        <ModalComedy></ModalComedy>
-       <ModalModerator></ModalModerator>
-       <ModalFace></ModalFace>
-       <ModalNerd></ModalNerd>
-      </Modals>
+      
       <Contents>우리팀은 <Fab>개그맨</Fab><Fab>배우</Fab><Fab>사회자</Fab><Fab>깍두기</Fab>으로 구성되어 있어요 
         
    </Contents>

@@ -32,6 +32,7 @@ color: #000;
     letter-spacing: -.015em;
     line-height: 149.8%;
     text-align: start;
+    font-size:13px;
 `
 const Comedian=()=>{
 return(

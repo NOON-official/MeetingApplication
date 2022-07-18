@@ -26,22 +26,23 @@ const MyPage= styled.div`
 `
 
 const Header=()=>{
-  const [Music, setMusic]= useState(true);
+  const [Music, setMusic]= useState(false);
 function MusicOff(){
-  setMusic(false);
+  setMusic(true);
   audio.pause();
 }
 const MusicOn=()=>{
-  setMusic(true);
+  setMusic(false);
   audio.play()
 }
 
   return(
 <HeaderContainer>
   
-  <Link to="/" style={{ textDecoration: 'none' }}>
-<HeaderLeft>미팅학개론 {Music?<VolumeOffIcon onClick={()=>MusicOff()}/>:<VolumeDownIcon onClick={()=>MusicOn()}/>} </HeaderLeft>
-</Link>
+  
+<HeaderLeft><Link to="/" style={{ textDecoration: 'none' }}>미팅학개론 </Link>{Music?<VolumeOffIcon onClick={()=>MusicOn()}/>:<VolumeDownIcon onClick={()=>MusicOff()}/>} </HeaderLeft>
+
+
 <HeaderRight>
   <MyPage>내 정보</MyPage>
 </HeaderRight>
