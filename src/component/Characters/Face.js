@@ -23,6 +23,10 @@ align-items: center;
     line-height: 149.8%;
 `
 const CharacterText= styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 width:90%;
 height:55%;
 margin:5%;
@@ -32,22 +36,22 @@ color: #000;
     letter-spacing: -.015em;
     line-height: 149.8%;
     text-align: start;
-    font-size:13px;
+    font-size:16px;
 `
 const Warning= styled.div`
 color: red;
+font-size:15px;
+margin-top: 20px;
 `
 const Face=()=>{
 return(
 <Container>
   <Character width="100" height="200" src={charimg}/>
- <Name>배우</Name>
+ <Name>비주얼</Name>
   <CharacterText>
-    출중한 외모로 상대를 매혹시켜요.
-            당신의 무기는 얼굴이에요. 바라만 보고 있어도 웃음이 나고 상대를 기분좋게 해줍니다.
-            미팅에서 당신은 팀원들의 견제 대상이에요.
-            하지만 주의하세요. 당신의 외모만 믿고 가만히 앉아있으면 상대방이 흥미를 잃을 수 있어요!
-            <Warning>주의! 주위에 물어볼 것 </Warning>
+    존재만으로도 분위기를 녹이는 당신! 바라만 보고 있어도 웃음이 나요.<br/>
+
+    <Warning>- 주의! 주위에 물어볼 것-</Warning>
   </CharacterText>
 </Container>
 

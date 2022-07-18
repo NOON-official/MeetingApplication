@@ -59,7 +59,7 @@ const UnivBox=()=>{
          <Univ variant="extended" size="small">경인교대</Univ>
           <Univ variant="extended" size="small">경찰대</Univ>
         </ThreeUnivs>
-         <ThreeUnivs direction="row" spacing={1}>
+         <ThreeUnivs direction="row" spacing={0.1}>
           <Univ variant="extended" size="small">경희대</Univ>
          <Univ variant="extended" size="small">고려대</Univ>
           <Univ variant="extended" size="small">공군사관학교</Univ>
@@ -107,7 +107,7 @@ const UnivBox=()=>{
           <Univ variant="extended" size="small">시립대</Univ>
         </ThreeUnivs>
       <UnivHeader>ㅇ-ㅎ</UnivHeader>
-        <ThreeUnivs direction="row" spacing={0.5}>
+        <ThreeUnivs direction="row" spacing={0.1}>
           <Univ variant="extended" size="small">아주대</Univ>
          <Univ variant="extended" size="small">연세대</Univ>
           <Univ variant="extended" size="small">육군사관학교</Univ>

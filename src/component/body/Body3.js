@@ -1,9 +1,7 @@
 import styled from "styled-components"
 import * as React from 'react';
-
-import { Fab } from "@mui/material";
 import UnivBox from "../Universities/UnivBox";
-import { Link } from 'react-router-dom';
+
 const Container= styled.div`
     left: 0;
     overflow: scroll;
@@ -91,13 +89,7 @@ const Body3=()=>{
        <UnivBox></UnivBox>
       
       
-      
-      <Contents>
-        우리는 이런 학과에요
-      </Contents>
-       <Univ>
-        <Fab>문과</Fab><Fab>이과</Fab><Fab>예술</Fab>
-      </Univ>
+
       
 </Container>
 )

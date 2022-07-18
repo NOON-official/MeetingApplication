@@ -33,6 +33,17 @@ font-weight:bold;
 `
 const Bottom= styled.div`
 `
+const SelectButton= styled.button`
+margin-right: 3px;
+margin-left:5px;
+border-radius: 34px;
+height:50px;
+width:200px;
+background-color:transparent !important;
+color: "black";
+border-color: #80808029;
+
+`
 const Body1=()=>{
   return(
 
@@ -44,7 +55,7 @@ const Body1=()=>{
       </Contents>
       
       <Link to="/Meeting2" style={{ textDecoration: 'none' }}>
-      <Fab variant="extended" size="small" >인연을 찾으러 가기</Fab>
+      <SelectButton>인연을 찾으러 가기</SelectButton>
       </Link>
       
 </Container>

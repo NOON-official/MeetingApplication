@@ -1,15 +1,3 @@
-const SET_Male= "SET_Male";
-const SET_FEMALE= "SET_FEMALE";
-const NUMBER= "NUMBER";
-const AGE="AGE";
-const JOBS_CHOOSE="JOBS_CHOOSE";
-const JOBS_UNCHOOSE="JOBS_UNCHOOSE";
-const UNIVERSITES_CHOOSE="UNIVERSITEIS_CHOOSE";
-const UNIVERSITES_UNCHOOSE= "UNIVERSITIES_UNCHOOSE";
-const MAJORS_CHOOSE="MAJORS_CHOOSE";
-const MAJORS_UNCHOOSE="MAJORS_UNCHOOSE";
-const CHARACTERS_CHOOSE="CHARACTERS_CHOOSE";
-const CHSRACTER_UNCHOOSE="CHARACTRS_UNCHOOSE";
 
 
 const initialState = 
@@ -26,8 +14,12 @@ const initialState =
    upper:false,
    jobs:{},
 	 universities: "userUniversities", // multi choice
-	 majors: [0]*3, // multi choice
-	 chatacters:[0]*4, // multi choice
+	  // multi choice
+	 comedian:false,
+   face:false,
+   moderator:false,
+   nerd:false,
+   characters:{},
 	 apperance: "userAppearance", // multi choice -> 2 or 3
 	 height: "userHeight", // multi choice
 	 personality: "userPersonality", // multi choice
@@ -72,6 +64,26 @@ const reducer=(state = initialState, action)=>{
       return{
         ...state,
         back:action.payload
+      }
+      case "CHAR_COMED":
+      return{
+        ...state,
+        comedian: action.payload
+      }
+      case "CHAR_FACE":
+        return{
+          ...state,
+          face:action.payload
+        }
+        case "CHAR_MODERA":
+      return{
+        ...state,
+        moderator: action.payload
+      }
+      case "CHAR_NERD":
+      return{
+        ...state,
+        nerd: action.payload
       }
     default:
       return state;

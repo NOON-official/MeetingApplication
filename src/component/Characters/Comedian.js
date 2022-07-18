@@ -12,6 +12,11 @@ height:35%;
 margin:5%;
 
 `
+const Warning= styled.div`
+color: red;
+font-size:15px;
+margin-top: 20px;
+`
 const Name= styled.div`
 height:5%;
 width:100%;
@@ -22,7 +27,12 @@ align-items: center;
     letter-spacing: -.015em;
     line-height: 149.8%;
 `
+
 const CharacterText= styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 width:90%;
 height:55%;
 margin:5%;
@@ -32,7 +42,7 @@ color: #000;
     letter-spacing: -.015em;
     line-height: 149.8%;
     text-align: start;
-    font-size:13px;
+    font-size:18px;
 `
 const Comedian=()=>{
 return(
@@ -40,8 +50,9 @@ return(
   <Character width="100" height="200" src={charimg}/>
  <Name>개그맨</Name>
   <CharacterText>
-    남다른 입담을 자랑하여 상대의 마음을 흔들어요.
-    하지만 주의하세요. 당신의 개그본능은 미팅을 성공적으로 이끌지만 상대방에게 가벼운 이미지를 남길 수 있어요.
+    리액션과 개그맨 뺨치는 입담으로 상대방을 홀리는 당신! <br/>
+
+ <Warning>-주의! 개그만 하다 집에 돌아올 수도 <br/>있으니 적절한 타이밍이 중요해요-  </Warning>
   </CharacterText>
 </Container>
 

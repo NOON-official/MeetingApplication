@@ -18,8 +18,7 @@ const Container= styled.div`
     position: absolute;
     top: 90px;
     width: 301px;
-    overflow: scroll;
-    overflow-x:hidden;
+    
 `
 const LeftButton= styled.button`
  position:absolute;

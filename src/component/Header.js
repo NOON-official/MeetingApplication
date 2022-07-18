@@ -40,7 +40,7 @@ const MusicOn=()=>{
 <HeaderContainer>
   
   
-<HeaderLeft><Link to="/" style={{ textDecoration: 'none' }}>미팅학개론 </Link>{Music?<VolumeOffIcon onClick={()=>MusicOn()}/>:<VolumeDownIcon onClick={()=>MusicOff()}/>} </HeaderLeft>
+<HeaderLeft><Link to="/" style={{ textDecoration: 'none', color:"black" }}>미팅학개론 </Link>{Music?<VolumeOffIcon onClick={()=>MusicOn()}/>:<VolumeDownIcon onClick={()=>MusicOff()}/>} </HeaderLeft>
 
 
 <HeaderRight>
