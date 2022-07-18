@@ -60,6 +60,7 @@ width: 50%;
 height: 100%;
 background-color: #C4D7E0;
 `
+
 const Footer=()=>{
 const [nextPath, setNextPath]= useState("/");
 const [prevPath,setPrevPath]= useState("/")
@@ -89,7 +90,7 @@ else if(location ==="/Meeting4"){
     <Container>
      <MovingPath/>
 <Percentage>
-<Line percent={percent} strokeWidth={4} strokeColor="#C4D7E0" />
+<Line style={{ height: '10px', width:"50%" }} percent={percent} strokeWidth={4} strokeColor="#C4D7E0" />
   <PercentageText>{percent}%</PercentageText>
 </Percentage>
 <BackAndFront>

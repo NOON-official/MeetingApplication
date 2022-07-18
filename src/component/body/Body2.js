@@ -109,7 +109,7 @@ const AgeSelect=()=>{
   };
   return(
    <ContentsAge>우리의 평균 나이는 {age}살 이에요 
-   <Slider color="secondary" valueLabelDisplay="off" min={20} step={1} max={35} defaultValue={30} aria-label="Default"  value={age} onChange={handleChange}/>
+   <Slider style={{ color:buttonColor }}  valueLabelDisplay="off" min={20} step={1} max={35} defaultValue={30} aria-label="Default"  value={age} onChange={handleChange}/>
    </ContentsAge>
     
   )
