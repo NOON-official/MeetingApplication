@@ -13,7 +13,7 @@ const initialState =
    back: false,
    upper:false,
    jobs:{},
-	 universities: "userUniversities", // multi choice
+	 universities: [], // multi choice
 	  // multi choice
 	 comedian:false,
    face:false,
@@ -85,6 +85,19 @@ const reducer=(state = initialState, action)=>{
         ...state,
         nerd: action.payload
       }
+      case "UNIVERSITIES":
+        const newUniv= action.payload;
+        state.universities.push(newUniv)
+        return{...state}
+        
+        case "UNIVERSITIES_DELETE":
+         const deleteUniv= state.universities.filter((value)=> value!==action.payload);
+          return {
+            ...state,
+            universities: deleteUniv
+          }
+            
+          
     default:
       return state;
   }
