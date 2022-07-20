@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import { Fab } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { useRef } from "react";
 import { useState } from "react";
 const buttonColor= "#C4D7E0";
 const Container= styled.div`
@@ -102,7 +101,7 @@ const University = (props) => {
  const [bgcolor, setBGColor]= useState("transparent")
  const [fontColor, setFontColor]= useState("black")
   const dispatch =useDispatch()
-  const universities= useSelector(state=>state.universities);
+  const universities= useSelector(state=>state.university);
   var isSame=false
   function OnUniversityClick(value){
     universities.map(univ=>univ===value?isSame=true: isSame) 

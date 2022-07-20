@@ -4,25 +4,16 @@ const initialState =
 
     { 
     user: "userName",
+    phone:"010-1111-1111",
 	 gender: true,
-	 number:2,
+	 num:2,
 	 age: 20,
-	 // jobs multi choice
-   univ: false,
-   busi:false,
-   back: false,
-   upper:false,
-   jobs:{},
-	 universities: [], // multi choice
-	  // multi choice
-	 comedian:false,
-   face:false,
-   moderator:false,
-   nerd:false,
-   characters:{},
-	 apperance: "userAppearance", // multi choice -> 2 or 3
-	 height: "userHeight", // multi choice
-	 personality: "userPersonality", // multi choice
+   jobs:[],
+	 university: [], // multi choice
+   characters:[],
+	 apperance: [], // multi choice -> 2 or 3
+	 height: [], // multi choice
+	 personality: [], // multi choice
     };
 
 
@@ -45,26 +36,7 @@ const reducer=(state = initialState, action)=>{
         age: action.payload
 
     }
-    case "JOBS_UNIV":
-      return{
-        ...state,
-        univ :action.payload
-      }
- case "JOBS_BUSI":
-      return{
-        ...state,
-       busi:action.payload
-      }
-       case "JOBS_UPPER":
-      return{
-        ...state,
-        upper:action.payload
-      }
-       case "JOBS_BACK":
-      return{
-        ...state,
-        back:action.payload
-      }
+ 
       case "CHAR_COMED":
       return{
         ...state,
@@ -85,18 +57,38 @@ const reducer=(state = initialState, action)=>{
         ...state,
         nerd: action.payload
       }
+      case "JOBS":
+        const newJob= action.payload;
+        state.jobs.push(newJob)
+        return{...state}
+      case "JOBS_DELETE":
+         const deleteJob= state.jobs.filter((value)=> value!==action.payload);
+          return {
+            ...state,
+            jobs: deleteJob
+          }
       case "UNIVERSITIES":
         const newUniv= action.payload;
-        state.universities.push(newUniv)
+        state.university.push(newUniv)
         return{...state}
         
         case "UNIVERSITIES_DELETE":
-         const deleteUniv= state.universities.filter((value)=> value!==action.payload);
+         const deleteUniv= state.university.filter((value)=> value!==action.payload);
           return {
             ...state,
-            universities: deleteUniv
+            university: deleteUniv
           }
-            
+        case "CHARACTERS":
+          const newCharacter= action.payload;
+        state.characters.push(newCharacter)
+        return{...state}
+        
+         case "CHARACTERS_DELETE":
+         const deleteCharacter= state.characters.filter((value)=> value!==action.payload);
+          return {
+            ...state,
+            characters:  deleteCharacter
+          }
           
     default:
       return state;

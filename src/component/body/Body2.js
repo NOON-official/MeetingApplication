@@ -2,7 +2,7 @@ import styled from "styled-components"
 import * as React from 'react';
 import Slider from '@mui/material/Slider';
 import { useSelector, useDispatch } from "react-redux";
-
+import { useState } from "react";
 const buttonColor= "#C4D7E0";
 const Container= styled.div`
 display: flex;
@@ -46,8 +46,8 @@ height:15%;
     margin-left: 35%;
 `
 const SelectButton= styled.button`
-margin-right: 3px;
 
+margin-right: 3px;
 border-radius: 34px;
 height:40px;
 width:70px;
@@ -56,6 +56,7 @@ color: ${(props)=>props.color };
 border-color: #80808029;
 
 `
+
 
 const GenderSelect=()=>{
  const dispatch =useDispatch()
@@ -115,34 +116,34 @@ const AgeSelect=()=>{
   )
 }
 const JobSelect=()=>{
+ const Job = (props) => {
+ const [bgcolor, setBGColor]= useState("transparent")
+ const [fontColor, setFontColor]= useState("black")
   const dispatch =useDispatch()
-    const univ= useSelector(state=>state.univ)
-    const busi= useSelector(state=>state.busi)
-    const upper= useSelector(state=>state.upper)
-    const back= useSelector(state=>state.back)
- 
-  function onUnivChange(e){
-    dispatch({type: "JOBS_UNIV", payload:!univ});
-   
-    
+  const jobs= useSelector(state=>state.jobs);
+  var isSame=false
+  function OnJobClick(value){
+    jobs.map(univ=>univ===value?isSame=true: isSame) 
+    if(isSame)
+    {dispatch({type:"JOBS_DELETE", payload: value})
+    setBGColor("transparent")  
+    setFontColor("black")
   }
-  function onBusinessChange(e){
-    dispatch({type: "JOBS_BUSI", payload:!busi});
+    else
+    {dispatch({type: "JOBS", payload:value})
+    setBGColor(buttonColor)
+    setFontColor("white")
+}
   }
-  function onBackSooChange(e){
-    dispatch({type: "JOBS_BACK", payload:!back});
-  }
-  function onMiChinNoom(e){
-   dispatch({type: "JOBS_UPPER", payload:!upper});
-  }
-
+return (<SelectButton color={fontColor}background_color={bgcolor} onClick={()=>OnJobClick(props.job)}>{props.job}</SelectButton>)
+}
   return(
 <Contents >
   우리는
-        <SelectButton variant="extended" size="small" background_color={univ?buttonColor:"white" } color={univ?"white":"black"} aria-label="add" onClick={()=>onUnivChange()}>대학생</SelectButton>
-        <SelectButton variant="extended" size="small" background_color={busi?buttonColor:"white" } color={busi?"white":"black"} aria-label="add" onClick={()=>onBusinessChange()}>직장인</SelectButton>
-        <SelectButton variant="extended" size="small" background_color={upper?buttonColor:"white" } color={upper?"white":"black"}aria-label="add"onClick={()=>onMiChinNoom()}>대학원생</SelectButton>
-        <SelectButton variant="extended" size="small"background_color={back?buttonColor:"white" } color={back?"white":"black"} aria-label="add" onClick={()=>onBackSooChange()}>취준생</SelectButton>
+        <Job job={"대학생"}></Job>
+       <Job job={"직장인"}></Job>
+       <Job job={"대학원생"}></Job>
+       <Job job={"취준생"}></Job>
          
        
         이에요

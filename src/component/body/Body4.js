@@ -2,6 +2,7 @@ import styled from "styled-components"
 import * as React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import CharactorContainer from "../Characters/CharactorContainer";
+import { useState } from "react";
 const buttonColor= "#C4D7E0";
 const Container= styled.div`
     left: 0;
@@ -47,7 +48,7 @@ const Contents= styled.div`
     width: 350px;
 `
 
-const Character= styled.button`
+const CharacterButton= styled.button`
 margin:5px;
 border-radius: 34px;
 height:40px;
@@ -60,23 +61,27 @@ color: ${(props)=>props.color||"black" };
 
 
 const Body4=()=>{
+ const Character = (props) => {
+ const [bgcolor, setBGColor]= useState("transparent")
+ const [fontColor, setFontColor]= useState("black")
   const dispatch =useDispatch()
-  const comedian= useSelector(state=>state.comedian)
-  const face= useSelector(state=> state.face)
-  const moderator= useSelector(state=> state.moderator)
-  const nerd=useSelector(state=>state.nerd)
-  const chooseComedian=()=>{
-    dispatch({type:"CHAR_COMED", payload:!comedian})
+  const characters= useSelector(state=>state.characters);
+  var isSame=false
+  function OnCharacterClick(value){
+    characters.map(univ=>univ===value?isSame=true: isSame) 
+    if(isSame)
+    {dispatch({type:"CHARACTERS_DELETE", payload: value})
+    setBGColor("transparent")  
+    setFontColor("black")
   }
-    const chooseFace=()=>{
-    dispatch({type:"CHAR_FACE", payload:!face})
+    else
+    {dispatch({type: "CHARACTERS", payload:value})
+    setBGColor(buttonColor)
+    setFontColor("white")
+}
   }
-    const chooseModerator=()=>{
-    dispatch({type:"CHAR_MODERA", payload:!moderator})
-  }
-    const chooseNerd=()=>{
-    dispatch({type:"CHAR_NERD", payload:!nerd})
-  }
+return (<CharacterButton color={fontColor}background_color={bgcolor} onClick={()=>OnCharacterClick(props.characters)}>{props.characters}</CharacterButton>)
+}
   return(
 
   <Container>
@@ -84,10 +89,10 @@ const Body4=()=>{
       <CharactorContainer></CharactorContainer>
       
       <Contents>우리팀은 <br/>
-        <Character background_color={comedian?buttonColor:"transparent"}  color={comedian?"white":"black"}onClick={()=>chooseComedian()}>개그맨</Character>
-        <Character background_color={face?buttonColor:"transparent"}  color={face?"white":"black"}onClick={()=>chooseFace()} >비주얼</Character>
-        <Character background_color={moderator?buttonColor:"transparent"}  color={moderator?"white":"black"} onClick={()=>chooseModerator()}>사회자</Character>
-        <Character background_color={nerd?buttonColor:"transparent"}  color={nerd?"white":"black"} onClick={()=>chooseNerd()}>깍두기</Character><br/>
+        <Character characters={"개그맨"}>개그맨</Character>
+        <Character characters={"비주얼"}>비주얼</Character>
+        <Character characters={"사회자"}>사회자</Character>
+        <Character characters={"깍두기"}>깍두기</Character><br/>
         로 구성되어 있어요 
         
    </Contents>
