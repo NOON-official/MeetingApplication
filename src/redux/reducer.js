@@ -5,12 +5,14 @@ const initialState =
     { 
     user: "userName",
     phone:"010-1111-1111",
-	 gender: true,
+	 gender: "남자",
 	 num:2,
 	 age: 20,
    jobs:[],
 	 university: [], // multi choice
    characters:[],
+   area:[],
+   day:[],
 	 apperance: [], // multi choice -> 2 or 3
 	 height: [], // multi choice
 	 personality: [], // multi choice
@@ -21,15 +23,15 @@ const reducer=(state = initialState, action)=>{
   switch (action.type) {
     case "SET_MALE":
       return { ...state, 
-        gender: true
+        gender: "남자"
       };
     case "SET_FEMALE":
       return{ ...state,
-        gender: false
+        gender: "여자"
       }
     case "NUMBER":
       return{...state,
-        number: action.payload
+        num: action.payload
       }
     case "AGE":
       return {...state,
@@ -89,7 +91,28 @@ const reducer=(state = initialState, action)=>{
             ...state,
             characters:  deleteCharacter
           }
-          
+          case "AREA":
+          const newArea= action.payload;
+        state.area.push(newArea)
+        return{...state}
+        
+         case "AREA_DELETE":
+         const deleteArea= state.area.filter((value)=> value!==action.payload);
+          return {
+            ...state,
+            area:  deleteArea
+          }
+          case "DAY":
+          const newDay= action.payload;
+        state.day.push(newDay)
+        return{...state}
+        
+         case "DAY_DELETE":
+         const deleteDay= state.day.filter((value)=> value!==action.payload);
+          return {
+            ...state,
+            day:  deleteDay
+          }
     default:
       return state;
   }

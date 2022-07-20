@@ -12,7 +12,6 @@ align-items: center;
 position: absolute;
 height:80%;
 width: 100%;
-
 `
 const Title=styled.div`
 font-size:20px;
@@ -46,7 +45,6 @@ height:15%;
     margin-left: 35%;
 `
 const SelectButton= styled.button`
-
 margin-right: 3px;
 border-radius: 34px;
 height:40px;
@@ -54,7 +52,6 @@ width:70px;
 background-color: ${(props)=>props.background_color || "transparent"};
 color: ${(props)=>props.color };
 border-color: #80808029;
-
 `
 
 
@@ -69,10 +66,10 @@ const GenderSelect=()=>{
   }
    // 남자: true, 여자 : false
 
-  const ColorMale= gender? buttonColor: "transparent"
-  const colorM =gender? "white":"black"
-  const ColorFemale= gender? "transparent":buttonColor
-  const colorF= gender?"black":"white"
+  const ColorMale= gender==="남자"? buttonColor: "transparent"
+  const colorM =gender==="남자"? "white":"black"
+  const ColorFemale= gender==="남자"? "transparent":buttonColor
+  const colorF= gender==="남자"?"black":"white"
   
   return(
   <Contents>
@@ -86,7 +83,7 @@ const GenderSelect=()=>{
 }
 const NumberSelect=()=>{
   const dispatch =useDispatch()
-    const number= useSelector(state=>state.number)
+    const number= useSelector(state=>state.num)
   function setnumber(value){
   dispatch({type:"NUMBER", payload: value})
 }
@@ -135,6 +132,7 @@ const JobSelect=()=>{
     setFontColor("white")
 }
   }
+  
 return (<SelectButton color={fontColor}background_color={bgcolor} onClick={()=>OnJobClick(props.job)}>{props.job}</SelectButton>)
 }
   return(

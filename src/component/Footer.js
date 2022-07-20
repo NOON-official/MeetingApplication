@@ -79,8 +79,14 @@ else if(location==="/Meeting3"){
   setPercent(35)
 }
 else if(location ==="/Meeting4"){
+   setNextPath("/Meeting5")
   setPrevPath("/Meeting3")
   setPercent(45)
+}
+else if(location ==="/Meeting5"){
+ 
+  setPrevPath("/Meeting4")
+  setPercent(50)
 }
 }
 
