@@ -24,27 +24,6 @@ const reducer = (state = initialState, action) => {
       return { ...state, num: action.payload }
     case 'AGE':
       return { ...state, age: action.payload }
-
-    case 'CHAR_COMED':
-      return {
-        ...state,
-        comedian: action.payload,
-      }
-    case 'CHAR_FACE':
-      return {
-        ...state,
-        face: action.payload,
-      }
-    case 'CHAR_MODERA':
-      return {
-        ...state,
-        moderator: action.payload,
-      }
-    case 'CHAR_NERD':
-      return {
-        ...state,
-        nerd: action.payload,
-      }
     case 'JOBS':
       const newJob = action.payload
       return { ...state, jobs: [...state.jobs, newJob] }
