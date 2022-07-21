@@ -9,9 +9,9 @@ const initialState = {
   characters: [],
   area: [],
   day: [],
-  apperance: [], // multi choice -> 2 or 3
-  height: [], // multi choice
-  personality: [], // multi choice
+  appearance: [], // multi choice -> 2 or 3
+  mbti: [], // multi choice
+  fashion: [], // multi choice
 }
 
 const reducer = (state = initialState, action) => {
@@ -80,6 +80,43 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         day: deleteDay,
+      }
+    case 'APPEARANCE':
+      const newAppearance = action.payload
+
+      return { ...state, appearance: [...state.appearance, newAppearance] }
+
+    case 'APPEARANCE_DELETE':
+      const deleteAppearance = state.appearance.filter(
+        (value) => value !== action.payload
+      )
+      return {
+        ...state,
+        appearance: deleteAppearance,
+      }
+    case 'MBTI':
+      const newMbti = action.payload
+
+      return { ...state, mbti: [...state.mbti, newMbti] }
+
+    case 'MBTI_DELETE':
+      const deleteMbti = state.mbti.filter((value) => value !== action.payload)
+      return {
+        ...state,
+        mbti: deleteMbti,
+      }
+    case 'FASHION':
+      const newFashion = action.payload
+
+      return { ...state, fashion: [...state.fashion, newFashion] }
+
+    case 'FASHION_DELETE':
+      const deleteFashion = state.fashion.filter(
+        (value) => value !== action.payload
+      )
+      return {
+        ...state,
+        fashion: deleteFashion,
       }
     default:
       return state
