@@ -1,6 +1,6 @@
 const initialState = {
   user: 'userName',
-  phone: '010-1111-1111',
+  phone: '',
   gender: '남자',
   num: 2,
   age: 20,
@@ -12,6 +12,11 @@ const initialState = {
   appearance: [], // multi choice -> 2 or 3
   mbti: [], // multi choice
   fashion: [], // multi choice
+  introduction: '',
+  kakaoid: '',
+  prefferedjobs: [],
+  prefferedage: 20,
+  preffereduniversity: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -118,6 +123,44 @@ const reducer = (state = initialState, action) => {
         ...state,
         fashion: deleteFashion,
       }
+    case 'PREFFEREDJOBS':
+      const newPrefferedJob = action.payload
+      return {
+        ...state,
+        prefferedjobs: [...state.prefferedjobs, newPrefferedJob],
+      }
+    case 'PREFFEREDJOBS_DELETE':
+      const deletePrefferedJob = state.prefferedjobs.filter(
+        (value) => value !== action.payload
+      )
+      return {
+        ...state,
+        prefferedjobs: deletePrefferedJob,
+      }
+    case 'PREFFEREDAGE':
+      return { ...state, prefferedage: action.payload }
+    case 'PREFFEREDUNIVERSITIES':
+      const newPrefferedUniv = action.payload
+
+      return {
+        ...state,
+        preffereduniversity: [...state.preffereduniversity, newPrefferedUniv],
+      }
+
+    case 'PREFFEREDUNIVERSITIES_DELETE':
+      const deletePrefferedUniv = state.preffereduniversity.filter(
+        (value) => value !== action.payload
+      )
+      return {
+        ...state,
+        preffereduniversity: deletePrefferedUniv,
+      }
+    case 'SET_PHONE':
+      return { ...state, phone: action.payload }
+    case 'SET_INTRODUCTION':
+      return { ...state, introduction: action.payload }
+    case 'SET_KAKAOID':
+      return { ...state, kakaoid: action.payload }
     default:
       return state
   }

@@ -76,8 +76,33 @@ const Footer = () => {
       setPrevPath('/Meeting4')
       setPercent(50)
     } else if (location === '/Meeting6') {
+      setNextPath('/Meeting7')
       setPrevPath('/Meeting5')
       setPercent(60)
+    } else if (location === '/Meeting7') {
+      setNextPath('/Meeting8')
+      setPrevPath('/Meeting6')
+      setPercent(70)
+    } else if (location === '/Meeting8') {
+      setNextPath('/Meeting9')
+      setPrevPath('/Meeting7')
+      setPercent(80)
+    } else if (location === '/Meeting9') {
+      setPrevPath('/Meeting8')
+      setNextPath('/Meeting10')
+      setPercent(90)
+    } else if (location === '/Meeting10') {
+      setPrevPath('/Meeting9')
+      setNextPath('/Meeting11')
+      setPercent(90)
+    } else if (location === '/Meeting11') {
+      setPrevPath('/Meeting10')
+      setNextPath('/Meeting12')
+      setPercent(90)
+    } else if (location === '/Meeting12') {
+      setPrevPath('/Meeting11')
+
+      setPercent(90)
     }
   }
 

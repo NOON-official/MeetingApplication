@@ -5,12 +5,18 @@ import Body3 from './component/body/Body3'
 import Body4 from './component/body/Body4'
 import Body5 from './component/body/Body5'
 import Body6 from './component/body/Body6'
+import Body7 from './component/body/Body7'
+import Body8 from './component/body/Body8'
+import Body9 from './component/body/Body9'
+import Body10 from './component/body/Body10'
+import Body11 from './component/body/Body11'
+import Body12 from './component/body/Body12'
 import Footer from './component/Footer'
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-
+import { app } from './component/Firebase/firebase'
 function App() {
   const Bootom = () => {
     const location = useLocation().pathname
@@ -31,6 +37,12 @@ function App() {
           <Route path="Meeting4" element={<Body4 />}></Route>
           <Route path="Meeting5" element={<Body5 />}></Route>
           <Route path="Meeting6" element={<Body6 />}></Route>
+          <Route path="Meeting7" element={<Body7 />}></Route>
+          <Route path="Meeting8" element={<Body8 />}></Route>
+          <Route path="Meeting9" element={<Body9 />}></Route>
+          <Route path="Meeting10" element={<Body10 />}></Route>
+          <Route path="Meeting11" element={<Body11 />}></Route>
+          <Route path="Meeting12" element={<Body12 />}></Route>
         </Routes>
         <Bootom></Bootom>
       </BrowserRouter>

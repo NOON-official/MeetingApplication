@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import Stack from '@mui/material/Stack'
 import { Fab } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-
+import { useState } from 'react'
 import * as React from 'react'
-const buttonColor = '#C4D7E0'
+const buttonColor = '#FFDCE1'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,6 +19,7 @@ const Container = styled.div`
   width: 301px;
   overflow: scroll;
   overflow-x: hidden;
+  top: ${(props) => props.top || '70%'};
 `
 const UnivHeader = styled(Stack)`
   border: solid #e5e5e5;
@@ -105,7 +106,7 @@ const Uni = styled.button`
 `
 const University = (props) => {
   const dispatch = useDispatch()
-  const universities = useSelector((state) => state.university)
+  const universities = useSelector((state) => state.preffereduniversity)
   const exist = React.useMemo(
     () => universities.includes(props.university),
     [universities]
@@ -118,9 +119,12 @@ const University = (props) => {
 
   const OnUniversityClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'UNIVERSITIES_DELETE', payload: props.university })
+      dispatch({
+        type: 'PREFFEREDUNIVERSITIES_DELETE',
+        payload: props.university,
+      })
     } else {
-      dispatch({ type: 'UNIVERSITIES', payload: props.university })
+      dispatch({ type: 'PREFFEREDUNIVERSITIES', payload: props.university })
     }
   }, [exist, props.university])
   return (
@@ -134,9 +138,9 @@ const University = (props) => {
   )
 }
 
-const UnivBox = () => {
+const UnivBox = (props) => {
   return (
-    <Container>
+    <Container top={props.top}>
       <UnivHeader spacing={2}>ㄱ-ㄹ</UnivHeader>
       <ThreeUnivs direction="row" spacing={2}>
         <University university={'가천대'}></University>
