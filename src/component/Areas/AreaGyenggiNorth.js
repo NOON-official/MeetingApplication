@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as React from 'react'
 const buttonColor = '#C4D7E0'
 const BoxButton = styled.button`
+  font-family: 'Single Day', cursive;
   display: flex;
   flex-direction: column;
   position: absolute;

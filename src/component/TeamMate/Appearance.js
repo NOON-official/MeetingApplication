@@ -38,6 +38,7 @@ const SelectedFace = (props) => {
 const Face = (props) => {
   const dispatch = useDispatch()
   const appearance = useSelector((state) => state.appearance)
+  const num = useSelector((state) => state.num)
   const exist = React.useMemo(
     () => appearance.includes(props.face),
     [appearance]
@@ -51,9 +52,10 @@ const Face = (props) => {
     if (exist) {
       dispatch({ type: 'APPEARANCE_DELETE', payload: props.face })
     } else {
-      dispatch({ type: 'APPEARANCE', payload: props.face })
+      if (appearance.length < num)
+        dispatch({ type: 'APPEARANCE', payload: props.face })
     }
-  }, [exist, props.face])
+  }, [exist, props.face, appearance])
   return (
     <FaceButton
       color={fontColor}

@@ -37,6 +37,7 @@ const SelectedMbti = (props) => {
 const Mbti = (props) => {
   const dispatch = useDispatch()
   const mbti = useSelector((state) => state.mbti)
+  const num = useSelector((state) => state.num)
   const exist = React.useMemo(() => mbti.includes(props.mbti), [mbti])
   const fontColor = React.useMemo(() => (exist ? 'white' : 'black'), [exist])
   const bgColor = React.useMemo(
@@ -47,9 +48,9 @@ const Mbti = (props) => {
     if (exist) {
       dispatch({ type: 'MBTI_DELETE', payload: props.mbti })
     } else {
-      dispatch({ type: 'MBTI', payload: props.mbti })
+      if (mbti.length < num) dispatch({ type: 'MBTI', payload: props.mbti })
     }
-  }, [exist, props.mbti])
+  }, [exist, props.mbti, mbti])
   return (
     <MbtiButton
       color={fontColor}

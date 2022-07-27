@@ -31,7 +31,7 @@ const UnivHeader = styled(Stack)`
   left: 0;
   letter-spacing: -0.015em;
   line-height: 180%;
-
+  font-family: 'Single Day', cursive;
   text-align: left;
   width: 281px;
 `
@@ -97,7 +97,8 @@ const Uni = styled.button`
   min-width: 34px;
   width: auto;
   height: 34px;
-  z-index: 1050;
+  font-family: 'Single Day', cursive;
+  z-index: 1;
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   color: ${(props) => props.color || 'black'};

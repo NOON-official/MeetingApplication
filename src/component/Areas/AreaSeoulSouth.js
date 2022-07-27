@@ -7,7 +7,7 @@ const BoxButton = styled.button`
   display: flex;
   flex-direction: column;
   position: absolute;
-
+  font-family: 'Single Day', cursive;
   top: 50%;
   width: 50%;
   height: 30%;

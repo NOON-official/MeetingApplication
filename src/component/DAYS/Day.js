@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as React from 'react'
 const buttonColor = '#C4D7E0'
 const DayButton = styled.input`
+  font-family: 'Single Day', cursive;
   border-radius: 100%;
   background-color: ${(props) =>
     props.background_color || 'transparent'}!important;

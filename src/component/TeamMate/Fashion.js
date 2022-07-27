@@ -36,6 +36,7 @@ const SelectedFashion = (props) => {
 const Fashion = (props) => {
   const dispatch = useDispatch()
   const fashion = useSelector((state) => state.fashion)
+  const num = useSelector((state) => state.num)
   const exist = React.useMemo(() => fashion.includes(props.fashion), [fashion])
   const fontColor = React.useMemo(() => (exist ? 'white' : 'black'), [exist])
   const bgColor = React.useMemo(
@@ -46,9 +47,10 @@ const Fashion = (props) => {
     if (exist) {
       dispatch({ type: 'FASHION_DELETE', payload: props.fashion })
     } else {
-      dispatch({ type: 'FASHION', payload: props.fashion })
+      if (fashion.length < num)
+        dispatch({ type: 'FASHION', payload: props.fashion })
     }
-  }, [exist, props.fashion])
+  }, [exist, props.fashion, fashion])
   return (
     <FashionButton
       color={fontColor}

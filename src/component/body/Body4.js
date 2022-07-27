@@ -22,6 +22,7 @@ const Title = styled.div`
   height: 27px;
   left: calc(50% - 175px);
   margin: 0;
+  font-family: 'Single Day', cursive;
   color: #000;
 
   font-style: normal;
@@ -32,6 +33,7 @@ const Title = styled.div`
   width: 350px;
 `
 const Contents = styled.div`
+  font-family: 'Single Day', cursive;
   top: 80%;
   font-size: 18px;
   font-weight: 400;
@@ -49,6 +51,7 @@ const Contents = styled.div`
 `
 
 const CharacterButton = styled.button`
+  font-family: 'Single Day', cursive;
   margin: 5px;
   border-radius: 34px;
   height: 40px;
@@ -99,12 +102,12 @@ const Body4 = () => {
       <CharactorContainer></CharactorContainer>
 
       <Contents>
-        우리팀은 <br />
+        미팅 나갈 구성원을 알려주세요~ <br />
         <Character character={'개그맨'}>개그맨</Character>
         <Character character={'비주얼'}>비주얼</Character>
         <Character character={'사회자'}>사회자</Character>
         <Character character={'깍두기'}>깍두기</Character>
-        <br />로 구성되어 있어요
+        <br />
       </Contents>
     </Container>
   )

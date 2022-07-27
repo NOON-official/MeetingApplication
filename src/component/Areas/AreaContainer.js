@@ -6,7 +6,7 @@ import AreaSeoulNorth from './AreaSeoulNorth'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-
+  font-family: 'Single Day', cursive;
   box-sizing: border-box;
   height: 60%;
   left: 50%;

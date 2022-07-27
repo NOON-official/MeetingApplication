@@ -12,6 +12,7 @@ const Container = styled.div`
   position: absolute;
   height: 80%;
   width: 100%;
+  font-family: 'Single Day', cursive;
 `
 const Title = styled.div`
   font-size: 20px;
@@ -19,7 +20,7 @@ const Title = styled.div`
 `
 const Contents = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   color: 'black';
   justify-content: center;
   align-items: center;
@@ -52,6 +53,7 @@ const SelectButton = styled.button`
   background-color: ${(props) => props.background_color || 'transparent'};
   color: ${(props) => props.color};
   border-color: #80808029;
+  font-family: 'Single Day', cursive;
 `
 
 const GenderSelect = () => {
@@ -72,28 +74,29 @@ const GenderSelect = () => {
 
   return (
     <Contents>
-      우리는
-      <SelectButton
-        variant="extended"
-        size="small"
-        background_color={ColorMale}
-        color={colorM}
-        aria-label="add"
-        onClick={() => setmale()}
-      >
-        남자
-      </SelectButton>
-      <SelectButton
-        variant="extended"
-        size="small"
-        background_color={ColorFemale}
-        color={colorF}
-        aria-label="add"
-        onClick={() => setfemale()}
-      >
-        여자
-      </SelectButton>
-      에요
+      셩별을 선택해 주세요!
+      <div>
+        <SelectButton
+          variant="extended"
+          size="small"
+          background_color={ColorMale}
+          color={colorM}
+          aria-label="add"
+          onClick={() => setmale()}
+        >
+          남자
+        </SelectButton>
+        <SelectButton
+          variant="extended"
+          size="small"
+          background_color={ColorFemale}
+          color={colorF}
+          aria-label="add"
+          onClick={() => setfemale()}
+        >
+          여자
+        </SelectButton>
+      </div>
     </Contents>
   )
 }
@@ -105,38 +108,39 @@ const NumberSelect = () => {
   }
   return (
     <Contents>
-      우리는
-      <SelectButton
-        variant="extended"
-        size="small"
-        background_color={number === 2 ? buttonColor : 'white'}
-        color={number === 2 ? 'white' : 'black'}
-        aria-label="add"
-        onClick={() => setnumber(2)}
-      >
-        2 명
-      </SelectButton>
-      <SelectButton
-        variant="extended"
-        size="small"
-        background_color={number === 3 ? buttonColor : 'white'}
-        color={number === 3 ? 'white' : 'black'}
-        aria-label="add"
-        onClick={() => setnumber(3)}
-      >
-        3 명
-      </SelectButton>
-      <SelectButton
-        variant="extended"
-        size="small"
-        background_color={number === 4 ? buttonColor : 'white'}
-        color={number === 4 ? 'white' : 'black'}
-        aria-label="add"
-        onClick={() => setnumber(4)}
-      >
-        4 명
-      </SelectButton>
-      이에요
+      인원을 알려주세요~
+      <div>
+        <SelectButton
+          variant="extended"
+          size="small"
+          background_color={number === 2 ? buttonColor : 'white'}
+          color={number === 2 ? 'white' : 'black'}
+          aria-label="add"
+          onClick={() => setnumber(2)}
+        >
+          2 명
+        </SelectButton>
+        <SelectButton
+          variant="extended"
+          size="small"
+          background_color={number === 3 ? buttonColor : 'white'}
+          color={number === 3 ? 'white' : 'black'}
+          aria-label="add"
+          onClick={() => setnumber(3)}
+        >
+          3 명
+        </SelectButton>
+        <SelectButton
+          variant="extended"
+          size="small"
+          background_color={number === 4 ? buttonColor : 'white'}
+          color={number === 4 ? 'white' : 'black'}
+          aria-label="add"
+          onClick={() => setnumber(4)}
+        >
+          4 명
+        </SelectButton>
+      </div>
     </Contents>
   )
 }
@@ -197,12 +201,13 @@ const Job = (props) => {
 const JobSelect = () => {
   return (
     <Contents>
-      우리는
-      <Job job={'대학생'}></Job>
-      <Job job={'직장인'}></Job>
-      <Job job={'대학원생'}></Job>
-      <Job job={'취준생'}></Job>
-      이에요
+      직업을 알려주세요~
+      <div>
+        <Job job={'대학생'}></Job>
+        <Job job={'직장인'}></Job>
+        <Job job={'대학원생'}></Job>
+        <Job job={'취준생'}></Job>
+      </div>
     </Contents>
   )
 }

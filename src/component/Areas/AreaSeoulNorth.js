@@ -12,6 +12,7 @@ const BoxButton = styled.button`
   height: 30%;
   justify-content: center;
   align-items: center;
+  font-family: 'Single Day', cursive;
   background-color: ${(props) =>
     props.background_color || 'transparent'}!important;
   color: ${(props) => props.color} !important;
