@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom'
 import { Line } from 'rc-progress'
 import { useSelector, useDispatch } from 'react-redux'
 import { PageNotCompleted } from './ErrorMessages/PageNotCompletedError'
+import { authentication } from './Firebase/firebase'
+
 const Container = styled.footer`
   position: fixed;
   bottom: 0%;
@@ -72,6 +74,10 @@ const Footer = () => {
   const [prevPath, setPrevPath] = useState('/')
   const location = useLocation().pathname
   const [percent, setPercent] = useState(10)
+  const phone = useSelector((state) => state.phone)
+  const gender = useSelector((state) => state.gender)
+  const num = useSelector((state) => state.num)
+  const age = useSelector((state) => state.age)
   const jobs = useSelector((state) => state.jobs)
   const prefferedjobs = useSelector((state) => state.prefferedjobs)
   const prefferedage = useSelector((state) => state.prefferedage)
@@ -79,6 +85,7 @@ const Footer = () => {
   const university = useSelector((state) => state.university)
   const characters = useSelector((state) => state.characters)
   const area = useSelector((state) => state.area)
+  const kakaoid = useSelector((state) => state.kakaoid)
   const day = useSelector((state) => state.day)
   const appearance = useSelector((state) => state.appearance)
   const mbti = useSelector((state) => state.mbti)
@@ -149,10 +156,16 @@ const Footer = () => {
       setPercent(90)
     } else if (location === '/Meeting10') {
       setPrevPath('/Meeting9')
-      setNextPath('/Meeting11')
+      if (authentication.currentUser) {
+        setNextPath('/Meeting11')
+      } else {
+        setNextPath('/Meeting10')
+      }
+
       setPercent(90)
     } else if (location === '/Meeting11') {
       setPrevPath('/Meeting10')
+
       setNextPath('/Meeting12')
       setPercent(90)
     } else if (location === '/Meeting12') {

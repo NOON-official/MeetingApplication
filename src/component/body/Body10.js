@@ -2,7 +2,11 @@ import styled from 'styled-components'
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState, useRef } from 'react'
-import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
+import {
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  onAuthStateChanged,
+} from 'firebase/auth'
 import { authentication } from '../Firebase/firebase'
 
 const buttonColor = '#C4D7E0'
@@ -134,7 +138,18 @@ const PhoneAuthInput = (props) => {
         onChange={verifyOTP}
       ></AuthNum>
 
-      <AuthSubmit>인증</AuthSubmit>
+      <AuthSubmit
+        onClick={() => {
+          if (authentication.currentUser) {
+            console.log(authentication.currentUser.uid)
+            alert('hello')
+          } else {
+            alert('번호가 일치하지 않습니다.')
+          }
+        }}
+      >
+        인증
+      </AuthSubmit>
     </AuthContainer>
   )
 }

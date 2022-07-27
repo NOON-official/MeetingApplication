@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-
+import axios from 'axios'
+import { authentication } from '../Firebase/firebase'
 const Container = styled.div`
   left: 0;
   overflow: hidden;
@@ -49,16 +50,63 @@ const KakaoIdInput = styled.input`
 `
 
 const Body11 = () => {
+  const phone = useSelector((state) => state.phone)
+  const gender = useSelector((state) => state.gender)
+  const num = useSelector((state) => state.num)
+  const age = useSelector((state) => state.age)
+  const jobs = useSelector((state) => state.jobs)
+  const prefferedjobs = useSelector((state) => state.prefferedjobs)
+  const prefferedage = useSelector((state) => state.prefferedage)
+  const preffereduniversity = useSelector((state) => state.preffereduniversity)
+  const university = useSelector((state) => state.university)
+  const characters = useSelector((state) => state.characters)
+  const area = useSelector((state) => state.area)
+  const kakaoid = useSelector((state) => state.kakaoid)
+  const day = useSelector((state) => state.day)
+  const appearance = useSelector((state) => state.appearance)
+  const mbti = useSelector((state) => state.mbti)
+  const fashion = useSelector((state) => state.fashion)
   const dispatch = useDispatch()
   const KakaoId = (e) => {
     dispatch({ type: 'SET_KAKAOID', payload: e.target.value })
   }
+
+  const Mid = () => {
+    const body = {
+      firebaseUid: authentication.currentUser.uid,
+      kakaoId: kakaoid,
+      phone: phone,
+      gender: gender,
+      num: `${num}`,
+      age: `${age}`,
+      job: jobs,
+      university: university,
+      role: characters,
+      area: area,
+      day: day,
+      appearance: appearance,
+      mbti: mbti,
+      fashion: fashion,
+    }
+    console.log(body)
+    axios
+      .post('http://localhost:5000/api/user/ourteam', body)
+      .then((res) => {
+        alert('카드 생성 성공 :)')
+      })
+      .catch((err) => {
+        console.log(err)
+        alert('카드 생성 실패 :(')
+      })
+  } //데이터 보내기
+
   return (
     <Container>
       <Title>
         카카오톡 아이디를 알려주세요. <br /> 매칭확인 후 상대에게 전달됩니다!
       </Title>
       <KakaoIdInput onChange={KakaoId} placeholder="깨똑아이뒤"></KakaoIdInput>
+      <button onClick={Mid}>버튼</button>
     </Container>
   )
 }
