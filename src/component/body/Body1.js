@@ -1,58 +1,45 @@
 import styled from 'styled-components'
 import * as React from 'react'
-import backimg from '../../image/BG3.gif'
 import { Link } from 'react-router-dom'
-import Fab from '@mui/material/Fab'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
   position: absolute;
   height: 70%;
   width: 100%;
-  font-family: 'Single Day', cursive;
-`
-const BackGround = styled.img`
-  position: absolute;
-  z-index: -1;
-  size: 100%;
-`
-const Title = styled.div`
-  font-size: 50px;
-  font-weight: bold;
+  font-family: var(--font);
 `
 const Contents = styled.div`
-  font-size: 40px;
-  white-space: pre-wrap;
+  font-size: var(--font-size-maintitle);
   font-weight: bold;
 `
-const Bottom = styled.div``
-const SelectButton = styled.button`
-  margin-right: 3px;
-  margin-left: 5px;
-  border-radius: 34px;
+const Button = styled.button`
+  border-radius: var(--round-borderradious);
   height: 50px;
   width: 200px;
-  background-color: transparent !important;
+  background-color: transparent;
   color: 'black';
-  border-color: #80808029;
-  font-family: 'Single Day', cursive;
-
-  font-size: 20px;
+  border-color: var(--color-gray);
+  font-family: var(--font);
+  font-size: var(--font-size-title);
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 20%;
 `
 const Body1 = () => {
   return (
     <Container>
-      <Title></Title>
       <Contents>
         그 시절,
         <br /> 우리가 설레였던 미팅
       </Contents>
 
       <Link to="/Meeting2" style={{ textDecoration: 'none' }}>
-        <SelectButton>인연을 찾으러 가기</SelectButton>
+        <Button>인연을 찾으러 가기</Button>
       </Link>
     </Container>
   )

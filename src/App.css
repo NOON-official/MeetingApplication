@@ -6,6 +6,17 @@
   height: 40vmin;
   pointer-events: none;
 }
+:root{
+--font-size-maintitle : 40px;
+--font-size-title : 20px;
+--font-size-subtitle:18px;
+--font-size-button:12px;
+--font-size-small : 10px;
+--round-borderradious:34px;
+--color-gray:#80808029;
+--color-lightblue:#C4D7E0;
+--font:"Single Day", cursive;
+}
 @import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
 @media (prefers-reduced-motion: no-preference) {
