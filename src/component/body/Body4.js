@@ -2,39 +2,19 @@ import styled from 'styled-components'
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import CharactorContainer from '../Characters/CharactorContainer'
-import { useState } from 'react'
-const buttonColor = '#C4D7E0'
-const Container = styled.div`
-  left: 0;
-  overflow: scroll;
-  overflow-x: hidden;
-  position: absolute;
-  top: 10%;
-  width: 100%;
-  height: 75%;
-  padding: 0;
-  display: block;
-`
-const Title = styled.div`
-  top: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  height: 27px;
-  left: calc(50% - 175px);
-  margin: 0;
-  font-family: 'Single Day', cursive;
-  color: #000;
+import {
+  Container,
+  MobileBox,
+  Title,
+  SubTitle,
+  ButtonBox,
+} from '../Elements/StyledComponent'
 
-  font-style: normal;
-  letter-spacing: -0.015em;
-  line-height: 149.8%;
-  position: absolute;
-  text-align: center;
-  width: 350px;
-`
+const buttonColor = '#C4D7E0'
+
 const Contents = styled.div`
   font-family: 'Single Day', cursive;
-  top: 80%;
+  top: 70%;
   font-size: 18px;
   font-weight: 400;
   height: 20px;
@@ -56,15 +36,14 @@ const CharacterButton = styled.button`
   border-radius: 34px;
   height: 40px;
   width: 70px;
-  border-color: transparent;
-  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%),
-    0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+  border: 0.5px solid var(--color-lightblue);
   background-color: ${(props) => props.background_color || 'transparent'};
   color: ${(props) => props.color || 'black'};
 `
 const Character = (props) => {
   const dispatch = useDispatch()
   const characters = useSelector((state) => state.characters)
+  const num = useSelector((state) => state.num)
   const exist = React.useMemo(
     () => characters.includes(props.character),
     [characters]
@@ -80,9 +59,10 @@ const Character = (props) => {
     if (exist) {
       dispatch({ type: 'CHARACTERS_DELETE', payload: props.character })
     } else {
-      dispatch({ type: 'CHARACTERS', payload: props.character })
+      if (characters.length < num)
+        dispatch({ type: 'CHARACTERS', payload: props.character })
     }
-  }, [exist, props.character])
+  }, [exist, props.character, characters])
 
   return (
     <CharacterButton
@@ -98,17 +78,20 @@ const Character = (props) => {
 const Body4 = () => {
   return (
     <Container>
-      <Title>우리 팀원을 소개해요</Title>
-      <CharactorContainer></CharactorContainer>
+      <MobileBox>
+        <Title>우리 팀원을 소개해요</Title>
+        <CharactorContainer></CharactorContainer>
 
-      <Contents>
-        미팅 나갈 구성원을 알려주세요~ <br />
-        <Character character={'개그맨'}>개그맨</Character>
-        <Character character={'비주얼'}>비주얼</Character>
-        <Character character={'사회자'}>사회자</Character>
-        <Character character={'깍두기'}>깍두기</Character>
-        <br />
-      </Contents>
+        <Contents>
+          미팅 나갈 구성원을 알려주세요~
+          <ButtonBox>
+            <Character character={'개그맨'}>개그맨</Character>
+            <Character character={'비주얼'}>비주얼</Character>
+            <Character character={'사회자'}>사회자</Character>
+            <Character character={'깍두기'}>깍두기</Character>
+          </ButtonBox>
+        </Contents>
+      </MobileBox>
     </Container>
   )
 }

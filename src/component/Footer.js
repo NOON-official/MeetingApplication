@@ -13,16 +13,18 @@ const Container = styled.footer`
   left: 0;
   right: 0;
   height: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `
 const Percentage = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 70%;
+  width: 360px;
   height: 50%;
-  margin-left: 10%;
-  margin-right: 10%;
 `
 const PercentageText = styled.div`
   font-weight: bold;
