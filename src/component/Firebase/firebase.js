@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+import { getAnalytics } from 'firebase/analytics'
 const firebaseConfig = {
   apiKey: 'AIzaSyA7eNDTovxQKYhYID5qlud6bDISFfZcgRI',
   authDomain: 'meetingnom.firebaseapp.com',
@@ -11,4 +12,5 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
+export const analytics = getAnalytics(app)
 export const authentication = getAuth(app)

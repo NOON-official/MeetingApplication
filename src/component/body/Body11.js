@@ -1,8 +1,9 @@
-import styled from 'styled-components';
-import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import client from '../../api';
-import { authentication } from '../Firebase/firebase';
+import styled from 'styled-components'
+import * as React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import client from '../../api'
+import { authentication } from '../Firebase/firebase'
+
 const Container = styled.div`
   left: 0;
   overflow: hidden;
@@ -16,7 +17,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
+`
 
 const Title = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const Title = styled.div`
   text-align: center;
   justify-content: center;
   width: auto;
-`;
+`
 const KakaoIdInput = styled.input`
   display: flex;
   justify-content: center;
@@ -47,29 +48,29 @@ const KakaoIdInput = styled.input`
     margin: 5px;
   }
   border: 1px solid #c4d7e0;
-`;
+`
 
 const Body11 = () => {
-  const phone = useSelector((state) => state.phone);
-  const gender = useSelector((state) => state.gender);
-  const num = useSelector((state) => state.num);
-  const age = useSelector((state) => state.age);
-  const jobs = useSelector((state) => state.jobs);
-  const prefferedjobs = useSelector((state) => state.prefferedjobs);
-  const prefferedage = useSelector((state) => state.prefferedage);
-  const preffereduniversity = useSelector((state) => state.preffereduniversity);
-  const university = useSelector((state) => state.university);
-  const characters = useSelector((state) => state.characters);
-  const area = useSelector((state) => state.area);
-  const kakaoid = useSelector((state) => state.kakaoid);
-  const day = useSelector((state) => state.day);
-  const appearance = useSelector((state) => state.appearance);
-  const mbti = useSelector((state) => state.mbti);
-  const fashion = useSelector((state) => state.fashion);
-  const dispatch = useDispatch();
+  const phone = useSelector((state) => state.phone)
+  const gender = useSelector((state) => state.gender)
+  const num = useSelector((state) => state.num)
+  const age = useSelector((state) => state.age)
+  const jobs = useSelector((state) => state.jobs)
+  const prefferedjobs = useSelector((state) => state.prefferedjobs)
+  const prefferedage = useSelector((state) => state.prefferedage)
+  const preffereduniversity = useSelector((state) => state.preffereduniversity)
+  const university = useSelector((state) => state.university)
+  const characters = useSelector((state) => state.characters)
+  const area = useSelector((state) => state.area)
+  const kakaoid = useSelector((state) => state.kakaoid)
+  const day = useSelector((state) => state.day)
+  const appearance = useSelector((state) => state.appearance)
+  const mbti = useSelector((state) => state.mbti)
+  const fashion = useSelector((state) => state.fashion)
+  const dispatch = useDispatch()
   const KakaoId = (e) => {
-    dispatch({ type: 'SET_KAKAOID', payload: e.target.value });
-  };
+    dispatch({ type: 'SET_KAKAOID', payload: e.target.value })
+  }
 
   const Mid = () => {
     const body = {
@@ -87,18 +88,40 @@ const Body11 = () => {
       appearance: appearance,
       mbti: mbti,
       fashion: fashion,
-    };
+    }
+    const prefferenceBody = {
+      age: prefferedage,
+      job: prefferedjobs,
+      exceptedUniv: preffereduniversity,
+      includedUniv: [''],
+      gamePercent: '78',
+      sweetPercent: '100',
+      funPercent: '0',
+      appearance: [''],
+      mbti: [''],
+      fashion: [''],
+    }
     // console.log(body);
+    console.log(client)
+    console.log('userInfo', authentication.currentUser)
     client
       .post('/api/user/ourteam', body)
       .then((res) => {
-        alert('카드 생성 성공 :)');
+        const newBody = { ...prefferenceBody, id: res.data.data.id }
+        console.log(newBody)
+        client
+          .post('/api/user/preference', newBody)
+          .then((res) => {
+            alert('완성')
+          })
+          .catch((err) => {
+            alert(err.response.data.message)
+          })
       })
       .catch((err) => {
-        console.log(err);
-        alert('카드 생성 실패 :(');
-      });
-  }; //데이터 보내기
+        alert(err.response.data.message)
+      })
+  } //데이터 보내기
 
   return (
     <Container>
@@ -108,7 +131,7 @@ const Body11 = () => {
       <KakaoIdInput onChange={KakaoId} placeholder="깨똑아이뒤"></KakaoIdInput>
       <button onClick={Mid}>버튼</button>
     </Container>
-  );
-};
+  )
+}
 
-export default Body11;
+export default Body11

@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import * as React from 'react'
 import Slider from '@mui/material/Slider'
 import { useSelector, useDispatch } from 'react-redux'
@@ -15,13 +14,14 @@ const buttonColor = '#C4D7E0'
 export const GenderSelect = () => {
   const dispatch = useDispatch()
   const gender = useSelector((state) => state.gender)
-  const setmale = () => {
+  const setmale = React.useCallback(() => {
     dispatch({ type: 'SET_MALE' })
-  }
-  const setfemale = () => {
+  }, [dispatch])
+  const setfemale = React.useCallback(() => {
     dispatch({ type: 'SET_FEMALE' })
-  }
+  }, [dispatch])
   // 남자: true, 여자 : false
+
   const ColorMale = gender === '남자' ? buttonColor : 'transparent'
   const colorM = gender === '남자' ? 'white' : 'black'
   const ColorFemale = gender === '남자' ? 'transparent' : buttonColor
@@ -37,7 +37,7 @@ export const GenderSelect = () => {
           background_color={ColorMale}
           color={colorM}
           aria-label="add"
-          onClick={() => setmale()}
+          onClick={setmale}
           width="50%"
         >
           남자
@@ -48,7 +48,7 @@ export const GenderSelect = () => {
           background_color={ColorFemale}
           color={colorF}
           aria-label="add"
-          onClick={() => setfemale()}
+          onClick={setfemale}
         >
           여자
         </SelectButton>
@@ -136,7 +136,10 @@ const Job = (props) => {
   const dispatch = useDispatch()
   const jobs = useSelector((state) => state.jobs)
   const num = useSelector((state) => state.num)
-  const exists = React.useMemo(() => jobs.includes(props.job), [jobs])
+  const exists = React.useMemo(
+    () => jobs.includes(props.job),
+    [jobs, props.job]
+  )
   const fontColor = React.useMemo(() => (exists ? 'white' : 'black'), [exists])
   const bgColor = React.useMemo(
     () => (exists ? buttonColor : 'transparent'),
@@ -149,7 +152,7 @@ const Job = (props) => {
     } else {
       if (jobs.length < num) dispatch({ type: 'JOBS', payload: props.job })
     }
-  }, [exists, props.job, jobs])
+  }, [exists, dispatch, props.job, jobs, num])
 
   return (
     <SelectButton

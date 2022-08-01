@@ -35,6 +35,10 @@ export const Contents = styled.div`
   justify-content: center;
   align-items: center;
   white-space: pre-wrap;
+  position: ${(props) => props.position};
+  top: ${(props) => props.top};
+  width: ${(props) => props.width};
+  height: ${(props) => props.heigth};
 `
 export const ContentsAge = styled.div`
   display: flex;

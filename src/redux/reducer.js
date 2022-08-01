@@ -1,6 +1,6 @@
 const initialState = {
   user: 'userName',
-  phone: '',
+  phone: '-없이 입력해 주세요',
   gender: '남자',
   num: 2,
   age: 20,
@@ -17,6 +17,7 @@ const initialState = {
   prefferedjobs: [],
   prefferedage: 20,
   preffereduniversity: [],
+  phonenumcall: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -41,7 +42,10 @@ const reducer = (state = initialState, action) => {
     case 'UNIVERSITIES':
       const newUniv = action.payload
 
-      return { ...state, university: [...state.university, newUniv] }
+      return {
+        ...state,
+        university: [...state.university, newUniv],
+      }
 
     case 'UNIVERSITIES_DELETE':
       const deleteUniv = state.university.filter(
@@ -161,6 +165,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, introduction: action.payload }
     case 'SET_KAKAOID':
       return { ...state, kakaoid: action.payload }
+    case 'SET_PHONENUMCALL':
+      return { ...state, phonenumcall: action.payload }
     default:
       return state
   }
