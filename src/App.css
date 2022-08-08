@@ -35,6 +35,17 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.id {
+  width:150px;
+  height: 30px;
+}
+.idl {
+  position: absolute;
+  left:35%;
+}
+.TestBox input:focus +label{
+top:30%;
+}
 
 .App-link {
   color: #61dafb;

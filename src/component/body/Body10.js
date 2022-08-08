@@ -2,14 +2,9 @@ import styled from 'styled-components'
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState, useRef } from 'react'
-import {
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-  onAuthStateChanged,
-} from 'firebase/auth'
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { authentication } from '../Firebase/firebase'
 
-import { MinimizeOutlined } from '@mui/icons-material'
 const buttonColor = '#C4D7E0'
 const Container = styled.div`
   left: 0;
@@ -159,11 +154,12 @@ const PhoneAuthInput = (props) => {
   }
 
   return (
-    <AuthContainer>
+    <AuthContainer className="container">
       <AuthNum
         width={'200px'}
         placeholder={`인증번호 유효시간${minutes}:${seconds}`}
         onChange={verifyOTP}
+        className="code"
       ></AuthNum>
 
       <AuthSubmit
