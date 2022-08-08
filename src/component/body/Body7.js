@@ -3,64 +3,22 @@ import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Slider from '@mui/material/Slider'
 import PrefferedUnivBox from '../Universities/PrefferedUnivBox'
+import {
+  Container,
+  MobileBox,
+  Title,
+  Contents,
+} from '../Elements/StyledComponent'
 const buttonColor = '#FFDCE1'
-const Container = styled.div`
-  left: 0;
-  overflow: scroll;
-  overflow-x: hidden;
-  position: absolute;
-  top: 10%;
-  width: 100%;
-  height: 75%;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-const Title = styled.div`
-  top: ${(props) => props.top || '5%'};
-  font-size: 18px;
-  font-weight: bold;
-  height: 27px;
 
-  margin: 0;
-  color: #000;
-  font-style: normal;
-  letter-spacing: -0.015em;
-  line-height: 149.8%;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-`
-const Contents = styled.div`
-  top: ${(props) => props.top || '10%'};
-  color: #000;
-
-  font-style: normal;
-  letter-spacing: -0.015em;
-  line-height: 149.8%;
-  position: absolute;
-  text-align: center;
-  width: 350px;
-  font-size: 18px;
-  font-weight: 500;
-  height: 27px;
-  left: calc(50% - 175px);
-  margin: 0;
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-`
 const ContentsAge = styled.div`
   display: flex;
   flex-direction: column;
   color: '#FFDCE1' !important;
-
-  top: ${(props) => props.top || '40%'};
-  left: 10%;
+  position: absolute;
+  top: ${(props) => props.top || '26%'};
+  left: 50%;
+  transform: translate(-50%, 0);
   font-weight: 800;
   justify-content: center;
   align-items: center;
@@ -105,7 +63,7 @@ const Job = (props) => {
 }
 const JobSelect = () => {
   return (
-    <Contents top={'20%'}>
+    <Contents position={'absolute'} flexDirection={'row'} top={'13%'}>
       <Job job={'대학생'}></Job>
       <Job job={'직장인'}></Job>
       <Job job={'대학원생'}></Job>
@@ -140,14 +98,16 @@ const AgeSelect = () => {
 }
 const Body7 = () => {
   return (
-    <Container>
-      <Title top={'5%'}>어떤 상대방을 원하시나요?</Title>
-      <Title top={'15%'}>상대팀의 직업은?</Title>
-      <JobSelect></JobSelect>
-      <Title top={'35%'}>상대팀의 평균나이는?</Title>
-      <AgeSelect></AgeSelect>
-      <Title top={'55%'}>이런 학교는 피하고 싶어요</Title>
-      <PrefferedUnivBox top={'70%'}></PrefferedUnivBox>
+    <Container overflow={'scroll'}>
+      <MobileBox height={'150%'}>
+        <Title>어떤 상대방을 원하시나요?</Title>
+        <Title top={'8%'}>상대팀의 직업은?</Title>
+        <JobSelect></JobSelect>
+        <Title top={'20%'}>상대팀의 평균나이는?</Title>
+        <AgeSelect></AgeSelect>
+        <Title top={'34%'}>이런 학교는 피하고 싶어요</Title>
+        <PrefferedUnivBox top={'44%'}></PrefferedUnivBox>
+      </MobileBox>
     </Container>
   )
 }

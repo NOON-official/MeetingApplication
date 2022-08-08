@@ -10,7 +10,7 @@ const Container = styled.div`
   left: 50%;
   margin: 0 0 0 -150.5px;
   position: absolute;
-  top: 70%;
+  top: 65%;
   width: 301px;
 `
 const ChooseDay = styled.div`

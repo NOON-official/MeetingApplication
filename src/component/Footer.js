@@ -51,6 +51,7 @@ const StyledBackLink = styled(Link)`
   justify-content: center;
   width: 50%;
   height: 100%;
+  background-color: white;
 `
 const StyledFrontLink = styled(Link)`
   color: black;

@@ -12,7 +12,7 @@ const Container = styled.div`
   left: 50%;
   margin: 0 0 0 -150.5px;
   position: absolute;
-  top: 10%;
+  top: 5%;
   width: 301px;
 `
 const ChooseArea = styled.div`

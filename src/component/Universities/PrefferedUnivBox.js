@@ -19,7 +19,7 @@ const Container = styled.div`
   width: 301px;
   overflow: scroll;
   overflow-x: hidden;
-  top: ${(props) => props.top || '70%'};
+  top: ${(props) => props.top || '50%'};
 `
 const UnivHeader = styled(Stack)`
   border: solid #e5e5e5;

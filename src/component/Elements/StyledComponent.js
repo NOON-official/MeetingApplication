@@ -7,7 +7,7 @@ export const SubTitle = styled.div`
   max-width: 768px;
   width: 100%;
   top: ${(props) => props.top};
-  left: 50%;
+  left: ${(props) => props.left || '50%'};
   transform: translate(-50%, 0);
 `
 export const ButtonBox = styled.div`
@@ -30,7 +30,7 @@ export const SliderBox = styled.div`
 `
 export const Contents = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props) => props.flexDirection || 'column'};
   color: 'black';
   justify-content: center;
   align-items: center;
@@ -60,13 +60,14 @@ export const SelectButton = styled.button`
 export const Container = styled.div`
   height: 80%;
   width: 100%;
+  position: absolute;
   overflow-x: hidden;
-  overflow: ${(props) => props.overflow};
+  overflow-y: ${(props) => props.overflow};
 `
 export const MobileBox = styled.div`
   max-width: 768px;
   width: 100%;
-  height: 80%;
+  height: ${(props) => props.height || '100%'};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,6 +75,8 @@ export const MobileBox = styled.div`
   left: 50%;
   transform: translate(-50%, 0);
   font-family: var(--font);
+  overflow-x: hidden;
+  overflow-y: ${(props) => props.overflow || 'hidden'};
 `
 export const Title = styled.div`
   font-size: var(--font-size-title);
@@ -81,7 +84,7 @@ export const Title = styled.div`
   position: absolute;
   max-width: 768px;
   width: 100%;
-  top: 0%;
+  top: ${(props) => props.top || '0%'};
   left: 50%;
   transform: translate(-50%, 0);
 `
