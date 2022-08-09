@@ -1,37 +1,14 @@
 import styled from 'styled-components'
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Container, MobileBox, Title } from '../Elements/StyledComponent'
 const buttonColor = '#218fc3'
-const Container = styled.div`
-  left: 0;
-  overflow: hidden;
-  overflow-x: hidden;
-  position: absolute;
-  top: 10%;
-  width: 100%;
-  height: 75%;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-const Title = styled.div`
-  top: ${(props) => props.top || '5%'};
-  font-size: 18px;
-  font-weight: bold;
-  height: 27px;
-  margin: 0;
-  color: #000;
-  font-style: normal;
-  letter-spacing: -0.015em;
-  line-height: 149.8%;
-  text-align: ${(props) => props.text_align || 'center'};
-  width: 100%;
+const StyledText = styled.text`
+  text-decoration: line-through;
 `
 const StyledBox = styled.div`
   display: flex;
-  top: ${(props) => props.top || '5%'};
+  top: ${(props) => props.top || '0%'};
   justify-content: ${(props) => props.justify_contnet || 'flext-start'};
   align-items: ${(props) => props.align_item || 'center'};
   width: ${(props) => props.width || '500px'};
@@ -53,10 +30,13 @@ const PrefferedBox = styled.div`
   box-sizing: border-box;
   height: auto;
   left: 50%;
+  transform: translate(-50%, 0);
   margin: 10px;
   width: 301px;
   overflow: hidden;
   overflow-x: hidden;
+  position: absolute;
+  top: ${(props) => props.top || '0'};
 `
 const MyTeamInfo = (props) => {
   const gender = useSelector((state) => state.gender)
@@ -80,22 +60,22 @@ const MyTeamInfo = (props) => {
     >
       #{gender} #{num}명 #평균 {age}살{' '}
       {universities.map((data) => {
-        return ` #${data}`
+        return ` # ${data}`
       })}
       {area.map((data) => {
-        return ` #${data}`
+        return ` # ${data}`
       })}
       {day.map((data) => {
-        return ` #${data}`
+        return ` # ${data}`
       })}
       {appearance.map((data) => {
-        return ` #${data}`
+        return ` # ${data}`
       })}
       {mbti.map((data) => {
-        return ` #${data}`
+        return ` # ${data}`
       })}
       {fashion.map((data) => {
-        return ` #${data}`
+        return `# ${data}`
       })}
     </StyledBox>
   )
@@ -115,11 +95,11 @@ const PrefferedInfo = () => {
       color="#ed586d"
     >
       {job.map((data) => {
-        return ` #${data}`
+        return ` # ${data} `
       })}
-      #{age}살
+      # {age}살
       {university.map((data) => {
-        return ` #${data}`
+        return <StyledText>#{data}</StyledText>
       })}
     </StyledBox>
   )
@@ -127,22 +107,23 @@ const PrefferedInfo = () => {
 const Body8 = () => {
   return (
     <Container>
-      <Title>당신만의 미팅학개론이 완성되었어요</Title>
-      <StyledBox top={'10%'} margin="5%">
-        <PrefferedBox top="90px" name="하이">
-          <Title top={'0%'} text_align={'center'}>
+      <MobileBox>
+        <Title>당신만의 미팅학개론이 완성되었어요</Title>
+        <StyledBox margin="5%">
+          <Title top={'15%'} text_align={'center'}>
             1. 우리는 이런 팀이에요
           </Title>
-          <MyTeamInfo name={'안녕'}></MyTeamInfo>
-        </PrefferedBox>
-        <PrefferedBox top="270px" name="하이">
-          <Title text_align={'center'}>2. 상대는 이런팀을 원해요</Title>
-          <PrefferedInfo></PrefferedInfo>
-        </PrefferedBox>
-        <PrefferedBox top="400px" name="하이">
-          <Title text_align={'center'}>3.분위기는 이랬으면 좋겠어요</Title>
-        </PrefferedBox>
-      </StyledBox>
+          <PrefferedBox top={'20%'} name="하이">
+            <MyTeamInfo name={'안녕'}></MyTeamInfo>
+          </PrefferedBox>
+          <Title top={'50%'} text_align={'center'}>
+            2. 상대는 이런팀을 원해요
+          </Title>
+          <PrefferedBox top="55%" name="하이">
+            <PrefferedInfo></PrefferedInfo>
+          </PrefferedBox>
+        </StyledBox>
+      </MobileBox>
     </Container>
   )
 }

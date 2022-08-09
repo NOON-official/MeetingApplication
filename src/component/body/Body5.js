@@ -1,5 +1,5 @@
 import AreaContainer from '../Areas/AreaContainer'
-import styled from 'styled-components'
+
 import DaysContainer from '../DAYS/DaysContainer'
 import { Container, MobileBox, Title } from '../Elements/StyledComponent'
 

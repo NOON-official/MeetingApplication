@@ -29,7 +29,6 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header></Header>
         <Routes>
           <Route path="/" element={<Body1 />}></Route>
           <Route path="Meeting2" element={<Body2 />}></Route>

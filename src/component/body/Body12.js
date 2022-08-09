@@ -45,10 +45,10 @@ const Body12 = () => {
   const [opposingTeam, setopposingTeam] = useState([])
   const [mbti1, setMbti1] = useState('')
   const [mbti2, setMbti2] = useState('')
-  //const [mbti3, setMbti3] = useState('')
+  const [mbti3, setMbti3] = useState('')
   const [mbti4, setMbti4] = useState('')
   const [mbti5, setMbti5] = useState('')
-  //const [mbti6, setMbti6] = useState('')
+  const [mbti6, setMbti6] = useState('')
 
   const result = React.useMemo(() =>
     compatibility >= 60 ? '궁합이 너무 좋아요' : '최악이에요'
@@ -58,18 +58,19 @@ const Body12 = () => {
       setMbti1(e.target.value)
     } else if (e.target.id === 'mbti2') {
       setMbti2(e.target.value)
-    } //else if (e.target.id === 'mbti3') {
-    //setMbti3(e.target.value)}
-    else if (e.target.id === 'mbti4') {
+    } else if (e.target.id === 'mbti3') {
+      setMbti3(e.target.value)
+    } else if (e.target.id === 'mbti4') {
       setMbti4(e.target.value)
     } else if (e.target.id === 'mbti5') {
       setMbti5(e.target.value)
-    } // else if (e.target.id === 'mbti6') {
-    //setMbti6(e.target.value)}
+    } else if (e.target.id === 'mbti6') {
+      setMbti6(e.target.value)
+    }
   }
   const OnClick = () => {
-    setourTeam([mbti1, mbti2])
-    setopposingTeam([mbti4, mbti5])
+    setourTeam([mbti1, mbti2, mbti3])
+    setopposingTeam([mbti4, mbti5, mbti6])
     mbtiCompatibility(ourTeam, opposingTeam)
   }
 

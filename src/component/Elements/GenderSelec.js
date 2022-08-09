@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Slider from '@mui/material/Slider'
+import { styled } from '@mui/material/styles'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   SubTitle,
@@ -8,8 +9,47 @@ import {
   Contents,
   ContentsAge,
   SelectButton,
+  StyledText,
 } from './StyledComponent'
 const buttonColor = '#C4D7E0'
+const PrettoSlider = styled(Slider)({
+  color: '#F6EEEE',
+  height: 8,
+  '& .MuiSlider-track': {
+    border: 'none',
+  },
+  '& .MuiSlider-thumb': {
+    height: 24,
+    width: 24,
+    backgroundColor: '#EB8888',
+    border: '2px solid currentColor',
+    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+      boxShadow: 'inherit',
+    },
+    '&:before': {
+      display: 'none',
+    },
+  },
+  '& .MuiSlider-valueLabel': {
+    lineHeight: 1.2,
+    fontSize: 12,
+    background: 'unset',
+    padding: 0,
+    width: 32,
+    height: 32,
+    borderRadius: '50% 50% 50% 0',
+    backgroundColor: '#EB8888',
+    transformOrigin: 'bottom left',
+    transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
+    '&:before': { display: 'none' },
+    '&.MuiSlider-valueLabelOpen': {
+      transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
+    },
+    '& > *': {
+      transform: 'rotate(45deg)',
+    },
+  },
+})
 
 export const GenderSelect = () => {
   const dispatch = useDispatch()
@@ -22,15 +62,17 @@ export const GenderSelect = () => {
   }, [dispatch])
   // 남자: true, 여자 : false
 
-  const ColorMale = gender === '남자' ? buttonColor : 'transparent'
-  const colorM = gender === '남자' ? 'white' : 'black'
-  const ColorFemale = gender === '남자' ? 'transparent' : buttonColor
+  const ColorMale = gender === '남자' ? '#EB8888' : '#F6EEEE'
+  const colorM = gender === '남자' ? 'white' : '#B79292'
+  const ColorFemale = gender === '남자' ? '#F6EEEE' : '#EB8888'
   const colorF = gender === '남자' ? 'black' : 'white'
 
   return (
     <Contents>
-      <SubTitle top="10%"> 셩별을 선택해 주세요!</SubTitle>
-      <ButtonBox top="20%">
+      <SubTitle top="5%" left="5%">
+        성별
+      </SubTitle>
+      <ButtonBox top="12%">
         <SelectButton
           variant="extended"
           size="small"
@@ -64,41 +106,43 @@ export const NumberSelect = () => {
   }
   return (
     <Contents>
-      <SubTitle top="33%"> 인원을 알려주세요~</SubTitle>
+      <SubTitle top="28%" left="6%">
+        인원수
+      </SubTitle>
 
-      <ButtonBox top="43%">
+      <ButtonBox top="38%">
         <SelectButton
           variant="extended"
           size="small"
-          background_color={number === 2 ? buttonColor : 'white'}
+          background_color={number === 2 ? '#EB8888' : '#F6EEEE'}
           color={number === 2 ? 'white' : 'black'}
           aria-label="add"
           onClick={() => setnumber(2)}
           width="33%"
         >
-          2 명
+          2 : 2
         </SelectButton>
         <SelectButton
           variant="extended"
           size="small"
-          background_color={number === 3 ? buttonColor : 'white'}
+          background_color={number === 3 ? '#EB8888' : '#F6EEEE'}
           color={number === 3 ? 'white' : 'black'}
           aria-label="add"
           onClick={() => setnumber(3)}
           width="33%"
         >
-          3 명
+          3 : 3
         </SelectButton>
         <SelectButton
           variant="extended"
           size="small"
-          background_color={number === 4 ? buttonColor : 'white'}
+          background_color={number === 4 ? '#EB8888' : '#F6EEEE'}
           color={number === 4 ? 'white' : 'black'}
           aria-label="add"
           onClick={() => setnumber(4)}
           width="33%"
         >
-          4 명
+          4 : 4
         </SelectButton>
       </ButtonBox>
     </Contents>
@@ -114,12 +158,20 @@ export const AgeSelect = () => {
   }
   return (
     <ContentsAge>
-      <SubTitle top="56%">우리의 평균 나이는 {age}살 이에요</SubTitle>
-      <SliderBox top="66%">
-        <Slider
-          style={{ color: buttonColor }}
-          valueLabelDisplay="off"
+      <SubTitle top="53%" left="8%">
+        평균나이
+      </SubTitle>
+      <SliderBox top="60%">
+        <StyledText top="75%" size="10px" color="#B79292">
+          20세
+        </StyledText>
+        <StyledText top="75%" left="90%" size="10px" color="#B79292">
+          35세
+        </StyledText>
+        <PrettoSlider
+          style={{ color: '#F6EEEE' }}
           min={20}
+          valueLabelDisplay="on"
           step={1}
           max={35}
           defaultValue={30}
@@ -140,9 +192,12 @@ const Job = (props) => {
     () => jobs.includes(props.job),
     [jobs, props.job]
   )
-  const fontColor = React.useMemo(() => (exists ? 'white' : 'black'), [exists])
+  const fontColor = React.useMemo(
+    () => (exists ? 'white' : '#B79292'),
+    [exists]
+  )
   const bgColor = React.useMemo(
-    () => (exists ? buttonColor : 'transparent'),
+    () => (exists ? '#EB8888' : '#F6EEEE'),
     [exists]
   )
 
@@ -168,7 +223,10 @@ const Job = (props) => {
 export const JobSelect = () => {
   return (
     <Contents>
-      <SubTitle top="79%"> 직업을 알려주세요~</SubTitle>
+      <SubTitle top="79%" left="5%">
+        {' '}
+        직업
+      </SubTitle>
       <ButtonBox top="85%">
         <Job job={'대학생'}></Job>
         <Job job={'직장인'}></Job>

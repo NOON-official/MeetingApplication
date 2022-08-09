@@ -12,7 +12,7 @@ const Container = styled.footer`
   bottom: 0%;
   left: 0;
   right: 0;
-  height: 15%;
+  height: 8%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,12 +37,32 @@ const BackAndFront = styled.div`
   height: 50%;
   width: 100%;
 `
-const BackButton = styled.div`
-  font-family: 'Single Day', cursive;
+const BackButton = styled.button`
+  background-color: transparent;
+  color: #f2cbcb;
+  margin-right: 5px;
+  border-radius: 14px;
+  height: 45px;
+  width: ${(props) => props.width || '100%'};
+  max-width: 162px;
+  color: ${(props) => props.color};
+  border-color: #f2cbcb;
+  font-family: var(--font);
+  font-size: var(--font-size-button);
+  border: 1px solid;
 `
-const FrontButton = styled.div`
-  background-color: #c4d7e0;
-  font-family: 'Single Day', cursive;
+const FrontButton = styled.button`
+  background-color: #e9e9e9;
+  color: #bbbbbb;
+  margin-right: 5px;
+  border-radius: 14px;
+  height: 45px;
+  width: ${(props) => props.width || '100%'};
+  max-width: 162px;
+  color: ${(props) => props.color};
+  border-color: transparent;
+  font-family: var(--font);
+  font-size: var(--font-size-button);
 `
 const StyledBackLink = styled(Link)`
   color: black;
@@ -60,7 +80,7 @@ const StyledFrontLink = styled(Link)`
   justify-content: center;
   width: 50%;
   height: 100%;
-  background-color: #c4d7e0;
+  background-color: transparent;
 `
 
 const Footer = () => {
@@ -187,15 +207,7 @@ const Footer = () => {
         children={'구체적인 답변이 매칭률을 높여줍니다!'}
       ></PageNotCompleted>
       <MovingPath />
-      <Percentage>
-        <Line
-          style={{ height: '10px', width: '50%' }}
-          percent={percent}
-          strokeWidth={4}
-          strokeColor="#C4D7E0"
-        />
-        <PercentageText>{percent}%</PercentageText>
-      </Percentage>
+
       <BackAndFront>
         <StyledBackLink to={prevPath} style={{ textDecoration: 'none' }}>
           {' '}
@@ -235,7 +247,7 @@ const Footer = () => {
           style={{ textDecoration: 'none' }}
         >
           {' '}
-          <FrontButton>다음으로 </FrontButton>{' '}
+          <FrontButton>다음</FrontButton>{' '}
         </StyledFrontLink>
       </BackAndFront>
     </Container>

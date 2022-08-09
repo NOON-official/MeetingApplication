@@ -1,28 +1,34 @@
 import styled from 'styled-components'
-
+export const StyledDiv = styled.div`
+  position: absolute;
+  top: ${(props) => props.top};
+  left: ${(props) => props.left};
+  transform: ${(props) => props.transform || 'translate(-50%, 0)'};
+`
 export const SubTitle = styled.div`
-  font-size: var(--font-size-subtitle);
-  font-weight: 100;
+  font-size: 14px;
   position: absolute;
   max-width: 768px;
   width: 100%;
   top: ${(props) => props.top};
   left: ${(props) => props.left || '50%'};
   transform: translate(-50%, 0);
+  color: #777777;
 `
 export const ButtonBox = styled.div`
   display: flex;
   flex-direction: ${(props) => props.display || 'row'};
-  justify-content: space-between;
+  justify-content: space-around;
   position: absolute;
   top: ${(props) => props.top};
   left: 50%;
   transform: translate(-50%, 0);
-  max-width: 250px;
+  max-width: 375px;
   width: 100%;
 `
 export const SliderBox = styled.div`
-  width: 200px;
+  width: 100%;
+  max-width: 350px;
   position: absolute;
   top: ${(props) => props.top};
   left: 50%;
@@ -47,22 +53,24 @@ export const ContentsAge = styled.div`
 `
 export const SelectButton = styled.button`
   margin-right: 5px;
-  border-radius: 34px;
-  height: 40px;
+  border-radius: 14px;
+  height: 45px;
   width: ${(props) => props.width || '50%'};
+  max-width: 162px;
   background-color: ${(props) => props.background_color || 'transparent'};
   color: ${(props) => props.color};
-  border-color: var(--color-gray);
+  border-color: transparent;
   font-family: var(--font);
   font-size: var(--font-size-button);
 `
 //Basic
 export const Container = styled.div`
-  height: 80%;
+  height: ${(props) => props.height || '92%'};
   width: 100%;
   position: absolute;
   overflow-x: hidden;
   overflow-y: ${(props) => props.overflow};
+  background-color: ${(props) => props.bg || 'white'};
 `
 export const MobileBox = styled.div`
   max-width: 768px;
@@ -87,4 +95,12 @@ export const Title = styled.div`
   top: ${(props) => props.top || '0%'};
   left: 50%;
   transform: translate(-50%, 0);
+`
+export const StyledText = styled.text`
+  position: absolute;
+  top: ${(props) => props.top};
+  left: ${(props) => props.left};
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.size};
+  color: ${(props) => props.color};
 `
