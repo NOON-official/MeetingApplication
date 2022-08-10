@@ -4,16 +4,21 @@ export const StyledDiv = styled.div`
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   transform: ${(props) => props.transform || 'translate(-50%, 0)'};
+  background-color: ${(props) => props.bg};
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
+  border-radius: ${(props) => props.border};
 `
 export const SubTitle = styled.div`
-  font-size: 14px;
+  font-size: ${(props) => props.size || '14px'};
   position: absolute;
   max-width: 768px;
   width: 100%;
   top: ${(props) => props.top};
   left: ${(props) => props.left || '50%'};
   transform: translate(-50%, 0);
-  color: #777777;
+  color: ${(props) => props.color || '#777777'};
+  font-family: ${(props) => props.font || 'var(--font-family)'};
 `
 export const ButtonBox = styled.div`
   display: flex;
@@ -27,7 +32,7 @@ export const ButtonBox = styled.div`
   width: 100%;
 `
 export const SliderBox = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 350px;
   position: absolute;
   top: ${(props) => props.top};
@@ -60,17 +65,17 @@ export const SelectButton = styled.button`
   background-color: ${(props) => props.background_color || 'transparent'};
   color: ${(props) => props.color};
   border-color: transparent;
-  font-family: var(--font);
-  font-size: var(--font-size-button);
+  font-family: var(--font-family);
+  font-size: 20px;
 `
 //Basic
 export const Container = styled.div`
   height: ${(props) => props.height || '92%'};
-  width: 100%;
+  width: ${(props) => props.width || '100%'};
   position: absolute;
   overflow-x: hidden;
   overflow-y: ${(props) => props.overflow};
-  background-color: ${(props) => props.bg || 'white'};
+  background-color: ${(props) => props.bg || '#F5F5F5'};
 `
 export const MobileBox = styled.div`
   max-width: 768px;
@@ -97,10 +102,25 @@ export const Title = styled.div`
   transform: translate(-50%, 0);
 `
 export const StyledText = styled.text`
-  position: absolute;
+  position: ${(props) => props.position || 'absolute'};
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
   color: ${(props) => props.color};
+  font-family: var(--font-family);
+  font-style: normal;
+`
+export const StyledButton = styled.button`
+  position: ${(props) => props.position};
+  top: ${(props) => props.top};
+  left: 50%;
+  font-family: var(--font-family);
+  font-size: ${(props) => props.size};
+  transform: translate(-50%, 0);
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  border-radius: 10px;
+  background-color: var(--color-ClickedPink);
+  color: ${(props) => props.color || 'white'};
 `

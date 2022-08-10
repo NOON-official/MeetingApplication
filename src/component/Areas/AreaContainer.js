@@ -1,46 +1,79 @@
 import styled from 'styled-components'
-import AreaGyenggiNorth from './AreaGyenggiNorth'
-import AreaGyenggiSouth from './AreaGyenggiSouth'
-import AreaSeoulSouth from './AreaSeoulSouth'
-import AreaSeoulNorth from './AreaSeoulNorth'
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-family: 'Single Day', cursive;
-  box-sizing: border-box;
-  height: 60%;
-  left: 50%;
-  margin: 0 0 0 -150.5px;
-  position: absolute;
-  top: 5%;
-  width: 301px;
-`
-const ChooseArea = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+import * as React from 'react'
+import { StyledDiv } from '../Elements/StyledComponent'
+import { useSelector, useDispatch } from 'react-redux'
+
+const AreaBox = styled.div`
   width: 100%;
-  position: absolute;
-  top: 10%;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #c9c9c9;
-  font-weight: 900;
-  font-size: 15px;
+  height: 8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 15px;
 `
-const AreaText = (props) => {
-  return <div style={{ marginBottom: '7px' }}>{props.text}</div>
+const Area = styled.button`
+  width: ${(props) => props.width || '50%'};
+  height: 100%;
+  border: 0.2px solid var(--color-lightblue);
+  border-radius: var(--round-borderradious);
+  margin: 10px;
+  max-height: 200px;
+  font-family: var(--font-family);
+  font-size: 20px;
+  color: ${(props) => props.color || 'black'};
+  background-color: ${(props) => props.background_color || 'transparent'};
+`
+const Areas = (props) => {
+  const dispatch = useDispatch()
+  const area = useSelector((state) => state.area)
+  const exist = React.useMemo(() => area.includes(props.area), [area])
+  const bgcolor = React.useMemo(() => (exist ? '#EB8888' : '#F6EEEE'), [exist])
+  const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist])
+  const bgColor = React.useMemo(
+    () => (exist ? '#F6EEEE' : 'transparent'),
+    [exist]
+  )
+  const OnAreaClick = React.useCallback(() => {
+    if (exist) {
+      dispatch({ type: 'AREA_DELETE', payload: props.area })
+    } else {
+      dispatch({ type: 'AREA', payload: props.area })
+    }
+  }, [exist, props.area])
+  return (
+    <Area
+      color={fontColor}
+      background_color={bgcolor}
+      onClick={OnAreaClick}
+      width={props.width}
+    >
+      {props.area}
+    </Area>
+  )
 }
+
 const AreaContainer = () => {
   return (
-    <Container>
-      <ChooseArea>
-        <AreaText text={'지역선택'}></AreaText>
-      </ChooseArea>
-      <AreaGyenggiSouth></AreaGyenggiSouth>
-      <AreaGyenggiNorth> </AreaGyenggiNorth>
-      <AreaSeoulSouth></AreaSeoulSouth>
-      <AreaSeoulNorth></AreaSeoulNorth>
-    </Container>
+    <StyledDiv top="15%" width="95%" height="65%" left="50%">
+      <AreaBox>
+        <Areas area="홍대"></Areas>
+        <Areas area="강남"></Areas>
+        <Areas area="회기"></Areas>
+        <Areas area="건대"></Areas>
+      </AreaBox>
+      <AreaBox>
+        <Areas area="안양"></Areas>
+        <Areas area="의왕"></Areas>
+        <Areas area="군포"></Areas>
+        <Areas area="언양"></Areas>
+      </AreaBox>
+      <AreaBox>
+        <Areas area="동대문"></Areas>
+        <Areas area="서대문"></Areas>
+        <Areas area="남대문"></Areas>
+        <Areas area="북대문"></Areas>
+      </AreaBox>
+    </StyledDiv>
   )
 }
 

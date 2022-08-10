@@ -17,6 +17,7 @@ const Container = styled.footer`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #f5f5f5;
 `
 const Percentage = styled.div`
   display: flex;
@@ -71,7 +72,7 @@ const StyledBackLink = styled(Link)`
   justify-content: center;
   width: 50%;
   height: 100%;
-  background-color: white;
+  background-color: #f5f5f5;
 `
 const StyledFrontLink = styled(Link)`
   color: black;
@@ -220,12 +221,9 @@ const Footer = () => {
               openModal()
             } else if (location === '/Meeting3' && university.length === 0) {
               openModal()
-            } else if (location === '/Meeting4' && characters.length === 0) {
+            } else if (location === '/Meeting4' && area.length === 0) {
               openModal()
-            } else if (
-              location === '/Meeting5' &&
-              (area.length === 0 || day.length === 0)
-            ) {
+            } else if (location === '/Meeting5' && day.length === 0) {
               openModal()
             } else if (
               location === '/Meeting6' &&

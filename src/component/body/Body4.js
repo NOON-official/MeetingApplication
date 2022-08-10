@@ -1,32 +1,41 @@
-import * as React from 'react'
+import AreaContiner from '../Areas/AreaContainer'
 
-import CharactorContainer from '../Characters/CharactorContainer'
+import { ReactComponent as DayCharacter } from '../../Asset/page4/DayCharacter.svg'
 import {
   Container,
   MobileBox,
-  Title,
-  ButtonBox,
+  StyledDiv,
+  StyledText,
   SubTitle,
 } from '../Elements/StyledComponent'
-import { Character } from '../Characters/CharacterButton'
 
 const Body4 = () => {
   return (
     <Container>
       <MobileBox>
-        <Title>우리 팀원을 소개해요</Title>
-        <CharactorContainer></CharactorContainer>
-
-        <SubTitle top={'80%'}>미팅 나갈 구성원을 알려주세요~</SubTitle>
-        <ButtonBox top={'88%'}>
-          <Character character={'개그맨'}>개그맨</Character>
-          <Character character={'비주얼'}>비주얼</Character>
-          <Character character={'사회자'}>사회자</Character>
-          <Character character={'깍두기'}>깍두기</Character>
-        </ButtonBox>
+        <StyledDiv top="5%" width="90%" height="10%" left="42%">
+          <StyledText position="static" size="35px" color="#F49393">
+            미팅 가능한 지역
+          </StyledText>
+          <StyledText position="static" size="35px">
+            을 말해주세요
+          </StyledText>
+        </StyledDiv>{' '}
+        <SubTitle
+          size="13px"
+          font="Pretendard"
+          color="#AAAAAA"
+          left="23%"
+          top="11%"
+        >
+          중복 선택이 가능해요
+        </SubTitle>
+        <AreaContiner></AreaContiner>
+        <StyledDiv top="82%" left="75%">
+          <DayCharacter />
+        </StyledDiv>
       </MobileBox>
     </Container>
   )
 }
-
 export default Body4

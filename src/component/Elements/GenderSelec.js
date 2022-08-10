@@ -69,7 +69,7 @@ export const GenderSelect = () => {
 
   return (
     <Contents>
-      <SubTitle top="5%" left="5%">
+      <SubTitle font="Pretendard" top="5%" left="5%">
         성별
       </SubTitle>
       <ButtonBox top="12%">
@@ -106,7 +106,7 @@ export const NumberSelect = () => {
   }
   return (
     <Contents>
-      <SubTitle top="28%" left="6%">
+      <SubTitle font="Pretendard" top="28%" left="6%">
         인원수
       </SubTitle>
 
@@ -158,7 +158,7 @@ export const AgeSelect = () => {
   }
   return (
     <ContentsAge>
-      <SubTitle top="53%" left="8%">
+      <SubTitle font="Pretendard" top="53%" left="8%">
         평균나이
       </SubTitle>
       <SliderBox top="60%">
@@ -223,7 +223,7 @@ const Job = (props) => {
 export const JobSelect = () => {
   return (
     <Contents>
-      <SubTitle top="79%" left="5%">
+      <SubTitle font="Pretendard" top="79%" left="5%">
         {' '}
         직업
       </SubTitle>

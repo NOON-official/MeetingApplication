@@ -8,7 +8,12 @@ import {
 } from '../Elements/GenderSelec'
 import { ReactComponent as PageTitle } from '../../Asset/page2/Page2Title.svg'
 import { ReactComponent as Character } from '../../Asset/page2/Character.svg'
-import { Container, MobileBox, StyledDiv } from '../Elements/StyledComponent'
+import {
+  Container,
+  MobileBox,
+  StyledDiv,
+  StyledText,
+} from '../Elements/StyledComponent'
 const TeamSelectBox = styled.div`
   height: 70%;
   width: 95%;
@@ -17,10 +22,15 @@ const TeamSelectBox = styled.div`
 `
 const Body2 = () => {
   return (
-    <Container>
+    <Container bg=" #F5F5F5">
       <MobileBox>
-        <StyledDiv top="5%" left="5%" transform="0">
-          <PageTitle />
+        <StyledDiv top="5%" width="196px" height="40px" left="30%">
+          <StyledText position="static" size="35px" color="#F49393">
+            우리 팀을 소개
+          </StyledText>
+          <StyledText position="static" size="35px">
+            해주세요
+          </StyledText>
         </StyledDiv>
         <TeamSelectBox>
           <GenderSelect />
