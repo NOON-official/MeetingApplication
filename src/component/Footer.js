@@ -133,7 +133,7 @@ const Footer = () => {
       setPrevPath('/Meeting2')
       setPercent(35)
     } else if (location === '/Meeting4') {
-      if (characters.length > 0) {
+      if (area.length > 0) {
         setNextPath('/Meeting5')
       } else {
         setNextPath('/Meeting4')
@@ -141,7 +141,7 @@ const Footer = () => {
       setPrevPath('/Meeting3')
       setPercent(45)
     } else if (location === '/Meeting5') {
-      if (area.length > 0 && day.length > 0) {
+      if (day.length > 0) {
         setNextPath('/Meeting6')
       } else {
         setNextPath('/Meeting5')

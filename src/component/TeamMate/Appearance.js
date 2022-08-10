@@ -1,20 +1,26 @@
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import * as React from 'react'
+import { StyledDiv, StyledText } from '../Elements/StyledComponent'
 const buttonColor = '#C4D7E0'
 const FaceButton = styled.button`
   margin: 5px;
   border-radius: 34px;
-  height: 40px;
-  width: 70px;
+  height: 30px;
+  width: auto;
+  min-width: 60px;
   border: 1px solid #c9c9c9;
   background-color: ${(props) => props.background_color || 'transparent'};
   color: ${(props) => props.color || 'black'};
 `
 const AppearanceContainer = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: ${(props) => props.location || 'flex-start'};
+  position: absolute;
+  top: ${(props) => props.top};
+  margin-left: 10px;
 `
 const SelectedBox = styled.div`
   display: flex;
@@ -70,23 +76,31 @@ const Face = (props) => {
 }
 const Appearance = (props) => {
   return (
-    <div
-      style={
-        ({ display: 'flex' }, { flexDirection: 'column' }, { height: '100%' })
-      }
+    <StyledDiv
+      top="5%"
+      left="50%"
+      bg="white"
+      height="25%"
+      width="95%"
+      border="14px"
+      display="flex"
+      justify_content="space-between"
+      direction="column"
     >
-      <AppearanceContainer>
+      <StyledText>외모</StyledText>
+      <AppearanceContainer top="33%">
         <Face face={'강아지'}></Face>
         <Face face={'고양이'}></Face>
         <Face face={'물고기'}></Face>
+        <Face face={'멍멍이'}></Face>
       </AppearanceContainer>
-      <AppearanceContainer location={'flex-end'}>
+      <AppearanceContainer top="63%">
         <Face face={'공룡상'}></Face>
         <Face face={'밥상'}></Face>
         <Face face={'최우수상'}></Face>
+        <Face face={'하기싫다'}></Face>
       </AppearanceContainer>
-      <SelectedFace></SelectedFace>
-    </div>
+    </StyledDiv>
   )
 }
 

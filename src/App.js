@@ -11,6 +11,7 @@ import Body9 from './component/body/Body9'
 import Body10 from './component/body/Body10'
 import Body11 from './component/body/Body11'
 import Body12 from './component/body/Body12'
+import KakaoLogin from './component/body/KaKaoLogin'
 import Footer from './component/Footer'
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
@@ -42,6 +43,7 @@ function App() {
           <Route path="Meeting10" element={<Body10 />}></Route>
           <Route path="Meeting11" element={<Body11 />}></Route>
           <Route path="Meeting12" element={<Body12 />}></Route>
+          <Route path="Kakaologin" element={<KakaoLogin />}></Route>
         </Routes>
         <Bootom></Bootom>
       </BrowserRouter>

@@ -8,6 +8,11 @@ export const StyledDiv = styled.div`
   height: ${(props) => props.height};
   width: ${(props) => props.width};
   border-radius: ${(props) => props.border};
+  display: ${(props) => props.display};
+  justify-content: ${(props) => props.justify_content};
+  flex-direction: ${(props) => props.direction};
+  f
+ 
 `
 export const SubTitle = styled.div`
   font-size: ${(props) => props.size || '14px'};
@@ -19,6 +24,8 @@ export const SubTitle = styled.div`
   transform: translate(-50%, 0);
   color: ${(props) => props.color || '#777777'};
   font-family: ${(props) => props.font || 'var(--font-family)'};
+  font-weight: ${(props) => props.weight || '700'};
+  line-height: ${(props) => props.line_height || '20px'};
 `
 export const ButtonBox = styled.div`
   display: flex;

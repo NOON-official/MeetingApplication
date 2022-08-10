@@ -2,46 +2,43 @@ import styled from 'styled-components'
 import Appearance from '../TeamMate/Appearance'
 import Mbtis from '../TeamMate/Mbti'
 import Fashions from '../TeamMate/Fashion'
-import { Container, MobileBox, Title } from '../Elements/StyledComponent'
+import {
+  Container,
+  MobileBox,
+  StyledDiv,
+  StyledText,
+  SubTitle,
+} from '../Elements/StyledComponent'
 
-const SubDiv = styled.div`
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  height: auto;
-  margin: 10px;
-  width: 301px;
-  top: ${(props) => props.top || '15%'};
-  overflow: hidden;
-  overflow-x: hidden;
-`
-const SubTitle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: flex-start;
-  font-size: 17px;
-  font-weight: bold;
-  width: 15%;
-  height: 10%;
-`
 const Body6 = () => {
   return (
-    <Container overflow={'scroll'}>
-      <MobileBox height={'160%'}>
-        <Title>우리팀에는 이런 사람들이 있어요!</Title>
-        <SubDiv top={'100px'}>
-          <SubTitle>외모</SubTitle>
+    <Container>
+      <MobileBox>
+        <StyledDiv top="5%" width="90%" height="10%" left="18%">
+          <StyledText position="static" size="35px">
+            우리팀에는 <br />
+          </StyledText>
+        </StyledDiv>
+        <StyledDiv top="10%" width="90%" height="10%" left="33%">
+          <StyledText position="static" size="35px" color="#F49393">
+            어떤사람들
+          </StyledText>
+          <StyledText position="static" size="35px">
+            이 있나요?
+          </StyledText>
+        </StyledDiv>{' '}
+        <SubTitle
+          size="13px"
+          font="Pretendard"
+          color="#AAAAAA"
+          left="24%"
+          top="15%"
+        >
+          중복 선택이 가능해요
+        </SubTitle>
+        <StyledDiv top="20%" width="90%" height="75%" left="50%">
           <Appearance></Appearance>
-        </SubDiv>
-        <SubDiv height={'45%'} top={'350px'}>
-          <SubTitle>mbti</SubTitle>
-          <Mbtis></Mbtis>
-        </SubDiv>
-        <SubDiv height={'35%'} top={'680px'}>
-          <SubTitle>패션</SubTitle>
-          <Fashions></Fashions>
-        </SubDiv>
+        </StyledDiv>
       </MobileBox>
     </Container>
   )
