@@ -32,12 +32,14 @@ const Body6 = () => {
           font="Pretendard"
           color="#AAAAAA"
           left="24%"
-          top="15%"
+          top="17%"
         >
           중복 선택이 가능해요
         </SubTitle>
         <StyledDiv top="20%" width="90%" height="75%" left="50%">
           <Appearance></Appearance>
+          <Mbtis></Mbtis>
+          <Fashions></Fashions>
         </StyledDiv>
       </MobileBox>
     </Container>

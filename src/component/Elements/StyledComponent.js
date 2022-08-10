@@ -11,8 +11,7 @@ export const StyledDiv = styled.div`
   display: ${(props) => props.display};
   justify-content: ${(props) => props.justify_content};
   flex-direction: ${(props) => props.direction};
-  f
- 
+  border-color: ${(props) => props.border_color};
 `
 export const SubTitle = styled.div`
   font-size: ${(props) => props.size || '14px'};
@@ -115,8 +114,10 @@ export const StyledText = styled.text`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
   color: ${(props) => props.color};
-  font-family: var(--font-family);
+  font-family: ${(props) => props.font || 'var(--font-family)'};
   font-style: normal;
+  font-weight: ${(props) => props.weight};
+  line-height: ${(props) => props.line};
 `
 export const StyledButton = styled.button`
   position: ${(props) => props.position};

@@ -2,16 +2,16 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import * as React from 'react'
 import { StyledDiv, StyledText } from '../Elements/StyledComponent'
-const buttonColor = '#C4D7E0'
+const buttonColor = '#EB8888'
 const FaceButton = styled.button`
   margin: 5px;
   border-radius: 34px;
   height: 30px;
   width: auto;
   min-width: 60px;
-  border: 1px solid #c9c9c9;
+  border: 0;
   background-color: ${(props) => props.background_color || 'transparent'};
-  color: ${(props) => props.color || 'black'};
+  color: ${(props) => props.color || '#B79292'};
 `
 const AppearanceContainer = styled.div`
   display: flex;
@@ -49,9 +49,9 @@ const Face = (props) => {
     () => appearance.includes(props.face),
     [appearance]
   )
-  const fontColor = React.useMemo(() => (exist ? 'white' : 'black'), [exist])
+  const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist])
   const bgColor = React.useMemo(
-    () => (exist ? buttonColor : 'transparent'),
+    () => (exist ? buttonColor : '#FBF6F6'),
     [exist]
   )
   const OnFaceClick = React.useCallback(() => {
@@ -86,8 +86,19 @@ const Appearance = (props) => {
       display="flex"
       justify_content="space-between"
       direction="column"
+      border_color="#F1ECEC"
     >
-      <StyledText>외모</StyledText>
+      <StyledText
+        font="Pretendard"
+        size="14px"
+        top="10%"
+        left="6%"
+        color="#777777"
+        weight="500"
+        line="16.8px"
+      >
+        외모
+      </StyledText>
       <AppearanceContainer top="33%">
         <Face face={'강아지'}></Face>
         <Face face={'고양이'}></Face>
