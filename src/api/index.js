@@ -1,5 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const client = axios.create({ baseURL: 'http://localhost:5000' })
+const client = axios.create({ baseURL: process.env.REACT_APP_URL });
 
-export default client
+export default client;
