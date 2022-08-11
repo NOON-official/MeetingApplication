@@ -28,6 +28,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.bright {
+  -webkit-filter: brightness(0.5);
+
+}
 
 .App-header {
   background-color: #282c34;
