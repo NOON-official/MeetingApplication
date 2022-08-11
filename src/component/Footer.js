@@ -19,17 +19,7 @@ const Container = styled.footer`
   flex-direction: column;
   background-color: #f5f5f5;
 `
-const Percentage = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 360px;
-  height: 50%;
-`
-const PercentageText = styled.div`
-  font-weight: bold;
-`
+
 const BackAndFront = styled.div`
   display: flex;
   flex-direction: row;
@@ -159,11 +149,7 @@ const Footer = () => {
       setPrevPath('/Meeting5')
       setPercent(60)
     } else if (location === '/Meeting7') {
-      if (
-        prefferedage !== 0 &&
-        prefferedjobs.length > 0 &&
-        preffereduniversity.length > 0
-      ) {
+      if (characters.length > 0) {
         setNextPath('/Meeting8')
       } else {
         setNextPath('/Meeting7')
@@ -171,7 +157,15 @@ const Footer = () => {
       setPrevPath('/Meeting6')
       setPercent(70)
     } else if (location === '/Meeting8') {
-      setNextPath('/Meeting9')
+      if (
+        prefferedage.length > 0 &&
+        prefferedjobs.length > 0 &&
+        preffereduniversity.length > 0
+      ) {
+        setNextPath('/Meeting9')
+      } else {
+        setNextPath('/Meeting8')
+      }
       setPrevPath('/Meeting7')
       setPercent(80)
     } else if (location === '/Meeting9') {
@@ -180,11 +174,7 @@ const Footer = () => {
       setPercent(90)
     } else if (location === '/Meeting10') {
       setPrevPath('/Meeting9')
-      if (authentication.currentUser) {
-        setNextPath('/Meeting11')
-      } else {
-        setNextPath('/Meeting10')
-      }
+      setNextPath('/Meeting11')
 
       setPercent(90)
     } else if (location === '/Meeting11') {
@@ -232,14 +222,15 @@ const Footer = () => {
                 fashion.length === 0)
             ) {
               openModal()
-            } else if (
-              location === '/Meeting7' &&
-              (preffereduniversity.length === 0 ||
-                prefferedjobs.length === 0 ||
-                prefferedage === 0)
-            ) {
+            } else if (location === '/Meeting7' && characters.length === 0) {
               openModal()
-            }
+            } else if (
+              location === '/Meeting8' &&
+              (prefferedage.length === 0 ||
+                prefferedjobs.length === 0 ||
+                preffereduniversity.length === 0)
+            )
+              openModal()
           }}
           to={nextPath}
           style={{ textDecoration: 'none' }}

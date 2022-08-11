@@ -1,60 +1,73 @@
-import styled from "styled-components";
-import charimg from "../../image/entj.png"
-const Container= styled.div`
-display:flex;
-flex-direction: column;
-height:100%;
-width:100%;
-`
-const Character= styled.img`
-width:90%;
-height:35%;
-margin:5%;
-
-`
-const Name= styled.div`
-height:5%;
-width:100%;
-justify-content: center;
-align-items: center;
-    font-weight: 700;
-    font-style: normal;
-    letter-spacing: -.015em;
-    line-height: 149.8%;
-`
-const CharacterText= styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width:90%;
-height:55%;
-margin:5%;
-color: #000;
-    font-weight: 700;
-    font-style: normal;
-    letter-spacing: -.015em;
-    line-height: 149.8%;
-    text-align: start;
-    font-size:18px;
-`
-const Warning= styled.div`
-color: red;
-font-size:15px;
-margin-top: 20px;
-`
-const Moderatoer=()=>{
-return(
-<Container>
-  <Character width="100" height="200" src={charimg}/>
- <Name>사회자</Name>
-  <CharacterText>
-   어색한 분위기를 풀어주는 당신은 미팅의 유재석! 당신이 없다면 미팅이 진행되지 않아요.<br/>
-<Warning> -주의! 진행만 하다가 숨겨진 단짝을 놓칠 수 있어요!-</Warning>
-  </CharacterText>
-</Container>
-
-)
-
+import { StyledDiv, StyledText } from '../Elements/StyledComponent'
+import { ReactComponent as ModeratorCharacter } from '../../Asset/page7/Moderator.svg'
+const Moderatoer = () => {
+  return (
+    <StyledDiv
+      width="100%"
+      height="20%"
+      left="50%"
+      max_width="350px"
+      max_height="350px"
+      border-width="1px"
+      border="10px"
+      border_color="#F1ECEC"
+      border_style="solid"
+      bg="white"
+      top="25%"
+    >
+      <StyledDiv left="50%" top="15%" width="70px" height="70px">
+        <ModeratorCharacter />
+      </StyledDiv>
+      <StyledText top="40%" weight="400" size="34px" left="43%" line="32.2px">
+        비주얼
+      </StyledText>
+      <StyledText
+        top="58%"
+        font="Pretend"
+        fontWeight="bold"
+        size="15px"
+        color="#777777"
+        line="18px"
+        left="20%"
+      >
+        존재만으로 분위기를 녹이는 당신!
+      </StyledText>
+      <StyledText
+        top="65%"
+        font="Pretend"
+        fontWeight="bold"
+        size="15px"
+        color="#777777"
+        line="18px"
+        left="23%"
+      >
+        바라만 보고 있어도 웃음이 나요
+      </StyledText>
+      <StyledDiv width="100%" left="50%" top="75%" height="25%" bg="#F1ECEC">
+        <StyledText
+          top="20%"
+          font="Pretendard"
+          fontWeight="bold"
+          line="15.6px"
+          size="16px"
+          left="45%"
+          color="#F49393"
+        >
+          주의!
+        </StyledText>
+        <StyledText
+          top="50%"
+          font="Pretendard"
+          fontWeight="bold"
+          line="15.6px"
+          size="16px"
+          left="32%"
+          color="#1A1A1A"
+        >
+          주위에 물어볼 것!
+        </StyledText>
+      </StyledDiv>
+    </StyledDiv>
+  )
 }
-export default Moderatoer;
+export default Moderatoer

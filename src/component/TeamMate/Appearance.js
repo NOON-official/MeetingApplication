@@ -77,7 +77,7 @@ const Face = (props) => {
 const Appearance = (props) => {
   return (
     <StyledDiv
-      top="5%"
+      top="2%"
       left="50%"
       bg="white"
       height="25%"
