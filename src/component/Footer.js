@@ -227,11 +227,10 @@ const Footer = () => {
             ) {
               openModal();
             } else if (
-              location === '/Meeting7' &&
-              (preffereduniversity.length === 0 || prefferedjobs.length === 0 || prefferedage === 0)
-            ) {
+              location === '/Meeting8' &&
+              (prefferedage.length === 0 || prefferedjobs.length === 0 || preffereduniversity.length === 0)
+            )
               openModal();
-            }
           }}
           to={nextPath}
           style={{ textDecoration: 'none' }}

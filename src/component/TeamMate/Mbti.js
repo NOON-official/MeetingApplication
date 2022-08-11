@@ -63,10 +63,10 @@ const Mbti = (props) => {
 const Mbtis = (props) => {
   return (
     <StyledDiv
-      top="35%"
+      top="30%"
       left="50%"
       bg="white"
-      height="35%"
+      height="40%"
       width="95%"
       border="14px"
       display="flex"

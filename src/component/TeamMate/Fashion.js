@@ -73,7 +73,7 @@ const Fashion = (props) => {
 const Fashions = (props) => {
   return (
     <StyledDiv
-      top="75%"
+      top="73%"
       left="50%"
       bg="white"
       height="25%"
