@@ -1,11 +1,11 @@
-import styled from 'styled-components'
-import * as React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Container, MobileBox, Title } from '../Elements/StyledComponent'
-const buttonColor = '#218fc3'
+import styled from 'styled-components';
+import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Container, MobileBox, Title } from '../Elements/StyledComponent';
+const buttonColor = '#218fc3';
 const StyledText = styled.text`
   text-decoration: line-through;
-`
+`;
 const StyledBox = styled.div`
   display: flex;
   top: ${(props) => props.top || '0%'};
@@ -21,7 +21,7 @@ const StyledBox = styled.div`
   color: ${(props) => props.color || buttonColor};
 
   margin: 20px;
-`
+`;
 const PrefferedBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,17 +37,17 @@ const PrefferedBox = styled.div`
   overflow-x: hidden;
   position: absolute;
   top: ${(props) => props.top || '0'};
-`
+`;
 const MyTeamInfo = (props) => {
-  const gender = useSelector((state) => state.gender)
-  const num = useSelector((state) => state.num)
-  const age = useSelector((state) => state.age)
-  const universities = useSelector((state) => state.university)
-  const area = useSelector((state) => state.area)
-  const day = useSelector((state) => state.day)
-  const appearance = useSelector((state) => state.appearance)
-  const mbti = useSelector((state) => state.mbti)
-  const fashion = useSelector((state) => state.fashion)
+  const gender = useSelector((state) => state.gender);
+  const num = useSelector((state) => state.num);
+  const age = useSelector((state) => state.age);
+  const universities = useSelector((state) => state.university);
+  const area = useSelector((state) => state.area);
+  const day = useSelector((state) => state.day);
+  const appearance = useSelector((state) => state.appearance);
+  const mbti = useSelector((state) => state.mbti);
+  const fashion = useSelector((state) => state.fashion);
 
   return (
     <StyledBox
@@ -60,30 +60,30 @@ const MyTeamInfo = (props) => {
     >
       #{gender} #{num}명 #평균 {age}살{' '}
       {universities.map((data) => {
-        return ` # ${data}`
+        return ` # ${data}`;
       })}
       {area.map((data) => {
-        return ` # ${data}`
+        return ` # ${data}`;
       })}
       {day.map((data) => {
-        return ` # ${data}`
+        return ` # ${data}`;
       })}
       {appearance.map((data) => {
-        return ` # ${data}`
+        return ` # ${data}`;
       })}
       {mbti.map((data) => {
-        return ` # ${data}`
+        return ` # ${data}`;
       })}
       {fashion.map((data) => {
-        return `# ${data}`
+        return `# ${data}`;
       })}
     </StyledBox>
-  )
-}
+  );
+};
 const PrefferedInfo = () => {
-  const job = useSelector((state) => state.prefferedjobs)
-  const age = useSelector((state) => state.prefferedage)
-  const university = useSelector((state) => state.preffereduniversity)
+  const job = useSelector((state) => state.prefferedjobs);
+  const age = useSelector((state) => state.prefferedage);
+  const university = useSelector((state) => state.preffereduniversity);
   return (
     <StyledBox
       align_item={'flex-start'}
@@ -95,15 +95,15 @@ const PrefferedInfo = () => {
       color="#ed586d"
     >
       {job.map((data) => {
-        return ` # ${data} `
+        return ` # ${data} `;
       })}
       # {age}살
       {university.map((data) => {
-        return <StyledText>#{data}</StyledText>
+        return <StyledText>#{data}</StyledText>;
       })}
     </StyledBox>
-  )
-}
+  );
+};
 const Body8 = () => {
   return (
     <Container>
@@ -125,7 +125,7 @@ const Body8 = () => {
         </StyledBox>
       </MobileBox>
     </Container>
-  )
-}
+  );
+};
 
-export default Body8
+export default Body8;

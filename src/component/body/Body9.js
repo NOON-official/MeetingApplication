@@ -1,7 +1,7 @@
-import styled from 'styled-components'
-import * as React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-const buttonColor = '#218fc3'
+import styled from 'styled-components';
+import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+const buttonColor = '#218fc3';
 const Container = styled.div`
   left: 0;
   overflow: hidden;
@@ -15,7 +15,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const Title = styled.div`
   display: flex;
@@ -32,7 +32,7 @@ const Title = styled.div`
   text-align: center;
   justify-content: center;
   width: auto;
-`
+`;
 const SubTitle = styled.div`
   display: flex;
   top: ${(props) => props.top || '10%'};
@@ -49,7 +49,7 @@ const SubTitle = styled.div`
   text-align: center;
   justify-content: center;
   width: auto;
-`
+`;
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@ const TextContainer = styled.div`
   width: 301px;
   overflow: hidden;
   overflow-x: hidden;
-`
+`;
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -73,7 +73,7 @@ const TextBox = styled.div`
   position: absolute;
   overflow: hidden;
   overflow-x: hidden;
-`
+`;
 const IntroBox = styled.textarea`
   position: absolute;
   top: 10%;
@@ -85,19 +85,17 @@ const IntroBox = styled.textarea`
     text-align: start;
     font-size: 13px;
   }
-`
+`;
 const Body9 = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const setIntroduction = (e) => {
-    dispatch({ type: 'SET_INTRODUCTION', payload: e.target.value })
-  }
+    dispatch({ type: 'SET_INTRODUCTION', payload: e.target.value });
+  };
 
   return (
     <Container>
       <Title>우리팀 어필할 수 있는 마지막 소개 한줄</Title>
-      <SubTitle margin_top="25px">
-        위트있게 우리팀을 두문장 이내로 설명해보아요!
-      </SubTitle>
+      <SubTitle margin_top="25px">위트있게 우리팀을 두문장 이내로 설명해보아요!</SubTitle>
       <TextContainer>
         <SubTitle margin_left="15px" top="30%">
           2문장 이내로 우리팀을 소개해 주세요!
@@ -111,7 +109,7 @@ const Body9 = () => {
         </TextBox>
       </TextContainer>
     </Container>
-  )
-}
+  );
+};
 
-export default Body9
+export default Body9;

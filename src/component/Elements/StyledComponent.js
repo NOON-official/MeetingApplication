@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 export const StyledDiv = styled.div`
   position: absolute;
   top: ${(props) => props.top};
@@ -12,7 +12,7 @@ export const StyledDiv = styled.div`
   justify-content: ${(props) => props.justify_content};
   flex-direction: ${(props) => props.direction};
   border-color: ${(props) => props.border_color};
-`
+`;
 export const SubTitle = styled.div`
   font-size: ${(props) => props.size || '14px'};
   position: absolute;
@@ -25,7 +25,7 @@ export const SubTitle = styled.div`
   font-family: ${(props) => props.font || 'var(--font-family)'};
   font-weight: ${(props) => props.weight || '700'};
   line-height: ${(props) => props.line_height || '20px'};
-`
+`;
 export const ButtonBox = styled.div`
   display: flex;
   flex-direction: ${(props) => props.display || 'row'};
@@ -36,7 +36,7 @@ export const ButtonBox = styled.div`
   transform: translate(-50%, 0);
   max-width: 375px;
   width: 100%;
-`
+`;
 export const SliderBox = styled.div`
   width: 90%;
   max-width: 350px;
@@ -44,7 +44,7 @@ export const SliderBox = styled.div`
   top: ${(props) => props.top};
   left: 50%;
   transform: translate(-50%, 0);
-`
+`;
 export const Contents = styled.div`
   display: flex;
   flex-direction: ${(props) => props.flexDirection || 'column'};
@@ -56,12 +56,12 @@ export const Contents = styled.div`
   top: ${(props) => props.top};
   width: ${(props) => props.width};
   height: ${(props) => props.heigth};
-`
+`;
 export const ContentsAge = styled.div`
   display: flex;
   flex-direction: column;
   color: 'black';
-`
+`;
 export const SelectButton = styled.button`
   margin-right: 5px;
   border-radius: 14px;
@@ -73,7 +73,7 @@ export const SelectButton = styled.button`
   border-color: transparent;
   font-family: var(--font-family);
   font-size: 20px;
-`
+`;
 //Basic
 export const Container = styled.div`
   height: ${(props) => props.height || '92%'};
@@ -82,7 +82,7 @@ export const Container = styled.div`
   overflow-x: hidden;
   overflow-y: ${(props) => props.overflow};
   background-color: ${(props) => props.bg || '#F5F5F5'};
-`
+`;
 export const MobileBox = styled.div`
   max-width: 768px;
   width: 100%;
@@ -96,7 +96,7 @@ export const MobileBox = styled.div`
   font-family: var(--font);
   overflow-x: hidden;
   overflow-y: ${(props) => props.overflow || 'hidden'};
-`
+`;
 export const Title = styled.div`
   font-size: var(--font-size-title);
   font-weight: bold;
@@ -106,7 +106,7 @@ export const Title = styled.div`
   top: ${(props) => props.top || '0%'};
   left: 50%;
   transform: translate(-50%, 0);
-`
+`;
 export const StyledText = styled.text`
   position: ${(props) => props.position || 'absolute'};
   top: ${(props) => props.top};
@@ -118,7 +118,7 @@ export const StyledText = styled.text`
   font-style: normal;
   font-weight: ${(props) => props.weight};
   line-height: ${(props) => props.line};
-`
+`;
 export const StyledButton = styled.button`
   position: ${(props) => props.position};
   top: ${(props) => props.top};
@@ -131,4 +131,4 @@ export const StyledButton = styled.button`
   border-radius: 10px;
   background-color: var(--color-ClickedPink);
   color: ${(props) => props.color || 'white'};
-`
+`;

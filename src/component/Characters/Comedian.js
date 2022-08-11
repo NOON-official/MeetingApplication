@@ -1,21 +1,21 @@
-import styled from 'styled-components'
-import charimg from '../../image/enfp.jpg'
+import styled from 'styled-components';
+import charimg from '../../image/enfp.jpg';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
-`
+`;
 const Character = styled.img`
   width: 90%;
   height: 35%;
   margin: 5%;
-`
+`;
 const Warning = styled.div`
   color: red;
   font-size: 15px;
   margin-top: 20px;
-`
+`;
 const Name = styled.div`
   font-family: 'Single Day', cursive;
   height: 5%;
@@ -26,7 +26,7 @@ const Name = styled.div`
   font-style: normal;
   letter-spacing: -0.015em;
   line-height: 149.8%;
-`
+`;
 
 const CharacterText = styled.div`
   font-family: 'Single Day', cursive;
@@ -44,7 +44,7 @@ const CharacterText = styled.div`
   line-height: 149.8%;
   text-align: start;
   font-size: 18px;
-`
+`;
 const Comedian = () => {
   return (
     <Container>
@@ -58,6 +58,6 @@ const Comedian = () => {
         </Warning>
       </CharacterText>
     </Container>
-  )
-}
-export default Comedian
+  );
+};
+export default Comedian;

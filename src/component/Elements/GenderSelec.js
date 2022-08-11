@@ -1,17 +1,9 @@
-import * as React from 'react'
-import Slider from '@mui/material/Slider'
-import { styled } from '@mui/material/styles'
-import { useSelector, useDispatch } from 'react-redux'
-import {
-  SubTitle,
-  ButtonBox,
-  SliderBox,
-  Contents,
-  ContentsAge,
-  SelectButton,
-  StyledText,
-} from './StyledComponent'
-const buttonColor = '#C4D7E0'
+import * as React from 'react';
+import Slider from '@mui/material/Slider';
+import { styled } from '@mui/material/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { SubTitle, ButtonBox, SliderBox, Contents, ContentsAge, SelectButton, StyledText } from './StyledComponent';
+const buttonColor = '#C4D7E0';
 const PrettoSlider = styled(Slider)({
   color: '#F6EEEE',
   height: 8,
@@ -49,23 +41,23 @@ const PrettoSlider = styled(Slider)({
       transform: 'rotate(45deg)',
     },
   },
-})
+});
 
 export const GenderSelect = () => {
-  const dispatch = useDispatch()
-  const gender = useSelector((state) => state.gender)
+  const dispatch = useDispatch();
+  const gender = useSelector((state) => state.gender);
   const setmale = React.useCallback(() => {
-    dispatch({ type: 'SET_MALE' })
-  }, [dispatch])
+    dispatch({ type: 'SET_MALE' });
+  }, [dispatch]);
   const setfemale = React.useCallback(() => {
-    dispatch({ type: 'SET_FEMALE' })
-  }, [dispatch])
+    dispatch({ type: 'SET_FEMALE' });
+  }, [dispatch]);
   // 남자: true, 여자 : false
 
-  const ColorMale = gender === '남자' ? '#EB8888' : '#F6EEEE'
-  const colorM = gender === '남자' ? 'white' : '#B79292'
-  const ColorFemale = gender === '남자' ? '#F6EEEE' : '#EB8888'
-  const colorF = gender === '남자' ? 'black' : 'white'
+  const ColorMale = gender === '남자' ? '#EB8888' : '#F6EEEE';
+  const colorM = gender === '남자' ? 'white' : '#B79292';
+  const ColorFemale = gender === '남자' ? '#F6EEEE' : '#EB8888';
+  const colorF = gender === '남자' ? 'black' : 'white';
 
   return (
     <Contents>
@@ -96,13 +88,13 @@ export const GenderSelect = () => {
         </SelectButton>
       </ButtonBox>
     </Contents>
-  )
-}
+  );
+};
 export const NumberSelect = () => {
-  const dispatch = useDispatch()
-  const number = useSelector((state) => state.num)
+  const dispatch = useDispatch();
+  const number = useSelector((state) => state.num);
   function setnumber(value) {
-    dispatch({ type: 'NUMBER', payload: value })
+    dispatch({ type: 'NUMBER', payload: value });
   }
   return (
     <Contents>
@@ -146,16 +138,16 @@ export const NumberSelect = () => {
         </SelectButton>
       </ButtonBox>
     </Contents>
-  )
-}
+  );
+};
 export const AgeSelect = () => {
-  const dispatch = useDispatch()
-  const age = useSelector((state) => state.age)
+  const dispatch = useDispatch();
+  const age = useSelector((state) => state.age);
   const handleChange = (event, newValue) => {
     if (typeof newValue === 'number') {
-      dispatch({ type: 'AGE', payload: newValue })
+      dispatch({ type: 'AGE', payload: newValue });
     }
-  }
+  };
   return (
     <ContentsAge>
       <SubTitle font="Pretendard" top="53%" left="8%">
@@ -181,45 +173,31 @@ export const AgeSelect = () => {
         />
       </SliderBox>
     </ContentsAge>
-  )
-}
+  );
+};
 
 const Job = (props) => {
-  const dispatch = useDispatch()
-  const jobs = useSelector((state) => state.jobs)
-  const num = useSelector((state) => state.num)
-  const exists = React.useMemo(
-    () => jobs.includes(props.job),
-    [jobs, props.job]
-  )
-  const fontColor = React.useMemo(
-    () => (exists ? 'white' : '#B79292'),
-    [exists]
-  )
-  const bgColor = React.useMemo(
-    () => (exists ? '#EB8888' : '#F6EEEE'),
-    [exists]
-  )
+  const dispatch = useDispatch();
+  const jobs = useSelector((state) => state.jobs);
+  const num = useSelector((state) => state.num);
+  const exists = React.useMemo(() => jobs.includes(props.job), [jobs, props.job]);
+  const fontColor = React.useMemo(() => (exists ? 'white' : '#B79292'), [exists]);
+  const bgColor = React.useMemo(() => (exists ? '#EB8888' : '#F6EEEE'), [exists]);
 
   const onJobClick = React.useCallback(() => {
     if (exists) {
-      dispatch({ type: 'JOBS_DELETE', payload: props.job })
+      dispatch({ type: 'JOBS_DELETE', payload: props.job });
     } else {
-      if (jobs.length < num) dispatch({ type: 'JOBS', payload: props.job })
+      if (jobs.length < num) dispatch({ type: 'JOBS', payload: props.job });
     }
-  }, [exists, dispatch, props.job, jobs, num])
+  }, [exists, dispatch, props.job, jobs, num]);
 
   return (
-    <SelectButton
-      color={fontColor}
-      background_color={bgColor}
-      onClick={onJobClick}
-      width="25%"
-    >
+    <SelectButton color={fontColor} background_color={bgColor} onClick={onJobClick} width="25%">
       {props.job}
     </SelectButton>
-  )
-}
+  );
+};
 export const JobSelect = () => {
   return (
     <Contents>
@@ -234,5 +212,5 @@ export const JobSelect = () => {
         <Job job={'취준생'}></Job>
       </ButtonBox>
     </Contents>
-  )
-}
+  );
+};

@@ -287,6 +287,6 @@ var DATA = {
     ISTJ: 5,
     ESTJ: 5,
   },
-}
+};
 
-export default DATA
+export default DATA;

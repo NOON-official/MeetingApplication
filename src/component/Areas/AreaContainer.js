@@ -1,7 +1,7 @@
-import styled from 'styled-components'
-import * as React from 'react'
-import { StyledDiv } from '../Elements/StyledComponent'
-import { useSelector, useDispatch } from 'react-redux'
+import styled from 'styled-components';
+import * as React from 'react';
+import { StyledDiv } from '../Elements/StyledComponent';
+import { useSelector, useDispatch } from 'react-redux';
 
 const AreaBox = styled.div`
   width: 100%;
@@ -10,7 +10,7 @@ const AreaBox = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin-bottom: 15px;
-`
+`;
 const Area = styled.button`
   width: ${(props) => props.width || '50%'};
   height: 100%;
@@ -22,35 +22,27 @@ const Area = styled.button`
   font-size: 20px;
   color: ${(props) => props.color || 'black'};
   background-color: ${(props) => props.background_color || 'transparent'};
-`
+`;
 const Areas = (props) => {
-  const dispatch = useDispatch()
-  const area = useSelector((state) => state.area)
-  const exist = React.useMemo(() => area.includes(props.area), [area])
-  const bgcolor = React.useMemo(() => (exist ? '#EB8888' : '#F6EEEE'), [exist])
-  const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist])
-  const bgColor = React.useMemo(
-    () => (exist ? '#F6EEEE' : 'transparent'),
-    [exist]
-  )
+  const dispatch = useDispatch();
+  const area = useSelector((state) => state.area);
+  const exist = React.useMemo(() => area.includes(props.area), [area]);
+  const bgcolor = React.useMemo(() => (exist ? '#EB8888' : '#F6EEEE'), [exist]);
+  const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist]);
+  const bgColor = React.useMemo(() => (exist ? '#F6EEEE' : 'transparent'), [exist]);
   const OnAreaClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'AREA_DELETE', payload: props.area })
+      dispatch({ type: 'AREA_DELETE', payload: props.area });
     } else {
-      dispatch({ type: 'AREA', payload: props.area })
+      dispatch({ type: 'AREA', payload: props.area });
     }
-  }, [exist, props.area])
+  }, [exist, props.area]);
   return (
-    <Area
-      color={fontColor}
-      background_color={bgcolor}
-      onClick={OnAreaClick}
-      width={props.width}
-    >
+    <Area color={fontColor} background_color={bgcolor} onClick={OnAreaClick} width={props.width}>
       {props.area}
     </Area>
-  )
-}
+  );
+};
 
 const AreaContainer = () => {
   return (
@@ -74,7 +66,7 @@ const AreaContainer = () => {
         <Areas area="북대문"></Areas>
       </AreaBox>
     </StyledDiv>
-  )
-}
+  );
+};
 
-export default AreaContainer
+export default AreaContainer;

@@ -1,25 +1,15 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import {
-  GenderSelect,
-  NumberSelect,
-  AgeSelect,
-  JobSelect,
-} from '../Elements/GenderSelec'
-import { ReactComponent as PageTitle } from '../../Asset/page2/Page2Title.svg'
-import { ReactComponent as Character } from '../../Asset/page2/Character.svg'
-import {
-  Container,
-  MobileBox,
-  StyledDiv,
-  StyledText,
-} from '../Elements/StyledComponent'
+import * as React from 'react';
+import styled from 'styled-components';
+import { GenderSelect, NumberSelect, AgeSelect, JobSelect } from '../Elements/GenderSelec';
+import { ReactComponent as PageTitle } from '../../Asset/page2/Page2Title.svg';
+import { ReactComponent as Character } from '../../Asset/page2/Character.svg';
+import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
 const TeamSelectBox = styled.div`
   height: 70%;
   width: 95%;
   position: absolute;
   top: 10%;
-`
+`;
 const Body2 = () => {
   return (
     <Container bg=" #F5F5F5">
@@ -43,6 +33,6 @@ const Body2 = () => {
         </StyledDiv>
       </MobileBox>
     </Container>
-  )
-}
-export default Body2
+  );
+};
+export default Body2;

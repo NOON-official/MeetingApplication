@@ -1,10 +1,10 @@
-import styled from 'styled-components'
-import Stack from '@mui/material/Stack'
-import { Fab } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react'
-import * as React from 'react'
-const buttonColor = '#FFDCE1'
+import styled from 'styled-components';
+import Stack from '@mui/material/Stack';
+import { Fab } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import * as React from 'react';
+const buttonColor = '#FFDCE1';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@ const Container = styled.div`
   overflow: scroll;
   overflow-x: hidden;
   top: ${(props) => props.top || '50%'};
-`
+`;
 const UnivHeader = styled(Stack)`
   border: solid #e5e5e5;
   border-width: 0 0 0.5px;
@@ -35,18 +35,17 @@ const UnivHeader = styled(Stack)`
   font-family: 'Single Day', cursive;
   text-align: left;
   width: 281px;
-`
+`;
 const ThreeUnivs = styled(Stack)`
   width: 80%;
   margin-left: 25px;
   margin-bottom: 20px; ;
-`
+`;
 
 const Univ = styled(Fab)`
-  background-color: ${(props) =>
-    props.background_color || 'transparent'}!important;
+  background-color: ${(props) => props.background_color || 'transparent'}!important;
   color: ${(props) => props.color} !important;
-`
+`;
 const Uni = styled.button`
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -89,10 +88,8 @@ const Uni = styled.button`
   text-transform: uppercase;
   min-height: auto;
   -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 17px;
   padding: 0 8px;
@@ -100,44 +97,34 @@ const Uni = styled.button`
   width: auto;
   height: 34px;
   z-index: 50;
-  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   color: ${(props) => props.color || 'black'};
   background-color: ${(props) => props.background_color || 'transparent'};
-`
+`;
 const University = (props) => {
-  const dispatch = useDispatch()
-  const universities = useSelector((state) => state.preffereduniversity)
-  const exist = React.useMemo(
-    () => universities.includes(props.university),
-    [universities]
-  )
-  const bgcolor = React.useMemo(
-    () => (exist ? buttonColor : 'transparent'),
-    [exist]
-  )
-  const fontColor = React.useMemo(() => (exist ? 'white' : 'black'), [exist])
+  const dispatch = useDispatch();
+  const universities = useSelector((state) => state.preffereduniversity);
+  const exist = React.useMemo(() => universities.includes(props.university), [universities]);
+  const bgcolor = React.useMemo(() => (exist ? buttonColor : 'transparent'), [exist]);
+  const fontColor = React.useMemo(() => (exist ? 'white' : 'black'), [exist]);
 
   const OnUniversityClick = React.useCallback(() => {
     if (exist) {
       dispatch({
         type: 'PREFFEREDUNIVERSITIES_DELETE',
         payload: props.university,
-      })
+      });
     } else {
-      dispatch({ type: 'PREFFEREDUNIVERSITIES', payload: props.university })
+      dispatch({ type: 'PREFFEREDUNIVERSITIES', payload: props.university });
     }
-  }, [exist, props.university])
+  }, [exist, props.university]);
   return (
-    <Uni
-      color={fontColor}
-      background_color={bgcolor}
-      onClick={OnUniversityClick}
-    >
+    <Uni color={fontColor} background_color={bgcolor} onClick={OnUniversityClick}>
       {props.university}
     </Uni>
-  )
-}
+  );
+};
 
 const UnivBox = (props) => {
   return (
@@ -222,7 +209,7 @@ const UnivBox = (props) => {
         <University university={'한양대'}>한양대</University>
       </ThreeUnivs>
     </Container>
-  )
-}
+  );
+};
 
-export default UnivBox
+export default UnivBox;

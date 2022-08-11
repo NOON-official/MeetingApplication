@@ -1,11 +1,11 @@
-import styled from 'styled-components'
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
-import { Line } from 'rc-progress'
-import { useSelector, useDispatch } from 'react-redux'
-import { PageNotCompleted } from './ErrorMessages/PageNotCompletedError'
-import { authentication } from './Firebase/firebase'
+import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Line } from 'rc-progress';
+import { useSelector, useDispatch } from 'react-redux';
+import { PageNotCompleted } from './ErrorMessages/PageNotCompletedError';
+import { authentication } from './Firebase/firebase';
 
 const Container = styled.footer`
   position: fixed;
@@ -18,7 +18,7 @@ const Container = styled.footer`
   align-items: center;
   flex-direction: column;
   background-color: #f5f5f5;
-`
+`;
 const Percentage = styled.div`
   display: flex;
   flex-direction: row;
@@ -26,10 +26,10 @@ const Percentage = styled.div`
   justify-content: center;
   width: 360px;
   height: 50%;
-`
+`;
 const PercentageText = styled.div`
   font-weight: bold;
-`
+`;
 const BackAndFront = styled.div`
   display: flex;
   flex-direction: row;
@@ -37,7 +37,7 @@ const BackAndFront = styled.div`
   align-items: center;
   height: 50%;
   width: 100%;
-`
+`;
 const BackButton = styled.button`
   background-color: transparent;
   color: #f2cbcb;
@@ -51,7 +51,7 @@ const BackButton = styled.button`
   font-family: var(--font);
   font-size: var(--font-size-button);
   border: 1px solid;
-`
+`;
 const FrontButton = styled.button`
   background-color: #e9e9e9;
   color: #bbbbbb;
@@ -64,7 +64,7 @@ const FrontButton = styled.button`
   border-color: transparent;
   font-family: var(--font);
   font-size: var(--font-size-button);
-`
+`;
 const StyledBackLink = styled(Link)`
   color: black;
   display: flex;
@@ -73,7 +73,7 @@ const StyledBackLink = styled(Link)`
   width: 50%;
   height: 100%;
   background-color: #f5f5f5;
-`
+`;
 const StyledFrontLink = styled(Link)`
   color: black;
   display: flex;
@@ -82,122 +82,118 @@ const StyledFrontLink = styled(Link)`
   width: 50%;
   height: 100%;
   background-color: transparent;
-`
+`;
 
 const Footer = () => {
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
-    setModalOpen(true)
-  }
+    setModalOpen(true);
+  };
   const closeModal = () => {
-    setModalOpen(false)
-  }
+    setModalOpen(false);
+  };
 
-  const [nextPath, setNextPath] = useState('/')
-  const [prevPath, setPrevPath] = useState('/')
-  const location = useLocation().pathname
-  const [percent, setPercent] = useState(10)
-  const phone = useSelector((state) => state.phone)
-  const gender = useSelector((state) => state.gender)
-  const num = useSelector((state) => state.num)
-  const age = useSelector((state) => state.age)
-  const jobs = useSelector((state) => state.jobs)
-  const prefferedjobs = useSelector((state) => state.prefferedjobs)
-  const prefferedage = useSelector((state) => state.prefferedage)
-  const preffereduniversity = useSelector((state) => state.preffereduniversity)
-  const university = useSelector((state) => state.university)
-  const characters = useSelector((state) => state.characters)
-  const area = useSelector((state) => state.area)
-  const kakaoid = useSelector((state) => state.kakaoid)
-  const day = useSelector((state) => state.day)
-  const appearance = useSelector((state) => state.appearance)
-  const mbti = useSelector((state) => state.mbti)
-  const fashion = useSelector((state) => state.fashion)
+  const [nextPath, setNextPath] = useState('/');
+  const [prevPath, setPrevPath] = useState('/');
+  const location = useLocation().pathname;
+  const [percent, setPercent] = useState(10);
+  const phone = useSelector((state) => state.phone);
+  const gender = useSelector((state) => state.gender);
+  const num = useSelector((state) => state.num);
+  const age = useSelector((state) => state.age);
+  const jobs = useSelector((state) => state.jobs);
+  const prefferedjobs = useSelector((state) => state.prefferedjobs);
+  const prefferedage = useSelector((state) => state.prefferedage);
+  const preffereduniversity = useSelector((state) => state.preffereduniversity);
+  const university = useSelector((state) => state.university);
+  const characters = useSelector((state) => state.characters);
+  const area = useSelector((state) => state.area);
+  const kakaoid = useSelector((state) => state.kakaoid);
+  const day = useSelector((state) => state.day);
+  const appearance = useSelector((state) => state.appearance);
+  const mbti = useSelector((state) => state.mbti);
+  const fashion = useSelector((state) => state.fashion);
   const MovingPath = () => {
     if (location === '/Meeting2') {
       if (jobs.length > 0) {
-        setNextPath('/Meeting3')
+        setNextPath('/Meeting3');
       } else {
-        setNextPath('/Meeting2')
+        setNextPath('/Meeting2');
       }
-      setPrevPath('/')
-      setPercent(20)
+      setPrevPath('/');
+      setPercent(20);
     } else if (location === '/Meeting3') {
       if (university.length > 0) {
-        setNextPath('/Meeting4')
+        setNextPath('/Meeting4');
       } else {
-        setNextPath('/Meeting3')
+        setNextPath('/Meeting3');
       }
 
-      setPrevPath('/Meeting2')
-      setPercent(35)
+      setPrevPath('/Meeting2');
+      setPercent(35);
     } else if (location === '/Meeting4') {
       if (area.length > 0) {
-        setNextPath('/Meeting5')
+        setNextPath('/Meeting5');
       } else {
-        setNextPath('/Meeting4')
+        setNextPath('/Meeting4');
       }
-      setPrevPath('/Meeting3')
-      setPercent(45)
+      setPrevPath('/Meeting3');
+      setPercent(45);
     } else if (location === '/Meeting5') {
       if (day.length > 0) {
-        setNextPath('/Meeting6')
+        setNextPath('/Meeting6');
       } else {
-        setNextPath('/Meeting5')
+        setNextPath('/Meeting5');
       }
 
-      setPrevPath('/Meeting4')
-      setPercent(50)
+      setPrevPath('/Meeting4');
+      setPercent(50);
     } else if (location === '/Meeting6') {
       if (mbti.length > 0 && fashion.length > 0 && appearance.length > 0) {
-        setNextPath('/Meeting7')
+        setNextPath('/Meeting7');
       } else {
-        setNextPath('/Meeting6')
+        setNextPath('/Meeting6');
       }
 
-      setPrevPath('/Meeting5')
-      setPercent(60)
+      setPrevPath('/Meeting5');
+      setPercent(60);
     } else if (location === '/Meeting7') {
-      if (
-        prefferedage !== 0 &&
-        prefferedjobs.length > 0 &&
-        preffereduniversity.length > 0
-      ) {
-        setNextPath('/Meeting8')
+      if (prefferedage !== 0 && prefferedjobs.length > 0 && preffereduniversity.length > 0) {
+        setNextPath('/Meeting8');
       } else {
-        setNextPath('/Meeting7')
+        setNextPath('/Meeting7');
       }
-      setPrevPath('/Meeting6')
-      setPercent(70)
+      setPrevPath('/Meeting6');
+      setPercent(70);
     } else if (location === '/Meeting8') {
-      setNextPath('/Meeting9')
-      setPrevPath('/Meeting7')
-      setPercent(80)
+      setNextPath('/Meeting9');
+      setPrevPath('/Meeting7');
+      setPercent(80);
     } else if (location === '/Meeting9') {
-      setPrevPath('/Meeting8')
-      setNextPath('/Meeting10')
-      setPercent(90)
+      setPrevPath('/Meeting8');
+      setNextPath('/Meeting10');
+      setPercent(90);
     } else if (location === '/Meeting10') {
-      setPrevPath('/Meeting9')
+      setPrevPath('/Meeting9');
       if (authentication.currentUser) {
-        setNextPath('/Meeting11')
+        setNextPath('/Meeting11');
       } else {
-        setNextPath('/Meeting10')
+        setNextPath('/Meeting10');
       }
 
-      setPercent(90)
+      setPercent(90);
     } else if (location === '/Meeting11') {
-      setPrevPath('/Meeting10')
+      setPrevPath('/Meeting10');
 
-      setNextPath('/Meeting12')
-      setPercent(90)
+      setNextPath('/Meeting12');
+      setPercent(90);
     } else if (location === '/Meeting12') {
-      setPrevPath('/Meeting11')
+      setPrevPath('/Meeting11');
 
-      setPercent(90)
+      setPercent(90);
     }
-  }
+  };
 
   return (
     <Container>
@@ -218,27 +214,23 @@ const Footer = () => {
         <StyledFrontLink
           onClick={() => {
             if (location === '/Meeting2' && jobs.length === 0) {
-              openModal()
+              openModal();
             } else if (location === '/Meeting3' && university.length === 0) {
-              openModal()
+              openModal();
             } else if (location === '/Meeting4' && area.length === 0) {
-              openModal()
+              openModal();
             } else if (location === '/Meeting5' && day.length === 0) {
-              openModal()
+              openModal();
             } else if (
               location === '/Meeting6' &&
-              (appearance.length === 0 ||
-                mbti.length === 0 ||
-                fashion.length === 0)
+              (appearance.length === 0 || mbti.length === 0 || fashion.length === 0)
             ) {
-              openModal()
+              openModal();
             } else if (
               location === '/Meeting7' &&
-              (preffereduniversity.length === 0 ||
-                prefferedjobs.length === 0 ||
-                prefferedage === 0)
+              (preffereduniversity.length === 0 || prefferedjobs.length === 0 || prefferedage === 0)
             ) {
-              openModal()
+              openModal();
             }
           }}
           to={nextPath}
@@ -249,7 +241,7 @@ const Footer = () => {
         </StyledFrontLink>
       </BackAndFront>
     </Container>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

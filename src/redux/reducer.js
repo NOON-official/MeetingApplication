@@ -18,158 +18,146 @@ const initialState = {
   prefferedage: 20,
   preffereduniversity: [],
   phonenumcall: false,
-}
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_MALE':
-      return { ...state, gender: '남자' }
+      return { ...state, gender: '남자' };
     case 'SET_FEMALE':
-      return { ...state, gender: '여자' }
+      return { ...state, gender: '여자' };
     case 'NUMBER':
-      return { ...state, num: action.payload }
+      return { ...state, num: action.payload };
     case 'AGE':
-      return { ...state, age: action.payload }
+      return { ...state, age: action.payload };
     case 'JOBS':
-      const newJob = action.payload
-      return { ...state, jobs: [...state.jobs, newJob] }
+      const newJob = action.payload;
+      return { ...state, jobs: [...state.jobs, newJob] };
     case 'JOBS_DELETE':
-      const deleteJob = state.jobs.filter((value) => value !== action.payload)
+      const deleteJob = state.jobs.filter((value) => value !== action.payload);
       return {
         ...state,
         jobs: deleteJob,
-      }
+      };
     case 'UNIVERSITIES':
-      const newUniv = action.payload
+      const newUniv = action.payload;
 
       return {
         ...state,
         university: [...state.university, newUniv],
-      }
+      };
 
     case 'UNIVERSITIES_DELETE':
-      const deleteUniv = state.university.filter(
-        (value) => value !== action.payload
-      )
+      const deleteUniv = state.university.filter((value) => value !== action.payload);
       return {
         ...state,
         university: deleteUniv,
-      }
+      };
     case 'CHARACTERS':
-      const newCharacter = action.payload
+      const newCharacter = action.payload;
 
-      return { ...state, characters: [...state.characters, newCharacter] }
+      return { ...state, characters: [...state.characters, newCharacter] };
 
     case 'CHARACTERS_DELETE':
-      const deleteCharacter = state.characters.filter(
-        (value) => value !== action.payload
-      )
+      const deleteCharacter = state.characters.filter((value) => value !== action.payload);
       return {
         ...state,
         characters: deleteCharacter,
-      }
+      };
     case 'AREA':
-      const newArea = action.payload
+      const newArea = action.payload;
 
-      return { ...state, area: [...state.area, newArea] }
+      return { ...state, area: [...state.area, newArea] };
 
     case 'AREA_DELETE':
-      const deleteArea = state.area.filter((value) => value !== action.payload)
+      const deleteArea = state.area.filter((value) => value !== action.payload);
       return {
         ...state,
         area: deleteArea,
-      }
+      };
     case 'DAY':
-      const newDay = action.payload
+      const newDay = action.payload;
 
-      return { ...state, day: [...state.day, newDay] }
+      return { ...state, day: [...state.day, newDay] };
 
     case 'DAY_DELETE':
-      const deleteDay = state.day.filter((value) => value !== action.payload)
+      const deleteDay = state.day.filter((value) => value !== action.payload);
       return {
         ...state,
         day: deleteDay,
-      }
+      };
     case 'APPEARANCE':
-      const newAppearance = action.payload
+      const newAppearance = action.payload;
 
-      return { ...state, appearance: [...state.appearance, newAppearance] }
+      return { ...state, appearance: [...state.appearance, newAppearance] };
 
     case 'APPEARANCE_DELETE':
-      const deleteAppearance = state.appearance.filter(
-        (value) => value !== action.payload
-      )
+      const deleteAppearance = state.appearance.filter((value) => value !== action.payload);
       return {
         ...state,
         appearance: deleteAppearance,
-      }
+      };
     case 'MBTI':
-      const newMbti = action.payload
+      const newMbti = action.payload;
 
-      return { ...state, mbti: [...state.mbti, newMbti] }
+      return { ...state, mbti: [...state.mbti, newMbti] };
 
     case 'MBTI_DELETE':
-      const deleteMbti = state.mbti.filter((value) => value !== action.payload)
+      const deleteMbti = state.mbti.filter((value) => value !== action.payload);
       return {
         ...state,
         mbti: deleteMbti,
-      }
+      };
     case 'FASHION':
-      const newFashion = action.payload
+      const newFashion = action.payload;
 
-      return { ...state, fashion: [...state.fashion, newFashion] }
+      return { ...state, fashion: [...state.fashion, newFashion] };
 
     case 'FASHION_DELETE':
-      const deleteFashion = state.fashion.filter(
-        (value) => value !== action.payload
-      )
+      const deleteFashion = state.fashion.filter((value) => value !== action.payload);
       return {
         ...state,
         fashion: deleteFashion,
-      }
+      };
     case 'PREFFEREDJOBS':
-      const newPrefferedJob = action.payload
+      const newPrefferedJob = action.payload;
       return {
         ...state,
         prefferedjobs: [...state.prefferedjobs, newPrefferedJob],
-      }
+      };
     case 'PREFFEREDJOBS_DELETE':
-      const deletePrefferedJob = state.prefferedjobs.filter(
-        (value) => value !== action.payload
-      )
+      const deletePrefferedJob = state.prefferedjobs.filter((value) => value !== action.payload);
       return {
         ...state,
         prefferedjobs: deletePrefferedJob,
-      }
+      };
     case 'PREFFEREDAGE':
-      return { ...state, prefferedage: action.payload }
+      return { ...state, prefferedage: action.payload };
     case 'PREFFEREDUNIVERSITIES':
-      const newPrefferedUniv = action.payload
+      const newPrefferedUniv = action.payload;
 
       return {
         ...state,
         preffereduniversity: [...state.preffereduniversity, newPrefferedUniv],
-      }
+      };
 
     case 'PREFFEREDUNIVERSITIES_DELETE':
-      const deletePrefferedUniv = state.preffereduniversity.filter(
-        (value) => value !== action.payload
-      )
+      const deletePrefferedUniv = state.preffereduniversity.filter((value) => value !== action.payload);
       return {
         ...state,
         preffereduniversity: deletePrefferedUniv,
-      }
+      };
     case 'SET_PHONE':
-      return { ...state, phone: action.payload }
+      return { ...state, phone: action.payload };
     case 'SET_INTRODUCTION':
-      return { ...state, introduction: action.payload }
+      return { ...state, introduction: action.payload };
     case 'SET_KAKAOID':
-      return { ...state, kakaoid: action.payload }
+      return { ...state, kakaoid: action.payload };
     case 'SET_PHONENUMCALL':
-      return { ...state, phonenumcall: action.payload }
+      return { ...state, phonenumcall: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default reducer
+export default reducer;

@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { StyledDiv } from '../Elements/StyledComponent'
-import Day from './Day'
+import styled from 'styled-components';
+import { StyledDiv } from '../Elements/StyledComponent';
+import Day from './Day';
 
 const Days = styled.div`
   display: flex;
@@ -11,11 +11,11 @@ const Days = styled.div`
   height: 10%;
   width: 100%;
   float: left;
-`
+`;
 
 const DayText = (props) => {
-  return <div style={{ marginBottom: '7px' }}>{props.text}</div>
-}
+  return <div style={{ marginBottom: '7px' }}>{props.text}</div>;
+};
 const DaysContainer = (props) => {
   return (
     <StyledDiv top="15%" width="95%" height="65%" left="50%">
@@ -35,7 +35,7 @@ const DaysContainer = (props) => {
         <Day day="일요일"></Day>
       </Days>
     </StyledDiv>
-  )
-}
+  );
+};
 
-export default DaysContainer
+export default DaysContainer;

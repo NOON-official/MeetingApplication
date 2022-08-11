@@ -45,10 +45,7 @@ function App() {
           <Route path="Meeting11" element={<Body11 />}></Route>
           <Route path="Meeting12" element={<Body12 />}></Route>
           <Route path="Kakaologin" element={<KakaoLogin />}></Route>
-          <Route
-            path="/auth/callback/kakao"
-            element={<KakaoLoginCallback />}
-          ></Route>
+          <Route path="/auth/callback/kakao" element={<KakaoLoginCallback />}></Route>
         </Routes>
         <Bootom></Bootom>
       </BrowserRouter>

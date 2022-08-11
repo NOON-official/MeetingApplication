@@ -1,8 +1,8 @@
-import styled from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux'
-import { StyledDiv, StyledText } from '../Elements/StyledComponent'
-import * as React from 'react'
-const buttonColor = '#EB8888'
+import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { StyledDiv, StyledText } from '../Elements/StyledComponent';
+import * as React from 'react';
+const buttonColor = '#EB8888';
 const MbtiButton = styled.button`
   margin: 5px;
   border-radius: 34px;
@@ -12,7 +12,7 @@ const MbtiButton = styled.button`
   border: 0;
   background-color: ${(props) => props.background_color || 'transparent'};
   color: ${(props) => props.color || '#B79292'};
-`
+`;
 const MbtiContainer = styled.div`
   display: flex;
   width: 100%;
@@ -21,54 +21,45 @@ const MbtiContainer = styled.div`
   position: absolute;
   top: ${(props) => props.top};
   margin-left: 10px;
-`
+`;
 const SelectedBox = styled.div`
   display: flex;
   flex-direction: row;
   height: 20%;
   border: 1px solid #c9c9c9;
   margin: 2%;
-`
+`;
 const MySelect = () => {
-  const mbti = useSelector((state) => state.mbti)
-  return mbti.map((data) => <Mbti mbti={data}></Mbti>)
-}
+  const mbti = useSelector((state) => state.mbti);
+  return mbti.map((data) => <Mbti mbti={data}></Mbti>);
+};
 const SelectedMbti = (props) => {
   return (
     <SelectedBox>
       <MySelect></MySelect>
     </SelectedBox>
-  )
-}
+  );
+};
 const Mbti = (props) => {
-  const dispatch = useDispatch()
-  const mbti = useSelector((state) => state.mbti)
-  const num = useSelector((state) => state.num)
-  const exist = React.useMemo(() => mbti.includes(props.mbti), [mbti])
-  const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist])
-  const bgColor = React.useMemo(
-    () => (exist ? buttonColor : '#FBF6F6'),
-    [exist]
-  )
+  const dispatch = useDispatch();
+  const mbti = useSelector((state) => state.mbti);
+  const num = useSelector((state) => state.num);
+  const exist = React.useMemo(() => mbti.includes(props.mbti), [mbti]);
+  const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist]);
+  const bgColor = React.useMemo(() => (exist ? buttonColor : '#FBF6F6'), [exist]);
   const OnMbtiClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'MBTI_DELETE', payload: props.mbti })
+      dispatch({ type: 'MBTI_DELETE', payload: props.mbti });
     } else {
-      if (mbti.length < num) dispatch({ type: 'MBTI', payload: props.mbti })
+      if (mbti.length < num) dispatch({ type: 'MBTI', payload: props.mbti });
     }
-  }, [exist, props.mbti, mbti])
+  }, [exist, props.mbti, mbti]);
   return (
-    <MbtiButton
-      color={fontColor}
-      background_color={bgColor}
-      type="button"
-      value={props.mbti}
-      onClick={OnMbtiClick}
-    >
+    <MbtiButton color={fontColor} background_color={bgColor} type="button" value={props.mbti} onClick={OnMbtiClick}>
       {props.mbti}
     </MbtiButton>
-  )
-}
+  );
+};
 const Mbtis = (props) => {
   return (
     <StyledDiv
@@ -83,15 +74,7 @@ const Mbtis = (props) => {
       direction="column"
       border_color="#F1ECEC"
     >
-      <StyledText
-        font="Pretendard"
-        size="14px"
-        top="10%"
-        left="6%"
-        color="#777777"
-        weight="500"
-        line="16.8px"
-      >
+      <StyledText font="Pretendard" size="14px" top="10%" left="6%" color="#777777" weight="500" line="16.8px">
         MBTI
       </StyledText>
       <MbtiContainer top="20%">
@@ -119,7 +102,7 @@ const Mbtis = (props) => {
         <Mbti mbti={'INTP'}></Mbti>
       </MbtiContainer>
     </StyledDiv>
-  )
-}
+  );
+};
 
-export default Mbtis
+export default Mbtis;

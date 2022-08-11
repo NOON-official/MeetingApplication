@@ -1,6 +1,6 @@
-import PrefferedUnivBox from '../Universities/PrefferedUnivBox'
-import { Container, MobileBox, Title } from '../Elements/StyledComponent'
-import { JobSelect, AgeSelect } from '../Elements/PrefferedSelect'
+import PrefferedUnivBox from '../Universities/PrefferedUnivBox';
+import { Container, MobileBox, Title } from '../Elements/StyledComponent';
+import { JobSelect, AgeSelect } from '../Elements/PrefferedSelect';
 const Body7 = () => {
   return (
     <Container overflow={'scroll'}>
@@ -14,7 +14,7 @@ const Body7 = () => {
         <PrefferedUnivBox top={'44%'}></PrefferedUnivBox>
       </MobileBox>
     </Container>
-  )
-}
+  );
+};
 
-export default Body7
+export default Body7;

@@ -1,13 +1,7 @@
-import AreaContiner from '../Areas/AreaContainer'
+import AreaContiner from '../Areas/AreaContainer';
 
-import { ReactComponent as DayCharacter } from '../../Asset/page4/DayCharacter.svg'
-import {
-  Container,
-  MobileBox,
-  StyledDiv,
-  StyledText,
-  SubTitle,
-} from '../Elements/StyledComponent'
+import { ReactComponent as DayCharacter } from '../../Asset/page4/DayCharacter.svg';
+import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 
 const Body4 = () => {
   return (
@@ -21,13 +15,7 @@ const Body4 = () => {
             을 말해주세요
           </StyledText>
         </StyledDiv>{' '}
-        <SubTitle
-          size="13px"
-          font="Pretendard"
-          color="#AAAAAA"
-          left="23%"
-          top="11%"
-        >
+        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="23%" top="11%">
           중복 선택이 가능해요
         </SubTitle>
         <AreaContiner></AreaContiner>
@@ -36,6 +24,6 @@ const Body4 = () => {
         </StyledDiv>
       </MobileBox>
     </Container>
-  )
-}
-export default Body4
+  );
+};
+export default Body4;

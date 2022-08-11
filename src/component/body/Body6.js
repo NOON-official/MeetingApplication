@@ -1,14 +1,8 @@
-import styled from 'styled-components'
-import Appearance from '../TeamMate/Appearance'
-import Mbtis from '../TeamMate/Mbti'
-import Fashions from '../TeamMate/Fashion'
-import {
-  Container,
-  MobileBox,
-  StyledDiv,
-  StyledText,
-  SubTitle,
-} from '../Elements/StyledComponent'
+import styled from 'styled-components';
+import Appearance from '../TeamMate/Appearance';
+import Mbtis from '../TeamMate/Mbti';
+import Fashions from '../TeamMate/Fashion';
+import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 
 const Body6 = () => {
   return (
@@ -27,13 +21,7 @@ const Body6 = () => {
             이 있나요?
           </StyledText>
         </StyledDiv>{' '}
-        <SubTitle
-          size="13px"
-          font="Pretendard"
-          color="#AAAAAA"
-          left="24%"
-          top="17%"
-        >
+        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="24%" top="17%">
           중복 선택이 가능해요
         </SubTitle>
         <StyledDiv top="20%" width="90%" height="75%" left="50%">
@@ -43,7 +31,7 @@ const Body6 = () => {
         </StyledDiv>
       </MobileBox>
     </Container>
-  )
-}
+  );
+};
 
-export default Body6
+export default Body6;

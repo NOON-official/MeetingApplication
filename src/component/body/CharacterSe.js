@@ -1,14 +1,8 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import CharactorContainer from '../Characters/CharactorContainer'
-import {
-  Container,
-  MobileBox,
-  Title,
-  ButtonBox,
-  SubTitle,
-} from '../Elements/StyledComponent'
-import { Character } from '../Characters/CharacterButton'
+import CharactorContainer from '../Characters/CharactorContainer';
+import { Container, MobileBox, Title, ButtonBox, SubTitle } from '../Elements/StyledComponent';
+import { Character } from '../Characters/CharacterButton';
 
 const CHaracter = () => {
   return (
@@ -26,5 +20,5 @@ const CHaracter = () => {
         </ButtonBox>
       </MobileBox>
     </Container>
-  )
-}
+  );
+};

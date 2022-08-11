@@ -1,19 +1,15 @@
-import React from 'react'
-import {
-  StyledButton,
-  StyledDiv,
-  StyledText,
-} from '../Elements/StyledComponent'
-import styled from 'styled-components'
-import { ReactComponent as Character } from '../../Asset/ErrorMessage/ErrorMessageCharacter.svg'
+import React from 'react';
+import { StyledButton, StyledDiv, StyledText } from '../Elements/StyledComponent';
+import styled from 'styled-components';
+import { ReactComponent as Character } from '../../Asset/ErrorMessage/ErrorMessageCharacter.svg';
 const ErrorText = styled.text`
   font-family: var(--font-family);
   font-style: normal;
   font-size: ${(props) => props.size};
   color: ${(props) => props.color};
-`
+`;
 export const PageNotCompleted = (props) => {
-  const { open, close, header } = props
+  const { open, close, header } = props;
 
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
@@ -41,18 +37,11 @@ export const PageNotCompleted = (props) => {
               {props.children}
             </ErrorText>
           </StyledDiv>
-          <StyledButton
-            position="absolute"
-            top="80%"
-            width="90%"
-            height="15%"
-            size="24px"
-            onClick={close}
-          >
+          <StyledButton position="absolute" top="80%" width="90%" height="15%" size="24px" onClick={close}>
             닫기
           </StyledButton>
         </StyledDiv>
       ) : null}
     </div>
-  )
-}
+  );
+};

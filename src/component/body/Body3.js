@@ -1,14 +1,8 @@
-import * as React from 'react'
-import UnivBox from '../Universities/UnivBox'
-import {
-  Container,
-  MobileBox,
-  StyledDiv,
-  StyledText,
-  SubTitle,
-} from '../Elements/StyledComponent'
-import { ReactComponent as Character } from '../../Asset/page3/Character.svg'
-import { ReactComponent as ChatBallon } from '../../Asset/page3/ChatBallon.svg'
+import * as React from 'react';
+import UnivBox from '../Universities/UnivBox';
+import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
+import { ReactComponent as Character } from '../../Asset/page3/Character.svg';
+import { ReactComponent as ChatBallon } from '../../Asset/page3/ChatBallon.svg';
 const Body3 = () => {
   return (
     <Container bg={'#F5F5F5'}>
@@ -21,13 +15,7 @@ const Body3 = () => {
             는?
           </StyledText>
         </StyledDiv>
-        <SubTitle
-          size="13px"
-          font="Pretendard"
-          color="#AAAAAA"
-          left="30%"
-          top="12%"
-        >
+        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="30%" top="12%">
           팀원들의 모든 학교를 말해주세요
         </SubTitle>
         <UnivBox></UnivBox>
@@ -39,7 +27,7 @@ const Body3 = () => {
         </StyledDiv>
       </MobileBox>
     </Container>
-  )
-}
+  );
+};
 
-export default Body3
+export default Body3;
