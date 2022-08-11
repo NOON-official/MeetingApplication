@@ -1,17 +1,48 @@
-import PrefferedUnivBox from '../Universities/PrefferedUnivBox'
-import { Container, MobileBox, Title } from '../Elements/StyledComponent'
-import { JobSelect, AgeSelect } from '../Elements/PrefferedSelect'
+import * as React from 'react'
+import {
+  Container,
+  MobileBox,
+  StyledDiv,
+  StyledText,
+  ButtonBox,
+} from '../Elements/StyledComponent'
+import Face from '../Characters/Face'
+import { Character } from '../Characters/CharacterButton'
+import Moderatoer from '../Characters/Moderatoer'
+import Comedian from '../Characters/Comedian'
+import Nerd from '../Characters/Nerd'
 const Body7 = () => {
   return (
-    <Container overflow={'scroll'}>
-      <MobileBox height={'150%'}>
-        <Title>어떤 상대방을 원하시나요?</Title>
-        <Title top={'8%'}>상대팀의 직업은?</Title>
-        <JobSelect></JobSelect>
-        <Title top={'20%'}>상대팀의 평균나이는?</Title>
-        <AgeSelect></AgeSelect>
-        <Title top={'34%'}>이런 학교는 피하고 싶어요</Title>
-        <PrefferedUnivBox top={'44%'}></PrefferedUnivBox>
+    <Container>
+      <MobileBox>
+        <StyledDiv top="5%" width="90%" height="15%" left="27%">
+          <StyledText position="static" size="35px" color="#F49393">
+            미팅 나갈 구성원
+          </StyledText>
+          <StyledText position="static" size="35px">
+            을<br /> 알려주세요!
+          </StyledText>
+        </StyledDiv>{' '}
+        <ButtonBox top={'18%'}>
+          <Character character={'비주얼'}>비주얼</Character>
+          <Character character={'사회자'}>사회자</Character>
+          <Character character={'개그맨'}>개그맨</Character>
+          <Character character={'깍두기'}>깍두기</Character>
+        </ButtonBox>
+        <StyledDiv
+          top="30%"
+          width="95%"
+          height="70%"
+          left="50%"
+          overflow="scroll"
+        >
+          <StyledDiv width="95%" height="210%" left="50%">
+            <Face />
+            <Moderatoer />
+            <Comedian />
+            <Nerd />
+          </StyledDiv>
+        </StyledDiv>
       </MobileBox>
     </Container>
   )

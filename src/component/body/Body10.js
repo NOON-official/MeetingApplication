@@ -1,251 +1,274 @@
 import styled from 'styled-components'
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState, useRef } from 'react'
-import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
-import { authentication } from '../Firebase/firebase'
+import {
+  Container,
+  MobileBox,
+  StyledDiv,
+  StyledText,
+} from '../Elements/StyledComponent'
 
-const buttonColor = '#C4D7E0'
-const Container = styled.div`
-  left: 0;
-  overflow: scroll;
-  overflow-x: hidden;
-  position: absolute;
-  top: 10%;
-  width: 100%;
-  height: 75%;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-const Title = styled.div`
-  top: ${(props) => props.top || '5%'};
-  font-size: 18px;
-  font-weight: bold;
-  height: 27px;
-  margin: 0;
-  color: #000;
-  font-style: normal;
-  letter-spacing: -0.015em;
-  line-height: 149.8%;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-`
-
-const PhoneNum = styled.input`
-  position: absolute;
-  top: ${(props) => props.top || '5%'};
-  width: ${(props) => props.width || '295px'};
-  height: 8%;
-  border-radius: 12px;
-  border: 0.5px solid black;
-  display: flex;
-  font-size: 18px;
-  text-align: center;
-  ::placeholder {
-    justify-content: center;
-    text-align: center;
-    font-size: 16px;
-  }
-`
-const SubmitButton = styled.button`
-  position: absolute;
-  top: ${(props) => props.top || '5%'};
-  width: 300px;
-  height: 8%;
-  border-radius: 12px;
-  border: 0.5px solid black;
-  display: flex;
-  font-size: 18px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  background-color: ${buttonColor};
-  color: black;
-  font-weight: 700;
-`
-const AuthNum = styled.input`
-  width: ${(props) => props.width || '300px'};
-  height: 50px;
-  border-radius: 12px;
-  border: 0.5px solid black;
-  display: flex;
-  font-size: 18px;
-  text-align: center;
-  ::placeholder {
-    justify-content: center;
-    text-align: center;
-    font-size: 16px;
-  }
-`
-const AuthSubmit = styled.button`
-  display: flex;
-  width: 70px;
-  border-radius: 12px;
-  border: 0.5px solid black;
-
-  font-size: 15x;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  color: black;
-  font-weight: 100;
-`
-const AuthContainer = styled.div`
-  width: 300px;
-  height: 50px;
-  position: absolute;
-  top: 60%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`
-
-const PhoneAuthInput = (props) => {
-  const dispatch = useDispatch()
-
-  const [minutes, setMinutes] = useState(3)
-  const [seconds, setSeconds] = useState(0)
-
-  function Timer() {
-    useEffect(() => {
-      if (iscalled) {
-        const countdown = setInterval(() => {
-          if (parseInt(seconds) > 0) {
-            setSeconds(parseInt(seconds) - 1)
-          }
-          if (parseInt(seconds) === 0) {
-            if (parseInt(minutes) === 0) {
-              clearInterval(countdown)
-            } else {
-              setMinutes(parseInt(minutes) - 1)
-              setSeconds(59)
-            }
-          }
-        }, 1000)
-        return () => clearInterval(countdown)
-      }
-    }, [minutes, seconds, iscalled])
-  }
-  const iscalled = useSelector((state) => state.phonenumcall)
-  Timer()
-  console.log(iscalled)
-  const verifyOTP = (e) => {
-    let otp = e.target.value
-    if (otp.length === 6) {
-      let confirmationResult = window.confirmationResult
-      confirmationResult
-        .confirm(otp)
-        .then((result) => {
-          // User signed in successfully.
-          const user = result.user
-          // ...
-          // console.log(user)
-        })
-        .catch((error) => {
-          // User couldn't sign in (bad verification code?)
-          // ...
-        })
-    }
-  }
+const MyTeamInfo = () => {
+  const gender = useSelector((state) => state.gender)
+  const num = useSelector((state) => state.num)
+  const age = useSelector((state) => state.age)
+  const universities = useSelector((state) => state.university)
+  const area = useSelector((state) => state.area)
+  const day = useSelector((state) => state.day)
+  const appearance = useSelector((state) => state.appearance)
+  const mbti = useSelector((state) => state.mbti)
+  const fashion = useSelector((state) => state.fashion)
 
   return (
-    <AuthContainer className="container">
-      <AuthNum
-        width={'200px'}
-        placeholder={`인증번호 유효시간${minutes}:${seconds}`}
-        onChange={verifyOTP}
-        className="code"
-      ></AuthNum>
-
-      <AuthSubmit
-        onClick={() => {
-          if (authentication.currentUser) {
-            // console.log(authentication.currentUser.uid);
-            alert('인증이 완료되었습니다.')
-          } else {
-            alert('번호가 일치하지 않습니다.')
-          }
-        }}
+    <StyledDiv
+      width="90%"
+      border_width="1px"
+      border="10px"
+      border_style="solid"
+      border_color="#F1ECEC"
+      borderBottom="1px solid #F1ECEC"
+      height="40%"
+      left="50%"
+      bg="white"
+      id="MyTeamInfo"
+    >
+      <StyledDiv
+        borderBottom="1px solid #F1ECEC"
+        top="0"
+        left="50%"
+        height="50px"
+        width="90%"
+        id="title"
       >
-        인증
-      </AuthSubmit>
-    </AuthContainer>
+        <StyledText
+          left="0%"
+          top="40%"
+          font="Pretendard"
+          line="16.8px"
+          size="14px"
+          fontWeight="600"
+          color="#777777"
+        >
+          1.우리는 이런 팀이에요!
+        </StyledText>
+      </StyledDiv>
+      <StyledDiv left="50%" top="50px" height="85%" width="90%" id="contents">
+        <StyledText top="5%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          성별
+        </StyledText>
+        <StyledText top="5%" left="25%" color="#777777" fontWeight={'400'}>
+          {' '}
+          {gender}
+        </StyledText>
+        <StyledText top="17%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          인원수
+        </StyledText>
+        <StyledText top="17%" left="25%" color="#777777" fontWeight={'400'}>
+          {num} 명
+        </StyledText>
+        <StyledText top="29%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          나이
+        </StyledText>
+        <StyledText top="29%" left="25%" color="#777777" fontWeight={'400'}>
+          평균 {age}살
+        </StyledText>
+        <StyledText top="41%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          학교
+        </StyledText>
+        <StyledText top="41%" left="25%" color="#777777" fontWeight={'400'}>
+          {universities.map((data) => ` ${data} ,`)}
+        </StyledText>
+        <StyledText top="53%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          지역
+        </StyledText>
+        <StyledText top="53%" left="25%" color="#777777" fontWeight={'400'}>
+          {area.map((data) => ` ${data} ,`)}
+        </StyledText>
+        <StyledText top="65%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          요일
+        </StyledText>
+        <StyledText top="65%" left="25%" color="#777777" fontWeight={'400'}>
+          {day.map((data) => ` ${data} ,`)}
+        </StyledText>
+        <StyledText top="77%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          스타일
+        </StyledText>
+        <StyledText top="77%" left="25%" color="#777777" fontWeight={'400'}>
+          {appearance.map((data) => ` ${data} ,`)}
+        </StyledText>
+        <StyledText top="85%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          mbti
+        </StyledText>
+        <StyledText top="85%" left="25%" color="#777777" fontWeight={'400'}>
+          {mbti.map((data) => ` ${data} ,`)}
+        </StyledText>
+      </StyledDiv>
+    </StyledDiv>
   )
 }
-
-const PhoneNumBox = (props) => {
-  const placeholder = useSelector((state) => state.phone)
+const PrefferedInfo = () => {
+  const job = useSelector((state) => state.prefferedjobs)
+  const age = useSelector((state) => state.prefferedage)
+  const university = useSelector((state) => state.preffereduniversity)
   return (
-    <PhoneNum
-      top={'40%'}
-      placeholder={placeholder}
-      id="phoneNum"
-      onChange={props.set}
-    ></PhoneNum>
+    <StyledDiv
+      width="90%"
+      border_width="1px"
+      border="10px"
+      border_style="solid"
+      border_color="#F1ECEC"
+      borderBottom="1px solid #F1ECEC"
+      height="20%"
+      left="50%"
+      bg="white"
+      id="MyTeamInfo"
+      top="45%"
+    >
+      <StyledDiv
+        borderBottom="1px solid #F1ECEC"
+        top="0"
+        left="50%"
+        height="50px"
+        width="90%"
+        id="title"
+      >
+        <StyledText
+          left="0%"
+          top="40%"
+          font="Pretendard"
+          line="16.8px"
+          size="14px"
+          fontWeight="600"
+          color="#777777"
+        >
+          2.상대는 이런 팀을 원해요!
+        </StyledText>
+      </StyledDiv>
+      <StyledDiv left="50%" top="50px" height="65%" width="90%" id="contents">
+        <StyledText top="15%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          직업
+        </StyledText>
+        <StyledText top="15%" left="25%" color="#777777" fontWeight={'400'}>
+          {job.map((data) => ` ${data} ,`)}
+        </StyledText>
+        <StyledText top="45%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          평균나이
+        </StyledText>
+        <StyledText top="45%" left="25%" color="#777777" fontWeight={'400'}>
+          {age.map((data, index) => {
+            if (index + 1 != age.length) {
+              return `${data}살~`
+            } else return `${data}살`
+          })}
+        </StyledText>
+        <StyledText top="72%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {' '}
+          기피학교
+        </StyledText>
+        <StyledText top="72%" left="25%" color="#777777" fontWeight={'400'}>
+          {university.map((data, index) => {
+            if (index + 1 != university.length) {
+              return `${data}, `
+            } else return `${data} `
+          })}
+          제외
+        </StyledText>
+      </StyledDiv>
+    </StyledDiv>
   )
 }
+const WantInfo = () => {
+  const want = useSelector((state) => state.prefferedthing)
 
+  return (
+    <StyledDiv
+      width="90%"
+      border_width="1px"
+      border="10px"
+      border_style="solid"
+      border_color="#F1ECEC"
+      borderBottom="1px solid #F1ECEC"
+      height="auto"
+      minHeight="100px"
+      left="50%"
+      bg="white"
+      id="MyTeamInfo"
+      top="70%"
+    >
+      <StyledDiv
+        borderBottom="1px solid #F1ECEC"
+        top="0"
+        left="50%"
+        height="50px"
+        width="90%"
+        id="title"
+      >
+        <StyledText
+          left="0%"
+          top="40%"
+          font="Pretendard"
+          line="16.8px"
+          size="14px"
+          fontWeight="600"
+          color="#777777"
+        >
+          3. 그날의 분의기는 어땠으면 좋겠어요?
+        </StyledText>
+      </StyledDiv>
+      <StyledDiv
+        left="50%"
+        top="50px"
+        height="auto"
+        width="90%"
+        minHeight="40px"
+        id="contents"
+      >
+        <StyledText top="5%" left="5%" color="#BBBBBB" fontWeight={'400'}>
+          {want.map((data) => ` ${data}, `)}
+        </StyledText>
+      </StyledDiv>
+    </StyledDiv>
+  )
+}
 const Body10 = () => {
-  const dispatch = useDispatch()
-  dispatch({ type: 'SET_PHONENUMCALL', payload: false })
-  const setPhone = (e) => {
-    dispatch({ type: 'SET_PHONE', payload: e.target.value })
-  }
-  const phone = useSelector((state) => state.phone)
-  const countryCode = '+82'
-  const generateRecaptcha = () => {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      'recaptchaContainer',
-      {
-        size: 'invisible',
-        callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-        },
-      },
-      authentication
-    )
-  }
-  const requestOTP = () => {
-    authentication.languageCode = 'Ko'
-    if (phone.length >= 11) {
-      alert('인증번호가 전송되었습니다.')
-      generateRecaptcha()
-      let appVerifier = window.recaptchaVerifier
-      signInWithPhoneNumber(authentication, countryCode + phone, appVerifier)
-        .then((confirmationResult) => {
-          window.confirmationResult = confirmationResult
-        })
-        .catch((error) => {
-          // Error; SMS not sent
-          // ...
-          console.log(error)
-        })
-    } else {
-      alert('올바른 번호를 입력하셈')
-    }
-  }
-
   return (
     <Container>
-      <div id="recaptchaContainer"></div>
-      <Title top={'30%'}> 전화번호 인증</Title>
-      <PhoneNumBox set={setPhone}></PhoneNumBox>
-      <SubmitButton
-        top={'50%'}
-        onClick={() => {
-          requestOTP()
-          dispatch({ type: 'SET_PHONENUMCALL', payload: true })
-        }}
-      >
-        인증번호 받기
-      </SubmitButton>
-      <PhoneAuthInput></PhoneAuthInput>
+      <MobileBox>
+        <StyledDiv top="5%" width="90%" height="15%" left="31%">
+          <StyledText position="static" size="35px" color="#F49393">
+            당신만의 미팅개론
+          </StyledText>
+          <StyledText position="static" size="35px">
+            을<br /> 정리해드립니다
+          </StyledText>
+        </StyledDiv>{' '}
+        <StyledDiv
+          left="50%"
+          top="20%"
+          height="80%"
+          width="100%"
+          id="scrollbox"
+          overflow="scroll"
+        >
+          <StyledDiv left="50%" height="120%" width="95%" id="InfoBox">
+            <MyTeamInfo></MyTeamInfo>
+            <PrefferedInfo />
+            <WantInfo />
+          </StyledDiv>
+        </StyledDiv>
+      </MobileBox>
     </Container>
   )
 }
+
 export default Body10
