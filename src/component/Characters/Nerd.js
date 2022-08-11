@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import charimg from '../../image/infp.jpg';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;

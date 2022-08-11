@@ -1,18 +1,30 @@
+import { PropaneSharp } from '@mui/icons-material';
 import styled from 'styled-components';
+
 export const StyledDiv = styled.div`
-  position: absolute;
+  position: ${(props) => props.position || 'absolute'};
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   transform: ${(props) => props.transform || 'translate(-50%, 0)'};
   background-color: ${(props) => props.bg};
   height: ${(props) => props.height};
   width: ${(props) => props.width};
+  border-width: ${(props) => props.border_width};
   border-radius: ${(props) => props.border};
   display: ${(props) => props.display};
   justify-content: ${(props) => props.justify_content};
   flex-direction: ${(props) => props.direction};
   border-color: ${(props) => props.border_color};
+  overflow-y: ${(props) => props.overflow || 'hidden'};
+  overflow-x: hidden;
+  border-style: ${(props) => props.border_style};
+  max-width: ${(props) => props.max_width};
+  max-height: ${(props) => props.max_height};
+  min-height: ${(props) => props.minHeight};
+  border-bottom: ${(props) => props.borderBottom || '0'};
+  align-items: ${(props) => props.align_item};
 `;
+
 export const SubTitle = styled.div`
   font-size: ${(props) => props.size || '14px'};
   position: absolute;
@@ -30,13 +42,15 @@ export const ButtonBox = styled.div`
   display: flex;
   flex-direction: ${(props) => props.display || 'row'};
   justify-content: space-around;
-  position: absolute;
+  position: ${(props) => props.position || 'absolute'};
   top: ${(props) => props.top};
   left: 50%;
   transform: translate(-50%, 0);
   max-width: 375px;
   width: 100%;
+  z-index: ${(props) => props.z_index};
 `;
+
 export const SliderBox = styled.div`
   width: 90%;
   max-width: 350px;
@@ -78,6 +92,7 @@ export const SelectButton = styled.button`
 export const Container = styled.div`
   height: ${(props) => props.height || '92%'};
   width: ${(props) => props.width || '100%'};
+
   position: absolute;
   overflow-x: hidden;
   overflow-y: ${(props) => props.overflow};
@@ -91,9 +106,9 @@ export const MobileBox = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
+  font-family: var(--font);
   left: 50%;
   transform: translate(-50%, 0);
-  font-family: var(--font);
   overflow-x: hidden;
   overflow-y: ${(props) => props.overflow || 'hidden'};
 `;
@@ -113,12 +128,14 @@ export const StyledText = styled.text`
   left: ${(props) => props.left};
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
-  color: ${(props) => props.color};
   font-family: ${(props) => props.font || 'var(--font-family)'};
   font-style: normal;
-  font-weight: ${(props) => props.weight};
   line-height: ${(props) => props.line};
+  font-weight: ${(props) => props.fontWeight};
+  align-items: ${(props) => props.align_item};
+  justify-content: ${(props) => props.justify_content};
 `;
+
 export const StyledButton = styled.button`
   position: ${(props) => props.position};
   top: ${(props) => props.top};
