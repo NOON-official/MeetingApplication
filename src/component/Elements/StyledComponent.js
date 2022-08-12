@@ -135,6 +135,11 @@ export const StyledText = styled.text`
   font-weight: ${(props) => props.fontWeight};
   align-items: ${(props) => props.align_item};
   justify-content: ${(props) => props.justify_content};
+  margin: ${(props) => props.margin};
+  word-break: ${(props) => props.word_break};
+  width: ${(props) => props.width};
+  transform: ${(props) => props.transform};
+  text-align: start;
 `;
 
 export const StyledButton = styled.button`

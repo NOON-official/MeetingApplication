@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as React from 'react';
 import { ReactComponent as Character } from '../../Asset/page11/InputCharacter.svg';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
 const StyledTextArea = styled.textarea`
   position: static;
