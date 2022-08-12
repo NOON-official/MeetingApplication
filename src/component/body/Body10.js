@@ -187,15 +187,18 @@ const Body10 = () => {
   return (
     <Container>
       <MobileBox>
-        <StyledDiv top="5%" width="90%" height="15%" left="31%">
-          <StyledText position="static" size="35px" color="#F49393">
-            당신만의 미팅개론
+        <StyledDiv max_width="350px" top="5%" width="90%" height="20%" left="50%">
+          <StyledText position=" absolute" size="35px" color="#F49393" left="10px">
+            당신만의 미팅학개론
           </StyledText>
-          <StyledText position="static" size="35px">
-            을<br /> 정리해드립니다
+          <StyledText position="absolute" size="35px" left="195px">
+            을
+          </StyledText>
+          <StyledText position="absolute" size="35px" left="10px" top="30px">
+            정리해드립니다.
           </StyledText>
         </StyledDiv>{' '}
-        <StyledDiv left="50%" top="20%" height="80%" width="100%" id="scrollbox" overflow="scroll">
+        <StyledDiv max_width="350px" left="50%" top="20%" height="80%" width="100%" id="scrollbox" overflow="scroll">
           <StyledDiv left="50%" height="120%" width="95%" id="InfoBox">
             <MyTeamInfo></MyTeamInfo>
             <PrefferedInfo />

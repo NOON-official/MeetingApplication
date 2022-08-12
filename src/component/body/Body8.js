@@ -15,11 +15,11 @@ const Body8 = () => {
   return (
     <Container bg=" #F5F5F5">
       <MobileBox>
-        <StyledDiv top="5%" width="250px" height="40px" left="35%">
-          <StyledText position="static" size="35px" color="#F49393">
+        <StyledDiv top="5%" width="90%" height="20%" left="50%">
+          <StyledText position=" absolute" size="35px" color="#F49393" left="10px">
             어떤 상대방을
           </StyledText>
-          <StyledText position="static" size="35px">
+          <StyledText position="absolute" size="35px" left="150px">
             원하시나요?
           </StyledText>
         </StyledDiv>
@@ -28,7 +28,16 @@ const Body8 = () => {
           <AgeSelect />
           <UnivSelect />
         </PrefferedTeamSelectBox>
-        <StyledDiv top="82%" left="80%">
+        <StyledDiv
+          display="flex"
+          justify_content="flex-end"
+          align_item="flex-end"
+          top="80%"
+          height="auto"
+          width="100%"
+          left="40%"
+          margin
+        >
           <Character />
         </StyledDiv>
       </MobileBox>

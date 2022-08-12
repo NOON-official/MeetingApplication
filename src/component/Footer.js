@@ -27,6 +27,7 @@ const BackAndFront = styled.div`
   align-items: center;
   height: 50%;
   width: 100%;
+  max-width: 350px;
 `;
 const BackButton = styled.button`
   background-color: transparent;
@@ -43,8 +44,8 @@ const BackButton = styled.button`
   border: 1px solid;
 `;
 const FrontButton = styled.button`
-  background-color: #e9e9e9;
-  color: #bbbbbb;
+  background-color: ${(props) => props.bg};
+  color: ${(props) => props.color};
   margin-right: 5px;
   border-radius: 14px;
   height: 45px;
@@ -75,6 +76,9 @@ const StyledFrontLink = styled(Link)`
 `;
 
 const Footer = () => {
+  const [isDone, setIsDone] = useState(false);
+  const frontButtonColor = React.useMemo(() => (isDone ? '#EB8888' : '#E9E9E9'), [isDone]);
+  const fronButtonTextColor = React.useMemo(() => (isDone ? '#FFFFFF' : '#bbbbbb'), [isDone]);
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -106,7 +110,9 @@ const Footer = () => {
   const fashion = useSelector((state) => state.fashion);
   const MovingPath = () => {
     if (location === '/Meeting2') {
+      setIsDone(false);
       if (jobs.length > 0) {
+        setIsDone(true);
         setNextPath('/Meeting3');
       } else {
         setNextPath('/Meeting2');
@@ -114,7 +120,9 @@ const Footer = () => {
       setPrevPath('/');
       setPercent(20);
     } else if (location === '/Meeting3') {
+      setIsDone(false);
       if (university.length > 0) {
+        setIsDone(true);
         setNextPath('/Meeting4');
       } else {
         setNextPath('/Meeting3');
@@ -123,7 +131,9 @@ const Footer = () => {
       setPrevPath('/Meeting2');
       setPercent(35);
     } else if (location === '/Meeting4') {
+      setIsDone(false);
       if (area.length > 0) {
+        setIsDone(true);
         setNextPath('/Meeting5');
       } else {
         setNextPath('/Meeting4');
@@ -131,7 +141,9 @@ const Footer = () => {
       setPrevPath('/Meeting3');
       setPercent(45);
     } else if (location === '/Meeting5') {
+      setIsDone(false);
       if (day.length > 0) {
+        setIsDone(true);
         setNextPath('/Meeting6');
       } else {
         setNextPath('/Meeting5');
@@ -140,7 +152,9 @@ const Footer = () => {
       setPrevPath('/Meeting4');
       setPercent(50);
     } else if (location === '/Meeting6') {
+      setIsDone(false);
       if (mbti.length > 0 && fashion.length > 0 && appearance.length > 0) {
+        setIsDone(true);
         setNextPath('/Meeting7');
       } else {
         setNextPath('/Meeting6');
@@ -149,7 +163,9 @@ const Footer = () => {
       setPrevPath('/Meeting5');
       setPercent(60);
     } else if (location === '/Meeting7') {
+      setIsDone(false);
       if (characters.length > 0) {
+        setIsDone(true);
         setNextPath('/Meeting8');
       } else {
         setNextPath('/Meeting7');
@@ -157,7 +173,9 @@ const Footer = () => {
       setPrevPath('/Meeting6');
       setPercent(70);
     } else if (location === '/Meeting8') {
+      setIsDone(false);
       if (prefferedage.length > 0 && prefferedjobs.length > 0 && preffereduniversity.length > 0) {
+        setIsDone(true);
         setNextPath('/Meeting9');
       } else {
         setNextPath('/Meeting8');
@@ -165,10 +183,12 @@ const Footer = () => {
       setPrevPath('/Meeting7');
       setPercent(80);
     } else if (location === '/Meeting9') {
+      setIsDone(true);
       setPrevPath('/Meeting8');
       setNextPath('/Meeting10');
       setPercent(90);
     } else if (location === '/Meeting10') {
+      setIsDone(true);
       setPrevPath('/Meeting9');
       setNextPath('/Meeting11');
 
@@ -228,7 +248,9 @@ const Footer = () => {
           style={{ textDecoration: 'none' }}
         >
           {' '}
-          <FrontButton>다음</FrontButton>{' '}
+          <FrontButton bg={frontButtonColor} color={fronButtonTextColor}>
+            다음
+          </FrontButton>{' '}
         </StyledFrontLink>
       </BackAndFront>
     </Container>
