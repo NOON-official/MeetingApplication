@@ -11,7 +11,7 @@ import Body9 from './component/body/Body9';
 import Body10 from './component/body/Body10';
 import Body11 from './component/body/Body11';
 import Body12 from './component/body/Body12';
-import KakaoLogin from './component/body/KaKaoLogin';
+import KakaoLogin from './component/body/KakaoLogin';
 import KakaoLoginCallback from './component/body/KakaoLoginCallback';
 import Footer from './component/Footer';
 import React from 'react';
