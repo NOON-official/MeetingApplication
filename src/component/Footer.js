@@ -204,6 +204,10 @@ const Footer = () => {
       setPercent(90);
     } else if (location === '/Meeting13') {
       setPrevPath('/Meeting12');
+      setNextPath('/Meeting14');
+      setPercent(90);
+    } else if (location === '/Meeting14') {
+      setPrevPath('/Meeting13');
 
       setPercent(90);
     }

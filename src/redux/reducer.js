@@ -18,7 +18,7 @@ const initialState = {
   prefferedage: [20, 25],
   preffereduniversity: [],
   prefferedthing: [],
-  phonenumcall: false,
+  signin: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -99,8 +99,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, introduction: action.payload };
     case 'SET_KAKAOID':
       return { ...state, kakaoid: action.payload };
-    case 'SET_PHONENUMCALL':
-      return { ...state, phonenumcall: action.payload };
+    case 'SET_SIGNIN':
+      return { ...state, signin: action.payload };
     case 'SET_PREFFEREDTHING':
       const newPrefferedthing = action.payload;
       return { ...state, prefferedthing: [...state.prefferedthing, newPrefferedthing] };
