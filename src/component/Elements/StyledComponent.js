@@ -24,6 +24,7 @@ export const StyledDiv = styled.div`
   border-bottom: ${(props) => props.borderBottom || '0'};
   align-items: ${(props) => props.align_item};
   margin: ${(props) => props.margin};
+  text-align: ${(props) => props.text_align};
 `;
 
 export const SubTitle = styled.div`
