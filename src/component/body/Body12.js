@@ -1,11 +1,14 @@
-import styled from 'styled-components';
 import * as React from 'react';
 import { ReactComponent as PrivateInfo } from '../../Asset/page12/PrivateInfo.svg';
 import { ReactComponent as ServiceUse } from '../../Asset/page12/ServiceUse.svg';
-import { useSelector, useDispatch } from 'react-redux';
+import { ReactComponent as CheckIcon } from '../../Asset/confirm/CheckIcon.svg';
+import { useState } from 'react';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
 
 const Body12 = () => {
+  const [infoConfirm, setInfoConfirm] = useState(false);
+  const buttonColor = React.useMemo(() => (infoConfirm ? '#EB8888' : '#EDEDED'), [infoConfirm]);
+  const buttonFontColor = React.useMemo(() => (infoConfirm ? '#FFFFFF' : '#BBBBBB'), [infoConfirm]);
   return (
     <Container>
       <MobileBox>
@@ -28,11 +31,17 @@ const Body12 = () => {
           width="334px"
           height="50px"
           left="50%"
-          bg="#EDEDED"
+          bg={buttonColor}
           border="10px"
+          onClick={() => setInfoConfirm(!infoConfirm)}
         >
           {' '}
-          <StyledText size="24px">네 모두 동의합니다</StyledText>
+          <StyledText color={buttonFontColor} size="24px">
+            네 모두 동의합니다
+          </StyledText>
+        </StyledDiv>
+        <StyledDiv left="9%" top="30.5%">
+          {infoConfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
         </StyledDiv>
         <StyledDiv left="37%" top="31%">
           <PrivateInfo />
@@ -169,6 +178,9 @@ const Body12 = () => {
             간에 분쟁이 발생하면 이의 해결을 위해 성실히 협의할 것입니다. 그럼에도 불구하고 해결되지 않으면
             민사소송법상의 관할법원에 소를 제기할 수 있습니다.
           </StyledText>
+        </StyledDiv>
+        <StyledDiv left="9%" top="59.5%">
+          {infoConfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
         </StyledDiv>
         <StyledDiv left="34%" top="60%">
           <ServiceUse />
