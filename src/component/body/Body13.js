@@ -1,59 +1,12 @@
 import styled from 'styled-components';
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { authentication } from '../Firebase/firebase';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
-import { ContentPasteSearchOutlined } from '@mui/icons-material';
-const buttonColor = '#C4D7E0';
-
-const PhoneNum = styled.input`
-  position: absolute;
-  top: ${(props) => props.top || '5%'};
-  width: ${(props) => props.width || '295px'};
-  height: 8%;
-  border-radius: 12px;
-  border: 0.5px solid black;
-  display: flex;
-  font-size: 18px;
-  text-align: center;
-  ::placeholder {
-    justify-content: center;
-    text-align: center;
-    font-size: 16px;
-  }
-`;
-const SubmitButton = styled.button`
-  position: absolute;
-  top: ${(props) => props.top || '5%'};
-  width: 300px;
-  height: 8%;
-  border-radius: 12px;
-  border: 0.5px solid black;
-  display: flex;
-  font-size: 18px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  background-color: ${buttonColor};
-  color: black;
-  font-weight: 700;
-`;
-const AuthNum = styled.input`
-  width: ${(props) => props.width || '300px'};
-  height: 50px;
-  border-radius: 12px;
-  border: 0.5px solid black;
-  display: flex;
-  font-size: 18px;
-  text-align: center;
-  ::placeholder {
-    justify-content: center;
-    text-align: center;
-    font-size: 16px;
-  }
-`;
+import { ReactComponent as CheckIcon } from '../../Asset/confirm/CheckIcon.svg';
+import { useEffect } from 'react';
 const StyledInput = styled.input`
   width: ${(props) => props.width || '100%'};
   height: 100%;
@@ -70,113 +23,18 @@ const StyledInput = styled.input`
     outline: none;
   }
 `;
-const AuthSubmit = styled.button`
-  display: flex;
-  width: 70px;
-  border-radius: 12px;
-  border: 0.5px solid black;
-
-  font-size: 15x;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  color: black;
-  font-weight: 100;
-`;
-const AuthContainer = styled.div`
-  width: 300px;
-  height: 50px;
-  position: absolute;
-  top: 60%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
-const PhoneAuthInput = (props) => {
-  const dispatch = useDispatch();
-
-  const [minutes, setMinutes] = useState(3);
-  const [seconds, setSeconds] = useState(0);
-
-  function Timer() {
-    useEffect(() => {
-      if (iscalled) {
-        const countdown = setInterval(() => {
-          if (parseInt(seconds) > 0) {
-            setSeconds(parseInt(seconds) - 1);
-          }
-          if (parseInt(seconds) === 0) {
-            if (parseInt(minutes) === 0) {
-              clearInterval(countdown);
-            } else {
-              setMinutes(parseInt(minutes) - 1);
-              setSeconds(59);
-            }
-          }
-        }, 1000);
-        return () => clearInterval(countdown);
-      }
-    }, [minutes, seconds, iscalled]);
-  }
-  const iscalled = useSelector((state) => state.phonenumcall);
-  Timer();
-  console.log(iscalled);
-  const verifyOTP = (e) => {
-    let otp = e.target.value;
-    if (otp.length === 6) {
-      let confirmationResult = window.confirmationResult;
-      confirmationResult
-        .confirm(otp)
-        .then((result) => {
-          // User signed in successfully.
-          const user = result.user;
-          // ...
-          // console.log(user)
-        })
-        .catch((error) => {
-          // User couldn't sign in (bad verification code?)
-          // ...
-        });
-    }
-  };
-
-  return (
-    <AuthContainer className="container">
-      <AuthNum
-        width={'200px'}
-        placeholder={`인증번호 유효시간${minutes}:${seconds}`}
-        onChange={verifyOTP}
-        className="code"
-      ></AuthNum>
-
-      <AuthSubmit
-        onClick={() => {
-          if (authentication.currentUser) {
-            // console.log(authentication.currentUser.uid);
-            alert('인증이 완료되었습니다.');
-          } else {
-            alert('번호가 일치하지 않습니다.');
-          }
-        }}
-      >
-        인증
-      </AuthSubmit>
-    </AuthContainer>
-  );
-};
-
-const PhoneNumBox = (props) => {
-  const placeholder = useSelector((state) => state.phone);
-  return <PhoneNum top={'40%'} placeholder={placeholder} id="phoneNum" onChange={props.set}></PhoneNum>;
-};
 
 const Body13 = () => {
+  const dispatch = useDispatch();
   const [zero, setZero] = useState('');
   const [phonenumFirst, setPhoneNumFirst] = useState('');
   const [phoneNumSecond, setPhonenumSecond] = useState('');
-  const [phoneNnum, setPhoneNum] = useState('');
+  const phone = useSelector((state) => state.phone);
+  const [signin, setSignin] = useState(false);
+  useEffect(() => {
+    signin && dispatch({ type: 'SET_SIGNIN', payload: true });
+  }, [signin]);
+  const countryCode = '+82';
   const submitAble = React.useMemo(
     () => (zero.length === 3 && phoneNumSecond.length === 4 && phonenumFirst.length === 4 ? true : false),
     [zero, phoneNumSecond, phonenumFirst],
@@ -200,16 +58,11 @@ const Body13 = () => {
       let phoneNumber = zero.concat(phonenumFirst.concat(phoneNumSecond));
       console.log(phoneNumber);
       setAuthModalOpen(true);
+      dispatch({ type: 'SET_PHONE', payload: phoneNumber });
+      requestOTP();
     }
-  }, [zero, phonenumFirst, phoneNumSecond]);
+  }, [zero, phonenumFirst, phoneNumSecond, phone]);
 
-  const dispatch = useDispatch();
-  dispatch({ type: 'SET_PHONENUMCALL', payload: false });
-  const setPhone = (e) => {
-    dispatch({ type: 'SET_PHONE', payload: e.target.value });
-  };
-  const phone = useSelector((state) => state.phone);
-  const countryCode = '+82';
   const generateRecaptcha = () => {
     window.recaptchaVerifier = new RecaptchaVerifier(
       'recaptchaContainer',
@@ -224,7 +77,8 @@ const Body13 = () => {
   };
   const requestOTP = () => {
     authentication.languageCode = 'Ko';
-    if (phone.length >= 11) {
+    if (phone.length === 11) {
+      console.log(phone);
       alert('인증번호가 전송되었습니다.');
       generateRecaptcha();
       let appVerifier = window.recaptchaVerifier;
@@ -241,7 +95,27 @@ const Body13 = () => {
       alert('올바른 번호를 입력하셈');
     }
   };
-
+  const PhoneAuthInput = (e) => {
+    let otp = e.target.value;
+    if (otp.length === 6) {
+      let confirmationResult = window.confirmationResult;
+      confirmationResult
+        .confirm(otp)
+        .then((result) => {
+          // User signed in successfully.
+          alert('승인되었습니다.');
+          setSignin(true);
+          // ...
+          // console.log(user)
+        })
+        .catch((error) => {
+          // User couldn't sign in (bad verification code?)
+          // ...
+          alert('번호가 올바르지 않습니다.');
+          setSignin(false);
+        });
+    }
+  };
   return (
     <Container>
       <MobileBox>
@@ -320,7 +194,8 @@ const Body13 = () => {
               </StyledText>
               <StyledDiv top="50%" width="100%" left="50%" height="50%">
                 <StyledDiv display="flex" justify_content="flex-start" left="50%" height="100%" width="100%">
-                  <StyledInput name="12345" onChange={inputHandler} placeholder="12345"></StyledInput>
+                  <StyledInput maxLength={6} name="otp" onChange={PhoneAuthInput} placeholder="12345"></StyledInput>
+                  <StyledDiv left="90%">{signin ? <CheckIcon /> : <CheckIcon className="bright" />}</StyledDiv>
                 </StyledDiv>
               </StyledDiv>
             </StyledDiv>

@@ -12,6 +12,7 @@ import Body10 from './component/body/Body10';
 import Body11 from './component/body/Body11';
 import Body12 from './component/body/Body12';
 import Body13 from './component/body/Body13';
+import Body14 from './component/body/Body14';
 import KakaoLogin from './component/body/KakaoLogin';
 import KakaoLoginCallback from './component/body/KakaoLoginCallback';
 import Footer from './component/Footer';
@@ -46,6 +47,7 @@ function App() {
           <Route path="Meeting11" element={<Body11 />}></Route>
           <Route path="Meeting12" element={<Body12 />}></Route>
           <Route path="Meeting13" element={<Body13 />}></Route>
+          <Route path="Meeting14" element={<Body14 />}></Route>
           <Route path="Kakaologin" element={<KakaoLogin />}></Route>
           <Route path="/auth/callback/kakao" element={<KakaoLoginCallback />}></Route>
         </Routes>
