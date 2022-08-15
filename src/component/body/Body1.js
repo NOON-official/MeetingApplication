@@ -56,7 +56,7 @@ const Body1 = () => {
         <StyledDiv top="65%" left="50%" transform="translate(-50%, 0)">
           <MainText />
         </StyledDiv>
-        <Link to="/Meeting2" style={{ textDecoration: 'none' }}>
+        <Link to="/apply/2" style={{ textDecoration: 'none' }}>
           <Button>
             <MainButtonText />
           </Button>
