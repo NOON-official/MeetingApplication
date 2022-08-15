@@ -13,8 +13,8 @@ import Body11 from './component/body/Body11';
 import Body12 from './component/body/Body12';
 import Body13 from './component/body/Body13';
 import Body14 from './component/body/Body14';
-import KakaoLogin from './component/body/KakaoLogin';
-import KakaoLoginCallback from './component/body/KakaoLoginCallback';
+import KakaoLogin from './component/Auth/KakaoLogin';
+import KakaoLoginCallback from './component/Auth/KakaoLoginCallback';
 import Footer from './component/Footer';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
@@ -49,7 +49,7 @@ function App() {
           <Route path="Meeting13" element={<Body13 />}></Route>
           <Route path="Meeting14" element={<Body14 />}></Route>
           <Route path="Kakaologin" element={<KakaoLogin />}></Route>
-          <Route path="/auth/callback/kakao" element={<KakaoLoginCallback />}></Route>
+          <Route path="/auth/kakao/callback" element={<KakaoLoginCallback />}></Route>
         </Routes>
         <Bootom></Bootom>
       </BrowserRouter>
