@@ -1,17 +1,20 @@
-import * as React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import KakaoLoginButton from '../../image/kakao-login-button.png';
 
-const { Kakao } = window;
-const LoginWithKakao = () => {
-  Kakao.Auth.authorize({
-    redirectUri: 'http://localhost:3000/auth/callback/kakao',
-  });
-};
 const KakaoButton = styled.div`
   border: none;
 `;
+
 const KakaoLogin = () => {
+  const { Kakao } = window;
+
+  const LoginWithKakao = useCallback(() => {
+    Kakao.Auth.authorize({
+      redirectUri: `${process.env.REACT_APP_CLIENT_URL}/auth/kakao/callback`,
+    });
+  }, []);
+
   return (
     <div>
       <KakaoButton id="kakao-login-button" onClick={LoginWithKakao}>
