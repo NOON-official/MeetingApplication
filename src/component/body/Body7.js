@@ -27,7 +27,7 @@ const Body7 = () => {
           <Character character={'깍두기'}>깍두기</Character>
         </ButtonBox>
         <StyledDiv top="30%" width="95%" height="70%" left="50%" overflow="scroll">
-          <StyledDiv width="95%" height="210%" left="50%">
+          <StyledDiv top="10%" width="95%" height="1108px" left="50%">
             <Face />
             <Moderatoer />
             <Comedian />

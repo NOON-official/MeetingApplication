@@ -39,7 +39,7 @@ const StyledInput = styled.input`
   padding: 5px;
 `;
 
-const Body12 = () => {
+const MbtiTest = () => {
   const [compatibility, setCompatibility] = useState(0);
   const [ourTeam, setourTeam] = useState();
   const [opposingTeam, setopposingTeam] = useState([]);
@@ -107,4 +107,4 @@ const Body12 = () => {
   );
 };
 
-export default Body12;
+export default MbtiTest;
