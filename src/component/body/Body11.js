@@ -1,135 +1,75 @@
 import styled from 'styled-components';
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import client from '../../api';
-import { authentication } from '../Firebase/firebase';
-
-const Container = styled.div`
-  left: 0;
-  overflow: hidden;
-  overflow-x: hidden;
-  position: absolute;
-  top: 10%;
-  width: 100%;
-  height: 75%;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Title = styled.div`
-  display: flex;
-  top: 10%;
-  font-size: 17px;
-  font-weight: bold;
-  height: auto;
-  margin: 0;
-  color: #000;
-  font-style: normal;
-  letter-spacing: -0.015em;
-  line-height: 149.8%;
-  position: absolute;
-  text-align: center;
-  justify-content: center;
-  width: auto;
-`;
-const KakaoIdInput = styled.input`
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  height: 50px;
-  width: 200px;
+import { ReactComponent as Character } from '../../Asset/page11/InputCharacter.svg';
+import { useDispatch } from 'react-redux';
+import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
+const StyledTextArea = styled.textarea`
+  position: static;
+  width: 90%;
+  height: 80%;
+  border: 0;
+  margin: 5%;
+  font-family: pretendard;
+  font-size: 14px;
   ::placeholder {
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: start;
     font-size: 13px;
-    margin: 5px;
   }
-  border: 1px solid #c4d7e0;
 `;
-
 const Body11 = () => {
-  const phone = useSelector((state) => state.phone);
-  const gender = useSelector((state) => state.gender);
-  const num = useSelector((state) => state.num);
-  const age = useSelector((state) => state.age);
-  const jobs = useSelector((state) => state.jobs);
-  const prefferedjobs = useSelector((state) => state.prefferedjobs);
-  const prefferedage = useSelector((state) => state.prefferedage);
-  const preffereduniversity = useSelector((state) => state.preffereduniversity);
-  const university = useSelector((state) => state.university);
-  const characters = useSelector((state) => state.characters);
-  const area = useSelector((state) => state.area);
-  const kakaoid = useSelector((state) => state.kakaoid);
-  const day = useSelector((state) => state.day);
-  const appearance = useSelector((state) => state.appearance);
-  const mbti = useSelector((state) => state.mbti);
-  const fashion = useSelector((state) => state.fashion);
   const dispatch = useDispatch();
-  const KakaoId = (e) => {
-    dispatch({ type: 'SET_KAKAOID', payload: e.target.value });
+  const setIntroduction = (e) => {
+    dispatch({ type: 'SET_INTRODUCTION', payload: e.target.value });
   };
-
-  const Mid = () => {
-    const body = {
-      firebaseUid: authentication.currentUser.uid,
-      kakaoId: kakaoid,
-      phone: phone,
-      gender: gender,
-      num: `${num}`,
-      age: `${age}`,
-      job: jobs,
-      university: university,
-      role: characters,
-      area: area,
-      day: day,
-      appearance: appearance,
-      mbti: mbti,
-      fashion: fashion,
-    };
-    const prefferenceBody = {
-      age: prefferedage,
-      job: prefferedjobs,
-      exceptedUniv: preffereduniversity,
-      includedUniv: [''],
-      gamePercent: '78',
-      sweetPercent: '100',
-      funPercent: '0',
-      appearance: [''],
-      mbti: [''],
-      fashion: [''],
-    };
-    // console.log(body);
-    console.log(client);
-    console.log('userInfo', authentication.currentUser);
-    client
-      .post('/api/user/ourteam', body)
-      .then((res) => {
-        const newBody = { ...prefferenceBody, id: res.data.data.id };
-        console.log(newBody);
-        client
-          .post('/api/user/preference', newBody)
-          .then((res) => {
-            alert('완성');
-          })
-          .catch((err) => {
-            alert(err.response.data.message);
-          });
-      })
-      .catch((err) => {
-        alert(err.response.data.message);
-      });
-  }; //데이터 보내기
 
   return (
     <Container>
-      <Title>
-        카카오톡 아이디를 알려주세요. <br /> 매칭확인 후 상대에게 전달됩니다!
-      </Title>
-      <KakaoIdInput onChange={KakaoId} placeholder="깨똑아이뒤"></KakaoIdInput>
-      <button onClick={Mid}>버튼</button>
+      <MobileBox>
+        <StyledDiv max_width="350px" top="5%" width="90%" height="20%" left="50%">
+          <StyledText position=" absolute" size="35px" color="#F49393" left="10px">
+            우리팀을 어필할 수 있는
+          </StyledText>
+          <StyledText position="absolute" size="35px" left="10px" top="30px">
+            마지막 기회
+          </StyledText>
+          <StyledText position="absolute" size="13px" font="Pretendard" color="#AAAAAA" left="10px" top="70px">
+            위트있게 우리팀을 설명해 보아요!
+          </StyledText>
+          <StyledText position="absolute" size="13px" font="Pretendard" color="#AAAAAA" left="10px" top="90px">
+            2문장 이내로 우리팀을 소개해주세요!
+          </StyledText>
+        </StyledDiv>{' '}
+        <StyledDiv
+          display="flex"
+          justify_content="center"
+          align_item="center"
+          max_width="350px"
+          border="10px"
+          bg="white"
+          left="50%"
+          width="90%"
+          height="20%"
+          top="170px"
+        >
+          <StyledTextArea
+            onChange={setIntroduction}
+            placeholder="안녕하세요 한국외국어대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다."
+          ></StyledTextArea>
+        </StyledDiv>
+        <StyledDiv
+          display="flex"
+          justify_content="flex-end"
+          align_item="flex-end"
+          top="80%"
+          height="auto"
+          width="100%"
+          left="40%"
+          margin
+        >
+          <Character />
+        </StyledDiv>
+      </MobileBox>
     </Container>
   );
 };

@@ -23,6 +23,7 @@ const MyTeamInfo = () => {
       border_color="#F1ECEC"
       borderBottom="1px solid #F1ECEC"
       height="40%"
+      minHeight="270px"
       left="50%"
       bg="white"
       id="MyTeamInfo"
@@ -107,10 +108,11 @@ const PrefferedInfo = () => {
       border_color="#F1ECEC"
       borderBottom="1px solid #F1ECEC"
       height="20%"
+      minHeight="156px"
       left="50%"
       bg="white"
       id="MyTeamInfo"
-      top="45%"
+      top="50%"
     >
       <StyledDiv borderBottom="1px solid #F1ECEC" top="0" left="50%" height="50px" width="90%" id="title">
         <StyledText left="0%" top="40%" font="Pretendard" line="16.8px" size="14px" fontWeight="600" color="#777777">
@@ -168,7 +170,7 @@ const WantInfo = () => {
       left="50%"
       bg="white"
       id="MyTeamInfo"
-      top="70%"
+      top="80%"
     >
       <StyledDiv borderBottom="1px solid #F1ECEC" top="0" left="50%" height="50px" width="90%" id="title">
         <StyledText left="0%" top="40%" font="Pretendard" line="16.8px" size="14px" fontWeight="600" color="#777777">
@@ -187,16 +189,19 @@ const Body10 = () => {
   return (
     <Container>
       <MobileBox>
-        <StyledDiv top="5%" width="90%" height="15%" left="31%">
-          <StyledText position="static" size="35px" color="#F49393">
-            당신만의 미팅개론
+        <StyledDiv max_width="350px" top="5%" width="90%" height="20%" left="50%">
+          <StyledText position=" absolute" size="35px" color="#F49393" left="10px">
+            당신만의 미팅학개론
           </StyledText>
-          <StyledText position="static" size="35px">
-            을<br /> 정리해드립니다
+          <StyledText position="absolute" size="35px" left="195px">
+            을
+          </StyledText>
+          <StyledText position="absolute" size="35px" left="10px" top="30px">
+            정리해드립니다.
           </StyledText>
         </StyledDiv>{' '}
-        <StyledDiv left="50%" top="20%" height="80%" width="100%" id="scrollbox" overflow="scroll">
-          <StyledDiv left="50%" height="120%" width="95%" id="InfoBox">
+        <StyledDiv max_width="350px" left="50%" top="20%" height="80%" width="100%" id="scrollbox" overflow="scroll">
+          <StyledDiv left="50%" height="600px" width="95%" id="InfoBox">
             <MyTeamInfo></MyTeamInfo>
             <PrefferedInfo />
             <WantInfo />

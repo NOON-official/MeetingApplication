@@ -23,6 +23,8 @@ export const StyledDiv = styled.div`
   min-height: ${(props) => props.minHeight};
   border-bottom: ${(props) => props.borderBottom || '0'};
   align-items: ${(props) => props.align_item};
+  margin: ${(props) => props.margin};
+  text-align: ${(props) => props.text_align};
 `;
 
 export const SubTitle = styled.div`
@@ -99,7 +101,7 @@ export const Container = styled.div`
   background-color: ${(props) => props.bg || '#F5F5F5'};
 `;
 export const MobileBox = styled.div`
-  max-width: 768px;
+  max-width: 400px;
   width: 100%;
   height: ${(props) => props.height || '100%'};
   display: flex;
@@ -134,6 +136,11 @@ export const StyledText = styled.text`
   font-weight: ${(props) => props.fontWeight};
   align-items: ${(props) => props.align_item};
   justify-content: ${(props) => props.justify_content};
+  margin: ${(props) => props.margin};
+  word-break: ${(props) => props.word_break};
+  width: ${(props) => props.width};
+  transform: ${(props) => props.transform};
+  text-align: start;
 `;
 
 export const StyledButton = styled.button`

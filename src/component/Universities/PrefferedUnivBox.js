@@ -32,7 +32,6 @@ const Uni = styled.button`
   max-height: 200px;
   font-family: var(--font-family);
   font-size: 20px;
->>>>>>> f8253df9458da5461f80ea832d6e2eca948d2410
   color: ${(props) => props.color || 'black'};
   background-color: ${(props) => props.background_color || 'transparent'};
 `;
