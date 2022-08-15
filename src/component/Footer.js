@@ -109,114 +109,114 @@ const Footer = () => {
   const privateinfoconfirm = useSelector((state) => state.privateinfoconfirm);
   const signin = useSelector((state) => state.signin);
   const MovingPath = () => {
-    if (location === '/Meeting2') {
+    if (location === '/apply/2') {
       setIsDone(false);
       if (jobs.length > 0) {
         setIsDone(true);
-        setNextPath('/Meeting3');
+        setNextPath('/apply/3');
       } else {
-        setNextPath('/Meeting2');
+        setNextPath('/apply/2');
       }
       setPrevPath('/');
-    } else if (location === '/Meeting3') {
+    } else if (location === '/apply/3') {
       setIsDone(false);
       if (university.length > 0) {
         setIsDone(true);
-        setNextPath('/Meeting4');
+        setNextPath('/apply/4');
       } else {
-        setNextPath('/Meeting3');
+        setNextPath('/apply/3');
       }
 
-      setPrevPath('/Meeting2');
-    } else if (location === '/Meeting4') {
+      setPrevPath('/apply/2');
+    } else if (location === '/apply/4') {
       setIsDone(false);
       if (area.length > 0) {
         setIsDone(true);
-        setNextPath('/Meeting5');
+        setNextPath('/apply/5');
       } else {
-        setNextPath('/Meeting4');
+        setNextPath('/apply/4');
       }
-      setPrevPath('/Meeting3');
-    } else if (location === '/Meeting5') {
+      setPrevPath('/apply/3');
+    } else if (location === '/apply/5') {
       setIsDone(false);
       if (day.length > 0) {
         setIsDone(true);
-        setNextPath('/Meeting6');
+        setNextPath('/apply/6');
       } else {
-        setNextPath('/Meeting5');
+        setNextPath('/apply/5');
       }
 
-      setPrevPath('/Meeting4');
-    } else if (location === '/Meeting6') {
+      setPrevPath('/apply/4');
+    } else if (location === '/apply/6') {
       setIsDone(false);
       if (mbti.length > 0 && fashion.length > 0 && appearance.length > 0) {
         setIsDone(true);
-        setNextPath('/Meeting7');
+        setNextPath('/apply/7');
       } else {
-        setNextPath('/Meeting6');
+        setNextPath('/apply/6');
       }
 
-      setPrevPath('/Meeting5');
-    } else if (location === '/Meeting7') {
+      setPrevPath('/apply/5');
+    } else if (location === '/apply/7') {
       setIsDone(false);
       if (characters.length > 0) {
         setIsDone(true);
-        setNextPath('/Meeting8');
+        setNextPath('/apply/8');
       } else {
-        setNextPath('/Meeting7');
+        setNextPath('/apply/7');
       }
-      setPrevPath('/Meeting6');
-    } else if (location === '/Meeting8') {
+      setPrevPath('/apply/6');
+    } else if (location === '/apply/8') {
       setIsDone(false);
       if (prefferedage.length > 0 && prefferedjobs.length > 0 && preffereduniversity.length > 0) {
         setIsDone(true);
-        setNextPath('/Meeting9');
+        setNextPath('/apply/9');
       } else {
-        setNextPath('/Meeting8');
+        setNextPath('/apply/8');
       }
-      setPrevPath('/Meeting7');
-    } else if (location === '/Meeting9') {
+      setPrevPath('/apply/7');
+    } else if (location === '/apply/9') {
       setIsDone(false);
       if (prefferedthing.length > 0) {
         setIsDone(true);
-        setNextPath('/Meeting10');
+        setNextPath('/apply/10');
       } else {
-        setNextPath('/Meeting9');
+        setNextPath('/apply/9');
       }
 
-      setPrevPath('/Meeting8');
-    } else if (location === '/Meeting10') {
-      setPrevPath('/Meeting9');
-      setNextPath('/Meeting11');
-    } else if (location === '/Meeting11') {
+      setPrevPath('/apply/8');
+    } else if (location === '/apply/10') {
+      setPrevPath('/apply/9');
+      setNextPath('/apply/11');
+    } else if (location === '/apply/11') {
       setIsDone(false);
       if (introduction.length > 0) {
         setIsDone(true);
-        setNextPath('/Meeting12');
+        setNextPath('/apply/12');
       } else {
-        setNextPath('/Meeting11');
+        setNextPath('/apply/11');
       }
-      setPrevPath('/Meeting10');
-    } else if (location === '/Meeting12') {
+      setPrevPath('/apply/10');
+    } else if (location === '/apply/12') {
       setIsDone(false);
       if (privateinfoconfirm) {
         setIsDone(true);
-        setNextPath('/Meeting13');
+        setNextPath('/apply/13');
       } else {
-        setNextPath('/Meeting12');
+        setNextPath('/apply/12');
       }
-      setPrevPath('/Meeting11');
-    } else if (location === '/Meeting13') {
+      setPrevPath('/apply/11');
+    } else if (location === '/apply/13') {
       setIsDone(false);
       if (signin) {
         setIsDone(true);
-        setNextPath('/Meeting14');
+        setNextPath('/apply/14');
       } else {
-        setNextPath('/Meeting13');
+        setNextPath('/apply/13');
       }
-      setPrevPath('/Meeting12');
-    } else if (location === '/Meeting14') {
-      setPrevPath('/Meeting13');
+      setPrevPath('/apply/12');
+    } else if (location === '/apply/14') {
+      setPrevPath('/apply/13');
     }
   };
 
@@ -238,29 +238,29 @@ const Footer = () => {
 
         <StyledFrontLink
           onClick={() => {
-            if (location === '/Meeting2' && jobs.length === 0) {
+            if (location === '/apply/2' && jobs.length === 0) {
               openModal();
-            } else if (location === '/Meeting3' && university.length === 0) {
+            } else if (location === '/apply/3' && university.length === 0) {
               openModal();
-            } else if (location === '/Meeting4' && area.length === 0) {
+            } else if (location === '/apply/4' && area.length === 0) {
               openModal();
-            } else if (location === '/Meeting5' && day.length === 0) {
+            } else if (location === '/apply/5' && day.length === 0) {
               openModal();
             } else if (
-              location === '/Meeting6' &&
+              location === '/apply/6' &&
               (appearance.length === 0 || mbti.length === 0 || fashion.length === 0)
             ) {
               openModal();
-            } else if (location === '/Meeting7' && characters.length === 0) {
+            } else if (location === '/apply/7' && characters.length === 0) {
               openModal();
             } else if (
-              location === '/Meeting8' &&
+              location === '/apply/8' &&
               (prefferedage.length === 0 || prefferedjobs.length === 0 || preffereduniversity.length === 0)
             ) {
               openModal();
-            } else if (location === '/Meeting9' && prefferedthing.length === 0) {
+            } else if (location === '/apply/9' && prefferedthing.length === 0) {
               openModal();
-            } else if (location === '/Meeting11' && introduction.length === 0) {
+            } else if (location === '/apply/11' && introduction.length === 0) {
               openModal();
             }
           }}
