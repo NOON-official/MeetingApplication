@@ -7,19 +7,29 @@ const Body4 = () => {
   return (
     <Container>
       <MobileBox>
-        <StyledDiv top="5%" width="90%" height="10%" left="42%">
-          <StyledText position="static" size="35px" color="#F49393">
+        <StyledDiv top="5%" width="90%" height="20%" left="50%">
+          <StyledText position="absolute" color="#F49393" size="35px" left="10px">
             미팅 가능한 지역
           </StyledText>
-          <StyledText position="static" size="35px">
+          <StyledText position=" absolute" size="35px" left="170 px">
             을 말해주세요
           </StyledText>
-        </StyledDiv>{' '}
+        </StyledDiv>
         <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="23%" top="11%">
           중복 선택이 가능해요
         </SubTitle>
         <AreaContiner></AreaContiner>
-        <StyledDiv top="82%" left="75%">
+        <StyledDiv
+          display="flex"
+          direction="row"
+          justify_content="flex-end"
+          align_item="flex-end"
+          top="80%"
+          height="auto"
+          width="100%"
+          left="40%"
+          margin
+        >
           <DayCharacter />
         </StyledDiv>
       </MobileBox>

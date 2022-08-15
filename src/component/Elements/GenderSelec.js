@@ -154,10 +154,10 @@ export const AgeSelect = () => {
         평균나이
       </SubTitle>
       <SliderBox top="60%">
-        <StyledText top="75%" size="10px" color="#B79292">
+        <StyledText top="75%" size="20px" color="#B79292">
           20세
         </StyledText>
-        <StyledText top="75%" left="90%" size="10px" color="#B79292">
+        <StyledText top="75%" left="90%" size="20px" color="#B79292">
           35세
         </StyledText>
         <PrettoSlider

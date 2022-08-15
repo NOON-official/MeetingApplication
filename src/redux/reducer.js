@@ -1,6 +1,6 @@
 const initialState = {
   user: 'userName',
-  phone: '-없이 입력해 주세요',
+  phone: '',
   gender: '남자',
   num: 2,
   age: 20,
@@ -18,7 +18,8 @@ const initialState = {
   prefferedage: [20, 25],
   preffereduniversity: [],
   prefferedthing: [],
-  phonenumcall: false,
+  signin: false,
+  privateinfoconfirm: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -99,8 +100,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, introduction: action.payload };
     case 'SET_KAKAOID':
       return { ...state, kakaoid: action.payload };
-    case 'SET_PHONENUMCALL':
-      return { ...state, phonenumcall: action.payload };
+    case 'SET_SIGNIN':
+      return { ...state, signin: action.payload };
+    case 'SET_PRIVATEINFOCONFIRM':
+      return { ...state, privateinfoconfirm: action.payload };
     case 'SET_PREFFEREDTHING':
       const newPrefferedthing = action.payload;
       return { ...state, prefferedthing: [...state.prefferedthing, newPrefferedthing] };

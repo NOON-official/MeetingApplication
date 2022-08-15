@@ -8,19 +8,18 @@ const Body6 = () => {
   return (
     <Container>
       <MobileBox>
-        <StyledDiv top="5%" width="90%" height="10%" left="18%">
-          <StyledText position="static" size="35px">
-            우리팀에는 <br />
+        <StyledDiv top="5%" width="90%" height="20%" left="50%">
+          <StyledText position=" absolute" size="35px" left="10px">
+            우리 팀에는
           </StyledText>
-        </StyledDiv>
-        <StyledDiv top="10%" width="90%" height="10%" left="33%">
-          <StyledText position="static" size="35px" color="#F49393">
-            어떤사람들
+
+          <StyledText position="absolute" color="#F49393" size="35px" left="10px" top="30px">
+            어떤 사람들
           </StyledText>
-          <StyledText position="static" size="35px">
+          <StyledText position=" absolute" size="35px" top="30px" left="120px">
             이 있나요?
           </StyledText>
-        </StyledDiv>{' '}
+        </StyledDiv>
         <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="24%" top="17%">
           중복 선택이 가능해요
         </SubTitle>
