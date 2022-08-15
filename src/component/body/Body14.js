@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as React from 'react';
 import { authentication } from '../Firebase/firebase';
 import client from '../../api';
+import axios from 'axios';
+
 const StyledInput = styled.input`
   width: ${(props) => props.width || '100%'};
   height: 100%;

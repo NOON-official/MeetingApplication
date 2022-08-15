@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SubTitle, ButtonBox, SliderBox, Contents, SelectButton, StyledText } from './StyledComponent';
 import UnivBox from '../Universities/PrefferedUnivBox';
 const PrettoSlider = styled(Slider)({
-  color: '#F6EEEE',
+  color: '#EB8888',
   height: 8,
   '& .MuiSlider-track': {
     border: 'none',
@@ -79,16 +79,13 @@ export const JobSelect = () => {
     </Contents>
   );
 };
-function valuetext(value) {
-  return `${value}°C`;
-}
+
 export const AgeSelect = () => {
   const dispatch = useDispatch();
   const age = useSelector((state) => state.prefferedage);
 
   const handleChange = (event, newValue) => {
     dispatch({ type: 'PREFFEREDAGE', payload: newValue });
-    console.log('redux', age);
   };
   return (
     <Contents>
@@ -96,21 +93,13 @@ export const AgeSelect = () => {
         평균나이
       </SubTitle>
       <SliderBox top="40%">
-        <StyledText top="75%" size="10px" color="#B79292">
+        <StyledText top="75%" size="20px" color="#B79292">
           20세
         </StyledText>
-        <StyledText top="75%" left="90%" size="10px" color="#B79292">
+        <StyledText top="75%" left="90%" size="20px" color="#B79292">
           35세
         </StyledText>
-        <PrettoSlider
-          min={20}
-          max={35}
-          getAriaLabel={() => 'Temperature range'}
-          value={age}
-          onChange={handleChange}
-          valueLabelDisplay="on"
-          disableSwap
-        />
+        <PrettoSlider min={20} max={35} value={age} onChange={handleChange} valueLabelDisplay="on" disableSwap />
       </SliderBox>
     </Contents>
   );

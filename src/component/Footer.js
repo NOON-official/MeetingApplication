@@ -91,15 +91,12 @@ const Footer = () => {
   const [nextPath, setNextPath] = useState('/');
   const [prevPath, setPrevPath] = useState('/');
   const location = useLocation().pathname;
-  const [percent, setPercent] = useState(10);
-  const phone = useSelector((state) => state.phone);
-  const gender = useSelector((state) => state.gender);
-  const num = useSelector((state) => state.num);
-  const age = useSelector((state) => state.age);
+
   const jobs = useSelector((state) => state.jobs);
   const prefferedjobs = useSelector((state) => state.prefferedjobs);
   const prefferedage = useSelector((state) => state.prefferedage);
   const preffereduniversity = useSelector((state) => state.preffereduniversity);
+  const prefferedthing = useSelector((state) => state.prefferedthing);
   const university = useSelector((state) => state.university);
   const characters = useSelector((state) => state.characters);
   const area = useSelector((state) => state.area);
@@ -108,6 +105,9 @@ const Footer = () => {
   const appearance = useSelector((state) => state.appearance);
   const mbti = useSelector((state) => state.mbti);
   const fashion = useSelector((state) => state.fashion);
+  const introduction = useSelector((state) => state.introduction);
+  const privateinfoconfirm = useSelector((state) => state.privateinfoconfirm);
+  const signin = useSelector((state) => state.signin);
   const MovingPath = () => {
     if (location === '/Meeting2') {
       setIsDone(false);
@@ -118,7 +118,6 @@ const Footer = () => {
         setNextPath('/Meeting2');
       }
       setPrevPath('/');
-      setPercent(20);
     } else if (location === '/Meeting3') {
       setIsDone(false);
       if (university.length > 0) {
@@ -129,7 +128,6 @@ const Footer = () => {
       }
 
       setPrevPath('/Meeting2');
-      setPercent(35);
     } else if (location === '/Meeting4') {
       setIsDone(false);
       if (area.length > 0) {
@@ -139,7 +137,6 @@ const Footer = () => {
         setNextPath('/Meeting4');
       }
       setPrevPath('/Meeting3');
-      setPercent(45);
     } else if (location === '/Meeting5') {
       setIsDone(false);
       if (day.length > 0) {
@@ -150,7 +147,6 @@ const Footer = () => {
       }
 
       setPrevPath('/Meeting4');
-      setPercent(50);
     } else if (location === '/Meeting6') {
       setIsDone(false);
       if (mbti.length > 0 && fashion.length > 0 && appearance.length > 0) {
@@ -161,7 +157,6 @@ const Footer = () => {
       }
 
       setPrevPath('/Meeting5');
-      setPercent(60);
     } else if (location === '/Meeting7') {
       setIsDone(false);
       if (characters.length > 0) {
@@ -171,7 +166,6 @@ const Footer = () => {
         setNextPath('/Meeting7');
       }
       setPrevPath('/Meeting6');
-      setPercent(70);
     } else if (location === '/Meeting8') {
       setIsDone(false);
       if (prefferedage.length > 0 && prefferedjobs.length > 0 && preffereduniversity.length > 0) {
@@ -181,35 +175,48 @@ const Footer = () => {
         setNextPath('/Meeting8');
       }
       setPrevPath('/Meeting7');
-      setPercent(80);
     } else if (location === '/Meeting9') {
-      setIsDone(true);
+      setIsDone(false);
+      if (prefferedthing.length > 0) {
+        setIsDone(true);
+        setNextPath('/Meeting10');
+      } else {
+        setNextPath('/Meeting9');
+      }
+
       setPrevPath('/Meeting8');
-      setNextPath('/Meeting10');
-      setPercent(90);
     } else if (location === '/Meeting10') {
-      setIsDone(true);
       setPrevPath('/Meeting9');
       setNextPath('/Meeting11');
-
-      setPercent(90);
     } else if (location === '/Meeting11') {
+      setIsDone(false);
+      if (introduction.length > 0) {
+        setIsDone(true);
+        setNextPath('/Meeting12');
+      } else {
+        setNextPath('/Meeting11');
+      }
       setPrevPath('/Meeting10');
-
-      setNextPath('/Meeting12');
-      setPercent(90);
     } else if (location === '/Meeting12') {
+      setIsDone(false);
+      if (privateinfoconfirm) {
+        setIsDone(true);
+        setNextPath('/Meeting13');
+      } else {
+        setNextPath('/Meeting12');
+      }
       setPrevPath('/Meeting11');
-      setNextPath('/Meeting13');
-      setPercent(90);
     } else if (location === '/Meeting13') {
+      setIsDone(false);
+      if (signin) {
+        setIsDone(true);
+        setNextPath('/Meeting14');
+      } else {
+        setNextPath('/Meeting13');
+      }
       setPrevPath('/Meeting12');
-      setNextPath('/Meeting14');
-      setPercent(90);
     } else if (location === '/Meeting14') {
       setPrevPath('/Meeting13');
-
-      setPercent(90);
     }
   };
 
@@ -249,8 +256,13 @@ const Footer = () => {
             } else if (
               location === '/Meeting8' &&
               (prefferedage.length === 0 || prefferedjobs.length === 0 || preffereduniversity.length === 0)
-            )
+            ) {
               openModal();
+            } else if (location === '/Meeting9' && prefferedthing.length === 0) {
+              openModal();
+            } else if (location === '/Meeting11' && introduction.length === 0) {
+              openModal();
+            }
           }}
           to={nextPath}
           style={{ textDecoration: 'none' }}

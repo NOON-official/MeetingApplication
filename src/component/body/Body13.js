@@ -77,7 +77,7 @@ const Body13 = () => {
   };
   const requestOTP = () => {
     authentication.languageCode = 'Ko';
-    if (phone.length === 11) {
+    if (phone.length >= 10) {
       console.log(phone);
       alert('인증번호가 전송되었습니다.');
       generateRecaptcha();

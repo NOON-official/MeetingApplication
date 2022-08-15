@@ -6,7 +6,7 @@ import { ReactComponent as Character } from '../../Asset/page2/Character.svg';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
 const TeamSelectBox = styled.div`
   height: 70%;
-  width: 95%;
+  width: 90%;
   position: absolute;
   top: 10%;
 `;

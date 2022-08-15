@@ -2,11 +2,15 @@ import * as React from 'react';
 import { ReactComponent as PrivateInfo } from '../../Asset/page12/PrivateInfo.svg';
 import { ReactComponent as ServiceUse } from '../../Asset/page12/ServiceUse.svg';
 import { ReactComponent as CheckIcon } from '../../Asset/confirm/CheckIcon.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
-
+import { useSelector, useDispatch } from 'react-redux';
 const Body12 = () => {
   const [infoConfirm, setInfoConfirm] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: 'SET_PRIVATEINFOCONFIRM', payload: infoConfirm });
+  }, [infoConfirm]);
   const buttonColor = React.useMemo(() => (infoConfirm ? '#EB8888' : '#EDEDED'), [infoConfirm]);
   const buttonFontColor = React.useMemo(() => (infoConfirm ? '#FFFFFF' : '#BBBBBB'), [infoConfirm]);
   return (
