@@ -15,7 +15,7 @@ const Body3 = () => {
             는?
           </StyledText>
         </StyledDiv>
-        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="30%" top="12%">
+        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="32%" top="12%">
           팀원들의 모든 학교를 말해주세요
         </SubTitle>
         <UnivBox></UnivBox>
@@ -28,7 +28,6 @@ const Body3 = () => {
           height="auto"
           width="100%"
           left="40%"
-          margin
         >
           <ChatBallon />
           <Character />

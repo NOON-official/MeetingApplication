@@ -15,15 +15,15 @@ const Container = styled.div`
 `;
 const UniversitiesBox = styled.div`
   width: 100%;
-  height: 20%;
+  height: 15%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 10px;
+  margin-bottom: 10px;
 `;
 
 const Uni = styled.button`
-  width: ${(props) => props.width || '50%'};
+  width: ${(props) => props.width || '22%'};
   height: 100%;
   border: 0.2px solid var(--color-lightblue);
   border-radius: var(--round-borderradious);
@@ -60,15 +60,56 @@ const UnivBox = () => {
   return (
     <Container>
       <UniversitiesBox>
-        <University university={'외대'}></University>
+        <University university={'가톨릭대'}></University>
+        <University university={'건국대'}></University>
+        <University university={'경인여대'}></University>
         <University university={'경희대'}></University>
       </UniversitiesBox>
       <UniversitiesBox>
-        <University university={'시립대'}></University>
-        <University university={'한예종'}></University>
+        <University university={'고려대'}></University>
+        <University university={'광운대'}></University>
+        <University university={'국민대'}></University>
+        <University university={'덕성여대'}></University>
       </UniversitiesBox>
       <UniversitiesBox>
-        <University width={'100%'} university={'다른 학교애요'}></University>
+        <University university={'명지대'}></University>
+        <University university={'배화여대'}></University>
+        <University university={'삼육대'}></University>
+        <University university={'상명대'}></University>
+      </UniversitiesBox>
+      <UniversitiesBox>
+        <University university={'서강대'}></University>
+        <University university={'서경대'}></University>
+        <University university={'서울대'}></University>
+        <University university={'서울과기대'}></University>
+      </UniversitiesBox>
+      <UniversitiesBox>
+        <University university={'서울여대'}></University>
+        <University university={'서울시립대'}></University>
+        <University university={'성균관대'}></University>
+        <University university={'성신여대'}></University>
+      </UniversitiesBox>
+      <UniversitiesBox>
+        <University university={'세종대'}></University>
+        <University university={'숙명여대'}></University>
+        <University university={'숭실대'}></University>
+        <University university={'연세대'}></University>
+      </UniversitiesBox>
+
+      <UniversitiesBox>
+        <University university={'이화여대'}></University>
+        <University university={'중앙대'}></University>
+        <University university={'한국외대'}></University>
+        <University university={'한체대'}></University>
+      </UniversitiesBox>
+      <UniversitiesBox>
+        <University university={'한성대'}></University>
+        <University university={'한양대'}></University>
+        <University university={'한성여대'}></University>
+        <University university={'홍익대'}></University>
+      </UniversitiesBox>
+      <UniversitiesBox>
+        <University university={'기타 대학'}></University>
       </UniversitiesBox>
     </Container>
   );
