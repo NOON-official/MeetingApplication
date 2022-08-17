@@ -8,40 +8,40 @@ function DataPush() {
   const finalOurTeamInfo = { ...ourTeamInfo, userId: parseInt(id) };
   console.log(phonenumber);
   const postPhonenunber = { userId: parseInt(id), phone: phonenumber };
-
+  console.log('post', postPhonenunber);
   client
-    .post('/api/user/ourteam', finalOurTeamInfo, {
+    .post('api/auth/phone', postPhonenunber, {
       headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
     })
     .then((res) => {
-      const newBody = {
-        ...prefferedTeamInfo,
-        userId: parseInt(id),
-        ourteamId: res.data.data.ourteamId,
-      };
-
       client
-        .post('/api/user/preference', newBody, {
+        .post('/api/user/ourteam', finalOurTeamInfo, {
           headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
         })
         .then((res) => {
-          alert('완성');
+          const newBody = {
+            ...prefferedTeamInfo,
+            userId: parseInt(id),
+            ourteamId: res.data.data.ourteamId,
+          };
+
+          client
+            .post('/api/user/preference', newBody, {
+              headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
+            })
+            .then((res) => {
+              alert('완성');
+            })
+            .catch((err) => {
+              alert(err.response.data.message);
+            });
         })
         .catch((err) => {
           alert(err.response.data.message);
         });
     })
-    .catch((err) => {
-      alert(err.response.data.message);
-    });
+    .catch((err) => {});
 }
 export default DataPush();
-/*console.log('post', postPhonenunber);
-  client
-    .post('/auth/phone', postPhonenunber, {
-      headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
-    })
-    .then((res) => {
-      .catch((err) => {})
-      });
-      */
+/*
+ */
