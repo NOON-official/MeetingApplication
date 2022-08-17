@@ -3,7 +3,7 @@ import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { SubTitle, ButtonBox, SliderBox, Contents, ContentsAge, SelectButton, StyledText } from './StyledComponent';
-const buttonColor = '#C4D7E0';
+
 const PrettoSlider = styled(Slider)({
   color: '#F6EEEE',
   height: 8,

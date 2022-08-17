@@ -8,6 +8,8 @@ const MbtiButton = styled.button`
   border-radius: 34px;
   height: 30px;
   width: auto;
+  font-family: var(--font-family);
+  font-size: 16px;
   min-width: 60px;
   border: 0;
   background-color: ${(props) => props.background_color || 'transparent'};
@@ -66,7 +68,7 @@ const Mbtis = (props) => {
       top="30%"
       left="50%"
       bg="white"
-      height="40%"
+      height="42%"
       width="95%"
       border="14px"
       display="flex"

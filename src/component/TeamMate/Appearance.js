@@ -9,6 +9,8 @@ const FaceButton = styled.button`
   height: 30px;
   width: auto;
   min-width: 60px;
+  font-size: 16px;
+  font-family: var(--font-family);
   border: 0;
   background-color: ${(props) => props.background_color || 'transparent'};
   color: ${(props) => props.color || '#B79292'};
@@ -79,16 +81,16 @@ const Appearance = (props) => {
         외모
       </StyledText>
       <AppearanceContainer top="33%">
-        <Face face={'강아지'}></Face>
-        <Face face={'고양이'}></Face>
-        <Face face={'물고기'}></Face>
-        <Face face={'멍멍이'}></Face>
+        <Face face={'강아지상'}></Face>
+        <Face face={'고양이상'}></Face>
+        <Face face={'토끼상'}></Face>
+        <Face face={'공룡상'}></Face>
       </AppearanceContainer>
       <AppearanceContainer top="63%">
-        <Face face={'공룡상'}></Face>
-        <Face face={'밥상'}></Face>
-        <Face face={'최우수상'}></Face>
-        <Face face={'하기싫다'}></Face>
+        <Face face={'말상'}></Face>
+        <Face face={'원숭이상'}></Face>
+        <Face face={'여우상'}></Face>
+        <Face face={'쥐상'}></Face>
       </AppearanceContainer>
     </StyledDiv>
   );

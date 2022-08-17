@@ -10,11 +10,12 @@ const FashionButton = styled.button`
   width: auto;
   min-width: 60px;
   border: 0;
+  font-family: var(--font-family);
   background-color: ${(props) => props.background_color || 'transparent'};
   color: ${(props) => props.color || '#B79292'};
-  font-family: Pretendard;
+
   font-weight: 500;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 18px;
 `;
 const FashionContainer = styled.div`
@@ -73,7 +74,7 @@ const Fashion = (props) => {
 const Fashions = (props) => {
   return (
     <StyledDiv
-      top="73%"
+      top="75%"
       left="50%"
       bg="white"
       height="25%"

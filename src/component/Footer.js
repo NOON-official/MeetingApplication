@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { Line } from 'rc-progress';
-import { useSelector, useDispatch } from 'react-redux';
-import { PageNotCompleted } from './ErrorMessages/PageNotCompletedError';
-import { authentication } from './Firebase/firebase';
 
+import { useSelector } from 'react-redux';
+import { PageNotCompleted } from './ErrorMessages/PageNotCompletedError';
+
+import DataPush from './Elements/DataPush';
 const Container = styled.footer`
   position: fixed;
   bottom: 0%;
@@ -50,7 +50,7 @@ const FrontButton = styled.button`
   border-radius: 14px;
   height: 45px;
   width: ${(props) => props.width || '100%'};
-  max-width: 162px;
+  max-width: ${(props) => props.max_width || '162px'};
   color: ${(props) => props.color};
   border-color: transparent;
   font-family: var(--font);
@@ -70,27 +70,36 @@ const StyledFrontLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
+  width: ${(props) => props.width || '50%'};
   height: 100%;
   background-color: transparent;
 `;
-
 const Footer = () => {
   const [isDone, setIsDone] = useState(false);
   const frontButtonColor = React.useMemo(() => (isDone ? '#EB8888' : '#E9E9E9'), [isDone]);
   const fronButtonTextColor = React.useMemo(() => (isDone ? '#FFFFFF' : '#bbbbbb'), [isDone]);
   const [modalOpen, setModalOpen] = useState(false);
-
+  const [nextPath, setNextPath] = useState('/');
+  const [prevPath, setPrevPath] = useState('/');
+  const location = useLocation().pathname;
   const openModal = () => {
     setModalOpen(true);
   };
   const closeModal = () => {
     setModalOpen(false);
   };
-
-  const [nextPath, setNextPath] = useState('/');
-  const [prevPath, setPrevPath] = useState('/');
-  const location = useLocation().pathname;
+  const complete = () => {
+    setIsDone(true);
+  };
+  const uncompleted = () => {
+    setIsDone(false);
+  };
+  const nextPathSetting = (props) => {
+    setNextPath(props);
+  };
+  const prevPathSetting = (props) => {
+    setPrevPath(props);
+  };
 
   const jobs = useSelector((state) => state.jobs);
   const prefferedjobs = useSelector((state) => state.prefferedjobs);
@@ -100,28 +109,26 @@ const Footer = () => {
   const university = useSelector((state) => state.university);
   const characters = useSelector((state) => state.characters);
   const area = useSelector((state) => state.area);
-  const kakaoid = useSelector((state) => state.kakaoid);
   const day = useSelector((state) => state.day);
   const appearance = useSelector((state) => state.appearance);
   const mbti = useSelector((state) => state.mbti);
   const fashion = useSelector((state) => state.fashion);
   const introduction = useSelector((state) => state.introduction);
-  const privateinfoconfirm = useSelector((state) => state.privateinfoconfirm);
-  const signin = useSelector((state) => state.signin);
+
   const MovingPath = () => {
     if (location === '/apply/2') {
-      setIsDone(false);
+      uncompleted();
       if (jobs.length > 0) {
-        setIsDone(true);
-        setNextPath('/apply/3');
+        complete();
+        nextPathSetting('/apply/3');
       } else {
-        setNextPath('/apply/2');
+        prevPathSetting('/apply/2');
       }
-      setPrevPath('/');
+      prevPathSetting('/');
     } else if (location === '/apply/3') {
-      setIsDone(false);
+      uncompleted();
       if (university.length > 0) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/4');
       } else {
         setNextPath('/apply/3');
@@ -129,18 +136,18 @@ const Footer = () => {
 
       setPrevPath('/apply/2');
     } else if (location === '/apply/4') {
-      setIsDone(false);
+      uncompleted();
       if (area.length > 0) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/5');
       } else {
         setNextPath('/apply/4');
       }
       setPrevPath('/apply/3');
     } else if (location === '/apply/5') {
-      setIsDone(false);
+      uncompleted();
       if (day.length > 0) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/6');
       } else {
         setNextPath('/apply/5');
@@ -148,9 +155,9 @@ const Footer = () => {
 
       setPrevPath('/apply/4');
     } else if (location === '/apply/6') {
-      setIsDone(false);
+      uncompleted();
       if (mbti.length > 0 && fashion.length > 0 && appearance.length > 0) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/7');
       } else {
         setNextPath('/apply/6');
@@ -158,27 +165,27 @@ const Footer = () => {
 
       setPrevPath('/apply/5');
     } else if (location === '/apply/7') {
-      setIsDone(false);
+      uncompleted();
       if (characters.length > 0) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/8');
       } else {
         setNextPath('/apply/7');
       }
       setPrevPath('/apply/6');
     } else if (location === '/apply/8') {
-      setIsDone(false);
+      uncompleted();
       if (prefferedage.length > 0 && prefferedjobs.length > 0 && preffereduniversity.length > 0) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/9');
       } else {
         setNextPath('/apply/8');
       }
       setPrevPath('/apply/7');
     } else if (location === '/apply/9') {
-      setIsDone(false);
+      uncompleted();
       if (prefferedthing.length > 0) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/10');
       } else {
         setNextPath('/apply/9');
@@ -189,34 +196,38 @@ const Footer = () => {
       setPrevPath('/apply/9');
       setNextPath('/apply/11');
     } else if (location === '/apply/11') {
-      setIsDone(false);
+      uncompleted();
       if (introduction.length > 0) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/12');
       } else {
         setNextPath('/apply/11');
       }
       setPrevPath('/apply/10');
     } else if (location === '/apply/12') {
-      setIsDone(false);
+      uncompleted();
       if (privateinfoconfirm) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/13');
       } else {
         setNextPath('/apply/12');
       }
-      setPrevPath('/apply/11');
     } else if (location === '/apply/13') {
-      setIsDone(false);
+      uncompleted();
       if (signin) {
-        setIsDone(true);
+        complete();
         setNextPath('/apply/14');
       } else {
         setNextPath('/apply/13');
       }
-      setPrevPath('/apply/12');
     } else if (location === '/apply/14') {
-      setPrevPath('/apply/13');
+      uncompleted();
+      if (window.localStorage.getItem('access') != null) {
+        complete();
+        setNextPath('/');
+      } else {
+        setNextPath('/apply/14');
+      }
     }
   };
 
@@ -229,50 +240,77 @@ const Footer = () => {
         children={'구체적인 답변이 매칭률을 높여줍니다!'}
       ></PageNotCompleted>
       <MovingPath />
+      {location === '/apply/2' ||
+      location === '/apply/3' ||
+      location === '/apply/4' ||
+      location === '/apply/5' ||
+      location === '/apply/6' ||
+      location === '/apply/7' ||
+      location === '/apply/8' ||
+      location === '/apply/9' ||
+      location === '/apply/10' ||
+      location === '/apply/11' ? (
+        <BackAndFront>
+          <StyledBackLink to={prevPath} style={{ textDecoration: 'none' }}>
+            {' '}
+            <BackButton> 뒤로가기</BackButton>
+          </StyledBackLink>
 
-      <BackAndFront>
-        <StyledBackLink to={prevPath} style={{ textDecoration: 'none' }}>
-          {' '}
-          <BackButton> 뒤로가기</BackButton>
-        </StyledBackLink>
-
-        <StyledFrontLink
-          onClick={() => {
-            if (location === '/apply/2' && jobs.length === 0) {
-              openModal();
-            } else if (location === '/apply/3' && university.length === 0) {
-              openModal();
-            } else if (location === '/apply/4' && area.length === 0) {
-              openModal();
-            } else if (location === '/apply/5' && day.length === 0) {
-              openModal();
-            } else if (
-              location === '/apply/6' &&
-              (appearance.length === 0 || mbti.length === 0 || fashion.length === 0)
-            ) {
-              openModal();
-            } else if (location === '/apply/7' && characters.length === 0) {
-              openModal();
-            } else if (
-              location === '/apply/8' &&
-              (prefferedage.length === 0 || prefferedjobs.length === 0 || preffereduniversity.length === 0)
-            ) {
-              openModal();
-            } else if (location === '/apply/9' && prefferedthing.length === 0) {
-              openModal();
-            } else if (location === '/apply/11' && introduction.length === 0) {
-              openModal();
-            }
-          }}
-          to={nextPath}
-          style={{ textDecoration: 'none' }}
-        >
-          {' '}
-          <FrontButton bg={frontButtonColor} color={fronButtonTextColor}>
-            다음
-          </FrontButton>{' '}
-        </StyledFrontLink>
-      </BackAndFront>
+          <StyledFrontLink
+            onClick={() => {
+              if (location === '/apply/2' && jobs.length === 0) {
+                openModal();
+              } else if (location === '/apply/3' && university.length === 0) {
+                openModal();
+              } else if (location === '/apply/4' && area.length === 0) {
+                openModal();
+              } else if (location === '/apply/5' && day.length === 0) {
+                openModal();
+              } else if (
+                location === '/apply/6' &&
+                (appearance.length === 0 || mbti.length === 0 || fashion.length === 0)
+              ) {
+                openModal();
+              } else if (location === '/apply/7' && characters.length === 0) {
+                openModal();
+              } else if (
+                location === '/apply/8' &&
+                (prefferedage.length === 0 || prefferedjobs.length === 0 || preffereduniversity.length === 0)
+              ) {
+                openModal();
+              } else if (location === '/apply/9' && prefferedthing.length === 0) {
+                openModal();
+              } else if (location === '/apply/11' && introduction.length === 0) {
+                openModal();
+              }
+            }}
+            to={nextPath}
+            style={{ textDecoration: 'none' }}
+          >
+            {' '}
+            <FrontButton bg={frontButtonColor} color={fronButtonTextColor}>
+              다음
+            </FrontButton>{' '}
+          </StyledFrontLink>
+        </BackAndFront>
+      ) : (
+        <BackAndFront>
+          <StyledFrontLink to={nextPath} width="100%" style={{ textDecoration: 'none' }}>
+            <FrontButton
+              onClick={() => {
+                if (location === '/apply/14' && window.localStorage.getItem('access') != null) {
+                  DataPush();
+                }
+              }}
+              max_width="350px"
+              bg={frontButtonColor}
+              color={fronButtonTextColor}
+            >
+              다음
+            </FrontButton>{' '}
+          </StyledFrontLink>
+        </BackAndFront>
+      )}
     </Container>
   );
 };
