@@ -114,7 +114,8 @@ const Footer = () => {
   const mbti = useSelector((state) => state.mbti);
   const fashion = useSelector((state) => state.fashion);
   const introduction = useSelector((state) => state.introduction);
-
+  const privateinfoconfirm = useSelector((state) => state.privateinfoconfirm);
+  const signin = useSelector((state) => state.signin);
   const MovingPath = () => {
     if (location === '/apply/2') {
       uncompleted();
