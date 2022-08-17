@@ -31,13 +31,13 @@ const Body12 = () => {
   const mbti = useSelector((state) => state.mbti);
   const fashion = useSelector((state) => state.fashion);
   const intro = useSelector((state) => state.introduction);
-  const newintro = intro;
+  const vibe = useSelector((state) => state.prefferedthing);
 
   const body = {
     gender: gender,
     num: num,
     age: age,
-    intro: newintro,
+    intro: intro,
     job: jobs,
     university: university,
     role: characters,
@@ -51,12 +51,12 @@ const Body12 = () => {
     age: prefferedage,
     job: prefferedjobs,
     sameUniversity: 1,
-    vibe: ['대화'],
+    vibe: vibe,
   };
   const saveState = (key, state) => {
     try {
       const serializedState = JSON.stringify(state);
-      localStorage.setItem(key, serializedState);
+      sessionStorage.setItem(key, serializedState);
     } catch {}
   };
 

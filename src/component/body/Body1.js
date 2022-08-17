@@ -27,17 +27,26 @@ const Button = styled.button`
   letter-spacing: 1px;
 `;
 const StyledText = styled.text`
+  position: ${(props) => props.position};
   height: ${(props) => props.height};
   width: ${(props) => props.width};
-  font-size: 13px;
+  font-size: ${(props) => props.size || '13px'};
   line-height: 20px;
   align-items: center;
   justify-content: start;
+  top: ${(props) => props.top};
+  left: ${(props) => props.left};
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.font || 'var(--font-family)'};
 `;
 const Body1 = () => {
   return (
-    <Container height={'90%'} bg="#f8f3f3">
+    <Container height={'100%'} bg="#f8f3f3">
       <MobileBox>
+        <StyledText size="16px" position="absolute" top="5%" left="70%">
+          {' '}
+          <a href="https://furry-bank-197.notion.site/41d68ef2663145299e4726247eca28d3">서비스 설명</a>{' '}
+        </StyledText>
         <StyledDiv top="10.5%" left="27.5%" transform=" translate(-50%, 0)">
           <Bulb />
         </StyledDiv>
@@ -56,11 +65,32 @@ const Body1 = () => {
         <StyledDiv top="65%" left="50%" transform="translate(-50%, 0)">
           <MainText />
         </StyledDiv>
+
         <Link to="/apply/2" style={{ textDecoration: 'none' }}>
           <Button>
             <MainButtonText />
           </Button>
         </Link>
+
+        <StyledDiv
+          border_top="1px solid #D6D6D6"
+          top="90%"
+          left="50%"
+          height="10%"
+          width="100%"
+          transform="translate(-50%, 0)"
+        >
+          <StyledText font="Pretendard" color="#515151" position="absolute" left="10%" top="30%">
+            {' '}
+            이용약관
+          </StyledText>
+          <StyledText font="Pretendard" color="#515151" position="absolute" left="38%" top="30%">
+            개인정보처리방침
+          </StyledText>
+          <StyledText font="Pretendard" color="#515151" position="absolute" left="80%" top="30%">
+            <a href='https://furry-bank-197.notion.site/303cd8bbdefc41a3bf088b30a4c98f84"'> 공지사항</a>
+          </StyledText>
+        </StyledDiv>
       </MobileBox>
     </Container>
   );

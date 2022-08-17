@@ -27,17 +27,17 @@ const StyledInput = styled.input`
 const Body13 = () => {
   const saveState = (key, state) => {
     try {
-      const serializedState = JSON.stringify(state);
-      localStorage.setItem(key, serializedState);
+      const serializedState = state;
+      sessionStorage.setItem(key, serializedState);
     } catch {}
   };
   const loadState = (key) => {
     try {
-      const serializedState = localStorage.getItem(key);
+      const serializedState = sessionStorage.getItem(key);
       if (serializedState === null) {
         return undefined;
       }
-      return JSON.parse(serializedState);
+      return serializedState;
     } catch (err) {
       return undefined;
     }

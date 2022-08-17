@@ -18,20 +18,20 @@ const Moderatoer = () => {
         <ModeratorCharacter />
       </StyledDiv>
       <StyledText top="100px" weight="400" size="34px" left="43%" line="32.2px">
-        비주얼
+        사회자
       </StyledText>
-      <StyledText top="140px" font="Pretend" fontWeight="bold" size="15px" color="#777777" line="18px" left="20%">
-        존재만으로 분위기를 녹이는 당신!
+      <StyledText top="140px" font="Pretend" fontWeight="bold" size="15px" color="#777777" line="16px" left="0">
+        어색한 분위기를 풀어주는 당신은 미팅의 유재석!
       </StyledText>
-      <StyledText top="158px" font="Pretend" fontWeight="bold" size="15px" color="#777777" line="18px" left="23%">
-        바라만 보고 있어도 웃음이 나요
+      <StyledText top="158px" font="Pretend" fontWeight="bold" size="15px" color="#777777" line="16px" left="10%">
+        당신이 없다면 미팅이 진행되지 않아요
       </StyledText>
       <StyledDiv width="100%" left="50%" top="191px" height="66px" bg="#F1ECEC">
         <StyledText top="15px" font="Pretendard" fontWeight="bold" line="15.6px" size="16px" left="45%" color="#F49393">
           주의!
         </StyledText>
-        <StyledText top="36px" font="Pretendard" fontWeight="bold" line="15.6px" size="16px" left="32%" color="#1A1A1A">
-          주위에 물어볼 것!
+        <StyledText top="36px" font="Pretendard" fontWeight="bold" line="15.6px" size="14px" left="5%" color="#1A1A1A">
+          진행만 하다가 숨겨진 인연을 놓칠 수 있어요!
         </StyledText>
       </StyledDiv>
     </StyledDiv>

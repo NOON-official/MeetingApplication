@@ -19,10 +19,9 @@ const MbtiContainer = styled.div`
   display: flex;
   width: 100%;
   flex-direction: row;
-  justify-content: ${(props) => props.location || 'flex-start'};
+  justify-content: ${(props) => props.location || 'space-around'};
   position: absolute;
   top: ${(props) => props.top};
-  margin-left: 10px;
 `;
 const SelectedBox = styled.div`
   display: flex;

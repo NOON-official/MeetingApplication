@@ -3,17 +3,7 @@ import { StyledDiv } from '../Elements/StyledComponent';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as React from 'react';
-/*const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 30%;
-  left: 50%;
-  transform: translate(-50%, 0);
-  position: absolute;
-  top: 20%;
-  width: 95%;
-  max-width: 375px;
-`*/
+
 const UniversitiesBox = styled.div`
   width: 100%;
   height: 20%;
@@ -38,41 +28,35 @@ const Uni = styled.button`
 const University = (props) => {
   const dispatch = useDispatch();
   const universities = useSelector((state) => state.preffereduniversity);
-  const exist = React.useMemo(() => universities.includes(props.university), [universities]);
-  const bgcolor = React.useMemo(() => (exist ? '#EB8888' : '#F6EEEE;'), [exist]);
-  const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist]);
 
+  const zerobgcolor = React.useMemo(() => (universities == 0 ? '#EB8888' : '#F6EEEE;'), [universities]);
+  const zerofontColor = React.useMemo(() => (universities == 0 ? 'white' : '#B79292'), [universities]);
+  const onebgcolor = React.useMemo(() => (universities == 1 ? '#EB8888' : '#F6EEEE;'), [universities]);
+  const onefontColor = React.useMemo(() => (universities == 1 ? 'white' : '#B79292'), [universities]);
   const OnUniversityClick = React.useCallback(() => {
-    if (exist) {
-      dispatch({
-        type: 'PREFFEREDUNIVERSITIES_DELETE',
-        payload: props.university,
-      });
-    } else {
-      dispatch({ type: 'PREFFEREDUNIVERSITIES', payload: props.university });
-    }
-  }, [exist, props.university, universities]);
-
-  return (
-    <Uni color={fontColor} background_color={bgcolor} onClick={OnUniversityClick}>
-      {props.university}
-    </Uni>
-  );
+    dispatch({ type: 'PREFFEREDUNIVERSITIES', payload: props.reduxnum });
+  }, [dispatch]);
+  if (props.reduxnum == 0) {
+    return (
+      <Uni color={zerofontColor} background_color={zerobgcolor} onClick={OnUniversityClick}>
+        {props.university}
+      </Uni>
+    );
+  } else {
+    return (
+      <Uni color={onefontColor} background_color={onebgcolor} onClick={OnUniversityClick}>
+        {props.university}
+      </Uni>
+    );
+  }
 };
 
 const UnivBox = () => {
   return (
     <StyledDiv width="100%" left="50%" height="45%" top="60%">
       <UniversitiesBox>
-        <University university={'외대'}></University>
-        <University university={'경희대'}></University>
-      </UniversitiesBox>
-      <UniversitiesBox>
-        <University university={'시립대'}></University>
-        <University university={'한예종'}></University>
-      </UniversitiesBox>
-      <UniversitiesBox>
-        <University width={'100%'} university={'상관 없어요'}></University>
+        <University reduxnum={0} university={'같은 학교는 싫어요'}></University>
+        <University reduxnum={1} university={'상관 없어요'}></University>
       </UniversitiesBox>
     </StyledDiv>
   );

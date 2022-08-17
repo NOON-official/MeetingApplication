@@ -2,10 +2,8 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
 import { useSelector } from 'react-redux';
 import { PageNotCompleted } from './ErrorMessages/PageNotCompletedError';
-
 import DataPush from './Elements/DataPush';
 const Container = styled.footer`
   position: fixed;
@@ -176,7 +174,7 @@ const Footer = () => {
       setPrevPath('/apply/6');
     } else if (location === '/apply/8') {
       uncompleted();
-      if (prefferedage.length > 0 && prefferedjobs.length > 0 && preffereduniversity.length > 0) {
+      if (prefferedage.length > 0 && prefferedjobs.length > 0) {
         complete();
         setNextPath('/apply/9');
       } else {
@@ -223,7 +221,7 @@ const Footer = () => {
       }
     } else if (location === '/apply/14') {
       uncompleted();
-      if (window.localStorage.getItem('access') != null) {
+      if (window.sessionStorage.getItem('access') != null) {
         complete();
         setNextPath('/');
       } else {
@@ -274,10 +272,7 @@ const Footer = () => {
                 openModal();
               } else if (location === '/apply/7' && characters.length === 0) {
                 openModal();
-              } else if (
-                location === '/apply/8' &&
-                (prefferedage.length === 0 || prefferedjobs.length === 0 || preffereduniversity.length === 0)
-              ) {
+              } else if (location === '/apply/8' && (prefferedage.length === 0 || prefferedjobs.length === 0)) {
                 openModal();
               } else if (location === '/apply/9' && prefferedthing.length === 0) {
                 openModal();
@@ -299,15 +294,15 @@ const Footer = () => {
           <StyledFrontLink to={nextPath} width="100%" style={{ textDecoration: 'none' }}>
             <FrontButton
               onClick={() => {
-                if (location === '/apply/14' && window.localStorage.getItem('access') != null) {
-                  DataPush();
+                if (location === '/apply/14' && window.sessionStorage.getItem('access') != null) {
+                  return DataPush();
                 }
               }}
               max_width="350px"
               bg={frontButtonColor}
               color={fronButtonTextColor}
             >
-              다음
+              제출하기
             </FrontButton>{' '}
           </StyledFrontLink>
         </BackAndFront>
