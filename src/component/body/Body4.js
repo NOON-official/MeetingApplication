@@ -11,7 +11,7 @@ const Body4 = () => {
           <StyledText position="absolute" color="#F49393" size="35px" left="10px">
             미팅 가능한 지역
           </StyledText>
-          <StyledText position=" absolute" size="35px" left="170 px">
+          <StyledText position=" absolute" size="35px" left="170px">
             을 말해주세요
           </StyledText>
         </StyledDiv>

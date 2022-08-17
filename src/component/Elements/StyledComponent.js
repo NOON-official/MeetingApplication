@@ -25,6 +25,7 @@ export const StyledDiv = styled.div`
   align-items: ${(props) => props.align_item};
   margin: ${(props) => props.margin};
   text-align: ${(props) => props.text_align};
+  border-top: ${(props) => props.border_top};
 `;
 
 export const SubTitle = styled.div`

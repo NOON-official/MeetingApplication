@@ -16,7 +16,7 @@ const initialState = {
   kakaoid: '',
   prefferedjobs: [],
   prefferedage: [20, 25],
-  preffereduniversity: [],
+  preffereduniversity: 1,
   prefferedthing: [],
   signin: false,
   privateinfoconfirm: false,
@@ -89,11 +89,8 @@ const reducer = (state = initialState, action) => {
     case 'PREFFEREDAGE':
       return { ...state, prefferedage: action.payload };
     case 'PREFFEREDUNIVERSITIES':
-      const newPrefferedUniv = action.payload;
-      return { ...state, preffereduniversity: [...state.preffereduniversity, newPrefferedUniv] };
-    case 'PREFFEREDUNIVERSITIES_DELETE':
-      const deletePrefferedUniv = state.preffereduniversity.filter((value) => value !== action.payload);
-      return { ...state, preffereduniversity: deletePrefferedUniv };
+      return { ...state, preffereduniversity: action.payload };
+
     case 'SET_PHONE':
       return { ...state, phone: action.payload };
     case 'SET_INTRODUCTION':

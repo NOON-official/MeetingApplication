@@ -55,15 +55,15 @@ const AreaContainer = () => {
       </AreaBox>
       <AreaBox>
         <Areas area="신촌"></Areas>
-        <Areas area="의왕"></Areas>
-        <Areas area="군포"></Areas>
-        <Areas area="언양"></Areas>
+        <Areas area="잠실"></Areas>
+        <Areas area="이태원"></Areas>
+        <Areas area="수원"></Areas>
       </AreaBox>
       <AreaBox>
-        <Areas area="동대문"></Areas>
-        <Areas area="서대문"></Areas>
-        <Areas area="남대문"></Areas>
-        <Areas area="북대문"></Areas>
+        <Areas area="용인"></Areas>
+        <Areas area="안양"></Areas>
+        <Areas area="인첱"></Areas>
+        <Areas area="상관없음"></Areas>
       </AreaBox>
     </StyledDiv>
   );

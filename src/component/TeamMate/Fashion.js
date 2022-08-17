@@ -22,10 +22,9 @@ const FashionContainer = styled.div`
   display: flex;
   width: 100%;
   flex-direction: row;
-  justify-content: ${(props) => props.location || 'flex-start'};
+  justify-content: ${(props) => props.location || 'space-around'};
   position: absolute;
   top: ${(props) => props.top};
-  margin-left: 10px;
 `;
 const SelectedBox = styled.div`
   display: flex;
@@ -90,13 +89,14 @@ const Fashions = (props) => {
       </StyledText>
       <FashionContainer top="33%">
         <Fashion fashion={'스트릿'}></Fashion>
-        <Fashion fashion={'페미닌'}></Fashion>
+        <Fashion fashion={'스포티'}></Fashion>
         <Fashion fashion={'러블리'}></Fashion>
         <Fashion fashion={'클래식'}></Fashion>
       </FashionContainer>
       <FashionContainer top="63%">
         <Fashion fashion={'캐주얼'}></Fashion>
         <Fashion fashion={'베이직'}></Fashion>
+        <Fashion fashion={'걸리쉬'}></Fashion>
         <Fashion fashion={'없음'}></Fashion>
       </FashionContainer>
     </StyledDiv>

@@ -32,7 +32,10 @@
 .bright {
   -webkit-filter: brightness(0.5);
 }
-
+a {
+  text-decoration: none;
+  color:#515151
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

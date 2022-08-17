@@ -143,12 +143,7 @@ const PrefferedInfo = () => {
           기피학교
         </StyledText>
         <StyledText top="72%" left="25%" color="#777777" fontWeight={'400'}>
-          {university.map((data, index) => {
-            if (index + 1 != university.length) {
-              return `${data}, `;
-            } else return `${data} `;
-          })}
-          제외
+          {university == 0 ? '같은학교는 싫어요' : '상관없어요'}
         </StyledText>
       </StyledDiv>
     </StyledDiv>

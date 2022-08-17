@@ -30,7 +30,7 @@ const Uni = styled.button`
   margin: 10px;
   max-height: 200px;
   font-family: var(--font-family);
-  font-size: 20px;
+  font-size: ${(props) => props.size || '20px'};
   color: ${(props) => props.color || 'black'};
   background-color: ${(props) => props.background_color || 'transparent'};
 `;
@@ -50,7 +50,7 @@ const University = (props) => {
     }
   }, [exist, props.university, universities]);
   return (
-    <Uni color={fontColor} background_color={bgcolor} onClick={OnUniversityClick} width={props.width}>
+    <Uni size={props.size} color={fontColor} background_color={bgcolor} onClick={OnUniversityClick} width={props.width}>
       {props.university}
     </Uni>
   );
@@ -81,7 +81,7 @@ const UnivBox = () => {
         <University university={'서강대'}></University>
         <University university={'서경대'}></University>
         <University university={'서울대'}></University>
-        <University university={'서울과기대'}></University>
+        <University size="12px" university={'서울과기대'}></University>
       </UniversitiesBox>
       <UniversitiesBox>
         <University university={'서울여대'}></University>
