@@ -25,10 +25,28 @@ const StyledInput = styled.input`
 `;
 
 const Body13 = () => {
+  const saveState = (key, state) => {
+    try {
+      const serializedState = JSON.stringify(state);
+      localStorage.setItem(key, serializedState);
+    } catch {}
+  };
+  const loadState = (key) => {
+    try {
+      const serializedState = localStorage.getItem(key);
+      if (serializedState === null) {
+        return undefined;
+      }
+      return JSON.parse(serializedState);
+    } catch (err) {
+      return undefined;
+    }
+  };
   const dispatch = useDispatch();
   const [zero, setZero] = useState('');
   const [phonenumFirst, setPhoneNumFirst] = useState('');
   const [phoneNumSecond, setPhonenumSecond] = useState('');
+
   const phone = useSelector((state) => state.phone);
   const [signin, setSignin] = useState(false);
   useEffect(() => {
@@ -51,17 +69,15 @@ const Body13 = () => {
       setZero(e.target.value);
     }
   };
-  const onPhoneNumSubmit = React.useCallback(() => {
+  const onPhoneNumSubmit = () => {
     if (!submitAble) {
       alert('번호입력');
     } else {
       let phoneNumber = zero.concat(phonenumFirst.concat(phoneNumSecond));
-      console.log(phoneNumber);
-      setAuthModalOpen(true);
-      dispatch({ type: 'SET_PHONE', payload: phoneNumber });
+      saveState('phone', phoneNumber);
       requestOTP();
     }
-  }, [zero, phonenumFirst, phoneNumSecond, phone]);
+  };
 
   const generateRecaptcha = () => {
     window.recaptchaVerifier = new RecaptchaVerifier(
@@ -75,12 +91,15 @@ const Body13 = () => {
       authentication,
     );
   };
-  const requestOTP = () => {
+  const requestOTP = React.useCallback(() => {
     authentication.languageCode = 'Ko';
+    const phone = loadState('phone');
     if (phone.length >= 10) {
-      console.log(phone);
-      alert('인증번호가 전송되었습니다.');
       generateRecaptcha();
+
+      alert('인증번호가 전송되었습니다.');
+      setAuthModalOpen(true);
+
       let appVerifier = window.recaptchaVerifier;
       signInWithPhoneNumber(authentication, countryCode + phone, appVerifier)
         .then((confirmationResult) => {
@@ -92,9 +111,11 @@ const Body13 = () => {
           console.log(error);
         });
     } else {
-      alert('올바른 번호를 입력하셈');
+      console.log('error', phone);
+      alert('올바른 번호를 입력하세요!');
     }
-  };
+  }, [phone]);
+
   const PhoneAuthInput = (e) => {
     let otp = e.target.value;
     if (otp.length === 6) {

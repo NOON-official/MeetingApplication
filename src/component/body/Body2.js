@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { GenderSelect, NumberSelect, AgeSelect, JobSelect } from '../Elements/GenderSelec';
-import { ReactComponent as PageTitle } from '../../Asset/page2/Page2Title.svg';
+
 import { ReactComponent as Character } from '../../Asset/page2/Character.svg';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
 const TeamSelectBox = styled.div`

@@ -8,7 +8,7 @@ const DayButton = styled.input`
   border-radius: 14px;
   background-color: ${(props) => props.background_color || 'transparent'}!important;
   color: ${(props) => props.color} !important;
-  border: 0.3px solid #c9c9c9;
+  border: 0;
   width: 30%;
   font-weight: 400;
   font-size: 20px;
