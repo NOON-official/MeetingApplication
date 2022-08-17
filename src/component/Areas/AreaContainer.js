@@ -54,7 +54,7 @@ const AreaContainer = () => {
         <Areas area="건대"></Areas>
       </AreaBox>
       <AreaBox>
-        <Areas area="안양"></Areas>
+        <Areas area="신촌"></Areas>
         <Areas area="의왕"></Areas>
         <Areas area="군포"></Areas>
         <Areas area="언양"></Areas>

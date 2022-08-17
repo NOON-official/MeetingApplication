@@ -11,8 +11,55 @@ const Body12 = () => {
   useEffect(() => {
     dispatch({ type: 'SET_PRIVATEINFOCONFIRM', payload: infoConfirm });
   }, [infoConfirm]);
+
   const buttonColor = React.useMemo(() => (infoConfirm ? '#EB8888' : '#EDEDED'), [infoConfirm]);
   const buttonFontColor = React.useMemo(() => (infoConfirm ? '#FFFFFF' : '#BBBBBB'), [infoConfirm]);
+
+  const gender = useSelector((state) => state.gender);
+  const num = useSelector((state) => state.num);
+  const age = useSelector((state) => state.age);
+  const jobs = useSelector((state) => state.jobs);
+  const prefferedjobs = useSelector((state) => state.prefferedjobs);
+  const prefferedage = useSelector((state) => state.prefferedage);
+
+  const university = useSelector((state) => state.university);
+  const characters = useSelector((state) => state.characters);
+  const area = useSelector((state) => state.area);
+
+  const day = useSelector((state) => state.day);
+  const appearance = useSelector((state) => state.appearance);
+  const mbti = useSelector((state) => state.mbti);
+  const fashion = useSelector((state) => state.fashion);
+  const intro = useSelector((state) => state.introduction);
+  const newintro = intro;
+
+  const body = {
+    gender: gender,
+    num: num,
+    age: age,
+    intro: newintro,
+    job: jobs,
+    university: university,
+    role: characters,
+    area: area,
+    day: day,
+    appearance: appearance,
+    mbti: mbti,
+    fashion: fashion,
+  };
+  const prefferenceBody = {
+    age: prefferedage,
+    job: prefferedjobs,
+    sameUniversity: 1,
+    vibe: ['대화'],
+  };
+  const saveState = (key, state) => {
+    try {
+      const serializedState = JSON.stringify(state);
+      localStorage.setItem(key, serializedState);
+    } catch {}
+  };
+
   return (
     <Container>
       <MobileBox>
@@ -37,7 +84,11 @@ const Body12 = () => {
           left="50%"
           bg={buttonColor}
           border="10px"
-          onClick={() => setInfoConfirm(!infoConfirm)}
+          onClick={() => {
+            setInfoConfirm(!infoConfirm);
+            saveState('ourTeam', body);
+            saveState('prefferedTeam', prefferenceBody);
+          }}
         >
           {' '}
           <StyledText color={buttonFontColor} size="24px">
