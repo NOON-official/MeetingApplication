@@ -12,8 +12,8 @@ function DataPush() {
       console.log('response', res);
       const newBody = {
         ...prefferedTeamInfo,
-        userId: rwindow.localStorage.getItem('id'),
-        ourteanId: res.data.data.ourteamId,
+        userId: window.localStorage.getItem('id'),
+        ourteamId: res.data.data.ourteamId,
       };
 
       client
