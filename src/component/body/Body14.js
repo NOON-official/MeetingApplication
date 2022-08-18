@@ -5,7 +5,6 @@ import { ReactComponent as StarYellow } from '../../Asset/finalPage/2.svg';
 import { ReactComponent as Heart } from '../../Asset/finalPage/3.svg';
 import { ReactComponent as Character } from '../../Asset/finalPage/4.svg';
 import KakaoLogin from '../Auth/KakaoLogin';
-import DataPush from '../Elements/DataPush';
 
 const Body14 = () => {
   //데이터 보내기*/

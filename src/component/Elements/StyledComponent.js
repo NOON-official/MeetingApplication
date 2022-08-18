@@ -130,7 +130,7 @@ export const StyledText = styled.text`
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   color: ${(props) => props.color};
-  font-size: ${(props) => props.size};
+  font-size: ${(props) => props.size || '18px'};
   font-family: ${(props) => props.font || 'var(--font-family)'};
   font-style: normal;
   line-height: ${(props) => props.line};

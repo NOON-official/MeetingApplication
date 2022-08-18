@@ -19,18 +19,18 @@ const Body7 = () => {
           <StyledText position="absolute" size="35px" left="10px" top="30px">
             알려주세요!
           </StyledText>
-          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="160px" top="45px">
+          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="160px" top="45px">
             6/9
           </SubTitle>
         </StyledDiv>
         <ButtonBox top={'18%'}>
-          <Character character={'비주얼'}>비주얼</Character>
-          <Character character={'사회자'}>사회자</Character>
-          <Character character={'개그맨'}>개그맨</Character>
-          <Character character={'깍두기'}>깍두기</Character>
+          <Character character={'비주얼'} />
+          <Character character={'사회자'} />
+          <Character character={'개그맨'} />
+          <Character character={'깍두기'} />
         </ButtonBox>
         <StyledDiv top="30%" width="95%" height="70%" left="50%" overflow="scroll">
-          <StyledDiv top="10%" width="95%" height="1108px" left="50%">
+          <StyledDiv width="95%" height="200%" left="50%">
             <Face />
             <Moderatoer />
             <Comedian />

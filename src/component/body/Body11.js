@@ -34,7 +34,7 @@ const Body11 = () => {
           <StyledText position="absolute" size="35px" color="#F49393" left="10px" top="30px">
             마지막 한 줄 어필
           </StyledText>
-          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="60%" top="35%">
+          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="60%" top="35%">
             9/9
           </SubTitle>
           <StyledText position="absolute" size="13px" font="Pretendard" color="#AAAAAA" left="10px" top="75px">

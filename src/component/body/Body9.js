@@ -17,11 +17,11 @@ const Body9 = () => {
           <StyledText position="absolute" size="35px" left="10px" top="30px">
             어땠으면 좋겠어요?
           </StyledText>
-          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="220px" top="45px">
+          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="220px" top="45px">
             8/9
           </SubTitle>
         </StyledDiv>
-        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="25%" top="18%">
+        <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="21%" top="18%">
           중복 선택이 가능해요
         </SubTitle>
         <Wants></Wants>

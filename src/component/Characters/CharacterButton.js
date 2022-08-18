@@ -6,8 +6,11 @@ import { ReactComponent as Comedian } from '../../Asset/page7/Comedian.svg';
 import { ReactComponent as Moderator } from '../../Asset/page7/Moderator.svg';
 import { ReactComponent as Face } from '../../Asset/page7/Face.svg';
 import { ReactComponent as Nerd } from '../../Asset/page7/Nerd.svg';
+import { ReactComponent as ComedianDark } from '../../Asset/page7/ComedianDark.svg';
+import { ReactComponent as ModeratorDark } from '../../Asset/page7/ModeratorDark.svg';
+import { ReactComponent as FaceDark } from '../../Asset/page7/FaceDark.svg';
+import { ReactComponent as NerdDark } from '../../Asset/page7/NerdDark.svg';
 
-const buttonColor = '#C4D7E0';
 const CharacterButton = styled.button`
   font-family: var(--font-family);
   font-size: 20px;
@@ -30,25 +33,25 @@ export const Character = (props) => {
         if (exist) {
           return <Comedian />;
         } else {
-          return <Comedian class="bright" />;
+          return <ComedianDark />;
         }
       } else if (props.character == '사회자') {
         if (exist) {
           return <Moderator />;
         } else {
-          return <Moderator class="bright" />;
+          return <ModeratorDark />;
         }
       } else if (props.character == '비주얼') {
         if (exist) {
           return <Face />;
         } else {
-          return <Face class="bright" />;
+          return <FaceDark />;
         }
       } else if (props.character == '깍두기') {
         if (exist) {
           return <Nerd />;
         } else {
-          return <Nerd class="bright" />;
+          return <NerdDark />;
         }
       }
     },
@@ -56,13 +59,12 @@ export const Character = (props) => {
   );
 
   const OnCharacterClick = React.useCallback(() => {
-    console.log('exist', exist);
     if (exist) {
       dispatch({ type: 'CHARACTERS_DELETE', payload: props.character });
     } else {
       if (characters.length < num) dispatch({ type: 'CHARACTERS', payload: props.character });
     }
-  }, [exist, props.character, characters]);
+  }, [exist, props.character, characters, num]);
 
   return (
     <StyledDiv position="static" transform="0" onClick={OnCharacterClick}>
