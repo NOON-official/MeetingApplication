@@ -6,6 +6,7 @@
   height: 40vmin;
   pointer-events: none;
 }
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard.css");
 @font-face {
   font-family: 'Nanum JungHagSaeng';
   src: url('./font/nanumfont.woff')format('woff');
@@ -33,6 +34,7 @@
 a {
   text-decoration: none;
   color:#515151
+  
 }
 .App-header {
   background-color: #282c34;
@@ -87,6 +89,7 @@ a {
   outline: none;
   cursor: pointer;
   border: 0;
+  
 }
 
 .modal > section {

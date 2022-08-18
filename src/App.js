@@ -13,6 +13,7 @@ import Body11 from './component/body/Body11';
 import Body12 from './component/body/Body12';
 import Body13 from './component/body/Body13';
 import Body14 from './component/body/Body14';
+import Body15 from './component/body/Body15';
 import KakaoLogin from './component/Auth/KakaoLogin';
 import KakaoLoginCallback from './component/Auth/KakaoLoginCallback';
 import Footer from './component/Footer';
@@ -146,6 +147,14 @@ function App() {
               <PublicRoute restricted={true}>
                 <Body14 />
               </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/15"
+            element={
+              <PrivateRoute restricted={false}>
+                <Body15 />
+              </PrivateRoute>
             }
           />
           <Route

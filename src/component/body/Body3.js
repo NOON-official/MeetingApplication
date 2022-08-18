@@ -14,11 +14,11 @@ const Body3 = () => {
           <StyledText position=" absolute" size="35px" left="135px">
             는?
           </StyledText>
-          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="55%" top="10%">
+          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="55%" top="10%">
             2/9
           </SubTitle>
         </StyledDiv>
-        <SubTitle size="13px" font="pretendard" color="#AAAAAA" left="32%" top="12%">
+        <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="30%" top="12%">
           팀원들의 모든 학교를 말해주세요
         </SubTitle>
         <UnivBox></UnivBox>
@@ -27,7 +27,7 @@ const Body3 = () => {
           direction="row"
           justify_content="flex-end"
           align_item="flex-end"
-          top="80%"
+          top="90%"
           height="auto"
           width="100%"
           left="40%"

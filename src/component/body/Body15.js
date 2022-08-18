@@ -4,11 +4,9 @@ import { ReactComponent as Star } from '../../Asset/finalPage/1.svg';
 import { ReactComponent as StarYellow } from '../../Asset/finalPage/2.svg';
 import { ReactComponent as Heart } from '../../Asset/finalPage/3.svg';
 import { ReactComponent as Character } from '../../Asset/finalPage/4.svg';
-import KakaoLogin from '../Auth/KakaoLogin';
-
-const Body14 = () => {
-  //데이터 보내기*/
-
+import { ReactComponent as Text } from '../../Asset/page15/Text.svg';
+import { ReactComponent as SubText } from '../../Asset/page15/SubText.svg';
+const Body15 = () => {
   return (
     <Container>
       <MobileBox>
@@ -26,22 +24,14 @@ const Body14 = () => {
             <Character />
           </StyledDiv>
         </StyledDiv>
-        <StyledDiv top="65%" width="90%" height="10%" left="50%">
-          <StyledText position="absolute" size="25px" left="15%">
-            카카오톡으로 매칭 결과를 보내드려요.
-          </StyledText>
+        <StyledDiv top="80%" left="50%">
+          <Text />
         </StyledDiv>
-        {window.sessionStorage.getItem('access') == null ? (
-          <StyledDiv height="80px" top="90%" width="200px" left="50%">
-            <KakaoLogin />
-          </StyledDiv>
-        ) : (
-          <StyledDiv height="80px" top="90%" width="200px" left="50%">
-            매칭진행중인 유저입니다
-          </StyledDiv>
-        )}
+        <StyledDiv top="65%" left="50%">
+          <SubText />
+        </StyledDiv>
       </MobileBox>
     </Container>
   );
 };
-export default Body14;
+export default Body15;
