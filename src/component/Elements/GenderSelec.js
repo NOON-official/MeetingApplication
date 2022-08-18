@@ -23,22 +23,16 @@ const PrettoSlider = styled(Slider)({
     },
   },
   '& .MuiSlider-valueLabel': {
-    lineHeight: 1.2,
-    fontSize: 12,
-    background: 'unset',
-    padding: 0,
-    width: 32,
-    height: 32,
-    borderRadius: '50% 50% 50% 0',
-    backgroundColor: '#EB8888',
-    transformOrigin: 'bottom left',
-    transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
-    '&:before': { display: 'none' },
-    '&.MuiSlider-valueLabelOpen': {
-      transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
+    fontSize: 16,
+    fontWeight: '700',
+    top: 55,
+    backgroundColor: 'unset',
+    color: '#EB8888',
+    '&:before': {
+      display: 'none',
     },
-    '& > *': {
-      transform: 'rotate(45deg)',
+    '& *': {
+      background: 'transparent',
     },
   },
 });
@@ -148,6 +142,7 @@ export const AgeSelect = () => {
       dispatch({ type: 'AGE', payload: newValue });
     }
   };
+
   return (
     <ContentsAge>
       <SubTitle weight="500" font="Pretendard" top="53%" left="8%">
