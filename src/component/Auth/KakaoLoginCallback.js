@@ -31,7 +31,7 @@ const KakaoLoginCallback = (props) => {
           window.sessionStorage.setItem('access', res.data.data.user.accessToken);
           window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
           window.sessionStorage.setItem('id', res.data.data.user.id);
-          setIsLogin(true);
+          setIsLogin((state) => !state);
         })
         .catch((err) => {
           console.log(err);
@@ -45,7 +45,7 @@ const KakaoLoginCallback = (props) => {
       }
       callDataPush() // 매칭 정보 서버에 저장
         .then(() => {
-          // setIsMatching(true);
+          // setIsMatching((state) => !state);
           // if (IsMatching) dispatch({ type: 'SET_IS_MATCHING', payload: props.IsMatching });
           window.location.replace('/apply/15');
         })
