@@ -66,7 +66,7 @@ const Job = (props) => {
 export const JobSelect = () => {
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="5%" left="5%">
+      <SubTitle weigth="500" font="Pretendard" top="5%" left="5%">
         {' '}
         직업
       </SubTitle>
@@ -89,7 +89,7 @@ export const AgeSelect = () => {
   };
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="30%" left="10%">
+      <SubTitle weigth="500" font="Pretendard" top="30%" left="10%">
         평균나이
       </SubTitle>
       <SliderBox top="40%">
@@ -108,7 +108,7 @@ export const AgeSelect = () => {
 export const UnivSelect = () => {
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="60%" left="10%">
+      <SubTitle weigth="500" font="Pretendard" top="60%" left="10%">
         기피 학교
       </SubTitle>
       <UnivBox />

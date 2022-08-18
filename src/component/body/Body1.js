@@ -34,6 +34,7 @@ const StyledText = styled.text`
   line-height: 20px;
   align-items: center;
   justify-content: start;
+  font-weight: 400;
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   color: ${(props) => props.color};
@@ -45,7 +46,7 @@ const Body1 = () => {
       <MobileBox>
         <StyledText size="16px" position="absolute" top="5%" left="70%">
           {' '}
-          <a href="https://furry-bank-197.notion.site/41d68ef2663145299e4726247eca28d3">서비스 설명</a>{' '}
+          <a href="https://furry-bank-197.notion.site/41d68ef2663145299e4726247eca28d3">서비스 설명 & 미팅꿀팁</a>{' '}
         </StyledText>
         <StyledDiv top="10.5%" left="10%" transform=" translate(-50%, 0)">
           <Bulb />
@@ -84,17 +85,17 @@ const Body1 = () => {
           justify_content="space-around"
           align_item="center"
         >
-          <StyledText position="static" font="pretendard" color="#515151">
+          <StyledText position="static" font="Pretendard" color="#515151">
             {' '}
             <a href="https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7"> 이용약관</a>
           </StyledText>
-          <StyledText font="pretendard" position="static" color="#515151">
+          <StyledText font="Pretendard" position="static" color="#515151">
             <a href="https://furry-bank-197.notion.site/c83f4127e3c54b7080c333aa31a4cc03"> 개인정보처리방침</a>
           </StyledText>
-          <StyledText font="pretendard" color="#515151" position="static">
+          <StyledText font="Pretendard" color="#515151" position="static">
             <a href="https://furry-bank-197.notion.site/303cd8bbdefc41a3bf088b30a4c98f84"> 공지사항</a>
           </StyledText>
-          <StyledText font="pretendard" color="#515151" position="static">
+          <StyledText font="Pretendard" color="#515151" position="static">
             <a href="https://furry-bank-197.notion.site/aaa47097d9b24192a739a3f7aafa8556"> 문의사항</a>
           </StyledText>
         </StyledDiv>

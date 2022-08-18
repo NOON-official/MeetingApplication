@@ -5,11 +5,11 @@ import * as React from 'react';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 30%;
+  height: 60%;
   left: 50%;
   transform: translate(-50%, 0);
   position: absolute;
-  top: 20%;
+  top: 17%;
   width: 95%;
   max-width: 375px;
 `;
@@ -28,7 +28,8 @@ const Uni = styled.button`
   border: 0.2px solid var(--color-lightblue);
   border-radius: var(--round-borderradious);
   margin: 10px;
-  max-height: 200px;
+  max-height: 50px;
+  min-height: 30px;
   font-family: var(--font-family);
   font-size: ${(props) => props.size || '20px'};
   color: ${(props) => props.color || 'black'};

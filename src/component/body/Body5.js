@@ -16,11 +16,11 @@ const Body5 = () => {
           <StyledText position=" absolute" size="35px" left="125px">
             을 알려주세요
           </StyledText>
-          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="75%" top="10%">
+          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="75%" top="10%">
             4/9
           </SubTitle>
         </StyledDiv>
-        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="23%" top="13%">
+        <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="23%" top="13%">
           중복 선택이 가능해요
         </SubTitle>
         <DaysContainer></DaysContainer>
