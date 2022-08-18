@@ -223,10 +223,13 @@ const Footer = () => {
       uncompleted();
       if (window.sessionStorage.getItem('access') != null) {
         complete();
-        setNextPath('/');
+        setNextPath('/apply/15');
       } else {
         setNextPath('/apply/14');
       }
+    } else if (location === '/apply/15') {
+      complete();
+      setNextPath('/');
     }
   };
 
@@ -302,7 +305,7 @@ const Footer = () => {
               bg={frontButtonColor}
               color={fronButtonTextColor}
             >
-              제출하기
+              {location === '/apply/14' ? '제출하기' : '메인으로 가기'}
             </FrontButton>{' '}
           </StyledFrontLink>
         </BackAndFront>
