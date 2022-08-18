@@ -201,9 +201,12 @@ const Job = (props) => {
 export const JobSelect = () => {
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="79%" left="5%">
+      <SubTitle font="Pretendard" top="75%" left="5%">
         {' '}
         직업
+      </SubTitle>
+      <SubTitle size="13px" font="pretendard" color="#AAAAAA" left="32%" top="75%">
+        중복 선택이 가능해요
       </SubTitle>
       <ButtonBox top="85%">
         <Job job={'대학생'}></Job>

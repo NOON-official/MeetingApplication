@@ -75,28 +75,28 @@ const Mbtis = (props) => {
       direction="column"
       border_color="#F1ECEC"
     >
-      <StyledText font="Pretendard" size="14px" top="10%" left="6%" color="#777777" weight="500" line="16.8px">
+      <StyledText font="Pretendard" size="14px" top="5%" left="6%" color="#777777" weight="500" line="16.8px">
         MBTI
       </StyledText>
-      <MbtiContainer top="20%">
+      <MbtiContainer top="16%">
         <Mbti mbti={'ESTP'}></Mbti>
         <Mbti mbti={'ESFP'}></Mbti>
         <Mbti mbti={'ENFP'}></Mbti>
         <Mbti mbti={'ENTP'}></Mbti>
       </MbtiContainer>
-      <MbtiContainer top="40%">
+      <MbtiContainer top="36%">
         <Mbti mbti={'ESTJ'}></Mbti>
         <Mbti mbti={'ESFJ'}></Mbti>
         <Mbti mbti={'ENFJ'}></Mbti>
         <Mbti mbti={'ENTJ'}></Mbti>
       </MbtiContainer>
-      <MbtiContainer top="60%">
+      <MbtiContainer top="56%">
         <Mbti mbti={'ISTJ'}></Mbti>
         <Mbti mbti={'ISFJ'}></Mbti>
         <Mbti mbti={'INFJ'}></Mbti>
         <Mbti mbti={'INTJ'}></Mbti>
       </MbtiContainer>
-      <MbtiContainer top="80%">
+      <MbtiContainer top="76%">
         <Mbti mbti={'ISTP'}></Mbti>
         <Mbti mbti={'ISFP'}></Mbti>
         <Mbti mbti={'INFP'}></Mbti>

@@ -76,16 +76,16 @@ const Appearance = (props) => {
       direction="column"
       border_color="#F1ECEC"
     >
-      <StyledText font="Pretendard" size="14px" top="10%" left="6%" color="#777777" weight="500" line="16.8px">
+      <StyledText font="Pretendard" size="14px" top="7%" left="6%" color="#777777" weight="500" line="16.8px">
         외모
       </StyledText>
-      <AppearanceContainer top="33%">
+      <AppearanceContainer top="28%">
         <Face face={'강아지상'}></Face>
         <Face face={'고양이상'}></Face>
         <Face face={'토끼상'}></Face>
         <Face face={'공룡상'}></Face>
       </AppearanceContainer>
-      <AppearanceContainer top="63%">
+      <AppearanceContainer top="58%">
         <Face face={'말상'}></Face>
         <Face face={'원숭이상'}></Face>
         <Face face={'여우상'}></Face>

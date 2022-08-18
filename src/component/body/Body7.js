@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, MobileBox, StyledDiv, StyledText, ButtonBox } from '../Elements/StyledComponent';
+import { Container, MobileBox, StyledDiv, StyledText, ButtonBox, SubTitle } from '../Elements/StyledComponent';
 import Face from '../Characters/Face';
 import { Character } from '../Characters/CharacterButton';
 import Moderatoer from '../Characters/Moderatoer';
@@ -19,6 +19,9 @@ const Body7 = () => {
           <StyledText position="absolute" size="35px" left="10px" top="30px">
             알려주세요!
           </StyledText>
+          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="160px" top="45px">
+            6/9
+          </SubTitle>
         </StyledDiv>
         <ButtonBox top={'18%'}>
           <Character character={'비주얼'}>비주얼</Character>

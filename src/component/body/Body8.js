@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { UnivSelect, AgeSelect, JobSelect } from '../Elements/PrefferedSelect';
 
 import { ReactComponent as Character } from '../../Asset/page2/Character.svg';
-import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
+import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 import PrefferedUnivBox from '../Universities/PrefferedUnivBox';
 const PrefferedTeamSelectBox = styled.div`
   height: 70%;
-  width: 95%;
+  width: 90%;
   position: absolute;
-  top: 10%;
+  top: 17%;
+  margin: 5px;
 `;
 const Body8 = () => {
   return (
@@ -17,11 +18,17 @@ const Body8 = () => {
       <MobileBox>
         <StyledDiv top="5%" width="90%" height="20%" left="50%">
           <StyledText position=" absolute" size="35px" color="#F49393" left="10px">
-            어떤 상대방을
+            어떤 상대팀
           </StyledText>
-          <StyledText position="absolute" size="35px" left="150px">
-            원하시나요?
+          <StyledText position="absolute" size="35px" left="120px">
+            을 원하시나요?
           </StyledText>
+          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="300px" top="15px">
+            7/9
+          </SubTitle>
+          <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="23%" top="40%">
+            중복 선택이 가능해요
+          </SubTitle>
         </StyledDiv>
         <PrefferedTeamSelectBox>
           <JobSelect />

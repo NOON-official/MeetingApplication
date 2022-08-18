@@ -9,7 +9,7 @@ const Body9 = () => {
       <MobileBox>
         <StyledDiv max_width="350px" top="5%" width="90%" height="20%" left="50%">
           <StyledText position=" absolute" size="35px" color="#F49393" left="10px">
-            그날의 분위기
+            미팅의 분위기
           </StyledText>
           <StyledText position="absolute" size="35px" left="130px">
             는
@@ -17,8 +17,11 @@ const Body9 = () => {
           <StyledText position="absolute" size="35px" left="10px" top="30px">
             어땠으면 좋겠어요?
           </StyledText>
+          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="220px" top="45px">
+            8/9
+          </SubTitle>
         </StyledDiv>
-        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="23%" top="20%">
+        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="25%" top="18%">
           중복 선택이 가능해요
         </SubTitle>
         <Wants></Wants>

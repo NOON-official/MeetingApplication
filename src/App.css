@@ -6,10 +6,9 @@
   height: 40vmin;
   pointer-events: none;
 }
-@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
-
-.nanumpenscript * {
-  font-family: 'Nanum Pen Script', cursive;
+@font-face {
+  font-family: 'Nanum JungHagSaeng';
+  src: url('./font/nanumfont.woff')format('woff');
 }
 :root {
   --font-size-maintitle: 40px;
@@ -20,10 +19,9 @@
   --round-borderradious: 10px;
   --color-gray: #80808029;
   --color-ClickedPink: #eb8888;
-  --font-family: 'Nanum JungHagSaeng', cursive;
+  --font-family: 'Nanum JungHagSaeng', normal;
 }
-@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const AreaBox = styled.div`
   width: 100%;
-  height: 8%;
+  height: 12%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -46,23 +46,21 @@ const Areas = (props) => {
 
 const AreaContainer = () => {
   return (
-    <StyledDiv top="15%" width="95%" height="65%" left="50%">
+    <StyledDiv top="20%" width="95%" height="65%" left="50%">
       <AreaBox>
-        <Areas area="홍대"></Areas>
         <Areas area="강남"></Areas>
-        <Areas area="회기"></Areas>
         <Areas area="건대"></Areas>
+        <Areas area="사당"></Areas>
       </AreaBox>
       <AreaBox>
         <Areas area="신촌"></Areas>
-        <Areas area="잠실"></Areas>
         <Areas area="이태원"></Areas>
-        <Areas area="수원"></Areas>
+        <Areas area="잠실"></Areas>
       </AreaBox>
       <AreaBox>
-        <Areas area="용인"></Areas>
-        <Areas area="안양"></Areas>
-        <Areas area="인첱"></Areas>
+        <Areas area="홍대"></Areas>
+        <Areas area="회기"></Areas>
+
         <Areas area="상관없음"></Areas>
       </AreaBox>
     </StyledDiv>

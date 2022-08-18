@@ -55,7 +55,7 @@ const Fashion = (props) => {
     if (exist) {
       dispatch({ type: 'FASHION_DELETE', payload: props.fashion });
     } else {
-      if (fashion.length < num) dispatch({ type: 'FASHION', payload: props.fashion });
+      dispatch({ type: 'FASHION', payload: props.fashion });
     }
   }, [exist, props.fashion, fashion]);
   return (
@@ -84,20 +84,20 @@ const Fashions = (props) => {
       direction="column"
       border_color="#F1ECEC"
     >
-      <StyledText font="Pretendard" size="14px" top="10%" left="6%" color="#777777" weight="500" line="16.8px">
+      <StyledText font="Pretendard" size="14px" top="7%" left="6%" color="#777777" weight="500" line="16.8px">
         패션
       </StyledText>
-      <FashionContainer top="33%">
+      <FashionContainer top="28%">
+        <Fashion fashion={'베이직'}></Fashion>
+        <Fashion fashion={'캐주얼'}></Fashion>
         <Fashion fashion={'스트릿'}></Fashion>
         <Fashion fashion={'스포티'}></Fashion>
-        <Fashion fashion={'러블리'}></Fashion>
-        <Fashion fashion={'클래식'}></Fashion>
       </FashionContainer>
-      <FashionContainer top="63%">
-        <Fashion fashion={'캐주얼'}></Fashion>
-        <Fashion fashion={'베이직'}></Fashion>
+      <FashionContainer top="58%">
+        <Fashion fashion={'페미닌'}></Fashion>
         <Fashion fashion={'걸리쉬'}></Fashion>
-        <Fashion fashion={'없음'}></Fashion>
+        <Fashion fashion={'무신사'}></Fashion>
+        <Fashion fashion={'파자마'}></Fashion>
       </FashionContainer>
     </StyledDiv>
   );
