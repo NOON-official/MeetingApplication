@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Bulb } from '../../Asset/page1/Frame.svg';
-import { ReactComponent as CatchPhrase } from '../../Asset/page1/CatchPhrase.svg';
+import { ReactComponent as CatchPhrase } from '../../Asset/page1/Text.svg';
 import { ReactComponent as Title } from '../../Asset/page1/Title.svg';
 import { ReactComponent as Logo } from '../../Asset/page1/Logo.svg';
 import { ReactComponent as Star } from '../../Asset/page1/Star.svg';
@@ -47,10 +47,10 @@ const Body1 = () => {
           {' '}
           <a href="https://furry-bank-197.notion.site/41d68ef2663145299e4726247eca28d3">서비스 설명</a>{' '}
         </StyledText>
-        <StyledDiv top="10.5%" left="27.5%" transform=" translate(-50%, 0)">
+        <StyledDiv top="10.5%" left="10%" transform=" translate(-50%, 0)">
           <Bulb />
         </StyledDiv>
-        <StyledDiv top="13%" left="50%" transform="translate(-50%, 0)">
+        <StyledDiv top="5%" left="50%" transform="translate(-50%, 0)">
           <CatchPhrase />
         </StyledDiv>
         <StyledDiv top="20%" left="50%" transform="translate(-50%, 0)">
@@ -74,21 +74,28 @@ const Body1 = () => {
 
         <StyledDiv
           border_top="1px solid #D6D6D6"
-          top="90%"
+          top="95%"
           left="50%"
-          height="10%"
+          height="5%"
           width="100%"
           transform="translate(-50%, 0)"
+          display="flex"
+          flex-direction="row"
+          justify_content="space-around"
+          align_item="center"
         >
-          <StyledText font="Pretendard" color="#515151" position="absolute" left="10%" top="30%">
+          <StyledText position="static" font="pretendard" color="#515151">
             {' '}
-            이용약관
+            <a href="https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7"> 이용약관</a>
           </StyledText>
-          <StyledText font="Pretendard" color="#515151" position="absolute" left="38%" top="30%">
-            개인정보처리방침
+          <StyledText font="pretendard" position="static" color="#515151">
+            <a href="https://furry-bank-197.notion.site/c83f4127e3c54b7080c333aa31a4cc03"> 개인정보처리방침</a>
           </StyledText>
-          <StyledText font="Pretendard" color="#515151" position="absolute" left="80%" top="30%">
-            <a href='https://furry-bank-197.notion.site/303cd8bbdefc41a3bf088b30a4c98f84"'> 공지사항</a>
+          <StyledText font="pretendard" color="#515151" position="static">
+            <a href="https://furry-bank-197.notion.site/303cd8bbdefc41a3bf088b30a4c98f84"> 공지사항</a>
+          </StyledText>
+          <StyledText font="pretendard" color="#515151" position="static">
+            <a href="https://furry-bank-197.notion.site/aaa47097d9b24192a739a3f7aafa8556"> 문의사항</a>
           </StyledText>
         </StyledDiv>
       </MobileBox>

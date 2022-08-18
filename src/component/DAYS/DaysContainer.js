@@ -5,12 +5,13 @@ import Day from './Day';
 const Days = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: ${(props) => props.justify_content || 'space-around'};
   position: absolute;
   top: ${(props) => props.top || '5%'};
   height: 10%;
   width: 100%;
   float: left;
+  left: ${(props) => props.left};
 `;
 
 const DayText = (props) => {
@@ -18,7 +19,7 @@ const DayText = (props) => {
 };
 const DaysContainer = (props) => {
   return (
-    <StyledDiv top="15%" width="95%" height="65%" left="50%">
+    <StyledDiv top="20%" width="95%" height="65%" left="50%">
       <Days>
         {' '}
         <Day day="월요일"></Day>
@@ -31,7 +32,7 @@ const DaysContainer = (props) => {
         <Day day="금요일"></Day>
         <Day day="토요일"></Day>
       </Days>
-      <Days top="31%">
+      <Days left=" 1%" justify_content="start" top="31%">
         <Day day="일요일"></Day>
       </Days>
     </StyledDiv>

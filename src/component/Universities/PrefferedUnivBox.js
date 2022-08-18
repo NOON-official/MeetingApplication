@@ -10,7 +10,6 @@ const UniversitiesBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 10px;
 `;
 
 const Uni = styled.button`
@@ -53,7 +52,7 @@ const University = (props) => {
 
 const UnivBox = () => {
   return (
-    <StyledDiv width="100%" left="50%" height="45%" top="60%">
+    <StyledDiv width="100%" left="50%" height="45%" top="65%">
       <UniversitiesBox>
         <University reduxnum={0} university={'같은 학교는 싫어요'}></University>
         <University reduxnum={1} university={'상관 없어요'}></University>

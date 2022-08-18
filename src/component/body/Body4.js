@@ -14,8 +14,11 @@ const Body4 = () => {
           <StyledText position=" absolute" size="35px" left="170px">
             을 말해주세요
           </StyledText>
+          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="90%" top="10%">
+            3/9
+          </SubTitle>
         </StyledDiv>
-        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="23%" top="11%">
+        <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="23%" top="13%">
           중복 선택이 가능해요
         </SubTitle>
         <AreaContiner></AreaContiner>

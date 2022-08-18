@@ -72,44 +72,47 @@ const UnivBox = () => {
         <University university={'덕성여대'}></University>
       </UniversitiesBox>
       <UniversitiesBox>
+        <University university={'동국대'}></University>
+        <University university={'동덕여대'}></University>
         <University university={'명지대'}></University>
         <University university={'배화여대'}></University>
+      </UniversitiesBox>
+      <UniversitiesBox>
         <University university={'삼육대'}></University>
         <University university={'상명대'}></University>
-      </UniversitiesBox>
-      <UniversitiesBox>
         <University university={'서강대'}></University>
         <University university={'서경대'}></University>
-        <University university={'서울대'}></University>
-        <University size="12px" university={'서울과기대'}></University>
       </UniversitiesBox>
       <UniversitiesBox>
+        <University university={'서울대'}></University>
+        <University university={'서울과기대'}></University>
         <University university={'서울여대'}></University>
         <University university={'서울시립대'}></University>
-        <University university={'성균관대'}></University>
-        <University university={'성신여대'}></University>
       </UniversitiesBox>
       <UniversitiesBox>
+        <University university={'성균관대'}></University>
+        <University university={'성신여대'}></University>
         <University university={'세종대'}></University>
         <University university={'숙명여대'}></University>
+      </UniversitiesBox>
+      <UniversitiesBox>
+        <University university={'숭의여대'}></University>
         <University university={'숭실대'}></University>
         <University university={'연세대'}></University>
+        <University university={'이화여대'}></University>
       </UniversitiesBox>
 
       <UniversitiesBox>
-        <University university={'이화여대'}></University>
         <University university={'중앙대'}></University>
         <University university={'한국외대'}></University>
         <University university={'한체대'}></University>
-      </UniversitiesBox>
-      <UniversitiesBox>
         <University university={'한성대'}></University>
-        <University university={'한양대'}></University>
-        <University university={'한성여대'}></University>
-        <University university={'홍익대'}></University>
       </UniversitiesBox>
       <UniversitiesBox>
-        <University university={'기타 대학'}></University>
+        <University university={'한양대'}></University>
+        <University university={'한양여대'}></University>
+        <University university={'홍익대'}></University>
+        <University university={'다른 대학'}></University>
       </UniversitiesBox>
     </Container>
   );

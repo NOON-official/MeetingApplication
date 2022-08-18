@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { GenderSelect, NumberSelect, AgeSelect, JobSelect } from '../Elements/GenderSelec';
 
 import { ReactComponent as Character } from '../../Asset/page2/Character.svg';
-import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
+import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 const TeamSelectBox = styled.div`
   height: 70%;
   width: 90%;
@@ -21,6 +21,9 @@ const Body2 = () => {
           <StyledText position=" absolute" size="35px" left="135px">
             해주세요
           </StyledText>
+          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="65%" top="10%">
+            1/9
+          </SubTitle>
         </StyledDiv>
         <TeamSelectBox>
           <GenderSelect />

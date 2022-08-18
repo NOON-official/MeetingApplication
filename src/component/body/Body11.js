@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import * as React from 'react';
 import { ReactComponent as Character } from '../../Asset/page11/InputCharacter.svg';
+import { ReactComponent as ChatBallon } from '../../Asset/page11/ChatBallon.svg';
 import { useDispatch } from 'react-redux';
-import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
+import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 const StyledTextArea = styled.textarea`
   position: static;
   width: 90%;
@@ -27,17 +28,20 @@ const Body11 = () => {
     <Container>
       <MobileBox>
         <StyledDiv max_width="350px" top="5%" width="90%" height="20%" left="50%">
-          <StyledText position=" absolute" size="35px" color="#F49393" left="10px">
-            우리팀을 어필할 수 있는
+          <StyledText position=" absolute" size="35px" left="10px">
+            우리팀을 소개하는
           </StyledText>
-          <StyledText position="absolute" size="35px" left="10px" top="30px">
-            마지막 기회
+          <StyledText position="absolute" size="35px" color="#F49393" left="10px" top="30px">
+            마지막 한 줄 어필
           </StyledText>
-          <StyledText position="absolute" size="13px" font="Pretendard" color="#AAAAAA" left="10px" top="70px">
-            위트있게 우리팀을 설명해 보아요!
+          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="60%" top="35%">
+            9/9
+          </SubTitle>
+          <StyledText position="absolute" size="13px" font="Pretendard" color="#AAAAAA" left="10px" top="75px">
+            센스 넘치게 우리팀을 소개할수록 매칭률이 올라가요.
           </StyledText>
-          <StyledText position="absolute" size="13px" font="Pretendard" color="#AAAAAA" left="10px" top="90px">
-            2문장 이내로 우리팀을 소개해주세요!
+          <StyledText position="absolute" size="13px" font="Pretendard" color="#AAAAAA" left="10px" top="95px">
+            2문장 이상으로 우리팀을 소개해주세요!
           </StyledText>
         </StyledDiv>{' '}
         <StyledDiv
@@ -56,6 +60,10 @@ const Body11 = () => {
             onChange={setIntroduction}
             placeholder="안녕하세요 한국외국어대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다."
           ></StyledTextArea>
+        </StyledDiv>
+        <StyledDiv top="65%" left="35%">
+          {' '}
+          <ChatBallon />
         </StyledDiv>
         <StyledDiv
           display="flex"

@@ -19,6 +19,9 @@ const Body6 = () => {
           <StyledText position=" absolute" size="35px" top="30px" left="120px">
             이 있나요?
           </StyledText>
+          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="250px" top="45px">
+            5/9
+          </SubTitle>
         </StyledDiv>
         <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="24%" top="17%">
           중복 선택이 가능해요

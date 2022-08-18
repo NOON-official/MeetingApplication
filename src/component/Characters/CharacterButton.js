@@ -9,7 +9,8 @@ import { ReactComponent as Nerd } from '../../Asset/page7/Nerd.svg';
 
 const buttonColor = '#C4D7E0';
 const CharacterButton = styled.button`
-  font-family: 'Single Day', cursive;
+  font-family: var(--font-family);
+  font-size: 20px;
   height: 40px;
   width: 70px;
   border: 0;

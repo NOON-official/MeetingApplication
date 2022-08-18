@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const WantBox = styled.div`
   width: 100%;
-  height: 8%;
+  height: 10%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -19,7 +19,7 @@ const Thing = styled.button`
   margin: 10px;
   max-height: 200px;
   font-family: var(--font-family);
-  font-size: 20px;
+  font-size: ${(props) => props.size || '20px'};
   color: ${(props) => props.color || 'black'};
   background-color: ${(props) => props.background_color || 'transparent'};
 `;
@@ -38,7 +38,7 @@ const Want = (props) => {
     }
   }, [exist, props.want]);
   return (
-    <Thing color={fontColor} background_color={bgcolor} onClick={OnwantClick} width={props.width}>
+    <Thing size={props.size} color={fontColor} background_color={bgcolor} onClick={OnwantClick} width={props.width}>
       {props.want}
     </Thing>
   );
@@ -48,19 +48,19 @@ const Wants = () => {
   return (
     <StyledDiv top="25%" width="95%" height="65%" left="50%">
       <WantBox>
-        <Want want="술게임"></Want>
-        <Want want="보드게임"></Want>
-        <Want want="대화"></Want>
+        <Want want="술게임 좋아요"></Want>
+        <Want want="보드게임 좋아요"></Want>
+        <Want want="대화가 좋아요"></Want>
       </WantBox>
       <WantBox>
-        <Want want="설레임"></Want>
-        <Want want="재미"></Want>
+        <Want want="설렘이 좋아요"></Want>
+        <Want size="18px" want="재밌는 게 좋아요"></Want>
         <Want want="마시고 죽자"></Want>
       </WantBox>
       <WantBox>
-        <Want want="술은 싫어.."></Want>
-        <Want want="노잼"></Want>
-        <Want want="인생 상담"></Want>
+        <Want want="술은 싫어요"></Want>
+        <Want want="구독과 좋아요"></Want>
+        <Want want="아무거나 좋아요"></Want>
       </WantBox>
     </StyledDiv>
   );
