@@ -21,7 +21,7 @@ const Body2 = () => {
           <StyledText position=" absolute" size="35px" left="135px">
             해주세요
           </StyledText>
-          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="65%" top="10%">
+          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="70%" top="10%">
             1/9
           </SubTitle>
         </StyledDiv>

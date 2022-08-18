@@ -10,6 +10,7 @@ const FaceButton = styled.button`
   width: auto;
   min-width: 60px;
   font-size: 16px;
+  min-height: 30px;
   font-family: var(--font-family);
   border: 0;
   background-color: ${(props) => props.background_color || 'transparent'};

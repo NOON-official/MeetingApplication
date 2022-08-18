@@ -23,22 +23,16 @@ const PrettoSlider = styled(Slider)({
     },
   },
   '& .MuiSlider-valueLabel': {
-    lineHeight: 1.2,
-    fontSize: 12,
-    background: 'unset',
-    padding: 0,
-    width: 32,
-    height: 32,
-    borderRadius: '50% 50% 50% 0',
-    backgroundColor: '#EB8888',
-    transformOrigin: 'bottom left',
-    transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
-    '&:before': { display: 'none' },
-    '&.MuiSlider-valueLabelOpen': {
-      transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
+    fontSize: 16,
+    fontWeight: '700',
+    top: 55,
+    backgroundColor: 'unset',
+    color: '#EB8888',
+    '&:before': {
+      display: 'none',
     },
-    '& > *': {
-      transform: 'rotate(45deg)',
+    '& *': {
+      background: 'transparent',
     },
   },
 });
@@ -66,7 +60,7 @@ const Job = (props) => {
 export const JobSelect = () => {
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="5%" left="5%">
+      <SubTitle weigth="500" font="Pretendard" top="5%" left="5%">
         {' '}
         직업
       </SubTitle>
@@ -89,7 +83,7 @@ export const AgeSelect = () => {
   };
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="30%" left="10%">
+      <SubTitle weigth="500" font="Pretendard" top="30%" left="10%">
         평균나이
       </SubTitle>
       <SliderBox top="40%">
@@ -108,7 +102,7 @@ export const AgeSelect = () => {
 export const UnivSelect = () => {
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="60%" left="10%">
+      <SubTitle weigth="500" font="Pretendard" top="60%" left="10%">
         기피 학교
       </SubTitle>
       <UnivBox />

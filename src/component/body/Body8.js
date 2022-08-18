@@ -23,10 +23,10 @@ const Body8 = () => {
           <StyledText position="absolute" size="35px" left="120px">
             을 원하시나요?
           </StyledText>
-          <SubTitle size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="300px" top="15px">
+          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="300px" top="15px">
             7/9
           </SubTitle>
-          <SubTitle size="13px" font="Pretendard" color="#AAAAAA" left="23%" top="40%">
+          <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="18%" top="40%">
             중복 선택이 가능해요
           </SubTitle>
         </StyledDiv>

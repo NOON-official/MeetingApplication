@@ -23,22 +23,16 @@ const PrettoSlider = styled(Slider)({
     },
   },
   '& .MuiSlider-valueLabel': {
-    lineHeight: 1.2,
-    fontSize: 12,
-    background: 'unset',
-    padding: 0,
-    width: 32,
-    height: 32,
-    borderRadius: '50% 50% 50% 0',
-    backgroundColor: '#EB8888',
-    transformOrigin: 'bottom left',
-    transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
-    '&:before': { display: 'none' },
-    '&.MuiSlider-valueLabelOpen': {
-      transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
+    fontSize: 16,
+    fontWeight: '700',
+    top: 55,
+    backgroundColor: 'unset',
+    color: '#EB8888',
+    '&:before': {
+      display: 'none',
     },
-    '& > *': {
-      transform: 'rotate(45deg)',
+    '& *': {
+      background: 'transparent',
     },
   },
 });
@@ -57,11 +51,11 @@ export const GenderSelect = () => {
   const ColorMale = gender === '남자' ? '#EB8888' : '#F6EEEE';
   const colorM = gender === '남자' ? 'white' : '#B79292';
   const ColorFemale = gender === '남자' ? '#F6EEEE' : '#EB8888';
-  const colorF = gender === '남자' ? 'black' : 'white';
+  const colorF = gender === '남자' ? '#B79292' : 'white';
 
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="5%" left="5%">
+      <SubTitle weight="500" font="Pretendard" top="5%" left="5%">
         성별
       </SubTitle>
       <ButtonBox top="12%">
@@ -98,7 +92,7 @@ export const NumberSelect = () => {
   }
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="28%" left="6%">
+      <SubTitle weight="500" font="Pretendard" top="28%" left="6%">
         인원수
       </SubTitle>
 
@@ -107,7 +101,7 @@ export const NumberSelect = () => {
           variant="extended"
           size="small"
           background_color={number === 2 ? '#EB8888' : '#F6EEEE'}
-          color={number === 2 ? 'white' : 'black'}
+          color={number === 2 ? 'white' : '#B79292'}
           aria-label="add"
           onClick={() => setnumber(2)}
           width="33%"
@@ -118,7 +112,7 @@ export const NumberSelect = () => {
           variant="extended"
           size="small"
           background_color={number === 3 ? '#EB8888' : '#F6EEEE'}
-          color={number === 3 ? 'white' : 'black'}
+          color={number === 3 ? 'white' : '#B79292'}
           aria-label="add"
           onClick={() => setnumber(3)}
           width="33%"
@@ -129,7 +123,7 @@ export const NumberSelect = () => {
           variant="extended"
           size="small"
           background_color={number === 4 ? '#EB8888' : '#F6EEEE'}
-          color={number === 4 ? 'white' : 'black'}
+          color={number === 4 ? 'white' : '#B79292'}
           aria-label="add"
           onClick={() => setnumber(4)}
           width="33%"
@@ -148,9 +142,10 @@ export const AgeSelect = () => {
       dispatch({ type: 'AGE', payload: newValue });
     }
   };
+
   return (
     <ContentsAge>
-      <SubTitle font="Pretendard" top="53%" left="8%">
+      <SubTitle weight="500" font="Pretendard" top="53%" left="8%">
         평균나이
       </SubTitle>
       <SliderBox top="60%">
@@ -201,11 +196,11 @@ const Job = (props) => {
 export const JobSelect = () => {
   return (
     <Contents>
-      <SubTitle font="Pretendard" top="75%" left="5%">
+      <SubTitle weight="500" font="Pretendard" top="75%" left="5%">
         {' '}
         직업
       </SubTitle>
-      <SubTitle size="13px" font="pretendard" color="#AAAAAA" left="32%" top="75%">
+      <SubTitle weight="500" size="13px" font="pretendard" color="#AAAAAA" left="32%" top="75%">
         중복 선택이 가능해요
       </SubTitle>
       <ButtonBox top="85%">

@@ -23,7 +23,7 @@ const MyTeamInfo = () => {
       border_color="#F1ECEC"
       borderBottom="1px solid #F1ECEC"
       height="40%"
-      minHeight="270px"
+      minHeight="280px"
       left="50%"
       bg="white"
       id="MyTeamInfo"
