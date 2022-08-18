@@ -8,23 +8,23 @@ async function DataPush() {
   const finalOurTeamInfo = { ...ourTeamInfo, userId: parseInt(id) };
   const postPhonenunber = { userId: parseInt(id), phone: phonenumber };
 
-  client
+  await client
     .post('api/auth/phone', postPhonenunber, {
       headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
     })
-    .then((res) => {
-      client
+    .then(async (res) => {
+      await client
         .post('/api/user/ourteam', finalOurTeamInfo, {
           headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
         })
-        .then((res) => {
+        .then(async (res) => {
           const newBody = {
             ...prefferedTeamInfo,
             userId: parseInt(id),
             ourteamId: res.data.data.ourteamId,
           };
 
-          client
+          await client
             .post('/api/user/preference', newBody, {
               headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
             })
@@ -41,4 +41,5 @@ async function DataPush() {
     })
     .catch((err) => {});
 }
+
 export default DataPush;
