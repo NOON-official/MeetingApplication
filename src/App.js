@@ -20,6 +20,8 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import PublicRoute from './component/Router/PublicRoute';
+import PrivateRoute from './component/Router/PrivateRoute';
 import { app } from './component/Firebase/firebase';
 function App() {
   const Bootom = () => {
@@ -34,22 +36,126 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Body1 />}></Route>
-          <Route path="/apply/2" element={<Body2 />}></Route>
-          <Route path="/apply/3" element={<Body3 />}></Route>
-          <Route path="/apply/4" element={<Body4 />}></Route>
-          <Route path="/apply/5" element={<Body5 />}></Route>
-          <Route path="/apply/6" element={<Body6 />}></Route>
-          <Route path="/apply/7" element={<Body7 />}></Route>
-          <Route path="/apply/8" element={<Body8 />}></Route>
-          <Route path="/apply/9" element={<Body9 />}></Route>
-          <Route path="/apply/10" element={<Body10 />}></Route>
-          <Route path="/apply/11" element={<Body11 />}></Route>
-          <Route path="/apply/12" element={<Body12 />}></Route>
-          <Route path="/apply/13" element={<Body13 />}></Route>
-          <Route path="/apply/14" element={<Body14 />}></Route>
-          <Route path="/auth/kakao" element={<KakaoLogin />}></Route>
-          <Route path="/auth/kakao/callback" element={<KakaoLoginCallback />}></Route>
+          <Route
+            path="/"
+            element={
+              <PublicRoute restricted={false}>
+                <Body1 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/2"
+            element={
+              <PublicRoute restricted={true}>
+                <Body2 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/3"
+            element={
+              <PublicRoute restricted={true}>
+                <Body3 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/4"
+            element={
+              <PublicRoute restricted={true}>
+                <Body4 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/5"
+            element={
+              <PublicRoute restricted={true}>
+                <Body5 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/6"
+            element={
+              <PublicRoute restricted={true}>
+                <Body6 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/7"
+            element={
+              <PublicRoute restricted={true}>
+                <Body7 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/8"
+            element={
+              <PublicRoute restricted={true}>
+                <Body8 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/9"
+            element={
+              <PublicRoute restricted={true}>
+                <Body9 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/10"
+            element={
+              <PublicRoute restricted={true}>
+                <Body10 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/11"
+            element={
+              <PublicRoute restricted={true}>
+                <Body11 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/12"
+            element={
+              <PublicRoute restricted={true}>
+                <Body12 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/13"
+            element={
+              <PublicRoute restricted={true}>
+                <Body13 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/apply/14"
+            element={
+              <PublicRoute restricted={true}>
+                <Body14 />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/auth/kakao/callback"
+            element={
+              <PublicRoute restricted={true}>
+                <KakaoLoginCallback />
+              </PublicRoute>
+            }
+          />
         </Routes>
         <Bootom></Bootom>
       </BrowserRouter>
