@@ -1,16 +1,12 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import client from '../../api';
 
-function DataPush() {
-  const dispatch = useDispatch();
+async function DataPush() {
   const ourTeamInfo = JSON.parse(window.sessionStorage.getItem('ourTeam'));
   const prefferedTeamInfo = JSON.parse(window.sessionStorage.getItem('prefferedTeam'));
   const phonenumber = window.sessionStorage.getItem('phone');
   const id = window.sessionStorage.getItem('id');
   const finalOurTeamInfo = { ...ourTeamInfo, userId: parseInt(id) };
   const postPhonenunber = { userId: parseInt(id), phone: phonenumber };
-  const [IsMatching, setIsMatching] = useState(false);
 
   client
     .post('api/auth/phone', postPhonenunber, {
@@ -33,8 +29,6 @@ function DataPush() {
               headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
             })
             .then((res) => {
-              setIsMatching(true);
-              if (IsMatching) dispatch({ type: 'SET_IS_MATCHING', payload: props.IsMatching });
               alert('완성');
             })
             .catch((err) => {

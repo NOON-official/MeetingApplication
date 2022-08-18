@@ -292,20 +292,21 @@ const Footer = () => {
             </FrontButton>{' '}
           </StyledFrontLink>
         </BackAndFront>
+      ) : location === '/apply/12' || location === '/apply/13' ? (
+        <BackAndFront>
+          <StyledFrontLink to={nextPath} width="100%" style={{ textDecoration: 'none' }}>
+            <FrontButton max_width="350px" bg={frontButtonColor} color={fronButtonTextColor}>
+              다음
+            </FrontButton>{' '}
+          </StyledFrontLink>
+        </BackAndFront>
+      ) : location === '/apply/14' ? (
+        <></>
       ) : (
         <BackAndFront>
           <StyledFrontLink to={nextPath} width="100%" style={{ textDecoration: 'none' }}>
-            <FrontButton
-              onClick={() => {
-                if (location === '/apply/14' && window.sessionStorage.getItem('access') != null) {
-                  return DataPush();
-                }
-              }}
-              max_width="350px"
-              bg={frontButtonColor}
-              color={fronButtonTextColor}
-            >
-              {location === '/apply/14' ? '제출하기' : '메인으로 가기'}
+            <FrontButton max_width="350px" bg={frontButtonColor} color={fronButtonTextColor}>
+              메인으로 가기
             </FrontButton>{' '}
           </StyledFrontLink>
         </BackAndFront>
