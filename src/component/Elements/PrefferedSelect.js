@@ -11,8 +11,8 @@ const PrettoSlider = styled(Slider)({
     border: 'none',
   },
   '& .MuiSlider-thumb': {
-    height: 24,
-    width: 24,
+    height: 18,
+    width: 18,
     backgroundColor: '#EB8888',
     border: '2px solid currentColor',
     '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {

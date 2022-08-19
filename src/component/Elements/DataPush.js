@@ -1,31 +1,30 @@
 import client from '../../api';
-function DataPush() {
+
+async function DataPush() {
   const ourTeamInfo = JSON.parse(window.sessionStorage.getItem('ourTeam'));
   const prefferedTeamInfo = JSON.parse(window.sessionStorage.getItem('prefferedTeam'));
-
   const phonenumber = window.sessionStorage.getItem('phone');
   const id = window.sessionStorage.getItem('id');
   const finalOurTeamInfo = { ...ourTeamInfo, userId: parseInt(id) };
-  console.log(phonenumber);
   const postPhonenunber = { userId: parseInt(id), phone: phonenumber };
-  console.log('post', postPhonenunber);
-  client
+
+  await client
     .post('api/auth/phone', postPhonenunber, {
       headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
     })
-    .then((res) => {
-      client
+    .then(async (res) => {
+      await client
         .post('/api/user/ourteam', finalOurTeamInfo, {
           headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
         })
-        .then((res) => {
+        .then(async (res) => {
           const newBody = {
             ...prefferedTeamInfo,
             userId: parseInt(id),
             ourteamId: res.data.data.ourteamId,
           };
 
-          client
+          await client
             .post('/api/user/preference', newBody, {
               headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
             })
@@ -42,6 +41,5 @@ function DataPush() {
     })
     .catch((err) => {});
 }
-export default DataPush();
-/*
- */
+
+export default DataPush;
