@@ -18,8 +18,9 @@ const initialState = {
   prefferedage: [20, 25],
   preffereduniversity: 1,
   prefferedthing: [],
-  signin: false,
-  privateinfoconfirm: false,
+  signin: false, // 핸드폰 인증 여부
+  privateinfoconfirm: false, // 이용 약관 동의 여부
+  isMatching: false, // 매칭 진행중 여부
 };
 
 const reducer = (state = initialState, action) => {
@@ -107,6 +108,8 @@ const reducer = (state = initialState, action) => {
     case 'DELETE_PREFFEREDTHING':
       const deletePrefferedThing = state.prefferedthing.filter((value) => value !== action.payload);
       return { ...state, prefferedthing: deletePrefferedThing };
+    case 'SET_IS_MATCHING':
+      return { ...state, isMatching: action.payload };
     default:
       return state;
   }
