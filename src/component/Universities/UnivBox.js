@@ -1,35 +1,50 @@
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import { StyledDiv } from '../Elements/StyledComponent';
 import * as React from 'react';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 60%;
+  height: 62%;
   left: 50%;
   transform: translate(-50%, 0);
   position: absolute;
-  top: 17%;
+  top: 20%;
   width: 95%;
   max-width: 375px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 const UniversitiesBox = styled.div`
   width: 100%;
-  height: 15%;
+  height: 10%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-bottom: 10px;
+  margin-bottom: 2%;
+  min-height: 35px;
 `;
-
+const UniversitiesDivide = styled.div`
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 5%;
+  font-family: 'Pretendard';
+  font-weight: 500;
+  font-size: 11px;
+  color: #1a1a1a;
+`;
 const Uni = styled.button`
   width: ${(props) => props.width || '22%'};
   height: 100%;
   border: 0.2px solid var(--color-lightblue);
   border-radius: var(--round-borderradious);
   margin: 10px;
-  max-height: 50px;
-  min-height: 30px;
+
   font-family: var(--font-family);
   font-size: ${(props) => props.size || '20px'};
   color: ${(props) => props.color || 'black'};
@@ -60,6 +75,7 @@ const University = (props) => {
 const UnivBox = () => {
   return (
     <Container>
+      <UniversitiesDivide>가 ~ 바</UniversitiesDivide>
       <UniversitiesBox>
         <University university={'가톨릭대'}></University>
         <University university={'건국대'}></University>
@@ -78,6 +94,7 @@ const UnivBox = () => {
         <University university={'명지대'}></University>
         <University university={'배화여대'}></University>
       </UniversitiesBox>
+      <UniversitiesDivide>사 ~ 아</UniversitiesDivide>
       <UniversitiesBox>
         <University university={'삼육대'}></University>
         <University university={'상명대'}></University>
@@ -102,7 +119,7 @@ const UnivBox = () => {
         <University university={'연세대'}></University>
         <University university={'이화여대'}></University>
       </UniversitiesBox>
-
+      <UniversitiesDivide>자 ~ 하</UniversitiesDivide>
       <UniversitiesBox>
         <University university={'중앙대'}></University>
         <University university={'한국외대'}></University>

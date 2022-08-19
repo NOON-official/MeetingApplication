@@ -4,7 +4,7 @@ import { UnivSelect, AgeSelect, JobSelect } from '../Elements/PrefferedSelect';
 
 import { ReactComponent as Character } from '../../Asset/page2/Character.svg';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
-import PrefferedUnivBox from '../Universities/PrefferedUnivBox';
+
 const PrefferedTeamSelectBox = styled.div`
   height: 70%;
   width: 90%;

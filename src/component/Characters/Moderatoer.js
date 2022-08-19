@@ -31,7 +31,7 @@ const Moderatoer = () => {
         display="flex"
         direction="column"
       >
-        <StyledText position="static" font="pretendard" fontWeight="500" size="15px" color="#777777" line="18px">
+        <StyledText position="static" font="pretendard" fontWeight="500" size="15px" color="#777777" line="16px">
           어색한 분위기를 풀어주는 당신은 미팅의 유재석!
         </StyledText>
         <StyledText position="static" font="pretendard" fontWeight="500" size="15px" color="#777777" line="18px">
@@ -53,7 +53,7 @@ const Moderatoer = () => {
         <StyledText position="static" font="Pretendard" fontWeight="700" line="15.6px" size="16px" color="#F49393">
           주의!
         </StyledText>
-        <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="16px" color="#1A1A1A">
+        <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="14px" color="#1A1A1A">
           진행만 하다가 숨겨진 인연을 놓칠 수 있어요!
         </StyledText>
       </StyledDiv>

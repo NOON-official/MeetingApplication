@@ -23,9 +23,9 @@ const PrettoSlider = styled(Slider)({
     },
   },
   '& .MuiSlider-valueLabel': {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '700',
-    top: 55,
+    top: -1,
     backgroundColor: 'unset',
     color: '#EB8888',
     '&:before': {
