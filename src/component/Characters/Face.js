@@ -12,6 +12,7 @@ const Face = () => {
       border_color="#F1ECEC"
       border_style="solid"
       bg="white"
+      min_width="290px"
     >
       <StyledDiv left="50%" top="10%">
         <FaceCharacter />

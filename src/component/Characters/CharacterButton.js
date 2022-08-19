@@ -13,9 +13,9 @@ import { ReactComponent as NerdDark } from '../../Asset/page7/NerdDark.svg';
 
 const CharacterButton = styled.button`
   font-family: var(--font-family);
-  font-size: 20px;
+  font-size: 17px;
   height: 40px;
-  width: 70px;
+  width: 90px;
   border: 0;
   background-color: transparent;
   color: ${(props) => props.color || '#1A1A1A'};

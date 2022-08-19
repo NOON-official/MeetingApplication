@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import Appearance from '../TeamMate/Appearance';
 import Mbtis from '../TeamMate/Mbti';
 import Fashions from '../TeamMate/Fashion';

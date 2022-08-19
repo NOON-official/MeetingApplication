@@ -89,7 +89,7 @@ export const SelectButton = styled.button`
   color: ${(props) => props.color};
   border-color: transparent;
   font-family: var(--font-family);
-  font-size: 20px;
+  font-size: 18px;
 `;
 //Basic
 export const Container = styled.div`

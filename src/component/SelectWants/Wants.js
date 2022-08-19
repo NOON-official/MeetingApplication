@@ -12,14 +12,15 @@ const WantBox = styled.div`
   margin-bottom: 15px;
 `;
 const Thing = styled.button`
-  width: ${(props) => props.width || '50%'};
+  width: ${(props) => props.width || '30%'};
   height: 100%;
   border: 0.2px solid var(--color-lightblue);
   border-radius: var(--round-borderradious);
   margin: 10px;
   max-height: 200px;
+  min-width: 86px;
   font-family: var(--font-family);
-  font-size: ${(props) => props.size || '20px'};
+  font-size: ${(props) => props.width || '16px'};
   color: ${(props) => props.color || 'black'};
   background-color: ${(props) => props.background_color || 'transparent'};
 `;
@@ -37,6 +38,7 @@ const Want = (props) => {
       dispatch({ type: 'SET_PREFFEREDTHING', payload: props.want });
     }
   }, [exist, props.want]);
+
   return (
     <Thing size={props.size} color={fontColor} background_color={bgcolor} onClick={OnwantClick} width={props.width}>
       {props.want}
@@ -54,7 +56,7 @@ const Wants = () => {
       </WantBox>
       <WantBox>
         <Want want="설렘이 좋아요"></Want>
-        <Want size="18px" want="재밌는 게 좋아요"></Want>
+        <Want want="재밌는 게 좋아요"></Want>
         <Want want="마시고 죽자"></Want>
       </WantBox>
       <WantBox>

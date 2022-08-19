@@ -116,6 +116,7 @@ const Footer = () => {
   const signin = useSelector((state) => state.signin);
   const MovingPath = () => {
     if (location === '/apply/2') {
+      nextPathSetting('/apply/2');
       uncompleted();
       if (jobs.length > 0) {
         complete();
@@ -305,7 +306,7 @@ const Footer = () => {
               bg={frontButtonColor}
               color={fronButtonTextColor}
             >
-              {location === '/apply/14' ? '제출하기' : '메인으로 가기'}
+              {location === '/apply/15' ? '메인으로 가기' : ' 제출하기'}
             </FrontButton>{' '}
           </StyledFrontLink>
         </BackAndFront>
