@@ -4,8 +4,8 @@ import { ReactComponent as Star } from '../../Asset/finalPage/1.svg';
 import { ReactComponent as StarYellow } from '../../Asset/finalPage/2.svg';
 import { ReactComponent as Heart } from '../../Asset/finalPage/3.svg';
 import { ReactComponent as Character } from '../../Asset/finalPage/4.svg';
-import { ReactComponent as Text } from '../../Asset/page15/Text.svg';
-import { ReactComponent as SubText } from '../../Asset/page15/SubText.svg';
+import { ReactComponent as SubText } from '../../Asset/page15/Text.svg';
+import { ReactComponent as Text } from '../../Asset/page15/SubText.svg';
 const Body15 = () => {
   return (
     <Container>
