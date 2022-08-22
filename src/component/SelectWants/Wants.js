@@ -56,7 +56,7 @@ const Wants = () => {
       </WantBox>
       <WantBox>
         <Want want="설렘이 좋아요"></Want>
-        <Want want="재밌는 게 좋아요"></Want>
+        <Want size="14px" want="재밌는 게 좋아요"></Want>
         <Want want="마시고 죽자"></Want>
       </WantBox>
       <WantBox>

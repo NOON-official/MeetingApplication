@@ -31,9 +31,10 @@ export const StyledDiv = styled.div`
 
 export const SubTitle = styled.div`
   font-size: ${(props) => props.size || '14px'};
-  position: absolute;
+  position: ${(props) => props.position || 'absolute'};
   max-width: 768px;
-  width: 100%;
+
+  width: ${(props) => props.width || 'auto'};
   top: ${(props) => props.top};
   left: ${(props) => props.left || '50%'};
   transform: translate(-50%, 0);
