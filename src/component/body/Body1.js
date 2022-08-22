@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Bulb } from '../../Asset/page1/Frame.svg';
@@ -7,39 +6,8 @@ import { ReactComponent as Title } from '../../Asset/page1/Title.svg';
 import { ReactComponent as Logo } from '../../Asset/page1/Logo.svg';
 import { ReactComponent as Star } from '../../Asset/page1/Star.svg';
 import { ReactComponent as MainText } from '../../Asset/page1/MainText.svg';
-import { ReactComponent as MainButtonText } from '../../Asset/page1/MainButtonText.svg';
-import { Container, MobileBox } from '../Elements/StyledComponent';
-import { StyledDiv } from '../Elements/StyledComponent';
+import { StyledDiv, StyledText, Container, MobileBox, StyledButton } from '../Elements/StyledComponent';
 
-const Button = styled.button`
-  border-radius: var(--round-borderradious);
-  height: 50px;
-  width: 200px;
-  background-color: var(--color-ClickedPink);
-  color: white;
-  border-color: var(--color-gray);
-  font-family: var(--font-family);
-  font-size: var(--font-size-title);
-  position: fixed;
-  left: 50%;
-  transform: translate(-50%, 0);
-  bottom: 20%;
-  letter-spacing: 1px;
-`;
-const StyledText = styled.text`
-  position: ${(props) => props.position};
-  height: ${(props) => props.height};
-  width: ${(props) => props.width};
-  font-size: ${(props) => props.size || '13px'};
-  line-height: 20px;
-  align-items: center;
-  justify-content: start;
-  font-weight: 400;
-  top: ${(props) => props.top};
-  left: ${(props) => props.left};
-  color: ${(props) => props.color};
-  font-family: ${(props) => props.font || 'var(--font-family)'};
-`;
 const Body1 = () => {
   return (
     <Container height={'100%'} bg="#f8f3f3">
@@ -68,9 +36,9 @@ const Body1 = () => {
         </StyledDiv>
 
         <Link to="/apply/2" style={{ textDecoration: 'none' }}>
-          <Button>
-            <MainButtonText />
-          </Button>
+          <StyledButton height="50px" width="200px" top="80%">
+            매칭 시작하기
+          </StyledButton>
         </Link>
 
         <StyledDiv

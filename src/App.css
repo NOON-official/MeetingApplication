@@ -6,17 +6,18 @@
   height: 40vmin;
   pointer-events: none;
 }
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard.css");
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard.css');
 @font-face {
   font-family: 'Nanum JungHagSaeng';
-  src: url('./font/nanumfont.woff')format('woff');
+  src: url('./font/nanumfont.woff') format('woff');
 }
 :root {
   --font-size-maintitle: 40px;
-  --font-size-title: 20px;
+  --font-size-button: 24px;
   --font-size-subtitle: 18px;
-  --font-size-button: 13px;
   --font-size-small: 10px;
+  --font-weight-button: 400;
+  --line-height-button: 27.6px;
   --round-borderradious: 10px;
   --color-gray: #80808029;
   --color-ClickedPink: #eb8888;
@@ -33,8 +34,7 @@
 }
 a {
   text-decoration: none;
-  color:#515151
-  
+  color: #515151;
 }
 .App-header {
   background-color: #282c34;
@@ -89,7 +89,6 @@ a {
   outline: none;
   cursor: pointer;
   border: 0;
-  
 }
 
 .modal > section {
