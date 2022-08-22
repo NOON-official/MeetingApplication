@@ -1,4 +1,3 @@
-import { PropaneSharp } from '@mui/icons-material';
 import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
@@ -26,6 +25,8 @@ export const StyledDiv = styled.div`
   margin: ${(props) => props.margin};
   text-align: ${(props) => props.text_align};
   border-top: ${(props) => props.border_top};
+  font-family: ${(props) => props.font};
+  color: ${(props) => props.color};
 `;
 
 export const SubTitle = styled.div`

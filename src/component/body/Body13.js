@@ -221,6 +221,19 @@ const Body13 = () => {
               </StyledDiv>
             </StyledDiv>
           )}
+          <StyledDiv
+            top="90%"
+            left="50%"
+            heigth="10%"
+            width="100%"
+            justify_content="center"
+            align_item="center"
+            text_align="center"
+            font="Pretendard"
+            color="#AAAAAA"
+          >
+            수집된 번호는 매칭에만 활용되고 <br /> 상대팀에게 전달되지 않습니다.
+          </StyledDiv>
         </StyledDiv>
       </MobileBox>
     </Container>
