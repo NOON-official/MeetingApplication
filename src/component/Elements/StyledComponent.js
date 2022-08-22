@@ -145,15 +145,17 @@ export const StyledText = styled.text`
 `;
 
 export const StyledButton = styled.button`
-  position: ${(props) => props.position};
+  position: ${(props) => props.position || 'absolute'};
   top: ${(props) => props.top};
-  left: 50%;
+  left: ${(props) => props.left || '50%'};
   font-family: var(--font-family);
-  font-size: ${(props) => props.size};
+  font-size: ${(props) => props.size || 'var(--font-size-button)'};
   transform: translate(-50%, 0);
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  border-radius: 10px;
+  border-radius: var(--round-borderradious);
   background-color: var(--color-ClickedPink);
   color: ${(props) => props.color || 'white'};
+  line-height: var(--line-height-button);
+  border-color: var(--color-gray);
 `;

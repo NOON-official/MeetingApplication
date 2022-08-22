@@ -37,7 +37,7 @@ const BackButton = styled.button`
   max-width: 162px;
   color: ${(props) => props.color};
   border-color: #f2cbcb;
-  font-family: var(--font);
+  font-family: var(--font-family);
   font-size: var(--font-size-button);
   border: 1px solid;
 `;
@@ -51,7 +51,7 @@ const FrontButton = styled.button`
   max-width: ${(props) => props.max_width || '162px'};
   color: ${(props) => props.color};
   border-color: transparent;
-  font-family: var(--font);
+  font-family: var(--font-family);
   font-size: var(--font-size-button);
 `;
 const StyledBackLink = styled(Link)`
