@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Bulb } from '../../Asset/page1/Frame.svg';
+import { ReactComponent as Bulb } from '../../Asset/page1/Bulb.svg';
 import { ReactComponent as CatchPhrase } from '../../Asset/page1/Text.svg';
 import { ReactComponent as Title } from '../../Asset/page1/Title.svg';
 import { ReactComponent as Logo } from '../../Asset/page1/Logo.svg';
