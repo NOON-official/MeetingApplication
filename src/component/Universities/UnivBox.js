@@ -39,14 +39,14 @@ const UniversitiesDivide = styled.div`
   color: #1a1a1a;
 `;
 const Uni = styled.button`
-  width: ${(props) => props.width || '22%'};
+  width: ${(props) => props.width || '24%'};
   height: 100%;
   border: 0.2px solid var(--color-lightblue);
   border-radius: var(--round-borderradious);
   margin: 10px;
 
   font-family: var(--font-family);
-  font-size: ${(props) => props.size || '20px'};
+  font-size: ${(props) => props.size || '16px'};
   color: ${(props) => props.color || 'black'};
   background-color: ${(props) => props.background_color || 'transparent'};
 `;
