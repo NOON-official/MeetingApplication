@@ -16,81 +16,123 @@ const MyTeamInfo = () => {
 
   return (
     <StyledDiv
-      width="90%"
+      position="static"
+      transform="0"
+      width="100%"
+      height="auto"
+      display="inline-block"
       border_width="1px"
       border="10px"
       border_style="solid"
       border_color="#F1ECEC"
       borderBottom="1px solid #F1ECEC"
-      height="40%"
-      minHeight="280px"
-      left="50%"
       bg="white"
       id="MyTeamInfo"
     >
-      <StyledDiv borderBottom="1px solid #F1ECEC" top="0" left="50%" height="50px" width="90%" id="title">
-        <StyledText left="0%" top="40%" font="Pretendard" line="16.8px" size="14px" fontWeight="600" color="#777777">
-          1.우리는 이런 팀이에요!
+      <StyledDiv
+        position="static"
+        transform="0"
+        display="flex"
+        justify_content="start"
+        borderBottom="1px solid #F1ECEC"
+        width="90%"
+        height="30px"
+        id="title"
+        margin="5%"
+      >
+        <StyledText position="static" font="Pretendard" line="16.8px" size="14px" fontWeight="600" color="#777777">
+          1. 우리는 이런 팀이에요!
         </StyledText>
       </StyledDiv>
-      <StyledDiv left="50%" top="50px" height="85%" width="90%" id="contents">
-        <StyledText top="5%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          성별
-        </StyledText>
-        <StyledText top="5%" left="25%" color="#777777" fontWeight={'400'}>
-          {' '}
-          {gender}
-        </StyledText>
-        <StyledText top="17%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          인원수
-        </StyledText>
-        <StyledText top="17%" left="25%" color="#777777" fontWeight={'400'}>
-          {num} 명
-        </StyledText>
-        <StyledText top="29%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          나이
-        </StyledText>
-        <StyledText top="29%" left="25%" color="#777777" fontWeight={'400'}>
-          평균 {age}살
-        </StyledText>
-        <StyledText top="41%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          학교
-        </StyledText>
-        <StyledText top="41%" left="25%" color="#777777" fontWeight={'400'}>
-          {universities.map((data) => ` ${data} ,`)}
-        </StyledText>
-        <StyledText top="53%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          지역
-        </StyledText>
-        <StyledText top="53%" left="25%" color="#777777" fontWeight={'400'}>
-          {area.map((data) => ` ${data} ,`)}
-        </StyledText>
-        <StyledText top="65%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          요일
-        </StyledText>
-        <StyledText top="65%" left="25%" color="#777777" fontWeight={'400'}>
-          {day.map((data) => ` ${data} ,`)}
-        </StyledText>
-        <StyledText top="77%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          스타일
-        </StyledText>
-        <StyledText top="77%" left="25%" color="#777777" fontWeight={'400'}>
-          {appearance.map((data) => ` ${data} ,`)}
-        </StyledText>
-        <StyledText top="85%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          mbti
-        </StyledText>
-        <StyledText top="85%" left="25%" color="#777777" fontWeight={'400'}>
-          {mbti.map((data) => ` ${data} ,`)}
-        </StyledText>
+      <StyledDiv
+        position="static"
+        transform="0"
+        display="inline-block"
+        direction="column"
+        justify_content="space-around"
+        left="50%"
+        top="50px"
+        height="auto"
+        width="90%"
+        id="contents"
+      >
+        <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
+          <table>
+            <tr>
+              <th>성별</th>
+              <td>{gender}</td>
+            </tr>
+            <tr>
+              <th>인원수</th>
+              <td>{num} 명</td>
+            </tr>
+            <tr>
+              <th>나이</th>
+              <td>평균 {age}살</td>
+            </tr>
+            <tr>
+              <th>학교</th>
+              <td>
+                {universities.map((data, index) => {
+                  if (index + 1 != universities.length) {
+                    return ` ${data} ,`;
+                  } else {
+                    return ` ${data} `;
+                  }
+                })}
+              </td>
+            </tr>
+            <tr>
+              <th>지역</th>
+              <td>
+                {' '}
+                {area.map((data, index) => {
+                  if (index + 1 != area.length) {
+                    return ` ${data} ,`;
+                  } else {
+                    return ` ${data} `;
+                  }
+                })}
+              </td>
+            </tr>
+            <tr>
+              <th>요일</th>
+              <td>
+                {day.map((data, index) => {
+                  if (index + 1 != day.length) {
+                    return ` ${data} ,`;
+                  } else {
+                    return ` ${data} `;
+                  }
+                })}
+              </td>
+            </tr>
+            <tr>
+              <th>스타일</th>
+              <td>
+                {appearance.map((data, index) => {
+                  if (index + 1 != appearance.length) {
+                    return ` ${data} ,`;
+                  } else {
+                    return ` ${data} `;
+                  }
+                })}
+              </td>
+            </tr>
+            <tr>
+              <th>mbti</th>
+              <td>
+                {mbti.map((data, index) => {
+                  if (index + 1 != mbti.length) {
+                    return ` ${data} ,`;
+                  } else {
+                    return ` ${data} `;
+                  }
+                })}
+              </td>
+            </tr>
+          </table>
+        </StyledDiv>
       </StyledDiv>
     </StyledDiv>
   );
@@ -101,50 +143,75 @@ const PrefferedInfo = () => {
   const university = useSelector((state) => state.preffereduniversity);
   return (
     <StyledDiv
-      width="90%"
+      position="static"
+      transform="0"
+      width="100%"
+      height="auto"
+      display="inline-block"
       border_width="1px"
       border="10px"
       border_style="solid"
       border_color="#F1ECEC"
       borderBottom="1px solid #F1ECEC"
-      height="20%"
-      minHeight="156px"
-      left="50%"
       bg="white"
-      id="MyTeamInfo"
-      top="50%"
     >
-      <StyledDiv borderBottom="1px solid #F1ECEC" top="0" left="50%" height="50px" width="90%" id="title">
-        <StyledText left="0%" top="40%" font="Pretendard" line="16.8px" size="14px" fontWeight="600" color="#777777">
-          2.상대는 이런 팀을 원해요!
+      <StyledDiv
+        position="static"
+        transform="0"
+        display="flex"
+        justify_content="start"
+        borderBottom="1px solid #F1ECEC"
+        width="90%"
+        id="title"
+        height="30px"
+        margin="5%"
+      >
+        <StyledText position="static" font="Pretendard" line="16.8px" size="14px" fontWeight="600" color="#777777">
+          2. 상대는 이런 팀을 원해요!
         </StyledText>
       </StyledDiv>
-      <StyledDiv left="50%" top="50px" height="65%" width="90%" id="contents">
-        <StyledText top="15%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          직업
-        </StyledText>
-        <StyledText top="15%" left="25%" color="#777777" fontWeight={'400'}>
-          {job.map((data) => ` ${data} ,`)}
-        </StyledText>
-        <StyledText top="45%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          평균나이
-        </StyledText>
-        <StyledText top="45%" left="25%" color="#777777" fontWeight={'400'}>
-          {age.map((data, index) => {
-            if (index + 1 != age.length) {
-              return `${data}살~`;
-            } else return `${data}살`;
-          })}
-        </StyledText>
-        <StyledText top="72%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {' '}
-          기피학교
-        </StyledText>
-        <StyledText top="72%" left="25%" color="#777777" fontWeight={'400'}>
-          {university == 0 ? '같은학교는 싫어요' : '상관없어요'}
-        </StyledText>
+      <StyledDiv
+        position="static"
+        transform="0"
+        display="inline-block"
+        direction="column"
+        justify_content="space-around"
+        left="50%"
+        top="50px"
+        height="auto"
+        width="90%"
+        id="contents"
+      >
+        <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
+          <table>
+            <tr>
+              <th>직업</th>
+              <td>
+                {job.map((data, index) => {
+                  if (index + 1 != job.length) {
+                    return ` ${data} ,`;
+                  } else {
+                    return ` ${data} `;
+                  }
+                })}
+              </td>
+            </tr>
+            <tr>
+              <th>평균나이</th>
+              <td>
+                {age.map((data, index) => {
+                  if (index + 1 != age.length) {
+                    return `${data}살~`;
+                  } else return `${data}살`;
+                })}
+              </td>
+            </tr>
+            <tr>
+              <th>기피학교</th>
+              <td>{university == 0 ? '같은학교는 싫어요' : '상관없어요'}</td>
+            </tr>
+          </table>
+        </StyledDiv>
       </StyledDiv>
     </StyledDiv>
   );
@@ -154,28 +221,60 @@ const WantInfo = () => {
 
   return (
     <StyledDiv
-      width="90%"
+      position="static"
+      transform="0"
+      width="100%"
+      display="inline-block"
       border_width="1px"
       border="10px"
       border_style="solid"
       border_color="#F1ECEC"
       borderBottom="1px solid #F1ECEC"
-      height="auto"
-      minHeight="100px"
-      left="50%"
       bg="white"
-      id="MyTeamInfo"
-      top="80%"
+      id="WantInfo"
     >
-      <StyledDiv borderBottom="1px solid #F1ECEC" top="0" left="50%" height="50px" width="90%" id="title">
-        <StyledText left="0%" top="40%" font="Pretendard" line="16.8px" size="14px" fontWeight="600" color="#777777">
-          3. 그날의 분의기는 어땠으면 좋겠어요?
+      <StyledDiv
+        position="static"
+        transform="0"
+        display="flex"
+        justify_content="start"
+        borderBottom="1px solid #F1ECEC"
+        width="90%"
+        id="title"
+        height="30px"
+        margin="5%"
+      >
+        <StyledText position="static" font="Pretendard" line="16.8px" size="14px" fontWeight="600" color="#777777">
+          3. 그날의 분위기는 어땠으면 좋겠어요?
         </StyledText>
       </StyledDiv>
-      <StyledDiv left="50%" top="50px" height="auto" width="90%" minHeight="40px" id="contents">
-        <StyledText top="5%" left="5%" color="#BBBBBB" fontWeight={'400'}>
-          {want.map((data) => ` ${data}, `)}
-        </StyledText>
+      <StyledDiv
+        position="static"
+        transform="0"
+        display="inline-block"
+        direction="column"
+        justify_content="space-around"
+        left="50%"
+        top="50px"
+        height="auto"
+        width="90%"
+        id="contents"
+      >
+        <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
+          <table>
+            <tr>
+              <td>
+                {want.map((data, index) => {
+                  if (index + 1 != want.length) {
+                    return ` ${data} / `;
+                  } else {
+                    return ` ${data} `;
+                  }
+                })}
+              </td>
+            </tr>
+          </table>
+        </StyledDiv>
       </StyledDiv>
     </StyledDiv>
   );
@@ -196,7 +295,15 @@ const Body10 = () => {
           </StyledText>
         </StyledDiv>{' '}
         <StyledDiv max_width="350px" left="50%" top="20%" height="80%" width="100%" id="scrollbox" overflow="scroll">
-          <StyledDiv left="50%" height="600px" width="95%" id="InfoBox">
+          <StyledDiv
+            left="50%"
+            height="700px"
+            width="95%"
+            id="InfoBox"
+            display="flex"
+            direction="column"
+            justify_content="space-around"
+          >
             <MyTeamInfo></MyTeamInfo>
             <PrefferedInfo />
             <WantInfo />

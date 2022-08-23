@@ -48,20 +48,25 @@ const AreaContainer = () => {
   return (
     <StyledDiv top="20%" width="95%" height="65%" left="50%">
       <AreaBox>
+        <Areas area="상관없음"></Areas>
         <Areas area="강남"></Areas>
         <Areas area="건대"></Areas>
-        <Areas area="사당"></Areas>
       </AreaBox>
       <AreaBox>
+        <Areas area="사당"></Areas>
         <Areas area="신촌"></Areas>
         <Areas area="이태원"></Areas>
-        <Areas area="잠실"></Areas>
       </AreaBox>
       <AreaBox>
+        <Areas area="잠실"></Areas>
         <Areas area="홍대"></Areas>
         <Areas area="회기"></Areas>
+      </AreaBox>
+      <AreaBox>
+        <Areas area="대학로"></Areas>
+        <Areas area="왕십리"></Areas>
 
-        <Areas area="상관없음"></Areas>
+        <Areas area="성수"></Areas>
       </AreaBox>
     </StyledDiv>
   );

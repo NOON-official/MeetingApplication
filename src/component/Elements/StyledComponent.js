@@ -27,6 +27,7 @@ export const StyledDiv = styled.div`
   border-top: ${(props) => props.border_top};
   font-family: ${(props) => props.font};
   color: ${(props) => props.color};
+  font-size: ${(props) => props.size};
 `;
 
 export const SubTitle = styled.div`
@@ -144,6 +145,7 @@ export const StyledText = styled.text`
   width: ${(props) => props.width};
   transform: ${(props) => props.transform};
   text-align: start;
+  z-index: 1;
 `;
 
 export const StyledButton = styled.button`
