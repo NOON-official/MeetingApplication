@@ -17,7 +17,7 @@ const Comedian = () => {
       <StyledDiv left="50%" top="10%">
         <ComedianCharacter />
       </StyledDiv>
-      <StyledText top="30%" weight="400" size="34px" left="43%" line="32.2px">
+      <StyledText top="30%" weight="400" size="34px" left="40%" line="32.2px">
         개그맨
       </StyledText>
       <StyledDiv

@@ -14,6 +14,7 @@ import Body12 from './component/body/Body12';
 import Body13 from './component/body/Body13';
 import Body14 from './component/body/Body14';
 import Body15 from './component/body/Body15';
+import TestPage from './component/TestPage';
 import KakaoLogin from './component/Auth/KakaoLogin';
 import KakaoLoginCallback from './component/Auth/KakaoLoginCallback';
 import Footer from './component/Footer';
@@ -37,6 +38,14 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route
+            path="/Test"
+            element={
+              <PublicRoute restricted={false}>
+                <TestPage />
+              </PublicRoute>
+            }
+          />
           <Route
             path="/"
             element={

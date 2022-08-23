@@ -92,7 +92,7 @@ const UnivBox = () => {
         <University university={'동국대'}></University>
         <University university={'동덕여대'}></University>
         <University university={'명지대'}></University>
-        <University university={'배화여대'}></University>
+        <University size="14px" university={'배화여대'}></University>
       </UniversitiesBox>
       <UniversitiesDivide>사 ~ 아</UniversitiesDivide>
       <UniversitiesBox>
@@ -103,9 +103,9 @@ const UnivBox = () => {
       </UniversitiesBox>
       <UniversitiesBox>
         <University university={'서울대'}></University>
-        <University university={'서울과기대'}></University>
+        <University size="14px" university={'서울과기대'}></University>
         <University university={'서울여대'}></University>
-        <University university={'서울시립대'}></University>
+        <University size="14px" university={'서울시립대'}></University>
       </UniversitiesBox>
       <UniversitiesBox>
         <University university={'성균관대'}></University>
@@ -128,9 +128,9 @@ const UnivBox = () => {
       </UniversitiesBox>
       <UniversitiesBox>
         <University university={'한양대'}></University>
-        <University university={'한양여대'}></University>
+        <University size="14px" university={'한양여대'}></University>
         <University university={'홍익대'}></University>
-        <University university={'다른 대학'}></University>
+        <University size="14px" university={'다른 대학'}></University>
       </UniversitiesBox>
     </Container>
   );

@@ -58,7 +58,7 @@ const Body11 = () => {
         >
           <StyledTextArea
             onChange={setIntroduction}
-            placeholder="안녕하세요 한국외국어대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다."
+            placeholder="안녕하세요 한국대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다."
           ></StyledTextArea>
         </StyledDiv>
         <StyledDiv top="65%" left="35%">

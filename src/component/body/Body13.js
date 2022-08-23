@@ -6,7 +6,7 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { authentication } from '../Firebase/firebase';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
 import { ReactComponent as CheckIcon } from '../../Asset/confirm/CheckIcon.svg';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 const StyledInput = styled.input`
   width: ${(props) => props.width || '100%'};
   height: 100%;
@@ -25,6 +25,8 @@ const StyledInput = styled.input`
 `;
 
 const Body13 = () => {
+  const firstPhoneNumber = useRef();
+  const secondPhoneNumber = useRef();
   const saveState = (key, state) => {
     try {
       const serializedState = state;
@@ -43,7 +45,6 @@ const Body13 = () => {
     }
   };
   const dispatch = useDispatch();
-  const [zero, setZero] = useState('');
   const [phonenumFirst, setPhoneNumFirst] = useState('');
   const [phoneNumSecond, setPhonenumSecond] = useState('');
 
@@ -52,10 +53,16 @@ const Body13 = () => {
   useEffect(() => {
     signin && dispatch({ type: 'SET_SIGNIN', payload: true });
   }, [signin]);
+  useEffect(() => {
+    if (phonenumFirst.length >= 4) {
+      secondPhoneNumber.current.focus();
+    }
+  }, [phonenumFirst]);
   const countryCode = '+82';
+  const basicPhoneNumber = '010';
   const submitAble = React.useMemo(
-    () => (zero.length === 3 && phoneNumSecond.length === 4 && phonenumFirst.length === 4 ? true : false),
-    [zero, phoneNumSecond, phonenumFirst],
+    () => (phoneNumSecond.length === 4 && phonenumFirst.length === 4 ? true : false),
+    [phoneNumSecond, phonenumFirst],
   );
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const ButtonColor = React.useMemo(() => (submitAble ? '#EB8888' : '#EDEDED'), [submitAble]);
@@ -65,15 +72,14 @@ const Body13 = () => {
       setPhonenumSecond(e.target.value);
     } else if (e.target.name === 'phoneNumFirst') {
       setPhoneNumFirst(e.target.value);
-    } else if (e.target.name === '010') {
-      setZero(e.target.value);
     }
   };
   const onPhoneNumSubmit = () => {
     if (!submitAble) {
       alert('번호입력');
     } else {
-      let phoneNumber = zero.concat(phonenumFirst.concat(phoneNumSecond));
+      let phoneNumber = basicPhoneNumber + phonenumFirst.concat(phoneNumSecond);
+      console.log(phoneNumber);
       saveState('phone', phoneNumber);
       requestOTP();
     }
@@ -137,6 +143,7 @@ const Body13 = () => {
         });
     }
   };
+
   return (
     <Container>
       <MobileBox>
@@ -167,22 +174,54 @@ const Body13 = () => {
               전화번호
             </StyledText>
             <StyledDiv top="50%" width="100%" left="50%" height="50%">
-              <StyledDiv left="15%" height="100%" width="28%">
-                <StyledInput name="010" onChange={inputHandler} placeholder="010"></StyledInput>
+              <StyledDiv
+                display="flex"
+                justify_content="center"
+                align_item="center"
+                left="15%"
+                height="100%"
+                width="28%"
+                size="18px"
+              >
+                010
               </StyledDiv>
               <StyledDiv text_align="center" justify_content="center" top="20%" left="33%" height="100%" width="7%">
                 {' '}
                 -{' '}
               </StyledDiv>
-              <StyledDiv left="50%" height="100%" width="28%">
-                <StyledInput name="phoneNumFirst" onChange={inputHandler} placeholder="1234"></StyledInput>
+              <StyledDiv
+                display="flex"
+                justify_content="center"
+                align_item="center"
+                left="50%"
+                height="100%"
+                width="28%"
+              >
+                <StyledInput
+                  name="phoneNumFirst"
+                  onChange={inputHandler}
+                  placeholder="1234"
+                  ref={firstPhoneNumber}
+                ></StyledInput>
               </StyledDiv>
               <StyledDiv text_align="center" justify_content="center" top="20%" left="68%" height="100%" width="7%">
                 {' '}
                 -{' '}
               </StyledDiv>
-              <StyledDiv left="85%" height="100%" width="28%">
-                <StyledInput name="phoneNumSecond" onChange={inputHandler} placeholder="5678"></StyledInput>
+              <StyledDiv
+                display="flex"
+                justify_content="center"
+                align_item="center"
+                left="85%"
+                height="100%"
+                width="28%"
+              >
+                <StyledInput
+                  ref={secondPhoneNumber}
+                  name="phoneNumSecond"
+                  onChange={inputHandler}
+                  placeholder="5678"
+                ></StyledInput>
               </StyledDiv>
             </StyledDiv>
           </StyledDiv>
