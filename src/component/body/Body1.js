@@ -9,8 +9,9 @@ import { ReactComponent as MainText } from '../../Asset/page1/MainText.svg';
 import { StyledDiv, StyledText, Container, MobileBox, StyledButton } from '../Elements/StyledComponent';
 import { WomanNotAllowed } from '../ErrorMessages/WomanNotAllowed';
 import client from '../../api';
-
+import Counter from '../Elements/CountAnimation';
 const Body1 = () => {
+  var num = 81;
   const [modalOpen, setModalOpen] = useState(true);
   const openModal = () => {
     setModalOpen(true);
@@ -64,6 +65,7 @@ const Body1 = () => {
           </StyledButton>
         </Link>
 
+        <Counter end={num} />
         <StyledDiv
           border_top="1px solid #D6D6D6"
           top="95%"
