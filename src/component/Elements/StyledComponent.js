@@ -28,6 +28,7 @@ export const StyledDiv = styled.div`
   font-family: ${(props) => props.font};
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
+  letter-spacing: ${(props) => props.letter_spacing};
 `;
 
 export const SubTitle = styled.div`
