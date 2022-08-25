@@ -122,6 +122,9 @@ const Body1 = () => {
               대표자 남한솔
             </StyledText>
             <StyledText size="12px" position="static" font="Pretendard" color="#515151">
+              연락처 010-6879-5436
+            </StyledText>
+            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
               사업자등록번호 811-29-00871
             </StyledText>
             <StyledText size="12px" position="static" font="Pretendard" color="#515151">
