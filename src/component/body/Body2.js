@@ -13,16 +13,34 @@ const Body2 = () => {
   return (
     <Container bg=" #F5F5F5">
       <MobileBox>
-        <StyledDiv display="flex" direction="row" top="5%" width="90%" height="auto" left="50%">
-          <StyledText position="static" color="#F49393" size="35px">
-            우리 팀을 소개
-          </StyledText>
-          <StyledText position=" static" size="35px">
-            해주세요
-          </StyledText>
-          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="70%" top="30%">
-            1/9
-          </SubTitle>
+        <StyledDiv display="flex" direction="column" top="5%" width="90%" height="15%" left="50%">
+          {/* HeaderBox*/}
+          <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%" margin="0 0 0 10px">
+            {/* TitleBox*/}
+            <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
+              {/* TextTitle*/}
+              <StyledText position="static" color="#F49393" size="1em">
+                우리 팀을 소개
+              </StyledText>
+              <StyledText position=" static" size="1em">
+                해주세요
+              </StyledText>
+            </StyledDiv>
+            <StyledDiv
+              position="static"
+              transform="0"
+              direction="row"
+              size="20px"
+              justify_content="center"
+              align_item="center"
+              margin=" 10px 0 0 10px"
+            >
+              {/*TextNumber*/}
+              <StyledText position="static" weight="400" size="1em" font="Nanum JungHagSaeng" color="#BBBBBB">
+                1/9
+              </StyledText>
+            </StyledDiv>
+          </StyledDiv>
         </StyledDiv>
         <TeamSelectBox>
           <GenderSelect />
