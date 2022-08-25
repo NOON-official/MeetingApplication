@@ -9,20 +9,60 @@ const Body7 = () => {
   return (
     <Container>
       <MobileBox>
-        <StyledDiv top="5%" width="90%" height="20%" left="50%">
-          <StyledText position=" absolute" size="35px" color="#F49393" left="10px">
-            미팅 나갈 구성원
-          </StyledText>
-          <StyledText position="absolute" size="35px" left="163px">
-            을
-          </StyledText>
-          <StyledText position="absolute" size="35px" left="10px" top="30px">
-            알려주세요!
-          </StyledText>
-          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="160px" top="45px">
-            6/9
-          </SubTitle>
+        <StyledDiv display="flex" direction="column" top="2%" width="90%" height="15%" left="50%">
+          {/* HeaderBox*/}
+          <StyledDiv
+            position="static"
+            display="flex"
+            direction="column"
+            transform="0"
+            width="100%"
+            margin="5px 0 0 10px"
+          >
+            <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
+              <StyledText position=" static" size="1em" color="#F49393">
+                미팅 나갈 구성원
+              </StyledText>
+              <StyledText position=" static" size="1em">
+                을
+              </StyledText>
+            </StyledDiv>
+            <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
+              {/* TitleBox*/}
+              <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
+                {/* TextTitle*/}
+
+                <StyledText position=" static" size="1em">
+                  알려주세요
+                </StyledText>
+              </StyledDiv>
+              <StyledDiv
+                position="static"
+                transform="0"
+                direction="row"
+                size="20px"
+                justify_content="center"
+                align_item="center"
+                margin=" 10px 0 0 10px"
+              >
+                {/*TextNumber*/}
+                <StyledText position="static" weight="400" size="1em" font="Nanum JungHagSaeng" color="#BBBBBB">
+                  6/9
+                </StyledText>
+              </StyledDiv>
+            </StyledDiv>
+          </StyledDiv>
+          <StyledDiv
+            position="static"
+            display="flex"
+            direction="row"
+            margin=" 0 0 0"
+            transform="0"
+            width="100%"
+            size="13px"
+          ></StyledDiv>
         </StyledDiv>
+
         <ButtonBox top={'18%'}>
           <Character character={'비주얼'} />
           <Character character={'사회자'} />

@@ -17,7 +17,7 @@ const Body9 = () => {
           <StyledText position="absolute" size="35px" left="10px" top="30px">
             어땠으면 좋겠어요?
           </StyledText>
-          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="220px" top="45px">
+          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="210px" top="45px">
             8/9
           </SubTitle>
         </StyledDiv>
