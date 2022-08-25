@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Bulb } from '../../Asset/page1/Bulb.svg';
 import { ReactComponent as CatchPhrase } from '../../Asset/page1/Text.svg';
@@ -7,9 +7,17 @@ import { ReactComponent as Logo } from '../../Asset/page1/Logo.svg';
 import { ReactComponent as Star } from '../../Asset/page1/Star.svg';
 import { ReactComponent as MainText } from '../../Asset/page1/MainText.svg';
 import { StyledDiv, StyledText, Container, MobileBox, StyledButton } from '../Elements/StyledComponent';
+import { WomanNotAllowed } from '../ErrorMessages/WomanNotAllowed';
 import client from '../../api';
 
 const Body1 = () => {
+  const [modalOpen, setModalOpen] = useState(true);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   /*React.useEffect(() => {
     client
       .get('api/service/count/team')
@@ -20,6 +28,11 @@ const Body1 = () => {
   }, []);*/
   return (
     <Container height={'100%'} bg="#f8f3f3">
+      <WomanNotAllowed
+        open={modalOpen}
+        close={closeModal}
+        children={'9월 초에 시작되는 다음 시즌에 이용해주세요'}
+      ></WomanNotAllowed>
       <MobileBox overflow="scroll">
         <StyledText position="absolute" top="3%" left="70%">
           <a id="tip" href="https://furry-bank-197.notion.site/41d68ef2663145299e4726247eca28d3">
