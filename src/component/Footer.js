@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PageNotCompleted } from './ErrorMessages/PageNotCompletedError';
-import DataPush from './Elements/DataPush';
+import { Navigate } from 'react-router-dom';
 const Container = styled.footer`
   position: fixed;
   bottom: 0%;
@@ -73,6 +73,7 @@ const StyledFrontLink = styled(Link)`
   background-color: transparent;
 `;
 const Footer = () => {
+
   const [isDone, setIsDone] = useState(false);
   const frontButtonColor = React.useMemo(() => (isDone ? '#EB8888' : '#E9E9E9'), [isDone]);
   const fronButtonTextColor = React.useMemo(() => (isDone ? '#FFFFFF' : '#bbbbbb'), [isDone]);
@@ -120,42 +121,94 @@ const Footer = () => {
       uncompleted();
       if (jobs.length > 0) {
         complete();
+       
         nextPathSetting('/apply/3');
       } else {
         prevPathSetting('/apply/2');
       }
       prevPathSetting('/');
     } else if (location === '/apply/3') {
-      uncompleted();
-      if (university.length > 0) {
-        complete();
-        setNextPath('/apply/4');
-      } else {
-        setNextPath('/apply/3');
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
       }
-
-      setPrevPath('/apply/2');
+      else{uncompleted();
+        if (university.length > 0) {
+          complete();
+          
+          setNextPath('/apply/4');
+        } else {
+          setNextPath('/apply/3');
+        }
+  
+        setPrevPath('/apply/2');}
+      
     } else if (location === '/apply/4') {
-      uncompleted();
-      if (area.length > 0) {
-        complete();
-        setNextPath('/apply/5');
-      } else {
-        setNextPath('/apply/4');
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
       }
-      setPrevPath('/apply/3');
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else{uncompleted();
+        if (area.length > 0) {
+          complete();
+          setNextPath('/apply/5');
+        } else {
+          setNextPath('/apply/4');
+        }
+        setPrevPath('/apply/3');}
+      
     } else if (location === '/apply/5') {
-      uncompleted();
-      if (day.length > 0) {
-        complete();
-        setNextPath('/apply/6');
-      } else {
-        setNextPath('/apply/5');
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
       }
-
-      setPrevPath('/apply/4');
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else{   uncompleted();
+        if (day.length > 0) {
+          complete();
+          setNextPath('/apply/6');
+        } else {
+          setNextPath('/apply/5');
+        }
+  
+        setPrevPath('/apply/4');}
+   
     } else if (location === '/apply/6') {
-      uncompleted();
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
+      }
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else if(day.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/5"/>)
+      }
+      else{
+        uncompleted();
       if (mbti.length > 0 && fashion.length > 0 && appearance.length > 0) {
         complete();
         setNextPath('/apply/7');
@@ -164,17 +217,67 @@ const Footer = () => {
       }
 
       setPrevPath('/apply/5');
-    } else if (location === '/apply/7') {
-      uncompleted();
-      if (characters.length > 0) {
-        complete();
-        setNextPath('/apply/8');
-      } else {
-        setNextPath('/apply/7');
       }
-      setPrevPath('/apply/6');
+      
+    } else if (location === '/apply/7') {
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
+      }
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else if(day.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/5"/>)
+      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/6"/>)
+      }
+      else{ uncompleted();
+        if (characters.length > 0) {
+          complete();
+          setNextPath('/apply/8');
+        } else {
+          setNextPath('/apply/7');
+        }
+        setPrevPath('/apply/6');}
+     
     } else if (location === '/apply/8') {
-      uncompleted();
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
+      }
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else if(day.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/5"/>)
+      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/6"/>)
+      }
+      else if(characters.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/7"/>)
+      }
+      else{
+        uncompleted();
       if (prefferedage.length > 0 && prefferedjobs.length > 0) {
         complete();
         setNextPath('/apply/9');
@@ -182,8 +285,41 @@ const Footer = () => {
         setNextPath('/apply/8');
       }
       setPrevPath('/apply/7');
+
+      }
+      
     } else if (location === '/apply/9') {
-      uncompleted();
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
+      }
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else if(day.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/5"/>)
+      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/6"/>)
+      }
+      else if(characters.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/7"/>)
+      }
+      else if(prefferedage.length==0||prefferedjobs.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/8"/>)
+      }
+      else{
+        uncompleted();
       if (prefferedthing.length > 0) {
         complete();
         setNextPath('/apply/10');
@@ -192,11 +328,73 @@ const Footer = () => {
       }
 
       setPrevPath('/apply/8');
+      }
+      
     } else if (location === '/apply/10') {
-      setPrevPath('/apply/9');
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
+      }
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else if(day.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/5"/>)
+      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/6"/>)
+      }
+      else if(characters.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/7"/>)
+      }
+      else if(prefferedage.length==0||prefferedjobs.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/8"/>)
+      }else{
+        setPrevPath('/apply/9');
       setNextPath('/apply/11');
-    } else if (location === '/apply/11') {
-      uncompleted();
+    }
+      
+    } else if (location === '/apply/11') {if(jobs.length ==0){
+      alert("어디서 꼼수를 부려")
+      return(<Navigate to="/apply/2"/>)
+    }
+    else if(
+      university.length == 0
+    ){
+      alert("어디서 꼼수를 부려")
+      return(<Navigate to="/apply/3"/>)
+    }
+    else if(area.length==0){
+      alert("어디서 꼼수를 부려")
+      return(<Navigate to="/apply/4"/>)
+    }
+    else if(day.length==0){
+      alert("어디서 꼼수를 부려")
+      return(<Navigate to="/apply/5"/>)
+    }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+      alert("어디서 꼼수를 부려")
+      return(<Navigate to="/apply/6"/>)
+    }
+    else if(characters.length==0){
+      alert("어디서 꼼수를 부려")
+      return(<Navigate to="/apply/7"/>)
+    }
+    else if(prefferedage.length==0||prefferedjobs.length==0){
+      alert("어디서 꼼수를 부려")
+      return(<Navigate to="/apply/8"/>)
+    }
+    else
+      {uncompleted();
       if (introduction.length > 0) {
         complete();
         setNextPath('/apply/12');
@@ -204,33 +402,201 @@ const Footer = () => {
         setNextPath('/apply/11');
       }
       setPrevPath('/apply/10');
+    }
     } else if (location === '/apply/12') {
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
+      }
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else if(day.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/5"/>)
+      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/6"/>)
+      }
+      else if(characters.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/7"/>)
+      }
+      else if(prefferedage.length==0||prefferedjobs.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/8"/>)
+      }
+      else if(introduction.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/11"/>)
+      }
+      else{
       uncompleted();
       if (privateinfoconfirm) {
         complete();
         setNextPath('/apply/13');
       } else {
         setNextPath('/apply/12');
-      }
+      }}
     } else if (location === '/apply/13') {
-      uncompleted();
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
+      }
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else if(day.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/5"/>)
+      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/6"/>)
+      }
+      else if(characters.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/7"/>)
+      }
+      else if(prefferedage.length==0||prefferedjobs.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/8"/>)
+      }
+      else if(introduction.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/11"/>)
+      }
+      else if(!privateinfoconfirm){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/12"/>)
+      }
+      else{
+        uncompleted();
       if (signin) {
         complete();
         setNextPath('/apply/14');
       } else {
         setNextPath('/apply/13');
       }
+      }
+      
     } else if (location === '/apply/14') {
-      uncompleted();
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
+      }
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else if(day.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/5"/>)
+      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/6"/>)
+      }
+      else if(characters.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/7"/>)
+      }
+      else if(prefferedage.length==0||prefferedjobs.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/8"/>)
+      }
+      else if(introduction.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/11"/>)
+      }
+      else if(!privateinfoconfirm){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/12"/>)
+      }
+      else if (!signin){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/13"/>)
+      }
+      else{
+        uncompleted();
       if (window.sessionStorage.getItem('access') != null) {
         complete();
         setNextPath('/apply/15');
       } else {
         setNextPath('/apply/14');
       }
+      }
+      
     } else if (location === '/apply/15') {
-      complete();
-      setNextPath('/');
+      if(jobs.length ==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/2"/>)
+      }
+      else if(
+        university.length == 0
+      ){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/3"/>)
+      }
+      else if(area.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/4"/>)
+      }
+      else if(day.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/5"/>)
+      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/6"/>)
+      }
+      else if(characters.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/7"/>)
+      }
+      else if(prefferedage.length==0||prefferedjobs.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/8"/>)
+      }
+      else if(introduction.length==0){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/11"/>)
+      }
+      else if(!privateinfoconfirm){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/12"/>)
+      }
+      else if (!signin){
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/13"/>)
+      }
+      else if(window.sessionStorage.getItem('access') == null)
+      {
+        alert("어디서 꼼수를 부려")
+        return(<Navigate to="/apply/14"/>)
+      }
+      else{
+        complete();
+        setNextPath('/');
+      }
+   
     }
   };
 

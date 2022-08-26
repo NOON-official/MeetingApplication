@@ -21,7 +21,7 @@ const Body9 = () => {
             8/9
           </SubTitle>
         </StyledDiv>
-        <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="21%" top="18%">
+        <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="22%" top="18%" >
           중복 선택이 가능해요
         </SubTitle>
         <Wants></Wants>
