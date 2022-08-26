@@ -3,7 +3,10 @@ import UnivBox from '../Universities/UnivBox';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 import { ReactComponent as Character } from '../../Asset/page3/Character.svg';
 import { ReactComponent as ChatBallon } from '../../Asset/page3/ChatBallon.svg';
+
 const Body3 = () => {
+ 
+  
   return (
     <Container bg={'#F5F5F5'}>
       <MobileBox>
