@@ -11,7 +11,7 @@ import { WomanNotAllowed } from '../ErrorMessages/WomanNotAllowed';
 import client from '../../api';
 import Counter from '../Elements/CountAnimation';
 const Body1 = () => {
-  var num = 81;
+  const [num, setNum] = useState(0);
   const [modalOpen, setModalOpen] = useState(true);
   const openModal = () => {
     setModalOpen(true);
@@ -19,14 +19,15 @@ const Body1 = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  /*React.useEffect(() => {
+  React.useEffect(() => {
     client
       .get('api/service/count/team')
       .then((res) => {
-        console.log(res);
+        setNum(res.data.data.waitingTeam);
       })
       .catch((err) => {});
-  }, []);*/
+  }, []);
+  console.log(num);
   return (
     <Container height={'100%'} bg="#f8f3f3">
       <WomanNotAllowed
@@ -34,16 +35,57 @@ const Body1 = () => {
         close={closeModal}
         children={'9월 초에 시작되는 다음 시즌에 이용해주세요'}
       ></WomanNotAllowed>
-      <MobileBox overflow="scroll">
-        <StyledText position="absolute" top="3%" left="70%">
-          <a id="tip" href="https://furry-bank-197.notion.site/41d68ef2663145299e4726247eca28d3">
-            서비스 설명 & 미팅꿀팁
-          </a>
-        </StyledText>
+      <MobileBox overflow="auto">
+        <StyledDiv
+          top="0%"
+          width="100%"
+          height="7%"
+          display="flex"
+          direction="row"
+          bg="#FFEAEA"
+          justify_content="space-around"
+          align_item="center"
+          left="50%"
+        >
+          <StyledDiv
+            color="#666666"
+            height="100%"
+            position="static"
+            width="25%"
+            transform="0"
+            size="16px"
+            font="Nanum JungHagSaeng"
+            display="flex"
+            align_item="flex-end"
+          >
+            <StyledDiv
+              bg="#f8f3f3"
+              display="flex"
+              justify_content="center"
+              align_item="center"
+              position="static"
+              border="10px 10px 0 0"
+              width="100%"
+              height="100%"
+              transform="0"
+            >
+              홈
+            </StyledDiv>
+          </StyledDiv>
+          <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
+            가이드
+          </StyledDiv>
+          <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
+            매칭 조회
+          </StyledDiv>
+          <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
+            우리팀 정보
+          </StyledDiv>
+        </StyledDiv>
         <StyledDiv top="10.5%" left="12%" transform=" translate(-50%, 0)">
           <Bulb />
         </StyledDiv>
-        <StyledDiv top="5%" left="52%" transform="translate(-50%, 0)">
+        <StyledDiv top="12%" left="52%" transform="translate(-50%, 0)">
           <CatchPhrase />
         </StyledDiv>
         <StyledDiv top="20%" left="52%" transform="translate(-50%, 0)">
