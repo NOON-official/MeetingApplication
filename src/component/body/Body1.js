@@ -36,7 +36,8 @@ const Body1 = () => {
         children={'9월 초에 시작되는 다음 시즌에 이용해주세요'}
       ></WomanNotAllowed>
       <MobileBox overflow="auto">
-        <StyledDiv
+        {/*페이지 업테이트 적용부분
+         * <StyledDiv
           top="0%"
           width="100%"
           height="7%"
@@ -81,7 +82,7 @@ const Body1 = () => {
           <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
             우리팀 정보
           </StyledDiv>
-        </StyledDiv>
+        </StyledDiv>*/}
         <StyledDiv top="10.5%" left="12%" transform=" translate(-50%, 0)">
           <Bulb />
         </StyledDiv>
