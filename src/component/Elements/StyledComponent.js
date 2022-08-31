@@ -20,7 +20,8 @@ export const StyledDiv = styled.div`
   max-width: ${(props) => props.max_width};
   max-height: ${(props) => props.max_height};
   min-height: ${(props) => props.minHeight};
-  border-bottom: ${(props) => props.borderBottom || '0'};
+  min-width: ${(props)=>props.min_width};
+  border-bottom: ${(props) => props.borderBottom};
   align-items: ${(props) => props.align_item};
   margin: ${(props) => props.margin};
   text-align: ${(props) => props.text_align};
@@ -29,6 +30,7 @@ export const StyledDiv = styled.div`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
   letter-spacing: ${(props) => props.letter_spacing};
+  overflow:${(props)=>props.border_overflow};
 `;
 
 export const SubTitle = styled.div`
