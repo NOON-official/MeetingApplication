@@ -63,13 +63,13 @@ setSearchKeyWord(e.target.value)
      })
      return data.map((c,index)=><SearchedUniversity onClick={()=>{OnUniversityClick(c)}}  key={index}>{c}</SearchedUniversity>)
 
-  },[searchKeyWord])
+  },[searchKeyWord,num,universities])
   
   const SelectedUniversity = (props)=>{
   
     const width = React.useMemo(()=>{if(universities.length==1){return"45%"}else if(universities.length==2){return"45%"}
     else if(universities.length==3){return"30%"} else if(universities.length==4){return"23%"}},[universities])
-    console.log(width)
+    
     return(<StyledDiv position="static" display="flex" justify_content="space-between"  width={width} align_item="center" bg="#EB8888" border="10px" color="#FFFFFF" minHeight="40px" text_align="center" transform="0" onClick={()=>{ dispatch({ type: 'UNIVERSITIES_DELETE', payload: props.university });}}>
       <StyledDiv font="Nanum JungHagSaeng" size="18px"position="static" margin="0 0 5px 5px" transform="0"> {props.university}</StyledDiv> 
       <Xbutton/>
@@ -131,7 +131,7 @@ setSearchKeyWord(e.target.value)
         <StyledDiv position="static" display="flex" direction="column"  transform= "0" width="100%" height="100%" >
        {/* NO Div if there is no Selected university*/}
         <StyledDiv position="static" display="flex" justify_content="space-evenly" margin=" 0 0 0 5%" align_item="center"transform="0" width="90%" height="50px">
-      {universities&& universities.map((university)=>{ return(<SelectedUniversity university={university}/>)})}
+      {universities&& universities.map((university, idx)=>{ return(<SelectedUniversity key={idx} university={university}/>)})}
 
         </StyledDiv>
           {/* Search inputBox*/}
