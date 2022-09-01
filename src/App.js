@@ -47,7 +47,7 @@ function App() {
               </PublicRoute>
             }
           />
-          <Route
+       {/*}   <Route
             path="/"
             element={
               <PublicRoute restricted={false}>
@@ -55,15 +55,15 @@ function App() {
               </PublicRoute>
             }
           />
-
-          {/* <Route
+          */}
+           <Route
             path="/"
             element={
               <PublicRoute restricted={false}>
                 <Body1 />
               </PublicRoute>
             }
-          /> */}
+          /> 
           <Route
             path="/apply/2"
             element={
