@@ -5,6 +5,7 @@ import { ReactComponent as CheckIcon } from '../../Asset/confirm/CheckIcon.svg';
 import { useState, useEffect } from 'react';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
 import { useSelector, useDispatch } from 'react-redux';
+
 const Body12 = () => {
   const [infoConfirm, setInfoConfirm] = useState(false);
   const dispatch = useDispatch();
@@ -55,11 +56,18 @@ const Body12 = () => {
   };
   const saveState = (key, state) => {
     try {
-      const serializedState = JSON.stringify(state);
+      {/*const serializedState = JSON.stringify(state);
       sessionStorage.setItem(key, serializedState);
-    } catch {}
+    */}
+    const serializedState = JSON.stringify(state);
+    console.log(typeof(key),typeof(state))
+    dispatch({type:`${key}`, payload:`${serializedState}`})
+    } catch {
+      console.log("error")
+      alert("오류가 발생했습니다. 개발자에게 알려주세요!")
+    }
   };
-
+// sessionstorage.setitem=> reux로 변경하기
   return (
     <Container>
       <MobileBox>
@@ -86,8 +94,8 @@ const Body12 = () => {
           border="10px"
           onClick={() => {
             setInfoConfirm(!infoConfirm);
-            saveState('ourTeam', body);
-            saveState('prefferedTeam', prefferenceBody);
+            saveState('SET_OURTEAMINFO', body);
+            saveState('SET_PREFFEREDTEAMINFO', prefferenceBody);
           }}
         >
           {' '}

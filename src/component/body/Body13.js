@@ -30,12 +30,15 @@ const Body13 = () => {
   const saveState = (key, state) => {
     try {
       const serializedState = state;
-      sessionStorage.setItem(key, serializedState);
+      dispatch({type:`${key}`, payload:`${serializedState}`});
     } catch {}
   };
-  const loadState = (key) => {
+ {/*} const loadState = () => {
+    console.log("start")
     try {
-      const serializedState = sessionStorage.getItem(key);
+      console.log("1")
+      const serializedState = useSelector((state)=>state.phone);
+      
       if (serializedState === null) {
         return undefined;
       }
@@ -44,6 +47,7 @@ const Body13 = () => {
       return undefined;
     }
   };
+*/}
   const dispatch = useDispatch();
   const [phonenumFirst, setPhoneNumFirst] = useState('');
   const [phoneNumSecond, setPhonenumSecond] = useState('');
@@ -58,6 +62,10 @@ const Body13 = () => {
       secondPhoneNumber.current.focus();
     }
   }, [phonenumFirst]);
+  useEffect(()=>{
+    let phoneNumber = basicPhoneNumber + phonenumFirst.concat(phoneNumSecond);
+    (phoneNumSecond.length==4) && dispatch({type: "SET_PHONE", payload:phoneNumber})
+  },[phoneNumSecond])
   const countryCode = '+82';
   const basicPhoneNumber = '010';
   const submitAble = React.useMemo(
@@ -79,8 +87,8 @@ const Body13 = () => {
       alert('번호입력');
     } else {
       let phoneNumber = basicPhoneNumber + phonenumFirst.concat(phoneNumSecond);
-      console.log(phoneNumber);
-      saveState('phone', phoneNumber);
+     
+      saveState('SET_PHONE', phoneNumber);
       requestOTP();
     }
   };
@@ -99,7 +107,7 @@ const Body13 = () => {
   };
   const requestOTP = React.useCallback(() => {
     authentication.languageCode = 'Ko';
-    const phone = loadState('phone');
+    
     if (phone.length >= 10) {
       generateRecaptcha();
 
