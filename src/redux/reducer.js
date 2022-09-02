@@ -21,6 +21,8 @@ const initialState = {
   signin: false, // 핸드폰 인증 여부
   privateinfoconfirm: false, // 이용 약관 동의 여부
   isMatching: false, // 매칭 진행중 여부
+  ourTeamInfo:{},
+  prefferedTeamInfo:{}
 };
 
 const reducer = (state = initialState, action) => {
@@ -110,6 +112,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, prefferedthing: deletePrefferedThing };
     case 'SET_IS_MATCHING':
       return { ...state, isMatching: action.payload };
+    case 'SET_OURTEAMINFO':
+      return{...state, ourTeamInfo: action.payload};
+    case 'SET_PREFFEREDTEAMINFO':
+        return{...state, prefferedTeamInfo: action.payload};
     default:
       return state;
   }

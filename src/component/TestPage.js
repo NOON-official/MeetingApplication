@@ -1,9 +1,18 @@
 import styled from 'styled-components';
+import { StyledDiv } from './Elements/StyledComponent';
 
 const FullDiv = styled.div`
 width:100%;
 `
 const TestPage = () => {
+  function hideColumn()  {
+    const column = document.getElementById('others');
+    column.style.display = 'none';
+  }
+  function showColumn()  {
+    const column = document.getElementById('others');
+    column.style.display = '';
+  }
  const data = [["me" , "a", "info"],["me", "b", "info"],["me", "c", "info"],["he", "c", "info"],["he", "d", "info"]]
  let sameuser =[]
  let nowUserNum=0
@@ -26,12 +35,13 @@ let prevUserName =null
   return (
     <div>
     <div> 매칭 리스트업</div>
-  
-    <table border="1" bordercolor="blue">
+  <StyledDiv left="50%" width="100%">
+    <table border="1" bordercolor="blue" >
       <tr>
         <td>name of me</td>
         <td>name of other</td>
-        <td>others</td>
+        <td id="others">others</td>
+        <td>button</td>
       </tr>
       { 
       data.map((data, idx)=>{
@@ -45,7 +55,8 @@ let prevUserName =null
                 <tr key={idx} > 
                 <td rowSpan ={sameuserdata[1]}>{data[0]}</td>
                 <td>{data[1]}</td>
-                <td>{data[2]}</td>
+                <td id="others">{data[2]}</td>
+                <td><button/></td>
                 </tr>
                 )
                 
@@ -56,7 +67,8 @@ let prevUserName =null
           else{
             return( <tr key={idx}>
               <td>{data[1]}</td>
-              <td>{data[2]}</td>
+              <td id="others">{data[2]}</td>
+              <td><button/></td>
             </tr>)
              
             
@@ -65,8 +77,9 @@ let prevUserName =null
       })}
      
     </table>
-  
-    
+  <button onClick={()=>{hideColumn()}}></button>
+  <button onClick={()=>{showColumn()}}></button>
+    </StyledDiv>
     </div>
   );
 };
