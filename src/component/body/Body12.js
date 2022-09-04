@@ -22,7 +22,8 @@ const Body12 = () => {
   const jobs = useSelector((state) => state.jobs);
   const prefferedjobs = useSelector((state) => state.prefferedjobs);
   const prefferedage = useSelector((state) => state.prefferedage);
-
+  const height = useSelector((state)=> state.height);
+  const drink = useSelector((state)=> state.drink); 
   const university = useSelector((state) => state.university);
   const characters = useSelector((state) => state.characters);
   const area = useSelector((state) => state.area);
@@ -33,7 +34,7 @@ const Body12 = () => {
   const fashion = useSelector((state) => state.fashion);
   const intro = useSelector((state) => state.introduction);
   const vibe = useSelector((state) => state.prefferedthing);
-
+const prefferedheight = useSelector(state=> state.prefferedheight)
   const body = {
     gender: gender,
     num: num,
@@ -47,12 +48,15 @@ const Body12 = () => {
     appearance: appearance,
     mbti: mbti,
     fashion: fashion,
+    drink: drink,
+    height: height
   };
   const prefferenceBody = {
     age: prefferedage,
     job: prefferedjobs,
     sameUniversity: 1,
     vibe: vibe,
+    height:prefferedheight
   };
   const saveState = (key, state) => {
     try {
@@ -60,7 +64,7 @@ const Body12 = () => {
       sessionStorage.setItem(key, serializedState);
     */}
     const serializedState = JSON.stringify(state);
-    console.log(typeof(key),typeof(state))
+    
     dispatch({type:`${key}`, payload:`${serializedState}`})
     } catch {
       console.log("error")

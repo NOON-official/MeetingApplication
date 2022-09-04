@@ -33,21 +33,7 @@ const Body13 = () => {
       dispatch({type:`${key}`, payload:`${serializedState}`});
     } catch {}
   };
- {/*} const loadState = () => {
-    console.log("start")
-    try {
-      console.log("1")
-      const serializedState = useSelector((state)=>state.phone);
-      
-      if (serializedState === null) {
-        return undefined;
-      }
-      return serializedState;
-    } catch (err) {
-      return undefined;
-    }
-  };
-*/}
+
   const dispatch = useDispatch();
   const [phonenumFirst, setPhoneNumFirst] = useState('');
   const [phoneNumSecond, setPhonenumSecond] = useState('');
@@ -66,6 +52,7 @@ const Body13 = () => {
     let phoneNumber = basicPhoneNumber + phonenumFirst.concat(phoneNumSecond);
     (phoneNumSecond.length==4) && dispatch({type: "SET_PHONE", payload:phoneNumber})
   },[phoneNumSecond])
+  // 뒤에서 버튼누를 시 redux로 넘기니 저장이 안되는 경우가 있어서 앞에서 확실하게 쥣번호 4개 입력시 데이터 저당하도록 설정
   const countryCode = '+82';
   const basicPhoneNumber = '010';
   const submitAble = React.useMemo(

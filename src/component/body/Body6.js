@@ -1,6 +1,8 @@
 import Appearance from '../TeamMate/Appearance';
 import Mbtis from '../TeamMate/Mbti';
 import Fashions from '../TeamMate/Fashion';
+import Height from '../TeamMate/Height';
+import Drink from '../TeamMate/Drink';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 
 const Body6 = () => {
@@ -33,7 +35,7 @@ const Body6 = () => {
                 size="20px"
                 justify_content="center"
                 align_item="center"
-                margin=" 0 0 0 10px"
+                margin=" 10px 0 0 10px"
               >
                 {/*TextNumber*/}
                 <StyledText position="static" weight="400" size="1em" font="Nanum JungHagSaeng" color="#BBBBBB">
@@ -56,11 +58,16 @@ const Body6 = () => {
             </StyledText>
           </StyledDiv>
         </StyledDiv>
-
-        <StyledDiv top="20%" width="90%" height="75%" left="50%">
+        {/*Div for Middle */}
+        <StyledDiv top="20%" width="90%" height="75%" left="50%" overflow="scroll"> 
+        {/** Div for scrollable area- position: static, justify content= space-around */}
+          <StyledDiv position="static" transform="0" display="flex" direction="column" minHeight="800px" justify_content="space-around"  width="95%" align_item="center">
           <Appearance></Appearance>
           <Mbtis></Mbtis>
           <Fashions></Fashions>
+          <Height></Height>
+          <Drink></Drink>
+          </StyledDiv>
         </StyledDiv>
       </MobileBox>
     </Container>

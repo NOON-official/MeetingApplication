@@ -4,6 +4,8 @@ const initialState = {
   gender: '남자',
   num: 2,
   age: 20,
+  drink:0,
+  height:170,
   jobs: [],
   university: [], // multi choice
   characters: [],
@@ -18,9 +20,11 @@ const initialState = {
   prefferedage: [20, 25],
   preffereduniversity: 1,
   prefferedthing: [],
+  prefferedheight:[165, 175],
   signin: false, // 핸드폰 인증 여부
   privateinfoconfirm: false, // 이용 약관 동의 여부
   isMatching: false, // 매칭 진행중 여부
+
   ourTeamInfo:{},
   prefferedTeamInfo:{}
 };
@@ -35,6 +39,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, num: action.payload };
     case 'AGE':
       return { ...state, age: action.payload };
+      case 'DRINK':
+      return { ...state, drink: action.payload };
+      case 'HEIGHT':
+      return { ...state, height: action.payload };
     case 'JOBS':
       const newJob = action.payload;
       return { ...state, jobs: [...state.jobs, newJob] };
@@ -91,6 +99,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, prefferedjobs: deletePrefferedJob };
     case 'PREFFEREDAGE':
       return { ...state, prefferedage: action.payload };
+      case 'PREFFEREDHEIGHT':
+      return{...state, prefferedheight: action.payload};
     case 'PREFFEREDUNIVERSITIES':
       return { ...state, preffereduniversity: action.payload };
 
