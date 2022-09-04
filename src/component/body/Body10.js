@@ -12,8 +12,8 @@ const MyTeamInfo = () => {
   const day = useSelector((state) => state.day);
   const appearance = useSelector((state) => state.appearance);
   const mbti = useSelector((state) => state.mbti);
-  const fashion = useSelector((state) => state.fashion);
-
+  const characters = useSelector((state)=> state.characters);
+  const height = useSelector((state)=> state.height);
   return (
     <StyledDiv
       position="static"
@@ -108,6 +108,18 @@ const MyTeamInfo = () => {
               </td>
             </tr>
             <tr>
+              <th>구성원</th>
+              <td>
+                {characters.map((data, index) => {
+                  if (index + 1 != characters.length) {
+                    return ` ${data} ,`;
+                  } else {
+                    return ` ${data} `;
+                  }
+                })}
+              </td>
+            </tr>
+            <tr>
               <th>스타일</th>
               <td>
                 {appearance.map((data, index) => {
@@ -131,6 +143,12 @@ const MyTeamInfo = () => {
                 })}
               </td>
             </tr>
+            <tr>
+              <th>평균키</th>
+              <td>
+                {height}cm
+              </td>
+            </tr>
           </table>
         </StyledDiv>
       </StyledDiv>
@@ -141,6 +159,7 @@ const PrefferedInfo = () => {
   const job = useSelector((state) => state.prefferedjobs);
   const age = useSelector((state) => state.prefferedage);
   const university = useSelector((state) => state.preffereduniversity);
+  const height = useSelector((state)=> state.prefferedheight);
   return (
     <StyledDiv
       position="static"
@@ -209,6 +228,14 @@ const PrefferedInfo = () => {
             <tr>
               <th>기피학교</th>
               <td>{university == 0 ? '같은학교는 싫어요' : '상관없어요'}</td>
+            </tr>
+            <tr>
+              <th>선호키</th>
+              <td>{height.map((data, index) => {
+                  if (index + 1 != height.length) {
+                    return ` ${data}cm ~ `;
+                  } else return ` ${data}cm`;
+                })}</td>
             </tr>
           </table>
         </StyledDiv>

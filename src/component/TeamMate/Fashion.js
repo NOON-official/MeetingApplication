@@ -23,7 +23,7 @@ const FashionContainer = styled.div`
   width: 100%;
   flex-direction: row;
   justify-content: ${(props) => props.location || 'space-around'};
-  position: absolute;
+  position: static;
   top: ${(props) => props.top};
 `;
 const SelectedBox = styled.div`
@@ -73,18 +73,19 @@ const Fashion = (props) => {
 const Fashions = (props) => {
   return (
     <StyledDiv
-      top="75%"
-      left="50%"
+    position="static"
+      transform="0"
       bg="white"
-      height="25%"
-      width="95%"
+      height="120px"
+      width="100%"
       border="14px"
       display="flex"
-      justify_content="space-between"
+      justify_content="space-around"
       direction="column"
       border_color="#F1ECEC"
+      align_item="center"
     >
-      <StyledText font="Pretendard" size="14px" top="7%" left="6%" color="#777777" weight="500" line="16.8px">
+      <StyledText  margin="5px 0 0 0"position="static" width="90%"font="Pretendard" size="14px"  color="#777777" weight="500" line="16.8px">
         패션
       </StyledText>
       <FashionContainer top="28%">

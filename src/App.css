@@ -23,7 +23,11 @@
   --color-ClickedPink: #eb8888;
   --font-family: 'Nanum JungHagSaeng', normal;
 }
+.MuiSlider-thumb{
 
+background-image: url("/Users/yujeo/Desktop/Freen/MeetingApplication/src/Asset/Slider/SliderThumb.svg");
+
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

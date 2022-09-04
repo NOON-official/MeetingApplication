@@ -20,7 +20,7 @@ const MbtiContainer = styled.div`
   width: 100%;
   flex-direction: row;
   justify-content: ${(props) => props.location || 'space-around'};
-  position: absolute;
+  position: static;
   top: ${(props) => props.top};
 `;
 const SelectedBox = styled.div`
@@ -64,39 +64,41 @@ const Mbti = (props) => {
 const Mbtis = (props) => {
   return (
     <StyledDiv
-      top="30%"
-      left="50%"
-      bg="white"
-      height="42%"
-      width="95%"
-      border="14px"
-      display="flex"
-      justify_content="space-between"
-      direction="column"
-      border_color="#F1ECEC"
+      
+    position="static"
+    transform="0"
+    bg="white"
+    height="200px"
+    width="100%"
+    border="14px"
+    display="flex"
+    justify_content="space-around"
+    direction="column"
+    border_color="#F1ECEC"
+    align_item="center"
     >
-      <StyledText font="Pretendard" size="14px" top="5%" left="6%" color="#777777" weight="500" line="16.8px">
+      <StyledText margin="5px 0 0 0"position="static" width="90%"font="Pretendard" size="14px"  color="#777777" weight="500" line="16.8px">
         MBTI
       </StyledText>
-      <MbtiContainer top="16%">
+      <MbtiContainer >
         <Mbti mbti={'ESTP'}></Mbti>
         <Mbti mbti={'ESFP'}></Mbti>
         <Mbti mbti={'ENFP'}></Mbti>
         <Mbti mbti={'ENTP'}></Mbti>
       </MbtiContainer>
-      <MbtiContainer top="36%">
+      <MbtiContainer >
         <Mbti mbti={'ESTJ'}></Mbti>
         <Mbti mbti={'ESFJ'}></Mbti>
         <Mbti mbti={'ENFJ'}></Mbti>
         <Mbti mbti={'ENTJ'}></Mbti>
       </MbtiContainer>
-      <MbtiContainer top="56%">
+      <MbtiContainer >
         <Mbti mbti={'ISTJ'}></Mbti>
         <Mbti mbti={'ISFJ'}></Mbti>
         <Mbti mbti={'INFJ'}></Mbti>
         <Mbti mbti={'INTJ'}></Mbti>
       </MbtiContainer>
-      <MbtiContainer top="76%">
+      <MbtiContainer >
         <Mbti mbti={'ISTP'}></Mbti>
         <Mbti mbti={'ISFP'}></Mbti>
         <Mbti mbti={'INFP'}></Mbti>

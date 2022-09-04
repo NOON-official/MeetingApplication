@@ -1,15 +1,19 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { UnivSelect, AgeSelect, JobSelect } from '../Elements/PrefferedSelect';
+import { UnivSelect, AgeSelect, JobSelect, HeightSelect } from '../Elements/PrefferedSelect';
 
 import { ReactComponent as Character } from '../../Asset/page2/Character.svg';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 
 const PrefferedTeamSelectBox = styled.div`
-  height: 70%;
+  height: 63%;
   width: 90%;
   position: absolute;
   top: 17%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   margin: 5px;
 `;
 const Body8 = () => {
@@ -62,6 +66,7 @@ const Body8 = () => {
         <PrefferedTeamSelectBox>
           <JobSelect />
           <AgeSelect />
+          <HeightSelect/>
           <UnivSelect />
         </PrefferedTeamSelectBox>
         <StyledDiv
