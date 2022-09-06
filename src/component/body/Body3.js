@@ -1,5 +1,5 @@
 import * as React from 'react';
-import UnivBox from '../Universities/UnivBox';
+
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
@@ -71,7 +71,7 @@ setSearchKeyWord(e.target.value)
     else if(universities.length==3){return"30%"} else if(universities.length==4){return"23%"}},[universities])
     
     return(<StyledDiv position="static" display="flex" justify_content="space-between"  width={width} align_item="center" bg="#EB8888" border="10px" color="#FFFFFF" minHeight="40px" text_align="center" transform="0" onClick={()=>{ dispatch({ type: 'UNIVERSITIES_DELETE', payload: props.university });}}>
-      <StyledDiv font="Nanum JungHagSaeng" size="18px"position="static" margin="0 0 5px 5px" transform="0"> {props.university}</StyledDiv> 
+      <StyledDiv font="Nanum JungHagSaeng" size="15px"position="static" margin="0 0 5px 5px" transform="0"> {props.university}</StyledDiv> 
       <Xbutton/>
       </StyledDiv>)
   }
@@ -86,10 +86,10 @@ setSearchKeyWord(e.target.value)
             {/* TitleBox*/}
             <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
               {/* TextTitle*/}
-              <StyledText position="static" color="#F49393" size="1em">
+              <StyledText position="static" color="#F49393" size="0.8em">
                 우리 팀의 학교
               </StyledText>
-              <StyledText position=" static" size="1em">
+              <StyledText position=" static" size="0.8em">
                 는?
               </StyledText>
             </StyledDiv>
@@ -103,7 +103,7 @@ setSearchKeyWord(e.target.value)
               margin=" 10px 0 0 10px"
             >
               {/*TextNumber*/}
-              <StyledText position="static" weight="400" size="1em" font="Nanum JungHagSaeng" color="#BBBBBB">
+              <StyledText position="static" weight="400" size="0.8em" font="Nanum JungHagSaeng" color="#BBBBBB">
                 2/9
               </StyledText>
             </StyledDiv>
@@ -117,26 +117,32 @@ setSearchKeyWord(e.target.value)
             size="13px"
             margin="0 0 0 10px"
           >
-            <StyledText position="static" weight="400" size="1em" font="Pretendard" color="#AAAAAA">
+            <StyledText position="static" weight="400" size="0.8em" font="Pretendard" color="#AAAAAA">
               팀원들의 모든 학교를 말해주세요
             </StyledText>
             <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="28%" top="50%"></SubTitle>
           </StyledDiv>
         </StyledDiv>
         {/*SearchBox*/}
-        <StyledDiv display="flex" direction="column" top="20%" height="68%" width="100%"  left="50%"> 
+        <StyledDiv display="flex" direction="column" top="20%" height="60%" width="100%"  left="50%"> 
     
        
         {/* Div of Body*/}
-        <StyledDiv position="static" display="flex" direction="column"  transform= "0" width="100%" height="100%" >
+        <StyledDiv position="static" display="flex" direction="column" align_item="start" transform= "0" width="100%" height="100%" >
        {/* NO Div if there is no Selected university*/}
+       {universities.length==0?console.log("none") :
+       
         <StyledDiv position="static" display="flex" justify_content="space-evenly" margin=" 0 0 0 5%" align_item="center"transform="0" width="90%" height="50px">
-      {universities&& universities.map((university, idx)=>{ return(<SelectedUniversity key={idx} university={university}/>)})}
+       {universities.map((university, idx)=>{ return(<SelectedUniversity key={idx} university={university}/>)})}
+       </StyledDiv>
+       }
+       
+      
 
-        </StyledDiv>
+       
           {/* Search inputBox*/}
           <StyledDiv position="static" display="flex" justify_content="center" align_item="center"transform="0" width="100%" height="50px">
-            <StyledDiv position= "static" display="flex" justify_content="space-between" direction="row" transform="0" width="90%" height=" 45px"  border="10px" border_style="solid" border_width="1px" border_color="#EB8888">
+            <StyledDiv position= "static" display="flex" justify_content="space-between" direction="row" transform="0" width="90%" height=" 44px"  border="10px" border_style="solid" border_width="1px" border_color="#EB8888">
           <StyledInput placeholder='학교를 검색해주세요' name="universitySearch" onChange={inputChange}></StyledInput>
            <StyledDiv position ="static" transform="0" display="flex" justify_content="center" align_item="center" margin="0 10px  0 0">  <SearchIcon></SearchIcon></StyledDiv>
             </StyledDiv>
@@ -156,12 +162,12 @@ setSearchKeyWord(e.target.value)
           direction="row"
           justify_content="flex-end"
           align_item="flex-end"
-          top="88%"
-          height="auto"
+          top="80%"
+          height="18%"
           width="100%"
           left="40%"
         >
-          <ChatBallon />
+      
           <Character />
         </StyledDiv>
       </MobileBox>

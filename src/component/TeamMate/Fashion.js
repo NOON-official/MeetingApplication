@@ -85,7 +85,7 @@ const Fashions = (props) => {
       border_color="#F1ECEC"
       align_item="center"
     >
-      <StyledText  margin="5px 0 0 0"position="static" width="90%"font="Pretendard" size="14px"  color="#777777" weight="500" line="16.8px">
+      <StyledText  margin="5px 0 0 0"position="static" width="90%"font="Pretendard" size="12px"  color="#777777" weight="500" line="16.8px">
         패션
       </StyledText>
       <FashionContainer top="28%">

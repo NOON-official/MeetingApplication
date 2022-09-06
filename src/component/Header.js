@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-const HeaderContainer = styled.div`
+import { ReactComponent as HeaderIcon } from '../Asset/Header/Header.svg';
+const HeaderContainer = styled.header`
   display: flex;
-  justify-content: space-between;
-  margin: 20px;
-  height: 15%;
+  justify-content: start;
+  align-items: center;
+  height: 5%;
+  background-color: #F8F3F3;
+  
+  border-bottom: 1px solid #FFB9B9;
 `;
 const HeaderLeft = styled.div`
   justify-content: center;
@@ -16,6 +19,7 @@ const HeaderLeft = styled.div`
   font-weight: bold;
   color: black;
   font-family: 'Single Day', cursive;
+  margin: 10px 0 0 10px
 `;
 
 const Header = () => {
@@ -23,7 +27,7 @@ const Header = () => {
     <HeaderContainer>
       <HeaderLeft>
         <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
-          미팅학개론{' '}
+          <HeaderIcon/>
         </Link>
       </HeaderLeft>
     </HeaderContainer>

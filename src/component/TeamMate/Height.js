@@ -63,7 +63,7 @@ const Height = () => {
     border_color="#F1ECEC"
     align_item="center"
     >
-      <StyledText margin="10px 0 0 0"position="static" width="90%" font="Pretendard" size="14px"  color="#777777" weight="500" line="16.8px">
+      <StyledText margin="10px 0 0 0"position="static" width="90%" font="Pretendard" size="12px"  color="#777777" weight="500" line="16.8px">
         평균키
       </StyledText>
       <SliderBox position=" static" left="0" transform="0" display="flex" direction="column" >

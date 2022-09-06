@@ -104,7 +104,7 @@ export const NumberSelect = () => {
           color={number === 2 ? 'white' : '#B79292'}
           aria-label="add"
           onClick={() => setnumber(2)}
-          width="33%"
+          width="50%"
         >
           2 : 2
         </SelectButton>
@@ -115,21 +115,11 @@ export const NumberSelect = () => {
           color={number === 3 ? 'white' : '#B79292'}
           aria-label="add"
           onClick={() => setnumber(3)}
-          width="33%"
+          width="50%"
         >
           3 : 3
         </SelectButton>
-        <SelectButton
-          variant="extended"
-          size="small"
-          background_color={number === 4 ? '#EB8888' : '#F6EEEE'}
-          color={number === 4 ? 'white' : '#B79292'}
-          aria-label="add"
-          onClick={() => setnumber(4)}
-          width="33%"
-        >
-          4 : 4
-        </SelectButton>
+       
       </ButtonBox>
     </Contents>
   );
@@ -149,10 +139,10 @@ export const AgeSelect = () => {
         평균나이
       </SubTitle>
       <SliderBox top="60%">
-        <StyledText top="75%" size="20px" color="#B79292">
+        <StyledText top="75%" size="15px" color="#B79292">
           20세
         </StyledText>
-        <StyledText top="75%" left="90%" size="20px" color="#B79292">
+        <StyledText top="75%" left="90%" size="15px" color="#B79292">
           35세
         </StyledText>
         <PrettoSlider
