@@ -7,23 +7,50 @@ const Body9 = () => {
   return (
     <Container>
       <MobileBox>
-        <StyledDiv max_width="350px" top="5%" width="90%" height="20%" left="50%">
-          <StyledText position=" absolute" size="35px" color="#F49393" left="10px">
-            미팅의 분위기
-          </StyledText>
-          <StyledText position="absolute" size="35px" left="130px">
-            는
-          </StyledText>
-          <StyledText position="absolute" size="35px" left="10px" top="30px">
-            어땠으면 좋겠어요?
-          </StyledText>
-          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="210px" top="45px">
-            8/9
-          </SubTitle>
-        </StyledDiv>
-        <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="22%" top="18%" >
-          중복 선택이 가능해요
-        </SubTitle>
+      <StyledDiv display="flex" direction="column" top="2%" width="90%" height="15%" left="50%">
+          {/* HeaderBox*/}
+          <StyledDiv
+            position="static"
+            display="flex"
+            direction="column"
+            transform="0"
+            width="100%"
+            margin="5px 0 0 10px"
+          >
+            <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
+              <StyledText position=" static" size="0.8em" color="#F49393">
+                미팅의 분위기
+              </StyledText>
+              <StyledText position=" static" size="0.8em">
+                는
+              </StyledText>
+            </StyledDiv>
+            <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
+              {/* TitleBox*/}
+              <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
+                {/* TextTitle*/}
+
+                <StyledText position=" static" size="0.8em">
+                  어땟으면 좋겠어요?
+                </StyledText>
+              </StyledDiv>
+              <StyledDiv
+                position="static"
+                transform="0"
+                direction="row"
+                size="20px"
+                justify_content="center"
+                align_item="center"
+                margin=" 10px 0 0 10px"
+              >
+                {/*TextNumber*/}
+                <StyledText position="static" weight="400" size="0.8em" font="Nanum JungHagSaeng" color="#BBBBBB">
+                  8/9
+                </StyledText>
+              </StyledDiv>
+            </StyledDiv>
+          </StyledDiv>
+          </StyledDiv>
         <Wants></Wants>
         <StyledDiv
           display="flex"

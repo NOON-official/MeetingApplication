@@ -9,7 +9,7 @@ const PrefferedTeamSelectBox = styled.div`
   height: 63%;
   width: 90%;
   position: absolute;
-  top: 17%;
+  top: 15%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -20,16 +20,16 @@ const Body8 = () => {
   return (
     <Container bg=" #F5F5F5">
       <MobileBox>
-        <StyledDiv display="flex" direction="column" top="5%" width="90%" height="15%" left="50%">
+        <StyledDiv display="flex" direction="column" top="5%" width="90%" height="10%" left="50%">
           {/* HeaderBox*/}
           <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
             {/* TitleBox*/}
             <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" margin="0 0 0 10px">
               {/* TextTitle*/}
-              <StyledText position="static" color="#F49393" size="1em">
+              <StyledText position="static" color="#F49393" size="0.8em">
                 어떤 상대팀
               </StyledText>
-              <StyledText position=" static" size="1em">
+              <StyledText position=" static" size="0.8em">
                 을 원하시나요?
               </StyledText>
             </StyledDiv>
@@ -43,7 +43,7 @@ const Body8 = () => {
               margin=" 10px 0 0 10px"
             >
               {/*TextNumber*/}
-              <StyledText position="static" weight="400" size="1em" font="Nanum JungHagSaeng" color="#BBBBBB">
+              <StyledText position="static" weight="400" size="0.8em" font="Nanum JungHagSaeng" color="#BBBBBB">
                 7/9
               </StyledText>
             </StyledDiv>

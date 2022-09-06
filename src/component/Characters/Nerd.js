@@ -16,7 +16,7 @@ const Nerd = () => {
       <StyledDiv left="50%" top="10%">
         <NerdCharacter />
       </StyledDiv>
-      <StyledText top="30%" weight="400" size="34px" left="40%" line="32.2px">
+      <StyledText top="30%" weight="400" size="31px" left="40%" line="32.2px">
         깍두기
       </StyledText>
       <StyledDiv
@@ -29,10 +29,10 @@ const Nerd = () => {
         display="flex"
         direction="column"
       >
-        <StyledText position="static" font="pretendard" fontWeight="500" size="15px" color="#777777" line="18px">
+        <StyledText position="static" font="pretendard" fontWeight="500" size="13px" color="#777777" line="18px">
           수줍음이 많은 당신
         </StyledText>
-        <StyledText position="static" font="Pretendard" fontWeight="500" size="15px" color="#777777" line="18px">
+        <StyledText position="static" font="Pretendard" fontWeight="500" size="13px" color="#777777" line="18px">
           순수한 매력에 상대방이 반할지도?
         </StyledText>
       </StyledDiv>
@@ -48,10 +48,10 @@ const Nerd = () => {
         height="20%"
         bg="#F1ECEC"
       >
-        <StyledText position="static" font="Pretendard" fontWeight="700" line="15.6px" size="16px" color="#F49393">
+        <StyledText position="static" font="Pretendard" fontWeight="700" line="15.6px" size="14px" color="#F49393">
           주의!
         </StyledText>
-        <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="16px" color="#1A1A1A">
+        <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="14px" color="#1A1A1A">
           좀 더 자신감을 가지고 강하게 어필해 봅시다!
         </StyledText>
       </StyledDiv>

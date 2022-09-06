@@ -103,7 +103,7 @@ const Footer = () => {
   const jobs = useSelector((state) => state.jobs);
   const prefferedjobs = useSelector((state) => state.prefferedjobs);
   const prefferedage = useSelector((state) => state.prefferedage);
-  const preffereduniversity = useSelector((state) => state.preffereduniversity);
+  const preffereduniversity = useSelector((state) => state.preffereduniversity);  
   const prefferedthing = useSelector((state) => state.prefferedthing);
   const university = useSelector((state) => state.university);
   const characters = useSelector((state) => state.characters);

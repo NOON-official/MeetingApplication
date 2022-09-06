@@ -34,7 +34,7 @@ export const StyledDiv = styled.div`
 `;
 
 export const SubTitle = styled.div`
-  font-size: ${(props) => props.size || '14px'};
+  font-size: ${(props) => props.size || '12px'};
   position: ${(props) => props.position || 'absolute'};
   max-width: 768px;
 
@@ -94,7 +94,7 @@ export const ContentsAge = styled.div`
 export const SelectButton = styled.button`
   margin-right: 5px;
   border-radius: 14px;
-  height: 45px;
+  height: 40px;
   width: ${(props) => props.width || '50%'};
   max-width: 162px;
   background-color: ${(props) => props.background_color || 'transparent'};
@@ -105,7 +105,7 @@ export const SelectButton = styled.button`
 `;
 //Basic
 export const Container = styled.div`
-  height: ${(props) => props.height || '92%'};
+  height: ${(props) => props.height || '87%'};
   width: ${(props) => props.width || '100%'};
 
   position: absolute;

@@ -3,7 +3,7 @@ import { ReactComponent as PrivateInfo } from '../../Asset/page12/PrivateInfo.sv
 import { ReactComponent as ServiceUse } from '../../Asset/page12/ServiceUse.svg';
 import { ReactComponent as CheckIcon } from '../../Asset/confirm/CheckIcon.svg';
 import { useState, useEffect } from 'react';
-import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
+import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Body12 = () => {
@@ -75,17 +75,39 @@ const prefferedheight = useSelector(state=> state.prefferedheight)
   return (
     <Container>
       <MobileBox>
-        <StyledDiv top="5%" width="90%" height="20%" left="50%">
-          <StyledText position=" absolute" size="35px" left="10px">
-            미팅학개론 이용을 위한
-          </StyledText>
-          <StyledText position="absolute" color="#F49393" size="35px" left="10px" top="30px">
-            약관에 동의
-          </StyledText>
-          <StyledText position="absolute" size="35px" left="125px" top="30px">
-            해주세요
-          </StyledText>
-        </StyledDiv>{' '}
+      <StyledDiv display="flex" direction="column" top="2%" width="90%" height="20%" left="50%">
+          {/* HeaderBox*/}
+          <StyledDiv
+            position="static"
+            display="flex"
+            direction="column"
+            transform="0"
+            width="100%"
+            margin="5px 0 0 10px"
+          >
+            <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
+              <StyledText position=" static" size="0.8em" >
+                미팅학개론 이용을 위한
+              </StyledText>
+              
+            </StyledDiv>
+            <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
+              {/* TitleBox*/}
+              <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
+                {/* TextTitle*/}
+
+                <StyledText position=" static" size="0.8em" color="#F49393">
+                  약관에 동의
+                </StyledText>
+                <StyledText position=" static" size="0.8em" >
+                 해주세요
+                </StyledText>
+              </StyledDiv>
+              
+            </StyledDiv>
+          </StyledDiv>
+          
+        </StyledDiv>
         <StyledDiv
           display="flex"
           justify_content="center"
@@ -103,7 +125,7 @@ const prefferedheight = useSelector(state=> state.prefferedheight)
           }}
         >
           {' '}
-          <StyledText color={buttonFontColor} size="24px">
+          <StyledText color={buttonFontColor} size="20px">
             네 모두 동의합니다
           </StyledText>
         </StyledDiv>

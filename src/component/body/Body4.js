@@ -13,10 +13,10 @@ const Body4 = () => {
             {/* TitleBox*/}
             <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
               {/* TextTitle*/}
-              <StyledText position="static" color="#F49393" size="1em">
+              <StyledText position="static" color="#F49393" size="0.8em">
                 미팅 가능한 지역
               </StyledText>
-              <StyledText position=" static" size="1em">
+              <StyledText position=" static" size="0.8em">
                 을 알려주세요
               </StyledText>
             </StyledDiv>
@@ -30,7 +30,7 @@ const Body4 = () => {
               margin=" 10px 0 0 10px"
             >
               {/*TextNumber*/}
-              <StyledText position="static" weight="400" size="1em" font="Nanum JungHagSaeng" color="#BBBBBB">
+              <StyledText position="static" weight="400" size="0.8em" font="Nanum JungHagSaeng" color="#BBBBBB">
                 3/9
               </StyledText>
             </StyledDiv>
@@ -44,7 +44,7 @@ const Body4 = () => {
             size="13px"
             margin="0 0 0 10px"
           >
-            <StyledText position="static" weight="400" size="1em" font="Pretendard" color="#AAAAAA">
+            <StyledText position="static" weight="400" size="0.8em" font="Pretendard" color="#AAAAAA">
               중복 선택이 가능해요
             </StyledText>
             <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="28%" top="50%"></SubTitle>

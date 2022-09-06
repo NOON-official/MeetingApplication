@@ -8,6 +8,7 @@ import { ReactComponent as Star } from '../../Asset/page1/Star.svg';
 import { ReactComponent as MainText } from '../../Asset/page1/MainText.svg';
 import { StyledDiv, StyledText, Container, MobileBox, StyledButton } from '../Elements/StyledComponent';
 import { WomanNotAllowed } from '../ErrorMessages/WomanNotAllowed';
+import { ManNotAllowed } from '../ErrorMessages/ManNotAllowed';
 import client from '../../api';
 import Counter from '../Elements/CountAnimation';
 const Body1 = () => {
@@ -30,14 +31,23 @@ const Body1 = () => {
   console.log(num);
   return (
     <Container height={'100%'} bg="#f8f3f3">
-      <WomanNotAllowed
+      {/** 여성 참가자 제한 modal */}
+      {/*<WomanNotAllowed
         open={modalOpen}
         close={closeModal}
         children={'9월 초에 시작되는 다음 시즌에 이용해주세요'}
       ></WomanNotAllowed>
+      */}
+        {/** 남성 참가자 제한 modal */}
+      {/*<ManNotAllowed
+        open={modalOpen}
+        close={closeModal}
+        children={'9월 초에 시작되는 다음 시즌에 이용해주세요'}
+      ></ManNotAllowed>
+      */}
       <MobileBox overflow="auto">
-        {/*페이지 업테이트 적용부분
-         * <StyledDiv
+        {/*페이지 업테이트 적용부분*/}
+        <StyledDiv
           top="0%"
           width="100%"
           height="7%"
@@ -48,30 +58,8 @@ const Body1 = () => {
           align_item="center"
           left="50%"
         >
-          <StyledDiv
-            color="#666666"
-            height="100%"
-            position="static"
-            width="25%"
-            transform="0"
-            size="16px"
-            font="Nanum JungHagSaeng"
-            display="flex"
-            align_item="flex-end"
-          >
-            <StyledDiv
-              bg="#f8f3f3"
-              display="flex"
-              justify_content="center"
-              align_item="center"
-              position="static"
-              border="10px 10px 0 0"
-              width="100%"
-              height="100%"
-              transform="0"
-            >
+          <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
               홈
-            </StyledDiv>
           </StyledDiv>
           <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
             가이드
@@ -82,7 +70,7 @@ const Body1 = () => {
           <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
             우리팀 정보
           </StyledDiv>
-        </StyledDiv>*/}
+        </StyledDiv>
         <StyledDiv top="10.5%" left="12%" transform=" translate(-50%, 0)">
           <Bulb />
         </StyledDiv>
@@ -92,18 +80,18 @@ const Body1 = () => {
         <StyledDiv top="20%" left="52%" transform="translate(-50%, 0)">
           <Title />
         </StyledDiv>
-        <StyledDiv top="30%" left="80%" transform="translate(-50%, 0)">
+        <StyledDiv top="28%" left="80%" transform="translate(-50%, 0)">
           <Star />
         </StyledDiv>
-        <StyledDiv top="35%" left="50%" transform="translate(-50%, 0)">
+        <StyledDiv top="33%" left="50%" transform="translate(-50%, 0)">
           <Logo />
         </StyledDiv>
-        <StyledDiv top="70%" left="50%" transform="translate(-50%, 0)">
+        <StyledDiv top="66%" left="50%" transform="translate(-50%, 0)">
           <MainText />
         </StyledDiv>
 
         <Link to="/apply/2" style={{ textDecoration: 'none' }}>
-          <StyledButton height="50px" width="200px" top="80%">
+          <StyledButton height="50px" width="200px" top="75%">
             매칭 시작하기
           </StyledButton>
         </Link>
