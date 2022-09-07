@@ -23,7 +23,7 @@ const Counter = (props) => {
       font="Nanum JungHagSaeng"
       size="1rem"
       color="#515151"
-      top="87%"
+      top="82%"
       left="43%"
       transform="translate(-50%, 0)"
       letter_spacing="9px"

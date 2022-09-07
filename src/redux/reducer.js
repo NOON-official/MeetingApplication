@@ -24,9 +24,10 @@ const initialState = {
   signin: false, // 핸드폰 인증 여부
   privateinfoconfirm: false, // 이용 약관 동의 여부
   isMatching: false, // 매칭 진행중 여부
-
+  pagestate:0,
   ourTeamInfo:{},
-  prefferedTeamInfo:{}
+  prefferedTeamInfo:{},
+ 
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +38,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, gender: '여자' };
     case 'NUMBER':
       return { ...state, num: action.payload };
+    case 'PAGE':
+       return {...state, pagestate: action.payload};
     case 'AGE':
       return { ...state, age: action.payload };
       case 'DRINK':

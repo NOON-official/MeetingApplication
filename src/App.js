@@ -1,4 +1,4 @@
-import Header from './component/Header';
+import {Header, MainPageHeader} from './component/Header';
 import Body1 from './component/body/Body1';
 import Body2 from './component/body/Body2';
 import Body3 from './component/body/Body3';
@@ -35,11 +35,18 @@ function App() {
       return <Footer></Footer>;
     }
   };
- 
+ const Top = ()=>{
+  const location = useLocation().pathname;
+  if (location === '/') {
+    return <MainPageHeader></MainPageHeader>;
+  } else {
+    return <Header></Header>;
+  }
+ }
   return (
     <div className="App">
       <BrowserRouter>
-      <Header></Header>
+      <Top></Top>
         <Routes>
           <Route
             path="/Test"

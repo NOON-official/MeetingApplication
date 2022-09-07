@@ -121,6 +121,7 @@ export const MobileBox = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
+  justify-content: ${props=> props.justify_content};
   font-family: var(--font);
   left: 50%;
   transform: translate(-50%, 0);
