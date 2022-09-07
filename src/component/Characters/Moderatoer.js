@@ -34,7 +34,7 @@ const Moderatoer = () => {
         <StyledText position="static" font="pretendard" fontWeight="500" size="13px" color="#777777" line="16px">
           어색한 분위기를 풀어주는 당신은 미팅의 유재석!
         </StyledText>
-        <StyledText position="static" font="pretendard" fontWeight="500" size="153x" color="#777777" line="18px">
+        <StyledText position="static" font="pretendard" fontWeight="500" size="13px" color="#777777" line="18px">
           당신이 없다면 미팅이 진행되지 않아요
         </StyledText>
       </StyledDiv>
