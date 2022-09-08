@@ -13,13 +13,13 @@ jobs:
       - name: multiple command
         uses: appleboy/ssh-action@master
         with:
-         host: ${{ secrets.HOST }}
-         username: ${{ secrets.USER_NAME }}
-         key: ${{ secrets.SSH_KEY }}
-        script: |
-          cd ~/client
-          git pull origin prod
-          npm install
-          npm run build
-          service nginx restart        
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/client
+            git pull origin prod
+            npm install
+            npm run build
+            service nginx restart        
 
