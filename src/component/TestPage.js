@@ -1,4 +1,8 @@
+import styled from 'styled-components';
 
+const FullDiv = styled.div`
+width:100%;
+`
 const TestPage = () => {
  const data = [["me" , "a", "info"],["me", "b", "info"],["me", "c", "info"],["he", "c", "info"],["he", "d", "info"]]
  let sameuser =[]
@@ -22,6 +26,7 @@ let prevUserName =null
   return (
     <div>
     <div> 매칭 리스트업</div>
+  
     <table border="1" bordercolor="blue">
       <tr>
         <td>name of me</td>
@@ -60,6 +65,8 @@ let prevUserName =null
       })}
      
     </table>
+  
+    
     </div>
   );
 };
