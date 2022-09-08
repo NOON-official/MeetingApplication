@@ -1,7 +1,7 @@
 const initialState = {
   user: 'userName',
   phone: '',
-  gender: '남자',
+  gender: 1,
   num: 2,
   age: 20,
   drink:0,
@@ -26,16 +26,16 @@ const initialState = {
   isMatching: false, // 매칭 진행중 여부
   pagestate:0,
   ourTeamInfo:{},
-  prefferedTeamInfo:{},
+  
  
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_MALE':
-      return { ...state, gender: '남자' };
+      return { ...state, gender: 1 };
     case 'SET_FEMALE':
-      return { ...state, gender: '여자' };
+      return { ...state, gender: 2 };
     case 'NUMBER':
       return { ...state, num: action.payload };
     case 'PAGE':
@@ -127,8 +127,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, isMatching: action.payload };
     case 'SET_OURTEAMINFO':
       return{...state, ourTeamInfo: action.payload};
-    case 'SET_PREFFEREDTEAMINFO':
-        return{...state, prefferedTeamInfo: action.payload};
+   
     default:
       return state;
   }

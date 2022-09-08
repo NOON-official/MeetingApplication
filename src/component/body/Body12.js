@@ -36,28 +36,34 @@ const Body12 = () => {
   const vibe = useSelector((state) => state.prefferedthing);
 const prefferedheight = useSelector(state=> state.prefferedheight)
   const body = {
-    gender: gender,
-    num: num,
-    age: age,
-    intro: intro,
-    job: jobs,
-    university: university,
-    role: characters,
-    area: area,
-    day: day,
-    appearance: appearance,
-    mbti: mbti,
-    fashion: fashion,
-    drink: drink,
-    height: height
+    ourTeam:
+    {
+      gender: gender,
+      num: num,
+      age: age,
+      intro: intro,
+      job: jobs,
+      university: university,
+      role: characters,
+      area: area,
+      day: day,
+      appearance: appearance,
+      mbti: mbti,
+      fashion: fashion,
+      drink: drink,
+      height: height
+    },
+    ourteamPreference:
+    {
+      
+      age: prefferedage,
+      job: prefferedjobs,
+      sameUniversity: 1,
+      vibe: vibe,
+      height:prefferedheight
+    }
   };
-  const prefferenceBody = {
-    age: prefferedage,
-    job: prefferedjobs,
-    sameUniversity: 1,
-    vibe: vibe,
-    height:prefferedheight
-  };
+ 
   const saveState = (key, state) => {
     try {
       {/*const serializedState = JSON.stringify(state);
@@ -121,7 +127,7 @@ const prefferedheight = useSelector(state=> state.prefferedheight)
           onClick={() => {
             setInfoConfirm(!infoConfirm);
             saveState('SET_OURTEAMINFO', body);
-            saveState('SET_PREFFEREDTEAMINFO', prefferenceBody);
+            
           }}
         >
           {' '}

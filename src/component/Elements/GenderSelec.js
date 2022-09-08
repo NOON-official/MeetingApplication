@@ -48,10 +48,10 @@ export const GenderSelect = () => {
   }, [dispatch]);
   // 남자: true, 여자 : false
 
-  const ColorMale = gender === '남자' ? '#EB8888' : '#F6EEEE';
-  const colorM = gender === '남자' ? 'white' : '#B79292';
-  const ColorFemale = gender === '남자' ? '#F6EEEE' : '#EB8888';
-  const colorF = gender === '남자' ? '#B79292' : 'white';
+  const ColorMale = gender === 1 ? '#EB8888' : '#F6EEEE';
+  const colorM = gender === 1 ? 'white' : '#B79292';
+  const ColorFemale = gender === 1? '#F6EEEE' : '#EB8888';
+  const colorF = gender === 1 ? '#B79292' : 'white';
 
   return (
     <Contents>

@@ -20,15 +20,16 @@ const Main = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  React.useEffect(() => {
+  {/*React.useEffect(() => {
+    console.log("server rendering")
     client
       .get('api/service/count/team')
       .then((res) => {
         setNum(res.data.data.waitingTeam);
       })
-      .catch((err) => {});
+      .catch((err) => {console.log(err)});
   }, []);
-
+*/}
   return (
     <Container height={'100%'} bg="#f8f3f3">
       {/** 여성 참가자 제한 modal */}
@@ -68,7 +69,7 @@ const Main = () => {
         </StyledDiv>
 
         <Link to="/apply/2" style={{ textDecoration: 'none' }}>
-          <StyledButton height="50px" width="200px" top="70%">
+          <StyledButton height="45px" width="180px" top="70%" size="18px">
             매칭 시작하기
           </StyledButton>
         </Link>
@@ -76,7 +77,7 @@ const Main = () => {
         <Counter end={num} />
         <StyledDiv
           border_top="1px solid #D6D6D6"
-          top="90%"
+          top="93%"
           left="50%"
           height="20%"
           width="100%"
