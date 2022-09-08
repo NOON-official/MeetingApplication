@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as HeaderIcon } from '../Asset/Header/Header.svg';
 import { StyledDiv } from './Elements/StyledComponent';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: start;
@@ -56,12 +56,21 @@ const HeaderRight = styled.div`
 `
 
 export const MainPageHeader = ()=>{
-
+  const pagestate = useSelector((state)=> state.pagestate);
   const dispatch = useDispatch();
+
   const pageChange=(state)=>{
-    
  return(dispatch({type: 'PAGE', payload: state}));
                             }
+  const OnStateColor = ()=>{
+    const bg = "#EB8888";
+    const font = "#FFFFFF";
+    return( {bg , font} )
+  }
+  const main = useMemo(()=>(pagestate==0&& OnStateColor()),[pagestate]);
+  const guide = useMemo(()=>(pagestate==1&& OnStateColor()),[pagestate]);
+  const matching = useMemo(()=>(pagestate==2 && OnStateColor()),[pagestate]);
+  const myinfo = useMemo(()=>(pagestate==3&& OnStateColor()),[pagestate]);
   return (
     
     <MainPageHeaderContainer>
@@ -73,7 +82,7 @@ export const MainPageHeader = ()=>{
           <HeaderIcon/>
         </Link>
       </HeaderLeft>
-      <HeaderRight>로그아웃</HeaderRight>
+      <HeaderRight>로그인</HeaderRight>
       </MainPageHeaderTop>
       <StyledDiv
         position="static"
@@ -87,16 +96,16 @@ export const MainPageHeader = ()=>{
           transform="0"
          
         >
-          <StyledDiv onClick={()=>{pageChange(0)}} display="flex" justify_content="center" align_item="center"color="#666666" text_align="center"height="23px"position="static" width="25%" transform="0" size="12px" font="Pretendard">
+          <StyledDiv onClick={()=>{pageChange(0)}} border="10px"bg={main.bg} color={main.font?main.font:"#666666"} display="flex" justify_content="center" align_item="center" text_align="center"height="23px"position="static" width="23%" transform="0" size="12px" font="Pretendard">
               홈
           </StyledDiv>
-          <StyledDiv onClick={()=>{pageChange(1)}}display="flex" justify_content="center" align_item="center" color="#666666" text_align="center"height="23px"position="static" width="25%" transform="0" size="12px" font="Pretendard">
+          <StyledDiv onClick={()=>{pageChange(1)}} border="10px"bg={guide.bg}  color={guide.font?guide.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px"position="static" width="23%" transform="0" size="12px" font="Pretendard">
             가이드
           </StyledDiv>
-          <StyledDiv onClick={()=>{pageChange(2)}} display="flex" justify_content="center" align_item="center"color="#666666" text_align="center"height="23px" position="static" width="25%" transform="0" size="12px" font="Pretendard">
+          <StyledDiv onClick={()=>{pageChange(2)}}border="10px" bg={matching.bg} color={matching.font?matching.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
             매칭 조회
           </StyledDiv>
-          <StyledDiv onClick={()=>{pageChange(3)}}display="flex" justify_content="center" align_item="center"color="#666666" text_align="center"height="23px" position="static" width="25%" transform="0" size="12px" font="Pretendard">
+          <StyledDiv onClick={()=>{pageChange(3)}} border="10px"bg={myinfo.bg} color={myinfo.font?myinfo.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
             우리팀 정보
           </StyledDiv>
         </StyledDiv>

@@ -1,5 +1,6 @@
 import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 //name, phoneNumbe
 const MyInfo = (r) => {
     
@@ -59,7 +60,9 @@ const MyInfo = (r) => {
                   010-4983-8022
                 </td>
                 <td>
-                    {<button> 변경</button>}
+                    {<Link to="/apply/13" style={{ textDecoration: 'none' }}>
+                    <button> 변경</button>
+                      </Link>}
                 </td>
               </tr>
               
