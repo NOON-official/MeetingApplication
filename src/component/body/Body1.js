@@ -2,8 +2,10 @@ import React, { useCallback, useState } from 'react';
 import client from '../../api';
 import Main from '../mainpages/Main';
 import Guide from '../mainpages/Guide';
+import MatchingInquire from '../mainpages/MatchingInquire';
 import { useSelector } from 'react-redux';
 import { Container } from '../Elements/StyledComponent';
+import MyPage from '../mainpages/MyPage';
 const Body1 = () => {
   const pagestate = useSelector((state)=> state.pagestate);
   
@@ -12,7 +14,10 @@ const Body1 = () => {
   {return(<Main/>)}
   else if( pagestate ==1)
   return(<Guide/>)
-
+  else if (pagestate==2)
+  return(<MatchingInquire/>)
+  else if(pagestate==3)
+  return(<MyPage/>)
 },
   [pagestate]) ;
   

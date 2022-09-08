@@ -31,6 +31,7 @@ export const StyledDiv = styled.div`
   font-size: ${(props) => props.size};
   letter-spacing: ${(props) => props.letter_spacing};
   overflow:${(props)=>props.border_overflow};
+  font-weight: ${(props)=> props.weight};
 `;
 
 export const SubTitle = styled.div`
@@ -164,7 +165,7 @@ export const StyledButton = styled.button`
   left: ${(props) => props.left || '50%'};
   font-family: var(--font-family);
   font-size: ${(props) => props.size || 'var(--font-size-button)'};
-  transform: translate(-50%, 0);
+  transform: ${(props)=>props.transform||"translate(-50%, 0)"};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border-radius: var(--round-borderradious);
