@@ -26,12 +26,14 @@ const initialState = {
   isMatching: false, // 매칭 진행중 여부
   pagestate:0,
   ourTeamInfo:{},
-  
+  userLogin: false,
  
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_LOGIN':
+      return{ ...state, userLogin: action.payload};
     case 'SET_MALE':
       return { ...state, gender: 1 };
     case 'SET_FEMALE':

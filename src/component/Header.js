@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as HeaderIcon } from '../Asset/Header/Header.svg';
 import { StyledDiv } from './Elements/StyledComponent';
 import { useDispatch, useSelector } from 'react-redux';
+import isLogin from '../utils/isLogin';
+import {logOut} from '../utils/LogOut';
+import MainPageLogin from './Auth/MainPageLogin';
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: start;
@@ -55,22 +58,42 @@ const HeaderRight = styled.div`
   margin: 0 20px 0 0;
 `
 
+const LogIn = () =>{
+  return(
+          <div > 로그인</div>
+  )
+}
 export const MainPageHeader = ()=>{
-  const pagestate = useSelector((state)=> state.pagestate);
+   const pagestate = useSelector((state)=> state.pagestate);
   const dispatch = useDispatch();
+  const [IsLogin, setIsLogin] = useState(isLogin());
+ useEffect(()=>{
+    dispatch({type: "SET_LOGIN", payload:IsLogin})
+ },[IsLogin])
+  const LogOut = ()=>
+      {
+        return(
+          <div onClick={()=>{logOut(),setIsLogin(false)} }> 로그아웃</div>
+        )
+      }
 
   const pageChange=(state)=>{
- return(dispatch({type: 'PAGE', payload: state}));
+        return(dispatch({type: 'PAGE', payload: state}));
                             }
   const OnStateColor = ()=>{
-    const bg = "#EB8888";
-    const font = "#FFFFFF";
-    return( {bg , font} )
-  }
+      const bg = "#EB8888";
+      const font = "#FFFFFF";
+      
+      return( {bg , font} )
+                            }
   const main = useMemo(()=>(pagestate==0&& OnStateColor()),[pagestate]);
   const guide = useMemo(()=>(pagestate==1&& OnStateColor()),[pagestate]);
   const matching = useMemo(()=>(pagestate==2 && OnStateColor()),[pagestate]);
   const myinfo = useMemo(()=>(pagestate==3&& OnStateColor()),[pagestate]);
+
+
+
+
   return (
     
     <MainPageHeaderContainer>
@@ -82,7 +105,9 @@ export const MainPageHeader = ()=>{
           <HeaderIcon/>
         </Link>
       </HeaderLeft>
-      <HeaderRight>로그인</HeaderRight>
+      <HeaderRight>
+     { IsLogin? <LogOut/>:<LogIn/>}
+      </HeaderRight>
       </MainPageHeaderTop>
       <StyledDiv
         position="static"

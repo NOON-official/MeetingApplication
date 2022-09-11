@@ -54,8 +54,8 @@ const UnivBox = () => {
   return (
     <StyledDiv position="static" width="100%" left="0" transform="0" height="45px">
       <UniversitiesBox>
-        <University reduxnum={1} university={'같은 학교는 싫어요'}></University>
-        <University reduxnum={2} university={'상관 없어요'}></University>
+        <University reduxnum={0} university={'같은 학교는 싫어요'}></University>
+        <University reduxnum={1} university={'상관 없어요'}></University>
       </UniversitiesBox>
     </StyledDiv>
   );
