@@ -22,8 +22,8 @@ const Body12 = () => {
   const jobs = useSelector((state) => state.jobs);
   const prefferedjobs = useSelector((state) => state.prefferedjobs);
   const prefferedage = useSelector((state) => state.prefferedage);
-  const height = useSelector((state)=> state.height);
-  const drink = useSelector((state)=> state.drink); 
+  const height = useSelector((state) => state.height);
+  const drink = useSelector((state) => state.drink);
   const university = useSelector((state) => state.university);
   const characters = useSelector((state) => state.characters);
   const area = useSelector((state) => state.area);
@@ -34,10 +34,9 @@ const Body12 = () => {
   const fashion = useSelector((state) => state.fashion);
   const intro = useSelector((state) => state.introduction);
   const vibe = useSelector((state) => state.prefferedthing);
-const prefferedheight = useSelector(state=> state.prefferedheight)
+  const prefferedheight = useSelector((state) => state.prefferedheight);
   const body = {
-    ourTeam:
-    {
+    ourteam: {
       gender: gender,
       num: num,
       age: age,
@@ -51,37 +50,37 @@ const prefferedheight = useSelector(state=> state.prefferedheight)
       mbti: mbti,
       fashion: fashion,
       drink: drink,
-      height: height
+      height: height,
     },
-    ourteamPreference:
-    {
-      
+    ourteamPreference: {
       age: prefferedage,
       job: prefferedjobs,
       sameUniversity: 1,
       vibe: vibe,
-      height:prefferedheight
-    }
+      height: prefferedheight,
+    },
   };
- 
+
   const saveState = (key, state) => {
     try {
-      {/*const serializedState = JSON.stringify(state);
+      {
+        /*const serializedState = JSON.stringify(state);
       sessionStorage.setItem(key, serializedState);
-    */}
-    const serializedState = JSON.stringify(state);
-    
-    dispatch({type:`${key}`, payload:`${serializedState}`})
+    */
+      }
+      const serializedState = JSON.stringify(state);
+
+      dispatch({ type: `${key}`, payload: `${serializedState}` });
     } catch {
-      console.log("error")
-      alert("오류가 발생했습니다. 개발자에게 알려주세요!")
+      console.log('error');
+      alert('오류가 발생했습니다. 개발자에게 알려주세요!');
     }
   };
-// sessionstorage.setitem=> reux로 변경하기
+  // sessionstorage.setitem=> reux로 변경하기
   return (
     <Container>
       <MobileBox>
-      <StyledDiv display="flex" direction="column" top="2%" width="90%" height="20%" left="50%">
+        <StyledDiv display="flex" direction="column" top="2%" width="90%" height="20%" left="50%">
           {/* HeaderBox*/}
           <StyledDiv
             position="static"
@@ -92,10 +91,9 @@ const prefferedheight = useSelector(state=> state.prefferedheight)
             margin="5px 0 0 10px"
           >
             <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
-              <StyledText position=" static" size="0.8em" >
+              <StyledText position=" static" size="0.8em">
                 미팅학개론 이용을 위한
               </StyledText>
-              
             </StyledDiv>
             <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
               {/* TitleBox*/}
@@ -105,14 +103,12 @@ const prefferedheight = useSelector(state=> state.prefferedheight)
                 <StyledText position=" static" size="0.8em" color="#F49393">
                   약관에 동의
                 </StyledText>
-                <StyledText position=" static" size="0.8em" >
-                 해주세요
+                <StyledText position=" static" size="0.8em">
+                  해주세요
                 </StyledText>
               </StyledDiv>
-              
             </StyledDiv>
           </StyledDiv>
-          
         </StyledDiv>
         <StyledDiv
           display="flex"
@@ -127,7 +123,6 @@ const prefferedheight = useSelector(state=> state.prefferedheight)
           onClick={() => {
             setInfoConfirm(!infoConfirm);
             saveState('SET_OURTEAMINFO', body);
-            
           }}
         >
           {' '}
