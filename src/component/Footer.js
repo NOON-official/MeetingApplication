@@ -244,7 +244,7 @@ const Footer = () => {
       else{ uncompleted();
         if (characters.length > 0) {
           complete();
-          setNextPath('/apply/8');
+          setNextPath('/apply/8');  
         } else {
           setNextPath('/apply/7');
         }

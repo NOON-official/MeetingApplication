@@ -11,36 +11,50 @@ import client from '../../api';
 import Counter from '../Elements/CountAnimation';
 
 const Main = () => {
-  ;
+  
   const [num, setNum] = useState(0);
   const [modalOpen, setModalOpen] = useState(true);
+  const [statusMale, setStatusMale] =useState();
+  const [statusFeale, setStatusFeale] =useState();
   const openModal = () => {
     setModalOpen(true);
   };
   const closeModal = () => {
     setModalOpen(false);
   };
-  {/*React.useEffect(() => {
-    console.log("server rendering")
+{React.useEffect(() => {
     client
       .get('api/service/count/team')
       .then((res) => {
-        setNum(res.data.data.waitingTeam);
+        console.log("제발")
+        
       })
       .catch((err) => {console.log(err)});
+    {/*client
+    .get('api/service/apply/status')
+    .then((res)=>{
+      setStatusMale(res.data.data.maleIsFulled);
+      setStatusFemale(res.data.data.femaleIsFulled)
+    })
+    .catch((err)=>{console.log(err)});
+  */}
   }, []);
-*/}
+}
   return (
     <Container height={'100%'} bg="#f8f3f3">
       {/** 여성 참가자 제한 modal */}
-      {/*<WomanNotAllowed
+      {/*
+        statusFemale&&
+        <WomanNotAllowed
         open={modalOpen}
         close={closeModal}
         children={'9월 초에 시작되는 다음 시즌에 이용해주세요'}
       ></WomanNotAllowed>
-      */}
+  */}
         {/** 남성 참가자 제한 modal */}
-      {/*<ManNotAllowed
+      {/*
+      statusMale&&
+      <ManNotAllowed
         open={modalOpen}
         close={closeModal}
         children={'9월 초에 시작되는 다음 시즌에 이용해주세요'}

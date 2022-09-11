@@ -11,7 +11,7 @@ const override = {
 };
 
 const KakaoLoginCallback = (props) => {
-  const dispatch = useDispatch();
+  
   let [color, setColor] = useState('#EB8888');
   let [IsLogin, setIsLogin] = useState(false);
  
@@ -48,6 +48,7 @@ const KakaoLoginCallback = (props) => {
           // setIsMatching((state) => !state);
           // if (IsMatching) dispatch({ type: 'SET_IS_MATCHING', payload: props.IsMatching });
           window.location.replace('/apply/15');
+          // 이부분 props로 받아와서 바꾸기
         })
         .catch((err) => {
           console.log(err);
