@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
 
 const MyTeamInfo = () => {
-  const gender = useSelector((state) => state.gender);
+  const genderstate = useSelector((state) => state.gender);
   const num = useSelector((state) => state.num);
   const age = useSelector((state) => state.age);
   const universities = useSelector((state) => state.university);
@@ -12,8 +12,9 @@ const MyTeamInfo = () => {
   const day = useSelector((state) => state.day);
   const appearance = useSelector((state) => state.appearance);
   const mbti = useSelector((state) => state.mbti);
-  const characters = useSelector((state)=> state.characters);
-  const height = useSelector((state)=> state.height);
+  const characters = useSelector((state) => state.characters);
+  const height = useSelector((state) => state.height);
+  const gender = React.useMemo(() => (genderstate == 1 ? '남자' : '여자'), [genderstate]);
   return (
     <StyledDiv
       position="static"
@@ -145,9 +146,7 @@ const MyTeamInfo = () => {
             </tr>
             <tr>
               <th>평균키</th>
-              <td>
-                {height}cm
-              </td>
+              <td>{height}cm</td>
             </tr>
           </table>
         </StyledDiv>
@@ -159,7 +158,7 @@ const PrefferedInfo = () => {
   const job = useSelector((state) => state.prefferedjobs);
   const age = useSelector((state) => state.prefferedage);
   const university = useSelector((state) => state.preffereduniversity);
-  const height = useSelector((state)=> state.prefferedheight);
+  const height = useSelector((state) => state.prefferedheight);
   return (
     <StyledDiv
       position="static"
@@ -231,11 +230,13 @@ const PrefferedInfo = () => {
             </tr>
             <tr>
               <th>선호키</th>
-              <td>{height.map((data, index) => {
+              <td>
+                {height.map((data, index) => {
                   if (index + 1 != height.length) {
                     return ` ${data}cm ~ `;
                   } else return ` ${data}cm`;
-                })}</td>
+                })}
+              </td>
             </tr>
           </table>
         </StyledDiv>
@@ -310,7 +311,7 @@ const Body10 = () => {
   return (
     <Container>
       <MobileBox>
-      <StyledDiv display="flex" direction="column" top="2%" width="90%" height="15%" left="50%">
+        <StyledDiv display="flex" direction="column" top="2%" width="90%" height="15%" left="50%">
           {/* HeaderBox*/}
           <StyledDiv
             position="static"
@@ -334,7 +335,7 @@ const Body10 = () => {
                 {/* TextTitle*/}
 
                 <StyledText position=" static" size="0.8em">
-                 정리해드립니다.
+                  정리해드립니다.
                 </StyledText>
               </StyledDiv>
               <StyledDiv
@@ -347,11 +348,10 @@ const Body10 = () => {
                 margin=" 10px 0 0 10px"
               >
                 {/*TextNumber*/}
-                
               </StyledDiv>
             </StyledDiv>
           </StyledDiv>
-          </StyledDiv>
+        </StyledDiv>
         <StyledDiv max_width="350px" left="50%" top="17%" height="80%" width="100%" id="scrollbox" overflow="scroll">
           <StyledDiv
             left="50%"
