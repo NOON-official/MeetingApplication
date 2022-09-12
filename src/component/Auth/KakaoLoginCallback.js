@@ -45,7 +45,7 @@ const KakaoLoginCallback = (props) => {
       callDataPush() // 매칭 정보 서버에 저장
         .then(() => {
           console.log('완료');
-          //window.location.replace('/apply/15');
+          window.location.replace('/apply/15');
         })
         .catch((err) => {
           console.log('오류', err);
