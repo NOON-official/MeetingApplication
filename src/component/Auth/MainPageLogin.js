@@ -8,7 +8,7 @@ const MainPageLogin = () => {
 
   const LoginWithKakao = useCallback(() => {
     Kakao.Auth.authorize({
-      redirectUri: `${process.env.REACT_APP_CLIENT_URL}/auth/kakao/callback`,
+      redirectUri: `${process.env.REACT_APP_CLIENT_URL}/auth/kakao/main/callback`,
     });
   }, []);
 
