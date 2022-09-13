@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import isLogin from '../utils/isLogin';
 import {logOut} from '../utils/LogOut';
 import MainPageLogin from './Auth/MainPageLogin';
+
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: start;
@@ -60,7 +61,7 @@ const HeaderRight = styled.div`
 
 const LogIn = () =>{
   return(
-          <div > 로그인</div>
+       <MainPageLogin/>
   )
 }
 export const MainPageHeader = ()=>{

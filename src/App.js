@@ -17,6 +17,7 @@ import Body15 from './component/body/Body15';
 import SeasonFinish from './component/body/SeasonFinishPage';
 import TestPage from './component/TestPage';
 import KakaoLogin from './component/Auth/KakaoLogin';
+import MainLoginCallback from './component/Auth/MainPageLoginCallback';
 import KakaoLoginCallback from './component/Auth/KakaoLoginCallback';
 import Footer from './component/Footer';
 import React from 'react';
@@ -191,6 +192,14 @@ function App() {
             element={
               <PublicRoute restricted={true}>
                 <KakaoLoginCallback />
+              </PublicRoute>
+            }
+          />
+           <Route
+            path="/auth/kakao/main/callback"
+            element={
+              <PublicRoute restricted={true}>
+                <MainLoginCallback />
               </PublicRoute>
             }
           />

@@ -1,7 +1,7 @@
-import client from '../../api';
+
 import { useSelector } from 'react-redux';
 async function DataPush() {
-  console.log('함수실행');
+  
   const ourTeamInfo = JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).ourTeamInfo);
   const phonenumber = JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).phone);
   const id = window.sessionStorage.getItem('id');
