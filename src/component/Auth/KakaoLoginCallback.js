@@ -13,7 +13,7 @@ const override = {
 const KakaoLoginCallback = (props) => {
   let [color, setColor] = useState('#EB8888');
   let [IsLogin, setIsLogin] = useState(false);
-  
+
   // 카카오 인가코드 추출
   let code = new URL(window.location.href).searchParams.get('code');
 
