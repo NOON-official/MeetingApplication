@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
-
-
 const MainPageLogin = () => {
   const { Kakao } = window;
 
@@ -12,11 +10,7 @@ const MainPageLogin = () => {
     });
   }, []);
 
-  return (
-    <div onClick={LoginWithKakao}>
-      로그인
-    </div>
-  );
+  return <div onClick={LoginWithKakao}>로그인</div>;
 };
 
 export default MainPageLogin;
