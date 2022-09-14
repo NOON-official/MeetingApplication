@@ -37,15 +37,15 @@ const MainLoginCallback = (props) => {
     }
     // 로그인 후
     else {
-      console.log('1', window.sessionStorage.getItem('access'));
+  
       async function callDataGet() {
         await DataGet();
       }
-      console.log('데이터 이전 시도중');
+ 
 
       callDataGet() // 매칭 정보 서버에 저장
         .then(() => {
-          console.log('완료');
+         window.location.replace('/');
         })
         .catch((err) => {
           console.log('오류', err);

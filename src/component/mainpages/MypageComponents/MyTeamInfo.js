@@ -1,17 +1,51 @@
 import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useState,useEffect  } from "react";
+import client from "../../../api";
 //gender, num, age,universities,area,day, appearance,mbti,characters,height
 const MyTeamInfo = () => {
-    const gender = useSelector((state) => state.gender);
-    const num = useSelector((state) => state.num);
-    const age = useSelector((state) => state.age);
-    const universities = useSelector((state) => state.university);
-    const area = useSelector((state) => state.area);
-    const day = useSelector((state) => state.day);
-    const appearance = useSelector((state) => state.appearance);
-    const mbti = useSelector((state) => state.mbti);
-    const characters = useSelector((state)=> state.characters);
-    const height = useSelector((state)=> state.height);
+  const dispatch= useDispatch()
+  
+  const gender = useSelector((state)=> state.gender)
+  const num = useSelector((state)=> state.num)
+  const age = useSelector((state)=> state.age)
+  const universities= useSelector((state)=> state.university)
+  const area = useSelector((state)=> state.area)
+  const day = useSelector((state)=> state.day)
+  const characters = useSelector((state)=> state.characters)
+  const appearance = useSelector((state)=> state.appearance)
+  const mbti = useSelector((state)=> state.mbti)
+  const height = useSelector((state)=> state.height);
+  
+ 
+  const GetData=()=>{
+    let id = window.sessionStorage.getItem('ourteamId')
+    let accessToken = window.sessionStorage.getItem('access')
+    client
+    .get(`api/team/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
+    .then((res)=>{
+      {res.data.data.ourteam.gender==1? dispatch({type:'SET_MALE'}):dispatch({type:"SET_FEMALE"})}
+      dispatch({type:'NUMBER', payload:res.data.data.ourteam.num})
+      dispatch({type:'AGE', payload:res.data.data.ourteam.age})
+      dispatch({type:'GET_UNIVERSITIES', payload:res.data.data.ourteam.university})
+      console.log("univ",JSON.stringify(res.data.data.ourteam))
+      dispatch({type:'AREA', payload: res.data.data.ourteam.area})
+      dispatch({type:'DAY', payload:res.data.data.ourteam.day})
+      dispatch({type:'CHARACTERS',payload:res.data.data.ourteam.role})
+      dispatch({type:'APPREANCE', payload:res.data.data.ourteam.appearance})
+      dispatch({type:'MBTI',payload:res.data.data.ourteam.mbti})
+      dispatch({type:'HEIGHT', payload:res.data.data.ourteam.height})
+      dispatch({type:'PREFFEREDJOBS', payload:res.data.data.ourteamPreference.job})
+      dispatch({type:'PREFFEREDUNIVERSITIES', payload:res.data.data.ourteamPreference.sameUniversity})
+      dispatch({type:'PREFFEREDAGE', payload:res.data.data.ourteamPreference.age})
+      dispatch({type:'PREFFEREDHEIGHT', payload:res.data.data.ourteamPreference.height})
+      dispatch({type:'SET_PREFFEREDTHING', payload:res.data.data.ourteamPreference.vibe})
+    })
+    .catch((err)=>console.log(err))
+  }
+    useEffect(()=>{
+    GetData()
+    },[])
     return (
       <StyledDiv
         position="static"
@@ -55,10 +89,10 @@ const MyTeamInfo = () => {
           id="contents"
         >
           <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
-            <table>
+          <table>
               <tr>
                 <th>성별</th>
-                <td>{gender}</td>
+                <td>{gender==1?'남자':'여자'}</td>
               </tr>
               <tr>
                 <th>인원수</th>

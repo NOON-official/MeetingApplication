@@ -2,7 +2,7 @@ import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
 import { useSelector } from "react-redux";
 //job, age,university, height
 const PrefferedTeamInfo = () => {
-    const job = useSelector((state) => state.prefferedjobs);
+  const job = useSelector((state) => state.prefferedjobs);
     const age = useSelector((state) => state.prefferedage);
     const university = useSelector((state) => state.preffereduniversity);
     const height = useSelector((state)=> state.prefferedheight);

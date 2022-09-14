@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux';
-
+import { PURGE } from "redux-persist";
 const initialState = {
   user: 'userName',
   phone: '',
@@ -110,7 +109,6 @@ const reducer = (state = initialState, action) => {
       return { ...state, prefferedheight: action.payload };
     case 'PREFFEREDUNIVERSITIES':
       return { ...state, preffereduniversity: action.payload };
-
     case 'SET_PHONE':
       return { ...state, phone: action.payload };
     case 'SET_INTRODUCTION':
@@ -133,15 +131,14 @@ const reducer = (state = initialState, action) => {
       return { ...state, ourTeamInfo: action.payload };
     case 'SET_OURTEAMID':
       return { ...state, ourteamId: action.payload };
-    case 'LOG_OUT':
-      window.localStorage.removeItem('persist:root');
-      state = undefined;
-      return appReducer(state, action);
+    case 'GET_UNIVERSITIES':
+      return{...state ,university: action.payload };
+   case 'LOU_OUT':
+    window.localStorage.clear();
+    state= undefined;
     default:
       return state;
   }
 };
-const appReducer = (state, action) => {
-  return state;
-};
+
 export default reducer;
