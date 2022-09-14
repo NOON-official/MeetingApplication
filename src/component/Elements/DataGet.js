@@ -7,19 +7,25 @@ async function DataGet() {
 
   console.log(`Bearer ${accessToken}`);
 
-  client
+  await client
     .get(`api/team/ourteam-id/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
 
     .then((res) => {
+      setTimeout(()=>{},1000);
       window.sessionStorage.setItem('ourteamId', res.data.data.ourteamId);
+      setTimeout(()=>{},1000);
       if (res.data.data.ourteamId == -1) {
         alert('매칭진행중인 팀 정보가 없습니다.');
+        window.location.replace('/');
+        
       } else {
-        client
+         client
           .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`, {
             headers: { authorization: `Bearer ${accessToken}` },
           })
-          .then((res) => console.log(res.data.data.matchingStatus))
+          .then((res) => {
+            
+            window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
           .catch((err) => console.log(err));
       }
     })

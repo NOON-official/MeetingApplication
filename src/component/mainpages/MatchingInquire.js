@@ -10,12 +10,18 @@ import NewUser from './matchinginquires/NewUser';
 import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
 const MatchingInquire = () => {
-  const userState = useSelector((state) => state.userLogin);
+  const userState = window.sessionStorage.getItem('matchingStatus')
   const MatchingInquirePage = useCallback(() => {
-    if (userState) {
-      return;
-    } else {
-      return <NewUser />;
+    if (userState == 0) {
+      return <Inprogress/>
+    } else if (userState ==1) {
+      return <Done />;
+    }
+    else if( userState==2){
+      return <Fail/>
+    }
+    else{
+      return <NewUser/>
     }
   }, userState);
   return (
@@ -36,7 +42,7 @@ const MatchingInquire = () => {
           border="10px"
         >
           {/** return pages for each section 1.user, 1.1 user and matching in progress, 1.2 matching fail, 1.3matching done 2.not user */}
-          {userState ? <Done /> : <NewUser />}
+          <MatchingInquirePage/>
         </StyledDiv>
       </MobileBox>
     </Container>

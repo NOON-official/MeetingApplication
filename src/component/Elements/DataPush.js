@@ -1,4 +1,4 @@
-
+import client from '../../api';
 import { useSelector } from 'react-redux';
 async function DataPush() {
   
@@ -8,16 +8,20 @@ async function DataPush() {
   let object = { userId: parseInt(id) };
   const finalOurTeamInfo = Object.assign(JSON.parse(ourTeamInfo), object);
   const postPhonenunber = { userId: parseInt(id), phone: phonenumber };
-  client
+  await client
     .post('api/user/phone', postPhonenunber, {
       headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
     })
     .then(async (res) => {
-      client
+     await client
         .post('/api/team', finalOurTeamInfo, {
           headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
         })
-        .then(alert('완료'))
+        .then(
+         await client
+          .get(`api/team/ourteam-id/${id}`,  {headers:{ authorization: `Bearer ${window.sessionStorage.getItem('access')}` }})
+
+        )
         .catch((err) => {
           if (err.response.data.status == 400) {
             alert(err.response.data.message);
