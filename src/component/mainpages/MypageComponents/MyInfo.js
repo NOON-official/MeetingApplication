@@ -9,23 +9,26 @@ import { useCallback, useEffect, useState } from "react";
 
 const MyInfo = () => {
   const dispatch=useDispatch()
-  const [nickname, setNickname]= useState();
-  const [phone, setPhone]= useState();
-  const GetData=()=>{
+  const [nickname, setNickname]= useState()
+  const [phone, setPhone]= useState()
+  const GetData = async () => {
     let id = window.sessionStorage.getItem('id')
     let accessToken = window.sessionStorage.getItem('access')
-    client
+    await client
     .get(`api/user/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
     .then((res)=>{
-      window.sessionStorage.setItem('nickname',res.data.data.user.nickname) 
-      window.sessionStorage.setItem('phone',res.data.data.user.phone) 
+      window.sessionStorage.setItem('nickname',res?.data.data?.user?.nickname) 
+      window.sessionStorage.setItem('phone',res?.data?.data?.user?.phone) 
     })
     .catch((err)=>console.log(err))
   }
     useEffect(()=>{
-      GetData()
-      setNickname(window.sessionStorage.getItem('nickname'))
-      setPhone(window.sessionStorage.getItem('phone'))
+      async function fetchData() { 
+        await GetData()
+        setNickname(window.sessionStorage.getItem('nickname'))
+        setPhone(window.sessionStorage.getItem('phone'))
+      }
+      fetchData()
     },[])
     
     return (
