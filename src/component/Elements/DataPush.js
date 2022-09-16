@@ -20,6 +20,24 @@ async function DataPush() {
         .then(
          await client
           .get(`api/team/ourteam-id/${id}`,  {headers:{ authorization: `Bearer ${window.sessionStorage.getItem('access')}` }})
+          .then(async (res)=>{
+            setTimeout(()=>{},1000);
+            window.sessionStorage.setItem('ourteamId', res.data.data.ourteamId);
+            setTimeout(()=>{},1000);
+            
+               await client
+                .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`, {
+                  headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
+                })
+                .then((res) => {
+                  
+                  window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
+                .catch((err) => alert(err));
+            
+
+
+          })
+          .catch((err)=>console.log(err))
 
         )
         .catch((err) => {
