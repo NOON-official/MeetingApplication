@@ -26,24 +26,12 @@ const MatchingInquire = () => {
   }, [userState]);
   return (
     <Container height={'100%'} bg="#f8f3f3">
-      <MobileBox overflow="auto" justify_content=" center" height="100%">
+      <MobileBox overflow="auto"  >
         {/** white space box */}
-        <StyledDiv
-          display="flex"
-          direction="column"
-          justify_content="space-around"
-          align_item="center"
-          position=" static"
-          transform="0"
-          left="0"
-          height="80%"
-          bg="white"
-          width="90%"
-          border="10px"
-        >
+       
           {/** return pages for each section 1.user, 1.1 user and matching in progress, 1.2 matching fail, 1.3matching done 2.not user */}
           <MatchingInquirePage/>
-        </StyledDiv>
+        
       </MobileBox>
     </Container>
   );

@@ -14,13 +14,13 @@ const Guide =()=>{
                 </StyledDiv>
                 <StyledDiv  position="static" transform="0" left="0" display="flex" direction="column">
                     <StyledDiv weight="500" text_align="start" font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" direction="column">
-                    미팅학개론은 대학생활의 낭만을 찾아주고자 모인
+                    - 설렘 반 재미 반. 여러분의 이상형에 맞는 상대팀을
                     </StyledDiv>
                     <StyledDiv weight="500" text_align="start"font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" direction="column">
-                    5용사가 매칭해주는 자동매칭 미팅 서비스입니다.
+                    매칭해드리고 채팅방까지 파드려요. 
                     </StyledDiv>
                     <StyledDiv weight="500" text_align="start"font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" direction="column">
-                    간편한 자동 매칭부터 단톡방까지 미팅학개론의 편리한 <br/>서비스를 이용해보세요!
+                    - 오픈채팅으로 서로 신원노출 위험까지 제로! <br/>미팅을 쉽고 간편하게. 
                     </StyledDiv>
                 </StyledDiv>
             </StyledDiv>
@@ -34,23 +34,26 @@ const Guide =()=>{
                     </StyledDiv>
                 </StyledDiv>
                 <StyledDiv  position="static" transform="0" height="70%" left="0" display="flex" direction="column" justify_content="space-around">
+                <StyledDiv  weight="500" text_align="start"font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" >
+                    0. 저희 미팅학개론은 팀단위로 이루어 집니다.  <br/>정보를 입력해주세요.
+                    </StyledDiv>
                     <StyledDiv  weight="500" text_align="start"font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" >
-                    1. 상단 홈 화면에서 매칭시작을 누른 후 본인 팀의 <br/>정보를 입력해주세요.
+                    1. 같이 나갈 팀원을 구했다면 메인페이지에서  <br/>매칭 시작하기를 누르시고, 우리팀의 정보를 입력해주세요.
                     </StyledDiv>
                     <StyledDiv weight="500" text_align="start"font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" >
-                    2. 입력 후 전화번호와 카카오톡 인증을 하면 3일 이내 <br/> 원하는 상대팀을 매칭해드려요.
+                    2. 회원가입 완료후 전화번호를 인증해주시면  <br/> 이틀 이내로 상대팀을 매칭해드려요.
                     </StyledDiv>
                     <StyledDiv weight="500" text_align="start"font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" >
-                    3. 매칭된 상대방이 마음에 든다면 수락을 누르시고 <br/>그 후에 카카오톡 오픈채팅 방을 파드려요.
+                    3. 매칭된 상대방의 정보를 확인하고, 오픈 채팅방에<br/>들어오면 매칭 끝! 함께 재밌게 놀아보자고!!!
                     </StyledDiv>
                 </StyledDiv>
             </StyledDiv>
             <StyledDiv  height="20%" display= "flex" direction="column" justify_content="space-around" align_item="center" position=" static" transform="0" left="0" >
-                <Link to="/apply/2" style={{ textDecoration: 'none' }}>
+            <a href="https://furry-bank-197.notion.site/9c7eacd16070426fab83478adfd4c091"> 
                     <StyledButton position="static" left="0"height="45px" transform="0" width="180px" size="18px" >
-                    매칭 시작하기
+                    자세히 알아보기
                     </StyledButton>
-                </Link>
+                </a>
             </StyledDiv>
             </StyledDiv>
     

@@ -58,7 +58,7 @@ const Body3 = () => {
   }
   const SearchedUniversities =React.useCallback(()=>{
     let data
-    data= Universities.filter((c)=>{
+    data = Universities.filter((c)=>{
      return c["univ"].indexOf(searchKeyWord)>-1;
      })
      return data.map((c,index)=><SearchedUniversity onClick={()=>{OnUniversityClick(c)}}  key={index}>{c["univ"]}</SearchedUniversity>)
