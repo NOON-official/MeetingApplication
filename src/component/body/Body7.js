@@ -64,10 +64,10 @@ const Body7 = () => {
         </StyledDiv>
 
         <ButtonBox top={'18%'}>
-          <Character character={'비주얼'} />
-          <Character character={'사회자'} />
-          <Character character={'개그맨'} />
-          <Character character={'깍두기'} />
+          <Character character={'비주얼'} meta={1}/>
+          <Character character={'사회자'} meta={2}/>
+          <Character character={'개그맨'} meta={3}/>
+          <Character character={'깍두기'} meta={4}/>
         </ButtonBox>
         <StyledDiv top="33%" width="95%" height="65%" left="50%" overflow="scroll">
           <StyledDiv width="95%" height="250%" left="50%" minHeight="1250px">

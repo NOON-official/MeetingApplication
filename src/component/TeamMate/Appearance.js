@@ -47,18 +47,18 @@ const Face = (props) => {
   const dispatch = useDispatch();
   const appearance = useSelector((state) => state.appearance);
   const num = useSelector((state) => state.num);
-  const exist = React.useMemo(() => appearance.includes(props.face), [appearance]);
+  const exist = React.useMemo(() => appearance.includes(props.meta), [appearance]);
   const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist]);
   const bgColor = React.useMemo(() => (exist ? buttonColor : '#FBF6F6'), [exist]);
   const OnFaceClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'APPEARANCE_DELETE', payload: props.face });
+      dispatch({ type: 'APPEARANCE_DELETE', payload: props.meta });
     } else {
-      if (appearance.length < num) dispatch({ type: 'APPEARANCE', payload: props.face });
+      if (appearance.length < num) dispatch({ type: 'APPEARANCE', payload: props.meta });
     }
-  }, [exist, props.face, appearance]);
+  }, [exist, props.meta, appearance]);
   return (
-    <FaceButton color={fontColor} background_color={bgColor} type="button" value={props.face} onClick={OnFaceClick}>
+    <FaceButton color={fontColor} background_color={bgColor} type="button" value={props.meta} onClick={OnFaceClick}>
       {props.face}
     </FaceButton>
   );
@@ -83,16 +83,16 @@ const Appearance = (props) => {
         외모
       </StyledText>
       <AppearanceContainer >
-        <Face face={'강아지상'}></Face>
-        <Face face={'고양이상'}></Face>
-        <Face face={'토끼상'}></Face>
-        <Face face={'공룡상'}></Face>
+        <Face face={'강아지상'} meta={1}></Face>
+        <Face face={'고양이상'} meta={2}></Face>
+        <Face face={'토끼상'}meta={3}></Face>
+        <Face face={'공룡상'}meta={4}></Face>
       </AppearanceContainer>
       <AppearanceContainer >
-        <Face face={'말상'}></Face>
-        <Face face={'원숭이상'}></Face>
-        <Face face={'여우상'}></Face>
-        <Face face={'쥐상'}></Face>
+        <Face face={'말상'}meta={5}></Face>
+        <Face face={'원숭이상'}meta={6}></Face>
+        <Face face={'여우상'}meta={7}></Face>
+        <Face face={'쥐상'}meta={8}></Face>
       </AppearanceContainer>
     </StyledDiv>
   );

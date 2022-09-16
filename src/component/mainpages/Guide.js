@@ -14,7 +14,7 @@ const Guide =()=>{
                 </StyledDiv>
                 <StyledDiv  position="static" transform="0" left="0" display="flex" direction="column">
                     <StyledDiv weight="500" text_align="start" font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" direction="column">
-                    팅학개론은 대학생활의 낭만을 찾아주고자 모인
+                    미팅학개론은 대학생활의 낭만을 찾아주고자 모인
                     </StyledDiv>
                     <StyledDiv weight="500" text_align="start"font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" direction="column">
                     5용사가 매칭해주는 자동매칭 미팅 서비스입니다.

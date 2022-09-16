@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import isLogin from '../utils/isLogin';
 import client from '../api';
 import MainPageLogin from './Auth/MainPageLogin';
-
+import {persistor} from '../index'
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: start;
@@ -67,12 +67,12 @@ const LogIn = () =>{
 export const MainPageHeader = ()=>{
    const pagestate = useSelector((state)=> state.pagestate);
   const dispatch = useDispatch();
-  function logOut () {
+  async function logOut () {
        
         window.sessionStorage.clear();
-        console.log("dispatch")
-        dispatch({type:'LOG_OUT'})
-        console.log("dispatchDone")
+     
+         await persistor.purge();
+       
 };
   const [IsLogin, setIsLogin] = useState(isLogin());
  useEffect(()=>{

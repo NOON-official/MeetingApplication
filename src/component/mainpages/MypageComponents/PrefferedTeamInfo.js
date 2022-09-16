@@ -53,10 +53,23 @@ const PrefferedTeamInfo = () => {
                 <th>직업</th>
                 <td>
                   {job.map((data, index) => {
+                    let local
+                    if(data ==1){
+                      local = '대학생'
+                    }
+                    else if(data == 2){
+                      local ='직장인'
+                    }
+                    else if(data == 3){
+                      local = "취준생"
+                    }
+                    else if(data == 4){
+                      local ='대학원생'
+                    }
                     if (index + 1 != job.length) {
-                      return ` ${data} ,`;
+                      return ` ${local} ,`;
                     } else {
-                      return ` ${data} `;
+                      return ` ${local} `;
                     }
                   })}
                 </td>

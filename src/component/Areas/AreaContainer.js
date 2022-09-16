@@ -26,17 +26,17 @@ const Area = styled.button`
 const Areas = (props) => {
   const dispatch = useDispatch();
   const area = useSelector((state) => state.area);
-  const exist = React.useMemo(() => area.includes(props.area), [area]);
+  const exist = React.useMemo(() => area.includes(props.meta), [area]);
   const bgcolor = React.useMemo(() => (exist ? '#EB8888' : '#F6EEEE'), [exist]);
   const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist]);
   const bgColor = React.useMemo(() => (exist ? '#F6EEEE' : 'transparent'), [exist]);
   const OnAreaClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'AREA_DELETE', payload: props.area });
+      dispatch({ type: 'AREA_DELETE', payload: props.meta });
     } else {
-      dispatch({ type: 'AREA', payload: props.area });
+      dispatch({ type: 'AREA', payload: props.meta });
     }
-  }, [exist, props.area]);
+  }, [exist, props.meta]);
   return (
     <Area color={fontColor} background_color={bgcolor} onClick={OnAreaClick} width={props.width}>
       {props.area}
@@ -48,25 +48,25 @@ const AreaContainer = () => {
   return (
     <StyledDiv top="20%" width="95%" height="65%" left="50%">
       <AreaBox>
-        <Areas area="상관없음"></Areas>
-        <Areas area="강남"></Areas>
-        <Areas area="건대"></Areas>
+        <Areas area="상관없음" meta={1}></Areas>
+        <Areas area="강남" meta={2}></Areas>
+        <Areas area="건대" meta={3}></Areas>
       </AreaBox>
       <AreaBox>
-        <Areas area="사당"></Areas>
-        <Areas area="신촌"></Areas>
-        <Areas area="이태원"></Areas>
+        <Areas area="사당" meta={4}></Areas>
+        <Areas area="신촌" meta={5}></Areas>
+        <Areas area="이태원"meta={6}></Areas>
       </AreaBox>
       <AreaBox>
-        <Areas area="잠실"></Areas>
-        <Areas area="홍대"></Areas>
-        <Areas area="회기"></Areas>
+        <Areas area="잠실" meta={7}></Areas>
+        <Areas area="홍대" meta={8}></Areas>
+        <Areas area="회기" meta={9}></Areas>
       </AreaBox>
       <AreaBox>
-        <Areas area="대학로"></Areas>
-        <Areas area="왕십리"></Areas>
+        <Areas area="대학로" meta={10}></Areas>
+        <Areas area="왕십리"meta={11}></Areas>
 
-        <Areas area="성수"></Areas>
+        <Areas area="성수"meta={12}></Areas>
       </AreaBox>
     </StyledDiv>
   );

@@ -49,10 +49,38 @@ const WantsInfo = () => {
               <tr>
                 <td>
                   {want.map((data, index) => {
+                    let local
+                    if(data ==1){
+                      local = '술게임 좋아요'
+                    }
+                    else if(data == 2){
+                      local ='보드게임 좋아요'
+                    }
+                    else if(data == 3){
+                      local = "대화가 좋아요"
+                    }
+                    else if(data == 4){
+                      local ='설레임이 좋아요'
+                    }
+                    else if (data ==5){
+                      local = '재밌는게 좋아요'
+                    }
+                    else if (data == 6){
+                      local = '마시고 죽자'
+                    }
+                    else if (data == 7){
+                      local = ' 술은 싷어요'
+                    }
+                    else if (data == 8){
+                      local = ' 구독과 좋아요'
+                    }
+                    else if (data == 9){
+                      local = ' 아무거나 좋아요'
+                    }
                     if (index + 1 != want.length) {
-                      return ` ${data} / `;
+                      return ` ${local} / `;
                     } else {
-                      return ` ${data} `;
+                      return ` ${local} `;
                     }
                   })}
                 </td>

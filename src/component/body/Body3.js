@@ -49,7 +49,7 @@ const Body3 = () => {
   const num = useSelector((state) => state.num);
   const [searchKeyWord, setSearchKeyWord]= React.useState('0');
  const inputChange = (e)=>{
-setSearchKeyWord(e.target.value)
+  setSearchKeyWord(e.target.value)
   }
   function OnUniversityClick (university) {
  
@@ -59,9 +59,9 @@ setSearchKeyWord(e.target.value)
   const SearchedUniversities =React.useCallback(()=>{
     let data
     data= Universities.filter((c)=>{
-     return c.indexOf(searchKeyWord)>-1;
+     return c["univ"].indexOf(searchKeyWord)>-1;
      })
-     return data.map((c,index)=><SearchedUniversity onClick={()=>{OnUniversityClick(c)}}  key={index}>{c}</SearchedUniversity>)
+     return data.map((c,index)=><SearchedUniversity onClick={()=>{OnUniversityClick(c)}}  key={index}>{c["univ"]}</SearchedUniversity>)
 
   },[searchKeyWord,num,universities])
   
@@ -70,8 +70,9 @@ setSearchKeyWord(e.target.value)
     const width = React.useMemo(()=>{if(universities.length==1){return"45%"}else if(universities.length==2){return"45%"}
     else if(universities.length==3){return"30%"} else if(universities.length==4){return"23%"}},[universities])
     
-    return(<StyledDiv position="static" display="flex" justify_content="space-between"  width={width} align_item="center" bg="#EB8888" border="10px" color="#FFFFFF" minHeight="40px" text_align="center" transform="0" onClick={()=>{ dispatch({ type: 'UNIVERSITIES_DELETE', payload: props.university });}}>
-      <StyledDiv font="Nanum JungHagSaeng" size="15px"position="static" margin="0 0 5px 5px" transform="0"> {props.university}</StyledDiv> 
+    return(<StyledDiv position="static" display="flex" justify_content="space-between"  width={width} align_item="center" bg="#EB8888" border="10px" color="#FFFFFF" minHeight="40px" text_align="center" transform="0"
+    onClick={()=>{ dispatch({ type: 'UNIVERSITIES_DELETE', payload: props.university });}}>
+      <StyledDiv font="Nanum JungHagSaeng" size="15px"position="static" margin="0 0 5px 5px" transform="0"> {props.university["univ"]}</StyledDiv> 
       <Xbutton/>
       </StyledDiv>)
   }
@@ -130,7 +131,7 @@ setSearchKeyWord(e.target.value)
         {/* Div of Body*/}
         <StyledDiv position="static" display="flex" direction="column" align_item="start" transform= "0" width="100%" height="100%" >
        {/* NO Div if there is no Selected university*/}
-       {universities.length==0?console.log("none") :
+       {universities.length==0?console.log() :
        
         <StyledDiv position="static" display="flex" justify_content="space-evenly" margin=" 0 0 0 5%" align_item="center"transform="0" width="90%" height="50px">
        {universities.map((university, idx)=>{ return(<SelectedUniversity key={idx} university={university}/>)})}
