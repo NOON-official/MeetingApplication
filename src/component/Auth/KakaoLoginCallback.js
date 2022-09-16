@@ -1,6 +1,6 @@
 import { async } from '@firebase/util';
 import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PulseLoader from 'react-spinners/PulseLoader';
 import client from '../../api';
 import DataPush from '../Elements/DataPush';
@@ -11,10 +11,8 @@ const override = {
 };
 
 const KakaoLoginCallback = (props) => {
-  const dispatch = useDispatch();
   let [color, setColor] = useState('#EB8888');
   let [IsLogin, setIsLogin] = useState(false);
-  const [IsMatching, setIsMatching] = useState(false);
 
   // 카카오 인가코드 추출
   let code = new URL(window.location.href).searchParams.get('code');
@@ -31,6 +29,7 @@ const KakaoLoginCallback = (props) => {
           window.sessionStorage.setItem('access', res.data.data.user.accessToken);
           window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
           window.sessionStorage.setItem('id', res.data.data.user.id);
+          window.sessionStorage.setItem('isAdmin',res.data.data.user.isAdmin);
           setIsLogin((state) => !state);
         })
         .catch((err) => {
@@ -40,17 +39,17 @@ const KakaoLoginCallback = (props) => {
     }
     // 로그인 후
     else {
+      console.log('데이터 이전 시도중');
       async function callDataPush() {
         await DataPush();
       }
       callDataPush() // 매칭 정보 서버에 저장
         .then(() => {
-          // setIsMatching((state) => !state);
-          // if (IsMatching) dispatch({ type: 'SET_IS_MATCHING', payload: props.IsMatching });
+          console.log('완료');
           window.location.replace('/apply/15');
         })
         .catch((err) => {
-          console.log(err);
+          console.log('오류', err);
         });
     }
   }, [IsLogin]);

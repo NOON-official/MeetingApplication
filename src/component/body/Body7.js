@@ -20,10 +20,10 @@ const Body7 = () => {
             margin="5px 0 0 10px"
           >
             <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
-              <StyledText position=" static" size="1em" color="#F49393">
+              <StyledText position=" static" size="0.8em" color="#F49393">
                 미팅 나갈 구성원
               </StyledText>
-              <StyledText position=" static" size="1em">
+              <StyledText position=" static" size="0.8em">
                 을
               </StyledText>
             </StyledDiv>
@@ -32,7 +32,7 @@ const Body7 = () => {
               <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
                 {/* TextTitle*/}
 
-                <StyledText position=" static" size="1em">
+                <StyledText position=" static" size="0.8em">
                   알려주세요
                 </StyledText>
               </StyledDiv>
@@ -46,7 +46,7 @@ const Body7 = () => {
                 margin=" 10px 0 0 10px"
               >
                 {/*TextNumber*/}
-                <StyledText position="static" weight="400" size="1em" font="Nanum JungHagSaeng" color="#BBBBBB">
+                <StyledText position="static" weight="400" size="0.8em" font="Nanum JungHagSaeng" color="#BBBBBB">
                   6/9
                 </StyledText>
               </StyledDiv>

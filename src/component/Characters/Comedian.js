@@ -17,7 +17,7 @@ const Comedian = () => {
       <StyledDiv left="50%" top="10%">
         <ComedianCharacter />
       </StyledDiv>
-      <StyledText top="30%" weight="400" size="34px" left="40%" line="32.2px">
+      <StyledText top="30%" weight="400" size="31px" left="40%" line="32.2px">
         개그맨
       </StyledText>
       <StyledDiv
@@ -30,10 +30,10 @@ const Comedian = () => {
         display="flex"
         direction="column"
       >
-        <StyledText position="static" font="pretendard" fontWeight="500" size="15px" color="#777777" line="18px">
+        <StyledText position="static" font="pretendard" fontWeight="500" size="13px" color="#777777" line="18px">
           리액션과 개그맨 뺨치는 입담으로
         </StyledText>
-        <StyledText position="static" font="Pretendard" fontWeight="500" size="15px" color="#777777" line="18px">
+        <StyledText position="static" font="Pretendard" fontWeight="500" size="13px" color="#777777" line="18px">
           상대방을 홀리는 당신!
         </StyledText>
       </StyledDiv>
@@ -49,13 +49,13 @@ const Comedian = () => {
         height="20%"
         bg="#F1ECEC"
       >
-        <StyledText position="static" font="Pretendard" fontWeight="700" line="15.6px" size="16px" color="#F49393">
+        <StyledText position="static" font="Pretendard" fontWeight="700" line="15.6px" size="14px" color="#F49393">
           주의!
         </StyledText>
-        <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="16px" color="#1A1A1A">
+        <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="14px" color="#1A1A1A">
           개그만 하다 집에 돌아올수도 있으니
         </StyledText>
-        <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="16px" color="#1A1A1A">
+        <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="14px" color="#1A1A1A">
           적절한 타이밍이 중요해요!
         </StyledText>
       </StyledDiv>

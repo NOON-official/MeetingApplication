@@ -11,7 +11,7 @@ const StyledTextArea = styled.textarea`
   border: 0;
   margin: 5%;
   font-family: pretendard;
-  font-size: 14px;
+  font-size: 12px;
   ::placeholder {
     justify-content: flex-start;
     text-align: start;
@@ -27,23 +27,65 @@ const Body11 = () => {
   return (
     <Container>
       <MobileBox>
-        <StyledDiv max_width="350px" top="5%" width="90%" height="20%" left="50%">
-          <StyledText position=" absolute" size="35px" left="10px">
-            우리팀을 소개하는
-          </StyledText>
-          <StyledText position="absolute" size="35px" color="#F49393" left="10px" top="30px">
-            마지막 한 줄 어필
-          </StyledText>
-          <SubTitle weight="400" size="20px" font="Nanum JungHagSaeng" color="#BBBBBB" left="60%" top="35%">
-            9/9
-          </SubTitle>
-          <StyledText position="absolute" size="13px" font="Pretendard" color="#AAAAAA" left="10px" top="75px">
-            센스 넘치게 우리팀을 소개할수록 매칭률이 올라가요.
-          </StyledText>
-          <StyledText position="absolute" size="13px" font="Pretendard" color="#AAAAAA" left="10px" top="95px">
-            2문장 이상으로 우리팀을 소개해주세요!
-          </StyledText>
-        </StyledDiv>{' '}
+      <StyledDiv display="flex" direction="column" top="2%" width="90%" height="20%" left="50%">
+          {/* HeaderBox*/}
+          <StyledDiv
+            position="static"
+            display="flex"
+            direction="column"
+            transform="0"
+            width="100%"
+            margin="5px 0 0 10px"
+          >
+            <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
+              <StyledText position=" static" size="0.8em" >
+                우리팀을 소개하는
+              </StyledText>
+              
+            </StyledDiv>
+            <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
+              {/* TitleBox*/}
+              <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
+                {/* TextTitle*/}
+
+                <StyledText position=" static" size="0.8em" color="#F49393">
+             마지막 한 줄 어필
+                </StyledText>
+              </StyledDiv>
+              <StyledDiv
+                position="static"
+                transform="0"
+                direction="row"
+                size="20px"
+                justify_content="center"
+                align_item="center"
+                margin=" 10px 0 0 10px"
+              >
+                {/*TextNumber*/}
+                <StyledText position="static" weight="400" size="0.8em" font="Nanum JungHagSaeng" color="#BBBBBB">
+                  9/9
+                </StyledText>
+              </StyledDiv>
+            </StyledDiv>
+          </StyledDiv>
+          <StyledDiv
+            position="static"
+            display="flex"
+            direction="column"
+            transform="0"
+            width="100%"
+            size="13px"
+            margin="0 0 0 10px"
+          >
+            <StyledText position="static" weight="400" size="1em" font="Pretendard" color="#AAAAAA">
+             센스 넘치게 우리 팀을 소개할수록 매칭률이 올라가요!
+            </StyledText>
+            <StyledText position="static" weight="400" size="1em" font="Pretendard" color="#AAAAAA">
+             3문장 이내로 작성해 주세요.
+            </StyledText>
+            <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="28%" top="50%"></SubTitle>
+          </StyledDiv>
+          </StyledDiv>
         <StyledDiv
           display="flex"
           justify_content="center"

@@ -6,18 +6,18 @@ import * as React from 'react';
 
 const UniversitiesBox = styled.div`
   width: 100%;
-  height: 20%;
+  height: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 `;
 
 const Uni = styled.button`
-  width: ${(props) => props.width || '50%'};
+  width: ${(props) => props.width || '45%'};
   height: 100%;
   border: 0.2px solid var(--color-lightblue);
   border-radius: var(--round-borderradious);
-  margin: 10px;
+ 
   max-height: 200px;
   font-family: var(--font-family);
   font-size: 20px;
@@ -52,7 +52,7 @@ const University = (props) => {
 
 const UnivBox = () => {
   return (
-    <StyledDiv width="100%" left="50%" height="45%" top="65%">
+    <StyledDiv position="static" width="100%" left="0" transform="0" height="45px">
       <UniversitiesBox>
         <University reduxnum={0} university={'같은 학교는 싫어요'}></University>
         <University reduxnum={1} university={'상관 없어요'}></University>
