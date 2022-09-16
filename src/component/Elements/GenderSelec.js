@@ -165,17 +165,17 @@ const Job = (props) => {
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobs);
   const num = useSelector((state) => state.num);
-  const exists = React.useMemo(() => jobs.includes(props.job), [jobs, props.job]);
+  const exists = React.useMemo(() => jobs.includes(props.meta), [jobs, props.meta]);
   const fontColor = React.useMemo(() => (exists ? 'white' : '#B79292'), [exists]);
   const bgColor = React.useMemo(() => (exists ? '#EB8888' : '#F6EEEE'), [exists]);
 
   const onJobClick = React.useCallback(() => {
     if (exists) {
-      dispatch({ type: 'JOBS_DELETE', payload: props.job });
+      dispatch({ type: 'JOBS_DELETE', payload: props.meta });
     } else {
-      if (jobs.length < num) dispatch({ type: 'JOBS', payload: props.job });
+      if (jobs.length < num) dispatch({ type: 'JOBS', payload: props.meta });
     }
-  }, [exists, dispatch, props.job, jobs, num]);
+  }, [exists, dispatch, props.meta, jobs, num]);
 
   return (
     <SelectButton color={fontColor} background_color={bgColor} onClick={onJobClick} width="25%">
@@ -194,10 +194,10 @@ export const JobSelect = () => {
         중복 선택이 가능해요
       </SubTitle>
       <ButtonBox top="85%">
-        <Job job={'대학생'}></Job>
-        <Job job={'직장인'}></Job>
-        <Job job={'대학원생'}></Job>
-        <Job job={'취준생'}></Job>
+        <Job job={'대학생'} meta={1}></Job>
+        <Job job={'직장인'} meta={2}></Job>
+        <Job job={'대학원생'} meta={3}></Job>
+        <Job job={'취준생'} meta={4}> </Job>
       </ButtonBox>
     </Contents>
   );

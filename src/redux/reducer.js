@@ -1,11 +1,12 @@
 import { PURGE } from "redux-persist";
-const initialState = {
+
+const initialState={
   user: 'userName',
   phone: '',
   gender: 1,
   num: 2,
   age: 20,
-  drink: 0,
+  drink: 1,
   height: 170,
   jobs: [],
   university: [], // multi choice
@@ -29,8 +30,59 @@ const initialState = {
   ourTeamInfo: {},
   userLogin: false,
   ourteamId: -1,
-};
-
+}
+/*
+const rootReducer = createSlice({
+  name: 'userData',
+  initialState:{
+    user: 'userName',
+    phone: '',
+    gender: 1,
+    num: 2,
+    age: 20,
+    drink: 1,
+    height: 170,
+    jobs: [],
+    university: [], // multi choice
+    characters: [],
+    area: [],
+    day: [],
+    appearance: [], // multi choice -> 2 or 3
+    mbti: [], // multi choice
+    fashion: [], // multi choice
+    introduction: '',
+    kakaoid: '',
+    prefferedjobs: [],
+    prefferedage: [20, 25],
+    preffereduniversity: 1,
+    prefferedthing: [],
+    prefferedheight: [165, 175],
+    signin: false, // 핸드폰 인증 여부
+    privateinfoconfirm: false, // 이용 약관 동의 여부
+    isMatching: false, // 매칭 진행중 여부
+    pagestate: 0,
+    ourTeamInfo: {},
+    userLogin: false,
+    ourteamId: -1,
+  },
+  reducers:{
+    SET_MALE:(state)=> {state.gender = 1},
+    SET_FEMALE:(state)=>{state.gender =2},
+    NUMBER:(state,action)=>{state.num= action.payload },
+    AGE:(state)=>{state.age= action.payload},
+    JOBS:(state,action)=>{state.jobs.push(action.payload)},
+    JOBS_DELETE:(state,action)=>{
+      const newJob = action.payload;
+      state.jobs = state.jobs.filter((jobs)=>jobs !==newJob)
+    }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
+}
+  
+  }
+)
+*/
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_LOGIN':
@@ -133,12 +185,65 @@ const reducer = (state = initialState, action) => {
       return { ...state, ourteamId: action.payload };
     case 'GET_UNIVERSITIES':
       return{...state ,university: action.payload };
-   case 'LOU_OUT':
-    window.localStorage.clear();
-    state= undefined;
+    case 'GET_AREA':
+      return {...state, area: action.payload};
+    case 'GET_DAY':
+      return {...state, day: action.payload};
+    case 'GET_CHARACTER':
+      return {...state, characters: action.payload};
+    case 'GET_APPREANCE':
+      return { ...state, appearance: action.payload};
+    case 'GET_MBTI':
+      return {...state, mbti: action.payload};
+    case 'GET_HEIGHT':
+      return{...state, height:action.payload};
+    case 'GET_PREFFEREDJOB':
+      return {...state, prefferedjobs:action.payload};
+    case 'GET_PREFFEREDAGE':
+      return {...state, prefferedage: action.payload};
+    case 'GET_PREFFEREDUNIVERSITY':
+      return {...state, preffereduniversity :action.payload};
+    case 'GET_PREFFEREDHEIGHT':
+      return{...state, prefferedheight:action.payload};
+    case 'GET_PREFFEREDTHING':
+      return{...state, prefferedthing:action.payload}
+   case PURGE:{
+  
+    return {user: 'userName',
+    phone: '',
+    gender: 1,
+    num: 2,
+    age: 20,
+    drink: 1,
+    height: 170,
+    jobs: [],
+    university: [], // multi choice
+    characters: [],
+    area: [],
+    day: [],
+    appearance: [], // multi choice -> 2 or 3
+    mbti: [], // multi choice
+    fashion: [], // multi choice
+    introduction: '',
+    kakaoid: '',
+    prefferedjobs: [],
+    prefferedage: [20, 25],
+    preffereduniversity: 1,
+    prefferedthing: [],
+    prefferedheight: [165, 175],
+    signin: false, // 핸드폰 인증 여부
+    privateinfoconfirm: false, // 이용 약관 동의 여부
+    isMatching: false, // 매칭 진행중 여부
+    pagestate: 0,
+    ourTeamInfo: {},
+    userLogin: false,
+    ourteamId: -1,};
+   }
+    
     default:
       return state;
   }
+  
 };
 
 export default reducer;

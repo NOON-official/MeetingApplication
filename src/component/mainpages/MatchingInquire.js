@@ -23,7 +23,7 @@ const MatchingInquire = () => {
     else{
       return <NewUser/>
     }
-  }, userState);
+  }, [userState]);
   return (
     <Container height={'100%'} bg="#f8f3f3">
       <MobileBox overflow="auto" justify_content=" center" height="100%">

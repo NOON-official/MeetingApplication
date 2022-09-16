@@ -76,9 +76,9 @@ const MyTeamInfo = () => {
               <td>
                 {universities.map((data, index) => {
                   if (index + 1 != universities.length) {
-                    return ` ${data} ,`;
+                    return ` ${data["univ"]} ,`;
                   } else {
-                    return ` ${data} `;
+                    return ` ${data["univ"]} `;
                   }
                 })}
               </td>
@@ -88,10 +88,47 @@ const MyTeamInfo = () => {
               <td>
                 {' '}
                 {area.map((data, index) => {
+                   let localArea
+                   if(data ==1){
+                     localArea = '상관없음'
+                   }
+                   else if(data == 2){
+                     localArea ='강남'
+                   }
+                   else if(data == 3){
+                     localArea = "건대"
+                   }
+                   else if(data == 4){
+                     localArea ='사당'
+                   }
+                   else if (data ==5){
+                     localArea = '신천'
+                   }
+                   else if (data == 6){
+                     localArea = '이태원'
+                   }
+                   else if (data == 7){
+                     localArea = ' 잠실'
+                   }
+                   else if (data == 8){
+                     localArea ='홍대'
+                   }
+                   else if(data == 9){
+                     localArea = '회기'
+                   }
+                   else if( data == 10){
+                     localArea = '대학로'
+                   }
+                   else if(data == 11){
+                     localArea = '왕십리'
+                   }
+                   else if(data ==12){
+                     localArea ='성수'
+                   }
                   if (index + 1 != area.length) {
-                    return ` ${data} ,`;
+                    return ` ${localArea} ,`;
                   } else {
-                    return ` ${data} `;
+                    return ` ${localArea} `;
                   }
                 })}
               </td>
@@ -100,10 +137,32 @@ const MyTeamInfo = () => {
               <th>요일</th>
               <td>
                 {day.map((data, index) => {
+                  let local
+                  if(data ==1){
+                    local = '월요일'
+                  }
+                  else if(data == 2){
+                    local ='화요일'
+                  }
+                  else if(data == 3){
+                    local = "수요일"
+                  }
+                  else if(data == 4){
+                    local ='목요일'
+                  }
+                  else if (data ==5){
+                    local = '금요일'
+                  }
+                  else if (data == 6){
+                    local = '토요일'
+                  }
+                  else if (data == 7){
+                    local = ' 일요일'
+                  }
                   if (index + 1 != day.length) {
-                    return ` ${data} ,`;
+                    return ` ${local} ,`;
                   } else {
-                    return ` ${data} `;
+                    return ` ${local} `;
                   }
                 })}
               </td>
@@ -112,10 +171,23 @@ const MyTeamInfo = () => {
               <th>구성원</th>
               <td>
                 {characters.map((data, index) => {
+                  let local
+                  if(data ==1){
+                    local = '비주얼'
+                  }
+                  else if(data == 2){
+                    local ='사회자'
+                  }
+                  else if(data == 3){
+                    local = "개그맨"
+                  }
+                  else if(data == 4){
+                    local ='깍두기'
+                  }
                   if (index + 1 != characters.length) {
-                    return ` ${data} ,`;
+                    return ` ${local} ,`;
                   } else {
-                    return ` ${data} `;
+                    return ` ${local} `;
                   }
                 })}
               </td>
@@ -124,10 +196,35 @@ const MyTeamInfo = () => {
               <th>스타일</th>
               <td>
                 {appearance.map((data, index) => {
+                  let local
+                  if(data ==1){
+                    local = '강아지상'
+                  }
+                  else if(data == 2){
+                    local ='고양이상'
+                  }
+                  else if(data == 3){
+                    local = "토끼상"
+                  }
+                  else if(data == 4){
+                    local ='공룡상'
+                  }
+                  else if (data ==5){
+                    local = '말상'
+                  }
+                  else if (data == 6){
+                    local = '원숭이상'
+                  }
+                  else if (data == 7){
+                    local = ' 여우상'
+                  }
+                  else if (data == 8){
+                    local = ' 쥐상'
+                  }
                   if (index + 1 != appearance.length) {
-                    return ` ${data} ,`;
+                    return ` ${local} ,`;
                   } else {
-                    return ` ${data} `;
+                    return ` ${local} `;
                   }
                 })}
               </td>
@@ -136,10 +233,59 @@ const MyTeamInfo = () => {
               <th>mbti</th>
               <td>
                 {mbti.map((data, index) => {
+                  let local
+                  if(data ==1){
+                    local = 'ENFJ'
+                  }
+                  else if(data == 2){
+                    local ='ENTJ'
+                  }
+                  else if(data == 3){
+                    local = "ENFP"
+                  }
+                  else if(data == 4){
+                    local ='ENTP'
+                  }
+                  else if (data ==5){
+                    local = 'ESFP'
+                  }
+                  else if (data == 6){
+                    local = 'ESFJ'
+                  }
+                  else if (data == 7){
+                    local = ' ESTP'
+                  }
+                  else if (data == 8){
+                    local = ' ESTJ'
+                  }
+                  else if(data ==9){
+                    local = 'INFP'
+                  }
+                  else if(data == 10){
+                    local ='INFJ'
+                  }
+                  else if(data == 11){
+                    local = "INTP"
+                  }
+                  else if(data == 12){
+                    local ='ISTP'
+                  }
+                  else if (data ==13){
+                    local = 'ISFP'
+                  }
+                  else if (data == 14){
+                    local = 'ISFJ'
+                  }
+                  else if (data == 15){
+                    local = ' ISTJ'
+                  }
+                  else if (data == 16){
+                    local = ' INTJ'
+                  }
                   if (index + 1 != mbti.length) {
-                    return ` ${data} ,`;
+                    return ` ${local} ,`;
                   } else {
-                    return ` ${data} `;
+                    return ` ${local} `;
                   }
                 })}
               </td>
@@ -206,11 +352,24 @@ const PrefferedInfo = () => {
               <th>직업</th>
               <td>
                 {job.map((data, index) => {
-                  if (index + 1 != job.length) {
-                    return ` ${data} ,`;
-                  } else {
-                    return ` ${data} `;
-                  }
+                   let local
+                   if(data ==1){
+                     local = '대학생'
+                   }
+                   else if(data == 2){
+                     local ='직장인'
+                   }
+                   else if(data == 3){
+                     local = "취준생"
+                   }
+                   else if(data == 4){
+                     local ='대학원생'
+                   }
+                   if (index + 1 != job.length) {
+                     return ` ${local} ,`;
+                   } else {
+                     return ` ${local} `;
+                   }
                 })}
               </td>
             </tr>
@@ -293,11 +452,39 @@ const WantInfo = () => {
             <tr>
               <td>
                 {want.map((data, index) => {
-                  if (index + 1 != want.length) {
-                    return ` ${data} / `;
-                  } else {
-                    return ` ${data} `;
-                  }
+                let local
+                if(data ==1){
+                  local = '술게임 좋아요'
+                }
+                else if(data == 2){
+                  local ='보드게임 좋아요'
+                }
+                else if(data == 3){
+                  local = "대화가 좋아요"
+                }
+                else if(data == 4){
+                  local ='설레임이 좋아요'
+                }
+                else if (data ==5){
+                  local = '재밌는게 좋아요'
+                }
+                else if (data == 6){
+                  local = '마시고 죽자'
+                }
+                else if (data == 7){
+                  local = ' 술은 싷어요'
+                }
+                else if (data == 8){
+                  local = ' 구독과 좋아요'
+                }
+                else if (data == 9){
+                  local = ' 아무거나 좋아요'
+                }
+                if (index + 1 != want.length) {
+                  return ` ${local} / `;
+                } else {
+                  return ` ${local} `;
+                }
                 })}
               </td>
             </tr>

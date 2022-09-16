@@ -40,17 +40,17 @@ const PrettoSlider = styled(Slider)({
 const Job = (props) => {
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.prefferedjobs);
-  const exists = React.useMemo(() => jobs.includes(props.job), [jobs]);
+  const exists = React.useMemo(() => jobs.includes(props.meta), [jobs]);
   const fontColor = React.useMemo(() => (exists ? 'white' : '#B79292'), [exists]);
   const bgColor = React.useMemo(() => (exists ? '#EB8888' : '#F6EEEE'), [exists]);
 
   const onJobClick = React.useCallback(() => {
     if (exists) {
-      dispatch({ type: 'PREFFEREDJOBS_DELETE', payload: props.job });
+      dispatch({ type: 'PREFFEREDJOBS_DELETE', payload: props.meta });
     } else {
-      dispatch({ type: 'PREFFEREDJOBS', payload: props.job });
+      dispatch({ type: 'PREFFEREDJOBS', payload: props.meta });
     }
-  }, [exists, dispatch, props.job, jobs]);
+  }, [exists, dispatch, props.meta, jobs]);
 
   return (
     <SelectButton color={fontColor} background_color={bgColor} onClick={onJobClick} width="25%">
@@ -66,10 +66,10 @@ export const JobSelect = () => {
         직업
       </SubTitle>
       <ButtonBox position="static" left="0" transform="0">
-        <Job job={'대학생'}></Job>
-        <Job job={'직장인'}></Job>
-        <Job job={'대학원생'}></Job>
-        <Job job={'취준생'}></Job>
+        <Job job={'대학생'} meta={1}></Job>
+        <Job job={'직장인'} meta={2}></Job>
+        <Job job={'대학원생'} meta={3}></Job>
+        <Job job={'취준생'} meta={4}></Job>
       </ButtonBox>
     </Contents>
   );

@@ -1,4 +1,5 @@
 import storage from 'redux-persist/lib/storage';
+import rootReducer from './reducer';
 import { combineReducers } from 'redux';
 import {
     persistReducer,
@@ -9,19 +10,25 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
-
+import storage from 'redux-persist/lib/storage'; 
+import logger from 'redux-logger';
 const persistConfig = {
     key: 'root',
     storage,
 };
-const reducers = combineReducers({ counter: counterSlice });
+const reducers = combineReducers({ persistConfig: rootReducer });
 const persistedReducer = persistReducer(persistConfig, reducers);
-export default configureStore({
+const store= configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }),
+  //미들웨어 작성시 에러 주의
+        getDefaultMiddleware(
+            {
+                serializableCheck: {
+                    ignoredActions: [PERSIST, PURGE],
+                },
+            }
+        ).concat(logger)
 });
+
+export default store;
