@@ -11,7 +11,7 @@ const StyledInput = styled.input`
   width: ${(props) => props.width || '100%'};
   height: 100%;
   display: flex;
-  font-size: 18px;
+  font-size: 15px;
   border: 0;
   text-align: 'center';
   outline: none;
@@ -19,7 +19,7 @@ const StyledInput = styled.input`
   ::placeholder {
     justify-content: center;
     text-align: 'center';
-    font-size: 16px;
+    font-size: 15px;
     outline: none;
   }
 `;
@@ -30,20 +30,10 @@ const Body13 = () => {
   const saveState = (key, state) => {
     try {
       const serializedState = state;
-      sessionStorage.setItem(key, serializedState);
+      dispatch({type:`${key}`, payload:`${serializedState}`});
     } catch {}
   };
-  const loadState = (key) => {
-    try {
-      const serializedState = sessionStorage.getItem(key);
-      if (serializedState === null) {
-        return undefined;
-      }
-      return serializedState;
-    } catch (err) {
-      return undefined;
-    }
-  };
+
   const dispatch = useDispatch();
   const [phonenumFirst, setPhoneNumFirst] = useState('');
   const [phoneNumSecond, setPhonenumSecond] = useState('');
@@ -58,6 +48,11 @@ const Body13 = () => {
       secondPhoneNumber.current.focus();
     }
   }, [phonenumFirst]);
+  useEffect(()=>{
+    let phoneNumber = basicPhoneNumber + phonenumFirst.concat(phoneNumSecond);
+    (phoneNumSecond.length==4) && dispatch({type: "SET_PHONE", payload:phoneNumber})
+  },[phoneNumSecond])
+  // 뒤에서 버튼누를 시 redux로 넘기니 저장이 안되는 경우가 있어서 앞에서 확실하게 쥣번호 4개 입력시 데이터 저당하도록 설정
   const countryCode = '+82';
   const basicPhoneNumber = '010';
   const submitAble = React.useMemo(
@@ -79,8 +74,8 @@ const Body13 = () => {
       alert('번호입력');
     } else {
       let phoneNumber = basicPhoneNumber + phonenumFirst.concat(phoneNumSecond);
-      console.log(phoneNumber);
-      saveState('phone', phoneNumber);
+     
+      saveState('SET_PHONE', phoneNumber);
       requestOTP();
     }
   };
@@ -99,7 +94,7 @@ const Body13 = () => {
   };
   const requestOTP = React.useCallback(() => {
     authentication.languageCode = 'Ko';
-    const phone = loadState('phone');
+    
     if (phone.length >= 10) {
       generateRecaptcha();
 
@@ -147,16 +142,38 @@ const Body13 = () => {
   return (
     <Container>
       <MobileBox>
-        <StyledDiv top="5%" width="90%" height="15%" left="50%">
-          <StyledText position=" absolute" size="35px" left="10px" color="#F49393">
-            전화번호 인증
-          </StyledText>
-          <StyledText position="absolute" size="35px" left="125px">
-            을 통해
-          </StyledText>
-          <StyledText position="absolute" size="35px" left="10px" top="30px">
-            서비스를 시작해 보세요
-          </StyledText>
+      <StyledDiv display="flex" direction="column" top="2%" width="90%" height="20%" left="50%">
+          {/* HeaderBox*/}
+          <StyledDiv
+            position="static"
+            display="flex"
+            direction="column"
+            transform="0"
+            width="100%"
+            margin="5px 0 0 10px"
+          >
+            <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
+              <StyledText position=" static" size="0.8em" color="#F49393" >
+              전화번호 인증
+              </StyledText>
+              <StyledText position=" static" size="0.8em" >
+              을 통해
+              </StyledText>
+            </StyledDiv>
+            <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
+              {/* TitleBox*/}
+              <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
+                {/* TextTitle*/}
+
+                <StyledText position=" static" size="0.8em" >
+                  서비스를 시작해 보세요
+                </StyledText>
+                
+              </StyledDiv>
+              
+            </StyledDiv>
+          </StyledDiv>
+          
         </StyledDiv>
         <div id="recaptchaContainer"></div>
         <StyledDiv height="80%" top="20%" width="90%" left="50%">
@@ -165,7 +182,7 @@ const Body13 = () => {
               color="#777777"
               font="Pretendard"
               weight="400"
-              size="13px"
+              size="12px"
               height="30%"
               width="90%"
               top="20%"
@@ -181,7 +198,7 @@ const Body13 = () => {
                 left="15%"
                 height="100%"
                 width="28%"
-                size="18px"
+                size="15px"
               >
                 010
               </StyledDiv>
@@ -270,6 +287,7 @@ const Body13 = () => {
             text_align="center"
             font="Pretendard"
             color="#AAAAAA"
+            size="12px"
           >
             수집된 번호는 매칭에만 활용되고 <br /> 상대팀에게 전달되지 않습니다.
           </StyledDiv>

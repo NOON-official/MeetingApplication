@@ -2,10 +2,11 @@ import * as React from 'react';
 import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { SubTitle, ButtonBox, SliderBox, Contents, SelectButton, StyledText } from './StyledComponent';
+import { SubTitle, ButtonBox, SliderBox, Contents, SelectButton, StyledText, StyledDiv } from './StyledComponent';
 import UnivBox from '../Universities/PrefferedUnivBox';
 const PrettoSlider = styled(Slider)({
   color: '#EB8888',
+  width: "90%",
   height: 8,
   '& .MuiSlider-track': {
     border: 'none',
@@ -59,12 +60,12 @@ const Job = (props) => {
 };
 export const JobSelect = () => {
   return (
-    <Contents>
-      <SubTitle weigth="500" font="Pretendard" top="5%" left="5%">
+    <Contents heigth="25%" width="100%" justify_content="space-around">
+      <SubTitle transform="0" margin="0 0 0 10px" width="100%"position="static" weigth="500" font="Pretendard" align_item="center" justify_content="flex-start">
         {' '}
         직업
       </SubTitle>
-      <ButtonBox top="12%">
+      <ButtonBox position="static" left="0" transform="0">
         <Job job={'대학생'}></Job>
         <Job job={'직장인'}></Job>
         <Job job={'대학원생'}></Job>
@@ -82,27 +83,63 @@ export const AgeSelect = () => {
     dispatch({ type: 'PREFFEREDAGE', payload: newValue });
   };
   return (
-    <Contents>
-      <SubTitle weigth="500" font="Pretendard" top="30%" left="10%">
+    <Contents heigth="25%" width="100%" justify_content="space-around">
+      <SubTitle transform="0" margin="0 0 0 10px" width="100%"position="static" weigth="500" font="Pretendard" align_item="center" justify_content="flex-start">
+        {' '}
         평균나이
       </SubTitle>
-      <SliderBox top="40%">
-        <StyledText top="75%" size="20px" color="#B79292">
-          20세
-        </StyledText>
-        <StyledText top="75%" left="90%" size="20px" color="#B79292">
-          35세
-        </StyledText>
-        <PrettoSlider min={20} max={35} value={age} onChange={handleChange} valueLabelDisplay="on" disableSwap />
+      <SliderBox position=" static" left="0" transform="0" display="flex" direction="column" >
+        {/** divide slider and text */}
+        <StyledDiv position="static" transform="0" display="flex" justify_content="center" align_item="end" height="50px">
+        <PrettoSlider
+          min={20} max={35} value={age} onChange={handleChange} valueLabelDisplay="on" disableSwap
+        
+        />
+        </StyledDiv>
+       <StyledDiv position="static" transform="0" display="flex" justify_content="space-between" align_item="start">
+            <StyledText position="static" transform="0" color="#B79292" font="Nanum JungHagSaeng">20세</StyledText>
+            <StyledText position="static" transform="0" color="#B79292" font="Nanum JungHagSaeng">35세</StyledText>
+       </StyledDiv>
       </SliderBox>
+      
     </Contents>
   );
 };
+export const HeightSelect =()=>{
+  const dispatch = useDispatch();
+  const height = useSelector((state) => state.prefferedheight);
 
+  const handleChange = (event, newValue) => {
+    dispatch({ type: 'PREFFEREDHEIGHT', payload: newValue });
+  };
+  return (
+    <Contents heigth="25%" width="100%" justify_content="space-around">
+    <SubTitle transform="0" margin="0 0 0 10px" width="100%"position="static" weigth="500" font="Pretendard" align_item="center" justify_content="flex-start">
+      {' '}
+      평균키
+    </SubTitle>
+    <SliderBox position=" static" left="0" transform="0" display="flex" direction="column" >
+      {/** divide slider and text */}
+      <StyledDiv position="static" transform="0" display="flex" justify_content="center" align_item="end" height="50px">
+      <PrettoSlider
+        min={150} max={190} value={height} onChange={handleChange} valueLabelDisplay="on" disableSwap
+      
+      />
+      </StyledDiv>
+     <StyledDiv position="static" transform="0" display="flex" justify_content="space-between" align_item="start">
+          <StyledText position="static" transform="0" color="#B79292" font="Nanum JungHagSaeng">150cm</StyledText>
+          <StyledText position="static" transform="0" color="#B79292" font="Nanum JungHagSaeng">190cm</StyledText>
+     </StyledDiv>
+    </SliderBox>
+    
+  </Contents>
+  );
+}
 export const UnivSelect = () => {
   return (
-    <Contents>
-      <SubTitle weigth="500" font="Pretendard" top="60%" left="10%">
+    <Contents heigth="25%" width="100%" justify_content="space-around">
+    <SubTitle transform="0" margin="0 0 0 10px" width="100%"position="static" weigth="500" font="Pretendard" align_item="center" justify_content="flex-start">
+      {' '}
         기피 학교
       </SubTitle>
       <UnivBox />

@@ -1,4 +1,4 @@
-import Header from './component/Header';
+import {Header, MainPageHeader} from './component/Header';
 import Body1 from './component/body/Body1';
 import Body2 from './component/body/Body2';
 import Body3 from './component/body/Body3';
@@ -17,6 +17,7 @@ import Body15 from './component/body/Body15';
 import SeasonFinish from './component/body/SeasonFinishPage';
 import TestPage from './component/TestPage';
 import KakaoLogin from './component/Auth/KakaoLogin';
+import MainLoginCallback from './component/Auth/MainPageLoginCallback';
 import KakaoLoginCallback from './component/Auth/KakaoLoginCallback';
 import Footer from './component/Footer';
 import React from 'react';
@@ -26,6 +27,8 @@ import './App.css';
 import PublicRoute from './component/Router/PublicRoute';
 import PrivateRoute from './component/Router/PrivateRoute';
 import { app } from './component/Firebase/firebase';
+import { useDispatch } from 'react-redux';
+
 function App() {
   const Bootom = () => {
     const location = useLocation().pathname;
@@ -35,9 +38,19 @@ function App() {
       return <Footer></Footer>;
     }
   };
+ const Top = ()=>{
+  const location = useLocation().pathname;
+  if (location === '/' || location === '/join') {
+    return <MainPageHeader></MainPageHeader>;
+  } else {
+    return <Header></Header>;
+  }
+ }
+ 
   return (
     <div className="App">
       <BrowserRouter>
+      <Top></Top>
         <Routes>
           <Route
             path="/Test"
@@ -47,7 +60,7 @@ function App() {
               </PublicRoute>
             }
           />
-       <Route
+     {/* <Route
             path="/"
             element={
               <PublicRoute restricted={false}>
@@ -55,7 +68,7 @@ function App() {
               </PublicRoute>
             }
           />
-        {/*
+          */}
            <Route
             path="/"
             element={
@@ -63,8 +76,17 @@ function App() {
                 <Body1 />
               </PublicRoute>
             }
-          /> 
-          * */}
+          />
+
+          <Route
+            path="/join"
+            element={
+              <PublicRoute restricted={false}>
+                <Body1 />
+              </PublicRoute>
+            }
+          />
+         
           <Route
             path="/apply/2"
             element={
@@ -182,6 +204,14 @@ function App() {
             element={
               <PublicRoute restricted={true}>
                 <KakaoLoginCallback />
+              </PublicRoute>
+            }
+          />
+           <Route
+            path="/auth/kakao/main/callback"
+            element={
+              <PublicRoute restricted={true}>
+                <MainLoginCallback />
               </PublicRoute>
             }
           />

@@ -31,21 +31,26 @@ export const StyledDiv = styled.div`
   font-size: ${(props) => props.size};
   letter-spacing: ${(props) => props.letter_spacing};
   overflow:${(props)=>props.border_overflow};
+  font-weight: ${(props)=> props.weight};
 `;
 
 export const SubTitle = styled.div`
-  font-size: ${(props) => props.size || '14px'};
+  font-size: ${(props) => props.size || '12px'};
   position: ${(props) => props.position || 'absolute'};
   max-width: 768px;
 
   width: ${(props) => props.width || 'auto'};
   top: ${(props) => props.top};
   left: ${(props) => props.left || '50%'};
-  transform: translate(-50%, 0);
+  transform: ${props=>props.transform ||"translate(-50%, 0)"};
   color: ${(props) => props.color || '#777777'};
   font-family: ${(props) => props.font || 'var(--font-family)'};
   font-weight: ${(props) => props.weight || '700'};
   line-height: ${(props) => props.line_height || '20px'};
+  margin: ${props=> props.margin};
+  display: flex;
+  justify-content: ${props=> props.justify_content};
+  align-items: ${props=> props.align_item};
 `;
 export const ButtonBox = styled.div`
   display: flex;
@@ -53,8 +58,8 @@ export const ButtonBox = styled.div`
   justify-content: space-around;
   position: ${(props) => props.position || 'absolute'};
   top: ${(props) => props.top};
-  left: 50%;
-  transform: translate(-50%, 0);
+  left: ${props=> props.left||"50%"};
+  transform: ${props=>props.transform ||"translate(-50%, 0)"};
   max-width: 375px;
   width: 100%;
   z-index: ${(props) => props.z_index};
@@ -63,16 +68,18 @@ export const ButtonBox = styled.div`
 export const SliderBox = styled.div`
   width: 90%;
   max-width: 350px;
-  position: absolute;
+  position: ${(props)=> props.position ||"absolute"};
   top: ${(props) => props.top};
-  left: 50%;
-  transform: translate(-50%, 0);
+  left: ${(props)=> props.left ||"50%"};
+  transform: ${(props)=> props.transform ||"translate(-50%, 0)"};
+  display: ${props=> props.display};
+  flex-direction: ${props=> props.direction};
 `;
 export const Contents = styled.div`
   display: flex;
   flex-direction: ${(props) => props.flexDirection || 'column'};
   color: 'black';
-  justify-content: center;
+  justify-content: ${props=> props.justify_content||"center"};
   align-items: center;
   white-space: pre-wrap;
   position: ${(props) => props.position};
@@ -88,7 +95,7 @@ export const ContentsAge = styled.div`
 export const SelectButton = styled.button`
   margin-right: 5px;
   border-radius: 14px;
-  height: 45px;
+  height: 40px;
   width: ${(props) => props.width || '50%'};
   max-width: 162px;
   background-color: ${(props) => props.background_color || 'transparent'};
@@ -99,7 +106,7 @@ export const SelectButton = styled.button`
 `;
 //Basic
 export const Container = styled.div`
-  height: ${(props) => props.height || '92%'};
+  height: ${(props) => props.height || '87%'};
   width: ${(props) => props.width || '100%'};
 
   position: absolute;
@@ -115,6 +122,7 @@ export const MobileBox = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
+  justify-content: ${props=> props.justify_content};
   font-family: var(--font);
   left: 50%;
   transform: translate(-50%, 0);
@@ -157,7 +165,7 @@ export const StyledButton = styled.button`
   left: ${(props) => props.left || '50%'};
   font-family: var(--font-family);
   font-size: ${(props) => props.size || 'var(--font-size-button)'};
-  transform: translate(-50%, 0);
+  transform: ${(props)=>props.transform||"translate(-50%, 0)"};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border-radius: var(--round-borderradious);

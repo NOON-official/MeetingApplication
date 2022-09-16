@@ -21,7 +21,7 @@ const AppearanceContainer = styled.div`
   width: 100%;
   flex-direction: row;
   justify-content: ${(props) => props.location || 'space-around'};
-  position: absolute;
+  position: static;
   top: ${(props) => props.top};
 `;
 const SelectedBox = styled.div`
@@ -66,27 +66,29 @@ const Face = (props) => {
 const Appearance = (props) => {
   return (
     <StyledDiv
-      top="2%"
-      left="50%"
+      
+      position="static"
+      transform="0"
       bg="white"
-      height="25%"
-      width="95%"
+      height="120px"
+      width="100%"
       border="14px"
       display="flex"
-      justify_content="space-between"
+      justify_content="space-around"
       direction="column"
       border_color="#F1ECEC"
+      align_item="center"
     >
-      <StyledText font="Pretendard" size="14px" top="7%" left="6%" color="#777777" weight="500" line="16.8px">
+      <StyledText margin="5px 0 0 0" position="static" width="90%" font="Pretendard" size="12px"  color="#777777" weight="500" line="16.8px">
         외모
       </StyledText>
-      <AppearanceContainer top="28%">
+      <AppearanceContainer >
         <Face face={'강아지상'}></Face>
         <Face face={'고양이상'}></Face>
         <Face face={'토끼상'}></Face>
         <Face face={'공룡상'}></Face>
       </AppearanceContainer>
-      <AppearanceContainer top="58%">
+      <AppearanceContainer >
         <Face face={'말상'}></Face>
         <Face face={'원숭이상'}></Face>
         <Face face={'여우상'}></Face>

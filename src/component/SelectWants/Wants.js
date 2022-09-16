@@ -20,7 +20,7 @@ const Thing = styled.button`
   max-height: 200px;
   min-width: 86px;
   font-family: var(--font-family);
-  font-size: ${(props) => props.width || '16px'};
+  font-size: ${(props) => props.size || '16px'};
   color: ${(props) => props.color || 'black'};
   background-color: ${(props) => props.background_color || 'transparent'};
 `;
@@ -48,7 +48,7 @@ const Want = (props) => {
 
 const Wants = () => {
   return (
-    <StyledDiv top="25%" width="95%" height="65%" left="50%">
+    <StyledDiv top="17%" width="95%" height="65%" left="50%">
       <WantBox>
         <Want want="술게임 좋아요"></Want>
         <Want want="보드게임 좋아요"></Want>
@@ -56,7 +56,7 @@ const Wants = () => {
       </WantBox>
       <WantBox>
         <Want want="설렘이 좋아요"></Want>
-        <Want size="14px" want="재밌는 게 좋아요"></Want>
+        <Want size="14px" want="재밌는게 좋아요"></Want>
         <Want want="마시고 죽자"></Want>
       </WantBox>
       <WantBox>

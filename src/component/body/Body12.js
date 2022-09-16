@@ -3,8 +3,9 @@ import { ReactComponent as PrivateInfo } from '../../Asset/page12/PrivateInfo.sv
 import { ReactComponent as ServiceUse } from '../../Asset/page12/ServiceUse.svg';
 import { ReactComponent as CheckIcon } from '../../Asset/confirm/CheckIcon.svg';
 import { useState, useEffect } from 'react';
-import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
+import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 import { useSelector, useDispatch } from 'react-redux';
+
 const Body12 = () => {
   const [infoConfirm, setInfoConfirm] = useState(false);
   const dispatch = useDispatch();
@@ -21,7 +22,8 @@ const Body12 = () => {
   const jobs = useSelector((state) => state.jobs);
   const prefferedjobs = useSelector((state) => state.prefferedjobs);
   const prefferedage = useSelector((state) => state.prefferedage);
-
+  const height = useSelector((state) => state.height);
+  const drink = useSelector((state) => state.drink);
   const university = useSelector((state) => state.university);
   const characters = useSelector((state) => state.characters);
   const area = useSelector((state) => state.area);
@@ -32,48 +34,82 @@ const Body12 = () => {
   const fashion = useSelector((state) => state.fashion);
   const intro = useSelector((state) => state.introduction);
   const vibe = useSelector((state) => state.prefferedthing);
-
+  const prefferedheight = useSelector((state) => state.prefferedheight);
   const body = {
-    gender: gender,
-    num: num,
-    age: age,
-    intro: intro,
-    job: jobs,
-    university: university,
-    role: characters,
-    area: area,
-    day: day,
-    appearance: appearance,
-    mbti: mbti,
-    fashion: fashion,
+    ourteam: {
+      gender: gender,
+      num: num,
+      age: age,
+      intro: intro,
+      job: jobs,
+      university: university,
+      role: characters,
+      area: area,
+      day: day,
+      appearance: appearance,
+      mbti: mbti,
+      fashion: fashion,
+      drink: drink,
+      height: height,
+    },
+    ourteamPreference: {
+      age: prefferedage,
+      job: prefferedjobs,
+      sameUniversity: 1,
+      vibe: vibe,
+      height: prefferedheight,
+    },
   };
-  const prefferenceBody = {
-    age: prefferedage,
-    job: prefferedjobs,
-    sameUniversity: 1,
-    vibe: vibe,
-  };
+
   const saveState = (key, state) => {
     try {
-      const serializedState = JSON.stringify(state);
+      {
+        /*const serializedState = JSON.stringify(state);
       sessionStorage.setItem(key, serializedState);
-    } catch {}
-  };
+    */
+      }
+      const serializedState = JSON.stringify(state);
 
+      dispatch({ type: `${key}`, payload: `${serializedState}` });
+    } catch {
+      console.log('error');
+      alert('오류가 발생했습니다. 개발자에게 알려주세요!');
+    }
+  };
+  // sessionstorage.setitem=> reux로 변경하기
   return (
     <Container>
       <MobileBox>
-        <StyledDiv top="5%" width="90%" height="20%" left="50%">
-          <StyledText position=" absolute" size="35px" left="10px">
-            미팅학개론 이용을 위한
-          </StyledText>
-          <StyledText position="absolute" color="#F49393" size="35px" left="10px" top="30px">
-            약관에 동의
-          </StyledText>
-          <StyledText position="absolute" size="35px" left="125px" top="30px">
-            해주세요
-          </StyledText>
-        </StyledDiv>{' '}
+        <StyledDiv display="flex" direction="column" top="2%" width="90%" height="20%" left="50%">
+          {/* HeaderBox*/}
+          <StyledDiv
+            position="static"
+            display="flex"
+            direction="column"
+            transform="0"
+            width="100%"
+            margin="5px 0 0 10px"
+          >
+            <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
+              <StyledText position=" static" size="0.8em">
+                미팅학개론 이용을 위한
+              </StyledText>
+            </StyledDiv>
+            <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
+              {/* TitleBox*/}
+              <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
+                {/* TextTitle*/}
+
+                <StyledText position=" static" size="0.8em" color="#F49393">
+                  약관에 동의
+                </StyledText>
+                <StyledText position=" static" size="0.8em">
+                  해주세요
+                </StyledText>
+              </StyledDiv>
+            </StyledDiv>
+          </StyledDiv>
+        </StyledDiv>
         <StyledDiv
           display="flex"
           justify_content="center"
@@ -86,12 +122,11 @@ const Body12 = () => {
           border="10px"
           onClick={() => {
             setInfoConfirm(!infoConfirm);
-            saveState('ourTeam', body);
-            saveState('prefferedTeam', prefferenceBody);
+            saveState('SET_OURTEAMINFO', body);
           }}
         >
           {' '}
-          <StyledText color={buttonFontColor} size="24px">
+          <StyledText color={buttonFontColor} size="20px">
             네 모두 동의합니다
           </StyledText>
         </StyledDiv>

@@ -1,182 +1,44 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ReactComponent as Bulb } from '../../Asset/page1/Bulb.svg';
-import { ReactComponent as CatchPhrase } from '../../Asset/page1/Text.svg';
-import { ReactComponent as Title } from '../../Asset/page1/Title.svg';
-import { ReactComponent as Logo } from '../../Asset/page1/Logo.svg';
-import { ReactComponent as Star } from '../../Asset/page1/Star.svg';
-import { ReactComponent as MainText } from '../../Asset/page1/MainText.svg';
-import { StyledDiv, StyledText, Container, MobileBox, StyledButton } from '../Elements/StyledComponent';
-import { WomanNotAllowed } from '../ErrorMessages/WomanNotAllowed';
+import React, { useCallback, useState } from 'react';
 import client from '../../api';
-import Counter from '../Elements/CountAnimation';
+import Main from '../mainpages/Main';
+import Guide from '../mainpages/Guide';
+import MatchingInquire from '../mainpages/MatchingInquire';
+import { useSelector } from 'react-redux';
+import { Container } from '../Elements/StyledComponent';
+import MyPage from '../mainpages/MyPage';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+
 const Body1 = () => {
-  const [num, setNum] = useState(0);
-  const [modalOpen, setModalOpen] = useState(true);
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-  React.useEffect(() => {
-    client
-      .get('api/service/count/team')
-      .then((res) => {
-        setNum(res.data.data.waitingTeam);
-      })
-      .catch((err) => {});
-  }, []);
-  console.log(num);
+  const dispatch = useDispatch();
+  const pageChange = async(state)=>{
+    return(dispatch({type: 'PAGE', payload: state}));
+  }
+  useEffect(async () => {
+    const location = window.location.pathname;
+    if (location === '/join')
+      pageChange(2);
+  }, [])
+
+  const pagestate = useSelector((state)=> state.pagestate);
+
+  const Body = useCallback(()=>{
+  if (pagestate == 0)
+    return(<Main/>)
+  else if(pagestate == 1)
+    return(<Guide/>)
+  else if (pagestate == 2)
+    return(<MatchingInquire/>)
+  else if(pagestate == 3)
+    return(<MyPage/>)
+}, [pagestate]) ;
+  
+
   return (
-    <Container height={'100%'} bg="#f8f3f3">
-      <WomanNotAllowed
-        open={modalOpen}
-        close={closeModal}
-        children={'9월 초에 시작되는 다음 시즌에 이용해주세요'}
-      ></WomanNotAllowed>
-      <MobileBox overflow="auto">
-        {/*페이지 업테이트 적용부분
-         * <StyledDiv
-          top="0%"
-          width="100%"
-          height="7%"
-          display="flex"
-          direction="row"
-          bg="#FFEAEA"
-          justify_content="space-around"
-          align_item="center"
-          left="50%"
-        >
-          <StyledDiv
-            color="#666666"
-            height="100%"
-            position="static"
-            width="25%"
-            transform="0"
-            size="16px"
-            font="Nanum JungHagSaeng"
-            display="flex"
-            align_item="flex-end"
-          >
-            <StyledDiv
-              bg="#f8f3f3"
-              display="flex"
-              justify_content="center"
-              align_item="center"
-              position="static"
-              border="10px 10px 0 0"
-              width="100%"
-              height="100%"
-              transform="0"
-            >
-              홈
-            </StyledDiv>
-          </StyledDiv>
-          <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
-            가이드
-          </StyledDiv>
-          <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
-            매칭 조회
-          </StyledDiv>
-          <StyledDiv color="#666666" position="static" width="25%" transform="0" size="16px" font="Nanum JungHagSaeng">
-            우리팀 정보
-          </StyledDiv>
-        </StyledDiv>*/}
-        <StyledDiv top="10.5%" left="12%" transform=" translate(-50%, 0)">
-          <Bulb />
-        </StyledDiv>
-        <StyledDiv top="12%" left="52%" transform="translate(-50%, 0)">
-          <CatchPhrase />
-        </StyledDiv>
-        <StyledDiv top="20%" left="52%" transform="translate(-50%, 0)">
-          <Title />
-        </StyledDiv>
-        <StyledDiv top="30%" left="80%" transform="translate(-50%, 0)">
-          <Star />
-        </StyledDiv>
-        <StyledDiv top="35%" left="50%" transform="translate(-50%, 0)">
-          <Logo />
-        </StyledDiv>
-        <StyledDiv top="70%" left="50%" transform="translate(-50%, 0)">
-          <MainText />
-        </StyledDiv>
-
-        <Link to="/apply/2" style={{ textDecoration: 'none' }}>
-          <StyledButton height="50px" width="200px" top="80%">
-            매칭 시작하기
-          </StyledButton>
-        </Link>
-
-        <Counter end={num} />
-        <StyledDiv
-          border_top="1px solid #D6D6D6"
-          top="95%"
-          left="50%"
-          height="20%"
-          width="100%"
-          transform="translate(-50%, 0)"
-          display="flex"
-          flex-direction="column"
-          justify_content="space-around"
-          align_item="center"
-        >
-          <StyledDiv
-            top="5%"
-            left="50%"
-            height="20%"
-            width="100%"
-            transform="translate(-50%, 0)"
-            display="flex"
-            flex-direction="row"
-            justify_content="space-around"
-            align_item="center"
-          >
-            <StyledText position="static" font="Pretendard" color="#515151">
-              {' '}
-              <a href="https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7"> 이용약관</a>
-            </StyledText>
-            <StyledText font="Pretendard" position="static" color="#515151">
-              <a href="https://furry-bank-197.notion.site/c83f4127e3c54b7080c333aa31a4cc03"> 개인정보처리방침</a>
-            </StyledText>
-            <StyledText font="Pretendard" color="#515151" position="static">
-              <a href="https://furry-bank-197.notion.site/303cd8bbdefc41a3bf088b30a4c98f84"> 공지사항</a>
-            </StyledText>
-            <StyledText font="Pretendard" color="#515151" position="static">
-              <a href="https://furry-bank-197.notion.site/aaa47097d9b24192a739a3f7aafa8556"> 문의사항</a>
-            </StyledText>
-          </StyledDiv>
-          <StyledDiv
-            margin="0 0 0 5%"
-            top="40%"
-            left="50%"
-            height="60%"
-            width="100%"
-            transform="translate(-50%, 0)"
-            display="flex"
-            direction="column"
-            justify_content="flex-start"
-            align_item="start"
-          >
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
-              노온
-            </StyledText>
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
-              대표자 남한솔
-            </StyledText>
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
-              연락처 010-6879-5436
-            </StyledText>
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
-              사업자등록번호 811-29-00871
-            </StyledText>
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
-              주소지 서울시 성북구 장월로 1마길 56 DAC 스타트업 인큐베이팅센터
-            </StyledText>
-          </StyledDiv>
-        </StyledDiv>
-      </MobileBox>
-    </Container>
+    <Container height={'90%'} bg="#f8f3f3">
+      <Body></Body>
+     </Container>
   );
 };
 

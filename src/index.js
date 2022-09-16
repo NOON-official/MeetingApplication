@@ -10,11 +10,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage'; // local storage
-import storageSession from 'redux-persist/lib/storage/session';
+
 
 const persistConfig = {
   key: 'root',
-  storage: storageSession,
+  storage: storage
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

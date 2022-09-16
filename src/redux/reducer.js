@@ -1,9 +1,13 @@
+import { combineReducers } from 'redux';
+
 const initialState = {
   user: 'userName',
   phone: '',
-  gender: '남자',
+  gender: 1,
   num: 2,
   age: 20,
+  drink: 0,
+  height: 170,
   jobs: [],
   university: [], // multi choice
   characters: [],
@@ -18,21 +22,34 @@ const initialState = {
   prefferedage: [20, 25],
   preffereduniversity: 1,
   prefferedthing: [],
+  prefferedheight: [165, 175],
   signin: false, // 핸드폰 인증 여부
   privateinfoconfirm: false, // 이용 약관 동의 여부
   isMatching: false, // 매칭 진행중 여부
+  pagestate: 0,
+  ourTeamInfo: {},
+  userLogin: false,
+  ourteamId: -1,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_LOGIN':
+      return { ...state, userLogin: action.payload };
     case 'SET_MALE':
-      return { ...state, gender: '남자' };
+      return { ...state, gender: 1 };
     case 'SET_FEMALE':
-      return { ...state, gender: '여자' };
+      return { ...state, gender: 2 };
     case 'NUMBER':
       return { ...state, num: action.payload };
+    case 'PAGE':
+      return { ...state, pagestate: action.payload };
     case 'AGE':
       return { ...state, age: action.payload };
+    case 'DRINK':
+      return { ...state, drink: action.payload };
+    case 'HEIGHT':
+      return { ...state, height: action.payload };
     case 'JOBS':
       const newJob = action.payload;
       return { ...state, jobs: [...state.jobs, newJob] };
@@ -89,6 +106,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, prefferedjobs: deletePrefferedJob };
     case 'PREFFEREDAGE':
       return { ...state, prefferedage: action.payload };
+    case 'PREFFEREDHEIGHT':
+      return { ...state, prefferedheight: action.payload };
     case 'PREFFEREDUNIVERSITIES':
       return { ...state, preffereduniversity: action.payload };
 
@@ -110,9 +129,19 @@ const reducer = (state = initialState, action) => {
       return { ...state, prefferedthing: deletePrefferedThing };
     case 'SET_IS_MATCHING':
       return { ...state, isMatching: action.payload };
+    case 'SET_OURTEAMINFO':
+      return { ...state, ourTeamInfo: action.payload };
+    case 'SET_OURTEAMID':
+      return { ...state, ourteamId: action.payload };
+    case 'LOG_OUT':
+      window.localStorage.removeItem('persist:root');
+      state = undefined;
+      return appReducer(state, action);
     default:
       return state;
   }
 };
-
+const appReducer = (state, action) => {
+  return state;
+};
 export default reducer;
