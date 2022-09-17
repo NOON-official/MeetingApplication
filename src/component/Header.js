@@ -5,9 +5,9 @@ import { ReactComponent as HeaderIcon } from '../Asset/Header/Header.svg';
 import { StyledDiv } from './Elements/StyledComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import isLogin from '../utils/isLogin';
-import {logOut} from '../utils/LogOut';
+import client from '../api';
 import MainPageLogin from './Auth/MainPageLogin';
-
+import {persistor} from '../index'
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: start;
@@ -67,10 +67,28 @@ const LogIn = () =>{
 export const MainPageHeader = () => {
   const pagestate = useSelector((state)=> state.pagestate);
   const dispatch = useDispatch();
+  async function logOut () {
+       
+        window.sessionStorage.clear();
+     
+         await persistor.purge();
+       
+};
   const [IsLogin, setIsLogin] = useState(isLogin());
  useEffect(()=>{
     dispatch({type: "SET_LOGIN", payload:IsLogin})
  },[IsLogin])
+ 
+ const MatchingStatusRefresh = () =>{
+          client
+          .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`, {
+            headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
+          })
+          .then((res) => {
+            
+            window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
+          .catch((err) => console.log(err));
+      }
   const LogOut = ()=>
       {
         return(
@@ -127,14 +145,15 @@ export const MainPageHeader = () => {
           <StyledDiv onClick={()=>{pageChange(1)}} border="10px"bg={guide.bg}  color={guide.font?guide.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px"position="static" width="23%" transform="0" size="12px" font="Pretendard">
             가이드
           </StyledDiv>
-          <StyledDiv onClick={()=>{pageChange(2)}}border="10px" bg={matching.bg} color={matching.font?matching.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
+          <StyledDiv onClick={()=>{pageChange(2),isLogin && MatchingStatusRefresh() }}border="10px" bg={matching.bg} color={matching.font?matching.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
             매칭 조회
           </StyledDiv>
           <StyledDiv onClick={()=>{pageChange(3)}} border="10px"bg={myinfo.bg} color={myinfo.font?myinfo.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
             우리팀 정보
           </StyledDiv>
         </StyledDiv>
-    </MainPageHeaderContainer>)
+    </MainPageHeaderContainer>
+    )
 };
 
 
