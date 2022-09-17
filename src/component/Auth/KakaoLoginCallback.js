@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import PulseLoader from 'react-spinners/PulseLoader';
 import client from '../../api';
 import DataPush from '../Elements/DataPush';
-
+import DataPut from '../Elements/DataPut';
+import isLogin from '../../utils/isLogin';
 const override = {
   display: 'block',
   margin: '0 auto',
@@ -12,47 +13,77 @@ const override = {
 
 const KakaoLoginCallback = (props) => {
   let [color, setColor] = useState('#EB8888');
-  let [IsLogin, setIsLogin] = useState(false);
 
+  //초기밧을 함수로 바꾸기--예정
+  let status;
+  let accessToken;
+  let ourteamId;
+  let userId;
   // 카카오 인가코드 추출
   let code = new URL(window.location.href).searchParams.get('code');
+  async function callDataPush() {
+    await DataPush();
+  }
+
+  async function callDataPut() {
+    await DataPut();
+  }
 
   // 서버에 인가코드 넘겨주기
   useEffect(() => {
     // 로그인 전
-    if (!IsLogin) {
+    
       client
         .get(`/api/auth/kakao/callback?code=${code}`)
         .then((res) => {
           // 반환된 Access Token, Refresh Token, 유저 정보 저장
-          console.log('로그인 성공');
+          
           window.sessionStorage.setItem('access', res.data.data.user.accessToken);
+          accessToken = res.data.data.user.accessToken;
           window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
           window.sessionStorage.setItem('id', res.data.data.user.id);
+          userId = res?.data?.data?.user?.id;
           window.sessionStorage.setItem('isAdmin',res.data.data.user.isAdmin);
-          setIsLogin((state) => !state);
+        })
+        // status 받아오기
+        .then(async()=>{
+            await client
+            .get(`api/team/ourteam-id/${userId}`, { headers: { authorization: `Bearer ${accessToken}` } })
+            .then(async(res)=>{
+              ourteamId = res?.data?.data?.ourteamId;
+              window.sessionStorage.setItem('ourteamId', ourteamId);
+            })
+            .then(async()=>{
+              if (ourteamId === -1)
+              {
+                callDataPush()
+                .then(() => {
+                  console.log('완료');
+                  window.location.replace('/apply/15');
+                })
+                .catch((err) => {
+                  console.log('오류', err);
+                });// 매칭 정보 서버에 저장
+              }
+              else 
+              {
+                callDataPut()
+                .then(() => {
+                  console.log('완료');
+                 window.location.replace('/apply/15');
+                })
+                .catch((err) => {
+                  console.log('오류', err);
+                });// 매칭 정보 서버에 저장
+              }
+            })
         })
         .catch((err) => {
           console.log(err);
           window.alert('로그인 실패');
         });
-    }
-    // 로그인 후
-    else {
-      console.log('데이터 이전 시도중');
-      async function callDataPush() {
-        await DataPush();
-      }
-       callDataPush() // 매칭 정보 서버에 저장
-        .then(() => {
-          console.log('완료');
-          window.location.replace('/apply/15');
-        })
-        .catch((err) => {
-          console.log('오류', err);
-        });
-    }
-  }, [IsLogin]);
+   
+  }, []);
 
   return (
     <div className="sweet-loading">
