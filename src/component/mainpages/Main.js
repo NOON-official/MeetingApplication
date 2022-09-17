@@ -23,7 +23,8 @@ const Main = () => {
   };
   {
     React.useEffect(() => {
-      client
+      const loadCount = async()=>{
+        await client
         .get('api/service/count/team')
         .then((res) => {
          
@@ -31,6 +32,8 @@ const Main = () => {
         .catch((err) => {
           console.log(err);
         });
+      }
+        loadCount();
       {
         /*client
     .get('api/service/apply/status')

@@ -90,9 +90,7 @@ function App() {
           <Route
             path="/apply/2"
             element={
-              <PublicRoute restricted={true}>
                 <Body2 />
-              </PublicRoute>
             }
           />
           <Route
