@@ -18,11 +18,11 @@ return(
         </StyledDiv>
         <StyledDiv top="70%" height="20%" left="50%" width="90%" display="flex" direction="column" justify_content="center" align_item="center">
                 {/**link 수정 필요 */}
-                <Link to="/apply/2" style={{ textDecoration: 'none' }}>
+                
                     <StyledButton position="static" left="0"height="45px" transform="0" width="180px" size="18px" >
                     한번 더 진행하기 
                     </StyledButton>
-                </Link>
+                
         </StyledDiv>
 
 </StyledDiv>
