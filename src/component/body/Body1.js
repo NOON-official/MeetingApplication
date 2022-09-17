@@ -15,11 +15,14 @@ const Body1 = () => {
   const pageChange = async(state)=>{
     return(dispatch({type: 'PAGE', payload: state}));
   }
-  useEffect(async () => {
+  useEffect(()=>{
+    const pagehandle =async() => {
     const location = window.location.pathname;
     if (location === '/join')
-      pageChange(2);
-  }, [])
+      {pageChange(2);}
+  }
+  pagehandle();
+}, [])
 
   const pagestate = useSelector((state)=> state.pagestate);
 
