@@ -79,14 +79,15 @@ export const MainPageHeader = ()=>{
     dispatch({type: "SET_LOGIN", payload:IsLogin})
  },[IsLogin])
  
- const MatchingStatusRefresh = () =>{
-          client
+ const MatchingStatusRefresh = async() =>{
+          await client
           .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`, {
             headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
           })
           .then((res) => {
             
             window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
+            setTimeout(()=>{},1000)
           .catch((err) => console.log(err));
       }
   const LogOut = ()=>

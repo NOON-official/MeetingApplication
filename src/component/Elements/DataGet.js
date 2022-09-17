@@ -11,7 +11,7 @@ async function DataGet() {
     .get(`api/team/ourteam-id/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
 
     .then((res) => {
-      setTimeout(()=>{},1000);
+      
       window.sessionStorage.setItem('ourteamId', res.data.data.ourteamId);
       setTimeout(()=>{},1000);
       if (res.data.data.ourteamId == -1) {
@@ -27,6 +27,7 @@ async function DataGet() {
             
             window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
           .catch((err) => console.log(err));
+        
       }
     })
     .catch((err) => console.log(err));
