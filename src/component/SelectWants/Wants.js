@@ -27,17 +27,17 @@ const Thing = styled.button`
 const Want = (props) => {
   const dispatch = useDispatch();
   const want = useSelector((state) => state.prefferedthing);
-  const exist = React.useMemo(() => want.includes(props.want), [want]);
+  const exist = React.useMemo(() => want.includes(props.meta), [want]);
   const bgcolor = React.useMemo(() => (exist ? '#EB8888' : '#F6EEEE'), [exist]);
   const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist]);
 
   const OnwantClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'DELETE_PREFFEREDTHING', payload: props.want });
+      dispatch({ type: 'DELETE_PREFFEREDTHING', payload: props.meta });
     } else {
-      dispatch({ type: 'SET_PREFFEREDTHING', payload: props.want });
+      dispatch({ type: 'SET_PREFFEREDTHING', payload: props.meta });
     }
-  }, [exist, props.want]);
+  }, [exist, props.meta]);
 
   return (
     <Thing size={props.size} color={fontColor} background_color={bgcolor} onClick={OnwantClick} width={props.width}>
@@ -50,19 +50,19 @@ const Wants = () => {
   return (
     <StyledDiv top="17%" width="95%" height="65%" left="50%">
       <WantBox>
-        <Want want="술게임 좋아요"></Want>
-        <Want want="보드게임 좋아요"></Want>
-        <Want want="대화가 좋아요"></Want>
+        <Want want="술게임 좋아요" meta={1}></Want>
+        <Want want="보드게임 좋아요"meta={2}></Want>
+        <Want want="대화가 좋아요"meta={3}></Want>
       </WantBox>
       <WantBox>
-        <Want want="설렘이 좋아요"></Want>
-        <Want size="14px" want="재밌는게 좋아요"></Want>
-        <Want want="마시고 죽자"></Want>
+        <Want want="설렘이 좋아요"meta={4}></Want>
+        <Want size="14px" want="재밌는게 좋아요" meta={5}></Want>
+        <Want want="마시고 죽자"meta={6}></Want>
       </WantBox>
       <WantBox>
-        <Want want="술은 싫어요"></Want>
-        <Want want="구독과 좋아요"></Want>
-        <Want want="아무거나 좋아요"></Want>
+        <Want want="술은 싫어요"meta={7}></Want>
+        <Want want="구독과 좋아요"meta={8}></Want>
+        <Want want="아무거나 좋아요"meta={9}></Want>
       </WantBox>
     </StyledDiv>
   );

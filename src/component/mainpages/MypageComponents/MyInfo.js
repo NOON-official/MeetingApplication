@@ -1,8 +1,35 @@
 import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
+import client from '../../../api';
+import { useCallback, useEffect, useState } from "react";
 //name, phoneNumbe
-const MyInfo = (r) => {
+
+
+
+const MyInfo = () => {
+  const dispatch=useDispatch()
+  const [nickname, setNickname]= useState()
+  const [phone, setPhone]= useState()
+  const GetData = async () => {
+    let id = window.sessionStorage.getItem('id')
+    let accessToken = window.sessionStorage.getItem('access')
+    await client
+    .get(`api/user/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
+    .then((res)=>{
+      window.sessionStorage.setItem('nickname',res?.data.data?.user?.nickname) 
+      window.sessionStorage.setItem('phone',res?.data?.data?.user?.phone) 
+    })
+    .catch((err)=>console.log(err))
+  }
+    useEffect(()=>{
+      async function fetchData() { 
+        await GetData()
+        setNickname(window.sessionStorage.getItem('nickname'))
+        setPhone(window.sessionStorage.getItem('phone'))
+      }
+      fetchData()
+    },[])
     
     return (
       <StyledDiv
@@ -51,13 +78,13 @@ const MyInfo = (r) => {
               <tr>
                 <th>이름</th>
                 <td>
-                  규하
+                  {nickname}
                 </td>
               </tr>
               <tr>
                 <th>전화번호</th>
                 <td>
-                  010-4983-8022
+                  {phone}
                 </td>
                 <td>
                     {<Link to="/apply/13" style={{ textDecoration: 'none' }}>

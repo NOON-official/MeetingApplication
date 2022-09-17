@@ -16,16 +16,16 @@ const DayButton = styled.input`
 const Day = (props) => {
   const dispatch = useDispatch();
   const day = useSelector((state) => state.day);
-  const exist = React.useMemo(() => day.includes(props.day), [day]);
+  const exist = React.useMemo(() => day.includes(props.meta), [day]);
   const fontColor = React.useMemo(() => (exist ? '#FFFFFF' : '#B79292'), [exist]);
   const bgColor = React.useMemo(() => (exist ? buttonColor : '#F6EEEE'), [exist]);
   const OnDayClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'DAY_DELETE', payload: props.day });
+      dispatch({ type: 'DAY_DELETE', payload: props.meta });
     } else {
-      dispatch({ type: 'DAY', payload: props.day });
+      dispatch({ type: 'DAY', payload: props.meta });
     }
-  }, [exist, props.day]);
+  }, [exist, props.meta]);
   return (
     <DayButton
       color={fontColor}

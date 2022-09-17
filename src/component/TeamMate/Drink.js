@@ -56,7 +56,7 @@ const Drink = () => {
     const drink = useSelector((state) => state.drink);
     const handleChange = (event, newValue) => {
       if (typeof newValue === 'number') {
-        dispatch({ type: 'DRINK', payload: newValue });
+        dispatch({ type: 'DRINK', payload: String(newValue) });
       }
     };
 
@@ -82,7 +82,7 @@ const Drink = () => {
         <StyledDiv position="static" transform="0" display="flex" justify_content="center" align_item="end" height="50px">
         <PrettoSlider
           style={{ color: '#F6EEEE' }}
-          min={0}
+          min={1}
           valueLabelDisplay="on"
           step={1}
           max={5}
