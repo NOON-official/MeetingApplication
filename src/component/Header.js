@@ -64,8 +64,8 @@ const LogIn = () =>{
        <MainPageLogin/>
   )
 }
-export const MainPageHeader = ()=>{
-   const pagestate = useSelector((state)=> state.pagestate);
+export const MainPageHeader = () => {
+  const pagestate = useSelector((state)=> state.pagestate);
   const dispatch = useDispatch();
   async function logOut () {
        
@@ -139,7 +139,6 @@ export const MainPageHeader = ()=>{
           align_item="center"
           left="0%"
           transform="0"
-         
         >
           <StyledDiv onClick={()=>{pageChange(0)}} border="10px"bg={main.bg} color={main.font?main.font:"#666666"} display="flex" justify_content="center" align_item="center" text_align="center"height="23px"position="static" width="23%" transform="0" size="12px" font="Pretendard">
               홈
