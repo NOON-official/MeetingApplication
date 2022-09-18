@@ -43,11 +43,11 @@ const MainLoginCallback = (props) => {
       async function callDataGet() {
         await DataGet();
       }
-      console.log('데이터 이전 시도중');
+ 
 
       callDataGet() // 매칭 정보 서버에 저장
         .then(() => {
-          console.log('완료');
+         window.location.replace('/');
         })
         .catch((err) => {
           console.log('오류', err);

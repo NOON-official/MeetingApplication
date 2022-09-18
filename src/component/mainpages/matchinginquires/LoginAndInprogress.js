@@ -6,6 +6,7 @@ import { ReactComponent as Character } from '../../../Asset/finalPage/4.svg';
 import { Link } from 'react-router-dom';
 const Inprogress = ()=>{
 return(
+  
 <StyledDiv position= "static" transform="0" left="0" height="100%" width="100%" display="flex" direction="column" justify_content="space-between" align_item="center">
         <StyledDiv top="10%" height="40%" left="50%"  width="90%">
           <StyledDiv top="20%"left="70%">
@@ -34,11 +35,11 @@ return(
         </StyledDiv>
         <StyledDiv top="70%" height="20%" left="50%" width="90%" display="flex" direction="column" justify_content="center" align_item="center">
                 {/**link 수정 필요 */}
-                <Link to="/apply/2" style={{ textDecoration: 'none' }}>
+                <a href="https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7"> 
                     <StyledButton position="static" left="0"height="45px" transform="0" width="180px" size="18px" >
                     미팅 팁 보러가기
                     </StyledButton>
-                </Link>
+              </a>
         </StyledDiv>
 
 </StyledDiv>

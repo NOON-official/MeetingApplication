@@ -27,7 +27,6 @@ const Body12 = () => {
   const university = useSelector((state) => state.university);
   const characters = useSelector((state) => state.characters);
   const area = useSelector((state) => state.area);
-
   const day = useSelector((state) => state.day);
   const appearance = useSelector((state) => state.appearance);
   const mbti = useSelector((state) => state.mbti);
@@ -35,6 +34,11 @@ const Body12 = () => {
   const intro = useSelector((state) => state.introduction);
   const vibe = useSelector((state) => state.prefferedthing);
   const prefferedheight = useSelector((state) => state.prefferedheight);
+  let finalUniversity = []
+  useEffect(()=>{
+    university.map((c)=>{ finalUniversity.push(c["key"])})
+  },[university])
+ 
   const body = {
     ourteam: {
       gender: gender,
@@ -42,7 +46,7 @@ const Body12 = () => {
       age: age,
       intro: intro,
       job: jobs,
-      university: university,
+      university: finalUniversity,
       role: characters,
       area: area,
       day: day,
