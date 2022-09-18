@@ -25,10 +25,10 @@ const MainLoginCallback = (props) => {
         .then((res) => {
           // 반환된 Access Token, Refresh Token, 유저 정보 저장
           console.log('로그인 성공');
-          window.sessionStorage.setItem('access', res.data.data.user.accessToken);
-          window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
+          // window.sessionStorage.setItem('access', res.data.data.user.accessToken);
+          // window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
           window.sessionStorage.setItem('id', res.data.data.user.id);
-          window.sessionStorage.setItem('isAdmin',res.data.data.user.isAdmin);
+          window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
           setIsLogin((state) => !state);
         })
         .catch((err) => {
@@ -38,7 +38,8 @@ const MainLoginCallback = (props) => {
     }
     // 로그인 후
     else {
-      console.log('1', window.sessionStorage.getItem('access'));
+      // console.log('1', window.sessionStorage.getItem('access'));
+
       async function callDataGet() {
         await DataGet();
       }
