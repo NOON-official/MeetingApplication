@@ -1,4 +1,4 @@
-import { async } from '@firebase/util';
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PulseLoader from 'react-spinners/PulseLoader';
@@ -43,7 +43,7 @@ const KakaoLoginCallback = (props) => {
       async function callDataPush() {
         await DataPush();
       }
-      callDataPush() // 매칭 정보 서버에 저장
+       callDataPush() // 매칭 정보 서버에 저장
         .then(() => {
           console.log('완료');
           window.location.replace('/apply/15');
