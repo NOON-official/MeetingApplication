@@ -8,7 +8,7 @@ import { Container } from '../Elements/StyledComponent';
 import MyPage from '../mainpages/MyPage';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+
 
 const Body1 = () => {
   const dispatch = useDispatch();
