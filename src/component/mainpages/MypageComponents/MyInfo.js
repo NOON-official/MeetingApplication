@@ -1,5 +1,4 @@
 import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
-import { useSelector,useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import client from '../../../api';
 import { useCallback, useEffect, useState } from "react";
@@ -8,14 +7,14 @@ import { useCallback, useEffect, useState } from "react";
 
 
 const MyInfo = () => {
-  const dispatch=useDispatch()
   const [nickname, setNickname]= useState()
   const [phone, setPhone]= useState()
   const GetData = async () => {
     let id = window.sessionStorage.getItem('id')
-    let accessToken = window.sessionStorage.getItem('access')
+    //let accessToken = window.sessionStorage.getItem('access')
     await client
-    .get(`api/user/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
+    .get(`api/user/${id}`)
+    //delete header
     .then((res)=>{
       window.sessionStorage.setItem('nickname',res?.data.data?.user?.nickname) 
       window.sessionStorage.setItem('phone',res?.data?.data?.user?.phone) 

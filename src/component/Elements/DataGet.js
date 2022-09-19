@@ -5,7 +5,7 @@ async function DataGet() {
   const id = window.sessionStorage.getItem('id');
   //const accessToken = window.sessionStorage.getItem('access');
 
-  console.log(`Bearer ${accessToken}`);
+  //console.log(`Bearer ${accessToken}`);
 
   await client
     .get(`api/team/ourteam-id/${id}`)

@@ -3,7 +3,6 @@ import { ReactComponent as Star } from '../../../Asset/finalPage/1.svg';
 import { ReactComponent as StarYellow } from '../../../Asset/finalPage/2.svg';
 import { ReactComponent as Heart } from '../../../Asset/finalPage/3.svg';
 import { ReactComponent as Character } from '../../../Asset/finalPage/4.svg';
-import { Link } from 'react-router-dom';
 const Inprogress = ()=>{
 return(
   

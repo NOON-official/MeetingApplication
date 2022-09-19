@@ -81,9 +81,8 @@ export const MainPageHeader = () => {
  
  const MatchingStatusRefresh = async() =>{
           await client
-          .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`, {
-            headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
-          })
+          .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`)
+          //delete header
           .then((res) => {
             window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)
           })

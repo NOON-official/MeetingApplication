@@ -1,4 +1,4 @@
-import { useState, useEffect,  } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import client from '../../api';
 import DataGet from '../Elements/DataGet';
 const override = {
@@ -7,17 +7,17 @@ const override = {
 };
 
 const MainLoginCallback = (props) => {
-
+  let [color, setColor] = useState('#EB8888');
   let [IsLogin, setIsLogin] = useState(false);
 
   // 카카오 인가코드 추출
   let code = new URL(window.location.href).searchParams.get('code');
 
   // 서버에 인가코드 넘겨주기
-  useEffect(async() => {
+  useEffect(() => {
     // 로그인 전
     if (!IsLogin) {
-      await client
+      client
         .get(`/api/auth/kakao/callback?code=${code}`)
         .then((res) => {
           // 반환된 Access Token, Refresh Token, 유저 정보 저장
