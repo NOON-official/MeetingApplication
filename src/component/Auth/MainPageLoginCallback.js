@@ -1,5 +1,4 @@
-import { async } from '@firebase/util';
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect,  } from 'react';
 import client from '../../api';
 import DataGet from '../Elements/DataGet';
 const override = {
@@ -8,7 +7,7 @@ const override = {
 };
 
 const MainLoginCallback = (props) => {
-  let [color, setColor] = useState('#EB8888');
+
   let [IsLogin, setIsLogin] = useState(false);
 
   // 카카오 인가코드 추출
