@@ -3,12 +3,13 @@ import client from '../../api';
 async function DataGet() {
   let   ourteamId;
   const id = window.sessionStorage.getItem('id');
-  const accessToken = window.sessionStorage.getItem('access');
+  //const accessToken = window.sessionStorage.getItem('access');
 
   console.log(`Bearer ${accessToken}`);
 
   await client
-    .get(`api/team/ourteam-id/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
+    .get(`api/team/ourteam-id/${id}`)
+    // header delete
     .then((res) => {
       ourteamId = res?.data?.data?.ourteamId;
       window.sessionStorage.setItem('ourteamId', res.data.data.ourteamId);
@@ -20,8 +21,8 @@ async function DataGet() {
         	}
         	else {
           	await client
-            	.get(`api/team/status/${ourteamId}}`, {
-              	headers: { authorization: `Bearer ${accessToken}` },})
+            	.get(`api/team/status/${ourteamId}}`)
+              //header delete
             	.then((res) => {
               	window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
       	}
