@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from 'react';
-import client from '../../api';
+import React, { useCallback } from 'react';
 import Main from '../mainpages/Main';
 import Guide from '../mainpages/Guide';
 import MatchingInquire from '../mainpages/MatchingInquire';

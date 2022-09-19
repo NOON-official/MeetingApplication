@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PageNotCompleted } from './ErrorMessages/PageNotCompletedError';
 import { Navigate } from 'react-router-dom';
+import isLogin from '../utils/isLogin';
 const Container = styled.footer`
   position: fixed;
   bottom: 0%;
@@ -537,7 +538,9 @@ const Footer = () => {
       }
       else{
         uncompleted();
-      if (window.sessionStorage.getItem('access') != null) {
+      if (isLogin()) 
+      //로그인시 불가
+      {
         complete();
         setNextPath('/apply/15');
       } else {
@@ -587,7 +590,8 @@ const Footer = () => {
         alert("어디서 꼼수를 부려")
         return(<Navigate to="/apply/13"/>)
       }
-      else if(window.sessionStorage.getItem('access') == null)
+      else if(!isLogin())
+      //로그인 안할시 불가
       {
         alert("어디서 꼼수를 부려")
         return(<Navigate to="/apply/14"/>)

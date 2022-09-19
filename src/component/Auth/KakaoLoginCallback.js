@@ -1,11 +1,8 @@
-
-import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 import client from '../../api';
 import DataPush from '../Elements/DataPush';
 import DataPut from '../Elements/DataPut';
-import isLogin from '../../utils/isLogin';
 const override = {
   display: 'block',
   margin: '0 auto',
@@ -35,10 +32,9 @@ const KakaoLoginCallback = (props) => {
     
       client
         .get(`/api/auth/kakao/callback?code=${code}`)
+        //header부분 삭제함
         .then((res) => {
           // 반환된 Access Token, Refresh Token, 유저 정보 저장
-
-          
           //window.sessionStorage.setItem('access', res.data.data.user.accessToken);
           //accessToken = res.data.data.user.accessToken;
           //window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);

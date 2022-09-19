@@ -12,26 +12,24 @@ const Done = ()=>{
         const GetData=async()=>{
             console.log("start")
             let id = window.sessionStorage.getItem('ourteamId')
-            let accessToken = window.sessionStorage.getItem('access')
+            //let accessToken = window.sessionStorage.getItem('access')
             let partnerTeamId= {}
           
            
             await client
-            .get(`api/team/partner-team-id/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
+            .get(`api/team/partner-team-id/${id}`)
+            //delete header
             //상대팀아이디 조회
             .then((res)=>{
                 //res = 상대팀 아이디
-                partnerTeamId = res.data.data.partnerTeamId
-                
+                partnerTeamId = res.data.data.partnerTeamId  
             })
             .catch((err)=>console.log(err))
-        
             await client 
-            .get(`api/team/${partnerTeamId}`,{ headers: { authorization: `Bearer ${accessToken}` } })
+            .get(`api/team/${partnerTeamId}`)
+            //delete header
             .then((res)=>{
-                
                 window.sessionStorage.setItem("partnerTeamInfo" ,JSON.stringify(res.data.data));
-              
             })
             .then(()=>{setWhere(1)})
             .catch((err)=> {console.log(err)})

@@ -1,7 +1,7 @@
 
 //지금 작동안됨
 import { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 //특정페이지에서 모두 완료되어야 할 요소들을 판단해 페이지에 필수 요소가 완성되었는지 true, false로 반환
 //페이지별 필수 요소를 redux를 통해서 판단할 예정
