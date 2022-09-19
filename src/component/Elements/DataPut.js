@@ -8,9 +8,8 @@ async function DataPut() {
   const finalOurTeamInfo = Object.assign(JSON.parse(ourTeamInfo), object);
  
     await client
-       .put('/api/team', finalOurTeamInfo, {
-         headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
-       })
+       .put('/api/team', finalOurTeamInfo)
+       //delete header
        .catch((err) => {
          if (err.response.data.status == 400) {
            alert(err.response.data.message);
