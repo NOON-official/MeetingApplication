@@ -1,7 +1,11 @@
 import { StyledDiv, StyledButton } from "../../Elements/StyledComponent"
 import { ReactComponent as Character } from '../../../Asset/mainPage/FailCharacter.svg';
 import { Link } from 'react-router-dom';
+import client from "../../../api";
 const Fail = ()=>{
+  async function ReMatching(){
+    client
+  }
 return(
 <StyledDiv position= "static" transform="0" left="0" height="100%" width="100%" display="flex" direction="column" justify_content="space-between" align_item="center">
         <StyledDiv top="25%" height="25%" left="50%"  width="90%">

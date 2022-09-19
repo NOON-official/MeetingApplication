@@ -14,9 +14,9 @@ const override = {
 const KakaoLoginCallback = (props) => {
   let [color, setColor] = useState('#EB8888');
 
-  //초기밧을 함수로 바꾸기--예정
+  
   let status;
-  let accessToken;
+  //let accessToken;
   let ourteamId;
   let userId;
   // 카카오 인가코드 추출
@@ -37,10 +37,11 @@ const KakaoLoginCallback = (props) => {
         .get(`/api/auth/kakao/callback?code=${code}`)
         .then((res) => {
           // 반환된 Access Token, Refresh Token, 유저 정보 저장
+
           
-          window.sessionStorage.setItem('access', res.data.data.user.accessToken);
-          accessToken = res.data.data.user.accessToken;
-          window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
+          //window.sessionStorage.setItem('access', res.data.data.user.accessToken);
+          //accessToken = res.data.data.user.accessToken;
+          //window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
           window.sessionStorage.setItem('id', res.data.data.user.id);
           userId = res?.data?.data?.user?.id;
           window.sessionStorage.setItem('isAdmin',res.data.data.user.isAdmin);
@@ -48,7 +49,7 @@ const KakaoLoginCallback = (props) => {
         // status 받아오기
         .then(async()=>{
             await client
-            .get(`api/team/ourteam-id/${userId}`, { headers: { authorization: `Bearer ${accessToken}` } })
+            .get(`api/team/ourteam-id/${userId}`)
             .then(async(res)=>{
               ourteamId = res?.data?.data?.ourteamId;
               window.sessionStorage.setItem('ourteamId', ourteamId);
@@ -77,6 +78,14 @@ const KakaoLoginCallback = (props) => {
                 });// 매칭 정보 서버에 저장
               }
             })
+
+          console.log('로그인 성공');
+          // window.sessionStorage.setItem('access', res.data.data.user.accessToken);
+          // window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
+          window.sessionStorage.setItem('id', res.data.data.user.id);
+          window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
+          setIsLogin((state) => !state);
+
         })
         .catch((err) => {
           console.log(err);
