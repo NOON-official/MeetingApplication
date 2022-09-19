@@ -1,7 +1,5 @@
 import { async } from '@firebase/util';
 import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import PulseLoader from 'react-spinners/PulseLoader';
 import client from '../../api';
 import DataGet from '../Elements/DataGet';
 const override = {
@@ -17,10 +15,10 @@ const MainLoginCallback = (props) => {
   let code = new URL(window.location.href).searchParams.get('code');
 
   // 서버에 인가코드 넘겨주기
-  useEffect(() => {
+  useEffect(async() => {
     // 로그인 전
     if (!IsLogin) {
-      client
+      await client
         .get(`/api/auth/kakao/callback?code=${code}`)
         .then((res) => {
           // 반환된 Access Token, Refresh Token, 유저 정보 저장
