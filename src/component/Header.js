@@ -85,9 +85,8 @@ export const MainPageHeader = () => {
             headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
           })
           .then((res) => {
-            
-            window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
-            setTimeout(()=>{},1000)
+            window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)
+          })
           .catch((err) => console.log(err));
       }
   const LogOut = ()=>
