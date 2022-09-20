@@ -1,6 +1,6 @@
 import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
 import { useSelector, useDispatch } from "react-redux";
-import { useState,useEffect  } from "react";
+import { useEffect  } from "react";
 import client from "../../../api";
 
 import Universities from "../../Universities";
@@ -47,9 +47,10 @@ const MyTeamInfo = () => {
   const GetData=()=>{
    
     let id = window.sessionStorage.getItem('ourteamId')
-    let accessToken = window.sessionStorage.getItem('access')
+    //let accessToken = window.sessionStorage.getItem('access')
     client
-    .get(`api/team/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
+    .get(`api/team/${id}`)
+    //delete header
     .then((res)=>{
       
       {res.data.data.ourteam.gender==1? dispatch({type:'SET_MALE'}):dispatch({type:"SET_FEMALE"})}

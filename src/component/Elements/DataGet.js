@@ -1,34 +1,35 @@
 import client from '../../api';
 
 async function DataGet() {
-  console.log('함수실행');
+  let   ourteamId;
   const id = window.sessionStorage.getItem('id');
-  const accessToken = window.sessionStorage.getItem('access');
+  //const accessToken = window.sessionStorage.getItem('access');
 
-  console.log(`Bearer ${accessToken}`);
+  //console.log(`Bearer ${accessToken}`);
 
   await client
-    .get(`api/team/ourteam-id/${id}`, { headers: { authorization: `Bearer ${accessToken}` } })
-
+    .get(`api/team/ourteam-id/${id}`)
+    // header delete
     .then((res) => {
-      setTimeout(()=>{},1000);
+      ourteamId = res?.data?.data?.ourteamId;
       window.sessionStorage.setItem('ourteamId', res.data.data.ourteamId);
-      setTimeout(()=>{},1000);
-      if (res.data.data.ourteamId == -1) {
-        alert('매칭진행중인 팀 정보가 없습니다.');
-        window.location.replace('/');
-        
-      } else {
-         client
-          .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`, {
-            headers: { authorization: `Bearer ${accessToken}` },
-          })
-          .then((res) => {
-            
-            window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
-          .catch((err) => console.log(err));
-      }
     })
+    .then(async () => {
+          if (ourteamId == -1 || ourteamId === undefined) {
+          	alert('매칭진행중인 팀 정보가 없습니다.');
+          	window.location.replace('/');
+        	}
+        	else {
+          	await client
+            	.get(`api/team/status/${ourteamId}}`)
+              //header delete
+            	.then((res) => {
+              	window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
+      	}
+    	}
+    )
     .catch((err) => console.log(err));
 }
 export default DataGet;
+
+   

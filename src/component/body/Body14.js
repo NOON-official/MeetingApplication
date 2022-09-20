@@ -29,15 +29,11 @@ const Body14 = () => {
             카카오톡으로 매칭 결과를 보내드려요.
           </StyledText>
         </StyledDiv>
-        {window.sessionStorage.getItem('access') == null ? (
+        
           <StyledDiv height="auto"  top="85%" width="auto" left="50%">
             <KakaoLogin />
           </StyledDiv>
-        ) : (
-          <StyledDiv height="80px" size="22px" top="90%" width="200px" left="50%">
-            매칭진행중인 유저입니다
-          </StyledDiv>
-        )}
+        
       </MobileBox>
     </Container>
   );
