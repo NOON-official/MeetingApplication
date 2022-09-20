@@ -65,7 +65,7 @@ const SeasonFinish = () => {
               미팅학개론의 2번째 시즌이 끝났습니다.
             </StyledText>
             <StyledText size="14px" fontWeight="500" font="Pretendard" position="static">
-              9월 초에 시작하는 다음 시즌을 기다려주세요!
+              9월 중에 시작하는 다음 시즌을 기다려주세요!
             </StyledText>
           </StyledDiv>
 
