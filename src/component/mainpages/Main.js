@@ -23,14 +23,17 @@ const Main = () => {
   };
   {
     React.useEffect(() => {
-      client
+      const loadCount = async()=>{
+        await client
         .get('api/service/count/team')
         .then((res) => {
-          console.log('제발');
+         
         })
         .catch((err) => {
           console.log(err);
         });
+      }
+        loadCount();
       {
         /*client
     .get('api/service/apply/status')
@@ -128,10 +131,10 @@ const Main = () => {
             </StyledText>
           </StyledDiv>
           <StyledDiv
-            margin="0 0 0 5%"
+            margin="0 0 5% 5%"
             top="40%"
             left="50%"
-            height="60%"
+            height="70%"
             width="100%"
             transform="translate(-50%, 0)"
             display="flex"

@@ -1,11 +1,9 @@
-import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect  } from "react";
-import client from "../../../api";
+import { StyledDiv,StyledText } from "../../../Elements/StyledComponent";
+import Universities from "../../../Universities";
 
-import Universities from "../../Universities";
 //gender, num, age,universities,area,day, appearance,mbti,characters,height
-const MyTeamInfo = () => {
+const TeamInfo = () => {
+  var partnerteamInfo = JSON.parse(window.sessionStorage.getItem("partnerTeamInfo"))?.ourteam
   function binarySearch(arr, target) {
     // TODO : 여기에 코드를 작성합니다.
     let start = 0;
@@ -30,50 +28,6 @@ const MyTeamInfo = () => {
     return -1
   
   };
-  const dispatch= useDispatch()
-  
-  const gender = useSelector((state)=> state.gender)
-  const num = useSelector((state)=> state.num)
-  const age = useSelector((state)=> state.age)
-  const universities= useSelector((state)=> state.university)
-  const area = useSelector((state)=> state.area)
-  const day = useSelector((state)=> state.day)
-  const characters = useSelector((state)=> state.characters)
-  const appearance = useSelector((state)=> state.appearance)
-  const mbti = useSelector((state)=> state.mbti)
-  const height = useSelector((state)=> state.height);
-  
- 
-  const GetData=()=>{
-   
-    let id = window.sessionStorage.getItem('ourteamId')
-    //let accessToken = window.sessionStorage.getItem('access')
-    client
-    .get(`api/team/${id}`)
-    //delete header
-    .then((res)=>{
-      
-      {res.data.data.ourteam.gender==1? dispatch({type:'SET_MALE'}):dispatch({type:"SET_FEMALE"})}
-      dispatch({type:'NUMBER', payload:res.data.data.ourteam.num})
-      dispatch({type:'AGE', payload:res.data.data.ourteam.age})
-      dispatch({type:'GET_UNIVERSITIES', payload:res.data.data.ourteam.university})
-      dispatch({type:'GET_AREA', payload: res.data.data.ourteam.area})
-      dispatch({type:'GET_DAY', payload:res.data.data.ourteam.day})
-      dispatch({type:'GET_CHARACTER',payload:res.data.data.ourteam.role})
-      dispatch({type:'GET_APPREANCE', payload:res.data.data.ourteam.appearance})
-      dispatch({type:'GET_MBTI',payload:res.data.data.ourteam.mbti})
-      dispatch({type:'GET_HEIGHT', payload:res.data.data.ourteam.height})
-      dispatch({type:'GET_PREFFEREDJOB', payload:res.data.data.ourteamPreference.job})
-      dispatch({type:'GET_PREFFEREDUNIVERSITIES', payload:res.data.data.ourteamPreference.sameUniversity})
-      dispatch({type:'GET_PREFFEREDAGE', payload:res.data.data.ourteamPreference.age})
-      dispatch({type:'GET_PREFFEREDHEIGHT', payload:res.data.data.ourteamPreference.height})
-      dispatch({type:'GET_PREFFEREDTHING', payload:res.data.data.ourteamPreference.vibe})
-    })
-    .catch((err)=>console.log(err))
-  }
-    useEffect(()=>{
-    GetData()
-    },[])
     return (
       <StyledDiv
         position="static"
@@ -101,7 +55,7 @@ const MyTeamInfo = () => {
           margin="5%"
         >
           <StyledText position="static" font="Pretendard" line="16.8px" size="12px" fontWeight="600" color="#777777">
-            1. 우리는 이런 팀이에요!
+            1. 상대는 이런 팀이에요!
           </StyledText>
         </StyledDiv>
         <StyledDiv
@@ -120,25 +74,25 @@ const MyTeamInfo = () => {
           <table>
               <tr>
                 <th>성별</th>
-                <td>{gender==1?'남자':'여자'}</td>
+                <td>{partnerteamInfo?.gender==1?'남자':'여자'}</td>
               </tr>
               <tr>
                 <th>인원수</th>
-                <td>{num} 명</td>
+                <td>{partnerteamInfo?.num} 명</td>
               </tr>
               <tr>
                 <th>나이</th>
-                <td>평균 {age}살</td>
+                <td>평균 {partnerteamInfo?.age}살</td>
               </tr>
               <tr>
                 <th>학교</th>
                 <td>
                   {
-                  universities.map((data, index) => {
+                  partnerteamInfo?.university.map((data, index) => {
                     // 숫자가 들어옴
                     if(typeof(data)=="number"){
                     let univ = binarySearch(Universities,data)
-                    if (index + 1 != universities.length) {
+                    if (index + 1 != partnerteamInfo?.university.length) {
                       return  (
                       ` ${univ} ,`);
                     } else {
@@ -147,7 +101,7 @@ const MyTeamInfo = () => {
                   }
                   else{
                     let univ = binarySearch(Universities,data["key"])
-                    if (index + 1 != universities.length) {
+                    if (index + 1 != partnerteamInfo?.university.length) {
                     
                       return  (
                       ` ${univ} ,`);
@@ -162,7 +116,7 @@ const MyTeamInfo = () => {
                 <th>지역</th>
                 <td>
                   {' '}
-                  {area.map((data, index) => {
+                  {partnerteamInfo?.area.map((data, index) => {
                     let localArea
                     if(data ==1){
                       localArea = '상관없음'
@@ -200,7 +154,7 @@ const MyTeamInfo = () => {
                     else if(data ==12){
                       localArea ='성수'
                     }
-                    if (index + 1 != area.length) {
+                    if (index + 1 != partnerteamInfo?.area.length) {
                       return ` ${localArea} ,`;
                     } else {
                       return ` ${localArea} `;
@@ -211,7 +165,7 @@ const MyTeamInfo = () => {
               <tr>
                 <th>요일</th>
                 <td>
-                  {day.map((data, index) => {
+                  {partnerteamInfo?.day.map((data, index) => {
                     let local
                     if(data ==1){
                       local = '월요일'
@@ -234,7 +188,7 @@ const MyTeamInfo = () => {
                     else if (data == 7){
                       local = ' 일요일'
                     }
-                    if (index + 1 != day.length) {
+                    if (index + 1 != partnerteamInfo?.day.length) {
                       return ` ${local} ,`;
                     } else {
                       return ` ${local} `;
@@ -245,7 +199,7 @@ const MyTeamInfo = () => {
               <tr>
                 <th>구성원</th>
                 <td>
-                  {characters.map((data, index) => {
+                  {partnerteamInfo?.role.map((data, index) => {
                     let local
                     if(data ==1){
                       local = '비주얼'
@@ -259,7 +213,7 @@ const MyTeamInfo = () => {
                     else if(data == 4){
                       local ='깍두기'
                     }
-                    if (index + 1 != characters.length) {
+                    if (index + 1 != partnerteamInfo?.role.length) {
                       return ` ${local} ,`;
                     } else {
                       return ` ${local} `;
@@ -270,7 +224,7 @@ const MyTeamInfo = () => {
               <tr>
                 <th>스타일</th>
                 <td>
-                  {appearance.map((data, index) => {
+                  {partnerteamInfo?.appearance.map((data, index) => {
                     let local
                     if(data ==1){
                       local = '강아지상'
@@ -296,7 +250,7 @@ const MyTeamInfo = () => {
                     else if (data == 8){
                       local = ' 쥐상'
                     }
-                    if (index + 1 != appearance.length) {
+                    if (index + 1 != partnerteamInfo?.appearance.length) {
                       return ` ${local} ,`;
                     } else {
                       return ` ${local} `;
@@ -307,7 +261,7 @@ const MyTeamInfo = () => {
               <tr>
                 <th>mbti</th>
                 <td>
-                  {mbti.map((data, index) => {
+                  {partnerteamInfo?.mbti.map((data, index) => {
                     let local
                     if(data ==1){
                       local = 'ENFJ'
@@ -357,7 +311,7 @@ const MyTeamInfo = () => {
                     else if (data == 16){
                       local = ' INTJ'
                     }
-                    if (index + 1 != mbti.length) {
+                    if (index + 1 != partnerteamInfo?.mbti.length) {
                       return ` ${local} ,`;
                     } else {
                       return ` ${local} `;
@@ -368,14 +322,14 @@ const MyTeamInfo = () => {
               <tr>
                 <th>평균키</th>
                 <td>
-                  {height}cm
+                  {partnerteamInfo?.height}cm
                 </td>
               </tr>
             </table>
           </StyledDiv>
         </StyledDiv>
       </StyledDiv>
-    );
+   ); 
   };
 
-  export default MyTeamInfo
+  export default TeamInfo

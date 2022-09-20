@@ -1,13 +1,15 @@
-import { useSelector } from "react-redux";
-import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
-const WantsInfo = () => {
-    const want = useSelector((state) => state.prefferedthing);
-  
+import { StyledDiv,StyledText } from "../../../Elements/StyledComponent";
+//job, age,university, height
+const PrefferedInfo = () => {
+    var partnerteamInfo = JSON.parse(window.sessionStorage.getItem("partnerTeamInfo")).ourteamPreference
+
+
     return (
       <StyledDiv
         position="static"
         transform="0"
         width="100%"
+        height="auto"
         display="inline-block"
         border_width="1px"
         border="10px"
@@ -15,7 +17,6 @@ const WantsInfo = () => {
         border_color="#F1ECEC"
         borderBottom="1px solid #F1ECEC"
         bg="white"
-        id="WantInfo"
       >
         <StyledDiv
           position="static"
@@ -29,7 +30,7 @@ const WantsInfo = () => {
           margin="5%"
         >
           <StyledText position="static" font="Pretendard" line="16.8px" size="12px" fontWeight="600" color="#777777">
-            3. 그날의 분위기는 어땠으면 좋겠어요?
+            2. 상대는 이런 팀을 원해요!
           </StyledText>
         </StyledDiv>
         <StyledDiv
@@ -47,43 +48,51 @@ const WantsInfo = () => {
           <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
             <table>
               <tr>
+                <th>직업</th>
                 <td>
-                  {want.map((data, index) => {
+                  {partnerteamInfo.job.map((data, index) => {
                     let local
                     if(data ==1){
-                      local = '술게임 좋아요'
+                      local = '대학생'
                     }
                     else if(data == 2){
-                      local ='보드게임 좋아요'
+                      local ='직장인'
                     }
                     else if(data == 3){
-                      local = "대화가 좋아요"
+                      local = "취준생"
                     }
                     else if(data == 4){
-                      local ='설레임이 좋아요'
+                      local ='대학원생'
                     }
-                    else if (data ==5){
-                      local = '재밌는게 좋아요'
-                    }
-                    else if (data == 6){
-                      local = '마시고 죽자'
-                    }
-                    else if (data == 7){
-                      local = ' 술은 싷어요'
-                    }
-                    else if (data == 8){
-                      local = ' 구독과 좋아요'
-                    }
-                    else if (data == 9){
-                      local = ' 아무거나 좋아요'
-                    }
-                    if (index + 1 != want.length) {
-                      return ` ${local} / `;
+                    if (index + 1 != partnerteamInfo.job.length) {
+                      return ` ${local} ,`;
                     } else {
                       return ` ${local} `;
                     }
                   })}
                 </td>
+              </tr>
+              <tr>
+                <th>평균나이</th>
+                <td>
+                  {partnerteamInfo.age.map((data, index) => {
+                    if (index + 1 != partnerteamInfo.age.length) {
+                      return `${data}살~`;
+                    } else return `${data}살`;
+                  })}
+                </td>
+              </tr>
+              <tr>
+                <th>기피학교</th>
+                <td>{partnerteamInfo.university == 0 ? '같은학교는 싫어요' : '상관없어요'}</td>
+              </tr>
+              <tr>
+                <th>선호키</th>
+                <td>{partnerteamInfo.height.map((data, index) => {
+                    if (index + 1 != partnerteamInfo.height.length) {
+                      return ` ${data}cm ~ `;
+                    } else return ` ${data}cm`;
+                  })}</td>
               </tr>
             </table>
           </StyledDiv>
@@ -92,4 +101,4 @@ const WantsInfo = () => {
     );
   };
 
-  export default WantsInfo
+  export default PrefferedInfo 

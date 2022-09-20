@@ -27,12 +27,10 @@ import './App.css';
 import PublicRoute from './component/Router/PublicRoute';
 import PrivateRoute from './component/Router/PrivateRoute';
 import { app } from './component/Firebase/firebase';
-import { useDispatch } from 'react-redux';
-
 function App() {
   const Bootom = () => {
     const location = useLocation().pathname;
-    if (location === '/') {
+    if (location === '/' || location==='/admin') {
       return;
     } else {
       return <Footer></Footer>;
@@ -40,13 +38,13 @@ function App() {
   };
  const Top = ()=>{
   const location = useLocation().pathname;
-  if (location === '/' || location === '/join') {
+  //location === '/' || 
+  if (location ==='/admin') {
     return <MainPageHeader></MainPageHeader>;
   } else {
     return <Header></Header>;
   }
  }
- 
   return (
     <div className="App">
       <BrowserRouter>
@@ -60,7 +58,7 @@ function App() {
               </PublicRoute>
             }
           />
-     {/* <Route
+      <Route
             path="/"
             element={
               <PublicRoute restricted={false}>
@@ -68,24 +66,15 @@ function App() {
               </PublicRoute>
             }
           />
-          */}
+          
            <Route
-            path="/"
+            path="/admin"
             element={
               <PublicRoute restricted={false}>
                 <Body1 />
               </PublicRoute>
             }
-          />
-
-          <Route
-            path="/join"
-            element={
-              <PublicRoute restricted={false}>
-                <Body1 />
-              </PublicRoute>
-            }
-          />
+          /> 
          
           <Route
             path="/apply/2"
@@ -215,6 +204,8 @@ function App() {
               </PublicRoute>
             }
           />
+          
+         
         </Routes>
         <Bootom></Bootom>
       </BrowserRouter>

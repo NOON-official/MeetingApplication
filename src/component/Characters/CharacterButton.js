@@ -25,7 +25,7 @@ export const Character = (props) => {
   const dispatch = useDispatch();
   const characters = useSelector((state) => state.characters);
   const num = useSelector((state) => state.num);
-  const exist = React.useMemo(() => characters.includes(props.character), [characters]);
+  const exist = React.useMemo(() => characters.includes(props.meta), [characters]);
   const fontColor = React.useMemo(() => (exist ? '#1A1A1A' : '#BBBBBB'), [exist]);
   const Characters = React.useCallback(
     (props) => {
@@ -60,11 +60,11 @@ export const Character = (props) => {
 
   const OnCharacterClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'CHARACTERS_DELETE', payload: props.character });
+      dispatch({ type: 'CHARACTERS_DELETE', payload: props.meta });
     } else {
-      if (characters.length < num) dispatch({ type: 'CHARACTERS', payload: props.character });
+      if (characters.length < num) dispatch({ type: 'CHARACTERS', payload: props.meta });
     }
-  }, [exist, props.character, characters, num]);
+  }, [exist, props.meta, characters, num]);
 
   return (
     <StyledDiv position="static" transform="0" onClick={OnCharacterClick}>

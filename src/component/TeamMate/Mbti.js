@@ -45,18 +45,18 @@ const Mbti = (props) => {
   const dispatch = useDispatch();
   const mbti = useSelector((state) => state.mbti);
   const num = useSelector((state) => state.num);
-  const exist = React.useMemo(() => mbti.includes(props.mbti), [mbti]);
+  const exist = React.useMemo(() => mbti.includes(props.meta), [mbti]);
   const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist]);
   const bgColor = React.useMemo(() => (exist ? buttonColor : '#FBF6F6'), [exist]);
   const OnMbtiClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'MBTI_DELETE', payload: props.mbti });
+      dispatch({ type: 'MBTI_DELETE', payload: props.meta });
     } else {
-      if (mbti.length < num) dispatch({ type: 'MBTI', payload: props.mbti });
+      if (mbti.length < num) dispatch({ type: 'MBTI', payload: props.meta });
     }
-  }, [exist, props.mbti, mbti]);
+  }, [exist, props.meta, mbti]);
   return (
-    <MbtiButton color={fontColor} background_color={bgColor} type="button" value={props.mbti} onClick={OnMbtiClick}>
+    <MbtiButton color={fontColor} background_color={bgColor} type="button" value={props.meta} onClick={OnMbtiClick}>
       {props.mbti}
     </MbtiButton>
   );
@@ -81,28 +81,28 @@ const Mbtis = (props) => {
         MBTI
       </StyledText>
       <MbtiContainer >
-        <Mbti mbti={'ESTP'}></Mbti>
-        <Mbti mbti={'ESFP'}></Mbti>
-        <Mbti mbti={'ENFP'}></Mbti>
-        <Mbti mbti={'ENTP'}></Mbti>
+        <Mbti mbti={'ESTP'}meta={7}></Mbti>
+        <Mbti mbti={'ESFP'}meta={5}></Mbti>
+        <Mbti mbti={'ENFP'}meta={3}></Mbti>
+        <Mbti mbti={'ENTP'}meta={4}></Mbti>
       </MbtiContainer>
       <MbtiContainer >
-        <Mbti mbti={'ESTJ'}></Mbti>
-        <Mbti mbti={'ESFJ'}></Mbti>
-        <Mbti mbti={'ENFJ'}></Mbti>
-        <Mbti mbti={'ENTJ'}></Mbti>
+        <Mbti mbti={'ESTJ'}meta={8}></Mbti>
+        <Mbti mbti={'ESFJ'}meta={6}></Mbti>
+        <Mbti mbti={'ENFJ'} meta={1}></Mbti>
+        <Mbti mbti={'ENTJ'}meta={2}></Mbti>
       </MbtiContainer>
       <MbtiContainer >
-        <Mbti mbti={'ISTJ'}></Mbti>
-        <Mbti mbti={'ISFJ'}></Mbti>
-        <Mbti mbti={'INFJ'}></Mbti>
-        <Mbti mbti={'INTJ'}></Mbti>
+        <Mbti mbti={'ISTJ'}meta={15}></Mbti>
+        <Mbti mbti={'ISFJ'}meta={14}></Mbti>
+        <Mbti mbti={'INFJ'}meta={10}></Mbti>
+        <Mbti mbti={'INTJ'}meta={16}></Mbti>
       </MbtiContainer>
       <MbtiContainer >
-        <Mbti mbti={'ISTP'}></Mbti>
-        <Mbti mbti={'ISFP'}></Mbti>
-        <Mbti mbti={'INFP'}></Mbti>
-        <Mbti mbti={'INTP'}></Mbti>
+        <Mbti mbti={'ISTP'}meta={12}></Mbti>
+        <Mbti mbti={'ISFP'}meta={13}></Mbti>
+        <Mbti mbti={'INFP'}meta={9}></Mbti>
+        <Mbti mbti={'INTP'}meta={11}></Mbti>
       </MbtiContainer>
     </StyledDiv>
   );

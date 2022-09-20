@@ -45,7 +45,7 @@ const Height = () => {
     const heigth = useSelector((state) => state.height);
     const handleChange = (event, newValue) => {
       if (typeof newValue === 'number') {
-        dispatch({ type: 'HEIGHT', payload: newValue });
+        dispatch({ type: 'HEIGHT', payload: String(newValue) });
       }
     };
 

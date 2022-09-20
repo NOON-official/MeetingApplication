@@ -1,8 +1,6 @@
-import { useSelector } from "react-redux";
-import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
-const WantsInfo = () => {
-    const want = useSelector((state) => state.prefferedthing);
-  
+import { StyledDiv,StyledText } from "../../../Elements/StyledComponent";
+const Vibe = () => {
+    var partnerteamInfo = JSON.parse(window.sessionStorage.getItem("partnerTeamInfo")).ourteamPreference
     return (
       <StyledDiv
         position="static"
@@ -15,7 +13,7 @@ const WantsInfo = () => {
         border_color="#F1ECEC"
         borderBottom="1px solid #F1ECEC"
         bg="white"
-        id="WantInfo"
+  
       >
         <StyledDiv
           position="static"
@@ -29,7 +27,7 @@ const WantsInfo = () => {
           margin="5%"
         >
           <StyledText position="static" font="Pretendard" line="16.8px" size="12px" fontWeight="600" color="#777777">
-            3. 그날의 분위기는 어땠으면 좋겠어요?
+            3. 상대팀이 원하는 분위기
           </StyledText>
         </StyledDiv>
         <StyledDiv
@@ -48,7 +46,7 @@ const WantsInfo = () => {
             <table>
               <tr>
                 <td>
-                  {want.map((data, index) => {
+                  { partnerteamInfo.vibe.map((data, index) => {
                     let local
                     if(data ==1){
                       local = '술게임 좋아요'
@@ -77,7 +75,7 @@ const WantsInfo = () => {
                     else if (data == 9){
                       local = ' 아무거나 좋아요'
                     }
-                    if (index + 1 != want.length) {
+                    if (index + 1 != partnerteamInfo.vibe.length) {
                       return ` ${local} / `;
                     } else {
                       return ` ${local} `;
@@ -92,4 +90,4 @@ const WantsInfo = () => {
     );
   };
 
-  export default WantsInfo
+  export default Vibe
