@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from 'react';
-import client from '../../api';
+import React, { useCallback } from 'react';
 import Main from '../mainpages/Main';
 import Guide from '../mainpages/Guide';
 import MatchingInquire from '../mainpages/MatchingInquire';
@@ -8,18 +7,21 @@ import { Container } from '../Elements/StyledComponent';
 import MyPage from '../mainpages/MyPage';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+
 
 const Body1 = () => {
   const dispatch = useDispatch();
   const pageChange = async(state)=>{
     return(dispatch({type: 'PAGE', payload: state}));
   }
-  useEffect(async () => {
+  useEffect(()=>{
+    const pagehandle =async() => {
     const location = window.location.pathname;
     if (location === '/join')
-      pageChange(2);
-  }, [])
+      {pageChange(2);}
+  }
+  pagehandle();
+}, [])
 
   const pagestate = useSelector((state)=> state.pagestate);
 

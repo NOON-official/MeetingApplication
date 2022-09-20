@@ -1,5 +1,4 @@
 import AreaContiner from '../Areas/AreaContainer';
-
 import { ReactComponent as DayCharacter } from '../../Asset/page4/DayCharacter.svg';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 

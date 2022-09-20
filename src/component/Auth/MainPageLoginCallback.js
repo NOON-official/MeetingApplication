@@ -1,15 +1,14 @@
-import { async } from '@firebase/util';
-import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import PulseLoader from 'react-spinners/PulseLoader';
+import React, { useState, useEffect } from 'react';
 import client from '../../api';
 import DataGet from '../Elements/DataGet';
+import { useSelector, useDispatch } from 'react-redux';
 const override = {
   display: 'block',
   margin: '0 auto',
 };
 
 const MainLoginCallback = (props) => {
+  const dispatch = useDispatch()
   let [color, setColor] = useState('#EB8888');
   let [IsLogin, setIsLogin] = useState(false);
 
@@ -25,10 +24,11 @@ const MainLoginCallback = (props) => {
         .then((res) => {
           // 반환된 Access Token, Refresh Token, 유저 정보 저장
           console.log('로그인 성공');
-          window.sessionStorage.setItem('access', res.data.data.user.accessToken);
-          window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
+          // window.sessionStorage.setItem('access', res.data.data.user.accessToken);
+          // window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
           window.sessionStorage.setItem('id', res.data.data.user.id);
-          window.sessionStorage.setItem('isAdmin',res.data.data.user.isAdmin);
+          window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
+          dispatch({type: "SET_LOGIN", payload: true})
           setIsLogin((state) => !state);
         })
         .catch((err) => {
@@ -38,15 +38,17 @@ const MainLoginCallback = (props) => {
     }
     // 로그인 후
     else {
-      console.log('1', window.sessionStorage.getItem('access'));
+      // console.log('1', window.sessionStorage.getItem('access'));
+
       async function callDataGet() {
         await DataGet();
       }
-      console.log('데이터 이전 시도중');
+ 
 
       callDataGet() // 매칭 정보 서버에 저장
         .then(() => {
-          console.log('완료');
+         window.location.replace('/admin');
+         //"/"
         })
         .catch((err) => {
           console.log('오류', err);

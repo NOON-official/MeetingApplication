@@ -48,16 +48,16 @@ const Fashion = (props) => {
   const dispatch = useDispatch();
   const fashion = useSelector((state) => state.fashion);
   const num = useSelector((state) => state.num);
-  const exist = React.useMemo(() => fashion.includes(props.fashion), [fashion]);
+  const exist = React.useMemo(() => fashion.includes(props.meta), [fashion]);
   const fontColor = React.useMemo(() => (exist ? 'white' : '#B79292'), [exist]);
   const bgColor = React.useMemo(() => (exist ? buttonColor : '#FBF6F6'), [exist]);
   const OnFashionClick = React.useCallback(() => {
     if (exist) {
-      dispatch({ type: 'FASHION_DELETE', payload: props.fashion });
+      dispatch({ type: 'FASHION_DELETE', payload: props.meta });
     } else {
-      dispatch({ type: 'FASHION', payload: props.fashion });
+      dispatch({ type: 'FASHION', payload: props.meta });
     }
-  }, [exist, props.fashion, fashion]);
+  }, [exist, props.meta, fashion]);
   return (
     <FashionButton
       color={fontColor}
@@ -89,16 +89,16 @@ const Fashions = (props) => {
         패션
       </StyledText>
       <FashionContainer top="28%">
-        <Fashion fashion={'베이직'}></Fashion>
-        <Fashion fashion={'캐주얼'}></Fashion>
-        <Fashion fashion={'스트릿'}></Fashion>
-        <Fashion fashion={'스포티'}></Fashion>
+        <Fashion fashion={'베이직'} meta={1}></Fashion>
+        <Fashion fashion={'캐주얼'} meta={2}></Fashion>
+        <Fashion fashion={'스트릿'}meta={3}></Fashion>
+        <Fashion fashion={'스포티'}meta={4}></Fashion>
       </FashionContainer>
       <FashionContainer top="58%">
-        <Fashion fashion={'페미닌'}></Fashion>
-        <Fashion fashion={'걸리쉬'}></Fashion>
-        <Fashion fashion={'무신사'}></Fashion>
-        <Fashion fashion={'파자마'}></Fashion>
+        <Fashion fashion={'페미닌'}meta={5}></Fashion>
+        <Fashion fashion={'걸리쉬'} meta={6}></Fashion>
+        <Fashion fashion={'무신사'} meta={7}></Fashion>
+        <Fashion fashion={'파자마'} meta={8}></Fashion>
       </FashionContainer>
     </StyledDiv>
   );
