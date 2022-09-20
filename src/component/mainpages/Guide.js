@@ -1,6 +1,5 @@
 import { Container } from "../Elements/StyledComponent"
 import { MobileBox, StyledDiv, StyledButton } from "../Elements/StyledComponent"
-import { Link } from 'react-router-dom';
 const Guide =()=>{
     return(
 <Container height={'100%'} bg="#f8f3f3">

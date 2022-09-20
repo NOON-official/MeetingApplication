@@ -1,5 +1,4 @@
 import client from '../../api';
-import { useSelector } from 'react-redux';
 async function DataPush() {
   
   const ourTeamInfo = JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).ourTeamInfo);
@@ -9,28 +8,22 @@ async function DataPush() {
   const finalOurTeamInfo = Object.assign(JSON.parse(ourTeamInfo), object);
   const postPhonenunber = { userId: parseInt(id), phone: phonenumber };
   await client
-    .post('api/user/phone', postPhonenunber, {
-      headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
-    })
+    .post('api/user/phone', postPhonenunber)
+    //delete header
     .then(async (res) => {
      await client
-        .post('/api/team', finalOurTeamInfo, {
-          headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
-        })
+        .post('/api/team', finalOurTeamInfo)
+        //delete header
         .then(
          await client
-          .get(`api/team/ourteam-id/${id}`,  {headers:{ authorization: `Bearer ${window.sessionStorage.getItem('access')}` }})
+          .get(`api/team/ourteam-id/${id}`)
+          //delete header
           .then(async (res)=>{
-            setTimeout(()=>{},1000);
-            window.sessionStorage.setItem('ourteamId', res.data.data.ourteamId);
-            setTimeout(()=>{},1000);
-            
+                window.sessionStorage.setItem('ourteamId', res.data.data.ourteamId);
                await client
-                .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`, {
-                  headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
-                })
+                .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`)
+                //delete header
                 .then((res) => {
-                  
                   window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
                 .catch((err) => alert(err));
             

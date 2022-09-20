@@ -1,7 +1,9 @@
 import { StyledDiv, StyledButton } from "../../Elements/StyledComponent"
 import { ReactComponent as Character } from '../../../Asset/mainPage/FailCharacter.svg';
 import { Link } from 'react-router-dom';
+
 const Fail = ()=>{
+ 
 return(
 <StyledDiv position= "static" transform="0" left="0" height="100%" width="100%" display="flex" direction="column" justify_content="space-between" align_item="center">
         <StyledDiv top="25%" height="25%" left="50%"  width="90%">
@@ -22,7 +24,7 @@ return(
                     <StyledButton position="static" left="0"height="45px" transform="0" width="180px" size="18px" >
                     한번 더 진행하기 
                     </StyledButton>
-                </Link>
+                  </Link>
         </StyledDiv>
 
 </StyledDiv>

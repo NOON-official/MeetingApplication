@@ -79,14 +79,13 @@ export const MainPageHeader = () => {
     dispatch({type: "SET_LOGIN", payload:IsLogin})
  },[IsLogin])
  
- const MatchingStatusRefresh = () =>{
-          client
-          .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`, {
-            headers: { authorization: `Bearer ${window.sessionStorage.getItem('access')}` },
-          })
+ const MatchingStatusRefresh = async() =>{
+          await client
+          .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`)
+          //delete header
           .then((res) => {
-            
-            window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
+            window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)
+          })
           .catch((err) => console.log(err));
       }
   const LogOut = ()=>

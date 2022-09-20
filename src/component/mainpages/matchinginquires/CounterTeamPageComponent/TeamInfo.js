@@ -1,6 +1,4 @@
 import { StyledDiv,StyledText } from "../../../Elements/StyledComponent";
-import { useState,useEffect  } from "react";
-import client from "../../../../api";
 import Universities from "../../../Universities";
 
 //gender, num, age,universities,area,day, appearance,mbti,characters,height
@@ -30,17 +28,6 @@ const TeamInfo = () => {
     return -1
   
   };
-  
-
-  
-   
-
-
-   
-     
-    
-
-
     return (
       <StyledDiv
         position="static"

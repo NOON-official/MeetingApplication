@@ -3,11 +3,9 @@
 import { Container } from '../Elements/StyledComponent';
 import { MobileBox, StyledDiv, StyledButton } from '../Elements/StyledComponent';
 import Inprogress from './matchinginquires/LoginAndInprogress';
-import { Link } from 'react-router-dom';
 import Done from './matchinginquires/LoginAndDone';
 import Fail from './matchinginquires/LoginAndFail';
 import NewUser from './matchinginquires/NewUser';
-import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
 const MatchingInquire = () => {
   const userState = window.sessionStorage.getItem('matchingStatus')
