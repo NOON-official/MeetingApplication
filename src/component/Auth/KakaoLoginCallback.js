@@ -3,6 +3,7 @@ import PulseLoader from 'react-spinners/PulseLoader';
 import client from '../../api';
 import DataPush from '../Elements/DataPush';
 import DataPut from '../Elements/DataPut';
+import { useSelector, useDispatch } from 'react-redux';
 const override = {
   display: 'block',
   margin: '0 auto',
@@ -10,7 +11,7 @@ const override = {
 
 const KakaoLoginCallback = (props) => {
   let [color, setColor] = useState('#EB8888');
-
+  const dispatch = useDispatch()
   
   let status;
   //let accessToken;
@@ -40,6 +41,7 @@ const KakaoLoginCallback = (props) => {
           //window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
           window.sessionStorage.setItem('id', res.data.data.user.id);
           userId = res?.data?.data?.user?.id;
+          dispatch({type: "SET_LOGIN", payload: true})
           window.sessionStorage.setItem('isAdmin',res.data.data.user.isAdmin);
         })
         // status 받아오기
@@ -85,7 +87,7 @@ const KakaoLoginCallback = (props) => {
         })
         .catch((err) => {
           console.log(err);
-          window.alert('로그인 실패');
+          
         });
    
   }, []);

@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux";
 const isLogin = () => {
-  const accessToken = window?.sessionStorage?.getItem('access');
-  if (!accessToken)
-    return false;
-  else
+  const isLogin = useSelector((state)=> state.userLogin)
+  if (isLogin)
     return true;
+  else
+    return false;
 };
 
 export default isLogin;
