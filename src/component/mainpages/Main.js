@@ -67,7 +67,7 @@ const Main = () => {
       ></ManNotAllowed>
       */}
       <MobileBox overflow="auto">
-        <StyledDiv top="5.5%" left="12%" transform=" translate(-50%, 0)">
+        <StyledDiv top="5.5%" left="17%" transform=" translate(-50%, 0)">
           <Bulb />
         </StyledDiv>
         <StyledDiv top="7%" left="52%" transform="translate(-50%, 0)">
