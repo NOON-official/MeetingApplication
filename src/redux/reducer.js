@@ -16,7 +16,7 @@ const initialState={
   appearance: [], // multi choice -> 2 or 3
   mbti: [], // multi choice
   fashion: [], // multi choice
-  introduction: '',
+  introduction: "안녕하세요 한국대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다.",
   kakaoid: '',
   prefferedjobs: [],
   prefferedage: [20, 25],
@@ -207,6 +207,12 @@ const reducer = (state = initialState, action) => {
       return{...state, prefferedheight:action.payload};
     case 'GET_PREFFEREDTHING':
       return{...state, prefferedthing:action.payload}
+    case 'GET_JOB':
+      return { ...state,jobs: action.payload}
+    case 'GET_INTRO':
+      return{...state,introduction: action.payload }
+    case 'GET_FASHION':
+        return{...state, fashion: action.payload}
    case PURGE:{
   
     return {user: 'userName',
@@ -224,7 +230,7 @@ const reducer = (state = initialState, action) => {
     appearance: [], // multi choice -> 2 or 3
     mbti: [], // multi choice
     fashion: [], // multi choice
-    introduction: '',
+    introduction: "안녕하세요 한국대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다.",
     kakaoid: '',
     prefferedjobs: [],
     prefferedage: [20, 25],
