@@ -85,12 +85,14 @@ const Main = () => {
         <StyledDiv top="61%" left="50%" transform="translate(-50%, 0)">
           <MainText />
         </StyledDiv>
-
-        <Link to="/apply/2" style={{ textDecoration: 'none' }}>
-          <StyledButton height="45px" width="180px" top="70%" size="18px">
-            매칭 시작하기
-          </StyledButton>
-        </Link>
+        {window.sessionStorage.getItem('matchingStatus')==1?
+        <div></div>
+        : <Link to="/apply/2" style={{ textDecoration: 'none' }}>
+        <StyledButton height="45px" width="180px" top="70%" size="18px">
+          매칭 시작하기
+        </StyledButton>
+      </Link>}
+       
 
         <Counter end={num} />
         <StyledDiv

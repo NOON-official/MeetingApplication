@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import * as React from 'react';
 import { ReactComponent as Character } from '../../Asset/page11/InputCharacter.svg';
 import { ReactComponent as ChatBallon } from '../../Asset/page11/ChatBallon.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 const StyledTextArea = styled.textarea`
   position: static;
@@ -20,6 +20,7 @@ const StyledTextArea = styled.textarea`
 `;
 const Body11 = () => {
   const dispatch = useDispatch();
+  const intro = useSelector((state)=> state.introduction)
   const setIntroduction = (e) => {
     dispatch({ type: 'SET_INTRODUCTION', payload: e.target.value });
   };
@@ -100,7 +101,7 @@ const Body11 = () => {
         >
           <StyledTextArea
             onChange={setIntroduction}
-            placeholder="안녕하세요 한국대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다."
+            placeholder={intro}
           ></StyledTextArea>
         </StyledDiv>
         <StyledDiv top="65%" left="35%">

@@ -7,7 +7,7 @@ const PublicRoute = ({ children, restricted }) => {
   // restricted = false (로그인한 유저 접근 가능)
   // restricted = true (로그인한 유저 접근 불가능)
   const toApply15Condition = (isLogin() && isAlredyMatching() && restricted)
-  return toApply15Condition ? <Navigate to="/apply/15" /> : children;
+  return toApply15Condition ? alert("매칭완료된 유저입니다.") : children;
 };
 
 export default PublicRoute;
