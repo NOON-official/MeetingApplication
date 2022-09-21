@@ -31,7 +31,7 @@ const Body9 = () => {
                 {/* TextTitle*/}
 
                 <StyledText position=" static" size="0.8em">
-                  어땟으면 좋겠어요?
+                  어땠으면 좋겠어요?
                 </StyledText>
               </StyledDiv>
               <StyledDiv
