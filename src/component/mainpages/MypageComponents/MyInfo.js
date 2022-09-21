@@ -16,16 +16,16 @@ const MyInfo = () => {
     .get(`api/user/${id}`)
     //delete header
     .then((res)=>{
-      window.sessionStorage.setItem('nickname',res?.data.data?.user?.nickname) 
-      window.sessionStorage.setItem('phone',res?.data?.data?.user?.phone) 
+      window.localStorage.setItem('nickname',res?.data.data?.user?.nickname) 
+      window.localStorage.setItem('phone',res?.data?.data?.user?.phone) 
     })
     .catch((err)=>console.log(err))
   }
     useEffect(()=>{
       async function fetchData() { 
         await GetData()
-        setNickname(window.sessionStorage.getItem('nickname'))
-        setPhone(window.sessionStorage.getItem('phone'))
+        setNickname(window.localStorage.getItem('nickname'))
+        setPhone(window.localStorage.getItem('phone'))
       }
       fetchData()
     },[])
