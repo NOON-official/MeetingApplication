@@ -24,7 +24,7 @@ async function DataPush() {
                 .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`)
                 //delete header
                 .then((res) => {
-                  window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
+                  window.localStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
                 .catch((err) => alert(err));
             
 
