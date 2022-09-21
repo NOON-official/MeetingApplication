@@ -37,7 +37,14 @@ return(
         <StyledDiv position="static" color="#777777"font="Nanum JungHagSaeng" size="20px"transform="0" left="0" display="flex" justify_content="center"align_itme="center">
             회원 탈퇴하기
         </StyledDiv>
-        </StyledDiv>:<div >로그인 후에 이용해주세요</div>}
+        </StyledDiv>:
+        <StyledDiv left="50%"
+        height="90%"
+        width="90%"
+        display="flex"
+        justify_content="space-around"
+        color="#777777"font="Nanum JungHagSaeng">로그인 후에 이용해주세요</StyledDiv>
+        }
             
         </MobileBox>
     </Container>
