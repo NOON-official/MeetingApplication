@@ -8,7 +8,7 @@ import Fail from './matchinginquires/LoginAndFail';
 import NewUser from './matchinginquires/NewUser';
 import { useCallback } from 'react';
 const MatchingInquire = () => {
-  const userState = window.sessionStorage.getItem('matchingStatus')
+  const userState = window.localStorage.getItem('matchingStatus')
   const MatchingInquirePage = useCallback(() => {
     if (userState == 0) {
       return <Inprogress/>
