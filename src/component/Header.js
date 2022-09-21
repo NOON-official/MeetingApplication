@@ -70,6 +70,7 @@ export const MainPageHeader = () => {
   async function logOut () {
        
         window.sessionStorage.clear();
+        window.localStorage.clear();
      
          await persistor.purge();
        
@@ -84,7 +85,7 @@ export const MainPageHeader = () => {
           .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`)
           //delete header
           .then((res) => {
-            window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)
+            window.localStorage.setItem('matchingStatus',res.data.data.matchingStatus)
           })
           .catch((err) => console.log(err));
       }
