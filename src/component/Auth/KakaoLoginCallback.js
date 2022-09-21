@@ -3,7 +3,7 @@ import PulseLoader from 'react-spinners/PulseLoader';
 import client from '../../api';
 import DataPush from '../Elements/DataPush';
 import DataPut from '../Elements/DataPut';
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 const override = {
   display: 'block',
   margin: '0 auto',
@@ -87,7 +87,7 @@ const KakaoLoginCallback = (props) => {
         })
         .catch((err) => {
           console.log(err);
-          
+          //window.alert('로그인 실패');
         });
    
   }, []);
