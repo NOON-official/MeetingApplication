@@ -24,7 +24,7 @@ async function DataGet() {
             	.get(`api/team/status/${ourteamId}}`)
               //header delete
             	.then((res) => {
-              	window.sessionStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
+              	window.localStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
       	}
     	}
     )
