@@ -27,7 +27,7 @@ const Main = () => {
         await client
         .get('api/service/count/team')
         .then((res) => {
-         
+         setNum(res.data.data.waitingTeam)
         })
         .catch((err) => {
           console.log(err);
@@ -44,7 +44,7 @@ const Main = () => {
     .catch((err)=>{console.log(err)});
   */
       }
-    }, []);
+    }, [num]);
   }
   return (
     <Container height={'100%'} bg="#f8f3f3">
