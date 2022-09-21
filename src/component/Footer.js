@@ -118,11 +118,11 @@ const Footer = () => {
   const signin = useSelector((state) => state.signin);
   const MovingPath = () => {
     if (location === '/apply/2') {
+
       nextPathSetting('/apply/2');
       uncompleted();
       if (jobs.length > 0) {
         complete();
-       
         nextPathSetting('/apply/3');
       } else {
         prevPathSetting('/apply/2');
