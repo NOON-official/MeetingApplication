@@ -153,20 +153,18 @@ const Body13 = () => {
             margin="5px 0 0 10px"
           >
             <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
-              <StyledText position=" static" size="0.8em" color="#F49393" >
-              전화번호 인증
+              <StyledText position=" static" size="0.8em"  >
+              연락을 드릴 수 있게
               </StyledText>
-              <StyledText position=" static" size="0.8em" >
-              을 통해
-              </StyledText>
+            
             </StyledDiv>
             <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
               {/* TitleBox*/}
               <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
                 {/* TextTitle*/}
 
-                <StyledText position=" static" size="0.8em" >
-                  서비스를 시작해 보세요
+                <StyledText position=" static" size="0.8em" color="#F49393" >
+                  전화번호 인증을 해주세요!
                 </StyledText>
                 
               </StyledDiv>

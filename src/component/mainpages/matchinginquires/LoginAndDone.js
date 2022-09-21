@@ -1,7 +1,7 @@
 import { StyledDiv, StyledButton } from "../../Elements/StyledComponent"
 import { ReactComponent as Character } from '../../../Asset/mainPage/Character.svg';
 import client from "../../../api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TeamInfo from "./CounterTeamPageComponent/TeamInfo";
 import Vibe from "./CounterTeamPageComponent/Vibe";
 import Intro from "./CounterTeamPageComponent/Intro";
@@ -10,10 +10,10 @@ const Done = ()=>{
     const [ where, setWhere] = useState(0)
     
         const GetData=async()=>{
-            console.log("start")
+        
             let id = window.sessionStorage.getItem('ourteamId')
             //let accessToken = window.sessionStorage.getItem('access')
-            let partnerTeamId= {}
+            let partnerTeamId
           
            
             await client
@@ -106,7 +106,15 @@ const Done = ()=>{
             )
         }
         else if (where==2){
-            const [ openChatLink, setOpenChatLink] = useState("www.")
+            const [ openChatLink, setOpenChatLink] = useState()
+            useEffect(()=>{
+                client
+                .get(`api/team/result/${ourteamId}`)
+                .then((res)=>{
+                    setOpenChatLink(res.data.data.matchingResult.chatLink)
+                })
+                .catch((err))
+            },[])
          
             return(
                 <StyledDiv
@@ -140,8 +148,8 @@ const Done = ()=>{
                                     <StyledDiv position="static"display="flex" justify_content="center" align_item="center" transform="0" left="0" height="40%"font="Pretendard" color="#777777" size="12px">오픈채팅방 링크는 다음과 같습니다.</StyledDiv>
                                     <StyledDiv position="static" display="flex"justify_content="center" align_item="center"transform="0" left="0" height="50%" color="#777777" size="12px">
                                       
-                                        <a href="https://open.kakao.com/o/geqPeWBe"> 
-                                        https://open.kakao.com/o/geqPeWBe
+                                        <a href={openChatLink}> 
+                                        {openChatLink}
                                             </a>
                                     </StyledDiv>
                                     {/**이부분에 링크 받아와서 넣기 */}

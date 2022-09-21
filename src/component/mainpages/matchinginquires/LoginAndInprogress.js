@@ -34,7 +34,7 @@ return(
         </StyledDiv>
         <StyledDiv top="70%" height="20%" left="50%" width="90%" display="flex" direction="column" justify_content="center" align_item="center">
                 {/**link 수정 필요 */}
-                <a href="https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7"> 
+                <a href="https://furry-bank-197.notion.site/9c7eacd16070426fab83478adfd4c091"> 
                     <StyledButton position="static" left="0"height="45px" transform="0" width="180px" size="18px" >
                     미팅 팁 보러가기
                     </StyledButton>

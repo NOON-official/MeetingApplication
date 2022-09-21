@@ -1,6 +1,5 @@
 import * as React from 'react';
 import DaysContainer from '../DAYS/DaysContainer';
-
 import { ReactComponent as DayCharacter } from '../../Asset/page5/DayCharacter.svg';
 import { ReactComponent as DayChatBallon } from '../../Asset/page5/DayChatBallon.svg';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
