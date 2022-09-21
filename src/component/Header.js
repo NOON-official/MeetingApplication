@@ -148,7 +148,7 @@ export const MainPageHeader = () => {
             매칭 조회
           </StyledDiv>
           <StyledDiv onClick={()=>{pageChange(3)}} border="10px"bg={myinfo.bg} color={myinfo.font?myinfo.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
-            우리팀 정보
+             내정보
           </StyledDiv>
         </StyledDiv>
     </MainPageHeaderContainer>

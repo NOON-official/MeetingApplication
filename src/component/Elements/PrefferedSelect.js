@@ -86,7 +86,7 @@ export const AgeSelect = () => {
     <Contents heigth="25%" width="100%" justify_content="space-around">
       <SubTitle transform="0" margin="0 0 0 10px" width="100%"position="static" weigth="500" font="Pretendard" align_item="center" justify_content="flex-start">
         {' '}
-        평균나이
+        평균 나이
       </SubTitle>
       <SliderBox position=" static" left="0" transform="0" display="flex" direction="column" >
         {/** divide slider and text */}
@@ -116,7 +116,7 @@ export const HeightSelect =()=>{
     <Contents heigth="25%" width="100%" justify_content="space-around">
     <SubTitle transform="0" margin="0 0 0 10px" width="100%"position="static" weigth="500" font="Pretendard" align_item="center" justify_content="flex-start">
       {' '}
-      평균키
+      평균 키
     </SubTitle>
     <SliderBox position=" static" left="0" transform="0" display="flex" direction="column" >
       {/** divide slider and text */}
