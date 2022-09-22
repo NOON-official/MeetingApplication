@@ -8,6 +8,7 @@ import { ReactComponent as ChatBallon } from '../../Asset/page3/ChatBallon.svg';
 import { ReactComponent as SearchIcon } from '../../Asset/page3/SearchIcon.svg';
 import { ReactComponent as Xbutton } from '../../Asset/page3/Xbutton.svg';
 import Universities from '../Universities';
+
 const StyledInput = styled.input`
   width: ${(props) => props.width || '100%'};
   height: 100%;
@@ -43,6 +44,30 @@ margin-left: 50px;
 margin-right: 50px;
 border-bottom: 1px solid #F6EEEE;
 `
+function binarySearch(arr, target) {
+  // TODO : 여기에 코드를 작성합니다.
+  let start = 0;
+  let end = arr.length-1
+  let mid
+ 
+  while(start<=end){ //점점 좁혀지다가 start와 end의 순서가 어긋나게 되면 반복을 종료한다
+  
+  mid = parseInt((start+end)/2)
+  
+  if(target === arr[mid]["key"]){
+    return arr[mid]["univ"];
+  } else{
+    if(target<arr[mid]["key"]){
+      end = mid-1
+    }
+    else{
+      start = mid+1
+    }
+  }
+  }
+  return -1
+
+};
 const Body3 = () => {
   const dispatch = useDispatch();
   const universities = useSelector((state) => state.university);
@@ -76,7 +101,16 @@ const Body3 = () => {
       <Xbutton/>
       </StyledDiv>)
   }
-  
+  const SelectedNumUniversity = (props)=>{
+    const width = React.useMemo(()=>{if(universities.length==1){return"45%"}else if(universities.length==2){return"45%"}
+    else if(universities.length==3){return"30%"} else if(universities.length==4){return"23%"}},[universities])
+
+    return(<StyledDiv position="static" display="flex" justify_content="space-between"  width={width} align_item="center" bg="#EB8888" border="10px" color="#FFFFFF" minHeight="40px" text_align="center" transform="0"
+    onClick={()=>{ dispatch({ type: 'UNIVERSITIES_DELETE', payload: props.univnum });}}>
+      <StyledDiv font="Nanum JungHagSaeng" size="15px"position="static" margin="0 0 5px 5px" transform="0"> {props.university}</StyledDiv> 
+      <Xbutton/>
+      </StyledDiv>)
+  }
   
   return (
     <Container bg={'#F5F5F5'}>
@@ -134,9 +168,18 @@ const Body3 = () => {
        {universities.length==0?console.log() :
        
         <StyledDiv position="static" display="flex" justify_content="space-evenly" margin=" 0 0 0 5%" align_item="center"transform="0" width="90%" height="50px">
-       {universities.map((university, idx)=>{ return(<SelectedUniversity key={idx} university={university}/>)})}
-       </StyledDiv>
-       }
+       {universities.map((data, idx)=>{
+        if(typeof(data)=='number'){
+       
+          let univ = binarySearch(Universities,data)
+         
+          return(<SelectedNumUniversity key={idx} univnum={data} university={univ}/>)
+        }else 
+        
+        return( <SelectedUniversity key={idx} university={data}/>)})}
+        
+      </StyledDiv>
+  }
        
       
 
