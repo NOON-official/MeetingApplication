@@ -38,11 +38,12 @@ return(
             회원 탈퇴하기
         </StyledDiv>
         </StyledDiv>:
-        <StyledDiv left="50%"
+        <StyledDiv 
+        left="50%"
         height="90%"
         width="90%"
         display="flex"
-        justify_content="space-around"
+        justify_content="center"
         color="#777777"font="Nanum JungHagSaeng">로그인 후에 이용해주세요</StyledDiv>
         }
             
