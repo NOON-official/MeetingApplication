@@ -9,6 +9,7 @@ import PrefferedInfo from "./CounterTeamPageComponent/PrefferedInfo";
 const Done = ()=>{
     const [ where, setWhere] = useState(0)
     let id
+    window.sessionStorage.getItem('ourteamId')? id= window.sessionStorage.getItem('ourteamId'):null;
         const GetData=async()=>{
         
              id = window.sessionStorage.getItem('ourteamId')
@@ -108,12 +109,13 @@ const Done = ()=>{
         else if (where==2){
             const [ openChatLink, setOpenChatLink] = useState()
             useEffect(()=>{
+                console.log('start',id)
                 client
                 .get(`api/team/result/${id}`)
-                .then((res)=>{
-                    setOpenChatLink(res.data.data.matchingResult.chatLink)
+                .then(async(res)=>{
+                     setOpenChatLink(res.data.data.matchingResult.chatLink)
                 })
-                .catch((err))
+                .catch((err)=>{console.log(err)})
             },[])
          
             return(
