@@ -11,7 +11,7 @@ const Done = ()=>{
     let id
     window.sessionStorage.getItem('ourteamId')? id= window.sessionStorage.getItem('ourteamId'):null;
         const GetData=async()=>{
-        
+            
              id = window.sessionStorage.getItem('ourteamId')
             //let accessToken = window.sessionStorage.getItem('access')
             let partnerTeamId
@@ -30,10 +30,12 @@ const Done = ()=>{
             .get(`api/team/${partnerTeamId}`)
             //delete header
             .then((res)=>{
-                window.sessionStorage.setItem("partnerTeamInfo" ,JSON.stringify(res.data.data));
+                window.sessionStorage.setItem("partnerTeamInfo", JSON.stringify(res.data.data));
             })
             .then(()=>{setWhere(1)})
-            .catch((err)=> {console.log(err)})
+            .catch((err)=> {
+                console.log(err)
+            })
           }
     
     const DonePage = () =>{
