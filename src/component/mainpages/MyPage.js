@@ -34,9 +34,6 @@ return(
             수정하기
             </StyledButton>
         </Link>
-        <StyledDiv position="static" color="#777777"font="Nanum JungHagSaeng" size="20px"transform="0" left="0" display="flex" justify_content="center"align_itme="center">
-            회원 탈퇴하기
-        </StyledDiv>
         </StyledDiv>:
         <StyledDiv 
         left="50%"
