@@ -109,7 +109,7 @@ const Done = ()=>{
             const [ openChatLink, setOpenChatLink] = useState()
             useEffect(()=>{
                 client
-                .get(`api/team/result/${ourteamId}`)
+                .get(`api/team/result/${id}`)
                 .then((res)=>{
                     setOpenChatLink(res.data.data.matchingResult.chatLink)
                 })
