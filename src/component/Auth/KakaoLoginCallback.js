@@ -41,7 +41,8 @@ const KakaoLoginCallback = (props) => {
           //window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
           window.sessionStorage.setItem('id', res.data.data.user.id);
           userId = res?.data?.data?.user?.id;
-          dispatch({type: "SET_LOGIN", payload: true})
+          //dispatch({type: "SET_LOGIN", payload: true})
+          window.localStorage.setItem('isLogin',true);
           window.sessionStorage.setItem('isAdmin',res.data.data.user.isAdmin);
         })
         // status 받아오기
