@@ -7,7 +7,7 @@ const Guide =()=>{
     {/** white space box */}
     <StyledDiv  display= "flex" direction="column" justify_content="space-around" align_item="center"position=" static" transform="0" left="0" height="80%" bg="white" width="90%" border="10px">
             {/** from here each div is for paragraph */}
-            <StyledDiv  height="30%" display= "flex" direction="column" justify_content="space-around"position=" static" transform="0" left="0" >
+            <StyledDiv width="80%" height="30%" display= "flex" direction="column" justify_content="space-around"position=" static" transform="0" left="0" >
                 <StyledDiv margin="15px 0 0 0" weight="bold" text_align="start" font="Pretendard" size="23px" color="#777777" position="static" transform="0" left="0" >
                     미팅학개론은?
                 </StyledDiv>
@@ -21,12 +21,12 @@ const Guide =()=>{
                     </StyledDiv>
                 </StyledDiv>
             </StyledDiv>
-            <StyledDiv  height="50%" display= "flex" direction="column" justify_content="space-around" align_item="center" position=" static" transform="0" left="0" >
-                <StyledDiv  position="static" transform="0" left="0" display="flex" direction="column" width="100%" >
-                    <StyledDiv margin="15px 0 0 0" weight="bold" display="flex" text_align="start"font="Pretendard" size="23px" color="#777777" position="static" transform="0" left="0" >
+            <StyledDiv width="80%"  height="50%" display= "flex" direction="column" justify_content="space-around"  position=" static" transform="0" left="0" >
+                
+                    <StyledDiv  margin="15px 0 0 0" weight="bold"  text_align="start"font="Pretendard" size="23px" color="#777777" position="static" transform="0" left="0" >
                     미팅학개론 진행 방식
                     </StyledDiv>
-                </StyledDiv>
+               
                 <StyledDiv  position="static" transform="0" height="70%" left="0" display="flex" direction="column" justify_content="space-around">
                 <StyledDiv  weight="700" text_align="start"font="Pretendard" size="13px" color="#777777" position="static" transform="0" left="0" display="flex" >
                     0. 신청하기 전 팀을 구해주세요 (2:2 혹은 3:3)

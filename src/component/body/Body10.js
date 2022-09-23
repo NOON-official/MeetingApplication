@@ -2,8 +2,32 @@ import styled from 'styled-components';
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, MobileBox, StyledDiv, StyledText } from '../Elements/StyledComponent';
-
+import Universities from '../Universities';
 const MyTeamInfo = () => {
+  function binarySearch(arr, target) {
+    // TODO : 여기에 코드를 작성합니다.
+    let start = 0;
+    let end = arr.length-1
+    let mid
+   
+    while(start<=end){ //점점 좁혀지다가 start와 end의 순서가 어긋나게 되면 반복을 종료한다
+    
+    mid = parseInt((start+end)/2)
+    
+    if(target === arr[mid]["key"]){
+      return arr[mid]["univ"];
+    } else{
+      if(target<arr[mid]["key"]){
+        end = mid-1
+      }
+      else{
+        start = mid+1
+      }
+    }
+    }
+    return -1
+  
+  };
   const genderstate = useSelector((state) => state.gender);
   const num = useSelector((state) => state.num);
   const age = useSelector((state) => state.age);
@@ -74,13 +98,29 @@ const MyTeamInfo = () => {
             <tr>
               <th>학교</th>
               <td>
-                {universities.map((data, index) => {
-                  if (index + 1 != universities.length) {
-                    return ` ${data["univ"]} ,`;
-                  } else {
-                    return ` ${data["univ"]} `;
+              {
+                  universities.map((data, index) => {
+                    // 숫자가 들어옴
+                    if(typeof(data)=="number"){
+                    let univ = binarySearch(Universities,data)
+                    if (index + 1 != universities.length) {
+                      return  (
+                      ` ${univ} ,`);
+                    } else {
+                      return (` ${univ} `);
+                    }
                   }
-                })}
+                  else{
+                    let univ = binarySearch(Universities,data["key"])
+                    if (index + 1 != universities.length) {
+                    
+                      return  (
+                      ` ${univ} ,`);
+                    } else {
+                      return (` ${univ} `);
+                    }
+                  }
+                  })}
               </td>
             </tr>
             <tr>
