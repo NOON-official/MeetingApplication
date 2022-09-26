@@ -6,7 +6,7 @@ const Rematch = async()=>{
   await client
   .put('api/team/reapply',{ourteamId: window.sessionStorage.getItem('ourteamId')})
   .then((res)=>{
-    alert("동일한 정보로 다시 신청되었습니다.")
+    alert("현재 입력하신 정보로 재매칭 합니다. \n 매칭 정보 수정이 필요하시다면 내정보 \n 수정하기 버튼을 클릭해주세요.")
  
 
   })
