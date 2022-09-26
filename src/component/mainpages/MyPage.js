@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 const MyPage = ()=>{
     const userLogin = useSelector((state)=> state.userLogin);
+    let matchingStatus = JSON.parse(window.localStorage.getItem("matchingStatus"));
 return(
     <Container height={'100%'} bg="#f8f3f3">
         <MobileBox overflow="auto">
@@ -29,11 +30,14 @@ return(
         <MyTeamInfo/>
         <PrefferedTeamInfo/>
         <WantsInfo/>
-        <Link to="/apply/2" style={{ textDecoration: 'none' }}>
+        {matchingStatus==1?
+        <div></div>
+        : <Link to="/apply/2" style={{ textDecoration: 'none' }}>
             <StyledButton size="18px"position="static" left="0" transform="0" height="45px" width="180px" >
             수정하기
             </StyledButton>
-        </Link>
+        </Link>}
+       
         </StyledDiv>:
         <StyledDiv 
         left="50%"

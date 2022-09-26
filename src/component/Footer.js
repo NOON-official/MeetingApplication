@@ -130,8 +130,10 @@ const Footer = () => {
       prevPathSetting('/');
     } else if (location === '/apply/3') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        {
         return(<Navigate to="/apply/2"/>)
+        }
       }
       else{uncompleted();
         if (university.length > 0) {
@@ -146,13 +148,16 @@ const Footer = () => {
       
     } else if (location === '/apply/4') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        {
         return(<Navigate to="/apply/2"/>)
+        }
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else{uncompleted();
@@ -166,17 +171,20 @@ const Footer = () => {
       
     } else if (location === '/apply/5') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else{   uncompleted();
@@ -191,21 +199,25 @@ const Footer = () => {
    
     } else if (location === '/apply/6') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else if(day.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/5"/>)
       }
       else{
@@ -222,24 +234,29 @@ const Footer = () => {
       
     } else if (location === '/apply/7') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else if(day.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/5"/>)
       }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/6"/>)
       }
       else{ uncompleted();
@@ -253,28 +270,34 @@ const Footer = () => {
      
     } else if (location === '/apply/8') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else if(day.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/5"/>)
       }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/6"/>)
       }
       else if(characters.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/7"/>)
       }
       else{
@@ -291,32 +314,39 @@ const Footer = () => {
       
     } else if (location === '/apply/9') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else if(day.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/5"/>)
       }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/6"/>)
       }
       else if(characters.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/7"/>)
       }
       else if(prefferedage.length==0||prefferedjobs.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/8"/>)
       }
       else{
@@ -333,32 +363,39 @@ const Footer = () => {
       
     } else if (location === '/apply/10') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else if(day.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/5"/>)
       }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/6"/>)
       }
       else if(characters.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/7"/>)
       }
       else if(prefferedage.length==0||prefferedjobs.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/8"/>)
       }else{
         setPrevPath('/apply/9');
@@ -366,32 +403,39 @@ const Footer = () => {
     }
       
     } else if (location === '/apply/11') {if(jobs.length ==0){
-      alert("어디서 꼼수를 부려")
+     alert("입력 정보를 변경합니다.")
+      
       return(<Navigate to="/apply/2"/>)
     }
     else if(
       university.length == 0
     ){
-      alert("어디서 꼼수를 부려")
+     alert("입력 정보를 변경합니다.")
+      
       return(<Navigate to="/apply/3"/>)
     }
     else if(area.length==0){
-      alert("어디서 꼼수를 부려")
+     alert("입력 정보를 변경합니다.")
+      
       return(<Navigate to="/apply/4"/>)
     }
     else if(day.length==0){
-      alert("어디서 꼼수를 부려")
+     alert("입력 정보를 변경합니다.")
+      
       return(<Navigate to="/apply/5"/>)
     }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
-      alert("어디서 꼼수를 부려")
+     alert("입력 정보를 변경합니다.")
+      
       return(<Navigate to="/apply/6"/>)
     }
     else if(characters.length==0){
-      alert("어디서 꼼수를 부려")
+     alert("입력 정보를 변경합니다.")
+      
       return(<Navigate to="/apply/7"/>)
     }
     else if(prefferedage.length==0||prefferedjobs.length==0){
-      alert("어디서 꼼수를 부려")
+     alert("입력 정보를 변경합니다.")
+      
       return(<Navigate to="/apply/8"/>)
     }
     else
@@ -406,36 +450,44 @@ const Footer = () => {
     }
     } else if (location === '/apply/12') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else if(day.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/5"/>)
       }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/6"/>)
       }
       else if(characters.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/7"/>)
       }
       else if(prefferedage.length==0||prefferedjobs.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/8"/>)
       }
       else if(introduction.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/11"/>)
       }
       else{
@@ -448,40 +500,49 @@ const Footer = () => {
       }}
     } else if (location === '/apply/13') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else if(day.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/5"/>)
       }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/6"/>)
       }
       else if(characters.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/7"/>)
       }
       else if(prefferedage.length==0||prefferedjobs.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/8"/>)
       }
       else if(introduction.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/11"/>)
       }
       else if(!privateinfoconfirm){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/12"/>)
       }
       else{
@@ -496,44 +557,54 @@ const Footer = () => {
       
     } else if (location === '/apply/14') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else if(day.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/5"/>)
       }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/6"/>)
       }
       else if(characters.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/7"/>)
       }
       else if(prefferedage.length==0||prefferedjobs.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/8"/>)
       }
       else if(introduction.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/11"/>)
       }
       else if(!privateinfoconfirm){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/12"/>)
       }
       else if (!signin){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/13"/>)
       }
       else{
@@ -550,50 +621,61 @@ const Footer = () => {
       
     } else if (location === '/apply/15') {
       if(jobs.length ==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/2"/>)
       }
       else if(
         university.length == 0
       ){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/3"/>)
       }
       else if(area.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/4"/>)
       }
       else if(day.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/5"/>)
       }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/6"/>)
       }
       else if(characters.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/7"/>)
       }
       else if(prefferedage.length==0||prefferedjobs.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/8"/>)
       }
       else if(introduction.length==0){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/11"/>)
       }
       else if(!privateinfoconfirm){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/12"/>)
       }
       else if (!signin){
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/13"/>)
       }
       else if(!isLogin())
       //로그인 안할시 불가
       {
-        alert("어디서 꼼수를 부려")
+       alert("입력 정보를 변경합니다.")
+        
         return(<Navigate to="/apply/14"/>)
       }
       else{
