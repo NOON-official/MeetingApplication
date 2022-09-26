@@ -22,17 +22,17 @@ const Counter = (props) => {
     <StyledDiv
       font="Nanum JungHagSaeng"
       size="1rem"
-      color="#515151"
+      color="#EB8888"
       top="82%"
-      left="43%"
+      left="35%"
       transform="translate(-50%, 0)"
-      letter_spacing="9px"
+      letter_spacing="3px"
       height="25px"
-      width="250px"
+      width="300px"
       display="flex"
       justify_content="end"
     >
-      {counter(props.end)}팀이 대기중이에요
+      {counter(props.end)}팀이 당신을 기다리고 있어요
     </StyledDiv>
   );
 };

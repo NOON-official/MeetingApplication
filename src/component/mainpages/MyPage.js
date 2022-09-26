@@ -30,7 +30,7 @@ return(
         <MyTeamInfo/>
         <PrefferedTeamInfo/>
         <WantsInfo/>
-        {matchingStatus==1?
+        {matchingStatus==1 ||matchingStatus==2 ?
         <div></div>
         : <Link to="/apply/2" style={{ textDecoration: 'none' }}>
             <StyledButton size="18px"position="static" left="0" transform="0" height="45px" width="180px" >
