@@ -83,18 +83,37 @@ const Main = () => {
         <StyledDiv top="28%" left="50%" transform="translate(-50%, 0)">
           <Logo />
         </StyledDiv>
-        <StyledDiv top="61%" left="50%" transform="translate(-50%, 0)">
+        
+        {
+        matchingStatus==1 ||matchingStatus==2?
+          matchingStatus==1?
+            <StyledDiv font="Pretendard" size="15px"weight="300"left="50%"height="45px" width="250px" top="65%" >
+              매칭이 완료되었습니다. <br/>매칭 조회를 통해 상대방을 확인해보세요.
+            </StyledDiv>
+          :<div>
+             <StyledDiv font="Pretendard" size="15px"weight="300"left="50%"height="45px" width="250px" top="60%" >
+              아쉽게도 이번에는 원하는 <br/>상대팀이 매칭이 되지 않았어요.
+            </StyledDiv>
+            <StyledDiv weight="bold"font="Pretendard" size="15px"left="50%"height="45px" width="250px" top="70%" >
+              매칭조회 페이지에서 
+            </StyledDiv>
+            <StyledDiv weight="300"font="Pretendard" size="15px"left="50%"height="45px" width="250px" top="75%" >
+              다시 한 번 도전해보세요!
+            </StyledDiv>
+          </div>
+           
+            
+      : <div>
+      <StyledDiv top="61%" left="50%" transform="translate(-50%, 0)">
           <MainText />
         </StyledDiv>
-        {matchingStatus==1?
-      <StyledDiv font="Pretendard" size="15px"weight="300"left="50%"height="45px" width="250px" top="75%" >
-           매칭이 완료된 유저입니다. <br/>매칭 조회를 통해 상대방을 확인하세요.
-    </StyledDiv>
-        : <Link to="/apply/2" style={{ textDecoration: 'none' }}>
-        <StyledButton height="45px" width="180px" top="70%" size="18px">
-          매칭 시작하기
-        </StyledButton>
-      </Link>}
+        <Link to="/apply/2" style={{ textDecoration: 'none' }}>
+          <StyledButton height="45px" width="180px" top="70%" size="18px">
+            매칭 시작하기
+          </StyledButton>
+        </Link>
+        </div>
+        }
        
 
         <Counter end={num} />
