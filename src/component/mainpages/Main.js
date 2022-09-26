@@ -11,6 +11,7 @@ import client from '../../api';
 import Counter from '../Elements/CountAnimation';
 
 const Main = () => {
+  let matchingStatus = JSON.parse(window.localStorage.getItem("matchingStatus"));
   const [num, setNum] = useState(0);
   const [modalOpen, setModalOpen] = useState(true);
   const [statusMale, setStatusMale] = useState();
@@ -85,8 +86,10 @@ const Main = () => {
         <StyledDiv top="61%" left="50%" transform="translate(-50%, 0)">
           <MainText />
         </StyledDiv>
-        {window.sessionStorage.getItem('matchingStatus')==1?
-        <div></div>
+        {matchingStatus==1?
+      <StyledDiv font="Pretendard" size="15px"weight="300"left="50%"height="45px" width="250px" top="75%" >
+           매칭이 완료된 유저입니다. <br/>매칭 조회를 통해 상대방을 확인하세요.
+    </StyledDiv>
         : <Link to="/apply/2" style={{ textDecoration: 'none' }}>
         <StyledButton height="45px" width="180px" top="70%" size="18px">
           매칭 시작하기
