@@ -85,14 +85,14 @@ const MyInfo = () => {
                 <td>
                   {phone}
                 </td>
-                {JSON.parse(window.localStorage.getItem('matchingStatus'))!==1?
-                <td>
-                {<Link to="/apply/13" style={{ textDecoration: 'none' }}>
-                <button> 변경</button>
-                  </Link>}
-            </td>
+                {JSON.parse(window.localStorage.getItem('matchingStatus'))==1 || JSON.parse(window.localStorage.getItem('matchingStatus'))==2?
+                <td/>
             :
-            <td/>
+            <td>
+            {<Link to="/apply/13" style={{ textDecoration: 'none' }}>
+            <button> 변경</button>
+              </Link>}
+        </td>
             }
                 
               </tr>
