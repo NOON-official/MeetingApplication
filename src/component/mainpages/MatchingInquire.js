@@ -8,25 +8,30 @@ import Fail from './matchinginquires/LoginAndFail';
 import NewUser from './matchinginquires/NewUser';
 import client from '../../api';
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 const MatchingInquire = () => {
   const [userState, setUserState] = useState (window.localStorage.getItem('matchingStatus'));
   let status
+  const isLogin = useSelector((state)=> state.userLogin)
   useEffect(()=>{
-     client
-    .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`)
-    .then((res)=>{
-      setUserState(res.data.data.matchingStatus)
-      status=res.data.data.matchingStatus
-    })
-    .then(()=>{
-     window.localStorage.removeItem('matchingStatus');
-     console.log("remove",window.localStorage.getItem('matchingStatus') );
-    })
-    .then(()=>{
-      window.localStorage.setItem('matchingStatus',status);
-    })
-    .catch((err)=>{})
-
+  
+    if (isLogin){
+      client
+      .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`)
+      .then((res)=>{
+        setUserState(res.data.data.matchingStatus)
+        status=res.data.data.matchingStatus
+      })
+      .then(()=>{
+       window.localStorage.removeItem('matchingStatus');
+      })
+      .then(()=>{
+        window.localStorage.setItem('matchingStatus',status);
+      })
+      .catch((err)=>{})
+  
+    }
+    
   },[])
   const MatchingInquirePage = useCallback(() => {
     if (userState == 0) {
