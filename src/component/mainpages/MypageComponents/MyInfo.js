@@ -85,11 +85,16 @@ const MyInfo = () => {
                 <td>
                   {phone}
                 </td>
+                {JSON.parse(window.localStorage.getItem('matchingStatus'))!==1?
                 <td>
-                    {<Link to="/apply/13" style={{ textDecoration: 'none' }}>
-                    <button> 변경</button>
-                      </Link>}
-                </td>
+                {<Link to="/apply/13" style={{ textDecoration: 'none' }}>
+                <button> 변경</button>
+                  </Link>}
+            </td>
+            :
+            <td/>
+            }
+                
               </tr>
               
             </table>
