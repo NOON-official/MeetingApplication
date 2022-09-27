@@ -8,7 +8,7 @@ client.interceptors.response.use(
         return response
     },
     err => {
-        if (count<=5)
+        if (count<1)
         {if (parseInt(err.response.status, 10) === 401) 
             {
                 client
@@ -21,6 +21,7 @@ client.interceptors.response.use(
         count+=1;
       
         }
+        else{ alert("로그인 기간이 만료되었습니다. 다시 로그인 해주세요.")}
      
         return (Promise.reject(err));
     }
