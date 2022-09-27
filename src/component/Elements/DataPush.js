@@ -21,7 +21,7 @@ async function DataPush() {
           .then(async (res)=>{
                 window.sessionStorage.setItem('ourteamId', res.data.data.ourteamId);
                await client
-                .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`)
+                .get(`api/team/status/${res.data.data.ourteamId}`)
                 //delete header
                 .then((res) => {
                   window.localStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
