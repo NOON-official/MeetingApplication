@@ -25,7 +25,7 @@
 }
 .MuiSlider-thumb{
 
-background-image: url("C: \프린\MeetingApplication\src\Asset\Slider\SliderThumb.svg");
+background-image: url("../src/Asset/Slider/SliderThumb.svg");
 
 }
 @media (prefers-reduced-motion: no-preference) {
