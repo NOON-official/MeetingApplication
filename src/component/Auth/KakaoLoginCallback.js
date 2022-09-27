@@ -10,10 +10,7 @@ const override = {
 };
 
 const KakaoLoginCallback = (props) => {
-  let [color, setColor] = useState('#EB8888');
-  const dispatch = useDispatch()
-  
-  let status;
+  let [color, setColor] = useState('#EB8888');  
   //let accessToken;
   let ourteamId;
   let userId;
@@ -81,9 +78,9 @@ const KakaoLoginCallback = (props) => {
           console.log('로그인 성공');
           // window.sessionStorage.setItem('access', res.data.data.user.accessToken);
           // window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
-          window.sessionStorage.setItem('id', res.data.data.user.id);
-          window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
-          setIsLogin((state) => !state);
+         // window.sessionStorage.setItem('id', res.data.data.user.id);
+          //window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
+          //setIsLogin((state) => !state);
 
         })
         .catch((err) => {
