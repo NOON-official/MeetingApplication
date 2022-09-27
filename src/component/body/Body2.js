@@ -10,7 +10,7 @@ const TeamSelectBox = styled.div`
   top: 10%;
 `;
 const Body2 = () => {
-  console.log("hello")
+ 
  
   return (
     <Container bg=" #F5F5F5">
