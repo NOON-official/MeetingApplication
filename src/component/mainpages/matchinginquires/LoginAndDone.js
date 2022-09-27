@@ -111,7 +111,6 @@ const Done = ()=>{
         else if (where==2){
             const [ openChatLink, setOpenChatLink] = useState()
             useEffect(()=>{
-                console.log('start',id)
                 client
                 .get(`api/team/result/${id}`)
                 .then(async(res)=>{
