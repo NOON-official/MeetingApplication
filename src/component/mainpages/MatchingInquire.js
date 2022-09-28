@@ -13,11 +13,12 @@ const MatchingInquire = () => {
   const [userState, setUserState] = useState (window.localStorage.getItem('matchingStatus'));
   let status
   const isLogin = useSelector((state)=> state.userLogin)
-  useEffect(()=>{
   
+  useEffect( ()=>{
+    let ourteamId =window.sessionStorage.getItem('ourteamId')
     if (isLogin){
       client
-      .get(`api/team/status/${window.sessionStorage.getItem('ourteamId')}`)
+      .get(`api/team/status/${ourteamId}`)
       .then((res)=>{
         setUserState(res.data.data.matchingStatus)
         status=res.data.data.matchingStatus
