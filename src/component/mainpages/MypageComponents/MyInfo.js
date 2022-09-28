@@ -74,6 +74,7 @@ const MyInfo = () => {
         >
           <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
             <table>
+              <tbody>
               <tr>
                 <th>이름</th>
                 <td>
@@ -96,7 +97,7 @@ const MyInfo = () => {
             }
                 
               </tr>
-              
+              </tbody>
             </table>
           </StyledDiv>
         </StyledDiv>
