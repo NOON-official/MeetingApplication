@@ -14,7 +14,7 @@ async function DataPush() {
      await client
         .post('/api/team', finalOurTeamInfo)
         //delete header
-        .then(
+        .then(async()=>{
          await client
           .get(`api/team/ourteam-id/${id}`)
           //delete header
@@ -31,7 +31,7 @@ async function DataPush() {
 
           })
           .catch((err)=>console.log(err))
-
+        }
         )
         .catch((err) => {
           if (err.response.data.status == 400) {
