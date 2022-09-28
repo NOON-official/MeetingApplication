@@ -25,7 +25,7 @@ async function DataPush() {
                 //delete header
                 .then((res) => {
                   window.localStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
-                .catch((err) => alert(err));
+                .catch((err) => {});
             
 
 

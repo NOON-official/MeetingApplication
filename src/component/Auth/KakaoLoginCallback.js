@@ -25,10 +25,10 @@ const KakaoLoginCallback = (props) => {
   }
 
   // 서버에 인가코드 넘겨주기
-  useEffect(() => {
+  useEffect(async () => {
     // 로그인 전
     
-      client
+      await client
         .get(`/api/auth/kakao/callback?code=${code}`)
         //header부분 삭제함
         .then((res) => {
@@ -46,11 +46,11 @@ const KakaoLoginCallback = (props) => {
         .then(async()=>{
             await client
             .get(`api/team/ourteam-id/${userId}`)
-            .then(async(res)=>{
+            .then((res)=>{
               ourteamId = res?.data?.data?.ourteamId;
-              window.sessionStorage.setItem('ourteamId', ourteamId);
+             
             })
-            .then(async()=>{
+            .then(()=>{
               if (ourteamId === -1)
               {
                 callDataPush()
@@ -75,10 +75,10 @@ const KakaoLoginCallback = (props) => {
               }
             })
 
-          console.log('로그인 성공');
           // window.sessionStorage.setItem('access', res.data.data.user.accessToken);
           // window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
-         // window.sessionStorage.setItem('id', res.data.data.user.id);
+          
+          
           //window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
           //setIsLogin((state) => !state);
 
