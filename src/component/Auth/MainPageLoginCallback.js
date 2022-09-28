@@ -40,7 +40,7 @@ const MainLoginCallback = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        window.alert('로그인 실패');
+        window.alert('로그인 오류');
       });
     }
 
