@@ -36,7 +36,7 @@ const Body12 = () => {
   const prefferedheight = useSelector((state) => state.prefferedheight);
   let finalUniversity = []
   useEffect(()=>{
-    university.map((c)=>{ finalUniversity.push(c["key"])})
+    university.map((c)=>{ if(typeof(c)=='number'){finalUniversity.push(c)} else finalUniversity.push(c["key"])})
   },[university])
  
   const body = {
