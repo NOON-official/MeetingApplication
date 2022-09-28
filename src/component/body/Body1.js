@@ -7,6 +7,7 @@ import { Container } from '../Elements/StyledComponent';
 import MyPage from '../mainpages/MyPage';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import client from '../../api';
 
 
 const Body1 = () => {
