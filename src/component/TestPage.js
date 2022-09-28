@@ -1,10 +1,20 @@
 import styled from 'styled-components';
 import { StyledDiv } from './Elements/StyledComponent';
 
+import React, { useState, useEffect } from 'react'
+import client from '../api';
 const FullDiv = styled.div`
   width: 100%;
 `;
-const TestPage = () => {
+//useCallback 특정 파리미터가 함수를 변환 
+
+
+const TestPage =  () => {
+
+  const [maleThreeTeam , setMaleThreeTeam] = useState();
+  const [maleTwoTeam, setMaleTwoTeam] =useState();
+  const [femaleTwoTeam, setFemaleTwoTeam] =useState();
+  const [femaleThreeeTeam, setFemaleThreeTeam] =useState();
   function hideColumn() {
     const column = document.getElementById('others');
     column.style.display = 'none';
@@ -13,13 +23,45 @@ const TestPage = () => {
     const column = document.getElementById('others');
     column.style.display = '';
   }
-  const data = [
-    ['me', 'a', 'info'],
-    ['me', 'b', 'info'],
-    ['me', 'c', 'info'],
-    ['he', 'c', 'info'],
-    ['he', 'd', 'info'],
-  ];
+  //여기서 데이터 채우기 
+  //const maleTwoData =MaleTwoData()
+  //const femaleTwoDate =FemaleTwoData()
+  //const femaleThreewoData =FemaleThreewoData()
+  const columns1=['id','여성유저 이름','인원','나이','희망나이','희망요일']//여성유저(2명) 테이블 배열
+  const columns2=['id','남성유저 이름','인원','나이','희망나이','희망요일']//남성유저(2명) 테이블 배열
+  const columns3=['id','여성유저 이름','인원','나이','희망나이','희망요일']//여성유저(3명) 테이블 배열
+  const columns4=['id','남성유저 이름','인원','나이','희망나이','희망요일']//남성유저(3명) 테이블 배열
+  
+  let data=[0,0,0];
+  let data1 =[];//남성유저 3명 데이터
+  let data2 =[];//남성유저 2명 데이터
+  let data3 =[];//여성유저 3명 데이터
+  let data4 =[];//여성유저 2명 데이터
+useEffect(()=>{
+  client
+    .get('api/admin/team/male/3')
+    .then(async(res)=>{
+  
+     setMaleThreeTeam(res.data.data.maleTeam)
+     .then(()=>{
+      console.log("1",maleThreeTeam)
+      })
+   
+        //console.log(maleThreeTeam[0]['userId'])
+    })
+    .catch((err)=>{})
+
+
+
+},[])
+console.log("2",maleThreeTeam)
+/*
+for(let i=0; i<maleThreeTeam.length;i++)
+{
+  data1[i] ={'age' : maleThreeTeam[i]['age'], 'preferenceAge' : maleThreeTeam[i]['preferenceAge']}
+}
+console.log(data1)
+*/
   let sameuser = [];
   let nowUserNum = 0;
   let nowUserName = data[0][0];
@@ -64,6 +106,7 @@ const TestPage = () => {
               return sameuser.map((sameuserdata) => {
                 if (sameuserdata[0] === data[0]) {
                   console.log('true');
+
                   prevUserName = data[0];
                   return (
                     <tr key={idx}>
