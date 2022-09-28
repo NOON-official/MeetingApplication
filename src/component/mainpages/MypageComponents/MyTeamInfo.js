@@ -121,6 +121,7 @@ const MyTeamInfo = () => {
         >
           <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
           <table>
+            <tbody>
               <tr>
                 <th>성별</th>
                 <td>{gender==1?'남자':'여자'}</td>
@@ -374,6 +375,7 @@ const MyTeamInfo = () => {
                   {height}cm
                 </td>
               </tr>
+              </tbody>
             </table>
           </StyledDiv>
         </StyledDiv>

@@ -49,6 +49,7 @@ const PrefferedTeamInfo = () => {
         >
           <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
             <table>
+              <tbody>
               <tr>
                 <th>직업</th>
                 <td>
@@ -96,6 +97,7 @@ const PrefferedTeamInfo = () => {
                     } else return ` ${data}cm`;
                   })}</td>
               </tr>
+              </tbody>
             </table>
           </StyledDiv>
         </StyledDiv>
