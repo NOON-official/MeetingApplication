@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {  useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as HeaderIcon } from '../Asset/Header/Header.svg';
 import { StyledDiv } from './Elements/StyledComponent';
@@ -8,6 +8,7 @@ import isLogin from '../utils/isLogin';
 import client from '../api';
 import MainPageLogin from './Auth/MainPageLogin';
 import {persistor} from '../index'
+import { Navigate } from 'react-router-dom';
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: start;
@@ -68,11 +69,22 @@ export const MainPageHeader = () => {
   const pagestate = useSelector((state)=> state.pagestate);
   const dispatch = useDispatch();
   async function logOut () {
-       
+      let userid = window.localStorage.getItem('id');
+       client.
+       get(`api/auth/signout/${userid}`)
+       .then(async (res)=>{
+        setIsLogin(false)
         window.sessionStorage.clear();
         window.localStorage.clear();
-     
-         await persistor.purge();
+        await persistor.purge();
+        
+       })
+       .then(()=>{
+       window.location.reload()
+       })
+       .catch((err)=>{console.log(err)})
+        
+
        
 };
   const [IsLogin, setIsLogin] = useState(isLogin());
@@ -93,7 +105,7 @@ export const MainPageHeader = () => {
   const LogOut = ()=>
       {
         return(
-          <div onClick={()=>{logOut(),setIsLogin(false)} }> 로그아웃</div>
+          <div onClick={()=>{logOut()} }> 로그아웃</div>
         )
       }
 
