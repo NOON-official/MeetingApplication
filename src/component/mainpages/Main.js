@@ -166,20 +166,20 @@ const Main = () => {
             justify_content="flex-start"
             align_item="start"
           >
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
+            <StyledText size="5px" position="static" font="Pretendard" color="#515151">
               노온
             </StyledText>
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
-              대표자 남한솔
+            <StyledText size="5px" position="static" font="Pretendard" color="#515151">
+              대표자 남한솔 사업자등록번호 811-29-00871
             </StyledText>
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
-              연락처 010-6879-5436
+            <StyledText size="5px" position="static" font="Pretendard" color="#515151">
+            통신판매업신고 : 2021-서울성북-1613
             </StyledText>
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
-              사업자등록번호 811-29-00871
+            <StyledText size="5px" position="static" font="Pretendard" color="#515151">
+            연락처 : 070-8064-3036  / noon.official.info@gmail.com
             </StyledText>
-            <StyledText size="12px" position="static" font="Pretendard" color="#515151">
-              주소지 서울시 성북구 장월로 1마길 56 DAC 스타트업 인큐베이팅센터
+            <StyledText size="5px" position="static" font="Pretendard" color="#515151">
+            주소지 서울시 성북구 장월로 1마길 56 DAC 스타트업 인큐베이팅센터
             </StyledText>
           </StyledDiv>
         </StyledDiv>
