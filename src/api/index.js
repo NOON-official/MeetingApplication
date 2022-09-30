@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import {persistor} from '../index'
-const dispatch = useDispatch()
+
 const client = axios.create({ withCredentials: true, baseURL: process.env.REACT_APP_SERVER_URL, timeout: 1000 * 10});
 let count =0;
 
@@ -30,18 +30,11 @@ client.interceptors.response.use(
                          await client.
                          get(`api/auth/signout/${uid}`)
                          .then(async (res)=>{
-                            dispatch({type:'SET_LOGIN', payload:false})
                           window.sessionStorage.clear();
                           window.localStorage.clear();
                           await persistor.purge();
-                          
                          })
-                         .then(()=>{
-                            alert("비정상적인 로그인 접근입니다. 다시 로그인 해주세요.")
-                         })
-                         .then(()=>{
-                         window.location.reload()
-                         })
+                       
                          .catch((err)=>{console.log(err)})       
                         })
                    
@@ -50,18 +43,15 @@ client.interceptors.response.use(
                 client.
                 get(`api/auth/signout/${uid}`)
                 .then(async (res)=>{
-                dispatch({type:'SET_LOGIN', payload:false})
                  window.sessionStorage.clear();
                  window.localStorage.clear();
                  await persistor.purge();
-                 
                 })
                 .then(()=>{
-                   alert("로그인 기간이 만료되었습니다. 다시 로그인 해주세요.")
+                  alert("로그인 기간이 만료되었습니다. 다시 로그인 해주세요.")
+                  window.location.reload()
                 })
-                .then(()=>{
-                window.location.reload()
-                })
+               
                 .catch((err)=>{console.log(err)})       
             }
         }
