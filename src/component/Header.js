@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {  useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as HeaderIcon } from '../Asset/Header/Header.svg';
 import { StyledDiv } from './Elements/StyledComponent';
@@ -8,6 +8,7 @@ import isLogin from '../utils/isLogin';
 import client from '../api';
 import MainPageLogin from './Auth/MainPageLogin';
 import {persistor} from '../index'
+import { Navigate } from 'react-router-dom';
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: start;
@@ -68,11 +69,22 @@ export const MainPageHeader = () => {
   const pagestate = useSelector((state)=> state.pagestate);
   const dispatch = useDispatch();
   async function logOut () {
-       
+      let userid = window.localStorage.getItem('id');
+       client.
+       get(`api/auth/signout/${userid}`)
+       .then(async (res)=>{
+        setIsLogin(false)
         window.sessionStorage.clear();
         window.localStorage.clear();
-     
-         await persistor.purge();
+        await persistor.purge();
+        
+       })
+       .then(()=>{
+       window.location.reload()
+       })
+       .catch((err)=>{console.log(err)})
+        
+
        
 };
   const [IsLogin, setIsLogin] = useState(isLogin());
@@ -93,7 +105,7 @@ export const MainPageHeader = () => {
   const LogOut = ()=>
       {
         return(
-          <div onClick={()=>{logOut(),setIsLogin(false)} }> 로그아웃</div>
+          <div onClick={()=>{logOut()} }> 로그아웃</div>
         )
       }
 
@@ -146,7 +158,7 @@ export const MainPageHeader = () => {
           <StyledDiv onClick={()=>{pageChange(1)}} border="10px"bg={guide.bg}  color={guide.font?guide.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px"position="static" width="23%" transform="0" size="12px" font="Pretendard">
             가이드
           </StyledDiv>
-          <StyledDiv onClick={()=>{pageChange(2),isLogin && MatchingStatusRefresh() }}border="10px" bg={matching.bg} color={matching.font?matching.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
+          <StyledDiv onClick={()=>{pageChange(2),isLogin() && MatchingStatusRefresh() }}border="10px" bg={matching.bg} color={matching.font?matching.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
             매칭 조회
           </StyledDiv>
           <StyledDiv onClick={()=>{pageChange(3)}} border="10px"bg={myinfo.bg} color={myinfo.font?myinfo.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
