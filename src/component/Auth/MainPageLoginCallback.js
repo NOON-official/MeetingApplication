@@ -31,6 +31,7 @@ const MainLoginCallback = (props) => {
       await client
       .get(`/api/auth/kakao/callback?code=${code}`)
       .then((res) => {
+    
         // 반환된 Access Token, Refresh Token, 유저 정보 저장
         console.log('로그인 성공');
         // window.sessionStorage.setItem('access', res.data.data.user.accessToken);

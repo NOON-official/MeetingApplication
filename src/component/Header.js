@@ -8,7 +8,6 @@ import isLogin from '../utils/isLogin';
 import client from '../api';
 import MainPageLogin from './Auth/MainPageLogin';
 import {persistor} from '../index'
-import { Navigate } from 'react-router-dom';
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: start;
@@ -67,6 +66,7 @@ const LogIn = () =>{
 }
 export const MainPageHeader = () => {
   const pagestate = useSelector((state)=> state.pagestate);
+  const sLogin = useSelector((state)=> state.userLogin);
   const dispatch = useDispatch();
   async function logOut () {
       let userid = window.localStorage.getItem('id');
