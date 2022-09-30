@@ -46,7 +46,7 @@ const MyTeamInfo = () => {
  
   const GetData=()=>{
    
-    let id = window.sessionStorage.getItem('ourteamId')
+    let id = window.localStorage.getItem('ourteamId')
     //let accessToken = window.sessionStorage.getItem('access')
     client
     .get(`api/team/${id}`)
