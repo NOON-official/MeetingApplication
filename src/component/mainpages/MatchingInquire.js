@@ -15,7 +15,7 @@ const MatchingInquire = () => {
   const isLogin = useSelector((state)=> state.userLogin)
   let ourteamId =window.localStorage.getItem('ourteamId')&&window.localStorage.getItem('ourteamId')
   useEffect( ()=>{
-  
+
     if (isLogin){
       client
       .get(`api/team/status/${ourteamId}`)
