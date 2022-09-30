@@ -13,7 +13,7 @@ const MatchingInquire = () => {
   const [userState, setUserState] = useState (window.localStorage.getItem('matchingStatus'));
   let status
   const isLogin = useSelector((state)=> state.userLogin)
-  let ourteamId =window.sessionStorage.getItem('ourteamId')
+  let ourteamId =window.localStorage.getItem('ourteamId')
   useEffect( ()=>{
   
     if (isLogin){

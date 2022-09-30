@@ -35,7 +35,7 @@ const MainLoginCallback = (props) => {
         console.log('로그인 성공');
         // window.sessionStorage.setItem('access', res.data.data.user.accessToken);
         // window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
-        window.sessionStorage.setItem('id', res.data.data.user.id);
+        window.localStorage.setItem('id', res.data.data.user.id);
         window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
       })
       .catch((err) => {

@@ -9,10 +9,10 @@ import PrefferedInfo from "./CounterTeamPageComponent/PrefferedInfo";
 const Done = ()=>{
     const [ where, setWhere] = useState(0)
     let id
-    window.sessionStorage.getItem('ourteamId')? id= window.sessionStorage.getItem('ourteamId'):null;
+    window.localStorage.getItem('ourteamId')? id= window.localStorage.getItem('ourteamId'):null;
         const GetData=async()=>{
             
-             id = window.sessionStorage.getItem('ourteamId')
+             id = window.localStorage.getItem('ourteamId')
             //let accessToken = window.sessionStorage.getItem('access')
             let partnerTeamId
           
