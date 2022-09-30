@@ -3,7 +3,7 @@ import client from '../../api';
 async function DataPut() {
   console.log("put start")
   const ourTeamInfo = JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).ourTeamInfo);
-  const ourTeamId = window.sessionStorage.getItem('ourteamId')
+  const ourTeamId = window.localStorage.getItem('ourteamId')
   let object = { ourteamId: parseInt(ourTeamId) };
   const finalOurTeamInfo = Object.assign(JSON.parse(ourTeamInfo), object);
  

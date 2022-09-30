@@ -10,7 +10,7 @@ const MyInfo = () => {
   const [nickname, setNickname]= useState()
   const [phone, setPhone]= useState()
   const GetData = async () => {
-    let id = window.sessionStorage.getItem('id')
+    let id = window.localStorage.getItem('id')
     //let accessToken = window.sessionStorage.getItem('access')
     await client
     .get(`api/user/${id}`)
