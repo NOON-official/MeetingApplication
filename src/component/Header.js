@@ -158,7 +158,7 @@ export const MainPageHeader = () => {
           <StyledDiv onClick={()=>{pageChange(1)}} border="10px"bg={guide.bg}  color={guide.font?guide.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px"position="static" width="23%" transform="0" size="12px" font="Pretendard">
             가이드
           </StyledDiv>
-          <StyledDiv onClick={()=>{pageChange(2),isLogin && MatchingStatusRefresh() }}border="10px" bg={matching.bg} color={matching.font?matching.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
+          <StyledDiv onClick={()=>{pageChange(2),isLogin() && MatchingStatusRefresh() }}border="10px" bg={matching.bg} color={matching.font?matching.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
             매칭 조회
           </StyledDiv>
           <StyledDiv onClick={()=>{pageChange(3)}} border="10px"bg={myinfo.bg} color={myinfo.font?myinfo.font:"#666666"}display="flex" justify_content="center" align_item="center" text_align="center"height="23px" position="static" width="23%" transform="0" size="12px" font="Pretendard">
