@@ -4,12 +4,27 @@ import MyTeamInfo from "./MypageComponents/MyTeamInfo"
 import PrefferedTeamInfo from "./MypageComponents/PrefferedTeamInfo"
 import WantsInfo from "./MypageComponents/WantsInfo"
 import { Link } from "react-router-dom"
+import { ReMatchingMessage } from "../ErrorMessages/ReMatchingMessage"
 import { useSelector } from "react-redux"
+import { useState } from "react"
 const MyPage = ()=>{
+    const [modalOpen, setModalOpen]= useState(false)
+    const openModal = () => {
+        setModalOpen(true);
+      };
+      const closeModal = () => {
+        setModalOpen(false);
+      };
     const userLogin = useSelector((state)=> state.userLogin);
     let matchingStatus = JSON.parse(window.localStorage.getItem("matchingStatus"));
 return(
     <Container height={'100%'} bg="#f8f3f3">
+        <ReMatchingMessage
+        open={modalOpen}
+        close={closeModal}
+        >
+
+        </ReMatchingMessage>
         <MobileBox overflow="auto">
         {userLogin?
         <StyledDiv
@@ -32,11 +47,13 @@ return(
         <WantsInfo/>
         {matchingStatus==1 ||matchingStatus==2 ?
         <div></div>
-        : <Link to="/apply/2" style={{ textDecoration: 'none' }}>
-            <StyledButton size="18px"position="static" left="0" transform="0" height="45px" width="180px" >
+        : <div>
+            <StyledButton onClick={openModal} size="18px"position="static" left="0" transform="0" height="45px" width="180px" >
             수정하기
             </StyledButton>
-        </Link>}
+        </div>
+            
+}
        
         </StyledDiv>:
         <StyledDiv 
