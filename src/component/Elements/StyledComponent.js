@@ -174,3 +174,17 @@ export const StyledButton = styled.button`
   line-height: var(--line-height-button);
   border-color: var(--color-gray);
 `;
+
+export const BoxContainer = styled.div`
+
+  border-radius: 20px;
+  height: 244px;
+  padding: 0 10px 10px 10px;
+  overflow: scroll;
+`;
+export const TableContainer = styled.div`
+
+height: 244px;
+overflow: scroll;
+`;
+
