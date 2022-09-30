@@ -36,7 +36,7 @@ const KakaoLoginCallback = (props) => {
           //window.sessionStorage.setItem('access', res.data.data.user.accessToken);
           //accessToken = res.data.data.user.accessToken;
           //window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
-          window.sessionStorage.setItem('id', res.data.data.user.id);
+          window.localStorage.setItem('id', res.data.data.user.id);
           userId = res?.data?.data?.user?.id;
           //dispatch({type: "SET_LOGIN", payload: true})
           window.localStorage.setItem('isLogin',true);
