@@ -2,7 +2,7 @@ import client from '../../api';
 
 async function DataGet() {
   let   ourteamId;
-  const id = window.sessionStorage.getItem('id');
+  const id = window.localStorage.getItem('id');
   //const accessToken = window.sessionStorage.getItem('access');
 
   //console.log(`Bearer ${accessToken}`);
@@ -12,7 +12,7 @@ async function DataGet() {
     // header delete
     .then((res) => {
       ourteamId = res?.data?.data?.ourteamId;
-      window.sessionStorage.setItem('ourteamId', res.data.data.ourteamId);
+      window.localStorage.setItem('ourteamId', res.data.data.ourteamId);
     })
     .then(async () => {
           if (ourteamId == -1 || ourteamId === undefined) {

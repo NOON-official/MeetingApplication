@@ -1,10 +1,11 @@
 import { StyledDiv, StyledButton } from "../../Elements/StyledComponent"
 import { ReactComponent as Character } from '../../../Asset/mainPage/FailCharacter.svg';
-import { Link } from 'react-router-dom';
+
 import client from "../../../api";
 const Rematch = async()=>{
+  let ourteamId =window.localStorage.getItem('ourteamId')
   await client
-  .put('api/team/reapply',{ourteamId: window.sessionStorage.getItem('ourteamId')})
+  .put('api/team/reapply',{ourteamId: ourteamId})
   .then((res)=>{
     alert("현재 입력하신 정보로 재매칭 합니다. \n 매칭 정보 수정이 필요하시다면 내정보 \n 수정하기 버튼을 클릭해주세요.")
  
