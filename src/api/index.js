@@ -9,7 +9,7 @@ client.interceptors.response.use(
         return response
     },
     err => {
-       let uid = window.sessionStorage.getItem("id")
+       let uid = window.localStorage.getItem("id")
         if (count<1)
         {
             if (parseInt(err.response.status, 10) === 401) 
