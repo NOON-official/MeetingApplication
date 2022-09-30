@@ -3,7 +3,7 @@ async function DataPush() {
   
   const ourTeamInfo = JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).ourTeamInfo);
   const phonenumber = JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).phone);
-  const id = window.sessionStorage.getItem('id');
+  const id = window.localStorage.getItem('id');
   let object = { userId: parseInt(id) };
   const finalOurTeamInfo = Object.assign(JSON.parse(ourTeamInfo), object);
   const postPhonenunber = { userId: parseInt(id), phone: phonenumber };
