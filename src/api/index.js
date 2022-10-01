@@ -27,32 +27,24 @@ client.interceptors.response.use(
                 )
                 .catch(async(err)=>{
                    
-                         await client.
-                         get(`api/auth/signout/${uid}`)
-                         .then(async (res)=>{
+                         
                           window.sessionStorage.clear();
                           window.localStorage.clear();
                           await persistor.purge();
+                          window.location.reload();
                          })
                        
-                         .catch((err)=>{console.log(err)})       
-                        })
+                        
                    
             }
             else{
-                client.
-                get(`api/auth/signout/${uid}`)
-                .then(async (res)=>{
+              
                  window.sessionStorage.clear();
                  window.localStorage.clear();
-                 await persistor.purge();
-                })
-                .then(()=>{
+                  persistor.purge();
                   alert("로그인 기간이 만료되었습니다. 다시 로그인 해주세요.")
                   window.location.reload()
-                })
-               
-                .catch((err)=>{console.log(err)})       
+                    
             }
         }
       
