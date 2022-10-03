@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import isLogin from '../../utils/isLogin';
 import isAdmin from '../../utils/isAdmin';
 
-// 로그인된 유저만 접근 가능
-const AdminRoute = ({ children ,restricted}) => {
-  // restricted = false (매칭중인 유저 접근 가능)
-  // restricted = true (매칭중인 유저 접근 불가능)
+// 관리자만 접근 가능
+const AdminRoute = ({ children }) => {
+  const [IsAdmin, setIsAdmin] = useState('');
 
-  if(isLogin){
-    //admin이 아니고 제한이 되어있으면
-    return !isAdmin() && restricted ? <Navigate to="/" /> : children;
-  }
+  // isAdmin 값을 동기적으로 불러오기 위한 함수
+  const getIsAdmin = async () => {
+    const data = await isAdmin();
+    setIsAdmin(data);
+  };
 
-  else
-  {
-    return children
+  getIsAdmin();
+
+  // 로그인을 안 한 경우
+  if (!isLogin()) {
+    return <Navigate to="/" />;
+  } else {
+    // 관리자가 아닌 경우
+    if (IsAdmin !== '' && !IsAdmin) {
+      return <Navigate to="/" />;
+    }
+    // 관리자인 경우
+    else if (IsAdmin === true) {
+      return children;
+    }
   }
 };
 
