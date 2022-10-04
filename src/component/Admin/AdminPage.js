@@ -414,9 +414,9 @@ const AdminPage = () => {
 
   // 서비스 매칭 신청 가능 상태
   data9[0] = {
-    MaleIsLimitedStatus: MaleIsLimitedStatus,
+    MaleIsLimitedStatus: MaleIsLimitedStatus === 1 ? 'YES' : 'NO',
     MaleLimitNumStatus: MaleLimitNumStatus,
-    FemaleIsLimitedStatus: FemaleIsLimitedStatus,
+    FemaleIsLimitedStatus: FemaleIsLimitedStatus === 1 ? 'YES' : 'NO',
     FemaleLimitNumStatus: FemaleLimitNumStatus,
   };
 
