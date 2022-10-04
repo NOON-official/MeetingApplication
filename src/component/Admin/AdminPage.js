@@ -26,6 +26,10 @@ const AdminPage = () => {
   const [femaleMatchingSuccess, setFemaleMatching] = useState([]);
   const [maleMatchingFail, setMaleMatchingFail] = useState([]);
   const [femaleMatchingFail, setFemaleMatchingFail] = useState([]);
+  const [MaleIsLimitedStatus, setMaleIsLimitedStatus] = useState('');
+  const [MaleLimitNumStatus, setMaleLimitNumStatus] = useState('');
+  const [FemaleIsLimitedStatus, setFemaleIsLimitedStatus] = useState('');
+  const [FemaleLimitNumStatus, setFemaleLimitNumStatus] = useState('');
 
   // ---------버튼 연동을 위한 코드 시작----------
   // 매칭하기
@@ -298,6 +302,28 @@ const AdminPage = () => {
     ],
     [],
   );
+
+  const columns4 = useMemo(
+    () => [
+      {
+        accessor: 'MaleIsLimitedStatus',
+        Header: '남자 인원제한',
+      },
+      {
+        accessor: 'MaleLimitNumStatus',
+        Header: '제한 인원',
+      },
+      {
+        accessor: 'FemaleIsLimitedStatus',
+        Header: '여자 인원제한',
+      },
+      {
+        accessor: 'FemaleLimitNumStatus',
+        Header: '제한 인원',
+      },
+    ],
+    [],
+  );
   let data1 = []; //남성유저3  데이터
   let data2 = []; //여성유저 3 데이터
   let data3 = []; //남성3
@@ -306,6 +332,7 @@ const AdminPage = () => {
   let data6 = []; //여성 매칭완료
   let data7 = []; //남성 매칭실패
   let data8 = []; //여성매칭실패
+  let data9 = []; // 현재 서비스 매칭 신청 가능 상태
   useEffect(() => {
     //남자 3
     client
@@ -372,7 +399,26 @@ const AdminPage = () => {
         setFemaleMatchingFail(res.data.data.femaleTeam);
       })
       .catch((err) => {});
+
+    // 서비스 매칭 신청 가능 상태 조회
+    client
+      .get('api/admin/apply/status')
+      .then(async (res) => {
+        setMaleIsLimitedStatus(res.data.data.applyStatus.maleIsLimited);
+        setMaleLimitNumStatus(res.data.data.applyStatus.maleLimitNum);
+        setFemaleIsLimitedStatus(res.data.data.applyStatus.femaleIsLimited);
+        setFemaleLimitNumStatus(res.data.data.applyStatus.femaleLimitNum);
+      })
+      .catch((err) => {});
   }, []);
+
+  // 서비스 매칭 신청 가능 상태
+  data9[0] = {
+    MaleIsLimitedStatus: MaleIsLimitedStatus === 1 ? 'YES' : 'NO',
+    MaleLimitNumStatus: MaleLimitNumStatus,
+    FemaleIsLimitedStatus: FemaleIsLimitedStatus === 1 ? 'YES' : 'NO',
+    FemaleLimitNumStatus: FemaleLimitNumStatus,
+  };
 
   // console.log('1', maleThreeTeam);
   //남자 데이터 받기
@@ -652,46 +698,63 @@ for(let i=0; i<femaleThreeTeam.length;i++)
       {/* 서비스 신청 인원 관리 */}
       <h2>서비스 신청 인원 관리</h2>
       <div>
+        <TableContainer>
+          <div style={{ width: '50%', marginBottom: '3rem' }}>
+            <h3>현재 상태</h3>
+            <Table columns={columns4} data={data9}></Table>
+          </div>
+        </TableContainer>
+      </div>
+      <div>
         <div>
-          <FormControl>
-            <FormLabel id="male-team">남자팀 인원 제한하기</FormLabel>
-            <RadioGroup row name="male-team-restricted" value={MaleRestricted} onChange={handleMaleRestrictedChange}>
-              <FormControlLabel value="true" control={<Radio />} label="Yes" />
-              <FormControlLabel value="false" control={<Radio />} label="No" />
-            </RadioGroup>
-          </FormControl>
-          <div />
-          <TextField
-            id="male-team-num"
-            label="남자팀 최대 인원수"
-            variant="outlined"
-            size="small"
-            onChange={handleMaleTeamNumChange}
-          />
-          <div />
-          <FormControl>
-            <FormLabel id="female-team">여자팀 인원 제한하기</FormLabel>
-            <RadioGroup
-              row
-              name="female-team-restricted"
-              value={FemaleRestricted}
-              onChange={handleFemaleRestrictedChange}
-            >
-              <FormControlLabel value="true" control={<Radio />} label="Yes" />
-              <FormControlLabel value="false" control={<Radio />} label="No" />
-            </RadioGroup>
-          </FormControl>
-          <div />
-          <TextField
-            id="female-team-num"
-            label="여자팀 최대 인원수"
-            variant="outlined"
-            size="small"
-            onChange={handleFemaleTeamNumChange}
-          />
+          <div style={{ display: 'inline-block', marginRight: '3rem' }}>
+            <FormControl>
+              <FormLabel id="male-team">남자팀 인원 제한하기</FormLabel>
+              <RadioGroup row name="male-team-restricted" value={MaleRestricted} onChange={handleMaleRestrictedChange}>
+                <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                <FormControlLabel value="false" control={<Radio />} label="No" />
+              </RadioGroup>
+            </FormControl>
+            <div />
+            <TextField
+              id="male-team-num"
+              label="남자팀 최대 인원수"
+              variant="outlined"
+              size="small"
+              onChange={handleMaleTeamNumChange}
+            />
+            <div />
+          </div>
+          <div style={{ display: 'inline-block' }}>
+            <FormControl>
+              <FormLabel id="female-team">여자팀 인원 제한하기</FormLabel>
+              <RadioGroup
+                row
+                name="female-team-restricted"
+                value={FemaleRestricted}
+                onChange={handleFemaleRestrictedChange}
+              >
+                <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                <FormControlLabel value="false" control={<Radio />} label="No" />
+              </RadioGroup>
+            </FormControl>
+            <div />
+            <TextField
+              id="female-team-num"
+              label="여자팀 최대 인원수"
+              variant="outlined"
+              size="small"
+              onChange={handleFemaleTeamNumChange}
+            />
+          </div>
         </div>
-        <Button id="save-button" variant="contained" onClick={updateApplyStatus}>
-          저장
+        <Button
+          id="save-button"
+          variant="contained"
+          style={{ marginTop: '1rem', marginBottom: '3rem', width: '31rem' }}
+          onClick={updateApplyStatus}
+        >
+          저장하기
         </Button>
       </div>
     </div>
