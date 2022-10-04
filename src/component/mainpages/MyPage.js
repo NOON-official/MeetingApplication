@@ -15,8 +15,9 @@ const MyPage = ()=>{
       const closeModal = () => {
         setModalOpen(false);
       };
-    const userLogin = useSelector((state)=> state.userLogin);
+    let userLogin = useSelector((state)=> state.userLogin);
     let matchingStatus = JSON.parse(window.localStorage.getItem("matchingStatus"));
+    let ourteamId = window.localStorage.getItem("ourteamId")
 return(
     <Container height={'100%'} bg="#f8f3f3">
         <ReMatchingMessage
@@ -26,7 +27,8 @@ return(
 
         </ReMatchingMessage>
         <MobileBox overflow="auto">
-        {userLogin?
+        {(userLogin== true && ourteamId!=-1)?
+       
         <StyledDiv
         left="50%"
         height="1000px"
