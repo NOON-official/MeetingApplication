@@ -757,7 +757,7 @@ const Footer = () => {
         <></>
       ) : (
         <BackAndFront>
-          <StyledFrontLink to={"/admin"} width="100%" style={{ textDecoration: 'none' }}>
+          <StyledFrontLink to="/" width="100%" style={{ textDecoration: 'none' }}>
             {/*nextPath*/}
             <FrontButton max_width="350px" bg={frontButtonColor} color={fronButtonTextColor}>
               메인으로 가기
