@@ -251,46 +251,48 @@ const AdminDataPost = () => {
       </div>
       {/* 서비스 신청 인원 관리 */}
       <div>
-        <FormControl>
-          <FormLabel id="male-team">남자팀 인원 제한하기</FormLabel>
-          <RadioGroup row name="male-team-restricted" value={MaleRestricted} onChange={handleMaleRestrictedChange}>
-            <FormControlLabel value="true" control={<Radio />} label="Yes" />
-            <FormControlLabel value="false" control={<Radio />} label="No" />
-          </RadioGroup>
-        </FormControl>
-        <div />
-        <TextField
-          id="male-team-num"
-          label="남자팀 최대 인원수"
-          variant="outlined"
-          size="small"
-          onChange={handleMaleTeamNumChange}
-        />
-        <div />
-        <FormControl>
-          <FormLabel id="female-team">여자팀 인원 제한하기</FormLabel>
-          <RadioGroup
-            row
-            name="female-team-restricted"
-            value={FemaleRestricted}
-            onChange={handleFemaleRestrictedChange}
-          >
-            <FormControlLabel value="true" control={<Radio />} label="Yes" />
-            <FormControlLabel value="false" control={<Radio />} label="No" />
-          </RadioGroup>
-        </FormControl>
-        <div />
-        <TextField
-          id="female-team-num"
-          label="여자팀 최대 인원수"
-          variant="outlined"
-          size="small"
-          onChange={handleFemaleTeamNumChange}
-        />
+        <div>
+          <FormControl>
+            <FormLabel id="male-team">남자팀 인원 제한하기</FormLabel>
+            <RadioGroup row name="male-team-restricted" value={MaleRestricted} onChange={handleMaleRestrictedChange}>
+              <FormControlLabel value="true" control={<Radio />} label="Yes" />
+              <FormControlLabel value="false" control={<Radio />} label="No" />
+            </RadioGroup>
+          </FormControl>
+          <div />
+          <TextField
+            id="male-team-num"
+            label="남자팀 최대 인원수"
+            variant="outlined"
+            size="small"
+            onChange={handleMaleTeamNumChange}
+          />
+          <div />
+          <FormControl>
+            <FormLabel id="female-team">여자팀 인원 제한하기</FormLabel>
+            <RadioGroup
+              row
+              name="female-team-restricted"
+              value={FemaleRestricted}
+              onChange={handleFemaleRestrictedChange}
+            >
+              <FormControlLabel value="true" control={<Radio />} label="Yes" />
+              <FormControlLabel value="false" control={<Radio />} label="No" />
+            </RadioGroup>
+          </FormControl>
+          <div />
+          <TextField
+            id="female-team-num"
+            label="여자팀 최대 인원수"
+            variant="outlined"
+            size="small"
+            onChange={handleFemaleTeamNumChange}
+          />
+        </div>
+        <Button id="save-button" variant="contained" onClick={updateApplyStatus}>
+          저장
+        </Button>
       </div>
-      <Button id="save-button" variant="contained" onClick={updateApplyStatus}>
-        저장
-      </Button>
     </div>
   );
 };

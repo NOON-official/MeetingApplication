@@ -1,7 +1,7 @@
 import client from "../../api"
 
 // 서버에서 인원과 성별이 구분된 배열을 받아옵니다.
-export const MaleTwoData = async(()=>{
+export const MaleTwoData = (async()=>{
     const adminid = 0
     const maleTwoTeam =[]
     await client
@@ -12,7 +12,7 @@ export const MaleTwoData = async(()=>{
     .catch((err)=>{})
     return maleTwoTeam;
 })
-export const MaleThreeData = async(()=>{
+export const MaleThreeData = (async()=>{
     const adminid = 0
     const maleThreeTeam =[]
     await client
@@ -23,7 +23,7 @@ export const MaleThreeData = async(()=>{
     .catch((err)=>{})
     return maleThreeTeam;
 })
-export const FemaleTwoData = async(()=>{
+export const FemaleTwoData = (async()=>{
     const adminid = 0
     const femaleTwoTeam =[]
     await client
@@ -34,7 +34,7 @@ export const FemaleTwoData = async(()=>{
     .catch((err)=>{})
     return femaleTwoTeam;
 })
-export const FemaleThreewoData = async(()=>{
+export const FemaleThreewoData = (async()=>{
     const adminid = 0
     const femaleThreeTeam =[]
     await client
