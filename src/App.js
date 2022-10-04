@@ -30,7 +30,7 @@ import { app } from './component/Firebase/firebase';
 function App() {
   const Bootom = () => {
     const location = useLocation().pathname;
-    if (location === '/' || location==='/admin') {
+    if (location === '/' ) {
       return;
     } else {
       return <Footer></Footer>;
@@ -39,7 +39,7 @@ function App() {
  const Top = ()=>{
   const location = useLocation().pathname;
   //location === '/' || 
-  if (location ==='/admin') {
+  if (location =='/') {
     return <MainPageHeader></MainPageHeader>;
   } else {
     return <Header></Header>;
@@ -58,7 +58,7 @@ function App() {
               </PublicRoute>
             }
           />
-      <Route
+     {/* <Route
             path="/"
             element={
               <PublicRoute restricted={false}>
@@ -66,9 +66,9 @@ function App() {
               </PublicRoute>
             }
           />
-          
+          */}
            <Route
-            path="/admin"
+            path="/"
             element={
               <PublicRoute restricted={false}>
                 <Body1 />
