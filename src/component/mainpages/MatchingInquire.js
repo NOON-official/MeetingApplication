@@ -12,11 +12,13 @@ import { useSelector } from 'react-redux';
 const MatchingInquire = () => {
   const [userState, setUserState] = useState (window.localStorage.getItem('matchingStatus')?window.localStorage.getItem('matchingStatus'):null);
   let status
-  const isLogin = useSelector((state)=> state.userLogin)
+  let isLogin = useSelector((state)=> state.userLogin)
   let ourteamId =window.localStorage.getItem('ourteamId')&&window.localStorage.getItem('ourteamId')
   useEffect( ()=>{
 
     if (isLogin){
+      if(ourteamId!= -1){
+      console.log("start");
       client
       .get(`api/team/status/${ourteamId}`)
       .then((res)=>{
@@ -30,7 +32,7 @@ const MatchingInquire = () => {
         window.localStorage.setItem('matchingStatus',status);
       })
       .catch((err)=>{})
-  
+    }
     }
     
   },[])
