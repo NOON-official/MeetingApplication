@@ -26,6 +26,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import PublicRoute from './component/Router/PublicRoute';
 import PrivateRoute from './component/Router/PrivateRoute';
+import AdminRoute from './component/Router/AdminRoute';
 import { app } from './component/Firebase/firebase';
 
 function App() {
@@ -54,9 +55,9 @@ function App() {
           <Route
             path="/admin/service/matching"
             element={
-              <PublicRoute restricted={false}>
+              <AdminRoute>
                 <AdminPage />
-              </PublicRoute>
+              </AdminRoute>
             }
           />
           {/* <Route
