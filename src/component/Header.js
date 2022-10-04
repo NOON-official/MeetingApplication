@@ -94,8 +94,9 @@ export const MainPageHeader = () => {
  },[IsLogin])
  
  const MatchingStatusRefresh = async() =>{
-          if(isLogin){
-          let ourteamId =window.localStorage.getItem('ourteamId')
+        let ourteamId =window.localStorage.getItem('ourteamId')
+          if(IsLogin== true && ourteamId != -1){
+         
           await client
           .get(`api/team/status/${ourteamId}`)
           //delete header
