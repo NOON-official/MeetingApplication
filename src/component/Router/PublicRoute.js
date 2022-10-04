@@ -7,7 +7,7 @@ const returnToMainPage = async()=>{
   console.log("call")
   return(
     await alert("매칭완료된 유저입니다.")
-    .then(()=>{<Navigate to="/apply/admin"/>
+    .then(()=>{<Navigate to="/"/>
     })
   )
   
