@@ -20,7 +20,7 @@ const MainLoginCallback = (props) => {
     .then(()=>{
       callDataGet() // 매칭 정보 서버에 저장
       .then(() => {
-        window.location.replace('/admin');
+        window.location.replace('/');
        })
       .catch((err) => {
         console.log('오류', err);
