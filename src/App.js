@@ -32,7 +32,7 @@ import { app } from './component/Firebase/firebase';
 function App() {
   const Bootom = () => {
     const location = useLocation().pathname;
-    if (location === '/' || location === '/admin/service/matching') {
+    if (location === '/' || location == '/join' || location === '/admin/service/matching') {
       return;
     } else {
       return <Footer></Footer>;
@@ -41,7 +41,7 @@ function App() {
   const Top = () => {
     const location = useLocation().pathname;
     //location === '/' ||
-    if (location == '/') {
+    if (location == '/' || location == '/join') {
       return <MainPageHeader></MainPageHeader>;
     } else {
       return <Header></Header>;
@@ -77,7 +77,14 @@ function App() {
               </PublicRoute>
             }
           />
-
+          <Route
+            path="/join"
+            element={
+              <PublicRoute restricted={false}>
+                <Body1 />
+              </PublicRoute>
+            }
+          />
           <Route
             path="/apply/2"
             element={
