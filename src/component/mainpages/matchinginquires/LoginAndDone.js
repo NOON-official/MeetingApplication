@@ -100,7 +100,7 @@ const Done = ()=>{
                 <div>상대방의 정보를 스크린샷 찍어서 우리팀에게 공유해보세요!</div>
               <div>
               <StyledButton onClick={()=>{setWhere(2)}} position="static" left="0"height="45px" transform="0" width="180px" size="18px" >
-                    연락처 보러가기
+                    미팅하러 가기
                     </StyledButton>
               </div>
                     
