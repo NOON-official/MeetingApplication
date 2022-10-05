@@ -429,9 +429,9 @@ const AdminPage = () => {
         name: maleThreeTeam[i]['nickname'],
         num: maleThreeTeam[i]['num'],
         age: maleThreeTeam[i]['age'],
-        preferenceAge: maleThreeTeam[i]['preferenceAge'].sort(),
-        day: maleThreeTeam[i]['day'].sort(),
-        area: maleThreeTeam[i]['area'].sort(),
+        preferenceAge: maleThreeTeam[i]['preferenceAge'].join('~'),
+        day: maleThreeTeam[i]['day'].sort().join(','),
+        area: maleThreeTeam[i]['area'].sort().join(','),
         time: maleThreeTeam[i]['updatedAt'],
       };
     }
@@ -444,9 +444,9 @@ const AdminPage = () => {
         name: maleTwoTeam[i]['nickname'],
         num: maleTwoTeam[i]['num'],
         age: maleTwoTeam[i]['age'],
-        preferenceAge: maleTwoTeam[i]['preferenceAge'].sort(),
-        day: maleTwoTeam[i]['day'].sort(),
-        area: maleTwoTeam[i]['area'].sort(),
+        preferenceAge: maleTwoTeam[i]['preferenceAge'].join('~'),
+        day: maleTwoTeam[i]['day'].sort().join(','),
+        area: maleTwoTeam[i]['area'].sort().join(','),
         time: maleTwoTeam[i]['updatedAt'],
       };
     }
@@ -466,9 +466,9 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: femaleThreeTeam[i]['nickname'],
         num: femaleThreeTeam[i]['num'],
         age: femaleThreeTeam[i]['age'],
-        preferenceAge: femaleThreeTeam[i]['preferenceAge'].sort(),
-        day: femaleThreeTeam[i]['day'].sort(),
-        area: femaleThreeTeam[i]['area'].sort(),
+        preferenceAge: femaleThreeTeam[i]['preferenceAge'].join("~"),
+        day: femaleThreeTeam[i]['day'].sort().join(','),
+        area: femaleThreeTeam[i]['area'].sort().join(','),
         time: femaleThreeTeam[i]['updatedAt'],
       };
     }
@@ -480,9 +480,9 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: femaleTwoTeam[i]['nickname'],
         num: femaleTwoTeam[i]['num'],
         age: femaleTwoTeam[i]['age'],
-        preferenceAge: femaleTwoTeam[i]['preferenceAge'].sort(),
-        day: femaleTwoTeam[i]['day'].sort(),
-        area: femaleTwoTeam[i]['area'].sort(),
+        preferenceAge: femaleTwoTeam[i]['preferenceAge'].join("~"),
+        day: femaleTwoTeam[i]['day'].sort().join(","),
+        area: femaleTwoTeam[i]['area'].sort().join(","),
         time: femaleTwoTeam[i]['updatedAt'],
       };
     }
