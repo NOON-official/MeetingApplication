@@ -512,7 +512,7 @@ const WantInfo = () => {
                   local = '마시고 죽자'
                 }
                 else if (data == 7){
-                  local = ' 술은 싷어요'
+                  local = ' 술은 싫어요'
                 }
                 else if (data == 8){
                   local = ' 구독과 좋아요'

@@ -64,7 +64,7 @@ return(
         width="90%"
         display="flex"
         justify_content="center"
-        color="#777777"font="Nanum JungHagSaeng">로그인 후에 이용해주세요</StyledDiv>
+        color="#777777"font="Nanum JungHagSaeng">미팅 신청 후 조회가능합니다.</StyledDiv>
         }
             
         </MobileBox>
