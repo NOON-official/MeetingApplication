@@ -34,6 +34,7 @@ const Body12 = () => {
   const intro = useSelector((state) => state.introduction);
   const vibe = useSelector((state) => state.prefferedthing);
   const prefferedheight = useSelector((state) => state.prefferedheight);
+  const preffereduniversity = useSelector((state)=>state.preffereduniversity);
   let finalUniversity = []
   useEffect(()=>{
     university.map((c)=>{ if(typeof(c)=='number'){finalUniversity.push(c)} else finalUniversity.push(c["key"])})
@@ -59,7 +60,7 @@ const Body12 = () => {
     ourteamPreference: {
       age: prefferedage,
       job: prefferedjobs,
-      sameUniversity: 1,
+      sameUniversity: preffereduniversity,
       vibe: vibe,
       height: prefferedheight,
     },
