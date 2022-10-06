@@ -16,11 +16,11 @@ const initialState={
   appearance: [], // multi choice -> 2 or 3
   mbti: [], // multi choice
   fashion: [], // multi choice
-  introduction: "안녕하세요 한국대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다.",
+  introduction: "",
   kakaoid: '',
   prefferedjobs: [],
   prefferedage: [20, 25],
-  preffereduniversity: 1,
+  preffereduniversity: 2,
   prefferedthing: [],
   prefferedheight: [165, 175],
   signin: false, // 핸드폰 인증 여부
