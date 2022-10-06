@@ -28,14 +28,14 @@ const University = (props) => {
   const dispatch = useDispatch();
   const universities = useSelector((state) => state.preffereduniversity);
 
-  const zerobgcolor = React.useMemo(() => (universities == 0 ? '#EB8888' : '#F6EEEE;'), [universities]);
-  const zerofontColor = React.useMemo(() => (universities == 0 ? 'white' : '#B79292'), [universities]);
-  const onebgcolor = React.useMemo(() => (universities == 1 ? '#EB8888' : '#F6EEEE;'), [universities]);
-  const onefontColor = React.useMemo(() => (universities == 1 ? 'white' : '#B79292'), [universities]);
+  const zerobgcolor = React.useMemo(() => (universities == 1 ? '#EB8888' : '#F6EEEE;'), [universities]);
+  const zerofontColor = React.useMemo(() => (universities == 1 ? 'white' : '#B79292'), [universities]);
+  const onebgcolor = React.useMemo(() => (universities == 2 ? '#EB8888' : '#F6EEEE;'), [universities]);
+  const onefontColor = React.useMemo(() => (universities == 2 ? 'white' : '#B79292'), [universities]);
   const OnUniversityClick = React.useCallback(() => {
     dispatch({ type: 'PREFFEREDUNIVERSITIES', payload: props.reduxnum });
   }, [dispatch]);
-  if (props.reduxnum == 0) {
+  if (props.reduxnum == 1) {
     return (
       <Uni color={zerofontColor} background_color={zerobgcolor} onClick={OnUniversityClick}>
         {props.university}
@@ -54,8 +54,8 @@ const UnivBox = () => {
   return (
     <StyledDiv position="static" width="100%" left="0" transform="0" height="45px">
       <UniversitiesBox>
-        <University reduxnum={0} university={'같은 학교는 싫어요'}></University>
-        <University reduxnum={1} university={'상관 없어요'}></University>
+        <University reduxnum={1} university={'같은 학교는 싫어요'}></University>
+        <University reduxnum={2} university={'상관 없어요'}></University>
       </UniversitiesBox>
     </StyledDiv>
   );

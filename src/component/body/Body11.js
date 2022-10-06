@@ -101,7 +101,7 @@ const Body11 = () => {
         >
           <StyledTextArea
             onChange={setIntroduction}
-            placeholder={intro}
+            placeholder={intro? intro: "우리팀 소개를 자세히 적을 수록 매칭확률이 높아져요! "}
           ></StyledTextArea>
         </StyledDiv>
         <StyledDiv top="65%" left="35%">
