@@ -3,14 +3,14 @@ import PulseLoader from 'react-spinners/PulseLoader';
 import client from '../../api';
 import DataPush from '../Elements/DataPush';
 import DataPut from '../Elements/DataPut';
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 const override = {
   display: 'block',
   margin: '0 auto',
 };
 
 const KakaoLoginCallback = (props) => {
-  let [color, setColor] = useState('#EB8888');  
+  let [color, setColor] = useState('#EB8888');
   //let accessToken;
   let ourteamId;
   let userId;
@@ -37,8 +37,9 @@ const KakaoLoginCallback = (props) => {
   // 서버에 인가코드 넘겨주기
   useEffect(() => {
     // 로그인 전
+
     kakaocallBack()
-        // status 받아오기
+      
         .then(async()=>{
             await client
             .get(`api/team/ourteam-id/${userId}`)
@@ -56,34 +57,29 @@ const KakaoLoginCallback = (props) => {
                 })
                 .catch((err) => {
                   console.log('오류', err);
-                });// 매칭 정보 서버에 저장
-              }
-              else 
-              {
-                callDataPut()
+                }); // 매칭 정보 서버에 저장
+            } else {
+               callDataPut()
                 .then(() => {
                   console.log('완료');
-                 window.location.replace('/apply/15');
+                  window.location.replace('/apply/15');
                 })
                 .catch((err) => {
                   console.log('오류', err);
-                });// 매칭 정보 서버에 저장
-              }
-            })
+                }); // 매칭 정보 서버에 저장
+            }
+          });
 
-          // window.sessionStorage.setItem('access', res.data.data.user.accessToken);
-          // window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
-          
-          
-          //window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
-          //setIsLogin((state) => !state);
+        // window.sessionStorage.setItem('access', res.data.data.user.accessToken);
+        // window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
 
-        })
-        .catch((err) => {
-          console.log(err);
-          //window.alert('로그인 실패');
-        });
-   
+        //window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
+        //setIsLogin((state) => !state);
+      })
+      .catch((err) => {
+        console.log(err);
+        //window.alert('로그인 실패');
+      });
   }, []);
 
   return (

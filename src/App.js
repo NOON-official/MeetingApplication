@@ -1,4 +1,4 @@
-import {Header, MainPageHeader} from './component/Header';
+import { Header, MainPageHeader } from './component/Header';
 import Body1 from './component/body/Body1';
 import Body2 from './component/body/Body2';
 import Body3 from './component/body/Body3';
@@ -15,7 +15,7 @@ import Body13 from './component/body/Body13';
 import Body14 from './component/body/Body14';
 import Body15 from './component/body/Body15';
 import SeasonFinish from './component/body/SeasonFinishPage';
-import TestPage from './component/TestPage';
+import AdminPage from './component/Admin/AdminPage';
 import KakaoLogin from './component/Auth/KakaoLogin';
 import MainLoginCallback from './component/Auth/MainPageLoginCallback';
 import KakaoLoginCallback from './component/Auth/KakaoLoginCallback';
@@ -26,39 +26,41 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import PublicRoute from './component/Router/PublicRoute';
 import PrivateRoute from './component/Router/PrivateRoute';
+import AdminRoute from './component/Router/AdminRoute';
 import { app } from './component/Firebase/firebase';
+
 function App() {
   const Bootom = () => {
     const location = useLocation().pathname;
-    if (location === '/' ) {
+    if (location === '/' || location == '/join' || location === '/admin/service/matching') {
       return;
     } else {
       return <Footer></Footer>;
     }
   };
- const Top = ()=>{
-  const location = useLocation().pathname;
-  //location === '/' || 
-  if (location =='/') {
-    return <MainPageHeader></MainPageHeader>;
-  } else {
-    return <Header></Header>;
-  }
- }
+  const Top = () => {
+    const location = useLocation().pathname;
+    //location === '/' ||
+    if (location == '/' || location == '/join') {
+      return <MainPageHeader></MainPageHeader>;
+    } else {
+      return <Header></Header>;
+    }
+  };
   return (
     <div className="App">
       <BrowserRouter>
-      <Top></Top>
+        <Top></Top>
         <Routes>
           <Route
-            path="/Test"
+            path="/admin/service/matching"
             element={
-              <PublicRoute restricted={false}>
-                <TestPage />
-              </PublicRoute>
+              <AdminRoute>
+                <AdminPage />
+              </AdminRoute>
             }
           />
-     {/* <Route
+          {/* <Route
             path="/"
             element={
               <PublicRoute restricted={false}>
@@ -67,15 +69,22 @@ function App() {
             }
           />
           */}
-           <Route
+          <Route
             path="/"
             element={
               <PublicRoute restricted={false}>
                 <Body1 />
               </PublicRoute>
             }
-          /> 
-         
+          />
+          <Route
+            path="/join"
+            element={
+              <PublicRoute restricted={false}>
+                <Body1 />
+              </PublicRoute>
+            }
+          />
           <Route
             path="/apply/2"
             element={
@@ -196,7 +205,7 @@ function App() {
               </PublicRoute>
             }
           />
-           <Route
+          <Route
             path="/auth/kakao/main/callback"
             element={
               <PublicRoute restricted={true}>
@@ -204,8 +213,6 @@ function App() {
               </PublicRoute>
             }
           />
-          
-         
         </Routes>
         <Bootom></Bootom>
       </BrowserRouter>
