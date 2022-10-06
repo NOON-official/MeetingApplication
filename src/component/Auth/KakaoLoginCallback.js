@@ -23,35 +23,34 @@ const KakaoLoginCallback = (props) => {
   async function callDataPut() {
     await DataPut();
   }
-
-  // 서버에 인가코드 넘겨주기
-  useEffect(async () => {
-    // 로그인 전
+  async function kakaocallBack(){
 
     await client
-      .get(`/api/auth/kakao/callback?code=${code}`)
-      //header부분 삭제함
-      .then((res) => {
-        // 반환된 Access Token, Refresh Token, 유저 정보 저장
-        //window.sessionStorage.setItem('access', res.data.data.user.accessToken);
-        //accessToken = res.data.data.user.accessToken;
-        //window.sessionStorage.setItem('refresh', res.data.data.user.refreshToken);
-        window.localStorage.setItem('id', res.data.data.user.id);
-        userId = res?.data?.data?.user?.id;
-        //dispatch({type: "SET_LOGIN", payload: true})
-        window.localStorage.setItem('isLogin', true);
-        window.sessionStorage.setItem('isAdmin', res.data.data.user.isAdmin);
-      })
-      // status 받아오기
-      .then(async () => {
-        await client
-          .get(`api/team/ourteam-id/${userId}`)
-          .then((res) => {
-            ourteamId = res?.data?.data?.ourteamId;
-          })
-          .then(async () => {
-            if (ourteamId === -1) {
-              await callDataPush()
+    .get(`/api/auth/kakao/callback?code=${code}`)
+    .then((res) => {
+      window.localStorage.setItem('id', res.data.data.user.id);
+      userId = res?.data?.data?.user?.id;
+      window.localStorage.setItem('isLogin',true);
+      window.sessionStorage.setItem('isAdmin',res.data.data.user.isAdmin);
+    })
+  }
+  // 서버에 인가코드 넘겨주기
+  useEffect(() => {
+    // 로그인 전
+
+    kakaocallBack()
+      
+        .then(async()=>{
+            await client
+            .get(`api/team/ourteam-id/${userId}`)
+            .then((res)=>{
+              ourteamId = res?.data?.data?.ourteamId;
+              window.localStorage.setItem("ourteamId",ourteamId)
+            })
+            .then(()=>{
+              if (ourteamId === -1)
+              {
+                callDataPush()
                 .then(() => {
                   console.log('완료');
                   window.location.replace('/apply/15');
@@ -60,7 +59,7 @@ const KakaoLoginCallback = (props) => {
                   console.log('오류', err);
                 }); // 매칭 정보 서버에 저장
             } else {
-              await callDataPut()
+               callDataPut()
                 .then(() => {
                   console.log('완료');
                   window.location.replace('/apply/15');

@@ -1,16 +1,25 @@
 import client from '../../api';
 async function DataPush() {
-  
-  const ourTeamInfo = JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).ourTeamInfo);
-  const phonenumber = JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).phone);
-  const id = window.localStorage.getItem('id');
-  let object = { userId: parseInt(id) };
-  const finalOurTeamInfo = Object.assign(JSON.parse(ourTeamInfo), object);
-  const postPhonenunber = { userId: parseInt(id), phone: phonenumber };
-  await client
+  let ourTeamInfo 
+  let phonenumber 
+  let id 
+  let object 
+  let finalOurTeamInfo
+  let postPhonenunber 
+  const callDataPush = async()=>{
+ourTeamInfo=JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).ourTeamInfo);
+phonenumber =JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).phone);
+id = window.localStorage.getItem('id');
+object = { userId: parseInt(id) };
+finalOurTeamInfo  = Object.assign(JSON.parse(ourTeamInfo), object);
+postPhonenunber = { userId: parseInt(id), phone: phonenumber };
+  }
+  await callDataPush().then(async ()=>{
+    await client
     .post('api/user/phone', postPhonenunber)
     //delete header
     .then(async (res) => {
+      
      await client
         .post('/api/team', finalOurTeamInfo)
         //delete header
@@ -43,6 +52,8 @@ async function DataPush() {
     .catch((err) => {
       console.log('1번 오류', err.response.data.message);
     });
+  })
+  
 }
 
 export default DataPush;
