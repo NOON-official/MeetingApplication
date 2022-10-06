@@ -131,7 +131,7 @@ const TeamInfo = () => {
                       localArea ='사당'
                     }
                     else if (data ==5){
-                      localArea = '신천'
+                      localArea = '신촌'
                     }
                     else if (data == 6){
                       localArea = '이태원'
