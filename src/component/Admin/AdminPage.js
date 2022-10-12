@@ -220,9 +220,12 @@ const AdminPage = () => {
   };
 
   // ---------버튼 연동을 위한 코드 끝----------
-
   const columns1 = useMemo(
     () => [
+      {
+        accessor: 'time',
+        Header: '신청시간',
+      },
       {
         accessor: 'id',
         Header: 'TeamID',
@@ -244,6 +247,14 @@ const AdminPage = () => {
         Header: '선호나이',
       },
       {
+        accessor: 'height',
+        Header: '키',
+      },
+      {
+        accessor: 'preferenceHeight',
+        Header: '선호키',
+      },
+      {
         accessor: 'day',
         Header: '선호요일',
       },
@@ -252,8 +263,28 @@ const AdminPage = () => {
         Header: '지역',
       },
       {
-        accessor: 'time',
-        Header: '신청시간',
+        accessor: 'intro',
+        Header: '자기소개',
+      },
+      {
+        accessor: 'university',
+        Header: '학교',
+      },
+      {
+        accessor: 'sameUniversity',
+        Header: '같은학교 선호',
+      },
+      {
+        accessor: 'job',
+        Header: '직업',
+      },
+      {
+        accessor: 'drink',
+        Header: '주량',
+      },
+      {
+        accessor: 'prefrenceVibe',
+        Header: '미팅 분위기',
       },
     ],
     [],
@@ -429,9 +460,17 @@ const AdminPage = () => {
         name: maleThreeTeam[i]['nickname'],
         num: maleThreeTeam[i]['num'],
         age: maleThreeTeam[i]['age'],
-        preferenceAge: maleThreeTeam[i]['preferenceAge'].join('~'),
-        day: maleThreeTeam[i]['day'].sort().join(','),
+        height: maleThreeTeam[i]['height'],
+        drink: maleThreeTeam[i]['drink'],
+        intro: maleThreeTeam[i]['intro'],
+        job: maleThreeTeam[i]['job'].sort().join(','),
+        university: maleThreeTeam[i]['university'].sort().join(','),
         area: maleThreeTeam[i]['area'].sort().join(','),
+        day: maleThreeTeam[i]['day'].sort().join(','),
+        preferenceAge: maleThreeTeam[i]['preferenceAge'].join('~'),
+        preferenceHeight: maleThreeTeam[i]['preferenceHeight'].join('~'),
+        sameUniversity: maleThreeTeam[i]['sameUniversity'],
+        preferenceVibe: maleThreeTeam[i]['preferenceVibe'].sort().join(','),
         time: maleThreeTeam[i]['updatedAt'],
       };
     }
@@ -444,9 +483,17 @@ const AdminPage = () => {
         name: maleTwoTeam[i]['nickname'],
         num: maleTwoTeam[i]['num'],
         age: maleTwoTeam[i]['age'],
-        preferenceAge: maleTwoTeam[i]['preferenceAge'].join('~'),
-        day: maleTwoTeam[i]['day'].sort().join(','),
+        height: maleTwoTeam[i]['height'],
+        drink: maleTwoTeam[i]['drink'],
+        intro: maleTwoTeam[i]['intro'],
+        job: maleTwoTeam[i]['job'].sort().join(','),
+        university: maleTwoTeam[i]['university'].sort().join(','),
         area: maleTwoTeam[i]['area'].sort().join(','),
+        day: maleTwoTeam[i]['day'].sort().join(','),
+        preferenceAge: maleTwoTeam[i]['preferenceAge'].join('~'),
+        preferenceHeight: maleTwoTeam[i]['preferenceHeight'].join('~'),
+        sameUniversity: maleTwoTeam[i]['sameUniversity'],
+        preferenceVibe: maleTwoTeam[i]['preferenceVibe'].sort().join(','),
         time: maleTwoTeam[i]['updatedAt'],
       };
     }
@@ -466,9 +513,17 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: femaleThreeTeam[i]['nickname'],
         num: femaleThreeTeam[i]['num'],
         age: femaleThreeTeam[i]['age'],
-        preferenceAge: femaleThreeTeam[i]['preferenceAge'].join("~"),
-        day: femaleThreeTeam[i]['day'].sort().join(','),
+        height: femaleThreeTeam[i]['height'],
+        drink: femaleThreeTeam[i]['drink'],
+        intro: femaleThreeTeam[i]['intro'],
+        job: femaleThreeTeam[i]['job'].sort().join(','),
+        university: femaleThreeTeam[i]['university'].sort().join(','),
         area: femaleThreeTeam[i]['area'].sort().join(','),
+        day: femaleThreeTeam[i]['day'].sort().join(','),
+        preferenceAge: femaleThreeTeam[i]['preferenceAge'].join('~'),
+        preferenceHeight: femaleThreeTeam[i]['preferenceHeight'].join('~'),
+        sameUniversity: femaleThreeTeam[i]['sameUniversity'],
+        preferenceVibe: femaleThreeTeam[i]['preferenceVibe'].sort().join(','),
         time: femaleThreeTeam[i]['updatedAt'],
       };
     }
@@ -480,9 +535,17 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: femaleTwoTeam[i]['nickname'],
         num: femaleTwoTeam[i]['num'],
         age: femaleTwoTeam[i]['age'],
-        preferenceAge: femaleTwoTeam[i]['preferenceAge'].join("~"),
-        day: femaleTwoTeam[i]['day'].sort().join(","),
-        area: femaleTwoTeam[i]['area'].sort().join(","),
+        height: femaleTwoTeam[i]['height'],
+        drink: femaleTwoTeam[i]['drink'],
+        intro: femaleTwoTeam[i]['intro'],
+        job: femaleTwoTeam[i]['job'].sort().join(','),
+        university: femaleTwoTeam[i]['university'].sort().join(','),
+        area: femaleTwoTeam[i]['area'].sort().join(','),
+        day: femaleTwoTeam[i]['day'].sort().join(','),
+        preferenceAge: femaleTwoTeam[i]['preferenceAge'].join('~'),
+        preferenceHeight: femaleTwoTeam[i]['preferenceHeight'].join('~'),
+        sameUniversity: femaleTwoTeam[i]['sameUniversity'],
+        preferenceVibe: femaleTwoTeam[i]['preferenceVibe'].sort().join(','),
         time: femaleTwoTeam[i]['updatedAt'],
       };
     }
@@ -551,14 +614,18 @@ for(let i=0; i<femaleThreeTeam.length;i++)
       </div>
 
       <TableContainer>
-        <BoxContainer style={{ width: '50%' }}>
+        <div style={{ width: '50%' }}>
           <h2>남자 매칭중</h2>
-          <Table columns={columns1} data={maleData}></Table>
-        </BoxContainer>
-        <BoxContainer style={{ width: '50%' }}>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns1} data={maleData}></Table>
+          </BoxContainer>
+        </div>
+        <div style={{ width: '50%' }}>
           <h2>여자 매칭중</h2>
-          <Table columns={columns1} data={femaleData}></Table>
-        </BoxContainer>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns1} data={femaleData}></Table>
+          </BoxContainer>
+        </div>
       </TableContainer>
       {/* 팀 매칭하기 버튼 */}
       <BoxContainer>
@@ -621,14 +688,18 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         </div>
       </BoxContainer>
       <TableContainer>
-        <BoxContainer style={{ width: '50%' }}>
+        <div style={{ width: '50%' }}>
           <h2>남자 매칭완료</h2>
-          <Table columns={columns2} data={data5}></Table>
-        </BoxContainer>
-        <BoxContainer style={{ width: '50%' }}>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns2} data={data5}></Table>
+          </BoxContainer>
+        </div>
+        <div style={{ width: '50%' }}>
           <h2>여자 매칭완료</h2>
-          <Table columns={columns2} data={data6}></Table>
-        </BoxContainer>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns2} data={data6}></Table>
+          </BoxContainer>
+        </div>
       </TableContainer>
       {/* 매칭 성공한 팀 삭제하기 버튼 */}
       <BoxContainer>
@@ -662,14 +733,18 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         </div>
       </BoxContainer>
       <TableContainer>
-        <BoxContainer style={{ width: '50%' }}>
+        <div style={{ width: '50%' }}>
           <h2>남자 매칭실패</h2>
-          <Table columns={columns3} data={data7}></Table>
-        </BoxContainer>
-        <BoxContainer style={{ width: '50%' }}>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data7}></Table>
+          </BoxContainer>
+        </div>
+        <div style={{ width: '50%' }}>
           <h2>여자 매칭실패</h2>
-          <Table columns={columns3} data={data8}></Table>
-        </BoxContainer>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data8}></Table>
+          </BoxContainer>
+        </div>
       </TableContainer>
       {/* 매칭 실패한 팀 삭제하기 버튼 */}
       <BoxContainer>
