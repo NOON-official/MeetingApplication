@@ -87,7 +87,7 @@ const PrefferedTeamInfo = () => {
               </tr>
               <tr>
                 <th>기피학교</th>
-                <td>{university == 0 ? '같은학교는 싫어요' : '상관없어요'}</td>
+                <td>{university == 1 ? '같은학교는 싫어요' : '상관없어요'}</td>
               </tr>
               <tr>
                 <th>선호키</th>
