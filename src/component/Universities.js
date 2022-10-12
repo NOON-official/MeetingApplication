@@ -883,6 +883,22 @@ var Universities=
  'key': 441},
  {'univ': '정화예술대학',
  'key': 442},
+ {'univ': '육군사관학교',
+ 'key': 443},
+ {'univ': '해군사관학교',
+ 'key': 444},
+ {'univ': '공군사관학교',
+ 'key': 445},
+ {'univ': '육군3사관학교',
+ 'key': 446},
+ {'univ': '국군간호사관학교',
+ 'key': 447},
+ {'univ': '기타 대학교',
+ 'key': 448},
+ {'univ': '해외 대학교',
+ 'key': 449},
+ {'univ': '한양대학교 ERICA',
+ 'key': 450},
 ]
 export default Universities
 
