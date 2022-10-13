@@ -21,12 +21,13 @@ const MyInfo = () => {
     })
     .catch((err)=>console.log(err))
   }
+  async function fetchData() { 
+    await GetData()
+    setNickname(window.localStorage.getItem('nickname'))
+    setPhone(window.localStorage.getItem('phone'))
+  }
     useEffect(()=>{
-      async function fetchData() { 
-        await GetData()
-        setNickname(window.localStorage.getItem('nickname'))
-        setPhone(window.localStorage.getItem('phone'))
-      }
+      
       fetchData()
     },[])
     
