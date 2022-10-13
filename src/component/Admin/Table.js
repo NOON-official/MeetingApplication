@@ -11,7 +11,13 @@ function Table({ columns, data }) {
   return (
     <>
       <table
-        style={{ bordercollapse: 'collapse', width: '100%', maxHeight: '200px', overflow: 'scroll' }}
+        style={{
+          bordercollapse: 'collapse',
+          width: '100%',
+          maxHeight: '200px',
+          overflow: 'scroll',
+          whiteSpace: 'nowrap',
+        }}
         {...getTableProps()}
       >
         <thead style={{ position: 'sticky', top: '0', backgroundColor: 'pink' }}>
