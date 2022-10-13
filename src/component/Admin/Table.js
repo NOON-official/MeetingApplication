@@ -1,15 +1,18 @@
 import React from 'react';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
+import Search from "./Search";
 //테이블 만드는 함수
 function Table({ columns, data }) {
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow,setGlobalFilter } = useTable(
     { columns, data },
     useGlobalFilter,
     useSortBy,
+
   );
 
   return (
-    <>
+    <>   
+    <Search onSubmit={setGlobalFilter} />
       <table
         style={{
           bordercollapse: 'collapse',
