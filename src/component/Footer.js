@@ -440,7 +440,7 @@ const Footer = () => {
     }
     else
       {uncompleted();
-      if (introduction.length > 0) {
+      if (introduction.length >= 10) {
         complete();
         setNextPath('/apply/12');
       } else {
