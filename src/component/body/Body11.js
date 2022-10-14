@@ -4,27 +4,35 @@ import { ReactComponent as Character } from '../../Asset/page11/InputCharacter.s
 import { ReactComponent as ChatBallon } from '../../Asset/page11/ChatBallon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
+import { introTextAreaComment } from '../../utils/introTextAreaComment';
 const StyledTextArea = styled.textarea`
   position: static;
   width: 90%;
   height: 80%;
   border: 0;
   margin: 5%;
-  font-family: pretendard;
+  font-family: Pretendard;
   font-size: 12px;
+  color: ${(props) => props.color };
   ::placeholder {
     justify-content: flex-start;
     text-align: start;
     font-size: 13px;
   }
+  :focus{
+    outline: none;
+  }
 `;
 const Body11 = () => {
+  
   const dispatch = useDispatch();
   const intro = useSelector((state)=> state.introduction)
   const setIntroduction = (e) => {
     dispatch({ type: 'SET_INTRODUCTION', payload: e.target.value });
   };
-
+  const textLengthColor = React.useMemo(()=>{return intro.length>=10?"#6495ED":"#FFB6C1"},[intro]);
+  const textComment = React.useCallback(introTextAreaComment(intro.length),[intro])
+  console.log(textComment)
   return (
     <Container>
       <MobileBox>
@@ -82,13 +90,14 @@ const Body11 = () => {
              센스 넘치게 우리 팀을 소개할수록 매칭률이 올라가요!
             </StyledText>
             <StyledText position="static" weight="400" size="1em" font="Pretendard" color="#AAAAAA">
-             3문장 이내로 작성해 주세요.
+             길게 쓰면 운명의 짝을 만날지도?
             </StyledText>
             <SubTitle weight="400" size="13px" font="Pretendard" color="#AAAAAA" left="28%" top="50%"></SubTitle>
           </StyledDiv>
           </StyledDiv>
         <StyledDiv
           display="flex"
+          direction="column"
           justify_content="center"
           align_item="center"
           max_width="350px"
@@ -96,13 +105,45 @@ const Body11 = () => {
           bg="white"
           left="50%"
           width="90%"
-          height="20%"
+          height="30%"
           top="170px"
         >
+          <StyledDiv 
+          position="static"
+          transform="0"
+          width="100%"
+          display="flex"
+          justify_content="end"
+          margin="5px 20px 0 0"
+          font= "pretendard"
+          size= "12px"
+          height="20px"
+          color= {textLengthColor}
+          >
+            {intro.length}/150
+          </StyledDiv>
           <StyledTextArea
+            id='textarea'
             onChange={setIntroduction}
-            placeholder={intro? intro: "우리팀 소개를 자세히 적을 수록 매칭확률이 높아져요! "}
+            maxLength={150}
+            minLength={10}
+            resize="none"
+            placeholder={intro? intro: "안녕하세요 한국대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^"}
           ></StyledTextArea>
+          <StyledDiv 
+          position="static"
+          transform="0"
+          width="100%"
+          display="flex"
+          justify_content="end"
+          margin="0 20px 10px 0"
+          font= "pretendard"
+          size= "12px"
+          height="20px"
+          color='#515151;'
+          >
+            {textComment}
+          </StyledDiv>
         </StyledDiv>
         <StyledDiv top="65%" left="35%">
           {' '}
