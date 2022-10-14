@@ -155,7 +155,7 @@ export const StyledText = styled.text`
   word-break: ${(props) => props.word_break};
   width: ${(props) => props.width};
   transform: ${(props) => props.transform};
-  text-align: start;
+  text-align: ${(props)=>props.text_align||"start"};
   z-index: 1;
 `;
 
