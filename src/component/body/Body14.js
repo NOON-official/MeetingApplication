@@ -24,9 +24,9 @@ const Body14 = () => {
             <Character />
           </StyledDiv>
         </StyledDiv>
-        <StyledDiv top="65%" width="90%" height="10%" left="50%">
-          <StyledText position="absolute" size="22px" left="20%">
-            카카오톡으로 매칭 결과를 보내드려요.
+        <StyledDiv top="65%" width="90%" height="10%" left="50%" display="flex" justify_content="center" align_item="center">
+          <StyledText  size="30px" left="20%" text_align="center">
+            미팅학개론을 이용하기 위해서는 <br/> 카카오톡 로그인이 필요해요.
           </StyledText>
         </StyledDiv>
         
