@@ -364,6 +364,11 @@ const AdminPage = () => {
   let data7 = []; //남성 매칭실패
   let data8 = []; //여성매칭실패
   let data9 = []; // 현재 서비스 매칭 신청 가능 상태
+
+  let male2=0;//남자 2대2
+  let male3=0;//남자 3대3
+  let female2=0;//여자 2대2
+  let female3=0;//여자 3대3
   useEffect(() => {
     //남자 3
     client
@@ -473,6 +478,7 @@ const AdminPage = () => {
         preferenceVibe: maleThreeTeam[i]['preferenceVibe'].sort().join(','),
         time: maleThreeTeam[i]['updatedAt'],
       };
+      male3+=1;
     }
   }
   //안비어있으면 ㄱㄱ
@@ -496,6 +502,7 @@ const AdminPage = () => {
         preferenceVibe: maleTwoTeam[i]['preferenceVibe'].sort().join(','),
         time: maleTwoTeam[i]['updatedAt'],
       };
+      male2+=1;
     }
   }
 
@@ -526,6 +533,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         preferenceVibe: femaleThreeTeam[i]['preferenceVibe'].sort().join(','),
         time: femaleThreeTeam[i]['updatedAt'],
       };
+      female3+=1;
     }
   }
   if (femaleTwoTeam) {
@@ -548,6 +556,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         preferenceVibe: femaleTwoTeam[i]['preferenceVibe'].sort().join(','),
         time: femaleTwoTeam[i]['updatedAt'],
       };
+      female2+=1;
     }
   }
   // console.log(maleMatchingSuccess);
@@ -612,7 +621,29 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         {' '}
         <h1>관리자페이지</h1>
       </div>
+      <TableContainer style={{marginLeft:"auto",marginRight:"auto",width:"70%"}}>
+        <table style={{width:"100%",alignContent:"center",border:"1px solid"}}>
+        <tr>
+          <th></th>
+          <th style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}><b>남자</b></th>
+          <th style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}><b>여자</b></th>
+          <th style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}><b>전체</b></th>
+        </tr>
+        <tr>
+          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>3:3</td>
+          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{male3}</td>
+          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{female3}</td>
+          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{male3+female3}</td>
+        </tr>
 
+        <tr>
+          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>2:2</td>
+          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{male2}</td>
+          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{female2}</td>
+          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{male2+female2}</td>
+        </tr>
+        </table>
+      </TableContainer>
       <TableContainer>
         <div style={{ width: '50%' }}>
           <h2>남자 매칭중</h2>
