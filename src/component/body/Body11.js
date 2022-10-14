@@ -19,6 +19,9 @@ const StyledTextArea = styled.textarea`
     text-align: start;
     font-size: 13px;
   }
+  :focus{
+    outline: none;
+  }
 `;
 const Body11 = () => {
   
