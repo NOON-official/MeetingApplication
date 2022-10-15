@@ -43,8 +43,15 @@ const AdminPage = () => {
   const [DeleteMaleTeamId, setDeleteMaleTeamId] = useState('');
   const [DeleteFemaleTeamId, setDeleteFemaleTeamId] = useState('');
 
+  // 매칭 완료에서 매칭중으로 되돌리기
+  const [RevertMaleTeamId, setRevertMaleTeamId] = useState('');
+  const [RevertFemaleTeamId, setRevertFemaleTeamId] = useState('');
+
   // 매칭 실패한 팀 삭제하기
   const [DeleteTeamId, setDeleteTeamId] = useState('');
+
+  // 매칭 실패에서 매칭중으로 되돌리기
+  const [RevertTeamId, setRevertTeamId] = useState('');
 
   // 서비스 신청 인원 관리
   const [MaleRestricted, setMaleRestricted] = useState('true');
@@ -88,12 +95,11 @@ const AdminPage = () => {
       });
   };
 
-  // 매칭 실패한 팀 삭제하기
+  // 매칭 실패 처리하기
   const handleFailedTeamIdChange = (e) => {
     setFailedTeamId(e.target.value);
   };
 
-  // 매칭 실패 처리하기
   const failTeam = async () => {
     if (!FailedTeamId) {
       return alert('모든 값을 입력해주세요');
@@ -146,6 +152,37 @@ const AdminPage = () => {
       });
   };
 
+  // 매칭완료에서 매칭중으로 되돌리기
+  const handleRevertMaleTeamIdChange = (e) => {
+    setRevertMaleTeamId(e.target.value);
+  };
+
+  const handleRevertFemaleTeamIdChange = (e) => {
+    setRevertFemaleTeamId(e.target.value);
+  };
+
+  const revertMatchedTeam = async () => {
+    if (!RevertMaleTeamId || !RevertFemaleTeamId) {
+      return alert('모든 값을 입력해주세요');
+    }
+
+    await client
+      .put('/api/admin/team/match', {
+        maleTeamId: RevertMaleTeamId,
+        femaleTeamId: RevertFemaleTeamId,
+      })
+      .then(() => {
+        alert('매칭중으로 되돌리기에 성공하였습니다');
+      })
+      .catch((err) => {
+        if (err.response.data.status == 400) {
+          alert(err.response.data.message);
+        }
+        console.log(err);
+        alert('매칭중으로 되돌리기에 실패하였습니다');
+      });
+  };
+
   // 매칭 실패한 팀 삭제하기
   const handleDeleteTeamIdChange = (e) => {
     setDeleteTeamId(e.target.value);
@@ -169,6 +206,32 @@ const AdminPage = () => {
         }
         console.log(err);
         alert('매칭 실패한 팀 삭제에 실패하였습니다');
+      });
+  };
+
+  // 매칭실패에서 매칭중으로 되돌리기
+  const handleRevertTeamIdChange = (e) => {
+    setRevertTeamId(e.target.value);
+  };
+
+  const revertFailedTeam = async () => {
+    if (!RevertTeamId) {
+      return alert('모든 값을 입력해주세요');
+    }
+
+    await client
+      .put('/api/admin/team/fail', {
+        ourteamId: RevertTeamId,
+      })
+      .then(() => {
+        alert('매칭중으로 되돌리기에 성공하였습니다');
+      })
+      .catch((err) => {
+        if (err.response.data.status == 400) {
+          alert(err.response.data.message);
+        }
+        console.log(err);
+        alert('매칭중으로 되돌리기에 실패하였습니다');
       });
   };
 
@@ -307,6 +370,10 @@ const AdminPage = () => {
         accessor: 'phone',
         Header: '폰번호',
       },
+      {
+        accessor: 'time',
+        Header: '매칭완료 시간',
+      },
     ],
     [],
   );
@@ -327,7 +394,7 @@ const AdminPage = () => {
       },
       {
         accessor: 'time',
-        Header: '실패시간',
+        Header: '매칭실패 시간',
       },
     ],
     [],
@@ -566,6 +633,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: maleMatchingSuccess[i]['nickname'],
         otherTeamID: maleMatchingSuccess[i]['partnerTeamId'],
         phone: maleMatchingSuccess[i]['phone'],
+        time: maleMatchingSuccess[i]['updatedAt'],
       };
     }
   }
@@ -578,6 +646,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: femaleMatchingSuccess[i]['nickname'],
         otherTeamID: femaleMatchingSuccess[i]['partnerTeamId'],
         phone: femaleMatchingSuccess[i]['phone'],
+        time: femaleMatchingSuccess[i]['updatedAt'],
       };
     }
   }
@@ -777,6 +846,35 @@ for(let i=0; i<femaleThreeTeam.length;i++)
             </Button>
           </Box>
         </div>
+        {/* 매칭 완료에서 매칭중으로 되돌리기 버튼 */}
+        <div>
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="revert-male-team-id"
+              label="매칭중으로 바꿀 남자팀 id"
+              variant="outlined"
+              size="small"
+              onChange={handleRevertMaleTeamIdChange}
+            />
+            <TextField
+              id="revert-female-team-id"
+              label="매칭중으로 바꿀 여자팀 id"
+              variant="outlined"
+              size="small"
+              onChange={handleRevertFemaleTeamIdChange}
+            />
+            <Button id="revert-match-button" variant="contained" onClick={revertMatchedTeam}>
+              매칭중으로 되돌리기
+            </Button>
+          </Box>
+        </div>
       </BoxContainer>
       <TableContainer>
         <div style={{ width: '50%' }}>
@@ -812,6 +910,28 @@ for(let i=0; i<femaleThreeTeam.length;i++)
             />
             <Button id="delete-team-button" variant="contained" onClick={deleteFailedTeam}>
               매칭 실패한 팀 삭제
+            </Button>
+          </Box>
+        </div>
+        {/* 매칭 실패에서 매칭중으로 되돌리기 버튼 */}
+        <div>
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="revert-team-id"
+              label="매칭중으로 바꿀 팀 id"
+              variant="outlined"
+              size="small"
+              onChange={handleRevertTeamIdChange}
+            />
+            <Button id="revert-team-button" variant="contained" onClick={revertFailedTeam}>
+              매칭중으로 되돌리기
             </Button>
           </Box>
         </div>
