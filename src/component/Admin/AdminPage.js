@@ -3,7 +3,6 @@ import { BoxContainer, Container, MobileBox, SliderBox, StyledDiv } from '../Ele
 import React, { useState, useEffect, useMemo } from 'react';
 import client from '../../api';
 import Table from './Table';
-import AdminDataPost from './AdminDataPost';
 import { Button, Box, TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
 
 const FullDiv = styled.div`
@@ -44,8 +43,15 @@ const AdminPage = () => {
   const [DeleteMaleTeamId, setDeleteMaleTeamId] = useState('');
   const [DeleteFemaleTeamId, setDeleteFemaleTeamId] = useState('');
 
+  // 매칭 완료에서 매칭중으로 되돌리기
+  const [RevertMaleTeamId, setRevertMaleTeamId] = useState('');
+  const [RevertFemaleTeamId, setRevertFemaleTeamId] = useState('');
+
   // 매칭 실패한 팀 삭제하기
   const [DeleteTeamId, setDeleteTeamId] = useState('');
+
+  // 매칭 실패에서 매칭중으로 되돌리기
+  const [RevertTeamId, setRevertTeamId] = useState('');
 
   // 서비스 신청 인원 관리
   const [MaleRestricted, setMaleRestricted] = useState('true');
@@ -89,12 +95,11 @@ const AdminPage = () => {
       });
   };
 
-  // 매칭 실패한 팀 삭제하기
+  // 매칭 실패 처리하기
   const handleFailedTeamIdChange = (e) => {
     setFailedTeamId(e.target.value);
   };
 
-  // 매칭 실패 처리하기
   const failTeam = async () => {
     if (!FailedTeamId) {
       return alert('모든 값을 입력해주세요');
@@ -147,6 +152,37 @@ const AdminPage = () => {
       });
   };
 
+  // 매칭완료에서 매칭중으로 되돌리기
+  const handleRevertMaleTeamIdChange = (e) => {
+    setRevertMaleTeamId(e.target.value);
+  };
+
+  const handleRevertFemaleTeamIdChange = (e) => {
+    setRevertFemaleTeamId(e.target.value);
+  };
+
+  const revertMatchedTeam = async () => {
+    if (!RevertMaleTeamId || !RevertFemaleTeamId) {
+      return alert('모든 값을 입력해주세요');
+    }
+
+    await client
+      .put('/api/admin/team/match', {
+        maleTeamId: RevertMaleTeamId,
+        femaleTeamId: RevertFemaleTeamId,
+      })
+      .then(() => {
+        alert('매칭중으로 되돌리기에 성공하였습니다');
+      })
+      .catch((err) => {
+        if (err.response.data.status == 400) {
+          alert(err.response.data.message);
+        }
+        console.log(err);
+        alert('매칭중으로 되돌리기에 실패하였습니다');
+      });
+  };
+
   // 매칭 실패한 팀 삭제하기
   const handleDeleteTeamIdChange = (e) => {
     setDeleteTeamId(e.target.value);
@@ -170,6 +206,32 @@ const AdminPage = () => {
         }
         console.log(err);
         alert('매칭 실패한 팀 삭제에 실패하였습니다');
+      });
+  };
+
+  // 매칭실패에서 매칭중으로 되돌리기
+  const handleRevertTeamIdChange = (e) => {
+    setRevertTeamId(e.target.value);
+  };
+
+  const revertFailedTeam = async () => {
+    if (!RevertTeamId) {
+      return alert('모든 값을 입력해주세요');
+    }
+
+    await client
+      .put('/api/admin/team/fail', {
+        ourteamId: RevertTeamId,
+      })
+      .then(() => {
+        alert('매칭중으로 되돌리기에 성공하였습니다');
+      })
+      .catch((err) => {
+        if (err.response.data.status == 400) {
+          alert(err.response.data.message);
+        }
+        console.log(err);
+        alert('매칭중으로 되돌리기에 실패하였습니다');
       });
   };
 
@@ -308,6 +370,10 @@ const AdminPage = () => {
         accessor: 'phone',
         Header: '폰번호',
       },
+      {
+        accessor: 'time',
+        Header: '매칭완료 시간',
+      },
     ],
     [],
   );
@@ -328,7 +394,7 @@ const AdminPage = () => {
       },
       {
         accessor: 'time',
-        Header: '실패시간',
+        Header: '매칭실패 시간',
       },
     ],
     [],
@@ -365,10 +431,10 @@ const AdminPage = () => {
   let data8 = []; //여성매칭실패
   let data9 = []; // 현재 서비스 매칭 신청 가능 상태
 
-  let male2=0;//남자 2대2
-  let male3=0;//남자 3대3
-  let female2=0;//여자 2대2
-  let female3=0;//여자 3대3
+  let male2 = 0; //남자 2대2
+  let male3 = 0; //남자 3대3
+  let female2 = 0; //여자 2대2
+  let female3 = 0; //여자 3대3
   useEffect(() => {
     //남자 3
     client
@@ -478,7 +544,7 @@ const AdminPage = () => {
         preferenceVibe: maleThreeTeam[i]['preferenceVibe'].sort().join(','),
         time: maleThreeTeam[i]['updatedAt'],
       };
-      male3+=1;
+      male3 += 1;
     }
   }
   //안비어있으면 ㄱㄱ
@@ -502,7 +568,7 @@ const AdminPage = () => {
         preferenceVibe: maleTwoTeam[i]['preferenceVibe'].sort().join(','),
         time: maleTwoTeam[i]['updatedAt'],
       };
-      male2+=1;
+      male2 += 1;
     }
   }
 
@@ -533,7 +599,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         preferenceVibe: femaleThreeTeam[i]['preferenceVibe'].sort().join(','),
         time: femaleThreeTeam[i]['updatedAt'],
       };
-      female3+=1;
+      female3 += 1;
     }
   }
   if (femaleTwoTeam) {
@@ -556,7 +622,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         preferenceVibe: femaleTwoTeam[i]['preferenceVibe'].sort().join(','),
         time: femaleTwoTeam[i]['updatedAt'],
       };
-      female2+=1;
+      female2 += 1;
     }
   }
   // console.log(maleMatchingSuccess);
@@ -567,6 +633,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: maleMatchingSuccess[i]['nickname'],
         otherTeamID: maleMatchingSuccess[i]['partnerTeamId'],
         phone: maleMatchingSuccess[i]['phone'],
+        time: maleMatchingSuccess[i]['updatedAt'],
       };
     }
   }
@@ -579,6 +646,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: femaleMatchingSuccess[i]['nickname'],
         otherTeamID: femaleMatchingSuccess[i]['partnerTeamId'],
         phone: femaleMatchingSuccess[i]['phone'],
+        time: femaleMatchingSuccess[i]['updatedAt'],
       };
     }
   }
@@ -606,11 +674,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
       };
     }
   }
-  //데이터 통합
-  let maleData = data1.concat(data3);
-  let femaleData = data2.concat(data4);
-  // console.log('남자', data1);
-  //console.log("여자",data2);
+
   return (
     <div>
       <div
@@ -621,40 +685,60 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         {' '}
         <h1>관리자페이지</h1>
       </div>
-      <TableContainer style={{marginLeft:"auto",marginRight:"auto",width:"70%"}}>
-        <table style={{width:"100%",alignContent:"center",border:"1px solid"}}>
-        <tr>
-          <th></th>
-          <th style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}><b>남자</b></th>
-          <th style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}><b>여자</b></th>
-          <th style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}><b>전체</b></th>
-        </tr>
-        <tr>
-          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>3:3</td>
-          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{male3}</td>
-          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{female3}</td>
-          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{male3+female3}</td>
-        </tr>
+      <TableContainer style={{ marginLeft: 'auto', marginRight: 'auto', marginBottom: '70px', width: '30%' }}>
+        <table style={{ width: '100%', alignContent: 'center', border: '1px solid' }}>
+          <tr>
+            <th></th>
+            <th style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>
+              <b>남자</b>
+            </th>
+            <th style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>
+              <b>여자</b>
+            </th>
+            <th style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>
+              <b>전체</b>
+            </th>
+          </tr>
+          <tr>
+            <td style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>3:3</td>
+            <td style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>{male3}</td>
+            <td style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>{female3}</td>
+            <td style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>{male3 + female3}</td>
+          </tr>
 
-        <tr>
-          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>2:2</td>
-          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{male2}</td>
-          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{female2}</td>
-          <td style={{textAlign:"center",fontSize:"1em",border:"1px solid"}}>{male2+female2}</td>
-        </tr>
+          <tr>
+            <td style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>2:2</td>
+            <td style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>{male2}</td>
+            <td style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>{female2}</td>
+            <td style={{ textAlign: 'center', fontSize: '1em', border: '1px solid' }}>{male2 + female2}</td>
+          </tr>
         </table>
       </TableContainer>
       <TableContainer>
         <div style={{ width: '50%' }}>
-          <h2>남자 매칭중</h2>
+          <h2>2:2 남자 매칭중</h2>
           <BoxContainer style={{ minHeight: '350px' }}>
-            <Table columns={columns1} data={maleData}></Table>
+            <Table columns={columns1} data={data3}></Table>
           </BoxContainer>
         </div>
         <div style={{ width: '50%' }}>
-          <h2>여자 매칭중</h2>
+          <h2>2:2 여자 매칭중</h2>
           <BoxContainer style={{ minHeight: '350px' }}>
-            <Table columns={columns1} data={femaleData}></Table>
+            <Table columns={columns1} data={data4}></Table>
+          </BoxContainer>
+        </div>
+      </TableContainer>
+      <TableContainer>
+        <div style={{ width: '50%' }}>
+          <h2>3:3 남자 매칭중</h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns1} data={data1}></Table>
+          </BoxContainer>
+        </div>
+        <div style={{ width: '50%' }}>
+          <h2>3:3 여자 매칭중</h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns1} data={data2}></Table>
           </BoxContainer>
         </div>
       </TableContainer>
@@ -762,6 +846,35 @@ for(let i=0; i<femaleThreeTeam.length;i++)
             </Button>
           </Box>
         </div>
+        {/* 매칭 완료에서 매칭중으로 되돌리기 버튼 */}
+        <div>
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="revert-male-team-id"
+              label="매칭중으로 바꿀 남자팀 id"
+              variant="outlined"
+              size="small"
+              onChange={handleRevertMaleTeamIdChange}
+            />
+            <TextField
+              id="revert-female-team-id"
+              label="매칭중으로 바꿀 여자팀 id"
+              variant="outlined"
+              size="small"
+              onChange={handleRevertFemaleTeamIdChange}
+            />
+            <Button id="revert-match-button" variant="contained" onClick={revertMatchedTeam}>
+              매칭중으로 되돌리기
+            </Button>
+          </Box>
+        </div>
       </BoxContainer>
       <TableContainer>
         <div style={{ width: '50%' }}>
@@ -797,6 +910,28 @@ for(let i=0; i<femaleThreeTeam.length;i++)
             />
             <Button id="delete-team-button" variant="contained" onClick={deleteFailedTeam}>
               매칭 실패한 팀 삭제
+            </Button>
+          </Box>
+        </div>
+        {/* 매칭 실패에서 매칭중으로 되돌리기 버튼 */}
+        <div>
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="revert-team-id"
+              label="매칭중으로 바꿀 팀 id"
+              variant="outlined"
+              size="small"
+              onChange={handleRevertTeamIdChange}
+            />
+            <Button id="revert-team-button" variant="contained" onClick={revertFailedTeam}>
+              매칭중으로 되돌리기
             </Button>
           </Box>
         </div>
