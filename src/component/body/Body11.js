@@ -48,7 +48,7 @@ const Body11 = () => {
           >
             <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
               <StyledText position=" static" size="0.8em" >
-                우리팀을 소개하는
+                우리 팀을 소개하는
               </StyledText>
               
             </StyledDiv>
