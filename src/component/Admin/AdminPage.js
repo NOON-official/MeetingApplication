@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import client from '../../api';
 import Table from './Table';
 import { Button, Box, TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
-
+import Universities from '../Universities';
 const FullDiv = styled.div`
   width: 100%;
 `;
@@ -15,7 +15,30 @@ const TableContainer = styled.div`
   justify-content: ${(props) => props.justify_content || 'space-around'};
   top: ${(props) => props.top || '5%'};
 `;
+function binarySearch(arr, target) {
+  // TODO : 여기에 코드를 작성합니다.
+  let start = 0;
+  let end = arr.length-1
+  let mid
+ 
+  while(start<=end){ //점점 좁혀지다가 start와 end의 순서가 어긋나게 되면 반복을 종료한다
+  
+  mid = parseInt((start+end)/2)
+  
+  if(target === arr[mid]["key"]){
+    return arr[mid]["univ"];
+  } else{
+    if(target<arr[mid]["key"]){
+      end = mid-1
+    }
+    else{
+      start = mid+1
+    }
+  }
+  }
+  return -1
 
+};
 const AdminPage = () => {
   const [maleThreeTeam, setMaleThreeTeam] = useState([]);
   const [maleTwoTeam, setMaleTwoTeam] = useState([]);
@@ -535,7 +558,28 @@ const AdminPage = () => {
         drink: maleThreeTeam[i]['drink'],
         intro: maleThreeTeam[i]['intro'],
         job: maleThreeTeam[i]['job'].sort().join(','),
-        university: maleThreeTeam[i]['university'].sort().join(','),
+        university: maleThreeTeam[i]['university'].sort().map((data, index) => {
+          // 숫자가 들어옴
+          if(typeof(data)=="number"){
+          let univ = binarySearch(Universities,data)
+          if (index + 1 != maleThreeTeam[i]['university'].length) {
+            return  (
+            ` ${univ} ,`);
+          } else {
+            return (` ${univ} `);
+          }
+        }
+        else{
+          let univ = binarySearch(Universities,data["key"])
+          if (index + 1 != maleThreeTeam[i]['university'].length) {
+          
+            return  (
+            ` ${univ} ,`);
+          } else {
+            return (` ${univ} `);
+          }
+        }
+        }),
         area: maleThreeTeam[i]['area'].sort().join(','),
         day: maleThreeTeam[i]['day'].sort().join(','),
         preferenceAge: maleThreeTeam[i]['preferenceAge'].join('~'),
@@ -559,7 +603,28 @@ const AdminPage = () => {
         drink: maleTwoTeam[i]['drink'],
         intro: maleTwoTeam[i]['intro'],
         job: maleTwoTeam[i]['job'].sort().join(','),
-        university: maleTwoTeam[i]['university'].sort().join(','),
+        university: maleTwoTeam[i]['university'].sort().map((data, index) => {
+          // 숫자가 들어옴
+          if(typeof(data)=="number"){
+          let univ = binarySearch(Universities,data)
+          if (index + 1 != maleTwoTeam[i]['university'].length) {
+            return  (
+            ` ${univ} ,`);
+          } else {
+            return (` ${univ} `);
+          }
+        }
+        else{
+          let univ = binarySearch(Universities,data["key"])
+          if (index + 1 != maleTwoTeam[i]['university'].length) {
+          
+            return  (
+            ` ${univ} ,`);
+          } else {
+            return (` ${univ} `);
+          }
+        }
+        }),
         area: maleTwoTeam[i]['area'].sort().join(','),
         day: maleTwoTeam[i]['day'].sort().join(','),
         preferenceAge: maleTwoTeam[i]['preferenceAge'].join('~'),
@@ -590,7 +655,28 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         drink: femaleThreeTeam[i]['drink'],
         intro: femaleThreeTeam[i]['intro'],
         job: femaleThreeTeam[i]['job'].sort().join(','),
-        university: femaleThreeTeam[i]['university'].sort().join(','),
+        university: femaleThreeTeam[i]['university'].sort().map((data, index) => {
+          // 숫자가 들어옴
+          if(typeof(data)=="number"){
+          let univ = binarySearch(Universities,data)
+          if (index + 1 != femaleThreeTeam[i]['university'].length) {
+            return  (
+            ` ${univ} ,`);
+          } else {
+            return (` ${univ} `);
+          }
+        }
+        else{
+          let univ = binarySearch(Universities,data["key"])
+          if (index + 1 != femaleThreeTeam[i]['university'].length) {
+          
+            return  (
+            ` ${univ} ,`);
+          } else {
+            return (` ${univ} `);
+          }
+        }
+        }),
         area: femaleThreeTeam[i]['area'].sort().join(','),
         day: femaleThreeTeam[i]['day'].sort().join(','),
         preferenceAge: femaleThreeTeam[i]['preferenceAge'].join('~'),
@@ -614,7 +700,28 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         intro: femaleTwoTeam[i]['intro'],
         job: femaleTwoTeam[i]['job'].sort().join(','),
         university: femaleTwoTeam[i]['university'].sort().join(','),
-        area: femaleTwoTeam[i]['area'].sort().join(','),
+        university: femaleTwoTeam[i]['university'].sort().map((data, index) => {
+          // 숫자가 들어옴
+          if(typeof(data)=="number"){
+          let univ = binarySearch(Universities,data)
+          if (index + 1 != femaleTwoTeam[i]['university'].length) {
+            return  (
+            ` ${univ} ,`);
+          } else {
+            return (` ${univ} `);
+          }
+        }
+        else{
+          let univ = binarySearch(Universities,data["key"])
+          if (index + 1 != femaleTwoTeam[i]['university'].length) {
+          
+            return  (
+            ` ${univ} ,`);
+          } else {
+            return (` ${univ} `);
+          }
+        }
+        }),
         day: femaleTwoTeam[i]['day'].sort().join(','),
         preferenceAge: femaleTwoTeam[i]['preferenceAge'].join('~'),
         preferenceHeight: femaleTwoTeam[i]['preferenceHeight'].join('~'),
