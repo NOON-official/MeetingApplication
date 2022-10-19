@@ -136,7 +136,7 @@ export const AgeSelect = () => {
   return (
     <ContentsAge>
       <SubTitle weight="500" font="Pretendard" top="53%" left="8%">
-        평균나이
+        평균 나이
       </SubTitle>
       <SliderBox top="60%">
         <StyledText top="75%" size="15px" color="#B79292">
