@@ -704,7 +704,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
             }
           }
         }),
-        area: femaleThreeTeam[i]['area'].sort().join(','),
+        area: femaleTwoTeam[i]['area'].sort().join(','),
         day: femaleTwoTeam[i]['day'].sort().join(','),
         preferenceAge: femaleTwoTeam[i]['preferenceAge'].join('~'),
         preferenceHeight: femaleTwoTeam[i]['preferenceHeight'].join('~'),
