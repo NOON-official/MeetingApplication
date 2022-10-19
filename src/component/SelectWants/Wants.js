@@ -55,9 +55,10 @@ const Wants = () => {
         <Want want="대화가 좋아요"meta={3}></Want>
       </WantBox>
       <WantBox>
-        <Want want="설렘이 좋아요"meta={4}></Want>
+      <Want want="마시고 죽자"meta={6}></Want>
         <Want size="14px" want="재밌는게 좋아요" meta={5}></Want>
-        <Want want="마시고 죽자"meta={6}></Want>
+       
+        <Want want="설렘이 좋아요"meta={4}></Want>
       </WantBox>
       <WantBox>
         <Want want="술은 싫어요"meta={7}></Want>
