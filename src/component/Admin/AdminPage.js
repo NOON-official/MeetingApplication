@@ -18,27 +18,26 @@ const TableContainer = styled.div`
 function binarySearch(arr, target) {
   // TODO : 여기에 코드를 작성합니다.
   let start = 0;
-  let end = arr.length-1
-  let mid
- 
-  while(start<=end){ //점점 좁혀지다가 start와 end의 순서가 어긋나게 되면 반복을 종료한다
-  
-  mid = parseInt((start+end)/2)
-  
-  if(target === arr[mid]["key"]){
-    return arr[mid]["univ"];
-  } else{
-    if(target<arr[mid]["key"]){
-      end = mid-1
-    }
-    else{
-      start = mid+1
-    }
-  }
-  }
-  return -1
+  let end = arr.length - 1;
+  let mid;
 
-};
+  while (start <= end) {
+    //점점 좁혀지다가 start와 end의 순서가 어긋나게 되면 반복을 종료한다
+
+    mid = parseInt((start + end) / 2);
+
+    if (target === arr[mid]['key']) {
+      return arr[mid]['univ'];
+    } else {
+      if (target < arr[mid]['key']) {
+        end = mid - 1;
+      } else {
+        start = mid + 1;
+      }
+    }
+  }
+  return -1;
+}
 const AdminPage = () => {
   const [maleThreeTeam, setMaleThreeTeam] = useState([]);
   const [maleTwoTeam, setMaleTwoTeam] = useState([]);
@@ -560,25 +559,21 @@ const AdminPage = () => {
         job: maleThreeTeam[i]['job'].sort().join(','),
         university: maleThreeTeam[i]['university'].sort().map((data, index) => {
           // 숫자가 들어옴
-          if(typeof(data)=="number"){
-          let univ = binarySearch(Universities,data)
-          if (index + 1 != maleThreeTeam[i]['university'].length) {
-            return  (
-            ` ${univ} ,`);
+          if (typeof data == 'number') {
+            let univ = binarySearch(Universities, data);
+            if (index + 1 != maleThreeTeam[i]['university'].length) {
+              return ` ${univ} ,`;
+            } else {
+              return ` ${univ} `;
+            }
           } else {
-            return (` ${univ} `);
+            let univ = binarySearch(Universities, data['key']);
+            if (index + 1 != maleThreeTeam[i]['university'].length) {
+              return ` ${univ} ,`;
+            } else {
+              return ` ${univ} `;
+            }
           }
-        }
-        else{
-          let univ = binarySearch(Universities,data["key"])
-          if (index + 1 != maleThreeTeam[i]['university'].length) {
-          
-            return  (
-            ` ${univ} ,`);
-          } else {
-            return (` ${univ} `);
-          }
-        }
         }),
         area: maleThreeTeam[i]['area'].sort().join(','),
         day: maleThreeTeam[i]['day'].sort().join(','),
@@ -605,25 +600,21 @@ const AdminPage = () => {
         job: maleTwoTeam[i]['job'].sort().join(','),
         university: maleTwoTeam[i]['university'].sort().map((data, index) => {
           // 숫자가 들어옴
-          if(typeof(data)=="number"){
-          let univ = binarySearch(Universities,data)
-          if (index + 1 != maleTwoTeam[i]['university'].length) {
-            return  (
-            ` ${univ} ,`);
+          if (typeof data == 'number') {
+            let univ = binarySearch(Universities, data);
+            if (index + 1 != maleTwoTeam[i]['university'].length) {
+              return ` ${univ} ,`;
+            } else {
+              return ` ${univ} `;
+            }
           } else {
-            return (` ${univ} `);
+            let univ = binarySearch(Universities, data['key']);
+            if (index + 1 != maleTwoTeam[i]['university'].length) {
+              return ` ${univ} ,`;
+            } else {
+              return ` ${univ} `;
+            }
           }
-        }
-        else{
-          let univ = binarySearch(Universities,data["key"])
-          if (index + 1 != maleTwoTeam[i]['university'].length) {
-          
-            return  (
-            ` ${univ} ,`);
-          } else {
-            return (` ${univ} `);
-          }
-        }
         }),
         area: maleTwoTeam[i]['area'].sort().join(','),
         day: maleTwoTeam[i]['day'].sort().join(','),
@@ -657,25 +648,21 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         job: femaleThreeTeam[i]['job'].sort().join(','),
         university: femaleThreeTeam[i]['university'].sort().map((data, index) => {
           // 숫자가 들어옴
-          if(typeof(data)=="number"){
-          let univ = binarySearch(Universities,data)
-          if (index + 1 != femaleThreeTeam[i]['university'].length) {
-            return  (
-            ` ${univ} ,`);
+          if (typeof data == 'number') {
+            let univ = binarySearch(Universities, data);
+            if (index + 1 != femaleThreeTeam[i]['university'].length) {
+              return ` ${univ} ,`;
+            } else {
+              return ` ${univ} `;
+            }
           } else {
-            return (` ${univ} `);
+            let univ = binarySearch(Universities, data['key']);
+            if (index + 1 != femaleThreeTeam[i]['university'].length) {
+              return ` ${univ} ,`;
+            } else {
+              return ` ${univ} `;
+            }
           }
-        }
-        else{
-          let univ = binarySearch(Universities,data["key"])
-          if (index + 1 != femaleThreeTeam[i]['university'].length) {
-          
-            return  (
-            ` ${univ} ,`);
-          } else {
-            return (` ${univ} `);
-          }
-        }
         }),
         area: femaleThreeTeam[i]['area'].sort().join(','),
         day: femaleThreeTeam[i]['day'].sort().join(','),
@@ -699,29 +686,25 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         drink: femaleTwoTeam[i]['drink'],
         intro: femaleTwoTeam[i]['intro'],
         job: femaleTwoTeam[i]['job'].sort().join(','),
-        university: femaleTwoTeam[i]['university'].sort().join(','),
         university: femaleTwoTeam[i]['university'].sort().map((data, index) => {
           // 숫자가 들어옴
-          if(typeof(data)=="number"){
-          let univ = binarySearch(Universities,data)
-          if (index + 1 != femaleTwoTeam[i]['university'].length) {
-            return  (
-            ` ${univ} ,`);
+          if (typeof data == 'number') {
+            let univ = binarySearch(Universities, data);
+            if (index + 1 != femaleTwoTeam[i]['university'].length) {
+              return ` ${univ} ,`;
+            } else {
+              return ` ${univ} `;
+            }
           } else {
-            return (` ${univ} `);
+            let univ = binarySearch(Universities, data['key']);
+            if (index + 1 != femaleTwoTeam[i]['university'].length) {
+              return ` ${univ} ,`;
+            } else {
+              return ` ${univ} `;
+            }
           }
-        }
-        else{
-          let univ = binarySearch(Universities,data["key"])
-          if (index + 1 != femaleTwoTeam[i]['university'].length) {
-          
-            return  (
-            ` ${univ} ,`);
-          } else {
-            return (` ${univ} `);
-          }
-        }
         }),
+        area: femaleThreeTeam[i]['area'].sort().join(','),
         day: femaleTwoTeam[i]['day'].sort().join(','),
         preferenceAge: femaleTwoTeam[i]['preferenceAge'].join('~'),
         preferenceHeight: femaleTwoTeam[i]['preferenceHeight'].join('~'),
