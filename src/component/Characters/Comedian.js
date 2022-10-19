@@ -53,7 +53,7 @@ const Comedian = () => {
           주의!
         </StyledText>
         <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="14px" color="#1A1A1A">
-          개그만 하다 집에 돌아올수도 있으니
+          개그만 하다 집에 돌아올 수도 있으니
         </StyledText>
         <StyledText position="static" font="Pretendard" fontWeight="500" line="15.6px" size="14px" color="#1A1A1A">
           적절한 타이밍이 중요해요!
