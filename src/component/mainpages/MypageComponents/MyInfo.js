@@ -91,9 +91,9 @@ const MyInfo = () => {
                 <td/>
             :
             <td>
-            {<Link to="/apply/13" style={{ textDecoration: 'none' }}>
+            {/*<Link to="/apply/13" style={{ textDecoration: 'none' }}>
             <button> 변경</button>
-              </Link>}
+    </Link>*/}
         </td>
             }
                 

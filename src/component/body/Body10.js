@@ -233,7 +233,7 @@ const MyTeamInfo = () => {
               </td>
             </tr>
             <tr>
-              <th>스타일</th>
+              <th>얼굴상</th>
               <td>
                 {appearance.map((data, index) => {
                   let local
@@ -331,7 +331,7 @@ const MyTeamInfo = () => {
               </td>
             </tr>
             <tr>
-              <th>평균키</th>
+              <th>평균 키</th>
               <td>{height}cm</td>
             </tr>
           </table>
@@ -414,7 +414,7 @@ const PrefferedInfo = () => {
               </td>
             </tr>
             <tr>
-              <th>평균나이</th>
+              <th>평균 나이</th>
               <td>
                 {age.map((data, index) => {
                   if (index + 1 != age.length) {
@@ -562,7 +562,7 @@ const Body10 = () => {
                 {/* TextTitle*/}
 
                 <StyledText position=" static" size="0.8em">
-                  정리해드립니다.
+                  정리해 드립니다.
                 </StyledText>
               </StyledDiv>
               <StyledDiv
