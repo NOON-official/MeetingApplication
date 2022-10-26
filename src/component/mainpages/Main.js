@@ -5,7 +5,12 @@ import { ReactComponent as CatchPhrase } from '../../Asset/page1/Text.svg';
 import { ReactComponent as Title } from '../../Asset/page1/Title.svg';
 import { ReactComponent as Logo } from '../../Asset/page1/Logo.svg';
 import { ReactComponent as Star } from '../../Asset/page1/Star.svg';
+import { ReactComponent as Season3Text } from '../../Asset/mainPage/Season3Text.svg';
 import { ReactComponent as MainText } from '../../Asset/page1/MainText.svg';
+import { ReactComponent as Christmascharacter} from '../../Asset/mainPage/ChristmasCharacter.svg';
+import {ReactComponent as KakaoLogo} from '../../Asset/mainPage/KakaoLogo.svg';
+import {ReactComponent as InstagramLogo} from '../../Asset/mainPage/InstagramLog.svg';
+
 import { StyledDiv, StyledText, Container, MobileBox, StyledButton } from '../Elements/StyledComponent';
 import client from '../../api';
 import Counter from '../Elements/CountAnimation';
@@ -77,14 +82,14 @@ const Main = () => {
         <StyledDiv top="15%" left="52%" transform="translate(-50%, 0)">
           <Title />
         </StyledDiv>
-        <StyledDiv top="23%" left="80%" transform="translate(-50%, 0)">
-          <Star />
-        </StyledDiv>
-        <StyledDiv top="28%" left="50%" transform="translate(-50%, 0)">
-          <Logo />
+        {/** <StyledDiv top="23%" left="80%" transform="translate(-50%, 0)"><Star /></StyledDiv>*/}
+        
+        <StyledDiv top="30%" left="50%" transform="translate(-50%, 0)">
+          {/*/<Logo />*/}
+          <Christmascharacter/>
         </StyledDiv>
         
-        {
+        {/*
         matchingStatus==1 ||matchingStatus==2?
           matchingStatus==1?
             <StyledDiv font="Pretendard" size="15px"weight="300"left="50%"height="45px" width="250px" top="65%" >
@@ -101,22 +106,40 @@ const Main = () => {
               다시 한 번 도전해보세요!
             </StyledDiv>
           </div>
-           
+    */} 
             
-      : <div>
-      <StyledDiv top="61%" left="50%" transform="translate(-50%, 0)">
-          <MainText />
+       <div>
+      <StyledDiv top="70%" left="50%" transform="translate(-50%, 0)">
+         {/*} <MainText />*/}
+         <Season3Text/>
         </StyledDiv>
-        <Link to="/apply/2" style={{ textDecoration: 'none' }}>
+        {/*<Link to="/apply/2" style={{ textDecoration: 'none' }}>
           <StyledButton height="45px" width="180px" top="70%" size="18px">
             매칭 시작하기
           </StyledButton>
         </Link>
+        */}
         </div>
-        }
+        <StyledDiv top="85%"  width="100%"height="5%"left="50%"display="flex" justify_content="center"align_item="center" transform="translate(-50%, 0)">
+        
+          <a href='http://pf.kakao.com/_Whxjqxj'>
+          <KakaoLogo/>
+          </a>
+       
+        
+        <a href='https://www.instagram.com/meetingo_me/'>
+        
+          
+         <InstagramLogo/>
+       
+          </a>
+        
+        </StyledDiv>
+        
+       
        
 
-        <Counter end={num} />
+        {/*<Counter end={num} />*/}
         <StyledDiv
           border_top="1px solid #D6D6D6"
           top="93%"
