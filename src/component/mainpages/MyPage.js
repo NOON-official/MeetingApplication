@@ -49,10 +49,13 @@ return(
         <WantsInfo/>
         {matchingStatus==1 ||matchingStatus==2 ?
         <div></div>
-        : <div>
-            <StyledButton onClick={openModal} size="18px"position="static" left="0" transform="0" height="45px" width="180px" >
+        :
+        
+        <div>
+        {/**    <StyledButton onClick={openModal} size="18px"position="static" left="0" transform="0" height="45px" width="180px" >
             수정하기
             </StyledButton>
+            */} 
         </div>
             
 }
