@@ -38,6 +38,14 @@ function binarySearch(arr, target) {
   }
   return -1;
 }
+function preferenceSchoolResult(a){
+  if (a==2){
+    return 'O'
+  }
+  else{
+    return 'X'
+  }
+}
 const AdminPage = () => {
   const [maleThreeTeam, setMaleThreeTeam] = useState([]);
   const [maleTwoTeam, setMaleTwoTeam] = useState([]);
@@ -347,10 +355,6 @@ const AdminPage = () => {
         Header: '지역',
       },
       {
-        accessor: 'intro',
-        Header: '자기소개',
-      },
-      {
         accessor: 'university',
         Header: '학교',
       },
@@ -370,6 +374,10 @@ const AdminPage = () => {
         accessor: 'prefrenceVibe',
         Header: '미팅 분위기',
       },
+      {
+        accessor: 'intro',
+        Header: '자기소개',
+      }
     ],
     [],
   );
@@ -555,7 +563,6 @@ const AdminPage = () => {
         age: maleThreeTeam[i]['age'],
         height: maleThreeTeam[i]['height'],
         drink: maleThreeTeam[i]['drink'],
-        intro: maleThreeTeam[i]['intro'],
         job: maleThreeTeam[i]['job'].sort().join(','),
         university: maleThreeTeam[i]['university'].sort().map((data, index) => {
           // 숫자가 들어옴
@@ -579,9 +586,10 @@ const AdminPage = () => {
         day: maleThreeTeam[i]['day'].sort().join(','),
         preferenceAge: maleThreeTeam[i]['preferenceAge'].join('~'),
         preferenceHeight: maleThreeTeam[i]['preferenceHeight'].join('~'),
-        sameUniversity: maleThreeTeam[i]['sameUniversity'],
+        sameUniversity: preferenceSchoolResult(maleThreeTeam[i]['sameUniversity']),
         preferenceVibe: maleThreeTeam[i]['preferenceVibe'].sort().join(','),
         time: maleThreeTeam[i]['updatedAt'],
+        intro: maleThreeTeam[i]['intro'],
       };
       male3 += 1;
     }
@@ -596,7 +604,6 @@ const AdminPage = () => {
         age: maleTwoTeam[i]['age'],
         height: maleTwoTeam[i]['height'],
         drink: maleTwoTeam[i]['drink'],
-        intro: maleTwoTeam[i]['intro'],
         job: maleTwoTeam[i]['job'].sort().join(','),
         university: maleTwoTeam[i]['university'].sort().map((data, index) => {
           // 숫자가 들어옴
@@ -620,9 +627,10 @@ const AdminPage = () => {
         day: maleTwoTeam[i]['day'].sort().join(','),
         preferenceAge: maleTwoTeam[i]['preferenceAge'].join('~'),
         preferenceHeight: maleTwoTeam[i]['preferenceHeight'].join('~'),
-        sameUniversity: maleTwoTeam[i]['sameUniversity'],
+        sameUniversity: preferenceSchoolResult(maleTwoTeam[i]['sameUniversity']),
         preferenceVibe: maleTwoTeam[i]['preferenceVibe'].sort().join(','),
         time: maleTwoTeam[i]['updatedAt'],
+        intro: maleTwoTeam[i]['intro'],
       };
       male2 += 1;
     }
@@ -644,7 +652,6 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         age: femaleThreeTeam[i]['age'],
         height: femaleThreeTeam[i]['height'],
         drink: femaleThreeTeam[i]['drink'],
-        intro: femaleThreeTeam[i]['intro'],
         job: femaleThreeTeam[i]['job'].sort().join(','),
         university: femaleThreeTeam[i]['university'].sort().map((data, index) => {
           // 숫자가 들어옴
@@ -668,9 +675,10 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         day: femaleThreeTeam[i]['day'].sort().join(','),
         preferenceAge: femaleThreeTeam[i]['preferenceAge'].join('~'),
         preferenceHeight: femaleThreeTeam[i]['preferenceHeight'].join('~'),
-        sameUniversity: femaleThreeTeam[i]['sameUniversity'],
+        sameUniversity: preferenceSchoolResult(femaleThreeTeam[i]['sameUniversity']),
         preferenceVibe: femaleThreeTeam[i]['preferenceVibe'].sort().join(','),
         time: femaleThreeTeam[i]['updatedAt'],
+        intro: femaleThreeTeam[i]['intro']
       };
       female3 += 1;
     }
@@ -684,7 +692,6 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         age: femaleTwoTeam[i]['age'],
         height: femaleTwoTeam[i]['height'],
         drink: femaleTwoTeam[i]['drink'],
-        intro: femaleTwoTeam[i]['intro'],
         job: femaleTwoTeam[i]['job'].sort().join(','),
         university: femaleTwoTeam[i]['university'].sort().map((data, index) => {
           // 숫자가 들어옴
@@ -708,9 +715,10 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         day: femaleTwoTeam[i]['day'].sort().join(','),
         preferenceAge: femaleTwoTeam[i]['preferenceAge'].join('~'),
         preferenceHeight: femaleTwoTeam[i]['preferenceHeight'].join('~'),
-        sameUniversity: femaleTwoTeam[i]['sameUniversity'],
+        sameUniversity: preferenceSchoolResult(femaleTwoTeam[i]['sameUniversity']),
         preferenceVibe: femaleTwoTeam[i]['preferenceVibe'].sort().join(','),
         time: femaleTwoTeam[i]['updatedAt'],
+        intro: femaleTwoTeam[i]['intro']
       };
       female2 += 1;
     }
