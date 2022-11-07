@@ -2,23 +2,23 @@ import styled from 'styled-components';
 import * as React from 'react';
 import { StyledDiv } from '../Elements/StyledComponent';
 import { useSelector, useDispatch } from 'react-redux';
-
 const WantBox = styled.div`
   width: 100%;
-  height: 10%;
+  height: 20%;
+  max-height: 45px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+
 `;
 const Thing = styled.button`
-  width: ${(props) => props.width || '30%'};
-  height: 100%;
+  width: ${(props) => props.width || '90%'};
+  height: 90%;
   border: 0.2px solid var(--color-lightblue);
   border-radius: var(--round-borderradious);
-  margin: 10px;
+  
   max-height: 200px;
-  min-width: 86px;
+ 
   font-family: var(--font-family);
   font-size: ${(props) => props.size || '16px'};
   color: ${(props) => props.color || 'black'};
@@ -48,22 +48,26 @@ const Want = (props) => {
 
 const Wants = () => {
   return (
-    <StyledDiv top="17%" width="95%" height="65%" left="50%">
+    <StyledDiv top="17%" width="95%" height="45%" left="50%"display="flex" direction="column" justify_content="space-between">
       <WantBox>
-        <Want want="술게임 좋아요" meta={1}></Want>
-        <Want want="보드게임 좋아요"meta={2}></Want>
-        <Want want="대화가 좋아요"meta={3}></Want>
-      </WantBox>
-      <WantBox>
-      <Want want="마시고 죽자"meta={6}></Want>
-        <Want size="14px" want="재밌는게 좋아요" meta={5}></Want>
+        <Want want="코로나 때문에 못한 연애 오늘!?" meta={1}></Want>
        
-        <Want want="설렘이 좋아요"meta={4}></Want>
       </WantBox>
       <WantBox>
-        <Want want="술은 싫어요"meta={7}></Want>
-        <Want want="구독과 좋아요"meta={8}></Want>
-        <Want want="아무거나 좋아요"meta={9}></Want>
+      
+        <Want size="14px" want="친구는 다다익성! 찐친 만들어 보자." meta={2}></Want>
+       
+       
+      </WantBox>
+      <WantBox>
+        
+        <Want want="왁자지껄 이 밤이 떠너가라!"meta={3}></Want>
+      </WantBox>
+      <WantBox>
+        <Want want="술게임 한 수 배우러 왔습니다."meta={4}></Want>
+      </WantBox>
+      <WantBox>
+        <Want want="술게임 못해도 챙겨주는 훈훈한 분위기."meta={5}></Want>
       </WantBox>
     </StyledDiv>
   );

@@ -128,7 +128,7 @@ const Body11 = () => {
             maxLength={150}
             minLength={10}
             resize="none"
-            placeholder={intro? intro: "안녕하세요 한국대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^"}
+            placeholder={intro? intro: "“안녕하세요 한국대학교 손석구, 최준 입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다.”"}
           ></StyledTextArea>
           <StyledDiv 
           position="static"
@@ -140,7 +140,7 @@ const Body11 = () => {
           font= "pretendard"
           size= "12px"
           height="20px"
-          color='#515151;'
+          color= {intro.length<10&&intro.length>=0 ?'#515151;':10<=intro.length&&intro.length<20?'#B9E0FF':20<=intro.length&&intro.length<40?'#8D9EFF':40<=intro.length&&intro.length<70?'#8D72E1':'#6C4AB6'}
           >
             {textComment}
           </StyledDiv>
