@@ -25,6 +25,9 @@ const initialState={
   prefferedheight: [165, 175],
   signin: false, // 핸드폰 인증 여부
   privateinfoconfirm: false, // 이용 약관 동의 여부
+  serviceconfirm:false,
+  ageinfo:false,
+  marketingconfirm:false,
   isMatching: false, // 매칭 진행중 여부
   pagestate: 0,
   ourTeamInfo: {},
@@ -170,7 +173,14 @@ const reducer = (state = initialState, action) => {
     case 'SET_SIGNIN':
       return { ...state, signin: action.payload };
     case 'SET_PRIVATEINFOCONFIRM':
-      return { ...state, privateinfoconfirm: action.payload };
+      return { ...state, privateinfoconfirm: action.payload};
+      case 'SET_AGEINFO':
+        return { ...state, ageinfo: action.payload};
+        case 'SET_MARKETINGCONFIRM':
+          return { ...state, marketingconfirm: action.payload};
+          case 'SET_SERVICECONFIRM':
+            return { ...state, serviceconfirm: action.payload};
+    
     case 'SET_PREFFEREDTHING':
       const newPrefferedthing = action.payload;
       return { ...state, prefferedthing: [...state.prefferedthing, newPrefferedthing] };
@@ -239,6 +249,9 @@ const reducer = (state = initialState, action) => {
     prefferedheight: [165, 175],
     signin: false, // 핸드폰 인증 여부
     privateinfoconfirm: false, // 이용 약관 동의 여부
+    serviceconfirm:false,
+    ageinfo:false,
+    marketingconfirm:false, // 이용 약관 동의 여부
     isMatching: false, // 매칭 진행중 여부
     pagestate: 0,
     ourTeamInfo: {},

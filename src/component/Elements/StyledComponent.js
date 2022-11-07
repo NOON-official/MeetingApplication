@@ -32,6 +32,7 @@ export const StyledDiv = styled.div`
   letter-spacing: ${(props) => props.letter_spacing};
   overflow:${(props)=>props.border_overflow};
   font-weight: ${(props)=> props.weight};
+  padding: ${(props)=> props.padding};
 `;
 
 export const SubTitle = styled.div`
@@ -154,8 +155,10 @@ export const StyledText = styled.text`
   margin: ${(props) => props.margin};
   word-break: ${(props) => props.word_break};
   width: ${(props) => props.width};
+  height: ${(props) => props.height};
   transform: ${(props) => props.transform};
   text-align: ${(props)=>props.text_align||"start"};
+
   z-index: 1;
 `;
 

@@ -1,21 +1,27 @@
 import * as React from 'react';
 import { ReactComponent as PrivateInfo } from '../../Asset/page12/PrivateInfo.svg';
 import { ReactComponent as ServiceUse } from '../../Asset/page12/ServiceUse.svg';
+import { ReactComponent as MarketingInfo } from '../../Asset/page12/MarketingInfo.svg';
+import { ReactComponent as AgeInfo } from '../../Asset/page12/AgeInfo.svg';
 import { ReactComponent as CheckIcon } from '../../Asset/confirm/CheckIcon.svg';
 import { useState, useEffect } from 'react';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Body12 = () => {
+  const privateIconfirm =useSelector((state)=>state.privateinfoconfirm);
+  const serviceconfirm = useSelector((state)=> state.serviceconfirm);
+  const ageinfo = useSelector((state)=>state.ageinfo);
+  const marketingconfirm = useSelector((state)=> state.marketingconfirm);
   const [infoConfirm, setInfoConfirm] = useState(false);
   const dispatch = useDispatch();
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch({ type: 'SET_PRIVATEINFOCONFIRM', payload: infoConfirm });
   }, [infoConfirm]);
+*/
 
-  const buttonColor = React.useMemo(() => (infoConfirm ? '#EB8888' : '#EDEDED'), [infoConfirm]);
-  const buttonFontColor = React.useMemo(() => (infoConfirm ? '#FFFFFF' : '#BBBBBB'), [infoConfirm]);
-
+  const buttonColor = React.useMemo(() => ((privateIconfirm&&serviceconfirm&&ageinfo&&marketingconfirm) ? '#EB8888' : '#EDEDED'), [infoConfirm]);
+  const buttonFontColor = React.useMemo(() => ((privateIconfirm&&serviceconfirm&&ageinfo&&marketingconfirm) ? '#FFFFFF' : '#BBBBBB'), [infoConfirm]);
   const gender = useSelector((state) => state.gender);
   const num = useSelector((state) => state.num);
   const age = useSelector((state) => state.age);
@@ -39,7 +45,7 @@ const Body12 = () => {
   useEffect(()=>{
     university.map((c)=>{ if(typeof(c)=='number'){finalUniversity.push(c)} else finalUniversity.push(c["key"])})
   },[university])
- 
+  
   const body = {
     ourteam: {
       gender: gender,
@@ -65,22 +71,28 @@ const Body12 = () => {
       height: prefferedheight,
     },
   };
-
-  const saveState = (key, state) => {
+const confirmAllAgree = async()=>{
+dispatch({type:"SET_PRIVATEINFOCONFIRM", payload:true})
+dispatch({type:"SET_AGEINFO",payload:true})
+dispatch({type:"SET_MARKETINGCONFIRM",payload:true})
+dispatch({type:"SET_SERVICECONFIRM",payload:true})
+}
+ useEffect( () => {
     try {
       {
         /*const serializedState = JSON.stringify(state);
       sessionStorage.setItem(key, serializedState);
     */
       }
-      const serializedState = JSON.stringify(state);
+      const serializedState = JSON.stringify(body);
 
-      dispatch({ type: `${key}`, payload: `${serializedState}` });
+      dispatch({ type: `SET_OURTEAMINFO`, payload: `${serializedState}` });
     } catch {
       console.log('error');
       alert('오류가 발생했습니다. 개발자에게 알려주세요!');
     }
-  };
+  },[privateIconfirm,serviceconfirm,ageinfo])
+ console.log(privateIconfirm,serviceconfirm,ageinfo,marketingconfirm)
   // sessionstorage.setitem=> reux로 변경하기
   return (
     <Container>
@@ -126,8 +138,7 @@ const Body12 = () => {
           bg={buttonColor}
           border="10px"
           onClick={() => {
-            setInfoConfirm(!infoConfirm);
-            saveState('SET_OURTEAMINFO', body);
+          confirmAllAgree()
           }}
         >
           {' '}
@@ -135,13 +146,15 @@ const Body12 = () => {
             네 모두 동의합니다
           </StyledText>
         </StyledDiv>
-        <StyledDiv left="9%" top="30.5%">
-          {infoConfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
+        <div style={{position:'absolute', top:"35.5%", height:"100%",width:"100%"}}>
+        <StyledDiv left="9%" top="0%" onClick={()=>{dispatch({type:'SET_PRIVATEINFOCONFIRM',payload:!privateIconfirm})}}>
+          {privateIconfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
         </StyledDiv>
-        <StyledDiv left="37%" top="31%">
-          <PrivateInfo />
+        <StyledDiv left="37%" top="0.5%">
+          <a href='https://furry-bank-197.notion.site/c83f4127e3c54b7080c333aa31a4cc03'>  <PrivateInfo /></a>
+         
         </StyledDiv>
-        <StyledDiv overflow="scroll" left="50%" top="36%" height="20%" width="90%" bg="white" border="10px">
+       {/*<StyledDiv overflow="scroll" left="50%" top="5%" height="20%" width="90%" bg="white" border="10px">
           <StyledText
             font="Pretendard"
             size="12px"
@@ -274,12 +287,15 @@ const Body12 = () => {
             민사소송법상의 관할법원에 소를 제기할 수 있습니다.
           </StyledText>
         </StyledDiv>
-        <StyledDiv left="9%" top="59.5%">
-          {infoConfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
+        * */} 
+        <StyledDiv left="9%" top="10%" onClick={()=>{dispatch({type:'SET_SERVICECONFIRM',payload:!serviceconfirm})}}>
+          {serviceconfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
         </StyledDiv>
-        <StyledDiv left="34%" top="60%">
-          <ServiceUse />
+        <StyledDiv left="34%" top="10.5%">
+          <a href='https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7'>   <ServiceUse /></a>
+        
         </StyledDiv>
+        {/** 
         <StyledDiv overflow="scroll" left="50%" top="65%" height="20%" width="90%" bg="white" border="10px">
           <StyledText
             font="Pretendard"
@@ -299,6 +315,20 @@ const Body12 = () => {
             1년
           </StyledText>
         </StyledDiv>
+        */}
+        <StyledDiv left="9%" top="20%"onClick={()=>{dispatch({type:'SET_AGEINFO',payload:!ageinfo})}}>
+          {ageinfo ? <CheckIcon /> : <CheckIcon className="bright" />}
+        </StyledDiv>
+        <StyledDiv left="34%" top="20.5%">
+          <AgeInfo />
+        </StyledDiv>
+        <StyledDiv left="9%" top="30%"onClick={()=>{dispatch({type:'SET_MARKETINGCONFIRM',payload:!marketingconfirm})}}>
+          {marketingconfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
+        </StyledDiv>
+        <StyledDiv left="38%" top="30.5%">
+          <MarketingInfo />
+        </StyledDiv>
+        </div>
       </MobileBox>
     </Container>
   );

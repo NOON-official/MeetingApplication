@@ -19,7 +19,7 @@ const StyledInput = styled.input`
   ::placeholder {
     justify-content: center;
     text-align: 'center';
-    font-size: 15px;
+    font-size:${(props)=> props.placholderFontSize||"15px"} ;
     outline: none;
   }
 `;
@@ -116,7 +116,10 @@ const Body13 = () => {
       alert('올바른 번호를 입력하세요!');
     }
   }, [phone]);
-
+  const KakaoInputHandler = (e) => {
+    let kakaoId = e.target.value
+    dispatch({type:"SET_KAKAOID", payload:kakaoId})
+  }
   const PhoneAuthInput = (e) => {
     let otp = e.target.value;
     if (otp.length === 6) {
@@ -141,8 +144,8 @@ const Body13 = () => {
 
   return (
     <Container>
-      <MobileBox>
-      <StyledDiv display="flex" direction="column" top="2%" width="90%" height="20%" left="50%">
+      <MobileBox overflow="scroll" >
+      <StyledDiv display="flex" direction="column" top="2%" width="90%" height="20%" left="50%" overflow="hidden">
           {/* HeaderBox*/}
           <StyledDiv
             position="static"
@@ -154,7 +157,7 @@ const Body13 = () => {
           >
             <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
               <StyledText position=" static" size="0.8em"  >
-              연락을 드릴 수 있게
+              연락을 드릴 수 있게   전화번호 인증과
               </StyledText>
             
             </StyledDiv>
@@ -164,7 +167,7 @@ const Body13 = () => {
                 {/* TextTitle*/}
 
                 <StyledText position=" static" size="0.8em" color="#F49393" >
-                  전화번호 인증을 해주세요!
+                 카카오톡 아이디를 입력해주세요!
                 </StyledText>
                 
               </StyledDiv>
@@ -173,8 +176,8 @@ const Body13 = () => {
           </StyledDiv>
           
         </StyledDiv>
-        <div id="recaptchaContainer"></div>
-        <StyledDiv height="80%" top="20%" width="90%" left="50%">
+      
+        <StyledDiv height="60%" top="20%" width="90%" left="50%" overflow="hidden">
           <StyledDiv height="88px" width="100%" left="50%" border="10px" bg="white">
             <StyledText
               color="#777777"
@@ -254,7 +257,8 @@ const Body13 = () => {
             </StyledText>
           </StyledDiv>
           {authModalOpen && (
-            <StyledDiv height="88px" width="100%" left="50%" border="10px" bg="white" top="35%">
+            <>
+            <StyledDiv height="88px" width="100%" left="50%" border="10px" bg="white" top="50%">
               <StyledText
                 color="#777777"
                 font="Pretendard"
@@ -274,24 +278,81 @@ const Body13 = () => {
                 </StyledDiv>
               </StyledDiv>
             </StyledDiv>
+              <StyledDiv
+              top="90%"
+              left="50%"
+              heigth="10%"
+              width="100%"
+              justify_content="center"
+              align_item="center"
+              text_align="center"
+              font="Pretendard"
+              color="#AAAAAA"
+              size="12px"
+            >
+              수집된 번호는 매칭에만 활용되고 <br /> 상대팀에게 전달되지 않습니다.
+            </StyledDiv>
+            </>
           )}
-          <StyledDiv
+        
+          
+        </StyledDiv>
+        <StyledDiv
             top="90%"
             left="50%"
-            heigth="10%"
+            height="50%"
+            width="100%"
+       
+          >
+              <StyledDiv display="flex" direction="column" top="2%" width="90%" height="10%" left="50%" overflow="hidden">
+            <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%" justify_content="center">
+              <StyledText position=" static" size="0.8em" text_align="center" >
+             카카오톡 아이디를 입력해주세요.
+              </StyledText>
+            </StyledDiv>
+            </StyledDiv>
+          
+            <StyledDiv height="88px" width="90%" left="50%" border="10px" bg="white" top="20%">
+              <StyledText
+                color="#777777"
+                font="Pretendard"
+                weight="400"
+                size="13px"
+                height="30%"
+                width="90%"
+                top="20%"
+                left="5%"
+              >
+                카카오톡 아이디
+            
+              </StyledText>
+              <StyledDiv top="50%" width="100%" left="50%" height="53%">
+                <StyledDiv display="flex" justify_content="flex-start" left="50%" height="100%" width="100%">
+                  <StyledInput placholderFontSize="12px" name="otp" onChange={KakaoInputHandler} placeholder="원활한 서비스 이용을 위해 카카오톡 아이디검색 허용을 해주세요.">
+                  </StyledInput>
+               
+                </StyledDiv>
+              </StyledDiv>
+            </StyledDiv>
+            <StyledDiv  
+            top="70%"
+            left="50%"
+            height="10%"
             width="100%"
             justify_content="center"
             align_item="center"
             text_align="center"
             font="Pretendard"
             color="#AAAAAA"
-            size="12px"
-          >
-            수집된 번호는 매칭에만 활용되고 <br /> 상대팀에게 전달되지 않습니다.
+            size="12px">
+            카카오톡 아이디는 서로 미팅을 수락할 경우 <br /> 상대팀에게 전달됩니다.
+            </StyledDiv>
           </StyledDiv>
-        </StyledDiv>
+  
       </MobileBox>
+      <div id="recaptchaContainer"></div>
     </Container>
+    
   );
 };
 export default Body13;

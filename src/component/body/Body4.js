@@ -1,5 +1,6 @@
 import AreaContiner from '../Areas/AreaContainer';
 import { ReactComponent as DayCharacter } from '../../Asset/page4/DayCharacter.svg';
+import { ReactComponent as LocationChatBallon } from '../../Asset/page4/LocationChatBallon.svg';
 import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elements/StyledComponent';
 
 const Body4 = () => {
@@ -53,15 +54,16 @@ const Body4 = () => {
         <AreaContiner></AreaContiner>
         <StyledDiv
           display="flex"
-          direction="row"
+          direction="column"
           justify_content="flex-end"
           align_item="flex-end"
-          top="80%"
+          top="70%"
           height="auto"
           width="100%"
           left="40%"
           margin
         >
+          <LocationChatBallon/>
           <DayCharacter />
         </StyledDiv>
       </MobileBox>
