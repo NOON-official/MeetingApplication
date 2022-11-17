@@ -5,6 +5,7 @@ import client from '../../api';
 import Table from './Table';
 import { Button, Box, TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
 import Universities from '../Universities';
+import * as Matching from './Matching.js';
 const FullDiv = styled.div`
   width: 100%;
 `;
@@ -15,12 +16,14 @@ const TableContainer = styled.div`
   justify-content: ${(props) => props.justify_content || 'space-around'};
   top: ${(props) => props.top || '5%'};
 `;
+
 function binarySearch(arr, target) {
   // TODO : 여기에 코드를 작성합니다.
   let start = 0;
   let end = arr.length - 1;
   let mid;
-
+ 
+  
   while (start <= end) {
     //점점 좁혀지다가 start와 end의 순서가 어긋나게 되면 반복을 종료한다
 
@@ -45,6 +48,43 @@ function preferenceSchoolResult(a){
   else{
     return 'X'
   }
+}
+//학교레밸
+const Level5 = [184,193,170,372,452,180,188,451,444,445,443,247];
+const Level4 = [196,169,200,153,185,193,305,191,175,205,172,192,260,427,273,222,227,286,158,189,201,314,407,450,396,214,220,203];
+const Level3 = [256,171,177,263,388,176,226,186,174,202,255,324,258,369,330,221,245,351,212,219,268,301,252,358,377,394,210,382,251,178,313,296,347,340];
+
+//학교레밸 평균 구하는 함수
+function schoolLevel(schoolList){
+  let sum=0;
+  var avg=0;
+  //console.log(schoolList)
+  for(var i=0; i<schoolList.length;i++)  
+  {
+  if (Level5.includes(schoolList[i]))
+    {
+        sum+=5;
+    }
+
+    else if(Level4.includes(schoolList[i]))
+    {
+        sum+= 4;
+    }
+    else if(Level3.includes(schoolList[i]))
+    {
+      sum+=3;
+    }
+    else
+    {
+        sum+= 2;
+    }
+  }  
+  //console.log("총합:",sum)
+  avg =sum/schoolList.length
+  //console.log("평균:",avg)
+  //console.log("학교 갯수:",schoolList.length)
+
+  return avg
 }
 const AdminPage = () => {
   const [maleThreeTeam, setMaleThreeTeam] = useState([]);
@@ -363,6 +403,10 @@ const AdminPage = () => {
         Header: '같은학교 선호',
       },
       {
+        accessor:"level",
+        Header:"학교레벨"
+      },
+      {
         accessor: 'job',
         Header: '직업',
       },
@@ -563,37 +607,23 @@ const AdminPage = () => {
         age: maleThreeTeam[i]['age'],
         height: maleThreeTeam[i]['height'],
         drink: maleThreeTeam[i]['drink'],
-        job: maleThreeTeam[i]['job'].sort().join(','),
-        university: maleThreeTeam[i]['university'].sort().map((data, index) => {
-          // 숫자가 들어옴
-          if (typeof data == 'number') {
-            let univ = binarySearch(Universities, data);
-            if (index + 1 != maleThreeTeam[i]['university'].length) {
-              return ` ${univ} ,`;
-            } else {
-              return ` ${univ} `;
-            }
-          } else {
-            let univ = binarySearch(Universities, data['key']);
-            if (index + 1 != maleThreeTeam[i]['university'].length) {
-              return ` ${univ} ,`;
-            } else {
-              return ` ${univ} `;
-            }
-          }
-        }),
-        area: maleThreeTeam[i]['area'].sort().join(','),
-        day: maleThreeTeam[i]['day'].sort().join(','),
-        preferenceAge: maleThreeTeam[i]['preferenceAge'].join('~'),
-        preferenceHeight: maleThreeTeam[i]['preferenceHeight'].join('~'),
+        job: maleThreeTeam[i]['job'].sort(),
+        university: maleThreeTeam[i]['university'],
+        area: maleThreeTeam[i]['area'].sort(),
+        day: maleThreeTeam[i]['day'].sort(),
+        preferenceAge: maleThreeTeam[i]['preferenceAge'],
+        preferenceHeight: maleThreeTeam[i]['preferenceHeight'],
         sameUniversity: preferenceSchoolResult(maleThreeTeam[i]['sameUniversity']),
-        preferenceVibe: maleThreeTeam[i]['preferenceVibe'].sort().join(','),
+        level:schoolLevel( maleThreeTeam[i]['university']),
+        preferenceVibe: maleThreeTeam[i]['preferenceVibe'].sort(),
         time: maleThreeTeam[i]['updatedAt'],
         intro: maleThreeTeam[i]['intro'],
+        preferenceJob: maleThreeTeam[i]['preferenceJob']
       };
       male3 += 1;
     }
   }
+  //console.log(maleThreeTeam)
   //안비어있으면 ㄱㄱ
   if (maleTwoTeam) {
     for (let i = 0; i < maleTwoTeam.length; i++) {
@@ -604,37 +634,25 @@ const AdminPage = () => {
         age: maleTwoTeam[i]['age'],
         height: maleTwoTeam[i]['height'],
         drink: maleTwoTeam[i]['drink'],
-        job: maleTwoTeam[i]['job'].sort().join(','),
-        university: maleTwoTeam[i]['university'].sort().map((data, index) => {
-          // 숫자가 들어옴
-          if (typeof data == 'number') {
-            let univ = binarySearch(Universities, data);
-            if (index + 1 != maleTwoTeam[i]['university'].length) {
-              return ` ${univ} ,`;
-            } else {
-              return ` ${univ} `;
-            }
-          } else {
-            let univ = binarySearch(Universities, data['key']);
-            if (index + 1 != maleTwoTeam[i]['university'].length) {
-              return ` ${univ} ,`;
-            } else {
-              return ` ${univ} `;
-            }
-          }
-        }),
-        area: maleTwoTeam[i]['area'].sort().join(','),
-        day: maleTwoTeam[i]['day'].sort().join(','),
-        preferenceAge: maleTwoTeam[i]['preferenceAge'].join('~'),
-        preferenceHeight: maleTwoTeam[i]['preferenceHeight'].join('~'),
+        job: maleTwoTeam[i]['job'].sort(),
+        university: maleTwoTeam[i]['university'],
+        area: maleTwoTeam[i]['area'].sort(),
+        day: maleTwoTeam[i]['day'].sort(),
+        preferenceAge: maleTwoTeam[i]['preferenceAge'],
+        preferenceHeight: maleTwoTeam[i]['preferenceHeight'],
         sameUniversity: preferenceSchoolResult(maleTwoTeam[i]['sameUniversity']),
-        preferenceVibe: maleTwoTeam[i]['preferenceVibe'].sort().join(','),
+        preferenceVibe: maleTwoTeam[i]['preferenceVibe'].sort(),
         time: maleTwoTeam[i]['updatedAt'],
         intro: maleTwoTeam[i]['intro'],
+        level: schoolLevel( maleTwoTeam[i]['university']),
+        preferenceJob: maleTwoTeam[i]['preferenceJob']
+
       };
       male2 += 1;
+     //console.log(data3[i])
     }
   }
+  
 
   /*
 for(let i=0; i<femaleThreeTeam.length;i++)
@@ -652,33 +670,18 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         age: femaleThreeTeam[i]['age'],
         height: femaleThreeTeam[i]['height'],
         drink: femaleThreeTeam[i]['drink'],
-        job: femaleThreeTeam[i]['job'].sort().join(','),
-        university: femaleThreeTeam[i]['university'].sort().map((data, index) => {
-          // 숫자가 들어옴
-          if (typeof data == 'number') {
-            let univ = binarySearch(Universities, data);
-            if (index + 1 != femaleThreeTeam[i]['university'].length) {
-              return ` ${univ} ,`;
-            } else {
-              return ` ${univ} `;
-            }
-          } else {
-            let univ = binarySearch(Universities, data['key']);
-            if (index + 1 != femaleThreeTeam[i]['university'].length) {
-              return ` ${univ} ,`;
-            } else {
-              return ` ${univ} `;
-            }
-          }
-        }),
-        area: femaleThreeTeam[i]['area'].sort().join(','),
-        day: femaleThreeTeam[i]['day'].sort().join(','),
-        preferenceAge: femaleThreeTeam[i]['preferenceAge'].join('~'),
-        preferenceHeight: femaleThreeTeam[i]['preferenceHeight'].join('~'),
+        job: femaleThreeTeam[i]['job'].sort(),
+        university: femaleThreeTeam[i]['university'],
+        area: femaleThreeTeam[i]['area'].sort(),
+        day: femaleThreeTeam[i]['day'].sort(),
+        preferenceAge: femaleThreeTeam[i]['preferenceAge'],
+        preferenceHeight: femaleThreeTeam[i]['preferenceHeight'],
         sameUniversity: preferenceSchoolResult(femaleThreeTeam[i]['sameUniversity']),
-        preferenceVibe: femaleThreeTeam[i]['preferenceVibe'].sort().join(','),
+        preferenceVibe: femaleThreeTeam[i]['preferenceVibe'].sort(),
         time: femaleThreeTeam[i]['updatedAt'],
-        intro: femaleThreeTeam[i]['intro']
+        intro: femaleThreeTeam[i]['intro'],
+        level :schoolLevel( femaleThreeTeam[i]['university']),
+        preferenceJob: femaleThreeTeam[i]['preferenceJob']
       };
       female3 += 1;
     }
@@ -692,37 +695,24 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         age: femaleTwoTeam[i]['age'],
         height: femaleTwoTeam[i]['height'],
         drink: femaleTwoTeam[i]['drink'],
-        job: femaleTwoTeam[i]['job'].sort().join(','),
-        university: femaleTwoTeam[i]['university'].sort().map((data, index) => {
-          // 숫자가 들어옴
-          if (typeof data == 'number') {
-            let univ = binarySearch(Universities, data);
-            if (index + 1 != femaleTwoTeam[i]['university'].length) {
-              return ` ${univ} ,`;
-            } else {
-              return ` ${univ} `;
-            }
-          } else {
-            let univ = binarySearch(Universities, data['key']);
-            if (index + 1 != femaleTwoTeam[i]['university'].length) {
-              return ` ${univ} ,`;
-            } else {
-              return ` ${univ} `;
-            }
-          }
-        }),
-        area: femaleTwoTeam[i]['area'].sort().join(','),
-        day: femaleTwoTeam[i]['day'].sort().join(','),
-        preferenceAge: femaleTwoTeam[i]['preferenceAge'].join('~'),
-        preferenceHeight: femaleTwoTeam[i]['preferenceHeight'].join('~'),
+        job: femaleTwoTeam[i]['job'].sort(),
+        university: femaleTwoTeam[i]['university'],
+        area: femaleTwoTeam[i]['area'].sort(),
+        day: femaleTwoTeam[i]['day'].sort(),
+        preferenceAge: femaleTwoTeam[i]['preferenceAge'],
+        preferenceHeight: femaleTwoTeam[i]['preferenceHeight'],
         sameUniversity: preferenceSchoolResult(femaleTwoTeam[i]['sameUniversity']),
-        preferenceVibe: femaleTwoTeam[i]['preferenceVibe'].sort().join(','),
+        preferenceVibe: femaleTwoTeam[i]['preferenceVibe'].sort(),
         time: femaleTwoTeam[i]['updatedAt'],
-        intro: femaleTwoTeam[i]['intro']
+        intro: femaleTwoTeam[i]['intro'],
+        level: schoolLevel( femaleTwoTeam[i]['university']),
+        preferenceJob: femaleTwoTeam[i]['preferenceJob']
       };
       female2 += 1;
+      //console.log(data4[i])
     }
   }
+
   // console.log(maleMatchingSuccess);
   if (maleMatchingSuccess) {
     for (let i = 0; i < maleMatchingSuccess.length; i++) {
@@ -1095,7 +1085,29 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         >
           저장하기
         </Button>
+
+       
       </div>
+    <div>
+    <Button
+          id="save-button"
+          variant="contained"
+          style={{ marginTop: '1rem', marginBottom: '3rem', width: '31rem' }}
+          onClick={() => Matching.Matching(data3,data4)}
+        >
+        2:2알고리즘 돌리기 
+        </Button>
+        
+        <Button
+          id="save-button"
+          variant="contained"
+          style={{ marginTop: '1rem', marginBottom: '3rem', width: '31rem' }}
+          onClick={() => Matching.Matching(data1,data2)}
+        >
+        3:3알고리즘 돌리기 
+        </Button>
+    </div>
+ 
     </div>
   );
 };
