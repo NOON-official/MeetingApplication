@@ -59,14 +59,17 @@ const Body6 = () => {
           </StyledDiv>
         </StyledDiv>
         {/*Div for Middle */}
-        <StyledDiv top="20%" width="90%" height="75%" left="50%" overflow="scroll"> 
+        <StyledDiv top="20%" width="90%" height="75%" left="50%" overflow="auto"> 
         {/** Div for scrollable area- position: static, justify content= space-around */}
-          <StyledDiv position="static" transform="0" display="flex" direction="column" minHeight="800px" justify_content="space-around"  width="95%" align_item="center">
+          <StyledDiv position="static" transform="0" display="flex" direction="column"  justify_content="flex-start"  width="95%" align_item="center">
           <Appearance></Appearance>
           <Mbtis></Mbtis>
-          <Fashions></Fashions>
-          <Height></Height>
+         
+         {/** 
+          *  <Fashions></Fashions>
+          * <Height></Height>
           <Drink></Drink>
+         */} 
           </StyledDiv>
         </StyledDiv>
       </MobileBox>

@@ -37,7 +37,7 @@ const MyTeamInfo = () => {
   const appearance = useSelector((state) => state.appearance);
   const mbti = useSelector((state) => state.mbti);
   const characters = useSelector((state) => state.characters);
-  const height = useSelector((state) => state.height);
+ 
   const gender = React.useMemo(() => (genderstate == 1 ? '남자' : '여자'), [genderstate]);
   return (
     <StyledDiv
@@ -130,41 +130,21 @@ const MyTeamInfo = () => {
                 {area.map((data, index) => {
                    let localArea
                    if(data ==1){
-                     localArea = '상관없음'
+                     localArea = '강남'
                    }
                    else if(data == 2){
-                     localArea ='강남'
+                     localArea ='건대'
                    }
                    else if(data == 3){
-                     localArea = "건대"
+                     localArea = "신촌"
                    }
                    else if(data == 4){
-                     localArea ='사당'
-                   }
-                   else if (data ==5){
-                     localArea = '신촌'
-                   }
-                   else if (data == 6){
-                     localArea = '이태원'
-                   }
-                   else if (data == 7){
-                     localArea = ' 잠실'
-                   }
-                   else if (data == 8){
                      localArea ='홍대'
                    }
-                   else if(data == 9){
-                     localArea = '회기'
+                   else if (data ==5){
+                     localArea = '상관없음'
                    }
-                   else if( data == 10){
-                     localArea = '대학로'
-                   }
-                   else if(data == 11){
-                     localArea = '왕십리'
-                   }
-                   else if(data ==12){
-                     localArea ='성수'
-                   }
+                
                   if (index + 1 != area.length) {
                     return ` ${localArea} ,`;
                   } else {
@@ -330,10 +310,11 @@ const MyTeamInfo = () => {
                 })}
               </td>
             </tr>
-            <tr>
+            {/*<tr>
               <th>평균 키</th>
               <td>{height}cm</td>
             </tr>
+              */}
           </table>
         </StyledDiv>
       </StyledDiv>
@@ -394,7 +375,7 @@ const PrefferedInfo = () => {
                 {job.map((data, index) => {
                    let local
                    if(data ==1){
-                     local = '대학생'
+                     local = '대(원)학생'
                    }
                    else if(data == 2){
                      local ='직장인'
@@ -402,9 +383,7 @@ const PrefferedInfo = () => {
                    else if(data == 3){
                      local = "취준생"
                    }
-                   else if(data == 4){
-                     local ='대학원생'
-                   }
+                 
                    if (index + 1 != job.length) {
                      return ` ${local} ,`;
                    } else {
@@ -427,16 +406,7 @@ const PrefferedInfo = () => {
               <th>기피학교</th>
               <td>{university == 0 ? '같은학교는 싫어요' : '상관없어요'}</td>
             </tr>
-            <tr>
-              <th>선호키</th>
-              <td>
-                {height.map((data, index) => {
-                  if (index + 1 != height.length) {
-                    return ` ${data}cm ~ `;
-                  } else return ` ${data}cm`;
-                })}
-              </td>
-            </tr>
+            
           </table>
         </StyledDiv>
       </StyledDiv>
@@ -445,7 +415,8 @@ const PrefferedInfo = () => {
 };
 const WantInfo = () => {
   const want = useSelector((state) => state.prefferedthing);
-
+  const drink = useSelector((state)=> state.drink);
+  console.log(drink==4)
   return (
     <StyledDiv
       position="static"
@@ -489,37 +460,37 @@ const WantInfo = () => {
       >
         <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
           <table>
+          <tr>
+            
+          
+            <th>주량 레벨</th>
+            
+      
+          <td>{drink==1?"한 방울":drink==2?"한병":drink==3?"한병 반":drink==4?"두병":"고래"}</td>
+       </tr>
+          </table>
+          <table>
+         
             <tr>
               <td>
                 {want.map((data, index) => {
                 let local
                 if(data ==1){
-                  local = '술게임 좋아요'
+                  local = '코로나 때문에 못한 연애 오늘!?'
                 }
                 else if(data == 2){
-                  local ='보드게임 좋아요'
+                  local ='친구는 다다익성! 찐친 만들어 보자.'
                 }
                 else if(data == 3){
-                  local = "대화가 좋아요"
+                  local = "왁자지껄 이 밤이 떠너가라!"
                 }
                 else if(data == 4){
-                  local ='설레임이 좋아요'
+                  local ='술게임 한 수 배우러 왔습니다'
                 }
                 else if (data ==5){
-                  local = '재밌는게 좋아요'
+                  local = '술게임 못해도 챙겨주는 훈훈한 분위기.'
                 }
-                else if (data == 6){
-                  local = '마시고 죽자'
-                }
-                else if (data == 7){
-                  local = ' 술은 싫어요'
-                }
-                else if (data == 8){
-                  local = ' 구독과 좋아요'
-                }
-                else if (data == 9){
-                  local = ' 아무거나 좋아요'
-                }
+              
                 if (index + 1 != want.length) {
                   return ` ${local} / `;
                 } else {
