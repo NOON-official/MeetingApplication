@@ -406,16 +406,7 @@ const PrefferedInfo = () => {
               <th>기피학교</th>
               <td>{university == 0 ? '같은학교는 싫어요' : '상관없어요'}</td>
             </tr>
-            <tr>
-              <th>선호키</th>
-              <td>
-                {height.map((data, index) => {
-                  if (index + 1 != height.length) {
-                    return ` ${data}cm ~ `;
-                  } else return ` ${data}cm`;
-                })}
-              </td>
-            </tr>
+            
           </table>
         </StyledDiv>
       </StyledDiv>

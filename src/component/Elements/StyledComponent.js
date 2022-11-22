@@ -20,7 +20,7 @@ export const StyledDiv = styled.div`
   max-width: ${(props) => props.max_width};
   max-height: ${(props) => props.max_height};
   min-height: ${(props) => props.minHeight};
-  min-width: ${(props)=>props.min_width};
+  min-width: ${(props) => props.min_width};
   border-bottom: ${(props) => props.borderBottom};
   align-items: ${(props) => props.align_item};
   margin: ${(props) => props.margin};
@@ -30,9 +30,10 @@ export const StyledDiv = styled.div`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
   letter-spacing: ${(props) => props.letter_spacing};
-  overflow:${(props)=>props.border_overflow};
-  font-weight: ${(props)=> props.weight};
-  padding: ${(props)=> props.padding};
+  overflow: ${(props) => props.border_overflow};
+  font-weight: ${(props) => props.weight};
+  padding: ${(props) => props.padding};
+  white-space: ${(props) => props.space};
 `;
 
 export const SubTitle = styled.div`
@@ -43,15 +44,15 @@ export const SubTitle = styled.div`
   width: ${(props) => props.width || 'auto'};
   top: ${(props) => props.top};
   left: ${(props) => props.left || '50%'};
-  transform: ${props=>props.transform ||"translate(-50%, 0)"};
+  transform: ${(props) => props.transform || 'translate(-50%, 0)'};
   color: ${(props) => props.color || '#777777'};
   font-family: ${(props) => props.font || 'var(--font-family)'};
   font-weight: ${(props) => props.weight || '700'};
   line-height: ${(props) => props.line_height || '20px'};
-  margin: ${props=> props.margin};
+  margin: ${(props) => props.margin};
   display: flex;
-  justify-content: ${props=> props.justify_content};
-  align-items: ${props=> props.align_item};
+  justify-content: ${(props) => props.justify_content};
+  align-items: ${(props) => props.align_item};
 `;
 export const ButtonBox = styled.div`
   display: flex;
@@ -59,8 +60,8 @@ export const ButtonBox = styled.div`
   justify-content: space-around;
   position: ${(props) => props.position || 'absolute'};
   top: ${(props) => props.top};
-  left: ${props=> props.left||"50%"};
-  transform: ${props=>props.transform ||"translate(-50%, 0)"};
+  left: ${(props) => props.left || '50%'};
+  transform: ${(props) => props.transform || 'translate(-50%, 0)'};
   max-width: 375px;
   width: 100%;
   z-index: ${(props) => props.z_index};
@@ -69,18 +70,18 @@ export const ButtonBox = styled.div`
 export const SliderBox = styled.div`
   width: 90%;
   max-width: 350px;
-  position: ${(props)=> props.position ||"absolute"};
+  position: ${(props) => props.position || 'absolute'};
   top: ${(props) => props.top};
-  left: ${(props)=> props.left ||"50%"};
-  transform: ${(props)=> props.transform ||"translate(-50%, 0)"};
-  display: ${props=> props.display};
-  flex-direction: ${props=> props.direction};
+  left: ${(props) => props.left || '50%'};
+  transform: ${(props) => props.transform || 'translate(-50%, 0)'};
+  display: ${(props) => props.display};
+  flex-direction: ${(props) => props.direction};
 `;
 export const Contents = styled.div`
   display: flex;
   flex-direction: ${(props) => props.flexDirection || 'column'};
   color: 'black';
-  justify-content: ${props=> props.justify_content||"center"};
+  justify-content: ${(props) => props.justify_content || 'center'};
   align-items: center;
   white-space: pre-wrap;
   position: ${(props) => props.position};
@@ -123,7 +124,7 @@ export const MobileBox = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
-  justify-content: ${props=> props.justify_content};
+  justify-content: ${(props) => props.justify_content};
   font-family: var(--font);
   left: 50%;
   transform: translate(-50%, 0);
@@ -157,7 +158,7 @@ export const StyledText = styled.text`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   transform: ${(props) => props.transform};
-  text-align: ${(props)=>props.text_align||"start"};
+  text-align: ${(props) => props.text_align || 'start'};
 
   z-index: 1;
 `;
@@ -168,7 +169,7 @@ export const StyledButton = styled.button`
   left: ${(props) => props.left || '50%'};
   font-family: var(--font-family);
   font-size: ${(props) => props.size || 'var(--font-size-button)'};
-  transform: ${(props)=>props.transform||"translate(-50%, 0)"};
+  transform: ${(props) => props.transform || 'translate(-50%, 0)'};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border-radius: var(--round-borderradious);
@@ -176,18 +177,17 @@ export const StyledButton = styled.button`
   color: ${(props) => props.color || 'white'};
   line-height: var(--line-height-button);
   border-color: var(--color-gray);
+  max-height: ${(props) => props.max_height};
+  max-width: ${(props) => props.max_width};
 `;
 
 export const BoxContainer = styled.div`
-
   border-radius: 20px;
   height: 244px;
   padding: 0 10px 10px 10px;
   overflow: scroll;
 `;
 export const TableContainer = styled.div`
-
-height: 244px;
-overflow: scroll;
+  height: 244px;
+  overflow: scroll;
 `;
-

@@ -9,10 +9,10 @@ import { Container, MobileBox, StyledDiv, StyledText, SubTitle } from '../Elemen
 import { useSelector, useDispatch } from 'react-redux';
 
 const Body12 = () => {
-  const privateIconfirm =useSelector((state)=>state.privateinfoconfirm);
-  const serviceconfirm = useSelector((state)=> state.serviceconfirm);
-  const ageinfo = useSelector((state)=>state.ageinfo);
-  const marketingconfirm = useSelector((state)=> state.marketingconfirm);
+  const privateinfconfirm = useSelector((state) => state.privateinfoconfirm);
+  const serviceconfirm = useSelector((state) => state.serviceconfirm);
+  const ageinfo = useSelector((state) => state.ageinfo);
+  const marketingconfirm = useSelector((state) => state.marketingconfirm);
   const [infoConfirm, setInfoConfirm] = useState(false);
   const dispatch = useDispatch();
   /*useEffect(() => {
@@ -20,15 +20,22 @@ const Body12 = () => {
   }, [infoConfirm]);
 */
 
-  const buttonColor = React.useMemo(() => ((privateIconfirm&&serviceconfirm&&ageinfo&&marketingconfirm) ? '#EB8888' : '#EDEDED'), [infoConfirm]);
-  const buttonFontColor = React.useMemo(() => ((privateIconfirm&&serviceconfirm&&ageinfo&&marketingconfirm) ? '#FFFFFF' : '#BBBBBB'), [infoConfirm]);
+  const buttonColor = React.useMemo(
+    () => (privateinfconfirm && serviceconfirm && ageinfo && marketingconfirm ? '#EB8888' : '#EDEDED'),
+    [infoConfirm],
+  );
+  const buttonFontColor = React.useMemo(
+    () => (privateinfconfirm && serviceconfirm && ageinfo && marketingconfirm ? '#FFFFFF' : '#BBBBBB'),
+    [infoConfirm],
+  );
   const gender = useSelector((state) => state.gender);
   const num = useSelector((state) => state.num);
   const age = useSelector((state) => state.age);
   const jobs = useSelector((state) => state.jobs);
   const prefferedjobs = useSelector((state) => state.prefferedjobs);
   const prefferedage = useSelector((state) => state.prefferedage);
-  const height = useSelector((state) => state.height);
+
+  //const height = useSelector((state) => state.height);
   const drink = useSelector((state) => state.drink);
   const university = useSelector((state) => state.university);
   const characters = useSelector((state) => state.characters);
@@ -36,16 +43,19 @@ const Body12 = () => {
   const day = useSelector((state) => state.day);
   const appearance = useSelector((state) => state.appearance);
   const mbti = useSelector((state) => state.mbti);
-  const fashion = useSelector((state) => state.fashion);
+  //const fashion = useSelector((state) => state.fashion);
   const intro = useSelector((state) => state.introduction);
   const vibe = useSelector((state) => state.prefferedthing);
-  const prefferedheight = useSelector((state) => state.prefferedheight);
-  const preffereduniversity = useSelector((state)=>state.preffereduniversity);
-  let finalUniversity = []
-  useEffect(()=>{
-    university.map((c)=>{ if(typeof(c)=='number'){finalUniversity.push(c)} else finalUniversity.push(c["key"])})
-  },[university])
-  
+  //const prefferedheight = useSelector((state) => state.prefferedheight);
+  const preffereduniversity = useSelector((state) => state.preffereduniversity);
+  let finalUniversity = [];
+  useEffect(() => {
+    university.map((c) => {
+      if (typeof c == 'number') {
+        finalUniversity.push(c);
+      } else finalUniversity.push(c['key']);
+    });
+  }, [privateinfconfirm, marketingconfirm, ageinfo, serviceconfirm]);
   const body = {
     ourteam: {
       gender: gender,
@@ -59,25 +69,30 @@ const Body12 = () => {
       day: day,
       appearance: appearance,
       mbti: mbti,
-      fashion: fashion,
+      // fashion: fashion,
       drink: drink,
-      height: height,
+      //privateinfconfirm:privateinfconfirm,
+      //serviceconfirm:serviceconfirm,
+      //ageinfo:ageinfo,
+      //marketingconfirm: marketingconfirm
+      // height: height,
     },
     ourteamPreference: {
       age: prefferedage,
       job: prefferedjobs,
       sameUniversity: preffereduniversity,
       vibe: vibe,
-      height: prefferedheight,
+      // height: prefferedheight,
     },
   };
-const confirmAllAgree = async()=>{
-dispatch({type:"SET_PRIVATEINFOCONFIRM", payload:true})
-dispatch({type:"SET_AGEINFO",payload:true})
-dispatch({type:"SET_MARKETINGCONFIRM",payload:true})
-dispatch({type:"SET_SERVICECONFIRM",payload:true})
-}
- useEffect( () => {
+  console.log('hi:', body);
+  const confirmAllAgree = async () => {
+    dispatch({ type: 'SET_PRIVATEINFOCONFIRM', payload: true });
+    dispatch({ type: 'SET_AGEINFO', payload: true });
+    dispatch({ type: 'SET_MARKETINGCONFIRM', payload: true });
+    dispatch({ type: 'SET_SERVICECONFIRM', payload: true });
+  };
+  useEffect(() => {
     try {
       {
         /*const serializedState = JSON.stringify(state);
@@ -91,8 +106,8 @@ dispatch({type:"SET_SERVICECONFIRM",payload:true})
       console.log('error');
       alert('오류가 발생했습니다. 개발자에게 알려주세요!');
     }
-  },[privateIconfirm,serviceconfirm,ageinfo])
- console.log(privateIconfirm,serviceconfirm,ageinfo,marketingconfirm)
+  }, [privateinfconfirm, serviceconfirm, ageinfo, marketingconfirm]);
+
   // sessionstorage.setitem=> reux로 변경하기
   return (
     <Container>
@@ -138,7 +153,7 @@ dispatch({type:"SET_SERVICECONFIRM",payload:true})
           bg={buttonColor}
           border="10px"
           onClick={() => {
-          confirmAllAgree()
+            confirmAllAgree();
           }}
         >
           {' '}
@@ -146,15 +161,23 @@ dispatch({type:"SET_SERVICECONFIRM",payload:true})
             네 모두 동의합니다
           </StyledText>
         </StyledDiv>
-        <div style={{position:'absolute', top:"35.5%", height:"100%",width:"100%"}}>
-        <StyledDiv left="9%" top="0%" onClick={()=>{dispatch({type:'SET_PRIVATEINFOCONFIRM',payload:!privateIconfirm})}}>
-          {privateIconfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
-        </StyledDiv>
-        <StyledDiv left="37%" top="0.5%">
-          <a href='https://furry-bank-197.notion.site/c83f4127e3c54b7080c333aa31a4cc03'>  <PrivateInfo /></a>
-         
-        </StyledDiv>
-       {/*<StyledDiv overflow="scroll" left="50%" top="5%" height="20%" width="90%" bg="white" border="10px">
+        <div style={{ position: 'absolute', top: '35.5%', height: '100%', width: '100%' }}>
+          <StyledDiv
+            left="9%"
+            top="0%"
+            onClick={() => {
+              dispatch({ type: 'SET_PRIVATEINFOCONFIRM', payload: !privateinfconfirm });
+            }}
+          >
+            {privateinfconfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
+          </StyledDiv>
+          <StyledDiv left="37%" top="0.5%">
+            <a href="https://furry-bank-197.notion.site/c83f4127e3c54b7080c333aa31a4cc03">
+              {' '}
+              <PrivateInfo />
+            </a>
+          </StyledDiv>
+          {/*<StyledDiv overflow="scroll" left="50%" top="5%" height="20%" width="90%" bg="white" border="10px">
           <StyledText
             font="Pretendard"
             size="12px"
@@ -287,15 +310,23 @@ dispatch({type:"SET_SERVICECONFIRM",payload:true})
             민사소송법상의 관할법원에 소를 제기할 수 있습니다.
           </StyledText>
         </StyledDiv>
-        * */} 
-        <StyledDiv left="9%" top="10%" onClick={()=>{dispatch({type:'SET_SERVICECONFIRM',payload:!serviceconfirm})}}>
-          {serviceconfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
-        </StyledDiv>
-        <StyledDiv left="34%" top="10.5%">
-          <a href='https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7'>   <ServiceUse /></a>
-        
-        </StyledDiv>
-        {/** 
+        * */}
+          <StyledDiv
+            left="9%"
+            top="10%"
+            onClick={() => {
+              dispatch({ type: 'SET_SERVICECONFIRM', payload: !serviceconfirm });
+            }}
+          >
+            {serviceconfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
+          </StyledDiv>
+          <StyledDiv left="34%" top="10.5%">
+            <a href="https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7">
+              {' '}
+              <ServiceUse />
+            </a>
+          </StyledDiv>
+          {/** 
         <StyledDiv overflow="scroll" left="50%" top="65%" height="20%" width="90%" bg="white" border="10px">
           <StyledText
             font="Pretendard"
@@ -316,18 +347,30 @@ dispatch({type:"SET_SERVICECONFIRM",payload:true})
           </StyledText>
         </StyledDiv>
         */}
-        <StyledDiv left="9%" top="20%"onClick={()=>{dispatch({type:'SET_AGEINFO',payload:!ageinfo})}}>
-          {ageinfo ? <CheckIcon /> : <CheckIcon className="bright" />}
-        </StyledDiv>
-        <StyledDiv left="34%" top="20.5%">
-          <AgeInfo />
-        </StyledDiv>
-        <StyledDiv left="9%" top="30%"onClick={()=>{dispatch({type:'SET_MARKETINGCONFIRM',payload:!marketingconfirm})}}>
-          {marketingconfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
-        </StyledDiv>
-        <StyledDiv left="38%" top="30.5%">
-          <MarketingInfo />
-        </StyledDiv>
+          <StyledDiv
+            left="9%"
+            top="20%"
+            onClick={() => {
+              dispatch({ type: 'SET_AGEINFO', payload: !ageinfo });
+            }}
+          >
+            {ageinfo ? <CheckIcon /> : <CheckIcon className="bright" />}
+          </StyledDiv>
+          <StyledDiv left="34%" top="20.5%">
+            <AgeInfo />
+          </StyledDiv>
+          <StyledDiv
+            left="9%"
+            top="30%"
+            onClick={() => {
+              dispatch({ type: 'SET_MARKETINGCONFIRM', payload: !marketingconfirm });
+            }}
+          >
+            {marketingconfirm ? <CheckIcon /> : <CheckIcon className="bright" />}
+          </StyledDiv>
+          <StyledDiv left="38%" top="30.5%">
+            <MarketingInfo />
+          </StyledDiv>
         </div>
       </MobileBox>
     </Container>
