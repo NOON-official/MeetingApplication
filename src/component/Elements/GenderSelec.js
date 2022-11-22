@@ -143,15 +143,15 @@ export const AgeSelect = () => {
           20세
         </StyledText>
         <StyledText top="75%" left="90%" size="15px" color="#B79292">
-          35세
+          30세
         </StyledText>
         <PrettoSlider
           style={{ color: '#F6EEEE' }}
           min={20}
           valueLabelDisplay="on"
           step={1}
-          max={35}
-          defaultValue={30}
+          max={30}
+          defaultValue={25}
           aria-label="Default"
           value={age}
           onChange={handleChange}
@@ -178,7 +178,7 @@ const Job = (props) => {
   }, [exists, dispatch, props.meta, jobs, num]);
 
   return (
-    <SelectButton color={fontColor} background_color={bgColor} onClick={onJobClick} width="25%">
+    <SelectButton color={fontColor} background_color={bgColor} onClick={onJobClick} width="30%">
       {props.job}
     </SelectButton>
   );
@@ -194,10 +194,9 @@ export const JobSelect = () => {
         중복 선택이 가능해요
       </SubTitle>
       <ButtonBox top="85%">
-        <Job job={'대학생'} meta={1}></Job>
+        <Job job={'대학(원)생'} meta={1}></Job>
         <Job job={'직장인'} meta={2}></Job>
-        <Job job={'대학원생'} meta={3}></Job>
-        <Job job={'취준생'} meta={4}> </Job>
+        <Job job={'취준생'} meta={3}> </Job>
       </ButtonBox>
     </Contents>
   );

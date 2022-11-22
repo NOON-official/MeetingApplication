@@ -66,7 +66,7 @@ const Body8 = () => {
         <PrefferedTeamSelectBox>
           <JobSelect />
           <AgeSelect />
-          <HeightSelect/>
+          {/*<HeightSelect/>*/}
           <UnivSelect />
         </PrefferedTeamSelectBox>
         <StyledDiv

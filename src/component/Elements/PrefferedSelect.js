@@ -15,6 +15,7 @@ const PrettoSlider = styled(Slider)({
     height: 18,
     width: 18,
     backgroundColor: '#EB8888',
+    backgroundImage:'url("https://user-images.githubusercontent.com/86870218/199769599-a741e20d-6a40-4f9b-ab10-2612123cc0e4.png")!important)',
     border: '2px solid currentColor',
     '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
       boxShadow: 'inherit',
@@ -53,7 +54,7 @@ const Job = (props) => {
   }, [exists, dispatch, props.meta, jobs]);
 
   return (
-    <SelectButton color={fontColor} background_color={bgColor} onClick={onJobClick} width="25%">
+    <SelectButton color={fontColor} background_color={bgColor} onClick={onJobClick} width="33%">
       {props.job}
     </SelectButton>
   );
@@ -66,10 +67,9 @@ export const JobSelect = () => {
         직업
       </SubTitle>
       <ButtonBox position="static" left="0" transform="0">
-        <Job job={'대학생'} meta={1}></Job>
+        <Job job={'대학(원)생'} meta={1}></Job>
         <Job job={'직장인'} meta={2}></Job>
-        <Job job={'대학원생'} meta={3}></Job>
-        <Job job={'취준생'} meta={4}></Job>
+        <Job job={'취준생'} meta={3}></Job>
       </ButtonBox>
     </Contents>
   );
@@ -92,13 +92,13 @@ export const AgeSelect = () => {
         {/** divide slider and text */}
         <StyledDiv position="static" transform="0" display="flex" justify_content="center" align_item="end" height="50px">
         <PrettoSlider
-          min={20} max={35} value={age} onChange={handleChange} valueLabelDisplay="on" disableSwap
+          min={20} max={30} value={age} onChange={handleChange} valueLabelDisplay="on" disableSwap
         
         />
         </StyledDiv>
        <StyledDiv position="static" transform="0" display="flex" justify_content="space-between" align_item="start">
             <StyledText position="static" transform="0" color="#B79292" font="Nanum JungHagSaeng">20세</StyledText>
-            <StyledText position="static" transform="0" color="#B79292" font="Nanum JungHagSaeng">35세</StyledText>
+            <StyledText position="static" transform="0" color="#B79292" font="Nanum JungHagSaeng">30세</StyledText>
        </StyledDiv>
       </SliderBox>
       
