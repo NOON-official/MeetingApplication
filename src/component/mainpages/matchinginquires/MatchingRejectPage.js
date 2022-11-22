@@ -2,58 +2,58 @@ import { StyledDiv, StyledButton } from '../../Elements/StyledComponent';
 import { ReactComponent as Character } from '../../../Asset/mainPage/FailCharacter.svg';
 
 import client from '../../../api';
-const Rematch = async () => {
-  let ourteamId = window.localStorage.getItem('ourteamId');
-  await client
-    .put('api/team/reapply', { ourteamId: ourteamId })
-    .then((res) => {
-      alert(
-        '현재 입력하신 정보로 재매칭 합니다. \n 매칭 정보 수정이 필요하시다면 내정보 \n 수정하기 버튼을 클릭해주세요.',
-        // 팀 아이디 새로 저장 후 이걸로 pageState 다시 불러야됨
-      );
-    })
-    .then(() => {
-      client
-        .get(`api/team/ourteam-id/${userId}`)
-        .then((res) => {
-          window.localStorage.setItem('ourteamId', res.data.data.ourteamId);
-        })
-        .catch((err) => console.log(err));
-    })
+const MatchingRejectPage = () => {
+  let userId = window.localStorage.getItem('id');
+  const Rematch = async () => {
+    let ourteamId = window.localStorage.getItem('ourteamId');
+    await client
+      .put('api/team/reapply', { ourteamId: ourteamId })
+      .then((res) => {
+        alert(
+          '현재 입력하신 정보로 재매칭 합니다. \n 매칭 정보 수정이 필요하시다면 내정보 \n 수정하기 버튼을 클릭해주세요.',
+          // 팀 아이디 새로 저장 후 이걸로 pageState 다시 불러야됨
+        );
+      })
+      .then(() => {
+        client
+          .get(`api/team/ourteam-id/${userId}`)
+          .then((res) => {
+            window.localStorage.setItem('ourteamId', res.data.data.ourteamId);
+          })
+          .catch((err) => console.log(err));
+      })
 
-    .catch((err) => {
-      console.log(err);
-      alert('fail');
-    });
-  window.location.reload();
-};
-const Quit = async () => {
-  let ourteamId = window.localStorage.getItem('ourteamId');
-  await client
-    .put('api/team/quit', { ourteamId: ourteamId })
-    .then((res) => {
-      alert(
-        '매칭을 그만둡니다.',
-        // 팀 아이디 새로 저장 후 이걸로 pageState 다시 불러야됨
-      );
-    })
-    .then(() => {
-      client
-        .get(`api/team/ourteam-id/${userId}`)
-        .then((res) => {
-          window.localStorage.setItem('ourteamId', res.data.data.ourteamId);
-        })
-        .catch((err) => console.log(err));
-    })
+      .catch((err) => {
+        console.log(err);
+        alert('fail');
+      });
+    window.location.reload();
+  };
+  const Quit = async () => {
+    let ourteamId = window.localStorage.getItem('ourteamId');
+    await client
+      .put('api/team/quit', { ourteamId: ourteamId })
+      .then((res) => {
+        alert(
+          '매칭을 그만둡니다.',
+          // 팀 아이디 새로 저장 후 이걸로 pageState 다시 불러야됨
+        );
+      })
+      .then(() => {
+        client
+          .get(`api/team/ourteam-id/${userId}`)
+          .then((res) => {
+            window.localStorage.setItem('ourteamId', res.data.data.ourteamId);
+          })
+          .catch((err) => console.log(err));
+      })
 
-    .catch((err) => {
-      console.log(err);
-      alert('해당 아이디의 정보가 없습니다.');
-    });
-  window.location.reload();
-};
-
-const Fail = () => {
+      .catch((err) => {
+        console.log(err);
+        alert('해당 아이디의 정보가 없습니다.');
+      });
+    window.location.reload();
+  };
   return (
     <StyledDiv
       position="static"
@@ -80,10 +80,10 @@ const Fail = () => {
         align_item="center"
       >
         <StyledDiv position="static" transform="0" left="0" font="Nanum JungHagSaeng" color="1A1A1A" size="30px">
-          아쉽게도 이번에는 원하는
+          이대로 그만두기에는 너무 아쉽지
         </StyledDiv>
         <StyledDiv position="static" transform="0" left="0" font="Nanum JungHagSaeng" color="1A1A1A" size="30px">
-          상대팀이 매칭되지 않았어요.
+          않나요? 한번 더 도전해봐요.
         </StyledDiv>
       </StyledDiv>
       <StyledDiv
@@ -97,13 +97,13 @@ const Fail = () => {
         align_item="center"
       >
         <StyledButton
-          onClick={Rematch}
           position="static"
           left="0"
           height="45px"
           transform="0"
           width="180px"
           size="18px"
+          onClick={Rematch}
         >
           한번 더 진행하기
         </StyledButton>
@@ -124,5 +124,4 @@ const Fail = () => {
     </StyledDiv>
   );
 };
-
-export default Fail;
+export default MatchingRejectPage;
