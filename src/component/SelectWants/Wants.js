@@ -9,16 +9,15 @@ const WantBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
 const Thing = styled.button`
   width: ${(props) => props.width || '90%'};
   height: 90%;
   border: 0.2px solid var(--color-lightblue);
   border-radius: var(--round-borderradious);
-  
+
   max-height: 200px;
- 
+
   font-family: var(--font-family);
   font-size: ${(props) => props.size || '16px'};
   color: ${(props) => props.color || 'black'};
@@ -48,26 +47,29 @@ const Want = (props) => {
 
 const Wants = () => {
   return (
-    <StyledDiv top="17%" width="95%" height="45%" left="50%"display="flex" direction="column" justify_content="space-between">
+    <StyledDiv
+      top="17%"
+      width="95%"
+      height="45%"
+      left="50%"
+      display="flex"
+      direction="column"
+      justify_content="space-between"
+    >
       <WantBox>
         <Want want="코로나 때문에 못한 연애 오늘!?" meta={1}></Want>
-       
       </WantBox>
       <WantBox>
-      
-        <Want size="14px" want="친구는 다다익성! 찐친 만들어 보자." meta={2}></Want>
-       
-       
+        <Want size="14px" want="친구는 다다익선! 찐친 만들어 보자." meta={2}></Want>
       </WantBox>
       <WantBox>
-        
-        <Want want="왁자지껄 이 밤이 떠너가라!"meta={3}></Want>
+        <Want want="왁자지껄 이 밤이 떠너가라!" meta={3}></Want>
       </WantBox>
       <WantBox>
-        <Want want="술게임 한 수 배우러 왔습니다."meta={4}></Want>
+        <Want want="술게임 한 수 배우러 왔습니다." meta={4}></Want>
       </WantBox>
       <WantBox>
-        <Want want="술게임 못해도 챙겨주는 훈훈한 분위기."meta={5}></Want>
+        <Want want="술게임 못해도 챙겨주는 훈훈한 분위기." meta={5}></Want>
       </WantBox>
     </StyledDiv>
   );

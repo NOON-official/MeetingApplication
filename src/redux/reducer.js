@@ -1,6 +1,6 @@
-import { PURGE } from "redux-persist";
+import { PURGE } from 'redux-persist';
 
-const initialState={
+const initialState = {
   user: 'userName',
   phone: '',
   gender: 1,
@@ -16,7 +16,7 @@ const initialState={
   appearance: [], // multi choice -> 2 or 3
   mbti: [], // multi choice
   fashion: [], // multi choice
-  introduction: "",
+  introduction: '',
   kakaoid: '',
   prefferedjobs: [],
   prefferedage: [20, 25],
@@ -25,15 +25,17 @@ const initialState={
   prefferedheight: [165, 175],
   signin: false, // 핸드폰 인증 여부
   privateinfoconfirm: false, // 이용 약관 동의 여부
-  serviceconfirm:false,
-  ageinfo:false,
-  marketingconfirm:false,
+  serviceconfirm: false,
+  ageinfo: false,
+  marketingconfirm: false,
   isMatching: false, // 매칭 진행중 여부
   pagestate: 0,
   ourTeamInfo: {},
   userLogin: false,
   ourteamId: -1,
-}
+  reasons: [],
+  reasontext: '',
+};
 /*
 const rootReducer = createSlice({
   name: 'userData',
@@ -128,6 +130,12 @@ const reducer = (state = initialState, action) => {
     case 'AREA_DELETE':
       const deleteArea = state.area.filter((value) => value !== action.payload);
       return { ...state, area: deleteArea };
+    case 'REASON':
+      const newreasons = action.payload;
+      return { ...state, reasons: [...state.reasons, newreasons] };
+    case 'REASON_DELETE':
+      const deleteReasons = state.reasons.filter((value) => value !== action.payload);
+      return { ...state, reasons: deleteReasons };
     case 'DAY':
       const newDay = action.payload;
       return { ...state, day: [...state.day, newDay] };
@@ -168,19 +176,21 @@ const reducer = (state = initialState, action) => {
       return { ...state, phone: action.payload };
     case 'SET_INTRODUCTION':
       return { ...state, introduction: action.payload };
+    case 'REASONTEXT':
+      return { ...state, reasontext: action.payload };
     case 'SET_KAKAOID':
       return { ...state, kakaoid: action.payload };
     case 'SET_SIGNIN':
       return { ...state, signin: action.payload };
     case 'SET_PRIVATEINFOCONFIRM':
-      return { ...state, privateinfoconfirm: action.payload};
-      case 'SET_AGEINFO':
-        return { ...state, ageinfo: action.payload};
-        case 'SET_MARKETINGCONFIRM':
-          return { ...state, marketingconfirm: action.payload};
-          case 'SET_SERVICECONFIRM':
-            return { ...state, serviceconfirm: action.payload};
-    
+      return { ...state, privateinfoconfirm: action.payload };
+    case 'SET_AGEINFO':
+      return { ...state, ageinfo: action.payload };
+    case 'SET_MARKETINGCONFIRM':
+      return { ...state, marketingconfirm: action.payload };
+    case 'SET_SERVICECONFIRM':
+      return { ...state, serviceconfirm: action.payload };
+
     case 'SET_PREFFEREDTHING':
       const newPrefferedthing = action.payload;
       return { ...state, prefferedthing: [...state.prefferedthing, newPrefferedthing] };
@@ -194,75 +204,79 @@ const reducer = (state = initialState, action) => {
     case 'SET_OURTEAMID':
       return { ...state, ourteamId: action.payload };
     case 'GET_UNIVERSITIES':
-      return{...state ,university: action.payload };
+      return { ...state, university: action.payload };
     case 'GET_AREA':
-      return {...state, area: action.payload};
+      return { ...state, area: action.payload };
     case 'GET_DAY':
-      return {...state, day: action.payload};
+      return { ...state, day: action.payload };
     case 'GET_CHARACTER':
-      return {...state, characters: action.payload};
+      return { ...state, characters: action.payload };
     case 'GET_APPREANCE':
-      return { ...state, appearance: action.payload};
+      return { ...state, appearance: action.payload };
     case 'GET_MBTI':
-      return {...state, mbti: action.payload};
+      return { ...state, mbti: action.payload };
     case 'GET_HEIGHT':
-      return{...state, height:action.payload};
+      return { ...state, height: action.payload };
     case 'GET_PREFFEREDJOB':
-      return {...state, prefferedjobs:action.payload};
+      return { ...state, prefferedjobs: action.payload };
     case 'GET_PREFFEREDAGE':
-      return {...state, prefferedage: action.payload};
+      return { ...state, prefferedage: action.payload };
     case 'GET_PREFFEREDUNIVERSITY':
-      return {...state, preffereduniversity :action.payload};
+      return { ...state, preffereduniversity: action.payload };
     case 'GET_PREFFEREDHEIGHT':
-      return{...state, prefferedheight:action.payload};
+      return { ...state, prefferedheight: action.payload };
     case 'GET_PREFFEREDTHING':
-      return{...state, prefferedthing:action.payload}
+      return { ...state, prefferedthing: action.payload };
     case 'GET_JOB':
-      return { ...state,jobs: action.payload}
+      return { ...state, jobs: action.payload };
     case 'GET_INTRO':
-      return{...state,introduction: action.payload }
+      return { ...state, introduction: action.payload };
+    case 'GET_REASONTEXT':
+      return { ...state, reasontext: action.payload };
     case 'GET_FASHION':
-        return{...state, fashion: action.payload}
-   case PURGE:{
-  
-    return {user: 'userName',
-    phone: '',
-    gender: 1,
-    num: 2,
-    age: 20,
-    drink: 1,
-    height: 170,
-    jobs: [],
-    university: [], // multi choice
-    characters: [],
-    area: [],
-    day: [],
-    appearance: [], // multi choice -> 2 or 3
-    mbti: [], // multi choice
-    fashion: [], // multi choice
-    introduction: "안녕하세요 한국대학교 개그동아리 학생들입니다. 진짜 재미를 원하는 분들은 후회하지 않을 겁니다^^ 아, 참고로 잘생겼습니다.",
-    kakaoid: '',
-    prefferedjobs: [],
-    prefferedage: [20, 25],
-    preffereduniversity: 1,
-    prefferedthing: [],
-    prefferedheight: [165, 175],
-    signin: false, // 핸드폰 인증 여부
-    privateinfoconfirm: false, // 이용 약관 동의 여부
-    serviceconfirm:false,
-    ageinfo:false,
-    marketingconfirm:false, // 이용 약관 동의 여부
-    isMatching: false, // 매칭 진행중 여부
-    pagestate: 0,
-    ourTeamInfo: {},
-    userLogin: false,
-    ourteamId: -1,};
-   }
-    
+      return { ...state, fashion: action.payload };
+    case PURGE: {
+      return {
+        user: 'userName',
+        phone: '',
+        gender: 1,
+        num: 2,
+        age: 20,
+        drink: 1,
+        height: 170,
+        jobs: [],
+        university: [], // multi choice
+        characters: [],
+        area: [],
+        day: [],
+        appearance: [], // multi choice -> 2 or 3
+        mbti: [], // multi choice
+        fashion: [], // multi choice
+        introduction: '',
+        kakaoid: '',
+        prefferedjobs: [],
+        prefferedage: [20, 25],
+        preffereduniversity: 2,
+        prefferedthing: [],
+        prefferedheight: [165, 175],
+        signin: false, // 핸드폰 인증 여부
+        privateinfoconfirm: false, // 이용 약관 동의 여부
+        serviceconfirm: false,
+        ageinfo: false,
+        marketingconfirm: false,
+        isMatching: false, // 매칭 진행중 여부
+        pagestate: 0,
+        ourTeamInfo: {},
+        userLogin: false,
+        ourteamId: -1,
+        reasons: [],
+        reasontext: '',
+      };
+    }
+
     default:
       return state;
   }
-  
 };
 
 export default reducer;
