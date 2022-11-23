@@ -11,6 +11,7 @@ import { ReactComponent as Christmascharacter } from '../../Asset/mainPage/Chris
 import { ReactComponent as KakaoLogo } from '../../Asset/mainPage/KakaoLogo.svg';
 import { ReactComponent as InstagramLogo } from '../../Asset/mainPage/InstagramLog.svg';
 import ChannelTalk from '../../utils/ChannelTalk';
+
 import { StyledDiv, StyledText, Container, MobileBox, StyledButton } from '../Elements/StyledComponent';
 import client from '../../api';
 import Counter from '../Elements/CountAnimation';
@@ -18,7 +19,7 @@ import Counter from '../Elements/CountAnimation';
 const Main = () => {
   let matchingStatus = JSON.parse(window.localStorage.getItem('matchingStatus'));
   let setting = {
-    pluginKey: 'deb07d5b-6d9f-4dbf-8934-5c96994e44e0', //please fill with your plugin key
+    pluginKey: process.env.REACT_APP_CHANNEL_TALK_PLUGIN, //please fill with your plugin key
     memberId: window.localStorage.id,
     profile: {
       name: window.localStorage.nickname,
@@ -26,6 +27,7 @@ const Main = () => {
       id: window.localStorage.id,
     },
   };
+
   const [num, setNum] = useState(0);
   const [modalOpen, setModalOpen] = useState(true);
   const [statusMale, setStatusMale] = useState();
