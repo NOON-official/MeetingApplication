@@ -14,7 +14,7 @@ const Guide = () => {
     {
       title: '미팅학개론은 어떻게 이용하나요?',
       content:
-        '✔️STEP 1. 주변 지인과 팀을 만드신 후 팀의 대표자가 미팅학개론 서비스에 접속합니다.\n✔️STEP 2. ‘매칭 시작하기’를 클릭하여 우리 팀 소개를 작성합니다.\n✔️STEP 3. 원하는 상대팀 조건을 입력합니다.✔️STEP 4. 내가 원하는 미팅은 어떤 미팅?\n✔️STEP 5. 미팅학개론 정리 페이지를 확인합니다.\n✔️STEP 6. (🌟중요!) 우리 팀을 소개하는 마지막 한 줄 어필을 임팩트 있게 작성합니다!🍯꿀팁: 재밌고 정성스럽게 쓸수록 매칭 확률 UP!\n\n🚩FINISH! 미팅을 위한 모든 준비가 끝났어요!다음 날 혹은 다다음날 11시에 꼭 맞는 팀이 매칭될 때까지 두근두근 기다립니다!✨\n미팅학개론은 매일 11시 매칭을 진행합니다. 최대 2일 이내에 매칭 결과가 통보되니 꼭 맞는 팀이 매칭될 때까지 설레는 마음으로 기다립니다!✨',
+        '✔️STEP 1. 주변 지인과 팀을 만드신 후 팀의 대표자가 미팅학개론 서비스에 접속합니다.\n✔️STEP 2. ‘매칭 시작하기’를 클릭하여 우리 팀 소개를 작성합니다.\n✔️STEP 3. 원하는 상대팀 조건을 입력합니다.\n✔️STEP 4. 내가 원하는 미팅은 어떤 미팅?\n✔️STEP 5. 미팅학개론 정리 페이지를 확인합니다.\n✔️STEP 6. (🌟중요!) 우리 팀을 소개하는 마지막 한 줄 어필을 임팩트 있게 작성합니다!\n🍯꿀팁: 재밌고 정성스럽게 쓸수록 매칭 확률 UP!\n\n🚩FINISH! 미팅을 위한 모든 준비가 끝났어요!다음 날 혹은 다다음날 11시에 꼭 맞는 팀이 매칭될 때까지 두근두근 기다립니다!✨\n미팅학개론은 매일 11시 매칭을 진행합니다. 최대 2일 이내에 매칭 결과가 통보되니 꼭 맞는 팀이 매칭될 때까지 설레는 마음으로 기다립니다!✨',
       link: '',
     },
     {
@@ -129,7 +129,7 @@ const Guide = () => {
           max_height="100px"
         >
           {' '}
-          <StyledDiv position="static" left="0" transform="0" minHeight="250px"></StyledDiv>
+          <StyledDiv position="static" left="0" transform="0" minHeight="30px"></StyledDiv>
           <StyledDiv
             position="static"
             height="60%"
@@ -143,21 +143,7 @@ const Guide = () => {
             justify_content="start"
             display="flex"
             font="'Nanum JungHagSaeng', normal;"
-          >
-            <StyledDiv
-              position="static"
-              left="0"
-              transform="0"
-              margin="0 0 0 50px"
-              minHeight="50px"
-              display="flex"
-              justify_content="center"
-              align_item="center"
-              onClick={() => ChannelTalk.boot(setting)}
-            >
-              궁금한게 있으신가요?
-            </StyledDiv>
-          </StyledDiv>
+          ></StyledDiv>
         </StyledDiv>
         <StyledDiv
           position="static"
@@ -178,12 +164,13 @@ const Guide = () => {
             border="10px"
             transform="0"
             display="flex"
-            margin=" 0 0 0 5%"
+            margin=" 10px 0 10px 5%"
             justify_content="center"
             align_item="center"
             color="white"
             font="'Nanum JungHagSaeng', normal;"
-            minHeight="40px"
+            minHeight="30px"
+            size="1.3 em"
           >
             미팅학개론
           </StyledDiv>
@@ -223,12 +210,13 @@ const Guide = () => {
             border="10px"
             transform="0"
             display="flex"
-            margin=" 0 0 0 5%"
+            margin=" 10px 0 10px 5%"
             justify_content="center"
             align_item="center"
             color="white"
             font="'Nanum JungHagSaeng', normal;"
-            minHeight="40px"
+            minHeight="30px"
+            size="1.3 em"
           >
             자주 묻는 질문
           </StyledDiv>
@@ -249,6 +237,18 @@ const Guide = () => {
             return <GuideBox GuideList={list} key={index}></GuideBox>;
           })}
         </StyledDiv>
+        <StyledDiv
+          position="static"
+          height="100px"
+          width="100%"
+          left="0"
+          transform="0"
+          display="flex"
+          justify_content="start"
+          align_item="center"
+          direction="column"
+          font="'Nanum JungHagSaeng', normal;"
+        ></StyledDiv>
       </MobileBox>
     </Container>
   );
@@ -267,7 +267,7 @@ const GuideBox = (props) => {
         height="auto"
         width="90%"
         bg="white"
-        border="20px"
+        border="10px"
         left="0"
         transform="0"
         display="flex"
@@ -287,7 +287,16 @@ const GuideBox = (props) => {
           justify_content="start"
           align_item="center"
         >
-          <StyledDiv position="static" transform="0" width="80%" display="flex" justify_content="start" margin="5%">
+          <StyledDiv
+            weight="500"
+            position="static"
+            size="23px"
+            transform="0"
+            width="80%"
+            display="flex"
+            justify_content="start"
+            margin="5%"
+          >
             {props.GuideList.title}
           </StyledDiv>
           <StyledDiv
