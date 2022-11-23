@@ -15,7 +15,6 @@ const KakaoLogin = () => {
       redirectUri: `${process.env.REACT_APP_CLIENT_URL}/auth/kakao/callback`,
     });
   }, []);
-
   return (
     <div>
       <KakaoButton id="kakao-login-button" onClick={LoginWithKakao}>
