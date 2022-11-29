@@ -1,109 +1,108 @@
-import { StyledDiv, StyledText } from "../../Elements/StyledComponent";
+import { StyledDiv, StyledText } from '../../Elements/StyledComponent';
 import { Link } from 'react-router-dom';
 import client from '../../../api';
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 //name, phoneNumbe
 
-
-
 const MyInfo = () => {
-  const [nickname, setNickname]= useState()
-  const [phone, setPhone]= useState()
+  const [nickname, setNickname] = useState();
+  const [phone, setPhone] = useState();
+  const [kakaoId, setKakaoId] = useState();
   const GetData = async () => {
-    let id = window.localStorage.getItem('id')
+    let id = window.localStorage.getItem('id');
     //let accessToken = window.sessionStorage.getItem('access')
     await client
-    .get(`api/user/${id}`)
-    //delete header
-    .then((res)=>{
-      window.localStorage.setItem('nickname',res?.data.data?.user?.nickname) 
-      window.localStorage.setItem('phone',res?.data?.data?.user?.phone) 
-    })
-    .catch((err)=>console.log(err))
+      .get(`api/user/${id}`)
+      //delete header
+      .then((res) => {
+        window.localStorage.setItem('nickname', res?.data.data?.user?.nickname);
+        window.localStorage.setItem('phone', res?.data?.data?.user?.phone);
+        window.localStorage.setItem('kakaoId', res?.data?.data?.user?.kakaoId);
+      })
+      .catch((err) => console.log(err));
+  };
+  async function fetchData() {
+    await GetData();
+    setNickname(window.localStorage.getItem('nickname'));
+    setPhone(window.localStorage.getItem('phone'));
+    setKakaoId(window.localStorage.getItem('kakaoId'));
   }
-  async function fetchData() { 
-    await GetData()
-    setNickname(window.localStorage.getItem('nickname'))
-    setPhone(window.localStorage.getItem('phone'))
-  }
-    useEffect(()=>{
-      
-      fetchData()
-    },[])
-    
-    return (
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <StyledDiv
+      position="static"
+      transform="0"
+      width="100%"
+      height="auto"
+      display="inline-block"
+      border_width="1px"
+      border="10px"
+      border_style="solid"
+      border_color="#F1ECEC"
+      borderBottom="1px solid #F1ECEC"
+      bg="white"
+    >
       <StyledDiv
         position="static"
         transform="0"
-        width="100%"
-        height="auto"
-        display="inline-block"
-        border_width="1px"
-        border="10px"
-        border_style="solid"
-        border_color="#F1ECEC"
+        display="flex"
+        justify_content="start"
         borderBottom="1px solid #F1ECEC"
-        bg="white"
+        width="90%"
+        id="title"
+        height="30px"
+        margin="5%"
       >
-        <StyledDiv
-          position="static"
-          transform="0"
-          display="flex"
-          justify_content="start"
-          borderBottom="1px solid #F1ECEC"
-          width="90%"
-          id="title"
-          height="30px"
-          margin="5%"
-
-        >
-          <StyledText position="static" font="Pretendard" line="16.8px" size="12px" fontWeight="600" color="#777777">
-            내정보
-          </StyledText>
-        </StyledDiv>
-        <StyledDiv
-          position="static"
-          transform="0"
-          display="inline-block"
-          direction="column"
-          justify_content="space-around"
-          left="50%"
-          top="50px"
-          height="auto"
-          width="90%"
-          id="contents"
-        >
-          <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
-            <table>
-              <tbody>
+        <StyledText position="static" font="Pretendard" line="16.8px" size="12px" fontWeight="600" color="#777777">
+          내정보
+        </StyledText>
+      </StyledDiv>
+      <StyledDiv
+        position="static"
+        transform="0"
+        display="inline-block"
+        direction="column"
+        justify_content="space-around"
+        left="50%"
+        top="50px"
+        height="auto"
+        width="90%"
+        id="contents"
+      >
+        <StyledDiv width="100%" display="inline-block" height="auto" transform="0" position="static">
+          <table>
+            <tbody>
               <tr>
                 <th>이름</th>
-                <td>
-                  {nickname}
-                </td>
+                <td>{nickname}</td>
               </tr>
               <tr>
                 <th>전화번호</th>
-                <td>
-                  {phone}
-                </td>
-                {JSON.parse(window.localStorage.getItem('matchingStatus'))==1 || JSON.parse(window.localStorage.getItem('matchingStatus'))==2?
-                <td/>
-            :
-            <td>
-            {/*<Link to="/apply/13" style={{ textDecoration: 'none' }}>
+                <td>{phone}</td>
+                {JSON.parse(window.localStorage.getItem('matchingStatus')) == 1 ||
+                JSON.parse(window.localStorage.getItem('matchingStatus')) == 2 ? (
+                  <td />
+                ) : (
+                  <td>
+                    {/*<Link to="/apply/13" style={{ textDecoration: 'none' }}>
             <button> 변경</button>
     </Link>*/}
-        </td>
-            }
-                
+                  </td>
+                )}
               </tr>
-              </tbody>
-            </table>
-          </StyledDiv>
+              <tr>
+                <th>카카오아이디</th>
+                <td>{kakaoId}</td>
+              </tr>
+            </tbody>
+          </table>
         </StyledDiv>
       </StyledDiv>
-    );
-  };
+    </StyledDiv>
+  );
+};
 
-  export default MyInfo 
+export default MyInfo;

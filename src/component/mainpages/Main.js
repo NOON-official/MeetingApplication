@@ -7,16 +7,27 @@ import { ReactComponent as Logo } from '../../Asset/page1/Logo.svg';
 import { ReactComponent as Star } from '../../Asset/page1/Star.svg';
 import { ReactComponent as Season3Text } from '../../Asset/mainPage/Season3Text.svg';
 import { ReactComponent as MainText } from '../../Asset/page1/MainText.svg';
-import { ReactComponent as Christmascharacter} from '../../Asset/mainPage/ChristmasCharacter.svg';
-import {ReactComponent as KakaoLogo} from '../../Asset/mainPage/KakaoLogo.svg';
-import {ReactComponent as InstagramLogo} from '../../Asset/mainPage/InstagramLog.svg';
+import { ReactComponent as Christmascharacter } from '../../Asset/mainPage/ChristmasCharacter.svg';
+import { ReactComponent as KakaoLogo } from '../../Asset/mainPage/KakaoLogo.svg';
+import { ReactComponent as InstagramLogo } from '../../Asset/mainPage/InstagramLog.svg';
+import ChannelTalk from '../../utils/ChannelTalk';
 
 import { StyledDiv, StyledText, Container, MobileBox, StyledButton } from '../Elements/StyledComponent';
 import client from '../../api';
 import Counter from '../Elements/CountAnimation';
 
 const Main = () => {
-  let matchingStatus = JSON.parse(window.localStorage.getItem("matchingStatus"));
+  let matchingStatus = JSON.parse(window.localStorage.getItem('matchingStatus'));
+  let setting = {
+    pluginKey: process.env.REACT_APP_CHANNEL_TALK_PLUGIN, //please fill with your plugin key
+    memberId: window.localStorage.id,
+    profile: {
+      name: window.localStorage.nickname,
+      email: '',
+      id: window.localStorage.id,
+    },
+  };
+
   const [num, setNum] = useState(0);
   const [modalOpen, setModalOpen] = useState(true);
   const [statusMale, setStatusMale] = useState();
@@ -29,17 +40,17 @@ const Main = () => {
   };
   {
     React.useEffect(() => {
-      const loadCount = async()=>{
+      const loadCount = async () => {
         await client
-        .get('api/service/count/team')
-        .then((res) => {
-         setNum(res.data.data.waitingTeam)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      }
-        loadCount();
+          .get('api/service/count/team')
+          .then((res) => {
+            setNum(res.data.data.waitingTeam);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      loadCount();
       {
         /*client
     .get('api/service/apply/status')
@@ -83,12 +94,12 @@ const Main = () => {
           <Title />
         </StyledDiv>
         {/** <StyledDiv top="23%" left="80%" transform="translate(-50%, 0)"><Star /></StyledDiv>*/}
-        
+
         <StyledDiv top="30%" left="50%" transform="translate(-50%, 0)">
           {/*/<Logo />*/}
-          <Christmascharacter/>
+          <Christmascharacter />
         </StyledDiv>
-        
+
         {/*
         matchingStatus==1 ||matchingStatus==2?
           matchingStatus==1?
@@ -106,38 +117,38 @@ const Main = () => {
               다시 한 번 도전해보세요!
             </StyledDiv>
           </div>
-    */} 
-            
-       <div>
-      <StyledDiv top="70%" left="50%" transform="translate(-50%, 0)">
-         {/*} <MainText />*/}
-         <Season3Text/>
-        </StyledDiv>
-        {/*<Link to="/apply/2" style={{ textDecoration: 'none' }}>
+    */}
+
+        <div>
+          <StyledDiv top="70%" left="50%" transform="translate(-50%, 0)">
+            {/*} <MainText />*/}
+            <Season3Text />
+          </StyledDiv>
+          {/*<Link to="/apply/2" style={{ textDecoration: 'none' }}>
           <StyledButton height="45px" width="180px" top="70%" size="18px">
             매칭 시작하기
           </StyledButton>
         </Link>
         */}
         </div>
-        <StyledDiv top="85%"  width="100%"height="5%"left="50%"display="flex" justify_content="center"align_item="center" transform="translate(-50%, 0)">
-        
-          <a href='http://pf.kakao.com/_Whxjqxj'>
-          <KakaoLogo/>
+        <StyledDiv
+          top="85%"
+          width="100%"
+          height="5%"
+          left="50%"
+          display="flex"
+          justify_content="center"
+          align_item="center"
+          transform="translate(-50%, 0)"
+        >
+          <a href="http://pf.kakao.com/_Whxjqxj">
+            <KakaoLogo />
           </a>
-       
-        
-        <a href='https://www.instagram.com/meetingo_me/'>
-        
-          
-         <InstagramLogo/>
-       
+
+          <a href="https://www.instagram.com/meetingo_me/">
+            <InstagramLogo />
           </a>
-        
         </StyledDiv>
-        
-       
-       
 
         {/*<Counter end={num} />*/}
         <StyledDiv
@@ -196,16 +207,17 @@ const Main = () => {
               대표자 남한솔 사업자등록번호 811-29-00871
             </StyledText>
             <StyledText size="5px" position="static" font="Pretendard" color="#515151">
-            통신판매업신고 : 2021-서울성북-1613
+              통신판매업신고 : 2021-서울성북-1613
             </StyledText>
             <StyledText size="5px" position="static" font="Pretendard" color="#515151">
-            연락처 : 070-8064-3036  / noon.official.info@gmail.com
+              연락처 : 070-8064-3036 / noon.official.info@gmail.com
             </StyledText>
             <StyledText size="5px" position="static" font="Pretendard" color="#515151">
-            주소지 서울시 성북구 장월로 1마길 56 DAC 스타트업 인큐베이팅센터
+              주소지 서울시 성북구 장월로 1마길 56 DAC 스타트업 인큐베이팅센터
             </StyledText>
           </StyledDiv>
         </StyledDiv>
+        <div>{ChannelTalk.boot(setting)}</div>
       </MobileBox>
     </Container>
   );
