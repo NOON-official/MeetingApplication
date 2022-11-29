@@ -121,6 +121,8 @@ export function Matching(maleData, femaleData){
         //console.log(maleData)
         //console.log("사이클",cycles,"번")
         //console.log(matchingData)
+        
+        //매칭된 사람들 설정값 바꾸기 
         matchingData.forEach(data => {
             //console.log('여자',data.femaleID)
             //console.log('남자',data.maleID)
@@ -129,19 +131,58 @@ export function Matching(maleData, femaleData){
                 .post('/api/admin/team/match', {
                     maleTeamId: data.maleID,
                     femaleTeamId: data.femaleID,
-                    chatLink: "chatlink",
                 })
                 .then(() => {
-                    alert('매칭 정보 저장에 성공하였습니다');
                 })
                 .catch((err) => {
                 if (err.response.data.status == 400) {
-                    alert(err.response.data.message);
+                    console.log(err);
                 }
                 console.log(err);
-                alert('매칭 정보 저장에 실패하였습니다');
             });
         })
+        
+
+        femaleData.forEach(data => {
+            //console.log('여자',data.femaleID)
+            //console.log('남자',data.maleID)
+            
+            client
+                .post('/api/admin/team/fail', {
+                    ourteamId: data.id,
+                })
+                .then(() => {
+                })
+                .catch((err) => {
+                if (err.response.data.status == 400) {
+                    console.log(err);
+                }
+                console.log(err);
+            });
+        })
+
+        maleData.forEach(data => {
+            //console.log('여자',data.femaleID)
+            //console.log('남자',data.maleID)
+            
+            client
+                .post('/api/admin/team/fail', {
+                    ourteamId: data.id,
+                })
+                .then(() => {
+                })
+                .catch((err) => {
+                if (err.response.data.status == 400) {
+                    console.log(err);
+                }
+                console.log(err);
+            });
+            
+        })
+
+        //console.log("다돌렸을까 female",femaleData)
+        //console.log("다돌렸을까 male",maleData)
+        
 }
 
 // 최종적으로 [여성유저팀아이디','여성유저이름','인원','나이','희망나이','요일', '남성유저팀아이디','남성유저이름','인원','나이','희망나이','요일' 'info'] 를 리턴합니다.
