@@ -1,7 +1,7 @@
 import client from '../../api';
 
 async function DataGet() {
-  let   ourteamId;
+  let ourteamId;
   const id = window.localStorage.getItem('id');
   //const accessToken = window.sessionStorage.getItem('access');
 
@@ -15,21 +15,18 @@ async function DataGet() {
       window.localStorage.setItem('ourteamId', res.data.data.ourteamId);
     })
     .then(async () => {
-          if (ourteamId == -1 || ourteamId === undefined) {
-          	alert('매칭진행중인 팀 정보가 없습니다.');
-          	window.location.replace('/');
-        	}
-        	else {
-          	await client
-            	.get(`api/team/status/${ourteamId}}`)
-              //header delete
-            	.then((res) => {
-              	window.localStorage.setItem('matchingStatus',res.data.data.matchingStatus)})
-      	}
-    	}
-    )
+      if (ourteamId == -1 || ourteamId === undefined) {
+        alert('매칭진행중인 팀 정보가 없습니다.');
+        window.location.replace('/');
+      } else {
+        await client
+          .get(`api/team/page/${ourteamId}}`)
+          //header delete
+          .then((res) => {
+            window.localStorage.setItem('matchingStatus', res.data.data.pageNum);
+          });
+      }
+    })
     .catch((err) => console.log(err));
 }
 export default DataGet;
-
-   

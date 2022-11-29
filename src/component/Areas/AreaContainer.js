@@ -7,17 +7,18 @@ const AreaBox = styled.div`
   width: 100%;
   height: 12%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   margin-bottom: 15px;
 `;
 const Area = styled.button`
-  width: ${(props) => props.width || '50%'};
+  width: ${(props) => props.width || '90%'};
   height: 100%;
+  
   border: 0.2px solid var(--color-lightblue);
   border-radius: var(--round-borderradious);
-  margin: 10px;
-  max-height: 200px;
+  margin: ${(props)=>props.margin||"10px"};
+  max-height: 50px;
   font-family: var(--font-family);
   font-size: 20px;
   color: ${(props) => props.color || 'black'};
@@ -38,7 +39,7 @@ const Areas = (props) => {
     }
   }, [exist, props.meta]);
   return (
-    <Area color={fontColor} background_color={bgcolor} onClick={OnAreaClick} width={props.width}>
+    <Area color={fontColor} margin="1%"background_color={bgcolor} onClick={OnAreaClick} width={props.width}>
       {props.area}
     </Area>
   );
@@ -46,28 +47,12 @@ const Areas = (props) => {
 
 const AreaContainer = () => {
   return (
-    <StyledDiv top="20%" width="95%" height="65%" left="50%">
-      <AreaBox>
-        <Areas area="상관없음" meta={1}></Areas>
-        <Areas area="강남" meta={2}></Areas>
-        <Areas area="건대" meta={3}></Areas>
-      </AreaBox>
-      <AreaBox>
-        <Areas area="사당" meta={4}></Areas>
-        <Areas area="신촌" meta={5}></Areas>
-        <Areas area="이태원"meta={6}></Areas>
-      </AreaBox>
-      <AreaBox>
-        <Areas area="잠실" meta={7}></Areas>
-        <Areas area="홍대" meta={8}></Areas>
-        <Areas area="회기" meta={9}></Areas>
-      </AreaBox>
-      <AreaBox>
-        <Areas area="대학로" meta={10}></Areas>
-        <Areas area="왕십리"meta={11}></Areas>
-
-        <Areas area="성수"meta={12}></Areas>
-      </AreaBox>
+    <StyledDiv top="20%" width="95%" height="50%" left="50%" display="flex" direction="column" justify_content="spcae-around">
+        <Areas area="강남" meta={1} width="98%"></Areas>
+        <Areas area="건대" meta={2}width="98%"></Areas> 
+        <Areas area="신촌" meta={3}width="98%"></Areas> 
+        <Areas area="홍대" meta={4}width="98%"></Areas> 
+        <Areas area="상관없음" meta={5}width="98%"></Areas> 
     </StyledDiv>
   );
 };
