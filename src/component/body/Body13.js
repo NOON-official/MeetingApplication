@@ -143,7 +143,7 @@ const Body13 = () => {
   };
 
   return (
-    <Container>
+    <Container display="flex" justify_content="center" align_item="start">
       <MobileBox position="static" transform="0" left="0" height="auto" overflow="scroll">
         <StyledDiv
           position="static"
@@ -331,18 +331,20 @@ const Body13 = () => {
                 >
                   인증번호
                 </StyledText>
-                <StyledDiv position="static" width="100%" left="0" transform="0">
+                <StyledDiv position="static" display="felx" width="100%" left="0" transform="0">
                   <StyledDiv
                     position="static"
                     display="flex"
-                    justify_content="flex-start"
-                    leff="0"
+                    justify_content="space-between"
+                    left="0"
                     transform="0"
                     width="100%"
-                    padding="10px 0 0 10px"
+                    padding="10px 0 0 0"
                   >
                     <StyledInput maxLength={6} name="otp" onChange={PhoneAuthInput} placeholder="12345"></StyledInput>
-                    <StyledDiv left="90%">{signin ? <CheckIcon /> : <CheckIcon className="bright" />}</StyledDiv>
+                    <StyledDiv padding="0 20px 0 0" position="static" left="0" transform="0">
+                      {signin ? <CheckIcon /> : <CheckIcon className="bright" />}
+                    </StyledDiv>
                   </StyledDiv>
                 </StyledDiv>
               </StyledDiv>
