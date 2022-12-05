@@ -8,7 +8,7 @@ import Vibe from './CounterTeamPageComponent/Vibe';
 import Intro from './CounterTeamPageComponent/Intro';
 import { ReactComponent as KakaoIdCopyText } from '../../../Asset/mainPage/KakaoIdCopyText.svg';
 const MatchingSuccessPage = () => {
-  let Kakaoid;
+  const [Kakaoid, setKakaoId] = useState('');
   const doCopy = () => {
     if (navigator.clipboard) {
       // (IE는 사용 못하고, 크롬은 66버전 이상일때 사용 가능합니다.)
@@ -59,7 +59,7 @@ const MatchingSuccessPage = () => {
     await client
       .get(`api/team/result/${id}`)
       .then((res) => {
-        Kakaoid = res.data.data.matchingResult.kakaoId;
+        setKakaoId(res.data.data.matchingResult.kakaoId);
       })
       .catch((err) => console.log(err));
   };
