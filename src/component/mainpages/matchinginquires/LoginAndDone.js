@@ -1,4 +1,4 @@
-import { StyledDiv, StyledButton, StyledTextArea } from '../../Elements/StyledComponent';
+import { StyledDiv, StyledButton, StyledTextArea, Container, MobileBox } from '../../Elements/StyledComponent';
 import { ReactComponent as Character } from '../../../Asset/mainPage/Character.svg';
 import client from '../../../api';
 import { useEffect, useState } from 'react';
@@ -197,6 +197,7 @@ const Done = () => {
           position=" static"
           transform="0"
           left="0"
+          margin="50px 0 0 0"
           height="80%"
           bg="white"
           width="90%"
@@ -491,9 +492,11 @@ const Done = () => {
     }
   };
   return (
-    <div style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-      <DonePage />
-    </div>
+    <Container height={'100%'} bg="#f8f3f3">
+      <MobileBox overflow="scroll" justify_content=" start" height="100%">
+        <DonePage />
+      </MobileBox>
+    </Container>
   );
 };
 
