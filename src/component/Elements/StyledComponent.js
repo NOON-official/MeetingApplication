@@ -123,11 +123,11 @@ export const MobileBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
+  position: ${(props) => props.position || 'absolute'};
   justify-content: ${(props) => props.justify_content};
   font-family: var(--font);
-  left: 50%;
-  transform: translate(-50%, 0);
+  left: ${(props) => props.left || '50%'};
+  transform: ${(props) => props.transform || 'translate(-50%, 0)'};
   overflow-x: hidden;
   overflow-y: ${(props) => props.overflow || 'hidden'};
 `;
@@ -159,7 +159,7 @@ export const StyledText = styled.text`
   height: ${(props) => props.height};
   transform: ${(props) => props.transform};
   text-align: ${(props) => props.text_align || 'start'};
-
+  padding: ${(props) => props.padding};
   z-index: 1;
 `;
 
