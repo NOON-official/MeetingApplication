@@ -379,14 +379,6 @@ const AdminPage = () => {
         Header: '선호나이',
       },
       {
-        accessor: 'height',
-        Header: '키',
-      },
-      {
-        accessor: 'preferenceHeight',
-        Header: '선호키',
-      },
-      {
         accessor: 'day',
         Header: '선호요일',
       },
@@ -512,7 +504,7 @@ const AdminPage = () => {
   useEffect(() => {
     //남자 3
     client
-      .get('api/admin/team/male/3')
+      .get('api/admin/team/male/3/checked')
       .then(async (res) => {
         setMaleThreeTeam(res.data.data.maleTeam);
       })
@@ -520,7 +512,7 @@ const AdminPage = () => {
 
     //남자 2
     client
-      .get('api/admin/team/male/2')
+      .get('api/admin/team/male/2/checked')
       .then(async (res) => {
         setMaleTwoTeam(res.data.data.maleTeam);
       })
@@ -528,7 +520,7 @@ const AdminPage = () => {
 
     //여자3
     client
-      .get('api/admin/team/female/3')
+      .get('api/admin/team/female/3/checked')
       .then(async (res) => {
         setFemaleThreeTeam(res.data.data.femaleTeam);
       })
@@ -536,7 +528,7 @@ const AdminPage = () => {
 
     //남자 2
     client
-      .get('api/admin/team/female/2')
+      .get('api/admin/team/female/2/checked')
       .then(async (res) => {
         setFemaleTwoTeam(res.data.data.femaleTeam);
       })
@@ -605,7 +597,6 @@ const AdminPage = () => {
         name: maleThreeTeam[i]['nickname'],
         num: maleThreeTeam[i]['num'],
         age: maleThreeTeam[i]['age'],
-        height: maleThreeTeam[i]['height'],
         drink: maleThreeTeam[i]['drink'],
         job: maleThreeTeam[i]['job'].sort(),
         university: maleThreeTeam[i]['university'],
@@ -632,7 +623,6 @@ const AdminPage = () => {
         name: maleTwoTeam[i]['nickname'],
         num: maleTwoTeam[i]['num'],
         age: maleTwoTeam[i]['age'],
-        height: maleTwoTeam[i]['height'],
         drink: maleTwoTeam[i]['drink'],
         job: maleTwoTeam[i]['job'].sort(),
         university: maleTwoTeam[i]['university'],
@@ -668,7 +658,6 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: femaleThreeTeam[i]['nickname'],
         num: femaleThreeTeam[i]['num'],
         age: femaleThreeTeam[i]['age'],
-        height: femaleThreeTeam[i]['height'],
         drink: femaleThreeTeam[i]['drink'],
         job: femaleThreeTeam[i]['job'].sort(),
         university: femaleThreeTeam[i]['university'],
@@ -693,7 +682,6 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         name: femaleTwoTeam[i]['nickname'],
         num: femaleTwoTeam[i]['num'],
         age: femaleTwoTeam[i]['age'],
-        height: femaleTwoTeam[i]['height'],
         drink: femaleTwoTeam[i]['drink'],
         job: femaleTwoTeam[i]['job'].sort(),
         university: femaleTwoTeam[i]['university'],
