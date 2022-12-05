@@ -115,6 +115,9 @@ export const Container = styled.div`
   overflow-x: hidden;
   overflow-y: ${(props) => props.overflow};
   background-color: ${(props) => props.bg || '#F5F5F5'};
+  display: ${(props) => props.display};
+  justify-content: ${(props) => props.justify_content};
+  align-items: ${(props) => props.align_item};
 `;
 export const MobileBox = styled.div`
   max-width: 400px;
