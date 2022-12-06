@@ -6,6 +6,7 @@ import Table from './Table';
 import { Button, Box, TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
 import Universities from '../Universities';
 import * as Matching from './Matching.js';
+
 const FullDiv = styled.div`
   width: 100%;
 `;
@@ -95,20 +96,22 @@ const AdminPage = () => {
   const [femaleMatchingSuccess, setFemaleMatching] = useState([]);
   const [maleMatchingFail, setMaleMatchingFail] = useState([]);
   const [femaleMatchingFail, setFemaleMatchingFail] = useState([]);
+  const [FemaleMatchingWaiting, setFemaleMatchingWating] =useState([]);
+  const [MaleMatchingWaiting, setMaleMatchingWating] =useState([]);
+  const[MaleMatchingRefuse, setMaleMatchingRefuse] =useState([]);
+  const[MaleMatchingRefused,setMaleMatchingRefused] =useState([]);
+  const[FemaleMatchingRefuse, setFemaleMatchingRefuse] =useState([]);
+  const[FemaleMatchingRefused,setFemaleMatchingRefused] =useState([]);
   const [MaleIsLimitedStatus, setMaleIsLimitedStatus] = useState('');
   const [MaleLimitNumStatus, setMaleLimitNumStatus] = useState('');
   const [FemaleIsLimitedStatus, setFemaleIsLimitedStatus] = useState('');
   const [FemaleLimitNumStatus, setFemaleLimitNumStatus] = useState('');
 
   // ---------버튼 연동을 위한 코드 시작----------
-  // 매칭하기
+
+  //매칭코드
   const [MaleTeamId, setMaleTeamId] = useState('');
   const [FemaleTeamId, setFemaleTeamId] = useState('');
-  const [ChatLink, setChatLink] = useState('');
-
-  // 매칭 실패 처리하기
-  const [FailedTeamId, setFailedTeamId] = useState('');
-
   // 매칭 완료된 팀 삭제하기
   const [DeleteMaleTeamId, setDeleteMaleTeamId] = useState('');
   const [DeleteFemaleTeamId, setDeleteFemaleTeamId] = useState('');
@@ -129,20 +132,21 @@ const AdminPage = () => {
   const [MaleTeamNum, setMaleTeamNum] = useState('');
   const [FemaleTeamNum, setFemaleTeamNum] = useState('');
 
-  // 매칭하기
-  const handleMatchMaleTeamIdChange = (e) => {
-    setMaleTeamId(e.target.value);
+  // 매칭 실패 처리하기
+  const handleFailedTeamIdChange = (e) => {
+    setFailedTeamId(e.target.value);
   };
 
-  const handleMatchFemaleTeamIdChange = (e) => {
-    setFemaleTeamId(e.target.value);
-  };
+//매칭하기
+const handleMatchMaleTeamIdChange = (e) => {
+  setMaleTeamId(e.target.value);
+};
 
-  const handleChatLinkChange = (e) => {
-    setChatLink(e.target.value);
-  };
+const handleMatchFemaleTeamIdChange = (e) => {
+  setFemaleTeamId(e.target.value);
+};
 
-  const matchTeam = async () => {
+const matchTeam = async () => {
     if (!MaleTeamId || !FemaleTeamId || !ChatLink) {
       return alert('모든 값을 입력해주세요');
     }
@@ -165,11 +169,8 @@ const AdminPage = () => {
       });
   };
 
-  // 매칭 실패 처리하기
-  const handleFailedTeamIdChange = (e) => {
-    setFailedTeamId(e.target.value);
-  };
 
+//매칭실패
   const failTeam = async () => {
     if (!FailedTeamId) {
       return alert('모든 값을 입력해주세요');
@@ -351,6 +352,24 @@ const AdminPage = () => {
       });
   };
 
+  const updateAcceptanceStatus = async () =>{
+
+
+    await client.post('/api/admin/update/team/state').then(() => {
+      alert('신청 인원 수락 거절 상태 변경에 성공하였습니다');
+    }).catch((err) => {
+      if (err.response.data.status == 400) {
+        alert(err.response.data.message);
+      }
+      console.log(err);
+      alert('실패');
+
+
+    });
+
+
+  };
+
   // ---------버튼 연동을 위한 코드 끝----------
   const columns1 = useMemo(
     () => [
@@ -496,6 +515,12 @@ const AdminPage = () => {
   let data7 = []; //남성 매칭실패
   let data8 = []; //여성매칭실패
   let data9 = []; // 현재 서비스 매칭 신청 가능 상태
+  let data10 =[]; //여자 수락대기
+  let data11 =[]; // 남자수락대기
+  let data12=[]; //여자 refuse
+  let data13=[]; //남자 refuse
+  let data14=[]; //여자 refused.. sad..
+  let data15=[]; //남자 refused.. sad..
 
   let male2 = 0; //남자 2대2
   let male3 = 0; //남자 3대3
@@ -504,7 +529,7 @@ const AdminPage = () => {
   useEffect(() => {
     //남자 3
     client
-      .get('api/admin/team/male/3/checked')
+      .get('api/admin/team/male/3')
       .then(async (res) => {
         setMaleThreeTeam(res.data.data.maleTeam);
       })
@@ -512,7 +537,7 @@ const AdminPage = () => {
 
     //남자 2
     client
-      .get('api/admin/team/male/2/checked')
+      .get('api/admin/team/male/2')
       .then(async (res) => {
         setMaleTwoTeam(res.data.data.maleTeam);
       })
@@ -520,7 +545,7 @@ const AdminPage = () => {
 
     //여자3
     client
-      .get('api/admin/team/female/3/checked')
+      .get('api/admin/team/female/3')
       .then(async (res) => {
         setFemaleThreeTeam(res.data.data.femaleTeam);
       })
@@ -528,7 +553,7 @@ const AdminPage = () => {
 
     //남자 2
     client
-      .get('api/admin/team/female/2/checked')
+      .get('api/admin/team/female/2')
       .then(async (res) => {
         setFemaleTwoTeam(res.data.data.femaleTeam);
       })
@@ -567,6 +592,52 @@ const AdminPage = () => {
         setFemaleMatchingFail(res.data.data.femaleTeam);
       })
       .catch((err) => {});
+
+      //여자 수락대기
+      client
+      .get('api/admin/team/matching/pending/female')
+      .then(async (res) => {
+        setFemaleMatchingWating(res.data.data.femaleTeam);
+      })
+      .catch((err) => {});
+      //남자 수락대기
+      client
+      .get('api/admin/team/matching/pending/male')
+      .then(async (res) => {
+        setMaleMatchingWating(res.data.data.maleTeam);
+      })
+      .catch((err) => {});
+
+       //여자 거절한
+       client
+       .get('api/admin/team/matching/refuse/female')
+       .then(async (res) => {
+         setFemaleMatchingRefuse(res.data.data.femaleTeam);
+       })
+       .catch((err) => {});
+       //남자 거절한 
+       client
+       .get('api/admin/team/matching/refuse/male')
+       .then(async (res) => {
+         setMaleMatchingRefuse(res.data.data.maleTeam);
+       })
+       .catch((err) => {});
+
+        //여자 거절당한
+        client
+        .get('api/admin/team/matching/refused/female')
+        .then(async (res) => {
+          setFemaleMatchingRefused(res.data.data.femaleTeam);
+        })
+        .catch((err) => {});
+        //남자 거절당한 
+        client
+        .get('api/admin/team/matching/refused/male')
+        .then(async (res) => {
+          setMaleMatchingRefused(res.data.data.maleTeam);
+        })
+        .catch((err) => {});
+ 
 
     // 서비스 매칭 신청 가능 상태 조회
     client
@@ -751,6 +822,190 @@ for(let i=0; i<femaleThreeTeam.length;i++)
     }
   }
 
+
+  if (maleThreeTeam) {
+    for (let i = 0; i < maleThreeTeam.length; i++) {
+      data1[i] = {
+        id: maleThreeTeam[i]['ourteamId'],
+        name: maleThreeTeam[i]['nickname'],
+        num: maleThreeTeam[i]['num'],
+        age: maleThreeTeam[i]['age'],
+        drink: maleThreeTeam[i]['drink'],
+        job: maleThreeTeam[i]['job'].sort(),
+        university: maleThreeTeam[i]['university'],
+        area: maleThreeTeam[i]['area'].sort(),
+        day: maleThreeTeam[i]['day'].sort(),
+        preferenceAge: maleThreeTeam[i]['preferenceAge'],
+        preferenceHeight: maleThreeTeam[i]['preferenceHeight'],
+        sameUniversity: preferenceSchoolResult(maleThreeTeam[i]['sameUniversity']),
+        level:schoolLevel( maleThreeTeam[i]['university']),
+        preferenceVibe: maleThreeTeam[i]['preferenceVibe'].sort(),
+        time: maleThreeTeam[i]['updatedAt'],
+        intro: maleThreeTeam[i]['intro'],
+        preferenceJob: maleThreeTeam[i]['preferenceJob']
+      };
+      male3 += 1;
+    }
+  }
+
+if(FemaleMatchingWaiting)
+{
+  for (let i = 0; i < FemaleMatchingWaiting.length; i++) {
+    data10[i] = {
+      id: FemaleMatchingWaiting[i]['ourteamId'],
+      name: FemaleMatchingWaiting[i]['nickname'],
+      num: FemaleMatchingWaiting[i]['num'],
+      age: FemaleMatchingWaiting[i]['age'],
+      drink: FemaleMatchingWaiting[i]['drink'],
+      job: FemaleMatchingWaiting[i]['job'].sort(),
+      university: FemaleMatchingWaiting[i]['university'],
+      area: FemaleMatchingWaiting[i]['area'].sort(),
+      day: FemaleMatchingWaiting[i]['day'].sort(),
+      preferenceAge: FemaleMatchingWaiting[i]['preferenceAge'],
+      preferenceHeight: FemaleMatchingWaiting[i]['preferenceHeight'],
+      sameUniversity: preferenceSchoolResult(FemaleMatchingWaiting[i]['sameUniversity']),
+      level:schoolLevel( FemaleMatchingWaiting[i]['university']),
+      preferenceVibe: FemaleMatchingWaiting[i]['preferenceVibe'].sort(),
+      time: FemaleMatchingWaiting[i]['updatedAt'],
+      intro:FemaleMatchingWaiting[i]['intro'],
+      preferenceJob: FemaleMatchingWaiting[i]['preferenceJob']
+    };
+  }
+}
+
+if(MaleMatchingWaiting)
+{
+  for (let i = 0; i < MaleMatchingWaiting.length; i++) {
+    data11[i] = {
+      id: MaleMatchingWaiting[i]['ourteamId'],
+      name: MaleMatchingWaiting[i]['nickname'],
+      num: MaleMatchingWaiting[i]['num'],
+      age: MaleMatchingWaiting[i]['age'],
+      drink: MaleMatchingWaiting[i]['drink'],
+      job: MaleMatchingWaiting[i]['job'].sort(),
+      university: MaleMatchingWaiting[i]['university'],
+      area: MaleMatchingWaiting[i]['area'].sort(),
+      day: MaleMatchingWaiting[i]['day'].sort(),
+      preferenceAge: MaleMatchingWaiting[i]['preferenceAge'],
+      preferenceHeight: MaleMatchingWaiting[i]['preferenceHeight'],
+      sameUniversity: preferenceSchoolResult(MaleMatchingWaiting[i]['sameUniversity']),
+      level:schoolLevel( MaleMatchingWaiting[i]['university']),
+      preferenceVibe: MaleMatchingWaiting[i]['preferenceVibe'].sort(),
+      time: MaleMatchingWaiting[i]['updatedAt'],
+      intro:MaleMatchingWaiting[i]['intro'],
+      preferenceJob: MaleMatchingWaiting[i]['preferenceJob']
+    };
+  }
+}
+
+if(MaleMatchingRefuse)
+{
+  for (let i = 0; i < MaleMatchingRefuse.length; i++) {
+    data12[i] = {
+      id: MaleMatchingRefuse[i]['ourteamId'],
+      name: MaleMatchingRefuse[i]['nickname'],
+      num:MaleMatchingRefuse[i]['num'],
+      age: MaleMatchingRefuse[i]['age'],
+      drink: MaleMatchingRefuse[i]['drink'],
+      job: MaleMatchingRefuse[i]['job'].sort(),
+      university: MaleMatchingRefuse[i]['university'],
+      area: MaleMatchingRefuse[i]['area'].sort(),
+      day: MaleMatchingRefuse[i]['day'].sort(),
+      preferenceAge: MaleMatchingRefuse[i]['preferenceAge'],
+      preferenceHeight:MaleMatchingRefuse[i]['preferenceHeight'],
+      sameUniversity: preferenceSchoolResult(MaleMatchingRefuse[i]['sameUniversity']),
+      level:schoolLevel( MaleMatchingRefuse[i]['university']),
+      preferenceVibe: MaleMatchingRefuse[i]['preferenceVibe'].sort(),
+      time: MaleMatchingRefuse[i]['updatedAt'],
+      intro:MaleMatchingRefuse[i]['intro'],
+      preferenceJob: MaleMatchingRefuse[i]['preferenceJob']
+    };
+  }
+}
+
+if(MaleMatchingRefused)
+{
+  for (let i = 0; i < MaleMatchingRefused.length; i++) {
+    data13[i] = {
+      id: MaleMatchingRefused[i]['ourteamId'],
+      name: MaleMatchingRefused[i]['nickname'],
+      num:MaleMatchingRefused[i]['num'],
+      age: MaleMatchingRefused[i]['age'],
+      drink: MaleMatchingRefused[i]['drink'],
+      job: MaleMatchingRefused[i]['job'].sort(),
+      university: MaleMatchingRefused[i]['university'],
+      area: MaleMatchingRefused[i]['area'].sort(),
+      day: MaleMatchingRefused[i]['day'].sort(),
+      preferenceAge: MaleMatchingRefused[i]['preferenceAge'],
+      preferenceHeight:MaleMatchingRefused[i]['preferenceHeight'],
+      sameUniversity: preferenceSchoolResult(MaleMatchingRefused[i]['sameUniversity']),
+      level:schoolLevel( MaleMatchingRefused[i]['university']),
+      preferenceVibe: MaleMatchingRefused[i]['preferenceVibe'].sort(),
+      time: MaleMatchingRefused[i]['updatedAt'],
+      intro:MaleMatchingRefused[i]['intro'],
+      preferenceJob: MaleMatchingRefused[i]['preferenceJob']
+    };
+  }
+}
+
+if(FemaleMatchingRefuse)
+{
+  for (let i = 0; i < FemaleMatchingRefuse.length; i++) {
+    data14[i] = {
+      id: FemaleMatchingRefuse[i]['ourteamId'],
+      name: MaleMatchingRefuse[i]['nickname'],
+      num:MaleMatchingRefuse[i]['num'],
+      age: MaleMatchingRefuse[i]['age'],
+      drink: MaleMatchingRefuse[i]['drink'],
+      job: MaleMatchingRefuse[i]['job'].sort(),
+      university: MaleMatchingRefuse[i]['university'],
+      area: MaleMatchingRefuse[i]['area'].sort(),
+      day: MaleMatchingRefuse[i]['day'].sort(),
+      preferenceAge: MaleMatchingRefuse[i]['preferenceAge'],
+      preferenceHeight:MaleMatchingRefuse[i]['preferenceHeight'],
+      sameUniversity: preferenceSchoolResult(MaleMatchingRefuse[i]['sameUniversity']),
+      level:schoolLevel( MaleMatchingRefuse[i]['university']),
+      preferenceVibe: MaleMatchingRefuse[i]['preferenceVibe'].sort(),
+      time: MaleMatchingRefuse[i]['updatedAt'],
+      intro:MaleMatchingRefuse[i]['intro'],
+      preferenceJob: MaleMatchingRefuse[i]['preferenceJob']
+    };
+  }
+}
+
+if(FemaleMatchingRefused)
+{
+  for (let i = 0; i < FemaleMatchingRefused.length; i++) {
+    data15[i] = {
+      id: FemaleMatchingRefused[i]['ourteamId'],
+      name: FemaleMatchingRefused[i]['nickname'],
+      num:FemaleMatchingRefused[i]['num'],
+      age: FemaleMatchingRefused[i]['age'],
+      drink: FemaleMatchingRefused[i]['drink'],
+      job: FemaleMatchingRefused[i]['job'].sort(),
+      university: FemaleMatchingRefused[i]['university'],
+      area: FemaleMatchingRefused[i]['area'].sort(),
+      day: FemaleMatchingRefused[i]['day'].sort(),
+      preferenceAge: FemaleMatchingRefused[i]['preferenceAge'],
+      preferenceHeight:FemaleMatchingRefused[i]['preferenceHeight'],
+      sameUniversity: preferenceSchoolResult(FemaleMatchingRefused[i]['sameUniversity']),
+      level:schoolLevel( FemaleMatchingRefused[i]['university']),
+      preferenceVibe: FemaleMatchingRefused[i]['preferenceVibe'].sort(),
+      time: FemaleMatchingRefused[i]['updatedAt'],
+      intro:FemaleMatchingRefused[i]['intro'],
+      preferenceJob: FemaleMatchingRefused[i]['preferenceJob']
+    };
+  }
+}
+
+
+
+
+
+
+
+
+
   return (
     <div>
       <div
@@ -818,8 +1073,31 @@ for(let i=0; i<femaleThreeTeam.length;i++)
           </BoxContainer>
         </div>
       </TableContainer>
-      {/* 팀 매칭하기 버튼 */}
-      <BoxContainer>
+       {/* 매칭대기 리스트  */}
+      <div>
+     {/* 매칭알고리즘 돌리기 버튼 */}
+  {/*
+    <Button
+          id="save-button"
+          variant="contained"
+          style={{ marginTop: '1rem', marginBottom: '3rem', width: '31rem' }}
+          onClick={() => Matching.Matching(data3,data4)}
+        >
+        2:2알고리즘 돌리기 
+        </Button>
+        
+        <Button
+          id="save-button"
+          variant="contained"
+          style={{ marginTop: '1rem', marginBottom: '3rem', width: '31rem' }}
+          onClick={() => Matching.Matching(data1,data2)}
+        >
+        3:3알고리즘 돌리기 
+        </Button>
+
+      */}
+
+<BoxContainer>
         <div>
           <Box
             component="form"
@@ -843,13 +1121,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
               size="small"
               onChange={handleMatchFemaleTeamIdChange}
             />
-            <TextField
-              id="match-chat-link"
-              label="오픈채팅 링크"
-              variant="outlined"
-              size="small"
-              onChange={handleChatLinkChange}
-            />
+        
             <Button id="match-button" variant="contained" onClick={matchTeam}>
               매칭하기
             </Button>
@@ -878,6 +1150,15 @@ for(let i=0; i<femaleThreeTeam.length;i++)
           </Box>
         </div>
       </BoxContainer>
+        {/* 매칭 실패 처리하기 버튼 */}
+
+    </div>
+
+
+
+
+
+
       <TableContainer>
         <div style={{ width: '50%' }}>
           <h2>남자 매칭완료</h2>
@@ -893,6 +1174,21 @@ for(let i=0; i<femaleThreeTeam.length;i++)
         </div>
       </TableContainer>
       {/* 매칭 성공한 팀 삭제하기 버튼 */}
+
+      <TableContainer>
+        <div style={{ width: '50%' }}>
+          <h2>남자 매칭 수락대기</h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data11}></Table>
+          </BoxContainer>
+        </div>
+        <div style={{ width: '50%' }}>
+          <h2>여자 매칭 수락대기</h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data10}></Table>
+          </BoxContainer>
+        </div>
+      </TableContainer>
       <BoxContainer>
         <div>
           <Box
@@ -918,7 +1214,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
               onChange={handleDeleteFemaleTeamIdChange}
             />
             <Button id="delete-match-button" variant="contained" onClick={deleteMatchedTeam}>
-              매칭 완료된 팀 삭제
+              비활성화 처리하기
             </Button>
           </Box>
         </div>
@@ -952,7 +1248,77 @@ for(let i=0; i<femaleThreeTeam.length;i++)
           </Box>
         </div>
       </BoxContainer>
+
+
+
+{/*페이지 나누는 경계 *********************************************************************************/}
+
+
+
       <TableContainer>
+        <div style={{ width: '50%' }}>
+          <h2>남자 매칭실패</h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data7}></Table>
+          </BoxContainer>
+        </div>
+        <div style={{ width: '50%' }}>
+          <h2>여자 매칭실패</h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data8}></Table>
+          </BoxContainer>
+        </div>
+      </TableContainer>
+
+
+{/* 페이지 나누는 경계 *********************************************************************************/}
+
+{/*페이지 나누는 경계 *********************************************************************************/}
+{/* 거절 수락 조회 */}
+
+
+
+<TableContainer>
+        <div style={{ width: '50%' }}>
+          <h2>남자 거절</h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data12}></Table>
+          </BoxContainer>
+        </div>
+        <div style={{ width: '50%' }}>
+          <h2>여자 거절</h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data14}></Table>
+          </BoxContainer>
+        </div>
+</TableContainer>
+
+
+<TableContainer>
+        <div style={{ width: '50%' }}>
+          <h2>거절당한 남자</h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data13}></Table>
+          </BoxContainer>
+        </div>
+        <div style={{ width: '50%' }}>
+          <h2>거절당한 여자 </h2>
+          <BoxContainer style={{ minHeight: '350px' }}>
+            <Table columns={columns3} data={data15}></Table>
+          </BoxContainer>
+        </div>
+</TableContainer>
+<Button
+          id="save-button"
+          variant="contained"
+          style={{ marginTop: '1rem', marginBottom: '3rem', width: '31rem' }}
+          onClick={updateAcceptanceStatus}
+        >
+          수락거절 적용
+        </Button>
+{/* 실패 조회 */}
+<TableContainer>
+
         <div style={{ width: '50%' }}>
           <h2>남자 매칭실패</h2>
           <BoxContainer style={{ minHeight: '350px' }}>
@@ -1012,6 +1378,8 @@ for(let i=0; i<femaleThreeTeam.length;i++)
           </Box>
         </div>
       </BoxContainer>
+{/*페이지 나누는 경계 *********************************************************************************/}
+
       {/* 서비스 신청 인원 관리 */}
       <h2>서비스 신청 인원 관리</h2>
       <div>
@@ -1074,27 +1442,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
           저장하기
         </Button>
 
-       
       </div>
-    <div>
-    <Button
-          id="save-button"
-          variant="contained"
-          style={{ marginTop: '1rem', marginBottom: '3rem', width: '31rem' }}
-          onClick={() => Matching.Matching(data3,data4)}
-        >
-        2:2알고리즘 돌리기 
-        </Button>
-        
-        <Button
-          id="save-button"
-          variant="contained"
-          style={{ marginTop: '1rem', marginBottom: '3rem', width: '31rem' }}
-          onClick={() => Matching.Matching(data1,data2)}
-        >
-        3:3알고리즘 돌리기 
-        </Button>
-    </div>
  
     </div>
   );
