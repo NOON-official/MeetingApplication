@@ -115,6 +115,8 @@ const Footer = () => {
   const fashion = useSelector((state) => state.fashion);
   const introduction = useSelector((state) => state.introduction);
   const privateinfoconfirm = useSelector((state) => state.privateinfoconfirm);
+  const ageinfo = useSelector((state)=> state.ageinfo);
+  const serviceconfirm = useSelector((state)=> state.serviceconfirm);
   const signin = useSelector((state) => state.signin);
   const MovingPath = () => {
     if (location === '/apply/2') {
@@ -188,10 +190,11 @@ const Footer = () => {
         return(<Navigate to="/apply/4"/>)
       }
       else{   uncompleted();
-        if (day.length > 0) {
+        if (day.length > 1) {
           complete();
           setNextPath('/apply/6');
         } else {
+      
           setNextPath('/apply/5');
         }
   
@@ -222,7 +225,8 @@ const Footer = () => {
       }
       else{
         uncompleted();
-      if (mbti.length > 0 && fashion.length > 0 && appearance.length > 0) {
+      if (mbti.length > 0  && appearance.length > 0) //&& fashion.length > 0
+      {
         complete();
         setNextPath('/apply/7');
       } else {
@@ -254,7 +258,8 @@ const Footer = () => {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+      }else if(mbti.length==0  || appearance.length==0)//|| fashion.length ==0
+      {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/6"/>)
@@ -290,7 +295,8 @@ const Footer = () => {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
+      {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/6"/>)
@@ -334,7 +340,8 @@ const Footer = () => {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
+      {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/6"/>)
@@ -383,7 +390,8 @@ const Footer = () => {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
+      {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/6"/>)
@@ -423,7 +431,8 @@ const Footer = () => {
      alert("입력 정보를 변경합니다.")
       
       return(<Navigate to="/apply/5"/>)
-    }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+    }else if(mbti.length==0  || appearance.length==0)//|| fashion.length ==0
+    {
      alert("입력 정보를 변경합니다.")
       
       return(<Navigate to="/apply/6"/>)
@@ -470,7 +479,8 @@ const Footer = () => {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+      }else if(mbti.length==0  || appearance.length==0)//|| fashion.length ==0
+      {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/6"/>)
@@ -492,7 +502,7 @@ const Footer = () => {
       }
       else{
       uncompleted();
-      if (privateinfoconfirm) {
+      if ((privateinfoconfirm&&serviceconfirm&&ageinfo)) {
         complete();
         setNextPath('/apply/13');
       } else {
@@ -520,7 +530,8 @@ const Footer = () => {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
+      {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/6"/>)
@@ -540,7 +551,7 @@ const Footer = () => {
         
         return(<Navigate to="/apply/11"/>)
       }
-      else if(!privateinfoconfirm){
+      else if(!(privateinfoconfirm&&serviceconfirm&&ageinfo)){
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/12"/>)
@@ -577,7 +588,8 @@ const Footer = () => {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
+      {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/6"/>)
@@ -597,7 +609,7 @@ const Footer = () => {
         
         return(<Navigate to="/apply/11"/>)
       }
-      else if(!privateinfoconfirm){
+      else if(!(privateinfoconfirm&&serviceconfirm&&ageinfo)){
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/12"/>)
@@ -641,7 +653,8 @@ const Footer = () => {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || fashion.length ==0 || appearance.length==0){
+      }else if(mbti.length==0  || appearance.length==0)//|| fashion.length ==0
+      {
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/6"/>)
@@ -661,7 +674,7 @@ const Footer = () => {
         
         return(<Navigate to="/apply/11"/>)
       }
-      else if(!privateinfoconfirm){
+      else if(!(privateinfoconfirm&&serviceconfirm&&ageinfo)){
        alert("입력 정보를 변경합니다.")
         
         return(<Navigate to="/apply/12"/>)
@@ -719,11 +732,12 @@ const Footer = () => {
                 openModal();
               } else if (location === '/apply/4' && area.length === 0) {
                 openModal();
-              } else if (location === '/apply/5' && day.length === 0) {
+              } else if (location === '/apply/5' && day.length <=1 ) {
                 openModal();
+                alert("2개 이상 선택해 주세요!")
               } else if (
                 location === '/apply/6' &&
-                (appearance.length === 0 || mbti.length === 0 || fashion.length === 0)
+                (appearance.length === 0 || mbti.length === 0 )//|| fashion.length === 0
               ) {
                 openModal();
               } else if (location === '/apply/7' && characters.length === 0) {

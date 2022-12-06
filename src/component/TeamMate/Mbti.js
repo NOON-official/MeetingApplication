@@ -76,6 +76,7 @@ const Mbtis = (props) => {
     direction="column"
     border_color="#F1ECEC"
     align_item="center"
+    margin="10% 0 0 0 "
     >
       <StyledText margin="5px 0 0 0"position="static" width="90%"font="Pretendard" size="12px"  color="#777777" weight="500" line="16.8px">
         MBTI
