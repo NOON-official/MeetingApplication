@@ -824,6 +824,7 @@ for(let i=0; i<femaleThreeTeam.length;i++)
 
 
   if (maleThreeTeam) {
+
     for (let i = 0; i < maleThreeTeam.length; i++) {
       data1[i] = {
         id: maleThreeTeam[i]['ourteamId'],
@@ -953,22 +954,22 @@ if(FemaleMatchingRefuse)
   for (let i = 0; i < FemaleMatchingRefuse.length; i++) {
     data14[i] = {
       id: FemaleMatchingRefuse[i]['ourteamId'],
-      name: MaleMatchingRefuse[i]['nickname'],
-      num:MaleMatchingRefuse[i]['num'],
-      age: MaleMatchingRefuse[i]['age'],
-      drink: MaleMatchingRefuse[i]['drink'],
-      job: MaleMatchingRefuse[i]['job'].sort(),
-      university: MaleMatchingRefuse[i]['university'],
-      area: MaleMatchingRefuse[i]['area'].sort(),
-      day: MaleMatchingRefuse[i]['day'].sort(),
-      preferenceAge: MaleMatchingRefuse[i]['preferenceAge'],
-      preferenceHeight:MaleMatchingRefuse[i]['preferenceHeight'],
-      sameUniversity: preferenceSchoolResult(MaleMatchingRefuse[i]['sameUniversity']),
-      level:schoolLevel( MaleMatchingRefuse[i]['university']),
-      preferenceVibe: MaleMatchingRefuse[i]['preferenceVibe'].sort(),
-      time: MaleMatchingRefuse[i]['updatedAt'],
-      intro:MaleMatchingRefuse[i]['intro'],
-      preferenceJob: MaleMatchingRefuse[i]['preferenceJob']
+      name: FemaleMatchingRefuse[i]['nickname'],
+      num:FemaleMatchingRefuse[i]['num'],
+      age: FemaleMatchingRefuse[i]['age'],
+      drink: FemaleMatchingRefuse[i]['drink'],
+      job: FemaleMatchingRefuse[i]['job'].sort(),
+      university: FemaleMatchingRefuse[i]['university'],
+      area: FemaleMatchingRefuse[i]['area'].sort(),
+      day: FemaleMatchingRefuse[i]['day'].sort(),
+      preferenceAge: FemaleMatchingRefuse[i]['preferenceAge'],
+      preferenceHeight:FemaleMatchingRefuse[i]['preferenceHeight'],
+      sameUniversity: preferenceSchoolResult(FemaleMatchingRefuse[i]['sameUniversity']),
+      level:schoolLevel( FemaleMatchingRefuse[i]['university']),
+      preferenceVibe: FemaleMatchingRefuse[i]['preferenceVibe'].sort(),
+      time: FemaleMatchingRefuse[i]['updatedAt'],
+      intro:FemaleMatchingRefuse[i]['intro'],
+      preferenceJob: FemaleMatchingRefuse[i]['preferenceJob']
     };
   }
 }
