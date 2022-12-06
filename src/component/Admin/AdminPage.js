@@ -147,15 +147,14 @@ const handleMatchFemaleTeamIdChange = (e) => {
 };
 
 const matchTeam = async () => {
-    if (!MaleTeamId || !FemaleTeamId || !ChatLink) {
+    if (!MaleTeamId || !FemaleTeamId ) {
       return alert('모든 값을 입력해주세요');
     }
 
     await client
       .post('/api/admin/team/match', {
         maleTeamId: MaleTeamId,
-        femaleTeamId: FemaleTeamId,
-        chatLink: ChatLink,
+        femaleTeamId: FemaleTeamId
       })
       .then(() => {
         alert('매칭 정보 저장에 성공하였습니다');
@@ -1318,21 +1317,6 @@ if(FemaleMatchingRefused)
           수락거절 적용
         </Button>
 {/* 실패 조회 */}
-<TableContainer>
-
-        <div style={{ width: '50%' }}>
-          <h2>남자 매칭실패</h2>
-          <BoxContainer style={{ minHeight: '350px' }}>
-            <Table columns={columns3} data={data7}></Table>
-          </BoxContainer>
-        </div>
-        <div style={{ width: '50%' }}>
-          <h2>여자 매칭실패</h2>
-          <BoxContainer style={{ minHeight: '350px' }}>
-            <Table columns={columns3} data={data8}></Table>
-          </BoxContainer>
-        </div>
-      </TableContainer>
       {/* 매칭 실패한 팀 삭제하기 버튼 */}
       <BoxContainer>
         <div>
