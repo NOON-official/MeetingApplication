@@ -39,12 +39,14 @@ const MatchingRejectPage = () => {
           // 팀 아이디 새로 저장 후 이걸로 pageState 다시 불러야됨
         );
       })
-      .then(() => {
-        client
+      .then(async () => {
+        await client
           .get(`api/team/ourteam-id/${userId}`)
           .then((res) => {
             window.localStorage.setItem('ourteamId', res.data.data.ourteamId);
           })
+          .then(() => window.location.reload())
+
           .catch((err) => console.log(err));
       })
 
