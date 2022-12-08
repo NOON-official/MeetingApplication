@@ -41,19 +41,19 @@ const MatchingInquire = () => {
     }
   }, []);
   const MatchingInquirePage = useCallback(() => {
-    if (userState == 3) {
+    if (userState == 3 && ourteamId != -1) {
       return <Inprogress />;
-    } else if (userState == 4) {
+    } else if (userState == 4 && ourteamId != -1) {
       return <Fail />;
-    } else if (userState == 5) {
+    } else if (userState == 5 && ourteamId != -1) {
       return <Done />;
-    } else if (userState == 6) {
+    } else if (userState == 6 && ourteamId != -1) {
       return <WaitingPage />;
-    } else if (userState == 7) {
+    } else if (userState == 7 && ourteamId != -1) {
       return <MatchingSuccessPage />;
-    } else if (userState == 8) {
+    } else if (userState == 8 && ourteamId != -1) {
       return <MatchingRejectPage />;
-    } else if (userState == 9) {
+    } else if (userState == 9 && ourteamId != -1) {
       return <RejectedByCounterTeam />;
     } else {
       return <NewUser />;
