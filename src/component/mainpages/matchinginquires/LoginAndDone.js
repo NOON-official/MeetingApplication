@@ -147,7 +147,7 @@ const Done = () => {
       >
         <Reasons text="나이가 마음에 들지 않아요" meta={1}></Reasons>
         <Reasons text="학교가 마음에 들지 않아요" meta={2}></Reasons>
-        <Reasons text="자기소개가 마음에 지 않아요" meta={3}></Reasons>
+        <Reasons text="자기소개가 마음에 들지 않아요" meta={3}></Reasons>
         <Reasons text="팀 내부 사정으로 거절 했어요" meta={4}></Reasons>
 
         <StyledDiv
