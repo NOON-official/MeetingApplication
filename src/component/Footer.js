@@ -74,7 +74,6 @@ const StyledFrontLink = styled(Link)`
   background-color: transparent;
 `;
 const Footer = () => {
-
   const [isDone, setIsDone] = useState(false);
   const frontButtonColor = React.useMemo(() => (isDone ? '#EB8888' : '#E9E9E9'), [isDone]);
   const fronButtonTextColor = React.useMemo(() => (isDone ? '#FFFFFF' : '#bbbbbb'), [isDone]);
@@ -104,7 +103,7 @@ const Footer = () => {
   const jobs = useSelector((state) => state.jobs);
   const prefferedjobs = useSelector((state) => state.prefferedjobs);
   const prefferedage = useSelector((state) => state.prefferedage);
-  const preffereduniversity = useSelector((state) => state.preffereduniversity);  
+  const preffereduniversity = useSelector((state) => state.preffereduniversity);
   const prefferedthing = useSelector((state) => state.prefferedthing);
   const university = useSelector((state) => state.university);
   const characters = useSelector((state) => state.characters);
@@ -115,12 +114,12 @@ const Footer = () => {
   const fashion = useSelector((state) => state.fashion);
   const introduction = useSelector((state) => state.introduction);
   const privateinfoconfirm = useSelector((state) => state.privateinfoconfirm);
-  const ageinfo = useSelector((state)=> state.ageinfo);
-  const serviceconfirm = useSelector((state)=> state.serviceconfirm);
+  const ageinfo = useSelector((state) => state.ageinfo);
+  const serviceconfirm = useSelector((state) => state.serviceconfirm);
   const signin = useSelector((state) => state.signin);
+  const kakaoId = useSelector((state) => state.kakaoid);
   const MovingPath = () => {
     if (location === '/apply/2') {
-
       nextPathSetting('/apply/2');
       uncompleted();
       if (jobs.length > 0) {
@@ -131,571 +130,472 @@ const Footer = () => {
       }
       prevPathSetting('/');
     } else if (location === '/apply/3') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
         {
-        return(<Navigate to="/apply/2"/>)
+          return <Navigate to="/apply/2" />;
         }
-      }
-      else{uncompleted();
+      } else {
+        uncompleted();
         if (university.length > 0) {
           complete();
-          
+
           setNextPath('/apply/4');
         } else {
           setNextPath('/apply/3');
         }
-  
-        setPrevPath('/apply/2');}
-      
+
+        setPrevPath('/apply/2');
+      }
     } else if (location === '/apply/4') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
         {
-        return(<Navigate to="/apply/2"/>)
+          return <Navigate to="/apply/2" />;
         }
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else{uncompleted();
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else {
+        uncompleted();
         if (area.length > 0) {
           complete();
           setNextPath('/apply/5');
         } else {
           setNextPath('/apply/4');
         }
-        setPrevPath('/apply/3');}
-      
+        setPrevPath('/apply/3');
+      }
     } else if (location === '/apply/5') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else{   uncompleted();
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else {
+        uncompleted();
         if (day.length > 1) {
           complete();
           setNextPath('/apply/6');
         } else {
-      
           setNextPath('/apply/5');
         }
-  
-        setPrevPath('/apply/4');}
-   
-    } else if (location === '/apply/6') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else if(day.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/5"/>)
-      }
-      else{
-        uncompleted();
-      if (mbti.length > 0  && appearance.length > 0) //&& fashion.length > 0
-      {
-        complete();
-        setNextPath('/apply/7');
-      } else {
-        setNextPath('/apply/6');
-      }
 
-      setPrevPath('/apply/5');
+        setPrevPath('/apply/4');
       }
-      
+    } else if (location === '/apply/6') {
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else {
+        uncompleted();
+        if (mbti.length > 0 && appearance.length > 0) {
+          //&& fashion.length > 0
+          complete();
+          setNextPath('/apply/7');
+        } else {
+          setNextPath('/apply/6');
+        }
+
+        setPrevPath('/apply/5');
+      }
     } else if (location === '/apply/7') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else if(day.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0  || appearance.length==0)//|| fashion.length ==0
-      {
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/6"/>)
-      }
-      else{ uncompleted();
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else if (mbti.length == 0 || appearance.length == 0) {
+        //|| fashion.length ==0
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/6" />;
+      } else {
+        uncompleted();
         if (characters.length > 0) {
           complete();
-          setNextPath('/apply/8');  
+          setNextPath('/apply/8');
         } else {
           setNextPath('/apply/7');
         }
-        setPrevPath('/apply/6');}
-     
+        setPrevPath('/apply/6');
+      }
     } else if (location === '/apply/8') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else if(day.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
-      {
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/6"/>)
-      }
-      else if(characters.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/7"/>)
-      }
-      else{
-        uncompleted();
-      if (prefferedage.length > 0 && prefferedjobs.length > 0) {
-        complete();
-        setNextPath('/apply/9');
-      } else {
-        setNextPath('/apply/8');
-      }
-      setPrevPath('/apply/7');
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
 
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else if (mbti.length == 0 || appearance.length == 0) {
+        //|| fashion.length ==0
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/6" />;
+      } else if (characters.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/7" />;
+      } else {
+        uncompleted();
+        if (prefferedage.length > 0 && prefferedjobs.length > 0) {
+          complete();
+          setNextPath('/apply/9');
+        } else {
+          setNextPath('/apply/8');
+        }
+        setPrevPath('/apply/7');
       }
-      
     } else if (location === '/apply/9') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else if(day.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
-      {
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/6"/>)
-      }
-      else if(characters.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/7"/>)
-      }
-      else if(prefferedage.length==0||prefferedjobs.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/8"/>)
-      }
-      else{
-        uncompleted();
-      if (prefferedthing.length > 0) {
-        complete();
-        setNextPath('/apply/10');
-      } else {
-        setNextPath('/apply/9');
-      }
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
 
-      setPrevPath('/apply/8');
-      }
-      
-    } else if (location === '/apply/10') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else if(day.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
-      {
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/6"/>)
-      }
-      else if(characters.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/7"/>)
-      }
-      else if(prefferedage.length==0||prefferedjobs.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/8"/>)
-      }else{
-        setPrevPath('/apply/9');
-      setNextPath('/apply/11');
-    }
-      
-    } else if (location === '/apply/11') {if(jobs.length ==0){
-     alert("입력 정보를 변경합니다.")
-      
-      return(<Navigate to="/apply/2"/>)
-    }
-    else if(
-      university.length == 0
-    ){
-     alert("입력 정보를 변경합니다.")
-      
-      return(<Navigate to="/apply/3"/>)
-    }
-    else if(area.length==0){
-     alert("입력 정보를 변경합니다.")
-      
-      return(<Navigate to="/apply/4"/>)
-    }
-    else if(day.length==0){
-     alert("입력 정보를 변경합니다.")
-      
-      return(<Navigate to="/apply/5"/>)
-    }else if(mbti.length==0  || appearance.length==0)//|| fashion.length ==0
-    {
-     alert("입력 정보를 변경합니다.")
-      
-      return(<Navigate to="/apply/6"/>)
-    }
-    else if(characters.length==0){
-     alert("입력 정보를 변경합니다.")
-      
-      return(<Navigate to="/apply/7"/>)
-    }
-    else if(prefferedage.length==0||prefferedjobs.length==0){
-     alert("입력 정보를 변경합니다.")
-      
-      return(<Navigate to="/apply/8"/>)
-    }
-    else
-      {uncompleted();
-      if (introduction.length >= 10) {
-        complete();
-        setNextPath('/apply/12');
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else if (mbti.length == 0 || appearance.length == 0) {
+        //|| fashion.length ==0
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/6" />;
+      } else if (characters.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/7" />;
+      } else if (prefferedage.length == 0 || prefferedjobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/8" />;
       } else {
+        uncompleted();
+        if (prefferedthing.length > 0) {
+          complete();
+          setNextPath('/apply/10');
+        } else {
+          setNextPath('/apply/9');
+        }
+
+        setPrevPath('/apply/8');
+      }
+    } else if (location === '/apply/10') {
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else if (mbti.length == 0 || appearance.length == 0) {
+        //|| fashion.length ==0
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/6" />;
+      } else if (characters.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/7" />;
+      } else if (prefferedage.length == 0 || prefferedjobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/8" />;
+      } else {
+        setPrevPath('/apply/9');
         setNextPath('/apply/11');
       }
-      setPrevPath('/apply/10');
-    }
+    } else if (location === '/apply/11') {
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else if (mbti.length == 0 || appearance.length == 0) {
+        //|| fashion.length ==0
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/6" />;
+      } else if (characters.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/7" />;
+      } else if (prefferedage.length == 0 || prefferedjobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/8" />;
+      } else {
+        uncompleted();
+        if (introduction.length >= 10) {
+          complete();
+          setNextPath('/apply/12');
+        } else {
+          setNextPath('/apply/11');
+        }
+        setPrevPath('/apply/10');
+      }
     } else if (location === '/apply/12') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else if(day.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0  || appearance.length==0)//|| fashion.length ==0
-      {
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/6"/>)
-      }
-      else if(characters.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/7"/>)
-      }
-      else if(prefferedage.length==0||prefferedjobs.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/8"/>)
-      }
-      else if(introduction.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/11"/>)
-      }
-      else{
-      uncompleted();
-      if ((privateinfoconfirm&&serviceconfirm&&ageinfo)) {
-        complete();
-        setNextPath('/apply/13');
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else if (mbti.length == 0 || appearance.length == 0) {
+        //|| fashion.length ==0
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/6" />;
+      } else if (characters.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/7" />;
+      } else if (prefferedage.length == 0 || prefferedjobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/8" />;
+      } else if (introduction.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/11" />;
       } else {
-        setNextPath('/apply/12');
-      }}
+        uncompleted();
+        if (privateinfoconfirm && serviceconfirm && ageinfo) {
+          complete();
+          setNextPath('/apply/13');
+        } else {
+          setNextPath('/apply/12');
+        }
+      }
     } else if (location === '/apply/13') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else if(day.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
-      {
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/6"/>)
-      }
-      else if(characters.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/7"/>)
-      }
-      else if(prefferedage.length==0||prefferedjobs.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/8"/>)
-      }
-      else if(introduction.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/11"/>)
-      }
-      else if(!(privateinfoconfirm&&serviceconfirm&&ageinfo)){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/12"/>)
-      }
-      else{
-        uncompleted();
-      if (signin) {
-        complete();
-        setNextPath('/apply/14');
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else if (mbti.length == 0 || appearance.length == 0) {
+        //|| fashion.length ==0
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/6" />;
+      } else if (characters.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/7" />;
+      } else if (prefferedage.length == 0 || prefferedjobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/8" />;
+      } else if (introduction.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/11" />;
+      } else if (!(privateinfoconfirm && serviceconfirm && ageinfo)) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/12" />;
       } else {
-        setNextPath('/apply/13');
+        uncompleted();
+        if (signin && kakaoId.length > 0) {
+          complete();
+          setNextPath('/apply/14');
+        } else {
+          setNextPath('/apply/13');
+        }
       }
-      }
-      
     } else if (location === '/apply/14') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else if(day.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0 || appearance.length==0)//|| fashion.length ==0 
-      {
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/6"/>)
-      }
-      else if(characters.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/7"/>)
-      }
-      else if(prefferedage.length==0||prefferedjobs.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/8"/>)
-      }
-      else if(introduction.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/11"/>)
-      }
-      else if(!(privateinfoconfirm&&serviceconfirm&&ageinfo)){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/12"/>)
-      }
-      else if (!signin){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/13"/>)
-      }
-      else{
-        uncompleted();
-      if (isLogin()) 
-      //로그인시 불가
-      {
-        complete();
-        setNextPath('/apply/15');
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else if (mbti.length == 0 || appearance.length == 0) {
+        //|| fashion.length ==0
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/6" />;
+      } else if (characters.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/7" />;
+      } else if (prefferedage.length == 0 || prefferedjobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/8" />;
+      } else if (introduction.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/11" />;
+      } else if (!(privateinfoconfirm && serviceconfirm && ageinfo)) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/12" />;
+      } else if (!(signin && kakaoId.length > 0)) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/13" />;
       } else {
-        setNextPath('/apply/14');
+        uncompleted();
+        if (isLogin()) {
+          //로그인시 불가
+          complete();
+          setNextPath('/apply/15');
+        } else {
+          setNextPath('/apply/14');
+        }
       }
-      }
-      
     } else if (location === '/apply/15') {
-      if(jobs.length ==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/2"/>)
-      }
-      else if(
-        university.length == 0
-      ){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/3"/>)
-      }
-      else if(area.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/4"/>)
-      }
-      else if(day.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/5"/>)
-      }else if(mbti.length==0  || appearance.length==0)//|| fashion.length ==0
-      {
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/6"/>)
-      }
-      else if(characters.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/7"/>)
-      }
-      else if(prefferedage.length==0||prefferedjobs.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/8"/>)
-      }
-      else if(introduction.length==0){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/11"/>)
-      }
-      else if(!(privateinfoconfirm&&serviceconfirm&&ageinfo)){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/12"/>)
-      }
-      else if (!signin){
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/13"/>)
-      }
-      else if(!isLogin())
-      //로그인 안할시 불가
-      {
-       alert("입력 정보를 변경합니다.")
-        
-        return(<Navigate to="/apply/14"/>)
-      }
-      else{
+      if (jobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/2" />;
+      } else if (university.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/3" />;
+      } else if (area.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/4" />;
+      } else if (day.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/5" />;
+      } else if (mbti.length == 0 || appearance.length == 0) {
+        //|| fashion.length ==0
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/6" />;
+      } else if (characters.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/7" />;
+      } else if (prefferedage.length == 0 || prefferedjobs.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/8" />;
+      } else if (introduction.length == 0) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/11" />;
+      } else if (!(privateinfoconfirm && serviceconfirm && ageinfo)) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/12" />;
+      } else if (!(signin && kakaoId.length > 0)) {
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/13" />;
+      } else if (!isLogin()) {
+        //로그인 안할시 불가
+        alert('입력 정보를 변경합니다.');
+
+        return <Navigate to="/apply/14" />;
+      } else {
         complete();
         setNextPath('/');
       }
-   
     }
   };
 
@@ -732,12 +632,12 @@ const Footer = () => {
                 openModal();
               } else if (location === '/apply/4' && area.length === 0) {
                 openModal();
-              } else if (location === '/apply/5' && day.length <=1 ) {
+              } else if (location === '/apply/5' && day.length <= 1) {
                 openModal();
-                alert("2개 이상 선택해 주세요!")
+                alert('2개 이상 선택해 주세요!');
               } else if (
                 location === '/apply/6' &&
-                (appearance.length === 0 || mbti.length === 0 )//|| fashion.length === 0
+                (appearance.length === 0 || mbti.length === 0) //|| fashion.length === 0
               ) {
                 openModal();
               } else if (location === '/apply/7' && characters.length === 0) {

@@ -60,7 +60,7 @@ const Wants = () => {
         <Want want="코로나 때문에 못한 연애 오늘!?" meta={1}></Want>
       </WantBox>
       <WantBox>
-        <Want size="14px" want="친구는 다다익선! 찐친 만들어 보자." meta={2}></Want>
+        <Want want="친구는 다다익선! 찐친 만들어 보자." meta={2}></Want>
       </WantBox>
       <WantBox>
         <Want want="왁자지껄 이 밤이 떠너가라!" meta={3}></Want>

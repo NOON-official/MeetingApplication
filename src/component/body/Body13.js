@@ -19,7 +19,7 @@ const StyledInput = styled.input`
   ::placeholder {
     justify-content: center;
     text-align: 'center';
-    font-size:${(props)=> props.placholderFontSize||"15px"} ;
+    font-size: ${(props) => props.placholderFontSize || '15px'};
     outline: none;
   }
 `;
@@ -30,7 +30,7 @@ const Body13 = () => {
   const saveState = (key, state) => {
     try {
       const serializedState = state;
-      dispatch({type:`${key}`, payload:`${serializedState}`});
+      dispatch({ type: `${key}`, payload: `${serializedState}` });
     } catch {}
   };
 
@@ -48,10 +48,10 @@ const Body13 = () => {
       secondPhoneNumber.current.focus();
     }
   }, [phonenumFirst]);
-  useEffect(()=>{
+  useEffect(() => {
     let phoneNumber = basicPhoneNumber + phonenumFirst.concat(phoneNumSecond);
-    (phoneNumSecond.length==4) && dispatch({type: "SET_PHONE", payload:phoneNumber})
-  },[phoneNumSecond])
+    phoneNumSecond.length == 4 && dispatch({ type: 'SET_PHONE', payload: phoneNumber });
+  }, [phoneNumSecond]);
   // 뒤에서 버튼누를 시 redux로 넘기니 저장이 안되는 경우가 있어서 앞에서 확실하게 쥣번호 4개 입력시 데이터 저당하도록 설정
   const countryCode = '+82';
   const basicPhoneNumber = '010';
@@ -74,7 +74,7 @@ const Body13 = () => {
       alert('번호입력');
     } else {
       let phoneNumber = basicPhoneNumber + phonenumFirst.concat(phoneNumSecond);
-     
+
       saveState('SET_PHONE', phoneNumber);
       requestOTP();
     }
@@ -94,7 +94,7 @@ const Body13 = () => {
   };
   const requestOTP = React.useCallback(() => {
     authentication.languageCode = 'Ko';
-    
+
     if (phone.length >= 10) {
       generateRecaptcha();
 
@@ -117,9 +117,9 @@ const Body13 = () => {
     }
   }, [phone]);
   const KakaoInputHandler = (e) => {
-    let kakaoId = e.target.value
-    dispatch({type:"SET_KAKAOID", payload:kakaoId})
-  }
+    let kakaoId = e.target.value;
+    dispatch({ type: 'SET_KAKAOID', payload: kakaoId });
+  };
   const PhoneAuthInput = (e) => {
     let otp = e.target.value;
     if (otp.length === 6) {
@@ -143,12 +143,23 @@ const Body13 = () => {
   };
 
   return (
-    <Container>
-      <MobileBox overflow="scroll" >
-      <StyledDiv display="flex" direction="column" top="2%" width="90%" height="20%" left="50%" overflow="hidden">
+    <Container display="flex" justify_content="center" align_item="start">
+      <MobileBox position="static" transform="0" left="0" height="auto" overflow="scroll">
+        <StyledDiv
+          position="static"
+          display="flex"
+          direction="column"
+          top="2%"
+          width="90%"
+          transform="0"
+          left="0"
+          overflow="hidden"
+          margin="20px 0 20px 0"
+        >
           {/* HeaderBox*/}
           <StyledDiv
             position="static"
+            left="0"
             display="flex"
             direction="column"
             transform="0"
@@ -156,64 +167,78 @@ const Body13 = () => {
             margin="5px 0 0 10px"
           >
             <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%">
-              <StyledText position=" static" size="0.8em"  >
-              연락을 드릴 수 있게   전화번호 인증과
+              <StyledText position=" static" size="0.8em">
+                연락을 드릴 수 있게 전화번호 인증과
               </StyledText>
-            
             </StyledDiv>
             <StyledDiv position="static" display="flex" direction="row" transform="0" width="100%">
               {/* TitleBox*/}
               <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0">
                 {/* TextTitle*/}
 
-                <StyledText position=" static" size="0.8em" color="#F49393" >
-                 카카오톡 아이디를 입력해주세요!
+                <StyledText position=" static" size="0.8em" color="#F49393">
+                  카카오톡 아이디를 입력해주세요!
                 </StyledText>
-                
               </StyledDiv>
-              
             </StyledDiv>
           </StyledDiv>
-          
         </StyledDiv>
-      
-        <StyledDiv height="60%" top="20%" width="90%" left="50%" overflow="hidden">
-          <StyledDiv height="88px" width="100%" left="50%" border="10px" bg="white">
+
+        <StyledDiv position="0" width="90%" left="0" transform="0" display="flex" direction="column" overflow="hidden">
+          <StyledDiv
+            minHeight="100px"
+            position="static"
+            width="100%"
+            left="0"
+            transform="0"
+            display="flex"
+            border="10px"
+            bg="white"
+            direction="column"
+          >
             <StyledText
+              position="static"
               color="#777777"
               font="Pretendard"
               weight="400"
               size="12px"
-              height="30%"
-              width="90%"
-              top="20%"
-              left="5%"
+              padding=" 10px 0 10px 10px"
             >
               전화번호
             </StyledText>
-            <StyledDiv top="50%" width="100%" left="50%" height="50%">
+            <StyledDiv padding="20px 0 20px 0" position="static" display="flex" transform="0" width="100%" left="0">
               <StyledDiv
+                position="static"
                 display="flex"
                 justify_content="center"
                 align_item="center"
-                left="15%"
-                height="100%"
+                left="0"
                 width="28%"
+                transform="0"
                 size="15px"
               >
                 010
               </StyledDiv>
-              <StyledDiv text_align="center" justify_content="center" top="20%" left="33%" height="100%" width="7%">
+              <StyledDiv
+                position="static"
+                text_align="center"
+                justify_content="center"
+                left="0"
+                width="7%"
+                transform="0"
+              >
                 {' '}
                 -{' '}
               </StyledDiv>
               <StyledDiv
+                position="static"
                 display="flex"
                 justify_content="center"
                 align_item="center"
-                left="50%"
-                height="100%"
+                left="0"
                 width="28%"
+                transform="0"
+                size="15px"
               >
                 <StyledInput
                   name="phoneNumFirst"
@@ -222,17 +247,26 @@ const Body13 = () => {
                   ref={firstPhoneNumber}
                 ></StyledInput>
               </StyledDiv>
-              <StyledDiv text_align="center" justify_content="center" top="20%" left="68%" height="100%" width="7%">
+              <StyledDiv
+                position="static"
+                text_align="center"
+                justify_content="center"
+                left="0"
+                width="7%"
+                transform="0"
+              >
                 {' '}
                 -{' '}
               </StyledDiv>
               <StyledDiv
+                position="static"
                 display="flex"
                 justify_content="center"
                 align_item="center"
-                left="85%"
-                height="100%"
+                left="0"
                 width="28%"
+                transform="0"
+                size="15px"
               >
                 <StyledInput
                   ref={secondPhoneNumber}
@@ -245,98 +279,173 @@ const Body13 = () => {
           </StyledDiv>
           <StyledDiv
             onClick={onPhoneNumSubmit}
+            margin="10px 0 0 0"
+            position="static"
             border="10px"
             top="98px"
             height="60px"
+            display="flex"
+            align_item="center"
+            justify_content="center"
             width="100%"
             bg={ButtonColor}
-            left="50%"
+            left="0"
+            transform="0"
           >
-            <StyledText color={ButtonFontColor} size="24px" weight="400" top="25%" left="40%">
+            <StyledText
+              position="static"
+              color={ButtonFontColor}
+              size="24px"
+              weight="400"
+              top="25%"
+              left="0"
+              transform="0"
+            >
               인증번호 요청
             </StyledText>
           </StyledDiv>
           {authModalOpen && (
-            <>
-            <StyledDiv height="88px" width="100%" left="50%" border="10px" bg="white" top="50%">
-              <StyledText
-                color="#777777"
-                font="Pretendard"
-                weight="400"
-                size="13px"
-                height="30%"
-                width="90%"
-                top="20%"
-                left="5%"
+            <StyledDiv position="static" transform="0" left="0" display="flex" direction="column">
+              <StyledDiv
+                minHeight="70px"
+                position="static"
+                width="100%"
+                left="0"
+                transform="0"
+                display="flex"
+                border="10px"
+                bg="white"
+                direction="column"
+                margin="10px 0 0 0"
               >
-                인증번호
-              </StyledText>
-              <StyledDiv top="50%" width="100%" left="50%" height="50%">
-                <StyledDiv display="flex" justify_content="flex-start" left="50%" height="100%" width="100%">
-                  <StyledInput maxLength={6} name="otp" onChange={PhoneAuthInput} placeholder="12345"></StyledInput>
-                  <StyledDiv left="90%">{signin ? <CheckIcon /> : <CheckIcon className="bright" />}</StyledDiv>
+                <StyledText
+                  position="static"
+                  color="#777777"
+                  font="Pretendard"
+                  weight="400"
+                  size="13px"
+                  width="90%"
+                  top="20%"
+                  left="5%"
+                  padding="10px 0 0 10px"
+                >
+                  인증번호
+                </StyledText>
+                <StyledDiv position="static" display="felx" width="100%" left="0" transform="0">
+                  <StyledDiv
+                    position="static"
+                    display="flex"
+                    justify_content="space-between"
+                    left="0"
+                    transform="0"
+                    width="100%"
+                    padding="10px 0 0 0"
+                  >
+                    <StyledInput maxLength={6} name="otp" onChange={PhoneAuthInput} placeholder="12345"></StyledInput>
+                    <StyledDiv padding="0 20px 0 0" position="static" left="0" transform="0">
+                      {signin ? <CheckIcon /> : <CheckIcon className="bright" />}
+                    </StyledDiv>
+                  </StyledDiv>
                 </StyledDiv>
               </StyledDiv>
-            </StyledDiv>
               <StyledDiv
-              top="90%"
-              left="50%"
-              heigth="10%"
-              width="100%"
-              justify_content="center"
-              align_item="center"
-              text_align="center"
-              font="Pretendard"
-              color="#AAAAAA"
-              size="12px"
-            >
-              수집된 번호는 매칭에만 활용되고 <br /> 상대팀에게 전달되지 않습니다.
+                position="static"
+                transform="0"
+                left="0"
+                heigth="50px"
+                width="100%"
+                justify_content="center"
+                align_item="center"
+                text_align="center"
+                font="Pretendard"
+                color="#AAAAAA"
+                size="12px"
+                margin="10px 0 0 0"
+              >
+                수집된 번호는 매칭에만 활용되고 <br /> 상대팀에게 전달되지 않습니다.
+              </StyledDiv>
             </StyledDiv>
-            </>
           )}
-        
-          
         </StyledDiv>
         <StyledDiv
-            top="90%"
-            left="50%"
-            height="50%"
-            width="100%"
-       
+          margin="20px 0 0 0"
+          position="static"
+          left="0"
+          transform="0"
+          display="flex"
+          width="100%"
+          align_item="center"
+          direction="column"
+        >
+          <StyledDiv
+            position="static"
+            display="flex"
+            direction="column"
+            width="90%"
+            left="0"
+            transform="0"
+            overflow="hidden"
           >
-              <StyledDiv display="flex" direction="column" top="2%" width="90%" height="10%" left="50%" overflow="hidden">
-            <StyledDiv position="static" display="flex" direction="row" size="35px" transform="0" width="100%" justify_content="center">
-              <StyledText position=" static" size="0.8em" text_align="center" >
-             카카오톡 아이디를 입력해주세요.
+            <StyledDiv
+              position="static"
+              minHeight="100px"
+              display="flex"
+              direction="row"
+              size="35px"
+              transform="0"
+              width="100%"
+              justify_content="center"
+            >
+              <StyledText position=" static" size="0.8em" text_align="center">
+                카카오톡 아이디를 입력해주세요.
               </StyledText>
             </StyledDiv>
-            </StyledDiv>
-          
-            <StyledDiv height="88px" width="90%" left="50%" border="10px" bg="white" top="20%">
-              <StyledText
-                color="#777777"
-                font="Pretendard"
-                weight="400"
-                size="13px"
-                height="30%"
-                width="90%"
-                top="20%"
-                left="5%"
+          </StyledDiv>
+
+          <StyledDiv
+            minHeight="80px"
+            position="static"
+            width="90%"
+            left="0"
+            transform="0"
+            display="flex"
+            border="10px"
+            bg="white"
+            direction="column"
+          >
+            <StyledText
+              position="static"
+              color="#777777"
+              font="Pretendard"
+              weight="400"
+              size="12px"
+              padding=" 10px 0 10px 10px"
+            >
+              카카오톡 아이디
+            </StyledText>
+            <StyledDiv position="static" top="50%" width="100%" left="0" transform="0" height="53%">
+              <StyledDiv
+                position="static"
+                display="flex"
+                justify_content="flex-start"
+                transform="0"
+                left="0"
+                height="100%"
+                width="100%"
               >
-                카카오톡 아이디
-            
-              </StyledText>
-              <StyledDiv top="50%" width="100%" left="50%" height="53%">
-                <StyledDiv display="flex" justify_content="flex-start" left="50%" height="100%" width="100%">
-                  <StyledInput placholderFontSize="12px" name="otp" onChange={KakaoInputHandler} placeholder="원활한 서비스 이용을 위해 카카오톡 아이디검색 허용을 해주세요.">
-                  </StyledInput>
-               
-                </StyledDiv>
+                <StyledInput
+                  placholderFontSize="12px"
+                  name="otp"
+                  onChange={KakaoInputHandler}
+                  placeholder="원활한 서비스 이용을 위해 카카오톡 아이디검색 허용을 해주세요."
+                ></StyledInput>
               </StyledDiv>
             </StyledDiv>
-            <StyledDiv  
-            top="70%"
-            left="50%"
+          </StyledDiv>
+          <StyledDiv
+            position="static"
+            left="0"
+            transform="0"
             height="10%"
             width="100%"
             justify_content="center"
@@ -344,15 +453,15 @@ const Body13 = () => {
             text_align="center"
             font="Pretendard"
             color="#AAAAAA"
-            size="12px">
+            size="12px"
+            margin="20px"
+          >
             카카오톡 아이디는 서로 미팅을 수락할 경우 <br /> 상대팀에게 전달됩니다.
-            </StyledDiv>
           </StyledDiv>
-  
+        </StyledDiv>
       </MobileBox>
       <div id="recaptchaContainer"></div>
     </Container>
-    
   );
 };
 export default Body13;
