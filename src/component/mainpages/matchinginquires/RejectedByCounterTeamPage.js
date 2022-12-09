@@ -3,6 +3,7 @@ import { ReactComponent as Character } from '../../../Asset/mainPage/FailCharact
 
 import client from '../../../api';
 const RejectedByCounterTeam = () => {
+  let userId = window.localStorage.getItem('id');
   const Rematch = async () => {
     let ourteamId = window.localStorage.getItem('ourteamId');
     await client
@@ -38,21 +39,23 @@ const RejectedByCounterTeam = () => {
           // 팀 아이디 새로 저장 후 이걸로 pageState 다시 불러야됨
         );
       })
-      .then(() => {
-        client
+      .then(async () => {
+        await client
           .get(`api/team/ourteam-id/${userId}`)
           .then((res) => {
             window.localStorage.setItem('ourteamId', res.data.data.ourteamId);
           })
+          .then(() => window.location.reload())
+
           .catch((err) => console.log(err));
       })
 
       .catch((err) => {
         console.log(err);
-        alert('해당 아이디의 정보가 없습니다.');
       });
     window.location.reload();
   };
+
   return (
     <StyledDiv
       position="static"
