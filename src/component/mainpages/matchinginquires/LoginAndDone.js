@@ -1,4 +1,4 @@
-import { StyledDiv, StyledButton, StyledTextArea } from '../../Elements/StyledComponent';
+import { StyledDiv, StyledButton, StyledTextArea, Container, MobileBox } from '../../Elements/StyledComponent';
 import { ReactComponent as Character } from '../../../Asset/mainPage/Character.svg';
 import client from '../../../api';
 import { useEffect, useState } from 'react';
@@ -147,7 +147,7 @@ const Done = () => {
       >
         <Reasons text="나이가 마음에 들지 않아요" meta={1}></Reasons>
         <Reasons text="학교가 마음에 들지 않아요" meta={2}></Reasons>
-        <Reasons text="자기소개가 마음에 지 않아요" meta={3}></Reasons>
+        <Reasons text="자기소개가 마음에 들지 않아요" meta={3}></Reasons>
         <Reasons text="팀 내부 사정으로 거절 했어요" meta={4}></Reasons>
 
         <StyledDiv
@@ -197,6 +197,7 @@ const Done = () => {
           position=" static"
           transform="0"
           left="0"
+          margin="50px 0 0 0"
           height="80%"
           bg="white"
           width="90%"
@@ -491,9 +492,11 @@ const Done = () => {
     }
   };
   return (
-    <div style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-      <DonePage />
-    </div>
+    <Container height={'100%'} bg="#f8f3f3">
+      <MobileBox overflow="scroll" justify_content=" start" height="100%">
+        <DonePage />
+      </MobileBox>
+    </Container>
   );
 };
 
