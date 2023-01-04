@@ -1,0 +1,37 @@
+import { createBrowserRouter } from "react-router-dom";
+
+import Main from "./pages/main/index";
+import NotFound from "./pages/errorpage/NotFound";
+import App from "./App";
+import Guide from "./pages/main/guide";
+import Matching from "./pages/main/matching";
+import MyInfo from "./pages/main/myinfo";
+
+const Router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <Main />,
+        children: [
+          {
+            path: "/guide",
+            element: <Guide />,
+          },
+          {
+            path: "/matching",
+            element: <Matching />,
+          },
+          {
+            path: "/myinfo",
+            element: <MyInfo />,
+          },
+        ],
+      },
+    ],
+  },
+]);
+
+export default Router;
