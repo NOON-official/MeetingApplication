@@ -1,19 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+
 @font-face {
     font-family:  'Nanum JungHagSaeng';
     src: url('./font/nanumfont.woff') format('woff');
     font-size: 28px;
     color: black;
 }
-
-
-    /*reset*/
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -59,3 +53,5 @@ table {
 	border-spacing: 0;
 }
 `;
+
+export default GlobalStyle;
