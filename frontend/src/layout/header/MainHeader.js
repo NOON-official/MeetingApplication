@@ -1,7 +1,7 @@
 import styled from "styled-components";
-
 import { Link, useMatch } from "react-router-dom";
-import { useState } from "react";
+
+import { theme } from "../../Style/theme";
 
 const MainHeader = () => {
   const homeMatch = useMatch("/");
@@ -30,18 +30,27 @@ const MainHeader = () => {
 export default MainHeader;
 
 const Container = styled.div`
-  padding: 0 20px;
-  margin-top: 10px;
+  height: 70px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid ${(props) => props.theme.pink};
+  border-bottom: 1px solid ${theme.pink};
+  padding: 0 20px;
 `;
 
 const Menu = styled.div`
-  background-color: ${(props) => `${props.isActive ? "blue" : ""}`};
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-radius: 15px;
+  line-height: 50px;
+  width: 25%;
+  background-color: ${(props) =>
+    `${props.isActive ? `${theme.pink}` : `${theme.background}`}`};
 `;
 
 const SLink = styled(Link)`
+  font-size: 20px;
+  width: 100%;
   text-decoration: none;
   color: black;
 `;

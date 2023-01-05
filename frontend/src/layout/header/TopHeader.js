@@ -7,9 +7,11 @@ import { theme } from "../../Style/theme";
 const TopHeader = () => {
   return (
     <Container>
-      <Link to="/">
-        <Header />
-      </Link>
+      <Logo>
+        <Link to="/">
+          <Header />
+        </Link>
+      </Logo>
       <LoginBox>로그인</LoginBox>
     </Container>
   );
@@ -19,12 +21,17 @@ export default TopHeader;
 
 const Container = styled.div`
   width: 100%;
-  background-color: ${(props) => props.theme.lightpink};
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
 const LoginBox = styled.div`
-  padding-right: ${theme.width * 2}px;
+  padding-right: ${theme.width * 5}px;
+  font-size: 15px;
+`;
+
+const Logo = styled.div`
+  padding-left: ${theme.width * 5}px;
 `;

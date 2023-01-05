@@ -36,6 +36,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	font-family:  'Nanum JungHagSaeng';
+    src: url('./font/nanumfont.woff') format('woff');
+    font-size: 28px;
+    color: black;
 }
 ol, ul {
 	list-style: none;
