@@ -15,20 +15,18 @@ const Router = createBrowserRouter([
       {
         path: "",
         element: <Main />,
-        children: [
-          {
-            path: "/guide",
-            element: <Guide />,
-          },
-          {
-            path: "/matching",
-            element: <Matching />,
-          },
-          {
-            path: "/myinfo",
-            element: <MyInfo />,
-          },
-        ],
+      },
+      {
+        path: "guide",
+        element: <Guide />,
+      },
+      {
+        path: "matching",
+        element: <Matching />,
+      },
+      {
+        path: "myinfo",
+        element: <MyInfo />,
       },
     ],
   },

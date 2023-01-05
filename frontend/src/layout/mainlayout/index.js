@@ -1,13 +1,22 @@
-import MainHeader from "../header/MainHeader";
-import TopHeader from "../header/TopHeader";
+import styled from "styled-components";
+
+import MainHeader from "../header/mainHeader";
+import TopHeader from "../header/topHeader";
+import { theme } from "../../Style/theme";
 
 const MainLayOut = ({ children }) => {
   return (
-    <div>
+    <Container>
       <TopHeader />
       <MainHeader />
-      {children}
-    </div>
+      <Content>{children}</Content>
+    </Container>
   );
 };
 export default MainLayOut;
+
+const Container = styled.div`
+  background-color: ${theme.background};
+`;
+
+const Content = styled.div``;
