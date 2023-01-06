@@ -1,18 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 
-import { ReactComponent as DownArrow } from "../../asset/svg/DownArrow.svg";
-import { ReactComponent as UpArrow } from "../../asset/svg/UpArrow.svg";
+import GuideBox from "../../components/guideBox";
 import MainLayOut from "../../layout/mainlayout";
 import { theme } from "../../Style/theme";
 
 const Guide = () => {
-  const [commentOpened, setCommentOpened] = useState(false);
-
-  const onToggleComment = useCallback(() => {
-    setCommentOpened((prev) => !prev);
-  }, []);
-
   const ServiceGuide = [
     {
       title: "미팅학개론은 어떤 서비스인가요?",
@@ -76,29 +69,9 @@ const Guide = () => {
   return (
     <MainLayOut>
       <Title>미팅학개론</Title>
-      {ServiceGuide.map((a) => (
-        <SubTitle key={a.title}>
-          {a.title}
-          <ArrowBox onClick={onToggleComment}>
-            {commentOpened ? (
-              <UpArrow key={a.title} />
-            ) : (
-              <DownArrow key={a.title} />
-            )}
-            {commentOpened && <div>{a.content}</div>}
-          </ArrowBox>
-        </SubTitle>
-      ))}
+      {ServiceGuide.map((a) => GuideBox(a))}
       <Title>자주묻는 질문</Title>
-      {GuideList.map((a) => (
-        <SubTitle key={a.title}>
-          {a.title}
-          <ArrowBox onClick={onToggleComment}>
-            {commentOpened ? <UpArrow /> : <DownArrow />}
-            {commentOpened && <div>{a.content}</div>}
-          </ArrowBox>
-        </SubTitle>
-      ))}
+      {GuideList.map((a) => GuideBox(a))}
     </MainLayOut>
   );
 };
@@ -109,10 +82,3 @@ const Title = styled.div`
   margin-top: 30px;
   background-color: ${theme.pink};
 `;
-
-const SubTitle = styled.div`
-  margin-top: 10px;
-  background-color: white;
-`;
-
-const ArrowBox = styled.div``;
