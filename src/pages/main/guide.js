@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import GuideBox from "../../components/guideBox";
