@@ -6,13 +6,15 @@ import { Provider } from "react-redux";
 
 import { theme } from "./Style/theme";
 import Router from "./Router";
-import store from "./store/store";
+import createstore from "./store/store";
+
+const store = createstore();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ThemeProvider theme={theme}>
-    <Provider store={store()}>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
       <RouterProvider router={Router} />
-    </Provider>
-  </ThemeProvider>
+    </ThemeProvider>
+  </Provider>
 );
