@@ -1,14 +1,18 @@
-import MainLayOut from "../../layout/mainlayout";
 import styled from "styled-components";
+
 import { ReactComponent as MainImg } from "../../asset/svg/MainImg.svg";
+import MainLayOut from "../../layout/mainlayout";
 
 const Main = () => {
   return (
-    <MainLayOut>
-      <ImgBox>
-        <MainImg />
-      </ImgBox>
-    </MainLayOut>
+    <>
+      <MainLayOut>
+        <ImgBox>
+          <MainImg />
+        </ImgBox>
+        <div>매칭박스</div>
+      </MainLayOut>
+    </>
   );
 };
 
