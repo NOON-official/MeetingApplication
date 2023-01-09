@@ -17,4 +17,5 @@ export default Main;
 const ImgBox = styled.div`
   display: flex;
   justify-content: center;
+  font-family: var(--font-family);
 `;

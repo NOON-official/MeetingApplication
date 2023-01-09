@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "Nanum JungHagSaeng";
+  font-style: normal;
+  src: url("../font/nanumfont.woff") format("woff");
+  font-size: 28px;
+  color: black;
+}
