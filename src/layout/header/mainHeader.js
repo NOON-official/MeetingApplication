@@ -31,6 +31,7 @@ export default MainHeader;
 
 const Container = styled.div`
   height: 70px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid ${theme.pink};
