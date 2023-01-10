@@ -1,8 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 import "./font.css";
+
+
+
 const GlobalStyle = createGlobalStyle`
-
-
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -31,9 +32,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-	font-family:  'Nanum JungHagSaeng';
-    src: url('./font/nanumfont.woff') format('woff');
-    font-size: 28px;
+	font-family: 'Pretendard';
     color: black;
 }
 ol, ul {

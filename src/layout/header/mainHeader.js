@@ -45,13 +45,13 @@ const Menu = styled.div`
   border-radius: 15px;
   line-height: 50px;
   width: 25%;
-  background-color: ${(props) =>
-    `${props.isActive ? `${theme.pink}` : `${theme.background}`}`};
+  background-color: ${(props) => `${props.isActive ? `${theme.pink}` : `${theme.background}`}`};
 `;
 
 const SLink = styled(Link)`
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 13px;
+  color: #858585;
   width: 100%;
   text-decoration: none;
-  color: black;
 `;

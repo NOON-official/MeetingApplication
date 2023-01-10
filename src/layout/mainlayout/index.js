@@ -25,5 +25,8 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  width: 100%;
+  width: 375px;
+  display:flex;
+  justify-content:center;
+  flex-wrap: wrap;
 `;
