@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { theme } from "../../Style/theme";
-
 const MainFooter = () => {
   return (
     <Footer>
