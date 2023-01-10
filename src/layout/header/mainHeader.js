@@ -11,17 +11,17 @@ const MainHeader = () => {
 
   return (
     <Container>
-      <Menu isActive={homeMatch}>
-        <SLink to="/">홈</SLink>
+      <Menu isactive={homeMatch}>
+        <SLink to="/" isactive={homeMatch}>홈</SLink>
       </Menu>
-      <Menu isActive={guideMatch}>
-        <SLink to="/guide">가이드</SLink>
+      <Menu isactive={guideMatch}>
+        <SLink to="/guide" isactive={guideMatch}>가이드</SLink>
       </Menu>
-      <Menu isActive={matchingMatch}>
-        <SLink to="/matching">매칭조회</SLink>
+      <Menu isactive={matchingMatch}>
+        <SLink to="/matching" isactive={matchingMatch}>매칭조회</SLink>
       </Menu>
-      <Menu isActive={myinfoMatch}>
-        <SLink to="/myinfo">내정보</SLink>
+      <Menu isactive={myinfoMatch}>
+        <SLink to="/myinfo" isactive={myinfoMatch}>내정보</SLink>
       </Menu>
     </Container>
   );
@@ -33,9 +33,9 @@ const Container = styled.div`
   height: 70px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   border-bottom: 1px solid ${theme.pink};
-  padding: 0 20px;
+  padding-bottom:8px;
 `;
 
 const Menu = styled.div`
@@ -44,14 +44,15 @@ const Menu = styled.div`
   text-align: center;
   border-radius: 15px;
   line-height: 50px;
-  width: 25%;
-  background-color: ${(props) => `${props.isActive ? `${theme.pink}` : `${theme.background}`}`};
+  width: 300px;
+  background-color: ${(props) => `${props.isactive ? `${theme.pink}` : `${theme.background}`}`};
+  color: ${(props) => `${props.isActive ? "white" : "#858585"}`};
 `;
 
 const SLink = styled(Link)`
+  color: ${(props) => `${props.isactive ? "white" : "#858585"}`};
   font-weight: 400;
   font-size: 13px;
-  color: #858585;
   width: 100%;
   text-decoration: none;
 `;

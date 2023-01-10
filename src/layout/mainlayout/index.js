@@ -10,8 +10,10 @@ const MainLayOut = ({ children }) => {
     <Container>
       <TopHeader />
       <MainHeader />
-      <Content>{children}</Content>
-      <MainFooter />
+      <Content>
+        {children}
+        <MainFooter />
+      </Content>
     </Container>
   );
 };
@@ -25,7 +27,8 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  width: 375px;
+  width: 400px;
+  background-color: ${theme.background};
   display:flex;
   justify-content:center;
   flex-wrap: wrap;
