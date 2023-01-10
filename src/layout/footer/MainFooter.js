@@ -35,6 +35,8 @@ const MainFooter = () => {
 export default MainFooter;
 
 const Footer = styled.div`
+  padding-top:20px;
+  margin-top:38px;
   width: 100%;
   border-top: 1px solid #d6d6d6;
   display: flex;
@@ -42,19 +44,22 @@ const Footer = styled.div`
 `;
 const SLink = styled.a`
   color: #515151;
-  font-size: ${theme.smallText};
+  font-size: 13px;
 `;
 const HeaderFooter = styled.div`
+  font-weight: 400;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const BottomFooter = styled.div`
+  margin-top:54px;
+`;
+const Info = styled.div`
   font-weight: 400;
   font-size: 7px;
   color: #9f9f9f;
 `;
-const Info = styled.div``;

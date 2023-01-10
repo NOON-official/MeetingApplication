@@ -68,10 +68,12 @@ const Guide = () => {
 
   return (
     <MainLayOut>
-      <Title>미팅학개론</Title>
-      {ServiceGuide.map((a) => GuideBox(a))}
-      <Title>자주묻는 질문</Title>
-      {GuideList.map((a) => GuideBox(a))}
+      <Container>
+        <Title>미팅학개론</Title>
+        {ServiceGuide.map((a) => GuideBox(a))}
+        <Title>자주묻는 질문</Title>
+        {GuideList.map((a) => GuideBox(a))}
+      </Container>
     </MainLayOut>
   );
 };
@@ -81,4 +83,9 @@ export default Guide;
 const Title = styled.div`
   margin-top: 30px;
   background-color: ${theme.pink};
+`;
+
+const Container = styled.div`
+  width:100%;
+  font-family: "Nanum JungHagSaeng";
 `;

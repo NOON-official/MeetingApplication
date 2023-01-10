@@ -29,4 +29,8 @@ const SubTitle = styled.div`
   background-color: white;
 `;
 
-const ArrowBox = styled.div``;
+const ArrowBox = styled.div`
+  :hover {
+    cursor: pointer;
+  }
+`;
