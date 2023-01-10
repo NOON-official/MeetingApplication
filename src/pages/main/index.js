@@ -30,7 +30,7 @@ export default Main;
 const ImgBox = styled.div`
   position: relative;
   margin-right:40px;
-  width:100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
 `;

@@ -1,8 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import "./font.css";
 
-
-
 const GlobalStyle = createGlobalStyle`
 
 html, body, div, span, applet, object, iframe,
@@ -32,7 +30,6 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-	font-family: 'Pretendard';
     color: black;
 }
 ol, ul {
