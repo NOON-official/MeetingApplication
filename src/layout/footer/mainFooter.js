@@ -19,15 +19,6 @@ const MainFooter = () => {
           문의사항
         </SLink>
       </HeaderFooter>
-      <BottomFooter>
-        <Info>노온</Info>
-        <Info>대표자 남한솔 사업자등록번호 811-29-00871</Info>
-        <Info>통신판매업신고 : 2021-서울성북-1613</Info>
-        <Info>연락처 : 070-8064-3036 / noon.official.info@gmail.com</Info>
-        <Info>
-          주소지 서울시 성북구 장월로 1마길 56 DAC 스타트업 인큐베이팅센터
-        </Info>
-      </BottomFooter>
     </Footer>
   );
 };
