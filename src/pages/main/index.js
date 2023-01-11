@@ -10,10 +10,10 @@ import MainFooter from "../../layout/footer/mainFooter";
 
 const Main = () => {
   
-  const a = 19;
-  const b = 35;
-  const c = 19;
-  const d = 35;
+  const twoman = 25;
+  const twogirl = 10;
+  const threeman = 3;
+  const threegirl = 24;
 
   return (
     <>
@@ -26,21 +26,25 @@ const Main = () => {
           <Title>50명이 채워지면 바로 매칭됩니다.</Title>
           <SubTitle>2 : 2</SubTitle>
           <TotalBar>
-            <Number>3</Number>
-            <LeftBar/>
-            <LeftBarProgress progress={a}/>
-            <RightBar></RightBar>
-            <RightBarProgress progress={b}/>
-            <Number>18</Number>
+            <Number>{twoman}</Number>
+            <LeftBar>
+              <LeftBarProgress progress={twoman}/>
+            </LeftBar>
+            <RightBar>
+              <RightBarProgress progress={twogirl}/>
+            </RightBar>
+            <Number>{twogirl}</Number>
           </TotalBar>
           <SubTitle>3 : 3</SubTitle>
           <TotalBar>
-            <Number>3</Number>
-            <LeftBar/>
-            <LeftBarProgress progress={c}/>
-            <RightBar></RightBar>
-            <RightBarProgress progress={d}/>
-            <Number>18</Number>
+            <Number>{threeman}</Number>
+            <LeftBar>
+              <LeftBarProgress progress={threeman}/>
+            </LeftBar>
+            <RightBar>
+              <RightBarProgress progress={threegirl}/>
+            </RightBar>
+            <Number>{threegirl}</Number>
           </TotalBar>
         </MatchingBox>
         <SLink to ="/apply/team">매칭 시작하기</SLink>
@@ -76,6 +80,9 @@ const Users = styled.div`
 `;
 
 const MatchingBox = styled.div`
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
   margin-top:20px;
   font-family: "Nanum JungHagSaeng";
   font-weight: 400;
@@ -89,10 +96,12 @@ const MatchingBox = styled.div`
 `;
 
 const Title = styled.p`
+  width:100%;
   color: ${theme.pink};
 `;
 
 const SubTitle = styled.p`
+  width:100%;
   color:black;
   margin-top:5px;
 `;
@@ -104,8 +113,10 @@ const TotalBar = styled.div`
 `;
 
 const LeftBar = styled.div`
+  display:flex;
+  justify-content:flex-end;
   position:relative;
-  width: 107px;
+  width: 110px;
   height: 18px;
   background: white;
   border: 1px solid #F1ECEC;
@@ -114,7 +125,8 @@ const LeftBar = styled.div`
 `;
 
 const RightBar = styled.div`
-  width: 107px;
+  position:relative;
+  width: 110px;
   height: 18px;
   background: white;
   border: 1px solid #F1ECEC;
@@ -124,27 +136,26 @@ const RightBar = styled.div`
 
 const LeftBarProgress = styled.div`
   position:absolute;
-  margin-right:112px;
-  width: 107px;
+  max-width:110px;
+  ${({ progress }) => { return progress ? `width: ${progress*4.4}px` : `width: 0`}};
   height: 18px;
   background: #BFE0FF;
-  border: 1px solid #F1ECEC;
   border-top-left-radius:10px;
   border-bottom-left-radius:10px;
 `;
 
 const RightBarProgress = styled.div`
   position:absolute;
-  margin-left:107px;
-  width: 107px;
+  max-width:110px;
+  ${({ progress }) => { return progress ? `width: ${progress*4.4}px` : `width: 0`}};
   height: 18px;
   background: #FFBFBF;
-  border: 1px solid #F1ECEC;
   border-top-right-radius:10px;
   border-bottom-right-radius:10px;
 `;
 
 const Number = styled.p`
+  width:10px;
   padding: 0 10px;
   font-family: "Nanum JungHagSaeng";
   font-weight: 400;
