@@ -38,7 +38,7 @@ const Router = createBrowserRouter([
         path: "apply/college",
         element: <College />,
       },
-
+    
     ],
   },
 ]);
