@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import GuideBox from "../../components/guideBox";
+import MainFooter from "../../layout/footer/mainFooter";
 import MainLayOut from "../../layout/mainlayout";
 import { theme } from "../../Style/theme";
 
@@ -74,6 +75,7 @@ const Guide = () => {
         <Title>자주묻는 질문</Title>
         {GuideList.map((a) => GuideBox(a))}
       </Container>
+      <MainFooter/>
     </MainLayOut>
   );
 };

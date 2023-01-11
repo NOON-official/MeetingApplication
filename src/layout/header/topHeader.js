@@ -18,7 +18,7 @@ const TopHeader = () => {
         </Link>
       </Logo>
       <LoginBox onClick={loginHandler}>
-        {login ? <div>로그인</div> : <div>로그아웃</div>}
+        {login ? <Text>로그인</Text> : <Text>로그아웃</Text>}
       </LoginBox>
     </Container>
   );
@@ -28,7 +28,9 @@ export default TopHeader;
 
 const Container = styled.div`
   width: 100%;
+  padding: 0 30px;
   height: 70px;
+  max-height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,4 +47,10 @@ const LoginBox = styled.button`
 
 const Logo = styled.div`
   padding-left: ${theme.width * 5}px;
+`;
+
+const Text = styled.div`
+  font-weight: 400;
+  font-size: 11px;
+  color: #858585;
 `;

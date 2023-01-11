@@ -1,6 +1,5 @@
 export const theme = {
-  font: "Pretendard",
-  width: `${window.innerWidth / 200}`,
+  Prefont: "Pretendard",
   grey: "#80808029",
   pink: "#eb8888",
   background: "#F8F3F3",
