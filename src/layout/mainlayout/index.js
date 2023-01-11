@@ -3,7 +3,6 @@ import styled from "styled-components";
 import MainHeader from "../header/mainHeader";
 import TopHeader from "../header/topHeader";
 import { theme } from "../../Style/theme";
-import MainFooter from "../footer/mainFooter";
 
 const MainLayOut = ({ children }) => {
   return (
@@ -12,7 +11,6 @@ const MainLayOut = ({ children }) => {
       <MainHeader />
       <Content>
         {children}
-        <MainFooter />
       </Content>
     </Container>
   );
@@ -20,6 +18,7 @@ const MainLayOut = ({ children }) => {
 export default MainLayOut;
 
 const Container = styled.div`
+  min-height:100vh;
   background-color: ${theme.background};
   display: flex;
   flex-wrap: wrap;
@@ -28,6 +27,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   width: 400px;
+  min-height: calc(100vh - 120px);
   background-color: ${theme.background};
   display:flex;
   justify-content:center;

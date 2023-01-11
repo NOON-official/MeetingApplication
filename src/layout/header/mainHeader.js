@@ -30,7 +30,8 @@ const MainHeader = () => {
 export default MainHeader;
 
 const Container = styled.div`
-  height: 70px;
+  height: 60px;
+  max-height: 60px;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -46,7 +47,6 @@ const Menu = styled.div`
   line-height: 50px;
   width: 300px;
   background-color: ${(props) => `${props.isactive ? `${theme.pink}` : `${theme.background}`}`};
-  color: ${(props) => `${props.isActive ? "white" : "#858585"}`};
 `;
 
 const SLink = styled(Link)`
