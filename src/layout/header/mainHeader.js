@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link, useMatch } from "react-router-dom";
 
-import { theme } from "../../Style/theme";
+import { theme } from "../../style/theme";
 
 const MainHeader = () => {
   const homeMatch = useMatch("/");

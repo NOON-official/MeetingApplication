@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Header } from "../../asset/svg/Header.svg";
-import { theme } from "../../Style/theme";
+import { theme } from "../../style/theme";
 import { useCallback, useState } from "react";
 import KakaoLoigin from '../../util/login/kakaoLogin';
 
