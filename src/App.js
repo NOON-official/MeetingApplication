@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import GlobalStyle from "./Style/global";
+import GlobalStyle from "./style/global";
 
 function App() {
   return (
