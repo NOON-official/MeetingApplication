@@ -8,7 +8,7 @@ import Matching from "./pages/main/matching";
 import MyInfo from "./pages/main/myinfo";
 import Team from "./pages/apply/team";
 import College from "./pages/apply/college";
-
+import KakaoCallback from "./util/login/MainPageLoginCallback";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -38,7 +38,9 @@ const Router = createBrowserRouter([
         path: "apply/college",
         element: <College />,
       },
-    
+    {
+      path: '/auth/kakao/main/callback',
+      element:<KakaoCallback/>,}
     ],
   },
 ]);
