@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 import { theme } from "../../Style/theme";
 import MainFooter from "../../layout/footer/mainFooter";
 import MainLayOut from "../../layout/mainlayout";
-// import { ReactComponent as Invitefreinds } from "../../asset/svg/Invitefreinds.svg";
+import { ReactComponent as Invitefreinds } from "../../asset/svg/Invitefreinds.svg";
+import { ReactComponent as RightArrow } from "../../asset/svg/RightArrow.svg";
+import { ReactComponent as Share } from "../../asset/svg/Share.svg";
 
 const MyInfo = () => {
   return (
     <MainLayOut>
       <Account>
-        <Item><SLink to="">계정관리</SLink></Item>
-        <Item><SLink to="">이용권현황</SLink></Item>
-        <LItem><SLink to="">제안하기</SLink></LItem>
+        <Item><SLink to="">계정관리</SLink><RightArrow/></Item>
+        <Item><SLink to="">이용권현황</SLink><RightArrow/></Item>
+        <LItem><SLink to="">제안하기</SLink><RightArrow/></LItem>
       </Account>
       <CouponBox>
         <Title>친구 4명을 초대하면 스타벅스 커피 1잔 쿠폰을 드려요!</Title>
@@ -23,6 +25,7 @@ const MyInfo = () => {
           <Circle>4</Circle>
         </Coupons>
       </CouponBox>
+      <Invitefreinds/>
       <MainFooter/>
     </MainLayOut>
   );
@@ -44,6 +47,10 @@ const Account = styled.div`
 `;
 
 const Item = styled.div`
+  display:flex;
+  padding-right:10px;
+  align-items:center;
+  justify-content:space-between;
   width:85%;
   padding-left:10px;
   font-weight: 600;
@@ -55,6 +62,10 @@ const Item = styled.div`
 `;
 
 const LItem = styled.div`
+  padding-right:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   width:85%;
   padding-left:10px;
   height:50px;
