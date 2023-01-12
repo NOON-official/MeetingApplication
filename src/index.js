@@ -4,9 +4,9 @@ import { ThemeProvider } from "styled-components";
 import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import { theme } from "./Style/theme";
+import { theme } from "./style/theme";
 import Router from "./Router";
-import createstore from "./store/store";
+import createstore from "./store";
 
 const store = createstore();
 

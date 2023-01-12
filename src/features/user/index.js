@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { login } from "./asyncActions";
 
 export const initialState = {
   loginLoading: false, // 로그인 시도중
@@ -28,7 +29,13 @@ const userSlice = createSlice({
       state.loginError = action.payload;
     },
   },
-  extraReducers: (builder) => builder,
+  extraReducers: (builder) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.loginDone = true;
+    })
+  },
 });
 
-export default userSlice;
+export const { loginLoading, loginDone, loginError } = userSlice.actions
+
+export default userSlice.reducer
