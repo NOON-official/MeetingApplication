@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
-const MainPageLogin = () => {
+const KakaoLogin = () => {
   const { Kakao } = window;
 
   const LoginWithKakao = useCallback(() => {
@@ -15,5 +15,5 @@ const MainPageLogin = () => {
   );
 };
 
-export default MainPageLogin;
+export default KakaoLogin ;
 
