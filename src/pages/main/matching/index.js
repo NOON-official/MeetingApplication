@@ -1,5 +1,5 @@
-import MainFooter from "../../layout/footer/mainFooter";
-import MainLayOut from "../../layout/mainlayout";
+import MainFooter from "../../../layout/footer/mainFooter";
+import MainLayOut from "../../../layout/mainlayout";
 
 const Matching = () => {
   return (

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { theme } from "../../style/theme";
-import MainFooter from "../../layout/footer/mainFooter";
-import MainLayOut from "../../layout/mainlayout";
-import { ReactComponent as Invitefreinds } from "../../asset/svg/Invitefreinds.svg";
-import { ReactComponent as RightArrow } from "../../asset/svg/RightArrow.svg";
-import { ReactComponent as Share } from "../../asset/svg/Share.svg";
+import { theme } from "../../../style/theme";
+import MainFooter from "../../../layout/footer/mainFooter";
+import MainLayOut from "../../../layout/mainlayout";
+import { ReactComponent as Invitefreinds } from "../../../asset/svg/Invitefreinds.svg";
+import { ReactComponent as RightArrow } from "../../../asset/svg/RightArrow.svg";
+import { ReactComponent as Share } from "../../../asset/svg/Share.svg";
 
 const MyInfo = () => {
   return (
