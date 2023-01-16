@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { theme } from '../style/theme';
+import theme from '../style/theme';
 import { ReactComponent as Plus } from '../asset/svg/Plus.svg';
 
 function Teambox() {

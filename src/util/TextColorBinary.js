@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export function TextColorBinary(props) {
+function TextColorBinary(props) {
   const firstText = props.text.substring(0, props.num);
   const secondText = props.text.substring(props.num);
   const FirstText = styled.text`
@@ -20,3 +20,5 @@ export function TextColorBinary(props) {
     </text>
   );
 }
+
+export default TextColorBinary;
