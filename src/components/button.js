@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export function BinaryButton(props) {
+export default function BinaryButton(props) {
   const bgColor = ['#EB8888', '#F6EEEE'];
   const color = ['#FFFFFF', '#B79292'];
 

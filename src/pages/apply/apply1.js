@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import TopHeader from '../../layout/header/topHeader';
-import { Container } from '../../components/Container/BasicContainer';
-import { theme } from '../../style/theme';
-import { TextColorBinary } from '../../util/TextColorBinary';
-import { BinaryButton } from '../../components/button';
+import BasicContainer from '../../components/Container/BasicContainer';
+import theme from '../../style/theme';
+import TextColorBinary from '../../util/TextColorBinary';
+import BinaryButton from '../../components/button';
 
 function Apply1() {
   const title = '우리 팀을 소개해주세요';
@@ -13,7 +13,7 @@ function Apply1() {
   const [number, setNumber] = useState(true);
 
   return (
-    <Container>
+    <BasicContainer>
       <TopHeader />
       <ScrollDiv>
         <TextColorBinary
@@ -48,7 +48,7 @@ function Apply1() {
           <SubTitle>팀원들의 모든 학교를 말해주세요</SubTitle>
         </ButtonDiv>
       </ScrollDiv>
-    </Container>
+    </BasicContainer>
   );
 }
 

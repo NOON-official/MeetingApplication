@@ -1,4 +1,4 @@
-export const theme = {
+const theme = {
   Prefont: 'Pretendard',
   grey: '#80808029',
   pink: '#eb8888',
@@ -9,3 +9,5 @@ export const theme = {
   mediumText: '20px',
   largeText: '30px',
 };
+
+export default theme;

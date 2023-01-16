@@ -4,7 +4,18 @@ import styled from 'styled-components';
 import { ReactComponent as DownArrow } from '../asset/svg/DownArrow.svg';
 import { ReactComponent as UpArrow } from '../asset/svg/UpArrow.svg';
 
-function GuideBox(props) {
+const SubTitle = styled.div`
+  margin-top: 10px;
+  background-color: white;
+`;
+
+const ArrowBox = styled.div`
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export default function GuideBox(props) {
   const [commentOpened, setCommentOpened] = useState(false);
   const onToggleComment = useCallback(() => {
     setCommentOpened((prev) => !prev);
@@ -21,16 +32,3 @@ function GuideBox(props) {
     </SubTitle>
   );
 }
-
-export default GuideBox;
-
-const SubTitle = styled.div`
-  margin-top: 10px;
-  background-color: white;
-`;
-
-const ArrowBox = styled.div`
-  :hover {
-    cursor: pointer;
-  }
-`;
