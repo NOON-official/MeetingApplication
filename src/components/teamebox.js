@@ -13,6 +13,7 @@ const Teambox = () => {
 export default Teambox;
 
 const Container = styled.div`
+  background-color: ${theme.background};
   border: 1px solid #F1ECEC;
   border-radius: 10px;
   width: 334px;
