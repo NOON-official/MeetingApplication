@@ -1,20 +1,20 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { theme } from "../../style/theme";
-import TopHeader from "../header/topHeader";
+import { theme } from '../../style/theme';
+import TopHeader from '../header/topHeader';
 
-const ApplyLayout = ({ children }) => {
+function ApplyLayout({ children }) {
   return (
     <Container>
-      <TopHeader/>
+      <TopHeader />
       <Content>{children}</Content>
     </Container>
   );
-};
+}
 export default ApplyLayout;
 
 const Container = styled.div`
-  min-height:100vh;
+  min-height: 100vh;
   background-color: ${theme.background};
   display: flex;
   flex-wrap: wrap;
@@ -24,8 +24,8 @@ const Container = styled.div`
 const Content = styled.div`
   width: 400px;
   min-height: calc(100vh - 70px);
-  background-color: #FBFAF9;
-  display:flex;
-  justify-content:center;
+  background-color: #fbfaf9;
+  display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 `;

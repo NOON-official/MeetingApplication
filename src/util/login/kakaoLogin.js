@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
-const KakaoLogin = () => {
+function KakaoLogin() {
   const { Kakao } = window;
 
   const LoginWithKakao = useCallback(() => {
@@ -10,10 +10,7 @@ const KakaoLogin = () => {
     });
   }, []);
 
-  return (
-    <div onClick={LoginWithKakao}>로그인</div>
-  );
-};
+  return <div onClick={LoginWithKakao}>로그인</div>;
+}
 
-export default KakaoLogin ;
-
+export default KakaoLogin;

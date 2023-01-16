@@ -1,7 +1,5 @@
-const Myteam = () => {
-  return(
-    <div></div>
-  )
-};
+function Myteam() {
+  return <div />;
+}
 
 export default Myteam;

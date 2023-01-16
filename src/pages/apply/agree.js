@@ -1,7 +1,5 @@
-const Agree = () => {
-  return(
-    <div></div>
-  )
-};
-  
+function Agree() {
+  return <div />;
+}
+
 export default Agree;

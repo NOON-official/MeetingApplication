@@ -1,14 +1,14 @@
-import TopHeader from "../../layout/header/topHeader";
-import styled from "styled-components";
-import { Container } from "../../components/Container/BasicContainer";
-import { theme } from "../../style/theme";
-import { TextColorBinary } from "../../util/TextColorBinary";
-import { useCallback, useMemo, useState } from "react";
-import { BinaryButton } from "../../components/button";
+import styled from 'styled-components';
+import { useCallback, useMemo, useState } from 'react';
+import TopHeader from '../../layout/header/topHeader';
+import { Container } from '../../components/Container/BasicContainer';
+import { theme } from '../../style/theme';
+import { TextColorBinary } from '../../util/TextColorBinary';
+import { BinaryButton } from '../../components/button';
 
-const Apply1 = () => {
-  const title = "우리 팀을 소개해주세요";
-  const title2 = "우리 팀의 학교는?";
+function Apply1() {
+  const title = '우리 팀을 소개해주세요';
+  const title2 = '우리 팀의 학교는?';
   const [gender, setGender] = useState(true);
   const [number, setNumber] = useState(true);
 
@@ -26,19 +26,19 @@ const Apply1 = () => {
           <TitleOfButton>성별</TitleOfButton>
           <BinaryButton
             state={gender}
-            condition1={"남자"}
-            condition2={"여자"}
+            condition1="남자"
+            condition2="여자"
             onChange={(result) => setGender(result)}
-          ></BinaryButton>
+          />
         </ButtonDiv>
         <ButtonDiv>
           <TitleOfButton>인원 수</TitleOfButton>
           <BinaryButton
             state={number}
-            condition1={"2:2"}
-            condition2={"3:3"}
+            condition1="2:2"
+            condition2="3:3"
             onChange={(result) => setNumber(result)}
-          ></BinaryButton>
+          />
           <TextColorBinary
             text={title2}
             colorFirst={theme.pink}
@@ -50,10 +50,10 @@ const Apply1 = () => {
       </ScrollDiv>
     </Container>
   );
-};
+}
 
 const SubTitle = styled.text`
-  color: "#AAAAAA";
+  color: '#AAAAAA';
   font-size: 13px;
   font-weight: 500;
 `;

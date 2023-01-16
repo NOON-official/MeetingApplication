@@ -1,13 +1,12 @@
-import MainFooter from "../../../layout/footer/mainFooter";
-import MainLayOut from "../../../layout/mainlayout";
+import MainFooter from '../../../layout/footer/mainFooter';
+import MainLayOut from '../../../layout/mainlayout';
 
-const Matching = () => {
+function Matching() {
   return (
     <MainLayOut>
-      <MainFooter/>
+      <MainFooter />
     </MainLayOut>
   );
-  
-};
+}
 
 export default Matching;
