@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { theme } from "../../style/theme";
 import ApplyLayout from "../../layout/mainlayout/apply";
-import Teambox from "../../components/teamebox";
+import Teambox from "../../components/teameBox";
 
 const Apply2 = () => {
   return(
