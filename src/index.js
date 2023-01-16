@@ -7,6 +7,8 @@ import { Provider } from "react-redux";
 import { theme } from "./style/theme";
 import Router from "./Router";
 import createstore from "./store";
+import { ConfigProvider } from "antd";
+import antdTheme from "./style/antdTheme";
 
 const store = createstore();
 
@@ -14,7 +16,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <RouterProvider router={Router} />
+      <ConfigProvider
+        theme={antdTheme}
+      >
+        <RouterProvider router={Router} />
+      </ConfigProvider>
     </ThemeProvider>
   </Provider>
 );
