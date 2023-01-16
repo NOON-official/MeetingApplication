@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { ConfigProvider } from 'antd';
-import { theme } from './style/theme';
+import theme from './style/theme';
 import Router from './Router';
 import createstore from './store';
 import antdTheme from './style/antdTheme';

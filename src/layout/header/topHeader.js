@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import { ReactComponent as Header } from '../../asset/svg/Header.svg';
-import { theme } from '../../style/theme';
+import theme from '../../style/theme';
 import KakaoLoigin from '../../util/login/kakaoLogin';
 
 function TopHeader() {

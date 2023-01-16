@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { theme } from '../../../style/theme';
+import theme from '../../../style/theme';
 import MainFooter from '../../../layout/footer/mainFooter';
 import MainLayOut from '../../../layout/mainlayout';
 import { ReactComponent as Invitefreinds } from '../../../asset/svg/Invitefreinds.svg';

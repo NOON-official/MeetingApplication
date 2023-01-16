@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import GuideBox from '../../../components/guideBox';
 import MainFooter from '../../../layout/footer/mainFooter';
 import MainLayOut from '../../../layout/mainlayout';
-import { theme } from '../../../style/theme';
+import theme from '../../../style/theme';
 
 function Guide() {
   const ServiceGuide = [

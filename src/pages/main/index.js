@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { theme } from '../../style/theme';
+import theme from '../../style/theme';
 import { ReactComponent as MainImg } from '../../asset/svg/MainImg.svg';
 import MainLayOut from '../../layout/mainlayout';
 import BottomFooter from '../../layout/footer/bottomFooter';
