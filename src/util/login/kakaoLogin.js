@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
 
 function KakaoLogin() {
   const { Kakao } = window;

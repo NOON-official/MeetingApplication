@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import client from './client';
 
 const override = {
@@ -12,14 +12,6 @@ const MainLoginCallback = (props) => {
 
   // 서버에 인가코드 넘겨주기
   useEffect(async () => {
-    await kakaoCallback()
-      .then(() => {
-        window.location.replace('/');
-      })
-      .catch((err) => {
-        console.log('오류', err);
-      });
-
     async function kakaoCallback() {
       await client
         .get(`/api/auth/kakao/callback?code=${code}`)
@@ -32,6 +24,14 @@ const MainLoginCallback = (props) => {
           window.alert('로그인 오류');
         });
     }
+
+    await kakaoCallback()
+      .then(() => {
+        window.location.replace('/');
+      })
+      .catch((err) => {
+        console.log('오류', err);
+      });
   }, []);
 };
 

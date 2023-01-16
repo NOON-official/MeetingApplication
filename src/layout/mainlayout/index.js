@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import MainHeader from '../header/mainHeader';
 import TopHeader from '../header/topHeader';
-import { theme } from '../../style/theme';
+import theme from '../../style/theme';
 
 function MainLayOut({ children }) {
   return (
