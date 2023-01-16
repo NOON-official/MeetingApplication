@@ -1,7 +1,5 @@
-const Apply6 = () => {
-  return(
-    <div></div>
-  )
-};
-  
+function Apply6() {
+  return <div />;
+}
+
 export default Apply6;

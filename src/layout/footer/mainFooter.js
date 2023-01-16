@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { theme } from "../../style/theme";
+import { theme } from '../../style/theme';
 
-const MainFooter = () => {
+function MainFooter() {
   return (
     <Footer>
       <HeaderFooter>
@@ -21,14 +21,14 @@ const MainFooter = () => {
       </HeaderFooter>
     </Footer>
   );
-};
+}
 
 export default MainFooter;
 
 const Footer = styled.div`
-  width:100%;
-  padding-top:20px;
-  margin-top:38px;
+  width: 100%;
+  padding-top: 20px;
+  margin-top: 38px;
   border-top: 1px solid #d6d6d6;
   display: flex;
   flex-wrap: wrap;
@@ -47,11 +47,11 @@ const HeaderFooter = styled.div`
 `;
 const BottomFooter = styled.div`
   width: 100%;
-  margin-top:23px;
-  padding-bottom:10px;
+  margin-top: 23px;
+  padding-bottom: 10px;
 `;
 const Info = styled.div`
-  margin-top:8px;
+  margin-top: 8px;
   font-weight: 400;
   font-size: 7px;
   color: #9f9f9f;

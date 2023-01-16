@@ -1,26 +1,24 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { ThemeProvider } from "styled-components";
-import { RouterProvider } from "react-router-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { ThemeProvider } from 'styled-components';
+import { RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import { theme } from "./style/theme";
-import Router from "./Router";
-import createstore from "./store";
-import { ConfigProvider } from "antd";
-import antdTheme from "./style/antdTheme";
+import { ConfigProvider } from 'antd';
+import { theme } from './style/theme';
+import Router from './Router';
+import createstore from './store';
+import antdTheme from './style/antdTheme';
 
 const store = createstore();
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <ConfigProvider
-        theme={antdTheme}
-      >
+      <ConfigProvider theme={antdTheme}>
         <RouterProvider router={Router} />
       </ConfigProvider>
     </ThemeProvider>
-  </Provider>
+  </Provider>,
 );
