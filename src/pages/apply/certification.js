@@ -1,7 +1,5 @@
-const Certification = () => {
-  return(
-    <div></div>
-  )
-};
-  
+function Certification() {
+  return <div />;
+}
+
 export default Certification;

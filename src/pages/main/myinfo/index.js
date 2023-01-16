@@ -1,20 +1,29 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import { theme } from "../../../style/theme";
-import MainFooter from "../../../layout/footer/mainFooter";
-import MainLayOut from "../../../layout/mainlayout";
-import { ReactComponent as Invitefreinds } from "../../../asset/svg/Invitefreinds.svg";
-import { ReactComponent as RightArrow } from "../../../asset/svg/RightArrow.svg";
-import { ReactComponent as Share } from "../../../asset/svg/Share.svg";
+import { theme } from '../../../style/theme';
+import MainFooter from '../../../layout/footer/mainFooter';
+import MainLayOut from '../../../layout/mainlayout';
+import { ReactComponent as Invitefreinds } from '../../../asset/svg/Invitefreinds.svg';
+import { ReactComponent as RightArrow } from '../../../asset/svg/RightArrow.svg';
+import { ReactComponent as Share } from '../../../asset/svg/Share.svg';
 
-const MyInfo = () => {
+function MyInfo() {
   return (
     <MainLayOut>
       <Account>
-        <Item><SLink to="">계정관리</SLink><RightArrow/></Item>
-        <Item><SLink to="">이용권현황</SLink><RightArrow/></Item>
-        <LItem><SLink to="">제안하기</SLink><RightArrow/></LItem>
+        <Item>
+          <SLink to="">계정관리</SLink>
+          <RightArrow />
+        </Item>
+        <Item>
+          <SLink to="">이용권현황</SLink>
+          <RightArrow />
+        </Item>
+        <LItem>
+          <SLink to="">제안하기</SLink>
+          <RightArrow />
+        </LItem>
       </Account>
       <CouponBox>
         <Title>친구 4명을 초대하면 스타벅스 커피 1잔 쿠폰을 드려요!</Title>
@@ -25,51 +34,50 @@ const MyInfo = () => {
           <Circle>4</Circle>
         </Coupons>
       </CouponBox>
-      <Invitefreinds/>
-      <MainFooter/>
+      <Invitefreinds />
+      <MainFooter />
     </MainLayOut>
   );
-  
-};
+}
 
 export default MyInfo;
 
 const Account = styled.div`
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   background-color: white;
-  border: 1px solid #F8F3F3;
+  border: 1px solid #f8f3f3;
   border-radius: 10px;
-  margin-top:21px;
+  margin-top: 21px;
   width: 334px;
   height: 158px;
 `;
 
 const Item = styled.div`
-  display:flex;
-  padding-right:10px;
-  align-items:center;
-  justify-content:space-between;
-  width:85%;
-  padding-left:10px;
+  display: flex;
+  padding-right: 10px;
+  align-items: center;
+  justify-content: space-between;
+  width: 85%;
+  padding-left: 10px;
   font-weight: 600;
   font-size: 14px;
   color: #777777;
-  border-bottom: 3px solid #F8F3F3;
-  height:50px;
-  line-height:50px;
+  border-bottom: 3px solid #f8f3f3;
+  height: 50px;
+  line-height: 50px;
 `;
 
 const LItem = styled.div`
-  padding-right:10px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:85%;
-  padding-left:10px;
-  height:50px;
-  line-height:50px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 85%;
+  padding-left: 10px;
+  height: 50px;
+  line-height: 50px;
 `;
 
 const SLink = styled(Link)`
@@ -79,46 +87,45 @@ const SLink = styled(Link)`
 `;
 
 const CouponBox = styled.div`
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   background-color: white;
-  border: 1px solid #F8F3F3;
+  border: 1px solid #f8f3f3;
   border-radius: 10px;
   width: 334px;
   height: 158px;
 `;
 
 const Title = styled.p`
-  margin-top:10px;
-  height:10px;
-  text-align:center;
-  width:100%;
+  margin-top: 10px;
+  height: 10px;
+  text-align: center;
+  width: 100%;
   font-weight: 200;
   font-size: 12px;
   color: #000000;
 `;
 
 const Coupons = styled.div`
-  margin-bottom:25px;
-  width:90%;
+  margin-bottom: 25px;
+  width: 90%;
   display: flex;
-  justify-content:center;
-  justify-content:space-between;
+  justify-content: center;
+  justify-content: space-between;
 `;
 
 const Circle = styled.div`
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  line-height:65px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  line-height: 65px;
   width: 65px;
   height: 65px;
   color: #777777;
   font-weight: 600;
   font-size: 20px;
-  border-radius:50%;
-  background-color: ${(props) => `${props.isactive ? `${theme.lightPink}` : "#ECE9E9"}`};
+  border-radius: 50%;
+  background-color: ${(props) =>
+    `${props.isactive ? `${theme.lightPink}` : '#ECE9E9'}`};
 `;
-
-

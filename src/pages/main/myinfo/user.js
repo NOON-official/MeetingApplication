@@ -1,7 +1,5 @@
-const User = () => {
-    return(
-        <div></div>
-    );
+function User() {
+  return <div />;
 }
 
 export default User;

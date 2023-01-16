@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {};
 
 const applySlice = createSlice({
-  name: "apply",
+  name: 'apply',
   initialState,
   reducer: {},
 });

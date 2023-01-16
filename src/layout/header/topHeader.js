@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { ReactComponent as Header } from "../../asset/svg/Header.svg";
-import { theme } from "../../style/theme";
-import { useCallback, useState } from "react";
-import KakaoLoigin from "../../util/login/kakaoLogin";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { useCallback, useState } from 'react';
+import { ReactComponent as Header } from '../../asset/svg/Header.svg';
+import { theme } from '../../style/theme';
+import KakaoLoigin from '../../util/login/kakaoLogin';
 
-const TopHeader = () => {
+function TopHeader() {
   const [login, setLogin] = useState(false);
   const loginHandler = useCallback(() => {
     setLogin((prev) => !prev);
@@ -22,7 +22,7 @@ const TopHeader = () => {
       </LoginBox>
     </Container>
   );
-};
+}
 
 export default TopHeader;
 

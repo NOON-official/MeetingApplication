@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 
-import styled from "styled-components";
-import { ReactComponent as DownArrow } from "../asset/svg/DownArrow.svg";
-import { ReactComponent as UpArrow } from "../asset/svg/UpArrow.svg";
+import styled from 'styled-components';
+import { ReactComponent as DownArrow } from '../asset/svg/DownArrow.svg';
+import { ReactComponent as UpArrow } from '../asset/svg/UpArrow.svg';
 
-const GuideBox = (props) => {
+function GuideBox(props) {
   const [commentOpened, setCommentOpened] = useState(false);
   const onToggleComment = useCallback(() => {
     setCommentOpened((prev) => !prev);
@@ -20,7 +20,7 @@ const GuideBox = (props) => {
       </ArrowBox>
     </SubTitle>
   );
-};
+}
 
 export default GuideBox;
 

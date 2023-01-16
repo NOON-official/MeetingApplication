@@ -1,15 +1,16 @@
-import styled from "styled-components";
-export const BinaryButton = (props) => {
-  let bgColor = ["#EB8888", "#F6EEEE"];
-  let color = ["#FFFFFF", "#B79292"];
+import styled from 'styled-components';
+
+export function BinaryButton(props) {
+  const bgColor = ['#EB8888', '#F6EEEE'];
+  const color = ['#FFFFFF', '#B79292'];
 
   return (
     <div
       style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
       }}
     >
       <SelectButton
@@ -28,17 +29,17 @@ export const BinaryButton = (props) => {
       </SelectButton>
     </div>
   );
-};
+}
 
 const SelectButton = styled.button`
   margin-right: 5px;
   border-radius: 14px;
   height: 40px;
-  width: ${(props) => props.width || "50%"};
+  width: ${(props) => props.width || '50%'};
   max-width: 162px;
   background-color: ${(props) => props.background_color};
   color: ${(props) => props.color};
   border-color: transparent;
-  font-family: "Nanum JungHagSaeng";
+  font-family: 'Nanum JungHagSaeng';
   font-size: 18px;
 `;
