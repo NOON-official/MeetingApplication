@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { login } from "./asyncActions";
+import { createSlice } from '@reduxjs/toolkit';
+import { login } from './asyncActions';
 
 export const initialState = {
   loginLoading: false, // 로그인 시도중
@@ -11,7 +11,7 @@ export const initialState = {
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducer: {
     loginLoading: (state) => {
@@ -32,10 +32,10 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       state.loginDone = true;
-    })
+    });
   },
 });
 
-export const { loginLoading, loginDone, loginError } = userSlice.actions
+export const { loginLoading, loginDone, loginError } = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;

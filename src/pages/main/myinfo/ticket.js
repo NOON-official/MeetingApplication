@@ -1,7 +1,5 @@
-const Ticket = () => {
-  return(
-    <div></div>
-  );
+function Ticket() {
+  return <div />;
 }
 
 export default Ticket;

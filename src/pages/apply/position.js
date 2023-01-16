@@ -1,7 +1,5 @@
-const Position = () => {
-  return(
-    <div></div>
-  )
-};
-  
+function Position() {
+  return <div />;
+}
+
 export default Position;

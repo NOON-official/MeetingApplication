@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {};
 
 const matchingSlice = createSlice({
-  name: "matching",
+  name: 'matching',
   initialState,
   reducer: {},
 });
