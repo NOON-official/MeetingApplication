@@ -24,7 +24,7 @@ const Container = styled.div`
 const Content = styled.div`
   width: 400px;
   min-height: calc(100vh - 70px);
-  background-color: ${theme.background};
+  background-color: #FBFAF9;
   display:flex;
   justify-content:center;
   flex-wrap: wrap;
