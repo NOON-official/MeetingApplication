@@ -1,44 +1,44 @@
-import styled from "styled-components";
-import { ReactComponent as ErrorChar } from "../../asset/svg/ErrorMessageCharacter.svg";
-import { TextColorBinary } from "../../util/TextColorBinary";
-import { theme } from "../../style/theme";
+import styled from 'styled-components';
+import { ReactComponent as ErrorChar } from '../../asset/svg/ErrorMessageCharacter.svg';
+import theme from '../../style/theme';
+
 const BlackText = styled.text`
   color: black;
   font-size: 35px;
-  font-family: "Nanum JungHagSaeng";
+  font-family: 'Nanum JungHagSaeng';
 `;
 const ColorText = styled.text`
   color: ${theme.pink};
   font-size: 35px;
-  font-family: "Nanum JungHagSaeng";
+  font-family: 'Nanum JungHagSaeng';
 `;
-export const IsPageCompleteModal = (props) => {
+export default function IsPageCompleteModal(props) {
   const { open, colse } = props;
 
   return (
-    <div className={open ? "openMidal modal" : "modal"}>
+    <div className={open ? 'openMidal modal' : 'modal'}>
       {open ? (
         <div
           style={{
-            transform: "translate(-50%, -50%)",
-            position: "fixed",
+            transform: 'translate(-50%, -50%)',
+            position: 'fixed',
 
-            top: "50%",
-            left: "50%",
+            top: '50%',
+            left: '50%',
 
-            borderRadius: "10px",
-            height: "50%",
-            width: "90%",
-            backgroundColor: "white",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
+            borderRadius: '10px',
+            height: '50%',
+            width: '90%',
+            backgroundColor: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <ErrorChar></ErrorChar>
+          <ErrorChar />
           <text>
-            {" "}
+            {' '}
             <BlackText>아직</BlackText>
             <ColorText>완료하지 않은 답변이</ColorText>
             <BlackText>이 있어요.</BlackText>
@@ -48,4 +48,4 @@ export const IsPageCompleteModal = (props) => {
       ) : null}
     </div>
   );
-};
+}
