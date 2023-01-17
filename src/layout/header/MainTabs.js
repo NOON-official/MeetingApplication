@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { Link, useMatch } from 'react-router-dom';
 
-import theme from '../../style/theme';
-
-function MainHeader() {
+export default function MainTabs() {
   const homeMatch = useMatch('/');
   const guideMatch = useMatch('/guide');
   const matchingMatch = useMatch('/matching');
@@ -35,27 +33,21 @@ function MainHeader() {
   );
 }
 
-export default MainHeader;
-
 const Container = styled.div`
-  height: 60px;
-  max-height: 60px;
-  width: 100%;
   display: flex;
   justify-content: space-around;
-  border-bottom: 1px solid ${theme.pink};
-  padding-bottom: 8px;
+  border-bottom: 1px solid ${(props) => props.theme.lightPink};
+  padding: 10px 30px;
 `;
 
 const Menu = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-  border-radius: 15px;
-  line-height: 50px;
-  width: 300px;
+  border-radius: 10px;
+  padding: 8px 28px;
   background-color: ${(props) =>
-    `${props.isactive ? `${theme.pink}` : `${theme.background}`}`};
+    `${props.isactive ? props.theme.pink : props.theme.background}`};
 `;
 
 const SLink = styled(Link)`

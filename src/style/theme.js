@@ -1,5 +1,6 @@
 const theme = {
-  Prefont: 'Pretendard',
+  primaryFont: 'Pretendard',
+  secondaryFont: 'Nanum JungHagSaeng',
   grey: '#80808029',
   pink: '#eb8888',
   black: '#000000',
