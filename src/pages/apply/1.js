@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import TopHeader from '../../layout/header/topHeader';
+import TopHeader from '../../layout/header/TopHeader';
 import BasicContainer from '../../components/Container/BasicContainer';
 import theme from '../../style/theme';
 import TextColorBinary from '../../util/TextColorBinary';
-import BinaryButton from '../../components/button';
+import BinaryButton from '../../components/BinaryButton';
 import Universities from '../../asset/Universities';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
@@ -43,7 +43,6 @@ export default function Apply1() {
       </SearchedUniversity>
     ));
   }, [searchKeyWord, selectedUniversities]);
-
   function binarySearch(arr, target) {
     let start = 0;
     let end = arr.length - 1;

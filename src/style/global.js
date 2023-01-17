@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
     color: black;
-	font-family: Pretendard;
+	font-family: 'Pretendard';
 }
 ol, ul {
 	list-style: none;
