@@ -6,9 +6,11 @@ import { TextColorBinary } from "../../util/TextColorBinary";
 import { useCallback, useMemo, useState } from "react";
 import { BinaryButton } from "../../components/button";
 import Universities from "../../asset/Universities";
+import { IsPageCompleteModal } from "../../components/Modal/IsPageCompleteModal";
 const Apply1 = () => {
   const title = "우리 팀을 소개해주세요";
   const title2 = "우리 팀의 학교는?";
+  const [openModal, setOpenModal] = useState(false);
   const [selectedUniversities, setSelectedUniversities] = useState([1]);
   const [gender, setGender] = useState(true);
   const [number, setNumber] = useState(true);
@@ -88,6 +90,7 @@ const Apply1 = () => {
   }
   return (
     <Container>
+      <IsPageCompleteModal open={openModal}></IsPageCompleteModal>
       <TopHeader />
       <ScrollDiv>
         <TextColorBinary
@@ -164,6 +167,12 @@ const Apply1 = () => {
             <SearchedUniversities></SearchedUniversities>
           </div>
         </UniversityDiv>
+        <button
+          onClick={() => {
+            console.log(openModal);
+            setOpenModal(true);
+          }}
+        ></button>
       </ScrollDiv>
     </Container>
   );
