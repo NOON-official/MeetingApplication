@@ -7,6 +7,7 @@ const BasicContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow: hidden;
 `;
 
 export default BasicContainer;
