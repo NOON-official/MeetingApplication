@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import GuideBox from '../../../components/guideBox';
-import MainFooter from '../../../layout/footer/mainFooter';
-import MainLayOut from '../../../layout/mainlayout';
-import theme from '../../../style/theme';
+import GuideBox from '../../components/GuideBox';
+import MainFooter from '../../layout/footer/MainFooter';
+import MainLayout from '../../layout/MainLayout';
+import theme from '../../style/theme';
 
 function Guide() {
   const ServiceGuide = [
@@ -68,7 +68,7 @@ function Guide() {
   ];
 
   return (
-    <MainLayOut>
+    <MainLayout>
       <Container>
         <Title>미팅학개론</Title>
         {ServiceGuide.map((a) => GuideBox(a))}
@@ -76,7 +76,7 @@ function Guide() {
         {GuideList.map((a) => GuideBox(a))}
       </Container>
       <MainFooter />
-    </MainLayOut>
+    </MainLayout>
   );
 }
 
