@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/mainlayout/apply';
+import ApplyLayout from '../../layout/ApplyLayout';
 import Teambox from '../../components/Teambox';
 
 function Apply2() {

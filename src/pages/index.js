@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import theme from '../../style/theme';
-import { ReactComponent as MainImg } from '../../asset/svg/MainImg.svg';
-import MainLayOut from '../../layout/mainlayout';
-import BottomFooter from '../../layout/footer/bottomFooter';
-import MainFooter from '../../layout/footer/mainFooter';
+import theme from '../style/theme';
+import { ReactComponent as MainImg } from '../asset/svg/MainImg.svg';
+import MainLayout from '../layout/MainLayout';
+import BottomFooter from '../layout/footer/BottomFooter';
+import MainFooter from '../layout/footer/MainFooter';
 
 function Main() {
   const twoman = 25;
@@ -14,7 +14,7 @@ function Main() {
   const threegirl = 24;
 
   return (
-    <MainLayOut>
+    <MainLayout>
       <ImgBox>
         <Users>최근 일주일 사용자 수 10명</Users>
         <MainImg />
@@ -47,7 +47,7 @@ function Main() {
       <SLink to="/apply/team">매칭 시작하기</SLink>
       <MainFooter />
       <BottomFooter />
-    </MainLayOut>
+    </MainLayout>
   );
 }
 

@@ -27,10 +27,7 @@ function TopHeader() {
 export default TopHeader;
 
 const Container = styled.div`
-  width: 100%;
-  padding: 0 30px;
-  height: 70px;
-  max-height: 70px;
+  padding: 10px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
