@@ -9,6 +9,8 @@ import { BinaryButton } from "../../components/button";
 const Apply1 = () => {
   const title = "우리 팀을 소개해주세요";
   const title2 = "우리 팀의 학교는?";
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedUniversities, setSelectedUniversities] = useState([1]);
   const [gender, setGender] = useState(true);
   const [number, setNumber] = useState(true);
   const [searchKeyWord, setSearchKeyWord] = useState("0");
@@ -127,6 +129,7 @@ const Apply1 = () => {
 
 const SubTitle = styled.text`
   color: "#AAAAAA";
+
   font-size: 13px;
   font-weight: 500;
 `;
@@ -164,5 +167,6 @@ const SearchedUniversity = styled.div`
   margin-left: 50px;
   margin-right: 50px;
   border-bottom: 1px solid #f6eeee;
+  overflow-x: hidden;
 `;
 export default Apply1;
