@@ -12,7 +12,7 @@ export default function Apply1() {
   const title = '우리 팀을 소개해주세요';
   const title2 = '우리 팀의 학교는?';
   const [openModal, setOpenModal] = useState(false);
-  const [selectedUniversities, setSelectedUniversities] = useState([1]);
+  const [selectedUniversities, setSelectedUniversities] = useState([]);
 
   const [gender, setGender] = useState(true);
   const [number, setNumber] = useState(true);
@@ -21,7 +21,11 @@ export default function Apply1() {
     setSearchKeyWord(e.target.value);
   };
   function OnUniversityClick(university) {
-    selectedUniversities.push(university);
+    // eslint-disable-next-line no-shadow
+    setSelectedUniversities((selectedUniversities) => [
+      ...selectedUniversities,
+      university,
+    ]);
   }
   const SearchedUniversities = useCallback(() => {
     const data = Universities.filter((c) => {
@@ -98,20 +102,19 @@ export default function Apply1() {
         />
         <SubTitle>팀원들의 모든 학교를 말해주세요</SubTitle>
         <UniversityDiv>
-          {selectedUniversities.length === 0 ? (
-            console.log
-          ) : (
+          {selectedUniversities.length === 0 ? null : (
             <SelectedDiv>
-              {Universities.map((data, idx) => {
-                const univ = binarySearch(Universities, data);
-                return null;
-                // return (
-                //   <SelectedNumUniversity
-                //     key={idx}
-                //     university={univ}
-                //     selectedUniversities={selectedUniversities}
-                //   />
-                // );
+              {selectedUniversities.map((data) => {
+                // eslint-disable-next-line prefer-const
+                // let univ = binarySearch(Universities, data);
+
+                return (
+                  <SelectedNumUniversity
+                    key={data}
+                    university={data.univ}
+                    selectedUniversities={selectedUniversities}
+                  />
+                );
               })}
             </SelectedDiv>
           )}
@@ -146,7 +149,6 @@ export default function Apply1() {
         <button
           type="button"
           onClick={() => {
-            console.log(openModal);
             setOpenModal(true);
           }}
         />
@@ -183,6 +185,7 @@ function SelectedNumUniversity(props) {
         textAlign: 'center',
         minHeight: '40px',
       }}
+      onClick={() => {}}
     >
       <div style={{ font: 'Nanum JungHagSaeng' }}>{props.university}</div>
     </div>
