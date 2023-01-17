@@ -19,7 +19,7 @@ module.exports = {
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module', 
+    sourceType: 'module',
   },
   plugins: ['react', 'unused-imports'],
   rules: {
@@ -31,6 +31,8 @@ module.exports = {
     'unused-imports/no-unused-imports': 'warn',
     'react/destructuring-assignment': 'warn',
     'no-param-reassign': 'warn',
+    radix: 'off',
+    'dot-notation': 'off',
     ...a11yOff,
   },
 };
