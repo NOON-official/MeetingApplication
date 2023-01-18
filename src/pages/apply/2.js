@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
+import { useState } from 'react';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import Teambox from '../../components/Teambox';
 
 function Apply2() {
+  const [member1, setMember1] = useState({});
+  const [member2, setMember2] = useState({});
+  const [member3, setMember3] = useState({});
+
+  console.log(member1);
   return (
     <ApplyLayout>
       <Title>
@@ -12,8 +18,8 @@ function Apply2() {
           <Pink>우리팀의 구성원</Pink>을 소개해 주세요!
         </Maintitle>
         <Subtitle>나와 팀원들의 개별 ID카드를 완성해 주세요</Subtitle>
+        <Teambox member={member1} setMember={setMember1} />
       </Title>
-      <Teambox />
     </ApplyLayout>
   );
 }
