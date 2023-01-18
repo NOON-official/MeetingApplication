@@ -1,7 +1,7 @@
 const theme = {
   primaryFont: 'Pretendard',
   secondaryFont: 'Nanum JungHagSaeng',
-  grey: '#80808029',
+  grey: '#777777',
   pink: '#eb8888',
   black: '#000000',
   background: '#F8F3F3',
