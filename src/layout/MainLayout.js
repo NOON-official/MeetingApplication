@@ -30,7 +30,7 @@ const Header = styled.header`
 const Content = styled.div`
   max-width: 425px;
   width: 100%;
-  flex: auto;
+  height: 100%;
   background-color: ${(props) => props.theme.background};
   overflow-y: scroll;
 `;

@@ -1,39 +1,76 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-import theme from '../../style/theme';
+import { Button, Tag } from 'antd';
 import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as Invitefreinds } from '../../asset/svg/Invitefreinds.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
+import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
+import { ReactComponent as QuestionCircle } from '../../asset/svg/QuestionCircle.svg';
+import Section from '../../components/Section';
 
 function MyInfo() {
   return (
     <MainLayout>
-      <Account>
-        <Item>
-          <SLink to="">계정관리</SLink>
-          <RightArrow />
-        </Item>
-        <Item>
-          <SLink to="">이용권현황</SLink>
-          <RightArrow />
-        </Item>
-        <LItem>
-          <SLink to="">제안하기</SLink>
-          <RightArrow />
-        </LItem>
-      </Account>
-      <CouponBox>
-        <Title>친구 4명을 초대하면 스타벅스 커피 1잔 쿠폰을 드려요!</Title>
-        <Coupons>
-          <Circle>1</Circle>
-          <Circle>2</Circle>
-          <Circle>3</Circle>
-          <Circle>4</Circle>
-        </Coupons>
-      </CouponBox>
-      <Invitefreinds />
+      <Section>
+        <MenuBox>
+          <MenuItem>
+            <LinkButton type="text" block>
+              계정관리 <RightArrow />
+            </LinkButton>
+          </MenuItem>
+          <MenuItem>
+            <LinkButton type="text" block>
+              이용권현황 <RightArrow />
+            </LinkButton>
+          </MenuItem>
+          <MenuItem>
+            <LinkButton type="text" block>
+              제안하기 <RightArrow />
+            </LinkButton>
+          </MenuItem>
+        </MenuBox>
+      </Section>
+      <Section my="8px" style={{ textAlign: 'right' }}>
+        <LogoutButton type="text">로그아웃</LogoutButton>
+      </Section>
+      <Section>
+        <InvitationTitle>친구 초대 이벤트</InvitationTitle>
+        <CouponBox>
+          <InvitationSubtitle>
+            친구 4명을 초대하면
+            <br />
+            스타벅스 커피 1잔 쿠폰을 드려요!
+          </InvitationSubtitle>
+          <Coupons>
+            <Circle>1</Circle>
+            <Circle>2</Circle>
+            <Circle>3</Circle>
+            <Circle>4</Circle>
+          </Coupons>
+          <InvitationDescription>
+            <li>
+              <b>나의 혜택:</b> 초대 받은 친구가 미팅학개론 회원가입 시,{' '}
+              <PinkText>스탬프 1개</PinkText>
+              적립 <PinkText>(4개 달성 시 커피 1잔 + 이용권 1장)</PinkText>
+            </li>
+            <li>
+              <b>친구 혜택:</b> 내가 보낸 초대 코드로 친구가 미팅학개론 회원가입
+              시, 친구에게 <PinkText>미팅학개론 50% 할인권</PinkText> 제공
+            </li>
+          </InvitationDescription>
+          <div style={{ width: '100%', paddingLeft: '12px' }}>
+            <TooltipButton type="text">
+              <QuestionCircle /> 유의 사항
+            </TooltipButton>
+          </div>
+        </CouponBox>
+      </Section>
+      <Section>
+        <Tag>
+          ABC123 <Copy />
+        </Tag>
+        <Invitefreinds />
+      </Section>
       <MainFooter />
     </MainLayout>
   );
@@ -41,48 +78,24 @@ function MyInfo() {
 
 export default MyInfo;
 
-const Account = styled.div`
+const MenuItem = styled.div``;
+
+const MenuBox = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   background-color: white;
   border: 1px solid #f8f3f3;
   border-radius: 10px;
-  margin-top: 21px;
-  width: 334px;
-  height: 158px;
-`;
+  margin-top: 20px;
+  padding: 4px 20px;
 
-const Item = styled.div`
-  display: flex;
-  padding-right: 10px;
-  align-items: center;
-  justify-content: space-between;
-  width: 85%;
-  padding-left: 10px;
-  font-weight: 600;
-  font-size: 14px;
-  color: #777777;
-  border-bottom: 3px solid #f8f3f3;
-  height: 50px;
-  line-height: 50px;
-`;
-
-const LItem = styled.div`
-  padding-right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 85%;
-  padding-left: 10px;
-  height: 50px;
-  line-height: 50px;
-`;
-
-const SLink = styled(Link)`
-  font-weight: 600;
-  font-size: 14px;
-  color: #777777;
+  > ${MenuItem} {
+    border-bottom: 3px solid #f8f3f3;
+    :last-child {
+      border: none;
+    }
+  }
 `;
 
 const CouponBox = styled.div`
@@ -92,18 +105,18 @@ const CouponBox = styled.div`
   background-color: white;
   border: 1px solid #f8f3f3;
   border-radius: 10px;
-  width: 334px;
-  height: 158px;
+  padding: 12px;
 `;
 
-const Title = styled.p`
-  margin-top: 10px;
-  height: 10px;
+const InvitationSubtitle = styled.p`
+  margin-bottom: 12px;
   text-align: center;
   width: 100%;
-  font-weight: 200;
-  font-size: 12px;
-  color: #000000;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: ${(props) => props.theme.pink};
 `;
 
 const Coupons = styled.div`
@@ -121,10 +134,68 @@ const Circle = styled.div`
   line-height: 65px;
   width: 65px;
   height: 65px;
-  color: #777777;
+  color: ${(props) => props.theme.grey};
   font-weight: 600;
   font-size: 20px;
   border-radius: 50%;
   background-color: ${(props) =>
-    `${props.isactive ? `${theme.lightPink}` : '#ECE9E9'}`};
+    `${props.isactive ? `${props.theme.lightPink}` : '#ECE9E9'}`};
+`;
+
+const LinkButton = styled(Button)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 4px 8px;
+  > span {
+    font-weight: 600;
+    font-size: 14px;
+    color: ${(props) => props.theme.grey};
+  }
+`;
+
+const LogoutButton = styled(Button)`
+  > span {
+    color: ${(props) => props.theme.grey};
+  }
+`;
+
+const InvitationTitle = styled.div`
+  font-size: 14px;
+  color: ${(props) => props.theme.grey};
+  padding-left: 20px;
+  padding-bottom: 10px;
+`;
+
+const InvitationDescription = styled.ul`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;
+  color: ${(props) => props.theme.grey};
+  padding: 0 32px;
+
+  > li {
+    position: relative;
+    :before {
+      content: '·';
+      position: absolute;
+      top: 0;
+      left: -8px;
+    }
+  }
+`;
+
+const PinkText = styled.span`
+  color: ${(props) => props.theme.pink};
+`;
+
+const TooltipButton = styled(Button)`
+  > svg {
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  > span {
+    color: #cdcdcd;
+  }
 `;
