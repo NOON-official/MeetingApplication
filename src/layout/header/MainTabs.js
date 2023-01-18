@@ -37,7 +37,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   border-bottom: 1px solid ${(props) => props.theme.lightPink};
-  padding: 10px 30px;
+  padding: 10px 30px 3px 30px;
 `;
 
 const Menu = styled.div`
@@ -45,7 +45,8 @@ const Menu = styled.div`
   align-items: center;
   text-align: center;
   border-radius: 10px;
-  padding: 8px 28px;
+  width: 23%;
+  height: 30px;
   background-color: ${(props) =>
     `${props.isactive ? props.theme.pink : props.theme.background}`};
 `;
