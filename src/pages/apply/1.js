@@ -17,6 +17,10 @@ export default function Apply1() {
   const [gender, setGender] = useState(true);
   const [number, setNumber] = useState(true);
   const [searchKeyWord, setSearchKeyWord] = useState('0');
+
+  const setModal = (bool) => {
+    setOpenModal(bool);
+  };
   const inputChange = (e) => {
     setSearchKeyWord(e.target.value);
   };
@@ -66,7 +70,7 @@ export default function Apply1() {
   }
   return (
     <BasicContainer>
-      <IsPageCompleteModal open={openModal} />
+      <IsPageCompleteModal open={openModal} setModal={setModal} />
       <TopHeader />
       <ScrollDiv>
         <TextColorBinary
