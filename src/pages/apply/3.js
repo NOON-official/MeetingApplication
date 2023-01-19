@@ -46,7 +46,7 @@ export default function Apply3() {
     const dayInfo = getDayInfo(value);
     console.log(dayInfo);
     return (
-      <div>
+      <div style={{ height: '10px' }}>
         {dayInfo.map((item) => (
           <li key={item.content}>
             <Badge status={item.type} />
