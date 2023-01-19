@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Calendar } from 'antd';
+import { Calendar, Badge } from 'antd';
 import TextColorBinary from '../../util/TextColorBinary';
 import theme from '../../style/theme';
 import TopHeader from '../../layout/header/TopHeader';
@@ -8,15 +8,54 @@ import BasicContainer from '../../components/Container/BasicContainer';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ColumnSelectButton from '../../components/ColumnSelectButton';
 
+// 중복체크 함수
+function isAlreadyCliked(list, value) {
+  const isduplicated = list.some((v) => v === value);
+  return isduplicated;
+}
+
+// eslint-disable-next-line consistent-return
+
 export default function Apply3() {
   const title = '미팅 선호 날짜를 알려주세요';
   const title2 = '미팅 선호 지역을 알려주세요';
   const [openModal, setOpenModal] = useState(false);
   const [selectedArea, setSelectedArea] = useState([]);
+  const [selectedDate, setSelecteddate] = useState([]);
   const setModal = (bool) => {
     setOpenModal(bool);
   };
-  console.log(selectedArea);
+
+  const dateCellRender = (value) => {
+    const getDayInfo = (date) => {
+      let calendarData;
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const i of selectedDate) {
+        if (i === date.format('YYYY-MM-DD')) {
+          calendarData = [
+            {
+              type: 'warning',
+            },
+          ];
+        }
+      }
+
+      return calendarData || [];
+    };
+    const dayInfo = getDayInfo(value);
+    console.log(dayInfo);
+    return (
+      <div>
+        {dayInfo.map((item) => (
+          <li key={item.content}>
+            <Badge status={item.type} />
+          </li>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <BasicContainer>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
@@ -31,7 +70,29 @@ export default function Apply3() {
         <SubTitle> 4일 이상 선택해 주세요</SubTitle>
         <CalendarDiv>
           {' '}
-          <Calendar format="YYYY-MM-DD" fullscreen={false} />
+          <Calendar
+            format="YYYY-MM-DD"
+            fullscreen={false}
+            onSelect={
+              // 중복이면 없애고 아니면 선택해서 배열에 넣기
+              (e) => {
+                const value = e.format('YYYY-MM-DD');
+                if (isAlreadyCliked(selectedDate, value)) {
+                  // 중복
+                  const result = selectedDate.filter((data) => data !== value);
+                  setSelecteddate(result);
+                }
+
+                // eslint-disable-next-line no-lone-blocks
+                // 중복 아님
+                // eslint-disable-next-line no-shadow,
+                else {
+                  setSelecteddate([...selectedDate, value]);
+                }
+              }
+            }
+            dateCellRender={dateCellRender}
+          />
         </CalendarDiv>
         <TextColorBinary
           text={title2}
@@ -49,6 +110,9 @@ export default function Apply3() {
     </BasicContainer>
   );
 }
+const SelectedCalendar = styled.div`
+  background-color: black;
+`;
 const CalendarDiv = styled.div`
   width: 300px;
 `;
