@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import Teambox from '../../components/Teambox';
+import ApplyButton from '../../components/ApplyButton';
+import ProgressBar from '../../components/ProgressBar';
 
 function Apply2() {
   const people = 3;
@@ -41,8 +44,19 @@ function Apply2() {
           <Pink>우리팀의 구성원</Pink>을 소개해 주세요!
         </Maintitle>
         <Subtitle>나와 팀원들의 개별 ID카드를 완성해 주세요</Subtitle>
-        {teamboxcount}
       </Title>
+      {teamboxcount}
+      <Footer>
+        <ProgressBar page={3} />
+        <ButtonBox>
+          <ApplyButton>
+            <SLink to="/apply/2">이전</SLink>
+          </ApplyButton>
+          <ApplyButton>
+            <SLink to="/apply/4">다음</SLink>
+          </ApplyButton>
+        </ButtonBox>
+      </Footer>
     </ApplyLayout>
   );
 }
@@ -50,12 +64,12 @@ function Apply2() {
 export default Apply2;
 
 const Title = styled.div`
+  padding-bottom: 4%;
+  margin-left: 10%;
   margin-top: 8%;
   display: flex;
   height: 30px;
-  justify-content: flex-start;
   flex-wrap: wrap;
-  width: 100%;
 `;
 
 const Maintitle = styled.div`
@@ -70,8 +84,32 @@ const Pink = styled.span`
 `;
 
 const Subtitle = styled.p`
+  text-align: center;
   margin-top: 5%;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 13px;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
+  padding-bottom: 5%;
+`;
+
+const SLink = styled(Link)`
+  width: 100%;
+  text-decoration: 'none';
+  color: ${(props) => props.theme.lightPink};
+`;
+
+const ButtonBox = styled.div`
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  margin-top: 5%;
 `;
