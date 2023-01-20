@@ -15,7 +15,7 @@ import { ReactComponent as Profile2 } from '../asset/svg/Profile2.svg';
 import { ReactComponent as Profile3 } from '../asset/svg/Profile3.svg';
 import { ReactComponent as Profile4 } from '../asset/svg/Profile4.svg';
 
-function Teambox({ member, setMember }) {
+function Teambox({ member, setMember, name }) {
   const { Option } = Select;
 
   const [profile, setProfile] = useState('');
@@ -76,7 +76,6 @@ function Teambox({ member, setMember }) {
   const handleSimilarChange = useCallback(
     (e) => {
       setS(e.target.value);
-      setMember({ ...member, similar: s });
     },
     [member],
   );
@@ -99,7 +98,7 @@ function Teambox({ member, setMember }) {
 
   return (
     <Container>
-      <Title>대표자 ID카드 &nbsp;&nbsp;&nbsp;</Title>
+      <Title>{name} ID Card &nbsp;&nbsp;&nbsp;</Title>
       <LeftBox>
         <Profile onClick={showModal}>{profileimg}</Profile>
         <SModal
@@ -175,7 +174,7 @@ function Teambox({ member, setMember }) {
             </BottomBox>
           </Position>
         </SModal>
-        <ProfileTitle>대표자</ProfileTitle>
+        <ProfileTitle>{name}</ProfileTitle>
       </LeftBox>
       <RightBox>
         <Info>
@@ -238,6 +237,9 @@ function Teambox({ member, setMember }) {
             placeholder="(선택)"
             autoComplete="off"
             required
+            onBlur={() => {
+              setMember({ ...member, similar: s });
+            }}
           />
           <SQuestion onClick={showModal2} />
           <Modal
@@ -265,6 +267,7 @@ function Teambox({ member, setMember }) {
 export default Teambox;
 
 const Container = styled.div`
+  margin-top: 8%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
