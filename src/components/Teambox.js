@@ -381,8 +381,8 @@ const SSearch = styled(Search)`
 `;
 
 const SInput = styled(Input)`
-  margin-left: 20px;
-  width: 70px;
+  text-align: center;
+  width: 100px;
   border: none;
   background-color: ${theme.background};
 `;
@@ -445,7 +445,6 @@ const SQuestion = styled(Question)`
   &:hover {
     cursor: pointer;
   }
-  margin-left: 7px;
 `;
 
 const Info2 = styled.div`
