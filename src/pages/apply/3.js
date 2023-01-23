@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { useState } from 'react';
-import { Calendar, Badge } from 'antd';
+import { useEffect, useState } from 'react';
+// import { Calendar, Badge } from 'antd';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Calendar } from 'react-multi-date-picker';
 import TextColorBinary from '../../util/TextColorBinary';
 import theme from '../../style/theme';
 import TopHeader from '../../layout/header/TopHeader';
@@ -21,40 +23,40 @@ export default function Apply3() {
   const title2 = '미팅 선호 지역을 알려주세요';
   const [openModal, setOpenModal] = useState(false);
   const [selectedArea, setSelectedArea] = useState([]);
-  const [selectedDate, setSelecteddate] = useState([]);
+  const [selectedDate, setSelecteddate] = useState(new Date());
   const setModal = (bool) => {
     setOpenModal(bool);
   };
 
-  const dateCellRender = (value) => {
-    const getDayInfo = (date) => {
-      let calendarData;
+  // const dateCellRender = (value) => {
+  //   const getDayInfo = (date) => {
+  //     let calendarData;
 
-      // eslint-disable-next-line no-restricted-syntax
-      for (const i of selectedDate) {
-        if (i === date.format('YYYY-MM-DD')) {
-          calendarData = [
-            {
-              type: 'warning',
-            },
-          ];
-        }
-      }
+  //     // eslint-disable-next-line no-restricted-syntax
+  //     for (const i of selectedDate) {
+  //       if (i === date.format('YYYY-MM-DD')) {
+  //         calendarData = [
+  //           {
+  //             type: 'warning',
+  //           },
+  //         ];
+  //       }
+  //     }
 
-      return calendarData || [];
-    };
-    const dayInfo = getDayInfo(value);
-    console.log(dayInfo);
-    return (
-      <div style={{ height: '10px' }}>
-        {dayInfo.map((item) => (
-          <li key={item.content}>
-            <Badge status={item.type} />
-          </li>
-        ))}
-      </div>
-    );
-  };
+  //     return calendarData || [];
+  //   };
+  //   const dayInfo = getDayInfo(value);
+
+  //   return (
+  //     <div style={{ height: '10px' }}>
+  //       {dayInfo.map((item) => (
+  //         <li key={item.content}>
+  //           <Badge status={item.type} />
+  //         </li>
+  //       ))}
+  //     </div>
+  //   );
+  // };
 
   return (
     <BasicContainer>
@@ -67,10 +69,17 @@ export default function Apply3() {
           colorSecond={theme.black}
           num={8}
         />
+        <SizedBox />
         <SubTitle> 4일 이상 선택해 주세요</SubTitle>
+        <SizedBox height="20px" />
         <CalendarDiv>
-          {' '}
           <Calendar
+            minDate={4}
+            multiple
+            value={selectedDate}
+            onChange={setSelecteddate}
+          />
+          {/* <Calendar
             format="YYYY-MM-DD"
             fullscreen={false}
             onSelect={
@@ -92,15 +101,18 @@ export default function Apply3() {
               }
             }
             dateCellRender={dateCellRender}
-          />
+          /> */}
         </CalendarDiv>
+        <SizedBox height="30px" />
         <TextColorBinary
           text={title2}
           colorFirst={theme.pink}
           colorSecond={theme.black}
           num={8}
         />
+        <SizedBox />
         <SubTitle> 중복 선택이 가능해요</SubTitle>
+        <SizedBox />
         <ColumnSelectButton
           state={setSelectedArea}
           selectedArea={selectedArea}
@@ -110,15 +122,22 @@ export default function Apply3() {
     </BasicContainer>
   );
 }
+const SizedBox = styled.div`
+  height: ${(props) => props.height || '10px'};
+`;
 const SelectedCalendar = styled.div`
   background-color: black;
 `;
 const CalendarDiv = styled.div`
+  padding-left: 8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 300px;
 `;
 const SubTitle = styled.text`
   display: flex;
-  color: '#AAAAAA';
+  color: #aaaaaa;
   font-size: 13px;
   font-weight: 500;
 `;

@@ -32,12 +32,21 @@ function AreaButton(props) {
   );
 }
 const Column = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  width: 90%;
   height: auto;
+  align-items: center;
+  justify-content: center;
 `;
 const Button = styled.div`
-  width: 100%;
-  height: 45px;
+  display: flex;
+  margin: 5px 0 5px 0;
+  border-radius: 10px;
+  width: 90%;
+  height: 40px;
+  font-family: 'Nanum JungHagSaeng';
   display: flex;
   align-items: center;
   justify-content: center;

@@ -33,43 +33,47 @@ export default function Apply1() {
       university,
     ]);
   }
+
   const SearchedUniversities = useCallback(() => {
     const data = Universities.filter((c) => {
       return c.univ.indexOf(searchKeyWord) > -1;
     });
-    return data.map((c, index) => (
+    return data.map((c) => (
       <SearchedUniversity
         onClick={() => {
-          OnUniversityClick(c);
+          if (selectedUniversities.length < 3) {
+            if (selectedUniversities.some((u) => u.univ === c.univ)) {
+              window.alert('이미 선택한 대학교입니다.');
+            } else OnUniversityClick(c);
+          } else window.alert('대학교 수가 너무 많습니다.');
         }}
-        // eslint-disable-next-line react/no-array-index-key
-        key={index}
+        key={c}
       >
         {c.univ}
       </SearchedUniversity>
     ));
   }, [searchKeyWord, selectedUniversities]);
-  function binarySearch(arr, target) {
-    let start = 0;
-    let end = arr.length - 1;
-    let mid;
+  // function binarySearch(arr, target) {
+  //   let start = 0;
+  //   let end = arr.length - 1;
+  //   let mid;
 
-    while (start <= end) {
-      // 점점 좁혀지다가 start와 end의 순서가 어긋나게 되면 반복을 종료한다
+  //   while (start <= end) {
+  //     // 점점 좁혀지다가 start와 end의 순서가 어긋나게 되면 반복을 종료한다
 
-      mid = parseInt((start + end) / 2);
+  //     mid = parseInt((start + end) / 2);
 
-      if (target === arr[mid]['key']) {
-        return arr[mid]['univ'];
-      }
-      if (target < arr[mid]['key']) {
-        end = mid - 1;
-      } else {
-        start = mid + 1;
-      }
-    }
-    return -1;
-  }
+  //     if (target === arr[mid]['key']) {
+  //       return arr[mid]['univ'];
+  //     }
+  //     if (target < arr[mid]['key']) {
+  //       end = mid - 1;
+  //     } else {
+  //       start = mid + 1;
+  //     }
+  //   }
+  //   return -1;
+  // }
   return (
     <BasicContainer>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
@@ -114,12 +118,18 @@ export default function Apply1() {
         <UniversityDiv>
           {selectedUniversities.length === 0 ? null : (
             <SelectedDiv>
-              {selectedUniversities.map((data) => {
+              {selectedUniversities.map((data, i) => {
                 // eslint-disable-next-line prefer-const
                 // let univ = binarySearch(Universities, data);
 
                 return (
                   <SelectedNumUniversity
+                    onDelete={() => {
+                      const deleteUniv = selectedUniversities.filter(
+                        (value) => value !== data,
+                      );
+                      setSelectedUniversities(deleteUniv);
+                    }}
                     key={data}
                     university={data.univ}
                     selectedUniversities={selectedUniversities}
@@ -133,13 +143,14 @@ export default function Apply1() {
             style={{
               display: 'flex',
               justifyContent: 'space-between',
+              alignItems: 'center',
               flexDirection: 'row',
               width: '90%',
               borderRadius: '10px',
               borderStyle: 'solid',
               borderWidth: '1px',
               borderColor: '#EB8888',
-
+              padding: ' 0 5px 0 5px',
               height: '44px',
             }}
           >
@@ -150,12 +161,13 @@ export default function Apply1() {
                 display: 'flex',
                 width: '100%',
                 height: '100%',
-                fontSize: '18px',
+                fontSize: '20px',
                 border: '0',
-                textAlign: 'center',
                 outline: 'none',
                 marginLeft: '10px',
                 backgroundColor: 'transparent',
+                color: '#EB8888',
+                fontFamily: 'Nanum JungHagSaeng',
               }}
               placeholder="학교를 검색해주세요"
             />
@@ -216,7 +228,7 @@ function SelectedNumUniversity(props) {
         borderRadius: '10px',
         padding: ' 5px 5px 5px 5px',
       }}
-      onClick={() => {}}
+      onClick={props.onDelete}
     >
       <UniversityText style={{ size: '15px' }}>
         {props.university}
@@ -248,7 +260,7 @@ const UniversityDiv = styled.div`
 `;
 const SubTitle = styled.text`
   display: flex;
-  color: '#AAAAAA';
+  color: #aaaaaa;
   font-size: 13px;
   font-weight: 500;
 `;
@@ -280,13 +292,12 @@ const SearchedUniversity = styled.div`
   display: flex;
   min-height: 40px;
   height: 40px;
-  width: 80%;
+  width: 100%;
   align-items: center;
   justify-content: flex-start;
   color: #eb8888;
   font-size: 14px;
-  margin-left: 50px;
-  margin-right: 50px;
+
   border-bottom: 1px solid #f6eeee;
   overflow-x: hidden;
 `;
