@@ -15,7 +15,6 @@ function ApplyLayout({ children }) {
 export default ApplyLayout;
 
 const Container = styled.div`
-  min-height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -26,8 +25,9 @@ const Header = styled.header`
 `;
 
 const Content = styled.div`
+  min-height: 90vh;
   width: 400px;
-  min-height: calc(100vh - 70px);
+  border: 1px solid red;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

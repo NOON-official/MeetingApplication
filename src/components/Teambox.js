@@ -274,7 +274,7 @@ const Container = styled.div`
   background-color: ${theme.background};
   border: 1px solid #f1ecec;
   border-radius: 10px;
-  width: 334px;
+  width: 340px;
   height: 200px;
 `;
 
