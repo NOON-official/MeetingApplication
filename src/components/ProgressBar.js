@@ -4,7 +4,7 @@ import { ReactComponent as HappyFace } from '../asset/svg/HappyFace.svg';
 
 const Progress = styled.div`
   position: relative;
-  width: 330px;
+  width: 360px;
   height: 24px;
   background-color: ${(props) => props.theme.grey};
   border-radius: 20px;
@@ -15,7 +15,7 @@ const IngBar = styled.div`
   justify-content: flex-end;
   position: absolute;
   ${({ progress }) => {
-    return progress ? `width: ${progress * 55}px` : `width: 0`;
+    return progress ? `width: ${progress * 60}px` : `width: 0`;
   }};
   background-color: ${(props) => props.theme.lightPink};
   border-radius: 20px;

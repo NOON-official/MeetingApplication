@@ -9,7 +9,7 @@ import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 
 function Apply2() {
-  const people = 3;
+  const people = 2;
   const [member1, setMember1] = useState({});
   const [member2, setMember2] = useState({});
   const [member3, setMember3] = useState({});
@@ -32,7 +32,7 @@ function Apply2() {
         </>
       );
     }
-    return <div />;
+    return null;
   });
 
   console.log(member1);
@@ -64,12 +64,10 @@ function Apply2() {
 export default Apply2;
 
 const Title = styled.div`
-  padding-bottom: 4%;
-  margin-left: 10%;
+  width: 90%;
   margin-top: 8%;
-  display: flex;
-  height: 30px;
-  flex-wrap: wrap;
+  height: 13%;
+  min-height: 13%;
 `;
 
 const Maintitle = styled.div`
@@ -84,8 +82,7 @@ const Pink = styled.span`
 `;
 
 const Subtitle = styled.p`
-  text-align: center;
-  margin-top: 5%;
+  margin-top: 4%;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 13px;
@@ -107,7 +104,7 @@ const SLink = styled(Link)`
 `;
 
 const ButtonBox = styled.div`
-  width: 85%;
+  width: 90%;
   display: flex;
   justify-content: center;
   justify-content: space-between;
