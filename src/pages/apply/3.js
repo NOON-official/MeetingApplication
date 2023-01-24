@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import 'react-multi-date-picker/styles/backgrounds/custom-calendar.css';
 // import { Calendar, Badge } from 'antd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Calendar } from 'react-multi-date-picker';
@@ -23,7 +24,7 @@ export default function Apply3() {
   const title2 = '미팅 선호 지역을 알려주세요';
   const [openModal, setOpenModal] = useState(false);
   const [selectedArea, setSelectedArea] = useState([]);
-  const [selectedDate, setSelecteddate] = useState(new Date());
+  const [SelectedDate, setSelecteddate] = useState(new Date());
   const setModal = (bool) => {
     setOpenModal(bool);
   };
@@ -74,9 +75,35 @@ export default function Apply3() {
         <SizedBox height="20px" />
         <CalendarDiv>
           <Calendar
+            layout="mobile"
+            className="custom-calendar"
+            mapDays={({
+              date,
+              today,
+              selectedDate,
+              currentMonth,
+              isSameDate,
+            }) => {
+              const props = {};
+
+              // 전체 css
+              props.style = {
+                borderRadius: '10px',
+              };
+              if (isSameDate(date, selectedDate)) {
+                console.log(selectedDate);
+                props.style = {
+                  ...props.style,
+                  color: '#F49393',
+                  backgroundColor: '#F49393',
+                  fontWeight: 'bold',
+                };
+              } else console.log(selectedDate);
+              return props;
+            }}
             minDate={4}
             multiple
-            value={selectedDate}
+            value={SelectedDate}
             onChange={setSelecteddate}
           />
           {/* <Calendar
