@@ -153,7 +153,7 @@ const Footer = styled.div`
 `;
 
 const SLink = styled(Link)`
-  width: 100%;
+  padding: 10px 58px;
   text-decoration: 'none';
   color: ${(props) => props.theme.lightPink};
 `;
