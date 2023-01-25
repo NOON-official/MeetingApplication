@@ -15,7 +15,7 @@ const IngBar = styled.div`
   justify-content: flex-end;
   position: absolute;
   ${({ progress }) => {
-    return progress ? `width: ${progress * 60}px` : `width: 0`;
+    return progress ? `width: ${progress * 72}px` : `width: 0`;
   }};
   background-color: ${(props) => props.theme.lightPink};
   border-radius: 20px;
