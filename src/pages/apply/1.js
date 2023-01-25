@@ -1,11 +1,13 @@
 import { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import TopHeader from '../../layout/header/TopHeader';
-import BasicContainer from '../../components/Container/BasicContainer';
+import { Link } from 'react-router-dom';
 import theme from '../../style/theme';
 import TextColorBinary from '../../util/TextColorBinary';
 import BinaryButton from '../../components/BinaryButton';
 import Universities from '../../asset/Universities';
+import ApplyLayout from '../../layout/ApplyLayout';
+import ApplyButton from '../../components/ApplyButton';
+import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
 import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
@@ -53,11 +55,11 @@ export default function Apply1() {
       </SearchedUniversity>
     ));
   }, [searchKeyWord, selectedUniversities]);
-  
+
   return (
-    <BasicContainer>
+    <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
-      <TopHeader />
+
       <ScrollDiv>
         <TextColorBinary
           text={title}
@@ -65,10 +67,9 @@ export default function Apply1() {
           colorSecond={theme.black}
           num={5}
         />
-        <SizedBox />
+
         <ButtonDiv>
           <TitleOfButton>성별</TitleOfButton>
-
           <BinaryButton
             state={gender}
             condition1="남자"
@@ -174,7 +175,18 @@ export default function Apply1() {
           }}
         />
       </ScrollDiv>
-    </BasicContainer>
+      <Footer>
+        <ProgressBar page={3} />
+        <ButtonBox>
+          <ApplyButton>
+            <SLink to="/">이전</SLink>
+          </ApplyButton>
+          <ApplyButton>
+            <SLink to="/apply/2">다음</SLink>
+          </ApplyButton>
+        </ButtonBox>
+      </Footer>
+    </ApplyLayout>
   );
 }
 function SelectedNumUniversity(props) {
@@ -217,6 +229,21 @@ function SelectedNumUniversity(props) {
     </div>
   );
 }
+const ButtonBox = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  margin-top: 5%;
+`;
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
+  padding-bottom: 5%;
+`;
 
 const UniversityText = styled.text`
   font-size: 10px;
@@ -242,7 +269,7 @@ const SubTitle = styled.text`
   display: flex;
   color: #aaaaaa;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
 `;
 const TitleOfButton = styled.text`
   margin: 10px 10px 10px 10px;
@@ -252,21 +279,25 @@ const TitleOfButton = styled.text`
   font-weight: 500;
 `;
 const ButtonDiv = styled.div`
+  margin-top: 8%;
   width: 100%;
-  max-width: 375px;
+
   height: 77px;
-  flex: 1 0 auto;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
 const ScrollDiv = styled.div`
-  max-width: 400px;
-  flex: 1 0 auto;
   width: 90%;
   align-items: flex-start;
-  min-height: calc(100vh - 120px);
+  margin-top: 8%;
+`;
+const SLink = styled(Link)`
+  width: 100%;
+  text-decoration: 'none';
+  color: ${(props) => props.theme.lightPink};
 `;
 const SearchedUniversity = styled.div`
   display: flex;
