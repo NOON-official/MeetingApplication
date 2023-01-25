@@ -1,18 +1,42 @@
 import styled from 'styled-components';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import Teambox from '../../components/Teambox';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
+import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
 function Apply3() {
+  const [openModal, setOpenModal] = useState(false);
+  const [openModal2, setOpenModal2] = useState(false);
+
   const people = 2;
   const [member1, setMember1] = useState({});
   const [member2, setMember2] = useState({});
   const [member3, setMember3] = useState({});
+
+  const setModal = (bool) => {
+    setOpenModal(bool);
+  };
+
+  useEffect(() => {
+    if (Object.keys(member1).length >= 3) {
+      setOpenModal2(true);
+    } else {
+      setOpenModal2(false);
+    }
+  });
+
+  const handleModal = () => {
+    if (Object.keys(member1).length >= 3) {
+      setOpenModal(false);
+    } else {
+      setOpenModal(true);
+    }
+  };
 
   const teamboxcount = useMemo(() => {
     if (people === 2) {
@@ -37,8 +61,10 @@ function Apply3() {
 
   console.log(member1);
   console.log(member2);
+
   return (
     <ApplyLayout>
+      <IsPageCompleteModal open={openModal} setModal={setModal} />
       <Title>
         <Maintitle>
           <Pink>우리팀의 구성원</Pink>을 소개해 주세요!
@@ -53,7 +79,15 @@ function Apply3() {
             <SLink to="/apply/2">이전</SLink>
           </ApplyButton>
           <ApplyButton>
-            <SLink to="/apply/4">다음</SLink>
+            {openModal2 ? (
+              <SLink onClick={handleModal} to="/apply/4">
+                다음
+              </SLink>
+            ) : (
+              <SLink onClick={handleModal} to="/apply/3">
+                다음
+              </SLink>
+            )}
           </ApplyButton>
         </ButtonBox>
       </Footer>
