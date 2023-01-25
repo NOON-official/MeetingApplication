@@ -15,7 +15,7 @@ import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
 export default function Apply1() {
   const title = '기본 정보를 알려주세요';
   const title2 = '우리 팀의 학교는?';
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
   const [selectedUniversities, setSelectedUniversities] = useState([]);
 
   const [gender, setGender] = useState(true);
@@ -176,7 +176,7 @@ export default function Apply1() {
         />
       </ScrollDiv>
       <Footer>
-        <ProgressBar page={3} />
+        <ProgressBar page={1} />
         <ButtonBox>
           <ApplyButton>
             <SLink to="/">이전</SLink>
