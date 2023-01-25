@@ -28,9 +28,12 @@ export default TopHeader;
 
 const Container = styled.div`
   padding: 10px 30px;
+  background-color: #f8f3f3;
+  height: 4vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid ${(props) => props.theme.lightPink};
 `;
 
 const LoginBox = styled.button`
