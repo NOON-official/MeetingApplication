@@ -80,7 +80,7 @@ function Apply5() {
       <SSlider dots marks={marks2} max={5} min={1} defaultValue={3} />
       <SBottom />
       <Footer>
-        <ProgressBar page={6} />
+        <ProgressBar page={5} />
         <ButtonBox>
           <ApplyButton>
             <SLink to="/apply/4">이전</SLink>
