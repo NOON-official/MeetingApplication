@@ -7,11 +7,13 @@ function TextColorBinary(props) {
     color: ${props.colorFirst};
     font-size: 35px;
     font-family: 'Nanum JungHagSaeng';
+    font-weight: 400;
   `;
   const SecondText = styled.text`
     color: ${props.colorSecond};
     font-size: 35px;
     font-family: 'Nanum JungHagSaeng';
+    font-weight: 400;
   `;
   return (
     <text>
