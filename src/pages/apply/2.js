@@ -11,8 +11,6 @@ import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
-import TopHeader from '../../layout/header/TopHeader';
-import BasicContainer from '../../components/Container/BasicContainer';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ColumnSelectButton from '../../components/ColumnSelectButton';
 
