@@ -5,8 +5,12 @@ import 'react-multi-date-picker/styles/backgrounds/custom-calendar.css';
 // import { Calendar, Badge } from 'antd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Calendar } from 'react-multi-date-picker';
+import { Link } from 'react-router-dom';
 import TextColorBinary from '../../util/TextColorBinary';
 import theme from '../../style/theme';
+import ApplyLayout from '../../layout/ApplyLayout';
+import ApplyButton from '../../components/ApplyButton';
+import ProgressBar from '../../components/ProgressBar';
 import TopHeader from '../../layout/header/TopHeader';
 import BasicContainer from '../../components/Container/BasicContainer';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
@@ -30,40 +34,9 @@ export default function Apply2() {
     setOpenModal(bool);
   };
 
-  // const dateCellRender = (value) => {
-  //   const getDayInfo = (date) => {
-  //     let calendarData;
-
-  //     // eslint-disable-next-line no-restricted-syntax
-  //     for (const i of selectedDate) {
-  //       if (i === date.format('YYYY-MM-DD')) {
-  //         calendarData = [
-  //           {
-  //             type: 'warning',
-  //           },
-  //         ];
-  //       }
-  //     }
-
-  //     return calendarData || [];
-  //   };
-  //   const dayInfo = getDayInfo(value);
-
-  //   return (
-  //     <div style={{ height: '10px' }}>
-  //       {dayInfo.map((item) => (
-  //         <li key={item.content}>
-  //           <Badge status={item.type} />
-  //         </li>
-  //       ))}
-  //     </div>
-  //   );
-  // };
-
   return (
-    <BasicContainer>
+    <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
-      <TopHeader />
       <ScrollDiv>
         <TextColorBinary
           text={title}
@@ -107,29 +80,6 @@ export default function Apply2() {
             value={SelectedDate}
             onChange={setSelecteddate}
           />
-          {/* <Calendar
-            format="YYYY-MM-DD"
-            fullscreen={false}
-            onSelect={
-              // 중복이면 없애고 아니면 선택해서 배열에 넣기
-              (e) => {
-                const value = e.format('YYYY-MM-DD');
-                if (isAlreadyCliked(selectedDate, value)) {
-                  // 중복
-                  const result = selectedDate.filter((data) => data !== value);
-                  setSelecteddate(result);
-                }
-
-                // eslint-disable-next-line no-lone-blocks
-                // 중복 아님
-                // eslint-disable-next-line no-shadow,
-                else {
-                  setSelecteddate([...selectedDate, value]);
-                }
-              }
-            }
-            dateCellRender={dateCellRender}
-          /> */}
         </CalendarDiv>
         <SizedBox height="30px" />
         <TextColorBinary
@@ -147,15 +97,44 @@ export default function Apply2() {
           area={['강남', '건대', '신촌', '홍대', '상관없음']}
         />
       </ScrollDiv>
-    </BasicContainer>
+      <Footer>
+        <ProgressBar page={2} />
+        <ButtonBox>
+          <ApplyButton>
+            <SLink to="/apply/1">이전</SLink>
+          </ApplyButton>
+          <ApplyButton>
+            <SLink to="/apply/3">다음</SLink>
+          </ApplyButton>
+        </ButtonBox>
+      </Footer>
+    </ApplyLayout>
   );
 }
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
+  padding-bottom: 5%;
+`;
+const ButtonBox = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  margin-top: 5%;
+`;
+const SLink = styled(Link)`
+  width: 100%;
+  text-decoration: 'none';
+  color: ${(props) => props.theme.lightPink};
+`;
 const SizedBox = styled.div`
   height: ${(props) => props.height || '10px'};
 `;
-const SelectedCalendar = styled.div`
-  background-color: black;
-`;
+
 const CalendarDiv = styled.div`
   padding-left: 8%;
   display: flex;
@@ -170,11 +149,7 @@ const SubTitle = styled.text`
   font-weight: 500;
 `;
 const ScrollDiv = styled.div`
-  padding: 20px 10px 20px 10px;
-  max-width: 400px;
-  flex: 1 0 auto;
-  width: 100%;
+  width: 90%;
   align-items: flex-start;
-  min-height: calc(100vh - 120px);
-  flex-direction: column;
+  margin-top: 8%;
 `;
