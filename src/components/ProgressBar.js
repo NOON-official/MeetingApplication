@@ -6,7 +6,7 @@ const Progress = styled.div`
   position: relative;
   width: 360px;
   height: 24px;
-  background-color: ${(props) => props.theme.grey};
+  background-color: #f1ecec;
   border-radius: 20px;
 `;
 
