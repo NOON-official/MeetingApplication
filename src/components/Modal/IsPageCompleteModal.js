@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import styled from 'styled-components';
 import { ReactComponent as ErrorChar } from '../../asset/svg/ErrorMessageCharacter.svg';
 import theme from '../../style/theme';
@@ -12,8 +13,13 @@ const ColorText = styled.text`
   font-size: 35px;
   font-family: 'Nanum JungHagSaeng';
 `;
+
+const Padding = styled.div`
+  width: 90%;
+  padding: 30px 30px 30px 30px;
+`;
 export default function IsPageCompleteModal(props) {
-  const { open, colse } = props;
+  const { open, colse, setModal } = props;
 
   return (
     <div className={open ? 'openMidal modal' : 'modal'}>
@@ -44,6 +50,19 @@ export default function IsPageCompleteModal(props) {
             <BlackText>이 있어요.</BlackText>
           </text>
           <text>모든 항목에 응답해 주세요.</text>
+          <Padding>
+            <Button
+              style={{
+                width: '100%',
+                height: '50px',
+
+                backgroundColor: `${theme.pink}`,
+              }}
+              onClick={() => setModal(false)}
+            >
+              <tect style={{ color: 'white' }}>닫기</tect>
+            </Button>
+          </Padding>
         </div>
       ) : null}
     </div>
