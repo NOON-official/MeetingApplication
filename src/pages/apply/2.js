@@ -125,7 +125,7 @@ const ButtonBox = styled.div`
   margin-top: 5%;
 `;
 const SLink = styled(Link)`
-  width: 100%;
+  padding: 10px 58.6px;
   text-decoration: 'none';
   color: ${(props) => props.theme.lightPink};
 `;

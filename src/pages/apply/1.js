@@ -293,7 +293,7 @@ const ScrollDiv = styled.div`
   margin-top: 8%;
 `;
 const SLink = styled(Link)`
-  padding: 10px 58px;
+  padding: 10px 58.6px;
   text-decoration: 'none';
   color: ${(props) => props.theme.lightPink};
 `;

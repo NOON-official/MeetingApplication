@@ -22,19 +22,51 @@ function Apply3() {
     setOpenModal(bool);
   };
 
-  useEffect(() => {
-    if (Object.keys(member1).length >= 3) {
-      setOpenModal2(true);
-    } else {
-      setOpenModal2(false);
-    }
-  });
+  if (people === 2) {
+    useEffect(() => {
+      if (
+        Object.keys(member1).length >= 3 &&
+        Object.keys(member2).length >= 3
+      ) {
+        setOpenModal2(true);
+      } else {
+        setOpenModal2(false);
+      }
+    });
+  } else {
+    useEffect(() => {
+      if (
+        Object.keys(member1).length >= 3 &&
+        Object.keys(member2).length >= 3 &&
+        Object.keys(member3).length >= 3
+      ) {
+        setOpenModal2(true);
+      } else {
+        setOpenModal2(false);
+      }
+    });
+  }
 
   const handleModal = () => {
-    if (Object.keys(member1).length >= 3) {
-      setOpenModal(false);
-    } else {
-      setOpenModal(true);
+    if (people === 2) {
+      if (
+        Object.keys(member1).length >= 3 &&
+        Object.keys(member2).length >= 3
+      ) {
+        setOpenModal(false);
+      } else {
+        setOpenModal(true);
+      }
+    } else if (people === 3) {
+      if (
+        Object.keys(member1).length >= 3 &&
+        Object.keys(member2).length >= 3 &&
+        Object.keys(member3).length >= 3
+      ) {
+        setOpenModal(false);
+      } else {
+        setOpenModal(true);
+      }
     }
   };
 
@@ -132,7 +164,7 @@ const Footer = styled.div`
 `;
 
 const SLink = styled(Link)`
-  padding: 10px 58px;
+  padding: 10px 58.6px;
   text-decoration: 'none';
   color: ${(props) => props.theme.lightPink};
 `;
