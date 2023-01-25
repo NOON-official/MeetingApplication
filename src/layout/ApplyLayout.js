@@ -25,6 +25,7 @@ const Header = styled.header`
 `;
 
 const Content = styled.div`
+  background-color: rgb(245, 245, 245);
   min-height: 90vh;
   width: 400px;
   border: 1px solid red;
