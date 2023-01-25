@@ -281,9 +281,7 @@ const TitleOfButton = styled.text`
 const ButtonDiv = styled.div`
   margin-top: 8%;
   width: 100%;
-
   height: 77px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -295,7 +293,7 @@ const ScrollDiv = styled.div`
   margin-top: 8%;
 `;
 const SLink = styled(Link)`
-  width: 100%;
+  padding: 10px 58px;
   text-decoration: 'none';
   color: ${(props) => props.theme.lightPink};
 `;
@@ -308,7 +306,6 @@ const SearchedUniversity = styled.div`
   justify-content: flex-start;
   color: #eb8888;
   font-size: 14px;
-
   border-bottom: 1px solid #f6eeee;
   overflow-x: hidden;
 `;
