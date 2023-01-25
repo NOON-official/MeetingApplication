@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-multi-date-picker/styles/backgrounds/custom-calendar.css';
 // import { Calendar, Badge } from 'antd';
 // eslint-disable-next-line import/no-extraneous-dependencies
