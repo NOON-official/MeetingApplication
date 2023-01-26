@@ -42,4 +42,7 @@ const SelectButton = styled.button`
   border-color: transparent;
   font-family: 'Nanum JungHagSaeng';
   font-size: 18px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
