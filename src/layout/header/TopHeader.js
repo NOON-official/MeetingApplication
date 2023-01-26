@@ -33,7 +33,9 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid ${(props) => props.theme.lightPink};
+  &:last-child {
+    border-bottom: 1px solid ${(props) => props.theme.lightPink};
+  }
 `;
 
 const LoginBox = styled.button`
