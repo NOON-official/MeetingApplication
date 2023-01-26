@@ -1,17 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import user from './features/user';
-import applySlice from './features/apply';
-import matchingSlice from './features/matching';
+import apply from './features/apply';
+import matching from './features/matching';
 
-const createStore = () => {
-  const store = configureStore({
-    reducer: {
-      user,
-      apply: applySlice.reducer,
-      matching: matchingSlice.reducer,
-    },
-  });
-  return store;
-};
+const store = configureStore({
+  reducer: {
+    user,
+    apply,
+    matching,
+  },
+});
 
-export default createStore;
+export default store;

@@ -208,13 +208,13 @@ const UniversityDiv = styled.div`
   flex-direction: column;
   height: 60%;
 `;
-const SubTitle = styled.text`
+const SubTitle = styled.span`
   display: flex;
   color: '#AAAAAA';
   font-size: 13px;
   font-weight: 500;
 `;
-const TitleOfButton = styled.text`
+const TitleOfButton = styled.span`
   color: #777777;
   font-size: 14px;
   font-family: ${theme.Prefont};

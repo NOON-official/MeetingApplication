@@ -5,7 +5,7 @@ export const initialState = {};
 const matchingSlice = createSlice({
   name: 'matching',
   initialState,
-  reducer: {},
+  reducers: {},
 });
 
-export default matchingSlice;
+export default matchingSlice.reducer;

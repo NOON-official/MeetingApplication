@@ -43,6 +43,6 @@ export default function SelectedNumUniversity(props) {
   );
 }
 
-const UniversityText = styled.text`
+const UniversityText = styled.span`
   font-size: 10px;
 `;
