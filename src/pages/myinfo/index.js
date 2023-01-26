@@ -1,16 +1,32 @@
 import styled from 'styled-components';
-import { Button, Tag } from 'antd';
+import { Button, Col, notification, Row } from 'antd';
+import { useCallback } from 'react';
 import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
-import { ReactComponent as Invitefreinds } from '../../asset/svg/Invitefreinds.svg';
+import { ReactComponent as KakaoTalk } from '../../asset/svg/KakaoTalk.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
 import { ReactComponent as QuestionCircle } from '../../asset/svg/QuestionCircle.svg';
 import Section from '../../components/Section';
 
 function MyInfo() {
+  const [api, contextHolder] = notification.useNotification();
+
+  const inviteCode = 'ABCD123';
+
+  const copyToClipboard = useCallback(() => {
+    navigator.clipboard.writeText(inviteCode);
+    api.open({
+      key: 'clipboard',
+      message: `클립보드에 복사되었습니다`,
+      placement: 'bottom',
+      className: 'ant-notification-no-description',
+    });
+  }, [inviteCode]);
+
   return (
     <MainLayout>
+      {contextHolder}
       <Section>
         <MenuBox>
           <MenuItem>
@@ -65,11 +81,19 @@ function MyInfo() {
           </div>
         </CouponBox>
       </Section>
-      <Section>
-        <Tag>
-          ABC123 <Copy />
-        </Tag>
-        <Invitefreinds />
+      <Section my="12px">
+        <Row gutter={16}>
+          <Col span={12}>
+            <CopyButton block onClick={copyToClipboard}>
+              {inviteCode} <Copy />
+            </CopyButton>
+          </Col>
+          <Col span={12}>
+            <KakaoButton icon={<KakaoTalk />} block>
+              카카오톡 공유하기
+            </KakaoButton>
+          </Col>
+        </Row>
       </Section>
       <MainFooter />
     </MainLayout>
@@ -197,5 +221,35 @@ const TooltipButton = styled(Button)`
   }
   > span {
     color: #cdcdcd;
+  }
+`;
+
+const KakaoButton = styled(Button)`
+  background-color: #fee500;
+  height: 47px;
+  > svg {
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  > span {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+  }
+`;
+
+const CopyButton = styled(Button)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 47px;
+  > svg {
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  > span {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
   }
 `;
