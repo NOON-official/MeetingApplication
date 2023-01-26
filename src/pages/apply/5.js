@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { Slider } from 'antd';
+import BinaryButton from '../../components/BinaryButton';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import { ReactComponent as Bottom } from '../../asset/svg/Apply5Bottom.svg';
+import ChooseButton from '../../components/ChooseButton';
 
 function Apply5() {
   const marks = {
@@ -22,13 +24,17 @@ function Apply5() {
     5: { label: <SliderText>5</SliderText> },
   };
 
-  const [school, setschool] = useState(false);
+  const [ageRange, setAgeRange] = useState([23, 25]);
+  const [sameSchool, setSameSchool] = useState(true);
+  const [alchol, setAlchol] = useState(3);
 
-  const schoolhandler = useCallback(() => {
-    setschool(false);
-  }, [school]);
+  const onAfterChange = (value) => {
+    setAgeRange(value);
+  };
 
-  console.log({ school });
+  console.log(ageRange);
+  console.log(sameSchool);
+  console.log(alchol);
 
   return (
     <ApplyLayout>
@@ -43,6 +49,7 @@ function Apply5() {
         <Subtitle2>범위를 넓게 선택해야 매칭확률이 상승해요</Subtitle2>
       </Title2>
       <SSlider
+        onAfterChange={onAfterChange}
         tooltip={{ placement: 'bottom' }}
         marks={marks}
         max={29}
@@ -54,8 +61,12 @@ function Apply5() {
         <Maintitle2>상대팀 학교</Maintitle2>
       </Title2>
       <ChooseBox>
-        <SmallButton onClick={schoolhandler}>같은 학교는 싫어요</SmallButton>
-        <SmallButton>상관없어요</SmallButton>
+        <BinaryButton
+          state={sameSchool}
+          condition1="같은학교"
+          condition2="상관없음"
+          onChange={(result) => setSameSchool(result)}
+        />
       </ChooseBox>
       <Title>
         <Maintitle>
@@ -67,17 +78,28 @@ function Apply5() {
         <Maintitle2>분위기</Maintitle2>
       </Title2>
       <ChooseBox2>
-        <BigButton>코로나 때문에 못한 연애오늘?!</BigButton>
-        <BigButton>친구는 다다익선! 찐친 만들어 보자</BigButton>
-        <BigButton>왁자지껄 이 밤이 떠나가라!</BigButton>
-        <BigButton>술게임 한 수 배우러 왔습니다</BigButton>
-        <BigButton>술게임 못해도 챙겨주는 훈훈한 분위기</BigButton>
+        <ChooseButton content="코로나 때문에 못한 연애오늘?!" />
+        <ChooseButton content="친구는 다다익선! 찐친 만들어 보자" />
+        <ChooseButton content="왁자지껄 이 밤이 떠나가라!" />
+        <ChooseButton content="술게임 한 수 배우러 왔습니다" />
+        <ChooseButton content="술게임 못해도 챙겨주는 훈훈한 분위기" />
       </ChooseBox2>
       <Title2>
         <Maintitle2>주량 레벨</Maintitle2>
         <Subtitle2>우리팀의 평균 주량을 알려주세요</Subtitle2>
       </Title2>
-      <SSlider dots marks={marks2} max={5} min={1} defaultValue={3} />
+      <SSlider
+        onChange={setAlchol}
+        value={alchol}
+        tooltip={{
+          open: false,
+        }}
+        dots
+        marks={marks2}
+        max={5}
+        min={1}
+        defaultValue={3}
+      />
       <SBottom />
       <Footer>
         <ProgressBar page={5} />
@@ -186,43 +208,11 @@ const ChooseBox = styled.div`
   padding-bottom: 10%;
 `;
 
-const SmallButton = styled.button`
-  background-color: ${(props) => (props.color ? 'red' : '#f6eeee')};
-  color: ${(props) => (props.fontcolor ? 'white' : '#b79292')};
-  border-radius: 10px;
-  border: none;
-  font-family: 'Nanum JungHagSaeng';
-  width: 162px;
-  height: 45px;
-  font-weight: 400;
-  font-size: 20px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const ChooseBox2 = styled.div`
   margin-top: 3%;
   width: 90%;
   display: flex;
   flex-direction: column;
-`;
-
-const BigButton = styled.button`
-  margin-top: 3%;
-  background: #f6eeee;
-  border-radius: 10px;
-  border: none;
-  font-family: 'Nanum JungHagSaeng';
-  width: 360px;
-  height: 45px;
-  font-weight: 400;
-  font-size: 20px;
-  color: #b79292;
-  background: '#f6eeee';
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const SBottom = styled(Bottom)`
