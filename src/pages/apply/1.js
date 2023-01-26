@@ -1,64 +1,35 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import theme from '../../style/theme';
 import TextColorBinary from '../../util/TextColorBinary';
 import BinaryButton from '../../components/BinaryButton';
-import Universities from '../../asset/Universities';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
+import SelectedNumUniversity from '../../util/SelectedUniversity';
+import { SearchedUniversities } from '../../util/SearchedUniversities';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
-import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
 import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
 
 export default function Apply1() {
   const title = '기본 정보를 알려주세요';
   const title2 = '우리 팀의 학교는?';
-  const [openModal, setOpenModal] = useState(true);
   const [selectedUniversities, setSelectedUniversities] = useState([]);
-
   const [gender, setGender] = useState(true);
   const [number, setNumber] = useState(true);
   const [searchKeyWord, setSearchKeyWord] = useState('0');
-
-  const setModal = (bool) => {
-    setOpenModal(bool);
-  };
   const inputChange = (e) => {
     setSearchKeyWord(e.target.value);
   };
-  function OnUniversityClick(university) {
-    // eslint-disable-next-line no-shadow
-    setSelectedUniversities((selectedUniversities) => [
-      ...selectedUniversities,
-      university,
-    ]);
-  }
-
-  const SearchedUniversities = useCallback(() => {
-    const data = Universities.filter((c) => {
-      return c.univ.indexOf(searchKeyWord) > -1;
-    });
-    return data.map((c) => (
-      <SearchedUniversity
-        onClick={() => {
-          if (selectedUniversities.length < 3) {
-            if (selectedUniversities.some((u) => u.univ === c.univ)) {
-              window.alert('이미 선택한 대학교입니다.');
-            } else OnUniversityClick(c);
-          } else window.alert('대학교 수가 너무 많습니다.');
-        }}
-        key={c}
-      >
-        {c.univ}
-      </SearchedUniversity>
-    ));
-  }, [searchKeyWord, selectedUniversities]);
+  // const [openModal, setOpenModal] = useState(true);
+  // const setModal = (bool) => {
+  //   setOpenModal(bool);
+  // };
 
   return (
     <ApplyLayout>
-      <IsPageCompleteModal open={openModal} setModal={setModal} />
+      {/* <IsPageCompleteModal open={openModal} setModal={setModal} /> */}
 
       <ScrollDiv>
         <TextColorBinary
@@ -120,60 +91,22 @@ export default function Apply1() {
             </SelectedDiv>
           )}
           <SizedBox height="20px" />
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexDirection: 'row',
-              width: '90%',
-              borderRadius: '10px',
-              borderStyle: 'solid',
-              borderWidth: '1px',
-              borderColor: '#EB8888',
-              padding: ' 0 5px 0 5px',
-              height: '44px',
-            }}
-          >
-            <input
+          <SearchDiv>
+            <SearchInput
               onChange={inputChange}
               name="universitySearch"
-              style={{
-                display: 'flex',
-                width: '100%',
-                height: '100%',
-                fontSize: '20px',
-                border: '0',
-                outline: 'none',
-                marginLeft: '10px',
-                backgroundColor: 'transparent',
-                color: '#EB8888',
-                fontFamily: 'Nanum JungHagSaeng',
-              }}
               placeholder="학교를 검색해주세요"
             />
             <SearchIcon />
-          </div>
-          <div
-            style={{
-              overflowX: 'hidden',
-              overflow: 'scroll',
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'column',
-              height: '200px',
-              width: '90%',
-            }}
-          >
-            <SearchedUniversities />
-          </div>
+          </SearchDiv>
+          <SearchListDiv>
+            <SearchedUniversities
+              searchKeyWord={searchKeyWord}
+              selectedUniversities={selectedUniversities}
+              setSelectedUniversities={setSelectedUniversities}
+            />
+          </SearchListDiv>
         </UniversityDiv>
-        <button
-          type="button"
-          onClick={() => {
-            setOpenModal(true);
-          }}
-        />
       </ScrollDiv>
       <Footer>
         <ProgressBar page={1} />
@@ -189,46 +122,7 @@ export default function Apply1() {
     </ApplyLayout>
   );
 }
-function SelectedNumUniversity(props) {
-  const { selectedUniversities } = props;
-  const width = useMemo(() => {
-    if (selectedUniversities.length === 1) {
-      return '45%';
-    }
-    if (selectedUniversities.length === 2) {
-      return '45%';
-    }
-    if (selectedUniversities.length === 3) {
-      return '30%';
-    }
-    if (selectedUniversities.length === 4) {
-      return '22%';
-    }
-    return '45%';
-  }, [selectedUniversities]);
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        width: `${width}`,
-        color: '#FFFFFF',
-        backgroundColor: '#EB8888',
-        alignItems: 'center',
-        textAlign: 'center',
-        minHeight: '40px',
-        borderRadius: '10px',
-        padding: ' 5px 5px 5px 5px',
-      }}
-      onClick={props.onDelete}
-    >
-      <UniversityText style={{ size: '15px' }}>
-        {props.university}
-      </UniversityText>
-      <Xbutton />
-    </div>
-  );
-}
+
 const ButtonBox = styled.div`
   width: 90%;
   display: flex;
@@ -245,9 +139,6 @@ const Footer = styled.div`
   padding-bottom: 5%;
 `;
 
-const UniversityText = styled.text`
-  font-size: 10px;
-`;
 const SizedBox = styled.div`
   height: ${(props) => props.height || '10px'};
 `;
@@ -297,15 +188,37 @@ const SLink = styled(Link)`
   text-decoration: 'none';
   color: ${(props) => props.theme.lightPink};
 `;
-const SearchedUniversity = styled.div`
+const SearchDiv = styled.div`
   display: flex;
-  min-height: 40px;
-  height: 40px;
-  width: 100%;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-start;
+  flex-direction: row;
+  width: 90%;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #eb8888;
+  padding: 0 5px 0 5px;
+  height: 44px;
+`;
+const SearchInput = styled.input`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  border: 0;
+  outline: none;
+  margin-left: 10px;
+  background-color: transparent;
   color: #eb8888;
-  font-size: 14px;
-  border-bottom: 1px solid #f6eeee;
+  font-family: Nanum JungHagSaeng;
+`;
+const SearchListDiv = styled.div`
   overflow-x: hidden;
+  overflow: scroll;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 200px;
+  width: 90%;
 `;
