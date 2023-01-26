@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-export default function ApplyButton({ children }) {
-  return <SButton type="text">{children}</SButton>;
-}
-
-const SButton = styled.button`
+const ApplyButton = styled.button.attrs({ type: 'button' })`
   font-weight: 400;
   font-size: 24px;
   font-family: 'Nanum JungHagSaeng';
@@ -13,8 +9,11 @@ const SButton = styled.button`
   height: 50px;
   border-radius: 10px;
   border: 1px solid ${(props) => props.theme.lightPink};
+  color: ${(props) => props.theme.lightPink};
   &:hover {
     cursor: pointer;
     background-color: ${(props) => props.theme.pink};
   }
 `;
+
+export default ApplyButton;

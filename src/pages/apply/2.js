@@ -1,15 +1,13 @@
 import styled from 'styled-components';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Calendar } from 'react-multi-date-picker';
+import { useSelector } from 'react-redux';
 import TextColorBinary from '../../util/TextColorBinary';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
-import TopHeader from '../../layout/header/TopHeader';
-import BasicContainer from '../../components/Container/BasicContainer';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ColumnSelectButton from '../../components/ColumnSelectButton';
 
@@ -27,6 +25,16 @@ export default function Apply2() {
   const [openModal, setOpenModal] = useState(false);
   const [selectedArea, setSelectedArea] = useState([]);
   const [SelectedDate, setSelecteddate] = useState(new Date());
+  const { finishedStep } = useSelector((store) => store.apply);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (finishedStep < 1) {
+      window.alert('잘못된 접근입니다');
+      navigate(`/apply/${finishedStep + 1}`);
+    }
+  }, []);
+
   const setModal = (bool) => {
     setOpenModal(bool);
   };
@@ -166,7 +174,7 @@ const CalendarDiv = styled.div`
     color: #fff;
   }
 `;
-const SubTitle = styled.text`
+const SubTitle = styled.span`
   display: flex;
   color: #aaaaaa;
   font-size: 13px;

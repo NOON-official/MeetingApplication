@@ -7,10 +7,8 @@ import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
 import theme from './style/theme';
 import Router from './Router';
-import createstore from './store';
 import antdTheme from './style/antdTheme';
-
-const store = createstore();
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

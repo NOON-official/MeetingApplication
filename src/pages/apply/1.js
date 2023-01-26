@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import theme from '../../style/theme';
 import TextColorBinary from '../../util/TextColorBinary';
 import BinaryButton from '../../components/BinaryButton';
@@ -9,23 +10,37 @@ import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import SelectedNumUniversity from '../../util/SelectedUniversity';
 import { SearchedUniversities } from '../../util/SearchedUniversities';
-import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
+import { submitStep1 } from '../../features/apply';
 
 export default function Apply1() {
   const title = '기본 정보를 알려주세요';
   const title2 = '우리 팀의 학교는?';
   const [selectedUniversities, setSelectedUniversities] = useState([]);
-  const [gender, setGender] = useState(true);
-  const [number, setNumber] = useState(true);
+  const [gender, setGender] = useState(1);
+  const [memberCount, setMemberCount] = useState(2);
   const [searchKeyWord, setSearchKeyWord] = useState('0');
   const inputChange = (e) => {
     setSearchKeyWord(e.target.value);
   };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   // const [openModal, setOpenModal] = useState(true);
   // const setModal = (bool) => {
   //   setOpenModal(bool);
   // };
+
+  const handleSubmit = useCallback(() => {
+    dispatch(
+      submitStep1({
+        gender,
+        memberCount,
+        universities: selectedUniversities,
+      }),
+    );
+    navigate('/apply/2');
+  });
 
   return (
     <ApplyLayout>
@@ -42,19 +57,21 @@ export default function Apply1() {
         <ButtonDiv>
           <TitleOfButton>성별</TitleOfButton>
           <BinaryButton
-            state={gender}
+            state={gender === 1}
             condition1="남자"
             condition2="여자"
-            onChange={(result) => setGender(result)}
+            onChange={(result) => (result ? setGender(1) : setGender(2))}
           />
         </ButtonDiv>
         <ButtonDiv>
           <TitleOfButton>인원 수</TitleOfButton>
           <BinaryButton
-            state={number}
+            state={memberCount === 2}
             condition1="2:2"
             condition2="3:3"
-            onChange={(result) => setNumber(result)}
+            onChange={(result) =>
+              result ? setMemberCount(2) : setMemberCount(3)
+            }
           />
         </ButtonDiv>
         <SizedBox height="50px" />
@@ -70,7 +87,7 @@ export default function Apply1() {
         <UniversityDiv>
           {selectedUniversities.length === 0 ? null : (
             <SelectedDiv>
-              {selectedUniversities.map((data, i) => {
+              {selectedUniversities.map((data) => {
                 // eslint-disable-next-line prefer-const
                 // let univ = binarySearch(Universities, data);
 
@@ -114,9 +131,7 @@ export default function Apply1() {
           <ApplyButton>
             <SLink to="/">이전</SLink>
           </ApplyButton>
-          <ApplyButton>
-            <SLink to="/apply/2">다음</SLink>
-          </ApplyButton>
+          <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
     </ApplyLayout>
@@ -156,13 +171,13 @@ const UniversityDiv = styled.div`
   height: 60%;
   width: 100%;
 `;
-const SubTitle = styled.text`
+const SubTitle = styled.span`
   display: flex;
   color: #aaaaaa;
   font-size: 13px;
   font-weight: 400;
 `;
-const TitleOfButton = styled.text`
+const TitleOfButton = styled.span`
   margin: 10px 10px 10px 10px;
   color: #777777;
   font-size: 14px;
