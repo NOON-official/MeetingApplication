@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import 'react-multi-date-picker/styles/backgrounds/custom-calendar.css';
 import { Calendar } from 'react-multi-date-picker';
 import TextColorBinary from '../../util/TextColorBinary';
 import theme from '../../style/theme';
 import TopHeader from '../../layout/header/TopHeader';
-import BasicContainer from '../../components/Container/BasicContainer';
+
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ColumnSelectButton from '../../components/ColumnSelectButton';
+import ApplyLayout from '../../layout/ApplyLayout';
+import ApplyButton from '../../components/ApplyButton';
+import ProgressBar from '../../components/ProgressBar';
 
 export default function Apply2() {
   const title = '미팅 선호 날짜를 알려주세요';
@@ -24,9 +28,9 @@ export default function Apply2() {
     return templist;
   }
   return (
-    <BasicContainer>
+    <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
-      <TopHeader />
+
       <ScrollDiv>
         <TextColorBinary
           text={title}
@@ -66,11 +70,7 @@ export default function Apply2() {
             }}
             minDate={4}
             multiple
-            value={new Date()}
-            onChange={(dateObj) => {
-              // setSelecteddate(List(dateObj));
-              // console.log(SelectedDate);
-            }}
+            onChange={(array) => {}}
           />
         </CalendarDiv>
         <SizedBox height="30px" />
@@ -89,7 +89,19 @@ export default function Apply2() {
           area={['강남', '건대', '신촌', '홍대', '상관없음']}
         />
       </ScrollDiv>
-    </BasicContainer>
+
+      <Footer>
+        <ProgressBar page={2} />
+        <ButtonBox>
+          <ApplyButton>
+            <SLink to="/apply/1">이전</SLink>
+          </ApplyButton>
+          <ApplyButton>
+            <SLink to="/apply/3">다음</SLink>
+          </ApplyButton>
+        </ButtonBox>
+      </Footer>
+    </ApplyLayout>
   );
 }
 const SizedBox = styled.div`
@@ -102,6 +114,14 @@ const CalendarDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 300px;
+`;
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
+  padding-bottom: 5%;
 `;
 const SubTitle = styled.text`
   display: flex;
@@ -117,4 +137,16 @@ const ScrollDiv = styled.div`
   align-items: flex-start;
   min-height: calc(100vh - 120px);
   flex-direction: column;
+`;
+const ButtonBox = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  margin-top: 5%;
+`;
+const SLink = styled(Link)`
+  padding: 10px 58.6px;
+  text-decoration: 'none';
+  color: ${(props) => props.theme.lightPink};
 `;
