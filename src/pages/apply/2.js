@@ -1,17 +1,25 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import 'react-multi-date-picker/styles/backgrounds/custom-calendar.css';
+
 import { Calendar } from 'react-multi-date-picker';
 import TextColorBinary from '../../util/TextColorBinary';
 import theme from '../../style/theme';
-import TopHeader from '../../layout/header/TopHeader';
-
-import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
-import ColumnSelectButton from '../../components/ColumnSelectButton';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
+import TopHeader from '../../layout/header/TopHeader';
+import BasicContainer from '../../components/Container/BasicContainer';
+import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import ColumnSelectButton from '../../components/ColumnSelectButton';
+
+// 중복체크 함수
+function isAlreadyCliked(list, value) {
+  const isduplicated = list.some((v) => v === value);
+  return isduplicated;
+}
+
+// eslint-disable-next-line consistent-return
 
 export default function Apply2() {
   const title = '미팅 선호 날짜를 알려주세요';
@@ -22,15 +30,10 @@ export default function Apply2() {
   const setModal = (bool) => {
     setOpenModal(bool);
   };
-  function List(dateObj) {
-    const templist = [];
-    dateObj.map((date) => templist.push(date.format('YYYY/MM/DD')));
-    return templist;
-  }
+
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
-
       <ScrollDiv>
         <TextColorBinary
           text={title}
@@ -59,18 +62,20 @@ export default function Apply2() {
                 borderRadius: '10px',
               };
               if (isSameDate(date, selectedDate)) {
+                console.log(selectedDate);
                 props.style = {
                   ...props.style,
                   color: '#F49393',
                   backgroundColor: '#F49393',
                   fontWeight: 'bold',
                 };
-              }
+              } else console.log(selectedDate);
               return props;
             }}
             minDate={4}
             multiple
-            onChange={(array) => {}}
+            value={SelectedDate}
+            onChange={setSelecteddate}
           />
         </CalendarDiv>
         <SizedBox height="30px" />
@@ -89,7 +94,6 @@ export default function Apply2() {
           area={['강남', '건대', '신촌', '홍대', '상관없음']}
         />
       </ScrollDiv>
-
       <Footer>
         <ProgressBar page={2} />
         <ButtonBox>
@@ -104,6 +108,26 @@ export default function Apply2() {
     </ApplyLayout>
   );
 }
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
+  padding-bottom: 5%;
+`;
+const ButtonBox = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  margin-top: 5%;
+`;
+const SLink = styled(Link)`
+  width: 100%;
+  text-decoration: 'none';
+  color: ${(props) => props.theme.lightPink};
+`;
 const SizedBox = styled.div`
   height: ${(props) => props.height || '10px'};
 `;
@@ -115,14 +139,6 @@ const CalendarDiv = styled.div`
   align-items: center;
   width: 300px;
 `;
-const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 10%;
-  padding-bottom: 5%;
-`;
 const SubTitle = styled.text`
   display: flex;
   color: #aaaaaa;
@@ -130,23 +146,7 @@ const SubTitle = styled.text`
   font-weight: 500;
 `;
 const ScrollDiv = styled.div`
-  padding: 20px 10px 20px 10px;
-  max-width: 400px;
-  flex: 1 0 auto;
-  width: 100%;
-  align-items: flex-start;
-  min-height: calc(100vh - 120px);
-  flex-direction: column;
-`;
-const ButtonBox = styled.div`
   width: 90%;
-  display: flex;
-  justify-content: center;
-  justify-content: space-between;
-  margin-top: 5%;
-`;
-const SLink = styled(Link)`
-  padding: 10px 58.6px;
-  text-decoration: 'none';
-  color: ${(props) => props.theme.lightPink};
+  align-items: flex-start;
+  margin-top: 8%;
 `;
