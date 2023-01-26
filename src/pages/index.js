@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import { Button } from 'antd';
 import theme from '../style/theme';
 import { ReactComponent as MainImg } from '../asset/svg/MainImg.svg';
 import MainLayout from '../layout/MainLayout';
 import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
+import Section from '../components/Section';
 
 function Main() {
   const twoman = 25;
@@ -15,36 +16,51 @@ function Main() {
 
   return (
     <MainLayout>
-      <ImgBox>
-        <Users>최근 일주일 사용자 수 10명</Users>
-        <MainImg />
-      </ImgBox>
-      <MatchingBox>
-        <Title>50명이 채워지면 바로 매칭됩니다.</Title>
-        <SubTitle>2 : 2</SubTitle>
-        <TotalBar>
-          <Number>{twoman}</Number>
-          <LeftBar>
-            <LeftBarProgress progress={twoman} />
-          </LeftBar>
-          <RightBar>
-            <RightBarProgress progress={twogirl} />
-          </RightBar>
-          <Number>{twogirl}</Number>
-        </TotalBar>
-        <SubTitle>3 : 3</SubTitle>
-        <TotalBar>
-          <Number>{threeman}</Number>
-          <LeftBar>
-            <LeftBarProgress progress={threeman} />
-          </LeftBar>
-          <RightBar>
-            <RightBarProgress progress={threegirl} />
-          </RightBar>
-          <Number>{threegirl}</Number>
-        </TotalBar>
-      </MatchingBox>
-      <SLink to="/apply/team">매칭 시작하기</SLink>
+      <Section mx="10px" my="12px">
+        <ImgBox>
+          <UserCountText>
+            <span>1</span>
+            <span>0</span>
+            <span>0</span>
+          </UserCountText>
+          <MainImg />
+        </ImgBox>
+      </Section>
+
+      <Section>
+        <MatchingBox>
+          <Title>50명이 채워지면 바로 매칭됩니다.</Title>
+          <SubTitle>2 : 2</SubTitle>
+          <TotalBar>
+            <Number>{twoman}</Number>
+            <LeftBar>
+              <LeftBarProgress progress={twoman} />
+            </LeftBar>
+            <RightBar>
+              <RightBarProgress progress={twogirl} />
+            </RightBar>
+            <Number>{twogirl}</Number>
+          </TotalBar>
+          <SubTitle>3 : 3</SubTitle>
+          <TotalBar>
+            <Number>{threeman}</Number>
+            <LeftBar>
+              <LeftBarProgress progress={threeman} />
+            </LeftBar>
+            <RightBar>
+              <RightBarProgress progress={threegirl} />
+            </RightBar>
+            <Number>{threegirl}</Number>
+          </TotalBar>
+        </MatchingBox>
+      </Section>
+
+      <Section my="32px" center>
+        <Link to="/apply/1">
+          <StartButton>매칭 시작하기</StartButton>
+        </Link>
+      </Section>
+
       <MainFooter />
       <BottomFooter />
     </MainLayout>
@@ -55,24 +71,26 @@ export default Main;
 
 const ImgBox = styled.div`
   position: relative;
-  margin-right: 40px;
   max-width: 100%;
   display: flex;
   justify-content: center;
+
+  > svg {
+    width: 100%;
+    height: auto;
+  }
 `;
 
-const Users = styled.div`
-  text-align: center;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 24px;
+const UserCountText = styled.div`
   position: absolute;
-  margin-left: 25px;
-  width: 260px;
-  height: 43px;
-  line-height: 30px;
-  top: 15%;
-  background-color: ${theme.background};
+  top: 9.3%;
+  right: 27%;
+
+  > span {
+    font-family: 'Nanum JungHagSaeng';
+    font-weight: 400;
+    font-size: 26px;
+  }
 `;
 
 const MatchingBox = styled.div`
@@ -84,7 +102,6 @@ const MatchingBox = styled.div`
   font-weight: 400;
   font-size: 20px;
   padding: 11px 10px 8px 9px;
-  width: 332px;
   height: 140px;
   background: #ffffff;
   border-radius: 10px;
@@ -162,16 +179,16 @@ const Number = styled.p`
   font-size: 15px;
 `;
 
-const SLink = styled(Link)`
-  width: 90px;
-  height: 30px;
+const StartButton = styled(Button).attrs({ type: 'text' })`
+  height: auto;
   font-family: 'Nanum JungHagSaeng';
-  margin-top: 48px;
-  padding: 15px 50px;
-  font-weight: 400;
-  font-size: 24px;
+  padding: 10px 50px;
   border-radius: 10px;
-  text-decoration: none;
-  color: white;
-  background-color: ${theme.pink};
+  background-color: ${(props) => props.theme.pink};
+
+  > span {
+    font-weight: 400;
+    font-size: 24px;
+    color: white;
+  }
 `;
