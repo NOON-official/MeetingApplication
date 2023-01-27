@@ -54,37 +54,13 @@ export default function Apply2() {
         <SizedBox height="20px" />
         <CalendarDiv>
           <Calendar
+            format="YYYY/MM/DD"
             layout="mobile"
             className="custom-calendar"
-            mapDays={({
-              date,
-              today,
-              selectedDate,
-              currentMonth,
-              isSameDate,
-            }) => {
-              const props = {};
-
-              // 전체 css
-              props.style = {
-                borderRadius: '10px',
-              };
-              if (date !== selectedDate) {
-                console.log('jj', selectedDate);
-                // selectedDate.map((valueDate) =>
-                //   setSelecteddate((prev) => [
-                //     ...prev,
-                //     valueDate.format('YYYY/MM/DD'),
-                //   ]),
-                // );
-              }
-              return props;
-            }}
-            minDate={4}
             multiple
-            onChange={() => {
-              console.log('j', SelectedDate);
-            }}
+            minDate={4}
+            value={SelectedDate}
+            onChange={setSelecteddate}
           />
         </CalendarDiv>
         <SizedBox height="30px" />
