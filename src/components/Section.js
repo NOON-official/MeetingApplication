@@ -6,6 +6,7 @@ import styled from 'styled-components';
  */
 const Section = styled.section`
   margin: ${({ my }) => my || '0px'} ${({ mx }) => mx || '20px'};
+  text-align: ${({ center }) => (center ? 'center' : 'left')};
 `;
 
 export default Section;
