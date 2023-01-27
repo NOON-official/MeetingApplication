@@ -1,74 +1,42 @@
 import styled from 'styled-components';
+import { useMemo, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { useMemo, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import Teambox from '../../components/Teambox';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import { submitStep3 } from '../../features/apply';
 
 function Apply3() {
   const [openModal, setOpenModal] = useState(false);
-  const [openModal2, setOpenModal2] = useState(false);
-
+  const { finishedStep, members } = useSelector((store) => store.apply);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const people = 2;
-  const [member1, setMember1] = useState({});
-  const [member2, setMember2] = useState({});
+  const [member1, setMember1] = useState(members[0]);
+  const [member2, setMember2] = useState(members[1]);
   const [member3, setMember3] = useState({});
 
   const setModal = (bool) => {
     setOpenModal(bool);
   };
 
-  if (people === 2) {
-    useEffect(() => {
-      if (
-        Object.keys(member1).length >= 3 &&
-        Object.keys(member2).length >= 3
-      ) {
-        setOpenModal2(true);
-      } else {
-        setOpenModal2(false);
-      }
-    });
-  } else {
-    useEffect(() => {
-      if (
-        Object.keys(member1).length >= 3 &&
-        Object.keys(member2).length >= 3 &&
-        Object.keys(member3).length >= 3
-      ) {
-        setOpenModal2(true);
-      } else {
-        setOpenModal2(false);
-      }
-    });
-  }
-
-  const handleModal = () => {
-    if (people === 2) {
-      if (
-        Object.keys(member1).length >= 3 &&
-        Object.keys(member2).length >= 3
-      ) {
-        setOpenModal(false);
-      } else {
-        setOpenModal(true);
-      }
-    } else if (people === 3) {
-      if (
-        Object.keys(member1).length >= 3 &&
-        Object.keys(member2).length >= 3 &&
-        Object.keys(member3).length >= 3
-      ) {
-        setOpenModal(false);
-      } else {
-        setOpenModal(true);
-      }
+  const handleSubmit = useCallback(() => {
+    if (Object.keys(member1).length < 3 || Object.keys(member2).length < 3) {
+      setOpenModal(true);
+      return;
     }
-  };
+    dispatch(
+      submitStep3({
+        members: [member1, member2],
+      }),
+    );
+    navigate('/apply/4');
+  });
 
   const teamboxcount = useMemo(() => {
     if (people === 2) {
@@ -110,17 +78,7 @@ function Apply3() {
           <ApplyButton>
             <SLink to="/apply/2">이전</SLink>
           </ApplyButton>
-          <ApplyButton>
-            {openModal2 ? (
-              <SLink onClick={handleModal} to="/apply/4">
-                다음
-              </SLink>
-            ) : (
-              <SLink onClick={handleModal} to="/apply/3">
-                다음
-              </SLink>
-            )}
-          </ApplyButton>
+          <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
     </ApplyLayout>
