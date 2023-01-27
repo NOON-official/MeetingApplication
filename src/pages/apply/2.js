@@ -69,21 +69,22 @@ export default function Apply2() {
               props.style = {
                 borderRadius: '10px',
               };
-              if (isSameDate(date, selectedDate)) {
-                console.log(selectedDate);
-                props.style = {
-                  ...props.style,
-                  color: '#F49393',
-                  backgroundColor: '#F49393',
-                  fontWeight: 'bold',
-                };
-              } else console.log(selectedDate);
+              if (date !== selectedDate) {
+                console.log('jj', selectedDate);
+                // selectedDate.map((valueDate) =>
+                //   setSelecteddate((prev) => [
+                //     ...prev,
+                //     valueDate.format('YYYY/MM/DD'),
+                //   ]),
+                // );
+              }
               return props;
             }}
             minDate={4}
             multiple
-            value={SelectedDate}
-            onChange={setSelecteddate}
+            onChange={() => {
+              console.log('j', SelectedDate);
+            }}
           />
         </CalendarDiv>
         <SizedBox height="30px" />
