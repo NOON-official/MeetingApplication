@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Button, Col, Modal, notification, Row } from 'antd';
 import { useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as KakaoTalk } from '../../asset/svg/KakaoTalk.svg';
@@ -33,14 +34,18 @@ function MyInfo() {
       <Section>
         <MenuBox>
           <MenuItem>
-            <LinkButton type="text" block>
-              계정관리 <RightArrow />
-            </LinkButton>
+            <Link to="/myinfo/account">
+              <LinkButton type="text" block>
+                계정관리 <RightArrow />
+              </LinkButton>
+            </Link>
           </MenuItem>
           <MenuItem>
-            <LinkButton type="text" block>
-              이용권현황 <RightArrow />
-            </LinkButton>
+            <Link to="/myinfo/ticket">
+              <LinkButton type="text" block>
+                이용권현황 <RightArrow />
+              </LinkButton>
+            </Link>
           </MenuItem>
           <MenuItem>
             <LinkButton type="text" block>
