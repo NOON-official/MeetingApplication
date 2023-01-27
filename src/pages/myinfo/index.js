@@ -43,12 +43,17 @@ function MyInfo() {
           <MenuItem>
             <Link to="/myinfo/ticket">
               <LinkButton type="text" block>
-                이용권현황 <RightArrow />
+                이용권 현황 <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
           <MenuItem>
-            <LinkButton type="text" block>
+            <LinkButton
+              type="text"
+              block
+              href="https://docs.google.com/forms/d/e/1FAIpQLScjiIvjK7UTXLeR5c5C4unZWXKarGR0sq_9TjMqi51IKtyvUg/viewform"
+              target="_blank"
+            >
               제안하기 <RightArrow />
             </LinkButton>
           </MenuItem>
