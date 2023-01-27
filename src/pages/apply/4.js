@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useState, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'antd';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
@@ -9,41 +9,35 @@ import { ReactComponent as Baloon } from '../../asset/svg/Baloon.svg';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import { submitStep4 } from '../../features/apply';
 
 function Apply4() {
   const [openModal, setOpenModal] = useState(false);
-  const [openModal2, setOpenModal2] = useState(false);
+  const { finishedStep, intro } = useSelector((store) => store.apply);
+  const [introduce, setIntroduce] = useState(intro);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [intro, setIntro] = useState('');
+  const handleChange = useCallback((e) => {
+    setIntroduce(e.target.value);
+  }, []);
 
-  useEffect(() => {
-    if (intro.length >= 10) {
-      setOpenModal2(true);
-    } else {
-      setOpenModal2(false);
+  const handleSubmit = useCallback(() => {
+    if (introduce.length < 10) {
+      setOpenModal(true);
+      return;
     }
+    dispatch(
+      submitStep4({
+        intro: introduce,
+      }),
+    );
+    navigate('/apply/5');
   });
-
-  const handleChange = useCallback(
-    (e) => {
-      setIntro(e.target.value);
-    },
-    [intro],
-  );
 
   const setModal = (bool) => {
     setOpenModal(bool);
   };
-
-  const handleModal = () => {
-    if (intro.length >= 10) {
-      setOpenModal(false);
-    } else {
-      setOpenModal(true);
-    }
-  };
-
-  console.log(intro);
 
   return (
     <ApplyLayout>
@@ -58,7 +52,7 @@ function Apply4() {
       <Text>
         <Alert>최소 글자수 10자</Alert>
         <STextArea
-          value={intro}
+          value={introduce}
           bordered={false}
           style={{
             height: '150px',
@@ -78,17 +72,7 @@ function Apply4() {
           <ApplyButton>
             <SLink to="/apply/3">이전</SLink>
           </ApplyButton>
-          <ApplyButton>
-            {openModal2 ? (
-              <SLink onClick={handleModal} to="/apply/5">
-                다음
-              </SLink>
-            ) : (
-              <SLink onClick={handleModal} to="/apply/4">
-                다음
-              </SLink>
-            )}
-          </ApplyButton>
+          <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
     </ApplyLayout>
