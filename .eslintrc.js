@@ -33,6 +33,7 @@ module.exports = {
     'no-param-reassign': 'warn',
     radix: 'off',
     'dot-notation': 'off',
+    'react/jsx-props-no-spreading': 'off',
     ...a11yOff,
   },
 };
