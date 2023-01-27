@@ -18,7 +18,7 @@ import { ReactComponent as Profile4 } from '../asset/svg/Profile4.svg';
 function Teambox({ member, setMember, name }) {
   const { Option } = Select;
 
-  const [profile, setProfile] = useState('');
+  const [profile, setProfile] = useState(member.position);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
@@ -57,7 +57,7 @@ function Teambox({ member, setMember, name }) {
     setIsModalOpen2(false);
   };
 
-  const [s, setS] = useState('');
+  const [s, setS] = useState(member.similar);
 
   const handleAgeChange = useCallback(
     (value) => {
@@ -180,6 +180,7 @@ function Teambox({ member, setMember, name }) {
         <Info>
           <BigTitle>나이</BigTitle>
           <SSelect
+            defaultValue={member.age}
             showSearch={false}
             bordered={false}
             removeIcon
@@ -203,6 +204,7 @@ function Teambox({ member, setMember, name }) {
         <Info>
           <BigTitle>MBTI</BigTitle>
           <SSelect
+            defaultValue={member.mbti}
             showSearch={false}
             bordered={false}
             optionFilterProp="children"
