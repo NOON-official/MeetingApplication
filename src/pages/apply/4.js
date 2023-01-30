@@ -22,6 +22,10 @@ function Apply4() {
     setIntroduce(e.target.value);
   }, []);
 
+  const handleBefore = useCallback(() => {
+    navigate('/apply/3');
+  });
+
   const handleSubmit = useCallback(() => {
     if (introduce.length < 10) {
       setOpenModal(true);
@@ -69,9 +73,7 @@ function Apply4() {
       <Footer>
         <ProgressBar page={4} />
         <ButtonBox>
-          <ApplyButton>
-            <SLink to="/apply/3">이전</SLink>
-          </ApplyButton>
+          <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
