@@ -25,6 +25,10 @@ function Apply3() {
     setOpenModal(bool);
   };
 
+  const handleBefore = useCallback(() => {
+    navigate('/apply/2');
+  });
+
   const handleSubmit = useCallback(() => {
     if (Object.keys(member1).length < 3 || Object.keys(member2).length < 3) {
       setOpenModal(true);
@@ -59,9 +63,6 @@ function Apply3() {
     return null;
   });
 
-  console.log(member1);
-  console.log(member2);
-
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
@@ -75,9 +76,7 @@ function Apply3() {
       <Footer>
         <ProgressBar page={3} />
         <ButtonBox>
-          <ApplyButton>
-            <SLink to="/apply/2">이전</SLink>
-          </ApplyButton>
+          <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
