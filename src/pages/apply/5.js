@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Slider } from 'antd';
 import BinaryButton from '../../components/BinaryButton';
@@ -10,8 +11,15 @@ import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import { ReactComponent as Bottom } from '../../asset/svg/Apply5Bottom.svg';
 import ChooseButton from '../../components/ChooseButton';
+import { submitStep5 } from '../../features/apply';
+import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
 function Apply5() {
+  const [openModal, setOpenModal] = useState(false);
+  const { finishedStep, prefAge, prefSameUniversity, prefVibe, drink } =
+    useSelector((store) => store.apply);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const marks = {
     20: { label: <SliderText>20세</SliderText> },
     29: { label: <SliderText>29세</SliderText> },
@@ -24,20 +32,53 @@ function Apply5() {
     5: { label: <SliderText>5</SliderText> },
   };
 
-  const [ageRange, setAgeRange] = useState([23, 25]);
-  const [sameSchool, setSameSchool] = useState(true);
-  const [alchol, setAlchol] = useState(3);
+  const [ageRange, setAgeRange] = useState(prefAge.length ? prefAge : [23, 25]);
+  const [sameSchool, setSameSchool] = useState(prefSameUniversity);
+  const [prefMood, setPrefMood] = useState(prefVibe);
+  const [alchol, setAlchol] = useState(drink || 3);
+
+  const setModal = (bool) => {
+    setOpenModal(bool);
+  };
 
   const onAfterChange = (value) => {
     setAgeRange(value);
   };
 
-  console.log(ageRange);
-  console.log(sameSchool);
-  console.log(alchol);
+  const handleVibe = useCallback(
+    (val, isChecked) => {
+      if (isChecked) {
+        setPrefMood([...prefMood, val]);
+        return;
+      }
+      setPrefMood(prefMood.filter((v) => v !== val));
+    },
+    [prefMood],
+  );
+
+  const handleBefore = useCallback(() => {
+    navigate('/apply/4');
+  });
+
+  const handleSubmit = useCallback(() => {
+    if (prefMood.length === 0) {
+      setOpenModal(true);
+      return;
+    }
+    dispatch(
+      submitStep5({
+        prefAge: ageRange,
+        prefSameUniversity: sameSchool,
+        prefVibe: prefMood,
+        drink: alchol,
+      }),
+    );
+    navigate('/apply/6');
+  });
 
   return (
     <ApplyLayout>
+      <IsPageCompleteModal open={openModal} setModal={setModal} />
       <Title>
         <Maintitle>
           <Pink>어떤 상대팀</Pink>을 원하시나요?
@@ -52,20 +93,20 @@ function Apply5() {
         onAfterChange={onAfterChange}
         tooltip={{ placement: 'bottom' }}
         marks={marks}
+        defaultValue={ageRange}
         max={29}
         min={20}
         range
-        defaultValue={[23, 25]}
       />
       <Title2>
         <Maintitle2>상대팀 학교</Maintitle2>
       </Title2>
       <ChooseBox>
         <BinaryButton
-          state={sameSchool}
+          state={sameSchool === 0}
           condition1="같은학교"
           condition2="상관없음"
-          onChange={(result) => setSameSchool(result)}
+          onChange={(result) => (result ? setSameSchool(0) : setSameSchool(1))}
         />
       </ChooseBox>
       <Title>
@@ -78,11 +119,31 @@ function Apply5() {
         <Maintitle2>분위기</Maintitle2>
       </Title2>
       <ChooseBox2>
-        <ChooseButton content="코로나 때문에 못한 연애오늘?!" />
-        <ChooseButton content="친구는 다다익선! 찐친 만들어 보자" />
-        <ChooseButton content="왁자지껄 이 밤이 떠나가라!" />
-        <ChooseButton content="술게임 한 수 배우러 왔습니다" />
-        <ChooseButton content="술게임 못해도 챙겨주는 훈훈한 분위기" />
+        <ChooseButton
+          isActive={prefMood.includes(1)}
+          onChange={(isActive) => handleVibe(1, isActive)}
+          content="코로나 때문에 못한 연애오늘?!"
+        />
+        <ChooseButton
+          isActive={prefMood.includes(2)}
+          onChange={(isActive) => handleVibe(2, isActive)}
+          content="친구는 다다익선! 찐친 만들어 보자"
+        />
+        <ChooseButton
+          isActive={prefMood.includes(3)}
+          onChange={(isActive) => handleVibe(3, isActive)}
+          content="왁자지껄 이 밤이 떠나가라!"
+        />
+        <ChooseButton
+          isActive={prefMood.includes(4)}
+          onChange={(isActive) => handleVibe(4, isActive)}
+          content="술게임 한 수 배우러 왔습니다"
+        />
+        <ChooseButton
+          isActive={prefMood.includes(5)}
+          onChange={(isActive) => handleVibe(5, isActive)}
+          content="술게임 못해도 챙겨주는 훈훈한 분위기"
+        />
       </ChooseBox2>
       <Title2>
         <Maintitle2>주량 레벨</Maintitle2>
@@ -98,18 +159,13 @@ function Apply5() {
         marks={marks2}
         max={5}
         min={1}
-        defaultValue={3}
       />
       <SBottom />
       <Footer>
         <ProgressBar page={5} />
         <ButtonBox>
-          <ApplyButton>
-            <SLink to="/apply/4">이전</SLink>
-          </ApplyButton>
-          <ApplyButton>
-            <SLink to="/apply/6">다음</SLink>
-          </ApplyButton>
+          <ApplyButton onClick={handleBefore}>이전</ApplyButton>
+          <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
     </ApplyLayout>
@@ -172,12 +228,6 @@ const Footer = styled.div`
   width: 100%;
   margin-top: 6%;
   padding-bottom: 5%;
-`;
-
-const SLink = styled(Link)`
-  padding: 10px 58px;
-  text-decoration: 'none';
-  color: ${(props) => props.theme.lightPink};
 `;
 
 const ButtonBox = styled.div`
