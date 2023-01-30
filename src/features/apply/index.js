@@ -8,7 +8,11 @@ const initialState = {
   memberCount: 0, // 2: 2대2, 3: 3대3
   universities: [],
   intro: '',
-  members: [],
+  members: [{}, {}],
+  drink: 0,
+  prefSameUniversity: 0,
+  prefAge: [],
+  prefVibe: [],
 };
 
 const applySlice = createSlice({
@@ -68,9 +72,29 @@ const applySlice = createSlice({
         }),
       );
     },
+    submitStep5: (state, action) => {
+      const { drink, prefAge, prefSameUniversity, prefVibe } = action.payload;
+
+      state.finishedStep = 5;
+      state.drink = drink;
+      state.prefAge = prefAge;
+      state.prefSameUniversity = prefSameUniversity;
+      state.prefVibe = prefVibe;
+
+      const stored = localStorage.getItem('apply-data');
+      localStorage.setItem(
+        APPLY_STORAGE_KEY,
+        JSON.stringify({
+          finishedStep: state.finishedStep,
+          ...JSON.parse(stored),
+          ...action.payload,
+        }),
+      );
+    },
   },
 });
 
-export const { submitStep1, submitStep3, submitStep4 } = applySlice.actions;
+export const { submitStep1, submitStep3, submitStep4, submitStep5 } =
+  applySlice.actions;
 
 export default applySlice.reducer;
