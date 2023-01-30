@@ -1,16 +1,20 @@
 import styled from 'styled-components';
-import { Button, Col, notification, Row } from 'antd';
-import { useCallback } from 'react';
+import { Button, Col, Modal, notification, Row } from 'antd';
+import { useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as KakaoTalk } from '../../asset/svg/KakaoTalk.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
 import { ReactComponent as QuestionCircle } from '../../asset/svg/QuestionCircle.svg';
+import coffeeGreyImg from '../../asset/img/coffee-grey.png';
+import coffeeImg from '../../asset/img/coffee.png';
 import Section from '../../components/Section';
 
 function MyInfo() {
   const [api, contextHolder] = notification.useNotification();
+  const [isNoticeOpened, setIsNoticeOpened] = useState(false);
 
   const inviteCode = 'ABCD123';
 
@@ -30,17 +34,26 @@ function MyInfo() {
       <Section>
         <MenuBox>
           <MenuItem>
-            <LinkButton type="text" block>
-              계정관리 <RightArrow />
-            </LinkButton>
+            <Link to="/myinfo/account">
+              <LinkButton type="text" block>
+                계정관리 <RightArrow />
+              </LinkButton>
+            </Link>
           </MenuItem>
           <MenuItem>
-            <LinkButton type="text" block>
-              이용권현황 <RightArrow />
-            </LinkButton>
+            <Link to="/myinfo/ticket">
+              <LinkButton type="text" block>
+                이용권 현황 <RightArrow />
+              </LinkButton>
+            </Link>
           </MenuItem>
           <MenuItem>
-            <LinkButton type="text" block>
+            <LinkButton
+              type="text"
+              block
+              href="https://docs.google.com/forms/d/e/1FAIpQLScjiIvjK7UTXLeR5c5C4unZWXKarGR0sq_9TjMqi51IKtyvUg/viewform"
+              target="_blank"
+            >
               제안하기 <RightArrow />
             </LinkButton>
           </MenuItem>
@@ -58,10 +71,12 @@ function MyInfo() {
             스타벅스 커피 1잔 쿠폰을 드려요!
           </InvitationSubtitle>
           <Coupons>
-            <Circle>1</Circle>
+            <Circle isActive>1</Circle>
             <Circle>2</Circle>
             <Circle>3</Circle>
-            <Circle>4</Circle>
+            <Circle>
+              {false ? <img src={coffeeImg} /> : <img src={coffeeGreyImg} />}
+            </Circle>
           </Coupons>
           <InvitationDescription>
             <li>
@@ -75,7 +90,7 @@ function MyInfo() {
             </li>
           </InvitationDescription>
           <div style={{ width: '100%', paddingLeft: '12px' }}>
-            <TooltipButton type="text">
+            <TooltipButton type="text" onClick={() => setIsNoticeOpened(true)}>
               <QuestionCircle /> 유의 사항
             </TooltipButton>
           </div>
@@ -96,6 +111,24 @@ function MyInfo() {
         </Row>
       </Section>
       <MainFooter />
+      <NoticeModal
+        title="유의사항"
+        open={isNoticeOpened}
+        onCancel={() => setIsNoticeOpened(false)}
+        footer={null}
+      >
+        <NoticeDescription>
+          <li>친구 초대 횟수에는 제한이 없습니다.</li>
+          <li>
+            초대 후 친구가 초대 코드를 입력하여 회원가입까지 완료해야
+            인정됩니다.
+          </li>
+          <li>
+            부정한 방법으로 초대를 유도할 경우, 당사는 임의로 회원님을 이벤트
+            참여 대상에서 제외할 수 있습니다.
+          </li>
+        </NoticeDescription>
+      </NoticeModal>
     </MainLayout>
   );
 }
@@ -153,17 +186,21 @@ const Coupons = styled.div`
 
 const Circle = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   line-height: 65px;
   width: 65px;
   height: 65px;
-  color: ${(props) => props.theme.grey};
+  color: ${(props) => (props.isActive ? 'white' : props.theme.grey)};
   font-weight: 600;
   font-size: 20px;
   border-radius: 50%;
+
   background-color: ${(props) =>
-    `${props.isactive ? `${props.theme.lightPink}` : '#ECE9E9'}`};
+    `${props.isActive ? `${props.theme.lightPink}` : '#ECE9E9'}`};
+  > img {
+    height: 40px;
+  }
 `;
 
 const LinkButton = styled(Button)`
@@ -251,5 +288,37 @@ const CopyButton = styled(Button)`
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
+  }
+`;
+
+const NoticeModal = styled(Modal)`
+  max-width: 330px;
+
+  .ant-modal-content,
+  .ant-modal-header {
+    background-color: #ece9e9;
+  }
+  .ant-modal-title {
+    color: #777777;
+    font-weight: 600;
+    font-size: 14px;
+  }
+`;
+
+const NoticeDescription = styled.ul`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;
+  color: ${(props) => props.theme.grey};
+  padding: 0 20px;
+
+  > li {
+    position: relative;
+    :before {
+      content: '·';
+      position: absolute;
+      top: 0;
+      left: -8px;
+    }
   }
 `;
