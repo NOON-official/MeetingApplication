@@ -6,7 +6,7 @@ import Guide from './pages/guide';
 import Matching from './pages/matching';
 import MyInfo from './pages/myinfo';
 import KakaoCallback from './util/login/MainPageLoginCallback';
-import User from './pages/myinfo/user';
+import Account from './pages/myinfo/account';
 import Ticket from './pages/myinfo/ticket';
 import Myteam from './pages/matching/myteam';
 import Result from './pages/matching/result';
@@ -50,8 +50,8 @@ const Router = createBrowserRouter([
         element: <MyInfo />,
       },
       {
-        path: 'myinfo/:userId',
-        element: <User />,
+        path: 'myinfo/account',
+        element: <Account />,
       },
       {
         path: 'myinfo/ticket',
