@@ -54,34 +54,11 @@ export default function Apply2() {
         <SizedBox height="20px" />
         <CalendarDiv>
           <Calendar
+            format="YYYY/MM/DD"
             layout="mobile"
             className="custom-calendar"
-            mapDays={({
-              date,
-              today,
-              selectedDate,
-              currentMonth,
-              isSameDate,
-            }) => {
-              const props = {};
-
-              // 전체 css
-              props.style = {
-                borderRadius: '10px',
-              };
-              if (isSameDate(date, selectedDate)) {
-                console.log(selectedDate);
-                props.style = {
-                  ...props.style,
-                  color: '#F49393',
-                  backgroundColor: '#F49393',
-                  fontWeight: 'bold',
-                };
-              } else console.log(selectedDate);
-              return props;
-            }}
-            minDate={4}
             multiple
+            minDate={4}
             value={SelectedDate}
             onChange={setSelecteddate}
           />
