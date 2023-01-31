@@ -1,9 +1,8 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import theme from '../../style/theme';
-import TextColorBinary from '../../util/TextColorBinary';
 import BinaryButton from '../../components/BinaryButton';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
@@ -11,79 +10,101 @@ import ProgressBar from '../../components/ProgressBar';
 import SelectedNumUniversity from '../../util/SelectedUniversity';
 import { SearchedUniversities } from '../../util/SearchedUniversities';
 import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
+import { ReactComponent as Bottom } from '../../asset/svg/B.svg';
 import { submitStep1 } from '../../features/apply';
+import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
 export default function Apply1() {
-  const title = '기본 정보를 알려주세요';
-  const title2 = '우리 팀의 학교는?';
-  const [selectedUniversities, setSelectedUniversities] = useState([]);
-  const [gender, setGender] = useState(1);
-  const [memberCount, setMemberCount] = useState(2);
-  const [searchKeyWord, setSearchKeyWord] = useState('0');
-  const inputChange = (e) => {
-    setSearchKeyWord(e.target.value);
-  };
+  const [openModal, setOpenModal] = useState(false);
+  const { finishedStep, gender, memberCount, universities } = useSelector(
+    (store) => store.apply,
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const [openModal, setOpenModal] = useState(true);
-  // const setModal = (bool) => {
-  //   setOpenModal(bool);
-  // };
+  const [selectedUniversities, setSelectedUniversities] =
+    useState(universities);
+  const [man, setMan] = useState(gender);
+  const [meetingMember, setmeetingMember] = useState(memberCount);
+  const [searchKeyWord, setSearchKeyWord] = useState('0');
+
+  const inputChange = (e) => {
+    setSearchKeyWord(e.target.value);
+  };
+
+  const setModal = (bool) => {
+    setOpenModal(bool);
+  };
+
+  const handleBefore = useCallback(() => {
+    navigate('/');
+  });
 
   const handleSubmit = useCallback(() => {
-    dispatch(
-      submitStep1({
-        gender,
-        memberCount,
-        universities: selectedUniversities,
-      }),
-    );
-    navigate('/apply/2');
+    if (meetingMember === 2) {
+      if (selectedUniversities.length < 2) {
+        setOpenModal(true);
+        return;
+      }
+      dispatch(
+        submitStep1({
+          gender: man,
+          memberCount: meetingMember,
+          universities: selectedUniversities,
+        }),
+      );
+      navigate('/apply/2');
+    } else {
+      if (selectedUniversities.length < 3) {
+        setOpenModal(true);
+        return;
+      }
+      dispatch(
+        submitStep1({
+          gender: man,
+          memberCount: meetingMember,
+          universities: selectedUniversities,
+        }),
+      );
+      navigate('/apply/2');
+    }
   });
 
   return (
     <ApplyLayout>
-      {/* <IsPageCompleteModal open={openModal} setModal={setModal} /> */}
-
+      <IsPageCompleteModal open={openModal} setModal={setModal} />
+      <Title>
+        <Maintitle>
+          <Pink>기본 정보</Pink>를 알려주세요
+        </Maintitle>
+      </Title>
+      <ChooseBox>
+        <ChooseTitle>성별</ChooseTitle>
+        <BinaryButton
+          state={man === 1}
+          condition1="남자"
+          condition2="여자"
+          onChange={(result) => (result ? setMan(1) : setMan(2))}
+        />
+      </ChooseBox>
+      <ChooseBox>
+        <ChooseTitle>인원 수</ChooseTitle>
+        <BinaryButton
+          state={meetingMember === 2}
+          condition1="2:2"
+          condition2="3:3"
+          onChange={(result) =>
+            result ? setmeetingMember(2) : setmeetingMember(3)
+          }
+        />
+      </ChooseBox>
+      <Title>
+        <Maintitle>
+          <Pink>우리 팀의 학교</Pink>를 알려주세요
+        </Maintitle>
+        <Subtitle>팀원들의 모든 학교를 말해주세요</Subtitle>
+      </Title>
       <ScrollDiv>
-        <TextColorBinary
-          text={title}
-          colorFirst={theme.pink}
-          colorSecond={theme.black}
-          num={5}
-        />
-
-        <ButtonDiv>
-          <TitleOfButton>성별</TitleOfButton>
-          <BinaryButton
-            state={gender === 1}
-            condition1="남자"
-            condition2="여자"
-            onChange={(result) => (result ? setGender(1) : setGender(2))}
-          />
-        </ButtonDiv>
-        <ButtonDiv>
-          <TitleOfButton>인원 수</TitleOfButton>
-          <BinaryButton
-            state={memberCount === 2}
-            condition1="2:2"
-            condition2="3:3"
-            onChange={(result) =>
-              result ? setMemberCount(2) : setMemberCount(3)
-            }
-          />
-        </ButtonDiv>
-        <SizedBox height="50px" />
-        <TextColorBinary
-          text={title2}
-          colorFirst={theme.pink}
-          colorSecond={theme.black}
-          num={8}
-        />
-        <SizedBox />
-        <SubTitle>팀원들의 모든 학교를 말해주세요</SubTitle>
-        <SizedBox height="20px" />
         <UniversityDiv>
           {selectedUniversities.length === 0 ? null : (
             <SelectedDiv>
@@ -107,12 +128,12 @@ export default function Apply1() {
               })}
             </SelectedDiv>
           )}
-          <SizedBox height="20px" />
           <SearchDiv>
             <SearchInput
               onChange={inputChange}
               name="universitySearch"
               placeholder="학교를 검색해주세요"
+              autoComplete="off"
             />
             <SearchIcon />
           </SearchDiv>
@@ -125,18 +146,72 @@ export default function Apply1() {
           </SearchListDiv>
         </UniversityDiv>
       </ScrollDiv>
+      <SBottom />
       <Footer>
         <ProgressBar page={1} />
         <ButtonBox>
-          <ApplyButton>
-            <SLink to="/">이전</SLink>
-          </ApplyButton>
+          <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
     </ApplyLayout>
   );
 }
+
+const Title = styled.div`
+  width: 90%;
+  margin-top: 8%;
+  height: 13%;
+  min-height: 13%;
+`;
+
+const Maintitle = styled.div`
+  width: 100%;
+  font-family: 'Nanum JungHagSaeng';
+  font-weight: 400;
+  font-size: 35px;
+`;
+
+const Subtitle = styled.p`
+  margin-top: 4%;
+  color: #aaaaaa;
+  font-weight: 400;
+  font-size: 13px;
+`;
+
+const Pink = styled.span`
+  color: ${theme.pink};
+`;
+
+const ChooseBox = styled.div`
+  margin-top: 4%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-bottom: 10%;
+`;
+
+const ChooseTitle = styled.span`
+  padding-bottom: 5%;
+  color: #777777;
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const SBottom = styled(Bottom)`
+  margin-left: 57%;
+  margin-top: 4%;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 6%;
+  padding-bottom: 5%;
+`;
 
 const ButtonBox = styled.div`
   width: 90%;
@@ -145,25 +220,15 @@ const ButtonBox = styled.div`
   justify-content: space-between;
   margin-top: 5%;
 `;
-const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 10%;
-  padding-bottom: 5%;
-`;
 
-const SizedBox = styled.div`
-  height: ${(props) => props.height || '10px'};
-`;
 const SelectedDiv = styled.div`
+  margin-bottom: 5%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin: '0 0 0 5%';
   align-items: center;
-  width: 100%;
-  height: 50px;
+  width: 92%;
 `;
 const UniversityDiv = styled.div`
   display: flex;
@@ -171,38 +236,14 @@ const UniversityDiv = styled.div`
   height: 60%;
   width: 100%;
 `;
-const SubTitle = styled.span`
-  display: flex;
-  color: #aaaaaa;
-  font-size: 13px;
-  font-weight: 400;
-`;
-const TitleOfButton = styled.span`
-  margin: 10px 10px 10px 10px;
-  color: #777777;
-  font-size: 14px;
-  font-family: ${theme.Prefont};
-  font-weight: 500;
-`;
-const ButtonDiv = styled.div`
-  margin-top: 8%;
-  width: 100%;
-  height: 77px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
 
 const ScrollDiv = styled.div`
+  height: 25%;
   width: 90%;
   align-items: flex-start;
   margin-top: 8%;
 `;
-const SLink = styled(Link)`
-  padding: 10px 58.6px;
-  text-decoration: 'none';
-  color: ${(props) => props.theme.lightPink};
-`;
+
 const SearchDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -214,7 +255,7 @@ const SearchDiv = styled.div`
   border-width: 1px;
   border-color: #eb8888;
   padding: 0 5px 0 5px;
-  height: 44px;
+  height: 40px;
 `;
 const SearchInput = styled.input`
   display: flex;
@@ -236,4 +277,7 @@ const SearchListDiv = styled.div`
   flex-direction: column;
   height: 200px;
   width: 90%;
+  &:hover {
+    cursor: pointer;
+  }
 `;

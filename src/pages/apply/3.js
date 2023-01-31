@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useMemo, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
@@ -118,12 +118,6 @@ const Footer = styled.div`
   width: 100%;
   margin-top: 10%;
   padding-bottom: 5%;
-`;
-
-const SLink = styled(Link)`
-  padding: 10px 58.6px;
-  text-decoration: 'none';
-  color: ${(props) => props.theme.lightPink};
 `;
 
 const ButtonBox = styled.div`
