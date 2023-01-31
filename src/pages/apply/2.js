@@ -11,12 +11,6 @@ import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ColumnSelectButton from '../../components/ColumnSelectButton';
 
-// 중복체크 함수
-function isAlreadyCliked(list, value) {
-  const isduplicated = list.some((v) => v === value);
-  return isduplicated;
-}
-
 // eslint-disable-next-line consistent-return
 
 export default function Apply2() {

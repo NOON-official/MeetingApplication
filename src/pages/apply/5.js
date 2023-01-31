@@ -76,6 +76,8 @@ function Apply5() {
     navigate('/apply/6');
   });
 
+  console.log(sameSchool);
+
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
@@ -104,7 +106,7 @@ function Apply5() {
       <ChooseBox>
         <BinaryButton
           state={sameSchool === 0}
-          condition1="같은학교"
+          condition1="같은학교는 싫어요"
           condition2="상관없음"
           onChange={(result) => (result ? setSameSchool(0) : setSameSchool(1))}
         />

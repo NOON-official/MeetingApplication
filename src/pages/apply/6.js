@@ -1,12 +1,24 @@
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 
 function Apply6() {
+  const {
+    intro,
+    gender,
+    memberCount,
+    universities,
+    members,
+    drink,
+    prefSameUniversity,
+    prefAge,
+    prefVibe,
+  } = useSelector((store) => store.apply);
   const navigate = useNavigate();
 
   const handleBefore = useCallback(() => {
@@ -16,6 +28,14 @@ function Apply6() {
   const handleSubmit = useCallback(() => {
     navigate('/apply/certification');
   });
+
+  const VibeContent = {
+    1: '코로나 때문에 못한 연애오늘?!',
+    2: '친구는 다다익선! 찐친 만들어 보자',
+    3: '왁자지껄 이 밤이 떠나가라!',
+    4: '술게임 한 수 배우러 왔습니다',
+    5: '술게임 못해도 챙겨주는 훈훈한 분위기',
+  };
 
   return (
     <ApplyLayout>
@@ -32,15 +52,19 @@ function Apply6() {
           <InfoContent>
             <Info>
               <SmallTitle>성별</SmallTitle>
-              <SmallContent>남성</SmallContent>
+              <SmallContent>{gender === 1 ? '남성' : '여성'}</SmallContent>
             </Info>
             <Info>
               <SmallTitle>인원수</SmallTitle>
-              <SmallContent>남성</SmallContent>
+              <SmallContent>{memberCount === 2 ? '2명' : '3명'}</SmallContent>
             </Info>
             <Info>
               <SmallTitle>학교</SmallTitle>
-              <SmallContent>남성</SmallContent>
+              <SmallContent>
+                {universities.map((a) => {
+                  return <School key={a['key']}>{a['univ']}</School>;
+                })}
+              </SmallContent>
             </Info>
             <Info>
               <SmallTitle>선호 날짜</SmallTitle>
@@ -54,7 +78,9 @@ function Apply6() {
           <InfoContent>
             <Info>
               <SmallTitle>나이</SmallTitle>
-              <SmallContent>십세</SmallContent>
+              <SmallContent>
+                {prefAge[0]} ~ {prefAge[1]}세
+              </SmallContent>
             </Info>
             <Info>
               <SmallTitle>MBTI</SmallTitle>
@@ -77,11 +103,15 @@ function Apply6() {
           <InfoContent>
             <Info>
               <SmallTitle>평균 나이</SmallTitle>
-              <SmallContent>십세</SmallContent>
+              <SmallContent>
+                {prefAge[0]} ~ {prefAge[1]}세
+              </SmallContent>
             </Info>
             <Info>
               <SmallTitle>학교</SmallTitle>
-              <SmallContent>남성</SmallContent>
+              <SmallContent>
+                {prefSameUniversity === 0 ? '같은학교는 싫어요' : '상관없어요'}
+              </SmallContent>
             </Info>
           </InfoContent>
         </InfoBox>
@@ -92,11 +122,15 @@ function Apply6() {
           <InfoContent>
             <Info>
               <SmallTitle>분위기</SmallTitle>
-              <SmallContent>십세</SmallContent>
+              <SmallContent>
+                {prefVibe.map((a) => {
+                  return <div key={a}>{VibeContent[a]}</div>;
+                })}
+              </SmallContent>
             </Info>
             <Info>
               <SmallTitle>주량 레벨</SmallTitle>
-              <SmallContent>남성</SmallContent>
+              <SmallContent>Level {drink}</SmallContent>
             </Info>
           </InfoContent>
         </InfoBox>
@@ -106,9 +140,7 @@ function Apply6() {
           </InfoTitle>
           <InfoContent>
             <Info>
-              <SmallContent>
-                dhodksehlrhwlfkdlwasfdsfsfsfdsffdsdfsfssdfsdsfsdfsf
-              </SmallContent>
+              <SmallContent>{intro}</SmallContent>
             </Info>
           </InfoContent>
         </InfoBox>
@@ -166,6 +198,10 @@ const InfoTitle = styled.div`
   font-size: 14px;
 `;
 
+const School = styled.div`
+  width: 100%;
+`;
+
 const InfoContent = styled.div`
   width: 100%;
   display: flex;
@@ -190,6 +226,7 @@ const SmallTitle = styled.span`
 `;
 
 const SmallContent = styled.div`
+  width: 80%;
   display: flex;
   flex-wrap: wrap;
   border: 1px solid red;
@@ -208,12 +245,6 @@ const Footer = styled.div`
   width: 100%;
   margin-top: 10%;
   padding-bottom: 5%;
-`;
-
-const SLink = styled(Link)`
-  padding: 10px 58.6px;
-  text-decoration: 'none';
-  color: ${(props) => props.theme.lightPink};
 `;
 
 const ButtonBox = styled.div`
