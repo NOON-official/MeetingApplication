@@ -7,6 +7,8 @@ const initialState = {
   gender: 1, // 1: 남자, 2: 여자
   memberCount: 2, // 2: 2대2, 3: 3대3
   universities: [],
+  availableDate: [],
+  area: [],
   intro: '',
   members: [{}, {}],
   drink: 0,
@@ -30,7 +32,24 @@ const applySlice = createSlice({
       state.memberCount = memberCount;
       state.universities = universities;
 
-      const stored = localStorage.getItem(APPLY_STORAGE_KEY);
+      const stored = localStorage.getItem('apply-data');
+      localStorage.setItem(
+        APPLY_STORAGE_KEY,
+        JSON.stringify({
+          finishedStep: state.finishedStep,
+          ...JSON.parse(stored),
+          ...action.payload,
+        }),
+      );
+    },
+    submitStep2: (state, action) => {
+      const { availableDate, area } = action.payload;
+
+      state.finishedStep = 2;
+      state.availableDate = availableDate;
+      state.area = area;
+
+      const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
         APPLY_STORAGE_KEY,
         JSON.stringify({
