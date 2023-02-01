@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Col, Modal, notification, Row } from 'antd';
+import { Button, Col, notification, Row } from 'antd';
 import { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MainFooter from '../../layout/footer/MainFooter';
@@ -11,6 +11,7 @@ import { ReactComponent as QuestionCircle } from '../../asset/svg/QuestionCircle
 import coffeeGreyImg from '../../asset/img/coffee-grey.png';
 import coffeeImg from '../../asset/img/coffee.png';
 import Section from '../../components/Section';
+import PrimaryModal from '../../components/Modal/PrimaryModal';
 
 function MyInfo() {
   const [api, contextHolder] = notification.useNotification();
@@ -111,7 +112,7 @@ function MyInfo() {
         </Row>
       </Section>
       <MainFooter />
-      <NoticeModal
+      <PrimaryModal
         title="유의사항"
         open={isNoticeOpened}
         onCancel={() => setIsNoticeOpened(false)}
@@ -128,7 +129,7 @@ function MyInfo() {
             참여 대상에서 제외할 수 있습니다.
           </li>
         </NoticeDescription>
-      </NoticeModal>
+      </PrimaryModal>
     </MainLayout>
   );
 }
@@ -288,20 +289,6 @@ const CopyButton = styled(Button)`
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
-  }
-`;
-
-const NoticeModal = styled(Modal)`
-  max-width: 330px;
-
-  .ant-modal-content,
-  .ant-modal-header {
-    background-color: #ece9e9;
-  }
-  .ant-modal-title {
-    color: #777777;
-    font-weight: 600;
-    font-size: 14px;
   }
 `;
 
