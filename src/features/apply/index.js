@@ -10,10 +10,10 @@ const initialState = {
   availableDate: [],
   area: [],
   intro: '',
-  members: [{}, {}],
-  drink: 0,
-  prefSameUniversity: 0,
-  prefAge: [],
+  members: [{}, {}, {}],
+  drink: 3,
+  prefSameUniversity: false,
+  prefAge: [23, 25],
   prefVibe: [],
 };
 
@@ -113,7 +113,12 @@ const applySlice = createSlice({
   },
 });
 
-export const { submitStep1, submitStep3, submitStep4, submitStep5 } =
-  applySlice.actions;
+export const {
+  submitStep1,
+  submitStep2,
+  submitStep3,
+  submitStep4,
+  submitStep5,
+} = applySlice.actions;
 
 export default applySlice.reducer;

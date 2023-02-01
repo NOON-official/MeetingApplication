@@ -60,7 +60,7 @@ function Teambox({ member, setMember, name }) {
 
   const handleAgeChange = useCallback(
     (value) => {
-      setMember({ ...member, age: value.label });
+      setMember({ ...member, age: parseInt(value) });
     },
     [member],
   );
@@ -185,7 +185,6 @@ function Teambox({ member, setMember, name }) {
             removeIcon
             showArrow={false}
             onChange={handleAgeChange}
-            labelInValue
           >
             <Option value="19">19세</Option>
             <Option value="20">20세</Option>
