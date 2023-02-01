@@ -12,6 +12,7 @@ import coffeeGreyImg from '../../asset/img/coffee-grey.png';
 import coffeeImg from '../../asset/img/coffee.png';
 import Section from '../../components/Section';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
+import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
 
 function MyInfo() {
   const [api, contextHolder] = notification.useNotification();
@@ -36,22 +37,20 @@ function MyInfo() {
         <MenuBox>
           <MenuItem>
             <Link to="/myinfo/account">
-              <LinkButton type="text" block>
+              <LinkButton>
                 계정관리 <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link to="/myinfo/ticket">
-              <LinkButton type="text" block>
+              <LinkButton>
                 이용권 현황 <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
           <MenuItem>
             <LinkButton
-              type="text"
-              block
               href="https://docs.google.com/forms/d/e/1FAIpQLScjiIvjK7UTXLeR5c5C4unZWXKarGR0sq_9TjMqi51IKtyvUg/viewform"
               target="_blank"
             >
@@ -136,26 +135,6 @@ function MyInfo() {
 
 export default MyInfo;
 
-const MenuItem = styled.div``;
-
-const MenuBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: white;
-  border: 1px solid #f8f3f3;
-  border-radius: 10px;
-  margin-top: 20px;
-  padding: 4px 20px;
-
-  > ${MenuItem} {
-    border-bottom: 3px solid #f8f3f3;
-    :last-child {
-      border: none;
-    }
-  }
-`;
-
 const CouponBox = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -201,19 +180,6 @@ const Circle = styled.div`
     `${props.isActive ? `${props.theme.lightPink}` : '#ECE9E9'}`};
   > img {
     height: 40px;
-  }
-`;
-
-const LinkButton = styled(Button)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-  padding: 4px 8px;
-  > span {
-    font-weight: 600;
-    font-size: 14px;
-    color: ${(props) => props.theme.grey};
   }
 `;
 
