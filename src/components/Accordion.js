@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { ReactComponent as DownArrow } from '../asset/svg/DownArrow.svg';
 import { ReactComponent as UpArrow } from '../asset/svg/UpArrow.svg';
 
-export default function GuideBox(props) {
+export default function Accordion(props) {
   const [isShown, setIsShown] = useState(false);
   const handleToggle = useCallback(() => {
     setIsShown((prev) => !prev);
   }, []);
 
   return (
-    <Accordion onClick={handleToggle}>
+    <Container onClick={handleToggle}>
       <TitleBox>
         <Title>{props.title}</Title>
         {isShown ? <UpArrow /> : <DownArrow />}
@@ -26,11 +26,11 @@ export default function GuideBox(props) {
           )}
         </ContentBox>
       )}
-    </Accordion>
+    </Container>
   );
 }
 
-const Accordion = styled.div`
+const Container = styled.div`
   background-color: #ffffff;
   border: 1px solid #f1ecec;
   border-radius: 10px;
