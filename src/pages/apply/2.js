@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Calendar } from 'react-multi-date-picker';
 import ChooseButton from '../../components/ChooseButton';
+import { submitStep2 } from '../../features/apply';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
@@ -20,7 +21,7 @@ export default function Apply2() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [selectDate, setSelectDate] = useState([]);
+  const [selectDate, setSelectDate] = useState(availableDate);
   const [selectedArea, setSelectedArea] = useState(area);
 
   useEffect(() => {
@@ -50,11 +51,18 @@ export default function Apply2() {
   });
 
   const handleSubmit = useCallback(() => {
+    if (selectDate.length < 4 || selectedArea < 1) {
+      setOpenModal(true);
+      return;
+    }
+    dispatch(
+      submitStep2({
+        availableDate: [...selectDate.map((a) => a.format())],
+        area: selectedArea,
+      }),
+    );
     navigate('/apply/3');
   });
-
-  console.log(selectDate);
-  console.log(selectedArea);
 
   return (
     <ApplyLayout>
@@ -75,12 +83,7 @@ export default function Apply2() {
             maxDate={new Date().setDate(new Date().getDate() + 13)}
             layout="mobile"
             value={selectDate}
-            onChange={() => {
-              setSelectDate([
-                ...selectDate,
-                selectDate.format?.('MMMM D YYYY'),
-              ]);
-            }}
+            onChange={setSelectDate}
           />
         </CalendarDiv>
       </ScrollDiv>

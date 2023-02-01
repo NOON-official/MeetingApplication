@@ -41,8 +41,8 @@ export default function Apply1() {
   });
 
   const handleSubmit = useCallback(() => {
-    if (meetingMember === 2) {
-      if (selectedUniversities.length < 2) {
+    if (meetingMember > 3) {
+      if (selectedUniversities.length > 2) {
         setOpenModal(true);
         return;
       }
@@ -55,7 +55,7 @@ export default function Apply1() {
       );
       navigate('/apply/2');
     } else {
-      if (selectedUniversities.length < 3) {
+      if (selectedUniversities.length > 3) {
         setOpenModal(true);
         return;
       }
@@ -69,6 +69,8 @@ export default function Apply1() {
       navigate('/apply/2');
     }
   });
+
+  console.log(selectedUniversities);
 
   return (
     <ApplyLayout>
