@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Section from '../../components/Section';
-import GuideBox from '../../components/GuideBox';
+import Accordion from '../../components/Accordion';
 import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 
@@ -69,7 +69,7 @@ export default function Guide() {
       <Section my="32px">
         <Container>
           {guides.map((guide) => (
-            <GuideBox {...guide} key={guide.title} />
+            <Accordion {...guide} key={guide.title} />
           ))}
         </Container>
       </Section>

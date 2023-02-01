@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Button } from 'antd';
 import { useCallback } from 'react';
 import theme from '../style/theme';
 import { ReactComponent as MainImg } from '../asset/svg/MainImg.svg';
@@ -185,18 +184,4 @@ const Number = styled.p`
   font-family: 'Nanum JungHagSaeng';
   font-weight: 400;
   font-size: 15px;
-`;
-
-const StartButton = styled(Button).attrs({ type: 'text' })`
-  height: auto;
-  font-family: 'Nanum JungHagSaeng';
-  padding: 10px 50px;
-  border-radius: 10px;
-  background-color: ${(props) => props.theme.pink};
-
-  > span {
-    font-weight: 400;
-    font-size: 24px;
-    color: white;
-  }
 `;
