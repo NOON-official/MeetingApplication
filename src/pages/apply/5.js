@@ -35,7 +35,7 @@ function Apply5() {
   const [ageRange, setAgeRange] = useState(prefAge.length ? prefAge : [23, 25]);
   const [sameSchool, setSameSchool] = useState(prefSameUniversity);
   const [prefMood, setPrefMood] = useState(prefVibe);
-  const [alchol, setAlchol] = useState(drink || 3);
+  const [alchol, setAlchol] = useState(drink);
 
   const setModal = (bool) => {
     setOpenModal(bool);
@@ -105,10 +105,12 @@ function Apply5() {
       </Title2>
       <ChooseBox>
         <BinaryButton
-          state={sameSchool === 0}
+          state={sameSchool === false}
           condition1="같은학교는 싫어요"
           condition2="상관없음"
-          onChange={(result) => (result ? setSameSchool(0) : setSameSchool(1))}
+          onChange={(result) =>
+            result ? setSameSchool(false) : setSameSchool(true)
+          }
         />
       </ChooseBox>
       <Title>
