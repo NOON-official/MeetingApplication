@@ -13,13 +13,14 @@ import { submitStep3 } from '../../features/apply';
 
 function Apply3() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, members } = useSelector((store) => store.apply);
+  const { finishedStep, members, memberCount } = useSelector(
+    (store) => store.apply,
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const people = 2;
   const [member1, setMember1] = useState(members[0]);
   const [member2, setMember2] = useState(members[1]);
-  const [member3, setMember3] = useState({});
+  const [member3, setMember3] = useState(members[2]);
 
   const setModal = (bool) => {
     setOpenModal(bool);
@@ -30,20 +31,35 @@ function Apply3() {
   });
 
   const handleSubmit = useCallback(() => {
-    if (Object.keys(member1).length < 3 || Object.keys(member2).length < 3) {
+    if (memberCount === 2) {
+      if (Object.keys(member1).length < 3 || Object.keys(member2).length < 3) {
+        setOpenModal(true);
+      } else {
+        dispatch(
+          submitStep3({
+            members: [member1, member2],
+          }),
+        );
+        navigate('/apply/4');
+      }
+    } else if (
+      Object.keys(member1).length < 3 ||
+      Object.keys(member2).length < 3 ||
+      Object.keys(member3).length < 3
+    ) {
       setOpenModal(true);
-      return;
+    } else {
+      dispatch(
+        submitStep3({
+          members: [member1, member2, member3],
+        }),
+      );
+      navigate('/apply/4');
     }
-    dispatch(
-      submitStep3({
-        members: [member1, member2],
-      }),
-    );
-    navigate('/apply/4');
   });
 
   const teamboxcount = useMemo(() => {
-    if (people === 2) {
+    if (memberCount === 2) {
       return (
         <>
           <Teambox member={member1} setMember={setMember1} name="대표자" />
@@ -51,7 +67,7 @@ function Apply3() {
         </>
       );
     }
-    if (people === 3) {
+    if (memberCount === 3) {
       return (
         <>
           <Teambox member={member1} setMember={setMember1} name="대표자" />

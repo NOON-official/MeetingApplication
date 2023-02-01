@@ -13,6 +13,8 @@ function Apply6() {
     gender,
     memberCount,
     universities,
+    availableDate,
+    area,
     members,
     drink,
     prefSameUniversity,
@@ -28,6 +30,14 @@ function Apply6() {
   const handleSubmit = useCallback(() => {
     navigate('/apply/certification');
   });
+
+  const SchoolContent = {
+    1: '강남',
+    2: '건대',
+    3: '신촌',
+    4: '홍대',
+    5: '상관없음',
+  };
 
   const VibeContent = {
     1: '코로나 때문에 못한 연애오늘?!',
@@ -62,37 +72,105 @@ function Apply6() {
               <SmallTitle>학교</SmallTitle>
               <SmallContent>
                 {universities.map((a) => {
-                  return <School key={a['key']}>{a['univ']}</School>;
+                  return <div key={a['key']}>{a['univ']} /</div>;
                 })}
               </SmallContent>
             </Info>
             <Info>
               <SmallTitle>선호 날짜</SmallTitle>
-              <SmallContent>남성</SmallContent>
+              <SmallContent>
+                {availableDate.map((a) => {
+                  return (
+                    <div key={a}>
+                      {a[6]}월 {a.substring(8, 10)}일 /
+                    </div>
+                  );
+                })}
+              </SmallContent>
             </Info>
             <Info>
               <SmallTitle>선호 지역</SmallTitle>
-              <SmallContent>남성</SmallContent>
+              <SmallContent>
+                {area.map((a) => {
+                  return <div key={a}> {SchoolContent[a]} /</div>;
+                })}
+              </SmallContent>
             </Info>
           </InfoContent>
           <InfoContent>
             <Info>
+              {memberCount === 2 ? (
+                <Member>
+                  <div>대표자</div>
+                  <div>팀원 1</div>
+                </Member>
+              ) : (
+                <Member2>
+                  <div>대표자</div>
+                  <div>팀원 1</div>
+                  <div>팀원 2</div>
+                </Member2>
+              )}
+            </Info>
+            <Info>
               <SmallTitle>나이</SmallTitle>
-              <SmallContent>
-                {prefAge[0]} ~ {prefAge[1]}세
-              </SmallContent>
+              {memberCount === 2 ? (
+                <MemberProfile>
+                  <div>{members[0].age}세</div>
+                  <div>{members[1].age}세</div>
+                </MemberProfile>
+              ) : (
+                <MemberProfile2>
+                  <div>{members[0].age}세</div>
+                  <div>{members[1].age}세</div>
+                  <div>{members[2].age}세</div>
+                </MemberProfile2>
+              )}
             </Info>
             <Info>
               <SmallTitle>MBTI</SmallTitle>
-              <SmallContent>남성</SmallContent>
+              {memberCount === 2 ? (
+                <MemberProfile>
+                  <div>{members[0].mbti}</div>
+                  <div>{members[1].mbti}</div>
+                </MemberProfile>
+              ) : (
+                <MemberProfile2>
+                  <div>{members[0].mbti}</div>
+                  <div>{members[1].mbti}</div>
+                  <div>{members[2].mbti}</div>
+                </MemberProfile2>
+              )}
             </Info>
             <Info>
               <SmallTitle>포지션</SmallTitle>
-              <SmallContent>십세</SmallContent>
+              {memberCount === 2 ? (
+                <MemberProfile>
+                  <div>{members[0].position}</div>
+                  <div>{members[1].position}</div>
+                </MemberProfile>
+              ) : (
+                <MemberProfile2>
+                  <div>{members[0].position}</div>
+                  <div>{members[1].position}</div>
+                  <div>{members[2].position}</div>
+                </MemberProfile2>
+              )}
             </Info>
             <Info>
               <SmallTitle>닮은꼴</SmallTitle>
-              <SmallContent>남성</SmallContent>
+              {memberCount === 2 ? (
+                <MemberProfile>
+                  <div>{members[0].similar}</div>
+                  <div>{members[1].similar}</div>
+                </MemberProfile>
+              ) : (
+                <MemberProfile2>
+                  <div>{members[0].similar}</div>
+                  <div>{members[1].similar}</div>
+                  <div>{members[2].similar}</div>
+                </MemberProfile2>
+              )}
             </Info>
           </InfoContent>
         </InfoBox>
@@ -110,7 +188,7 @@ function Apply6() {
             <Info>
               <SmallTitle>학교</SmallTitle>
               <SmallContent>
-                {prefSameUniversity === 0 ? '같은학교는 싫어요' : '상관없어요'}
+                {prefSameUniversity ? '상관없어요' : '같은학교는 싫어요'}
               </SmallContent>
             </Info>
           </InfoContent>
@@ -198,10 +276,6 @@ const InfoTitle = styled.div`
   font-size: 14px;
 `;
 
-const School = styled.div`
-  width: 100%;
-`;
-
 const InfoContent = styled.div`
   width: 100%;
   display: flex;
@@ -218,7 +292,9 @@ const Info = styled.div`
 `;
 
 const SmallTitle = styled.span`
-  width: 25%;
+  width: 23%;
+  max-width: 23%;
+  border: 1px solid red;
   font-family: 'Nanum JungHagSaeng';
   color: #bbbbbb;
   font-weight: 400;
@@ -229,11 +305,56 @@ const SmallContent = styled.div`
   width: 80%;
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid red;
   max-width: 80%;
   word-break: break-all;
   font-family: 'Nanum JungHagSaeng';
   color: #777777;
+  font-weight: 400;
+  font-size: 21px;
+`;
+
+const Member = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-left: 24%;
+  border: 1px solid red;
+  width: 35%;
+  font-family: 'Nanum JungHagSaeng';
+  color: #bbbbbb;
+  font-weight: 400;
+  font-size: 21px;
+`;
+
+const Member2 = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-left: 24%;
+  border: 1px solid red;
+  width: 60%;
+  font-family: 'Nanum JungHagSaeng';
+  color: #bbbbbb;
+  font-weight: 400;
+  font-size: 21px;
+`;
+
+const MemberProfile = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
+  width: 35%;
+  font-family: 'Nanum JungHagSaeng';
+  color: #777777;
+  font-weight: 400;
+  font-size: 21px;
+`;
+
+const MemberProfile2 = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
+  width: 60%;
+  font-family: 'Nanum JungHagSaeng';
+  color: #bbbbbb;
   font-weight: 400;
   font-size: 21px;
 `;
