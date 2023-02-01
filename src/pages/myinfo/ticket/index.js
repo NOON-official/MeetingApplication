@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
-import Section from '../../components/Section';
-import MyinfoLayout from '../../layout/MyinfoLayout';
-import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
+import MenuBox, { LinkButton, MenuItem } from '../../../components/MenuBox';
+import Section from '../../../components/Section';
+import MyinfoLayout from '../../../layout/MyinfoLayout';
+import { ReactComponent as RightArrow } from '../../../asset/svg/RightArrow.svg';
 
-export default function Ticket() {
+export default function TicketPage() {
   return (
     <MyinfoLayout title="이용권 현황">
       <Section>
@@ -34,14 +34,14 @@ export default function Ticket() {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/myinfo/ticket/coupons">
+            <Link to="/myinfo/ticket/coupon">
               <LinkButton>
                 보유 쿠폰 <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/myinfo/ticket/orders">
+            <Link to="/myinfo/ticket/history">
               <LinkButton>
                 결제 내역 <RightArrow />
               </LinkButton>
