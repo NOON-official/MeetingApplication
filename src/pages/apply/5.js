@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,12 +14,20 @@ import ChooseButton from '../../components/ChooseButton';
 import { submitStep5 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
-function Apply5() {
+function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
   const { finishedStep, prefAge, prefSameUniversity, prefVibe, drink } =
     useSelector((store) => store.apply);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (finishedStep < 4) {
+      window.alert('잘못된 접근입니다');
+      navigate(`/apply/${finishedStep + 1}`);
+    }
+  }, []);
+
   const marks = {
     20: { label: <SliderText>20세</SliderText> },
     29: { label: <SliderText>29세</SliderText> },
@@ -153,6 +161,7 @@ function Apply5() {
         <Maintitle2>주량 레벨</Maintitle2>
         <Subtitle2>우리팀의 평균 주량을 알려주세요</Subtitle2>
       </Title2>
+      <AlcholMiddle>한 병 반</AlcholMiddle>
       <SSlider
         onChange={setAlchol}
         value={alchol}
@@ -176,7 +185,7 @@ function Apply5() {
   );
 }
 
-export default Apply5;
+export default Apply5Page;
 
 const Title = styled.div`
   width: 90%;
@@ -243,7 +252,7 @@ const ButtonBox = styled.div`
 `;
 
 const SSlider = styled(Slider)`
-  margin-top: 6%;
+  margin-top: 3%;
   width: 85%;
 `;
 
@@ -269,6 +278,14 @@ const ChooseBox2 = styled.div`
   flex-direction: column;
 `;
 
+const AlcholMiddle = styled.div`
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 5%;
+  width: 90%;
+  color: #eb8888;
+`;
 const SBottom = styled(Bottom)`
   margin-left: 57%;
   margin-top: 4%;

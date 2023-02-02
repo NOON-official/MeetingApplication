@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'antd';
@@ -11,12 +11,19 @@ import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { submitStep4 } from '../../features/apply';
 
-function Apply4() {
+function Apply4Page() {
   const [openModal, setOpenModal] = useState(false);
   const { finishedStep, intro } = useSelector((store) => store.apply);
   const [introduce, setIntroduce] = useState(intro);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (finishedStep < 3) {
+      window.alert('잘못된 접근입니다');
+      navigate(`/apply/${finishedStep + 1}`);
+    }
+  }, []);
 
   const handleChange = useCallback((e) => {
     setIntroduce(e.target.value);
@@ -81,7 +88,7 @@ function Apply4() {
   );
 }
 
-export default Apply4;
+export default Apply4Page;
 
 const Title = styled.div`
   width: 90%;
