@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import theme from '../../style/theme';
@@ -9,6 +9,7 @@ import ApplyButton from '../../components/ApplyButton';
 
 function Apply6() {
   const {
+    finishedStep,
     intro,
     gender,
     memberCount,
@@ -22,6 +23,13 @@ function Apply6() {
     prefVibe,
   } = useSelector((store) => store.apply);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (finishedStep < 5) {
+      window.alert('잘못된 접근입니다');
+      navigate(`/apply/${finishedStep + 1}`);
+    }
+  }, []);
 
   const handleBefore = useCallback(() => {
     navigate('/apply/5');
@@ -294,7 +302,6 @@ const Info = styled.div`
 const SmallTitle = styled.span`
   width: 23%;
   max-width: 23%;
-  border: 1px solid red;
   font-family: 'Nanum JungHagSaeng';
   color: #bbbbbb;
   font-weight: 400;
@@ -316,7 +323,7 @@ const SmallContent = styled.div`
 const Member = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-left: 24%;
+  margin-left: 23%;
   border: 1px solid red;
   width: 35%;
   font-family: 'Nanum JungHagSaeng';
@@ -328,8 +335,7 @@ const Member = styled.div`
 const Member2 = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-left: 24%;
-  border: 1px solid red;
+  margin-left: 23%;
   width: 60%;
   font-family: 'Nanum JungHagSaeng';
   color: #bbbbbb;
@@ -340,7 +346,6 @@ const Member2 = styled.div`
 const MemberProfile = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 1px solid red;
   width: 35%;
   font-family: 'Nanum JungHagSaeng';
   color: #777777;
@@ -351,10 +356,9 @@ const MemberProfile = styled.div`
 const MemberProfile2 = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 1px solid red;
   width: 60%;
   font-family: 'Nanum JungHagSaeng';
-  color: #bbbbbb;
+  color: #777777;
   font-weight: 400;
   font-size: 21px;
 `;
