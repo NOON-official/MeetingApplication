@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { submitStep3 } from '../../features/apply';
 
-function Apply3() {
+function Apply3Page() {
   const [openModal, setOpenModal] = useState(false);
   const { finishedStep, members, memberCount } = useSelector(
     (store) => store.apply,
@@ -21,6 +21,13 @@ function Apply3() {
   const [member1, setMember1] = useState(members[0]);
   const [member2, setMember2] = useState(members[1]);
   const [member3, setMember3] = useState(members[2]);
+
+  useEffect(() => {
+    if (finishedStep < 2) {
+      window.alert('잘못된 접근입니다');
+      navigate(`/apply/${finishedStep + 1}`);
+    }
+  }, []);
 
   const setModal = (bool) => {
     setOpenModal(bool);
@@ -100,7 +107,7 @@ function Apply3() {
   );
 }
 
-export default Apply3;
+export default Apply3Page;
 
 const Title = styled.div`
   width: 90%;

@@ -7,7 +7,7 @@ import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 
-function Apply6() {
+function Apply6Page() {
   const {
     finishedStep,
     intro,
@@ -241,7 +241,7 @@ function Apply6() {
   );
 }
 
-export default Apply6;
+export default Apply6Page;
 
 const Title = styled.div`
   width: 90%;
