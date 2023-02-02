@@ -14,7 +14,7 @@ import { ReactComponent as Bottom } from '../../asset/svg/B.svg';
 import { submitStep1 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
-export default function Apply1() {
+export default function Apply1Page() {
   const [openModal, setOpenModal] = useState(false);
   const { finishedStep, gender, memberCount, universities } = useSelector(
     (store) => store.apply,
