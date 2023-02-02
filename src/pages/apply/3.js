@@ -1,77 +1,65 @@
 import styled from 'styled-components';
+import { useMemo, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { useMemo, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import Teambox from '../../components/Teambox';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import { submitStep3 } from '../../features/apply';
 
 function Apply3() {
   const [openModal, setOpenModal] = useState(false);
-  const [openModal2, setOpenModal2] = useState(false);
-
-  const people = 2;
-  const [member1, setMember1] = useState({});
-  const [member2, setMember2] = useState({});
-  const [member3, setMember3] = useState({});
+  const { finishedStep, members, memberCount } = useSelector(
+    (store) => store.apply,
+  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [member1, setMember1] = useState(members[0]);
+  const [member2, setMember2] = useState(members[1]);
+  const [member3, setMember3] = useState(members[2]);
 
   const setModal = (bool) => {
     setOpenModal(bool);
   };
 
-  if (people === 2) {
-    useEffect(() => {
-      if (
-        Object.keys(member1).length >= 3 &&
-        Object.keys(member2).length >= 3
-      ) {
-        setOpenModal2(true);
-      } else {
-        setOpenModal2(false);
-      }
-    });
-  } else {
-    useEffect(() => {
-      if (
-        Object.keys(member1).length >= 3 &&
-        Object.keys(member2).length >= 3 &&
-        Object.keys(member3).length >= 3
-      ) {
-        setOpenModal2(true);
-      } else {
-        setOpenModal2(false);
-      }
-    });
-  }
+  const handleBefore = useCallback(() => {
+    navigate('/apply/2');
+  });
 
-  const handleModal = () => {
-    if (people === 2) {
-      if (
-        Object.keys(member1).length >= 3 &&
-        Object.keys(member2).length >= 3
-      ) {
-        setOpenModal(false);
-      } else {
+  const handleSubmit = useCallback(() => {
+    if (memberCount === 2) {
+      if (Object.keys(member1).length < 3 || Object.keys(member2).length < 3) {
         setOpenModal(true);
-      }
-    } else if (people === 3) {
-      if (
-        Object.keys(member1).length >= 3 &&
-        Object.keys(member2).length >= 3 &&
-        Object.keys(member3).length >= 3
-      ) {
-        setOpenModal(false);
       } else {
-        setOpenModal(true);
+        dispatch(
+          submitStep3({
+            members: [member1, member2],
+          }),
+        );
+        navigate('/apply/4');
       }
+    } else if (
+      Object.keys(member1).length < 3 ||
+      Object.keys(member2).length < 3 ||
+      Object.keys(member3).length < 3
+    ) {
+      setOpenModal(true);
+    } else {
+      dispatch(
+        submitStep3({
+          members: [member1, member2, member3],
+        }),
+      );
+      navigate('/apply/4');
     }
-  };
+  });
 
   const teamboxcount = useMemo(() => {
-    if (people === 2) {
+    if (memberCount === 2) {
       return (
         <>
           <Teambox member={member1} setMember={setMember1} name="대표자" />
@@ -79,7 +67,7 @@ function Apply3() {
         </>
       );
     }
-    if (people === 3) {
+    if (memberCount === 3) {
       return (
         <>
           <Teambox member={member1} setMember={setMember1} name="대표자" />
@@ -90,9 +78,6 @@ function Apply3() {
     }
     return null;
   });
-
-  console.log(member1);
-  console.log(member2);
 
   return (
     <ApplyLayout>
@@ -107,20 +92,8 @@ function Apply3() {
       <Footer>
         <ProgressBar page={3} />
         <ButtonBox>
-          <ApplyButton>
-            <SLink to="/apply/2">이전</SLink>
-          </ApplyButton>
-          <ApplyButton>
-            {openModal2 ? (
-              <SLink onClick={handleModal} to="/apply/4">
-                다음
-              </SLink>
-            ) : (
-              <SLink onClick={handleModal} to="/apply/3">
-                다음
-              </SLink>
-            )}
-          </ApplyButton>
+          <ApplyButton onClick={handleBefore}>이전</ApplyButton>
+          <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
     </ApplyLayout>
@@ -161,12 +134,6 @@ const Footer = styled.div`
   width: 100%;
   margin-top: 10%;
   padding-bottom: 5%;
-`;
-
-const SLink = styled(Link)`
-  padding: 10px 58.6px;
-  text-decoration: 'none';
-  color: ${(props) => props.theme.lightPink};
 `;
 
 const ButtonBox = styled.div`
