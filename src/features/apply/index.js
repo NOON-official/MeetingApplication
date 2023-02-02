@@ -110,6 +110,9 @@ const applySlice = createSlice({
         }),
       );
     },
+    submitStep6: (state) => {
+      state.finishedStep = 6;
+    },
   },
 });
 
@@ -119,6 +122,7 @@ export const {
   submitStep3,
   submitStep4,
   submitStep5,
+  submitStep6,
 } = applySlice.actions;
 
 export default applySlice.reducer;

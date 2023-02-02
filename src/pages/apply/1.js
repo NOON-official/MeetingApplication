@@ -41,33 +41,18 @@ export default function Apply1() {
   });
 
   const handleSubmit = useCallback(() => {
-    if (meetingMember > 3) {
-      if (selectedUniversities.length > 2) {
-        setOpenModal(true);
-        return;
-      }
-      dispatch(
-        submitStep1({
-          gender: man,
-          memberCount: meetingMember,
-          universities: selectedUniversities,
-        }),
-      );
-      navigate('/apply/2');
-    } else {
-      if (selectedUniversities.length > 3) {
-        setOpenModal(true);
-        return;
-      }
-      dispatch(
-        submitStep1({
-          gender: man,
-          memberCount: meetingMember,
-          universities: selectedUniversities,
-        }),
-      );
-      navigate('/apply/2');
+    if (selectedUniversities.length < 1) {
+      setOpenModal(true);
+      return;
     }
+    dispatch(
+      submitStep1({
+        gender: man,
+        memberCount: meetingMember,
+        universities: selectedUniversities,
+      }),
+    );
+    navigate('/apply/2');
   });
 
   console.log(selectedUniversities);
@@ -272,7 +257,12 @@ const SearchInput = styled.input`
   font-family: Nanum JungHagSaeng;
 `;
 const SearchListDiv = styled.div`
-  overflow-x: hidden;
+  margin-left: 2%;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+  ::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  }
   overflow: scroll;
   display: flex;
   align-items: center;
