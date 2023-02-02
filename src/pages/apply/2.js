@@ -1,32 +1,28 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Calendar } from 'react-multi-date-picker';
-import { useSelector } from 'react-redux';
-import TextColorBinary from '../../util/TextColorBinary';
+import ChooseButton from '../../components/ChooseButton';
+import { submitStep2 } from '../../features/apply';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
-import ColumnSelectButton from '../../components/ColumnSelectButton';
-
-// 중복체크 함수
-function isAlreadyCliked(list, value) {
-  const isduplicated = list.some((v) => v === value);
-  return isduplicated;
-}
 
 // eslint-disable-next-line consistent-return
 
 export default function Apply2() {
-  const title = '미팅 선호 날짜를 알려주세요';
-  const title2 = '미팅 선호 지역을 알려주세요';
   const [openModal, setOpenModal] = useState(false);
-  const [selectedArea, setSelectedArea] = useState([]);
-  const [SelectedDate, setSelecteddate] = useState(new Date());
-  const { finishedStep } = useSelector((store) => store.apply);
+  const { finishedStep, availableDate, area } = useSelector(
+    (store) => store.apply,
+  );
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [selectDate, setSelectDate] = useState(availableDate);
+  const [selectedArea, setSelectedArea] = useState(area);
 
   useEffect(() => {
     if (finishedStep < 1) {
@@ -35,64 +31,131 @@ export default function Apply2() {
     }
   }, []);
 
+  const handleArea = useCallback(
+    (val, isChecked) => {
+      if (isChecked) {
+        setSelectedArea([...selectedArea, val]);
+        return;
+      }
+      setSelectedArea(selectedArea.filter((v) => v !== val));
+    },
+    [selectedArea],
+  );
+
   const setModal = (bool) => {
     setOpenModal(bool);
   };
 
+  const handleBefore = useCallback(() => {
+    navigate('/apply/1');
+  });
+
+  const handleSubmit = useCallback(() => {
+    if (selectDate.length < 4 || selectedArea < 1) {
+      setOpenModal(true);
+      return;
+    }
+    dispatch(
+      submitStep2({
+        availableDate: [...selectDate.map((a) => a.format())],
+        area: selectedArea,
+      }),
+    );
+    navigate('/apply/3');
+  });
+
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
+      <Title>
+        <Maintitle>
+          <Pink>미팅 선호 날짜</Pink>를 알려주세요
+        </Maintitle>
+        <Subtitle> 4일 이상 선택해 주세요</Subtitle>
+      </Title>
       <ScrollDiv>
-        <TextColorBinary
-          text={title}
-          colorFirst={theme.pink}
-          colorSecond={theme.black}
-          num={8}
-        />
-        <SizedBox />
-        <SubTitle> 4일 이상 선택해 주세요</SubTitle>
-        <SizedBox height="20px" />
         <CalendarDiv>
           <Calendar
-            format="YYYY/MM/DD"
-            layout="mobile"
-            className="custom-calendar"
             multiple
-            minDate={4}
-            value={SelectedDate}
-            onChange={setSelecteddate}
+            format="YYYY-MM-DD"
+            hideYear
+            minDate={new Date()}
+            maxDate={new Date().setDate(new Date().getDate() + 13)}
+            layout="mobile"
+            value={selectDate}
+            onChange={setSelectDate}
           />
         </CalendarDiv>
-        <SizedBox height="30px" />
-        <TextColorBinary
-          text={title2}
-          colorFirst={theme.pink}
-          colorSecond={theme.black}
-          num={8}
-        />
-        <SizedBox />
-        <SubTitle> 중복 선택이 가능해요</SubTitle>
-        <SizedBox />
-        <ColumnSelectButton
-          state={setSelectedArea}
-          selectedArea={selectedArea}
-          area={['강남', '건대', '신촌', '홍대', '상관없음']}
-        />
       </ScrollDiv>
+      <Title>
+        <Maintitle>
+          <Pink>미팅 선호 지역</Pink>를 알려주세요
+        </Maintitle>
+        <Subtitle>중복선택이 가능해요</Subtitle>
+      </Title>
+      <ChooseBox>
+        <ChooseButton
+          isActive={selectedArea.includes(1)}
+          onChange={(isActive) => handleArea(1, isActive)}
+          content="강남"
+        />
+        <ChooseButton
+          isActive={selectedArea.includes(2)}
+          onChange={(isActive) => handleArea(2, isActive)}
+          content="건대"
+        />
+        <ChooseButton
+          isActive={selectedArea.includes(3)}
+          onChange={(isActive) => handleArea(3, isActive)}
+          content="신촌"
+        />
+        <ChooseButton
+          isActive={selectedArea.includes(4)}
+          onChange={(isActive) => handleArea(4, isActive)}
+          content="홍대"
+        />
+        <ChooseButton
+          isActive={selectedArea.includes(5)}
+          onChange={(isActive) => handleArea(5, isActive)}
+          content="상관없음"
+        />
+      </ChooseBox>
       <Footer>
         <ProgressBar page={2} />
         <ButtonBox>
-          <ApplyButton>
-            <SLink to="/apply/1">이전</SLink>
-          </ApplyButton>
-          <ApplyButton>
-            <SLink to="/apply/3">다음</SLink>
-          </ApplyButton>
+          <ApplyButton onClick={handleBefore}>이전</ApplyButton>
+          <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
     </ApplyLayout>
   );
 }
+
+const Title = styled.div`
+  width: 90%;
+  margin-top: 8%;
+  height: 13%;
+  min-height: 13%;
+`;
+
+const Maintitle = styled.div`
+  width: 100%;
+  font-family: 'Nanum JungHagSaeng';
+  font-weight: 400;
+  font-size: 35px;
+`;
+
+const Subtitle = styled.p`
+  margin-top: 4%;
+  color: #aaaaaa;
+  font-weight: 400;
+  font-size: 13px;
+`;
+
+const Pink = styled.span`
+  color: ${theme.pink};
+`;
+
 const Footer = styled.div`
   display: flex;
   flex-direction: column;
@@ -108,13 +171,12 @@ const ButtonBox = styled.div`
   justify-content: space-between;
   margin-top: 5%;
 `;
-const SLink = styled(Link)`
-  width: 100%;
-  text-decoration: 'none';
-  color: ${(props) => props.theme.lightPink};
-`;
-const SizedBox = styled.div`
-  height: ${(props) => props.height || '10px'};
+
+const ChooseBox = styled.div`
+  margin-top: 3%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CalendarDiv = styled.div`
@@ -151,12 +213,7 @@ const CalendarDiv = styled.div`
     color: #fff;
   }
 `;
-const SubTitle = styled.span`
-  display: flex;
-  color: #aaaaaa;
-  font-size: 13px;
-  font-weight: 500;
-`;
+
 const ScrollDiv = styled.div`
   width: 90%;
   align-items: flex-start;
