@@ -1,14 +1,11 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 
 export default function ChooseButton(props) {
-  const [check, setCheck] = useState(false);
-
   return (
     <BigButton
-      isActive={check}
+      isActive={props.isActive}
       onClick={() => {
-        setCheck((prev) => !prev);
+        props.onChange(!props.isActive);
       }}
     >
       {props.content}

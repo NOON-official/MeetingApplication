@@ -1,6 +1,7 @@
+import { Button } from 'antd';
 import styled from 'styled-components';
 
-const ApplyButton = styled.button.attrs({ type: 'button' })`
+const ApplyButton = styled(Button).attrs({ type: 'button' })`
   font-weight: 400;
   font-size: 24px;
   font-family: 'Nanum JungHagSaeng';
@@ -11,8 +12,8 @@ const ApplyButton = styled.button.attrs({ type: 'button' })`
   border: 1px solid ${(props) => props.theme.lightPink};
   color: ${(props) => props.theme.lightPink};
   &:hover {
-    cursor: pointer;
     background-color: ${(props) => props.theme.pink};
+    color: white;
   }
 `;
 

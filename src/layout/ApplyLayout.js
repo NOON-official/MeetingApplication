@@ -22,11 +22,12 @@ const Container = styled.div`
 
 const Header = styled.header`
   width: 100%;
+  height: 6vh;
 `;
 
 const Content = styled.div`
   background-color: rgb(245, 245, 245);
-  min-height: 90vh;
+  min-height: 94vh;
   width: 400px;
   border: 1px solid red;
   display: flex;
