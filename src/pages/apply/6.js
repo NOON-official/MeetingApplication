@@ -29,7 +29,7 @@ function Apply6Page() {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
-  }, []);
+  }, [finishedStep]);
 
   const handleBefore = useCallback(() => {
     navigate('/apply/5');
@@ -324,7 +324,6 @@ const Member = styled.div`
   display: flex;
   justify-content: space-between;
   margin-left: 23%;
-  border: 1px solid red;
   width: 35%;
   font-family: 'Nanum JungHagSaeng';
   color: #bbbbbb;

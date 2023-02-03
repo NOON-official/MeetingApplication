@@ -10,12 +10,16 @@ import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
+import NotEnoughDateModal from '../../components/Modal/NotEnoughDateModal';
+import NotEnoughPlaceModal from '../../components/Modal/NotEnoughPlaceModal';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
 // eslint-disable-next-line consistent-return
 
 export default function Apply2() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal1, setOpenModal1] = useState(false);
+  const [openModal2, setOpenModal2] = useState(false);
+  const [openModal3, setOpenModal3] = useState(false);
   const { finishedStep, availableDate, area } = useSelector(
     (store) => store.apply,
   );
@@ -29,7 +33,7 @@ export default function Apply2() {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
-  }, []);
+  }, [finishedStep]);
 
   const handleArea = useCallback(
     (val, isChecked) => {
@@ -42,8 +46,16 @@ export default function Apply2() {
     [selectedArea],
   );
 
-  const setModal = (bool) => {
-    setOpenModal(bool);
+  const setModal1 = (bool) => {
+    setOpenModal1(bool);
+  };
+
+  const setModal2 = (bool) => {
+    setOpenModal2(bool);
+  };
+
+  const setModal3 = (bool) => {
+    setOpenModal3(bool);
   };
 
   const handleBefore = useCallback(() => {
@@ -51,8 +63,16 @@ export default function Apply2() {
   });
 
   const handleSubmit = useCallback(() => {
-    if (selectDate.length < 4 || selectedArea < 1) {
-      setOpenModal(true);
+    if (selectDate.length < 4 && selectedArea < 1) {
+      setOpenModal3(true);
+      return;
+    }
+    if (selectDate.length < 4) {
+      setOpenModal1(true);
+      return;
+    }
+    if (selectedArea < 1) {
+      setOpenModal2(true);
       return;
     }
     dispatch(
@@ -66,7 +86,9 @@ export default function Apply2() {
 
   return (
     <ApplyLayout>
-      <IsPageCompleteModal open={openModal} setModal={setModal} />
+      <NotEnoughDateModal open={openModal1} setModal={setModal1} />
+      <NotEnoughPlaceModal open={openModal2} setModal={setModal2} />
+      <IsPageCompleteModal open={openModal3} setModal={setModal3} />
       <Title>
         <Maintitle>
           <Pink>미팅 선호 날짜</Pink>를 알려주세요

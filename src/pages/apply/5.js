@@ -26,7 +26,7 @@ function Apply5Page() {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
-  }, []);
+  }, [finishedStep]);
 
   const marks = {
     20: { label: <SliderText>20세</SliderText> },

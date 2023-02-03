@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Button } from 'antd';
+import { useCallback } from 'react';
 import theme from '../style/theme';
 import { ReactComponent as MainImg } from '../asset/svg/MainImg.svg';
 import MainLayout from '../layout/MainLayout';
@@ -9,6 +11,14 @@ import MainFooter from '../layout/footer/MainFooter';
 import Section from '../components/Section';
 
 function Main() {
+  const { finishedStep } = useSelector((store) => store.apply);
+
+  const navigate = useNavigate();
+
+  const handleStart = useCallback(() => {
+    navigate(`/apply/${finishedStep + 1}`);
+  }, [finishedStep]);
+
   const twoman = 25;
   const twogirl = 10;
   const threeman = 3;
@@ -56,9 +66,7 @@ function Main() {
       </Section>
 
       <Section my="32px" center>
-        <Link to="/apply/1">
-          <StartButton>매칭 시작하기</StartButton>
-        </Link>
+        <StartButton onClick={handleStart}>매칭 시작하기</StartButton>
       </Section>
 
       <MainFooter />
