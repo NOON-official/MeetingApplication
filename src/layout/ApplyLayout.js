@@ -22,14 +22,13 @@ const Container = styled.div`
 
 const Header = styled.header`
   width: 100%;
-  height: 6vh;
+  height: 7vh;
 `;
 
 const Content = styled.div`
   background-color: rgb(245, 245, 245);
-  min-height: 94vh;
+  min-height: 93vh;
   width: 400px;
-  border: 1px solid red;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

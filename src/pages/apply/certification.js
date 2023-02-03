@@ -1,5 +1,234 @@
-function Certification() {
-  return <div />;
+import { useState, useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+
+import { Input, Button, Modal } from 'antd';
+import ApplyLayout from '../../layout/ApplyLayout';
+import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
+import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
+
+function CertificationPage() {
+  const vaildcheck = true;
+
+  const { finishedStep } = useSelector((store) => store.apply);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [authorizeNumber, setAuthorizeNumber] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  const [submitOk1, setSubmitOk1] = useState(false);
+  const [submitOk2, setSubmitOk2] = useState(false);
+  const navigate = useNavigate();
+  const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+  useEffect(() => {
+    if (finishedStep < 5) {
+      window.alert('잘못된 접근입니다');
+      navigate(`/apply/${finishedStep + 1}`);
+    }
+  }, [finishedStep]);
+
+  const handleNumber = useCallback(
+    (e) => {
+      setPhoneNumber(e.target.value);
+    },
+    [phoneNumber],
+  );
+  const SubmitPhoneNumber = useCallback(() => {
+    setSubmitOk1(true);
+    console.log(phoneNumber);
+  }, [phoneNumber]);
+
+  const handleAuthorizeNumber = useCallback(
+    (e) => {
+      setAuthorizeNumber(e.target.value);
+    },
+    [authorizeNumber],
+  );
+
+  const SubmitAuthorizeNumber = useCallback(() => {
+    setSubmitOk2(true);
+    console.log(authorizeNumber);
+  }, [authorizeNumber]);
+
+  return (
+    <ApplyLayout>
+      <Modal open={openModal} centered footer={null} closable={false}>
+        <TextBox>
+          <BlackText>
+            매칭 결과가 추후에 <ColorText>문자</ColorText>로 전송됩니다.
+          </BlackText>
+          <BlackText>꼭 확인해 주세요!</BlackText>
+        </TextBox>
+        <SButton
+          onClick={() => {
+            setOpenModal(false);
+            navigate('/apply/complete');
+          }}
+        >
+          닫기
+        </SButton>
+      </Modal>
+      <Title>
+        <Maintitle>
+          <Pink>전화번호 인증 </Pink>후
+        </Maintitle>
+        <Maintitle>미팅 신청이 완료됩니다</Maintitle>
+      </Title>
+      <Conatiner>
+        <PhoneBox>
+          전화번호
+          <PhoneNumber>
+            <InputBox>
+              <SInput
+                value={phoneNumber}
+                onChange={handleNumber}
+                placeholder="전화번호 입력"
+              />
+            </InputBox>
+          </PhoneNumber>
+        </PhoneBox>
+        <SubmitButton
+          onClick={SubmitPhoneNumber}
+          disabled={!regex.test(phoneNumber) || submitOk1}
+        >
+          인증번호요청
+        </SubmitButton>
+        <PhoneBox>
+          인증번호
+          <PhoneNumber>
+            <InputBox>
+              <SInput
+                value={authorizeNumber}
+                onChange={handleAuthorizeNumber}
+                placeholder="인증번호 입력"
+              />
+            </InputBox>
+            {vaildcheck ? <SCheckValid /> : <SCheckInvalid />}
+          </PhoneNumber>
+        </PhoneBox>
+        <SubmitButton
+          onClick={SubmitAuthorizeNumber}
+          disabled={!authorizeNumber || !regex.test(phoneNumber) || submitOk2}
+        >
+          인증번호확인
+        </SubmitButton>
+      </Conatiner>
+      <Footer>
+        <SubmitButton
+          onClick={() => {
+            setOpenModal(true);
+          }}
+          disabled={!vaildcheck}
+        >
+          매칭신청완료
+        </SubmitButton>
+      </Footer>
+    </ApplyLayout>
+  );
 }
 
-export default Certification;
+export default CertificationPage;
+
+const Title = styled.div`
+  width: 90%;
+  margin-top: 8%;
+  height: 13%;
+  min-height: 13%;
+`;
+
+const Maintitle = styled.div`
+  width: 100%;
+  font-family: 'Nanum JungHagSaeng';
+  font-weight: 400;
+  font-size: 35px;
+`;
+
+const Pink = styled.span`
+  color: ${(props) => props.theme.pink};
+`;
+
+const Conatiner = styled.div`
+  margin-bottom: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+`;
+
+const PhoneBox = styled.div`
+  margin-top: 5%;
+  width: 90%;
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #f1ecec;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 13px;
+  color: #777777;
+`;
+
+const PhoneNumber = styled.div`
+  margin-top: 3%;
+  display: flex;
+`;
+
+const InputBox = styled.div`
+  width: 50%;
+`;
+
+const SCheckValid = styled(CheckValid)`
+  margin-left: 40%;
+`;
+
+const SCheckInvalid = styled(CheckInvalid)`
+  margin-left: 40%;
+`;
+
+const SInput = styled(Input)`
+  width: 100%;
+`;
+
+const SubmitButton = styled(Button)`
+  font-family: 'Nanum JungHagSaeng';
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 24px;
+  text-align: center;
+  border: none;
+  margin-top: 3%;
+  width: 100%;
+  height: 50px;
+  background: #eb8888;
+  border-radius: 10px;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin-bottom: 60%;
+`;
+
+const TextBox = styled.div`
+  width: 100%;
+  text-align: center;
+`;
+const BlackText = styled.span`
+  color: black;
+  font-size: 31px;
+  font-family: 'Nanum JungHagSaeng';
+`;
+const ColorText = styled.span`
+  color: ${(props) => props.theme.pink};
+  font-size: 31px;
+  font-family: 'Nanum JungHagSaeng';
+`;
+
+const SButton = styled(Button)`
+  margin-top: 10%;
+  width: 100%;
+  height: 50px;
+  color: white;
+  background-color: ${(props) => props.theme.pink};
+`;

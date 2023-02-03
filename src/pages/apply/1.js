@@ -16,7 +16,7 @@ import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
 export default function Apply1Page() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, gender, memberCount, universities } = useSelector(
+  const { gender, memberCount, universities } = useSelector(
     (store) => store.apply,
   );
   const dispatch = useDispatch();
@@ -54,8 +54,6 @@ export default function Apply1Page() {
     );
     navigate('/apply/2');
   });
-
-  console.log(selectedUniversities);
 
   return (
     <ApplyLayout>
