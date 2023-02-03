@@ -18,6 +18,7 @@ import Apply4 from './pages/apply/4';
 import Apply5 from './pages/apply/5';
 import Apply6 from './pages/apply/6';
 import Certification from './pages/apply/certification';
+import Complete from './pages/apply/complete';
 import Agree from './pages/apply/agree';
 
 const Router = createBrowserRouter([
@@ -92,6 +93,10 @@ const Router = createBrowserRouter([
       {
         path: 'apply/certification',
         element: <Certification />,
+      },
+      {
+        path: 'apply/complete',
+        element: <Complete />,
       },
       {
         path: '/auth/kakao/main/callback',
