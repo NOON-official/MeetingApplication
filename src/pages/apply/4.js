@@ -23,7 +23,7 @@ function Apply4Page() {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
-  }, []);
+  }, [finishedStep]);
 
   const handleChange = useCallback((e) => {
     setIntroduce(e.target.value);
