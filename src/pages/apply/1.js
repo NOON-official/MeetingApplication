@@ -55,8 +55,6 @@ export default function Apply1Page() {
     navigate('/apply/2');
   });
 
-  console.log(selectedUniversities);
-
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />

@@ -16,7 +16,6 @@ function Complete() {
           <BlackText>미팅 신청이 완료되었습니다!</BlackText>
           <BlackText>매칭이 완료되면 문자를 드릴께요.</BlackText>
         </TextBox>
-        <WhiteBox>ssfdsfs</WhiteBox>
         <SubmitButton
           onClick={() => {
             navigate('/');
@@ -32,7 +31,7 @@ function Complete() {
 export default Complete;
 
 const Container = styled.div`
-  margin-top: 20%;
+  margin-top: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,13 +54,6 @@ const BlackText = styled.div`
   font-family: 'Nanum JungHagSaeng';
 `;
 
-const WhiteBox = styled.div`
-  margin-top: 8%;
-  width: 90%;
-  background: #ffffff;
-  border-radius: 10px;
-`;
-
 const SubmitButton = styled(Button)`
   font-family: 'Nanum JungHagSaeng';
   color: #ffffff;
@@ -69,7 +61,7 @@ const SubmitButton = styled(Button)`
   font-size: 24px;
   text-align: center;
   border: none;
-  margin-top: 10%;
+  margin-top: 75%;
   width: 100%;
   height: 50px;
   background: #eb8888;
