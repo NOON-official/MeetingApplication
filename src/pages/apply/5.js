@@ -84,8 +84,6 @@ function Apply5Page() {
     navigate('/apply/6');
   });
 
-  console.log(sameSchool);
-
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
