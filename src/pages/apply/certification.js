@@ -1,9 +1,43 @@
+import { useState, useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 import { Input, Button } from 'antd';
 import ApplyLayout from '../../layout/ApplyLayout';
+import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
+import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 
 function CertificationPage() {
+  const { finishedStep } = useSelector((store) => store.apply);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [authorizeNumber, setAuthorizeNumber] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (finishedStep < 5) {
+      window.alert('잘못된 접근입니다');
+      navigate(`/apply/${finishedStep + 1}`);
+    }
+  }, [finishedStep]);
+
+  const handleNumber = useCallback(
+    (e) => {
+      setPhoneNumber(e.target.value);
+    },
+    [phoneNumber],
+  );
+  const SubmitPhoneNumber = useCallback(() => {
+    console.log(phoneNumber);
+  }, [phoneNumber]);
+
+  const handleAuthorizeNumber = useCallback(
+    (e) => {
+      setAuthorizeNumber(e.target.value);
+    },
+    [authorizeNumber],
+  );
+
   return (
     <ApplyLayout>
       <Title>
@@ -17,23 +51,24 @@ function CertificationPage() {
           전화번호
           <PhoneNumber>
             <InputBox>
-              <SInput defaultValue="010" /> &nbsp;&nbsp;&nbsp;—
-            </InputBox>
-            <InputBox>
-              <SInput /> &nbsp;&nbsp;&nbsp;—
-            </InputBox>
-            <InputBox>
-              <SInput />
+              <SInput value={phoneNumber} onChange={handleNumber} />
             </InputBox>
           </PhoneNumber>
         </PhoneBox>
-        <SubmitButton>인증번호요청</SubmitButton>
+        <SubmitButton onClick={SubmitPhoneNumber} disabled={!phoneNumber}>
+          인증번호요청
+        </SubmitButton>
         <PhoneBox>
           인증번호
           <PhoneNumber>
             <InputBox>
-              <SInput2 placeholder="인증번호를입력해주세요" />
+              <SInput
+                value={authorizeNumber}
+                onChange={handleAuthorizeNumber}
+                placeholder="인증번호를입력해주세요"
+              />
             </InputBox>
+            <SCheckValid />
           </PhoneNumber>
         </PhoneBox>
       </Conatiner>
@@ -93,11 +128,15 @@ const InputBox = styled.div`
   width: 50%;
 `;
 
-const SInput = styled(Input)`
-  width: 60%;
+const SCheckValid = styled(CheckValid)`
+  margin-left: 40%;
 `;
 
-const SInput2 = styled(Input)`
+const SCheckInvalid = styled(CheckInvalid)`
+  margin-left: 40%;
+`;
+
+const SInput = styled(Input)`
   width: 100%;
 `;
 
