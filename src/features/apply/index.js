@@ -36,9 +36,9 @@ const applySlice = createSlice({
       localStorage.setItem(
         APPLY_STORAGE_KEY,
         JSON.stringify({
-          finishedStep: state.finishedStep,
           ...JSON.parse(stored),
           ...action.payload,
+          finishedStep: state.finishedStep,
         }),
       );
     },
@@ -50,12 +50,13 @@ const applySlice = createSlice({
       state.area = area;
 
       const stored = localStorage.getItem('apply-data');
+      console.log(state.finishedStep);
       localStorage.setItem(
         APPLY_STORAGE_KEY,
         JSON.stringify({
-          finishedStep: state.finishedStep,
           ...JSON.parse(stored),
           ...action.payload,
+          finishedStep: state.finishedStep,
         }),
       );
     },
@@ -69,9 +70,9 @@ const applySlice = createSlice({
       localStorage.setItem(
         APPLY_STORAGE_KEY,
         JSON.stringify({
-          finishedStep: state.finishedStep,
           ...JSON.parse(stored),
           ...action.payload,
+          finishedStep: state.finishedStep,
         }),
       );
     },
@@ -85,9 +86,9 @@ const applySlice = createSlice({
       localStorage.setItem(
         APPLY_STORAGE_KEY,
         JSON.stringify({
-          finishedStep: state.finishedStep,
           ...JSON.parse(stored),
           ...action.payload,
+          finishedStep: state.finishedStep,
         }),
       );
     },
@@ -104,14 +105,11 @@ const applySlice = createSlice({
       localStorage.setItem(
         APPLY_STORAGE_KEY,
         JSON.stringify({
-          finishedStep: state.finishedStep,
           ...JSON.parse(stored),
           ...action.payload,
+          finishedStep: state.finishedStep,
         }),
       );
-    },
-    submitStep6: (state) => {
-      state.finishedStep = 6;
     },
   },
 });
@@ -122,7 +120,6 @@ export const {
   submitStep3,
   submitStep4,
   submitStep5,
-  submitStep6,
 } = applySlice.actions;
 
 export default applySlice.reducer;
