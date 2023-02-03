@@ -27,7 +27,7 @@ function Apply3Page() {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
-  }, []);
+  }, [finishedStep]);
 
   const setModal = (bool) => {
     setOpenModal(bool);
