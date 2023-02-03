@@ -11,8 +11,8 @@ export default function Accordion(props) {
   }, []);
 
   return (
-    <Container onClick={handleToggle}>
-      <TitleBox>
+    <Container className={props.className}>
+      <TitleBox onClick={handleToggle}>
         <Title>{props.title}</Title>
         {isShown ? <UpArrow /> : <DownArrow />}
       </TitleBox>
@@ -35,9 +35,6 @@ const Container = styled.div`
   border: 1px solid #f1ecec;
   border-radius: 10px;
   padding: 0 22px;
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 const TitleBox = styled.div`
@@ -45,6 +42,9 @@ const TitleBox = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 15px 0;
+  :hover {
+    cursor: pointer;
+  }
 `;
 const Title = styled.span`
   font-size: 12px;
