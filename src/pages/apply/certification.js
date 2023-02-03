@@ -3,16 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
-import { Input, Button } from 'antd';
+import { Input, Button, Modal } from 'antd';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 
 function CertificationPage() {
+  const vaildcheck = true;
+
   const { finishedStep } = useSelector((store) => store.apply);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [authorizeNumber, setAuthorizeNumber] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  const [submitOk1, setSubmitOk1] = useState(false);
+  const [submitOk2, setSubmitOk2] = useState(false);
   const navigate = useNavigate();
+  const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
   useEffect(() => {
     if (finishedStep < 5) {
@@ -28,6 +34,7 @@ function CertificationPage() {
     [phoneNumber],
   );
   const SubmitPhoneNumber = useCallback(() => {
+    setSubmitOk1(true);
     console.log(phoneNumber);
   }, [phoneNumber]);
 
@@ -38,11 +45,32 @@ function CertificationPage() {
     [authorizeNumber],
   );
 
+  const SubmitAuthorizeNumber = useCallback(() => {
+    setSubmitOk2(true);
+    console.log(authorizeNumber);
+  }, [authorizeNumber]);
+
   return (
     <ApplyLayout>
+      <Modal open={openModal} centered footer={null} closable={false}>
+        <TextBox>
+          <BlackText>
+            매칭 결과가 추후에 <ColorText>문자</ColorText>로 전송됩니다.
+          </BlackText>
+          <BlackText>꼭 확인해 주세요!</BlackText>
+        </TextBox>
+        <SButton
+          onClick={() => {
+            setOpenModal(false);
+            navigate('/apply/complete');
+          }}
+        >
+          닫기
+        </SButton>
+      </Modal>
       <Title>
         <Maintitle>
-          <Pink>전화 번호 인증 </Pink>후
+          <Pink>전화번호 인증 </Pink>후
         </Maintitle>
         <Maintitle>미팅 신청이 완료됩니다</Maintitle>
       </Title>
@@ -51,11 +79,18 @@ function CertificationPage() {
           전화번호
           <PhoneNumber>
             <InputBox>
-              <SInput value={phoneNumber} onChange={handleNumber} />
+              <SInput
+                value={phoneNumber}
+                onChange={handleNumber}
+                placeholder="전화번호 입력"
+              />
             </InputBox>
           </PhoneNumber>
         </PhoneBox>
-        <SubmitButton onClick={SubmitPhoneNumber} disabled={!phoneNumber}>
+        <SubmitButton
+          onClick={SubmitPhoneNumber}
+          disabled={!regex.test(phoneNumber) || submitOk1}
+        >
           인증번호요청
         </SubmitButton>
         <PhoneBox>
@@ -65,15 +100,28 @@ function CertificationPage() {
               <SInput
                 value={authorizeNumber}
                 onChange={handleAuthorizeNumber}
-                placeholder="인증번호를입력해주세요"
+                placeholder="인증번호 입력"
               />
             </InputBox>
-            <SCheckValid />
+            {vaildcheck ? <SCheckValid /> : <SCheckInvalid />}
           </PhoneNumber>
         </PhoneBox>
+        <SubmitButton
+          onClick={SubmitAuthorizeNumber}
+          disabled={!authorizeNumber || !regex.test(phoneNumber) || submitOk2}
+        >
+          인증번호확인
+        </SubmitButton>
       </Conatiner>
       <Footer>
-        <SubmitButton>매칭신청완료</SubmitButton>
+        <SubmitButton
+          onClick={() => {
+            setOpenModal(true);
+          }}
+          disabled={!vaildcheck}
+        >
+          매칭신청완료
+        </SubmitButton>
       </Footer>
     </ApplyLayout>
   );
@@ -160,4 +208,27 @@ const Footer = styled.div`
   align-items: center;
   width: 90%;
   margin-bottom: 60%;
+`;
+
+const TextBox = styled.div`
+  width: 100%;
+  text-align: center;
+`;
+const BlackText = styled.span`
+  color: black;
+  font-size: 31px;
+  font-family: 'Nanum JungHagSaeng';
+`;
+const ColorText = styled.span`
+  color: ${(props) => props.theme.pink};
+  font-size: 31px;
+  font-family: 'Nanum JungHagSaeng';
+`;
+
+const SButton = styled(Button)`
+  margin-top: 10%;
+  width: 100%;
+  height: 50px;
+  color: white;
+  background-color: ${(props) => props.theme.pink};
 `;
