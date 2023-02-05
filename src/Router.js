@@ -4,12 +4,12 @@ import Main from './pages/index';
 import App from './App';
 import Guide from './pages/guide';
 import Matching from './pages/matching';
+import MatchingMyteam from './pages/matching/myteam';
+import MatchingOtherteam from './pages/matching/otherteam';
 import MyInfo from './pages/myinfo';
 import KakaoCallback from './util/login/MainPageLoginCallback';
 import Account from './pages/myinfo/account';
 import Ticket from './pages/myinfo/ticket';
-import Myteam from './pages/matching/myteam';
-import Result from './pages/matching/result';
 import Apply1 from './pages/apply/1';
 import Invite from './pages/apply/invite';
 import Apply2 from './pages/apply/2';
@@ -40,11 +40,11 @@ const Router = createBrowserRouter([
       },
       {
         path: 'matching/myteam',
-        element: <Myteam />,
+        element: <MatchingMyteam />,
       },
       {
-        path: 'matching/result',
-        element: <Result />,
+        path: 'matching/otherteam',
+        element: <MatchingOtherteam />,
       },
       {
         path: 'myinfo',
