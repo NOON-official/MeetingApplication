@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Modal, Button } from 'antd';
+import { ReactComponent as LeftArrow } from '../../asset/svg/LeftArrow.svg';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 
-function MatchingMyTeam() {
+function MatchingOtherTeam() {
   const {
     intro,
     gender,
@@ -18,16 +19,24 @@ function MatchingMyTeam() {
     area,
     members,
     drink,
-    prefSameUniversity,
-    prefAge,
     prefVibe,
   } = useSelector((store) => store.apply);
   const navigate = useNavigate();
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal1, setOpenModal1] = useState(false);
+  const [openModal2, setOpenModal2] = useState(false);
+  const [openModal3, setOpenModal3] = useState(false);
 
-  const handleCancel = () => {
-    setOpenModal(false);
+  const handleCancel1 = () => {
+    setOpenModal1(false);
+  };
+
+  const handleCancel2 = () => {
+    setOpenModal2(false);
+  };
+
+  const handleCancel3 = () => {
+    setOpenModal3(false);
   };
 
   const SchoolContent = {
@@ -50,34 +59,78 @@ function MatchingMyTeam() {
     <ApplyLayout>
       <Modal
         width="380px"
-        open={openModal}
-        onCancel={handleCancel}
+        open={openModal1}
+        onCancel={handleCancel1}
         centered
         footer={null}
       >
         <ModalContainer>
-          <ModalText>
-            지금 정보를 수정하면 매칭이 늦어져요. 그래도 괜찮으신가요?
-          </ModalText>
+          <ModalText1>수락하기 위해서는 이용권이 필요해요</ModalText1>
+          <ModalText1>상대팀이 거절할 경우 이용권이 반환돼요.</ModalText1>
           <ModalButton
             onClick={() => {
-              handleCancel();
-              navigate('/apply/1');
+              handleCancel1();
+              navigate('/myinfo/ticket');
             }}
           >
-            수정하러가기
+            이용권구매하기
           </ModalButton>
         </ModalContainer>
       </Modal>
-      <Title>
-        <Maintitle>
-          <Pink>당신만의 미팅학개론</Pink>을 정리해 드립니다
-        </Maintitle>
-      </Title>
+      <Modal
+        width="380px"
+        open={openModal3}
+        onCancel={handleCancel3}
+        centered
+        footer={null}
+      >
+        <ModalContainer>
+          <ModalText1>수락하시면 이용권 한장이 사용돼요.</ModalText1>
+          <ModalText1>만약 상대팀이 거절할경우</ModalText1>
+          <ModalText1>이용권이 봔환되요.</ModalText1>
+          <ModalButton
+            onClick={() => {
+              handleCancel3();
+              navigate('/matching');
+            }}
+          >
+            수락하기
+          </ModalButton>
+        </ModalContainer>
+      </Modal>
+      <Modal
+        width="380px"
+        open={openModal2}
+        onCancel={handleCancel2}
+        centered
+        footer={null}
+      >
+        <ModalContainer>
+          <ModalText2>
+            거절하시면 상대팀과 다시 매칭될수 없어요. 그래도 거절하시겠어요?
+          </ModalText2>
+          <ModalButton
+            onClick={() => {
+              handleCancel2();
+              navigate('/matching');
+            }}
+          >
+            거절하기
+          </ModalButton>
+        </ModalContainer>
+      </Modal>
       <Content>
+        <Title>
+          <SLeftArrow
+            onClick={() => {
+              navigate('/matching');
+            }}
+          />
+          상대팀 미팅학개론
+        </Title>
         <InfoBox>
           <InfoTitle>
-            1. <Pink>우리는</Pink> 이런 팀이에요!
+            1. <Pink>상대는</Pink> 이런 팀이에요!
           </InfoTitle>
           <InfoContent>
             <Info>
@@ -196,25 +249,6 @@ function MatchingMyTeam() {
         </InfoBox>
         <InfoBox>
           <InfoTitle>
-            2. <Pink>상대</Pink>는 이런 팀을 원해요!
-          </InfoTitle>
-          <InfoContent>
-            <Info>
-              <SmallTitle>평균 나이</SmallTitle>
-              <SmallContent>
-                {prefAge[0]} ~ {prefAge[1]}세
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>학교</SmallTitle>
-              <SmallContent>
-                {prefSameUniversity ? '상관없어요' : '같은학교는 싫어요'}
-              </SmallContent>
-            </Info>
-          </InfoContent>
-        </InfoBox>
-        <InfoBox>
-          <InfoTitle>
             3. <Pink>미팅</Pink>은 이랬으면 좋겠어요!
           </InfoTitle>
           <InfoContent>
@@ -234,7 +268,7 @@ function MatchingMyTeam() {
         </InfoBox>
         <InfoBox>
           <InfoTitle>
-            4. 우리팀 <Pink>한 줄 어필</Pink>
+            4. 상대팀 <Pink>한 줄 어필</Pink>
           </InfoTitle>
           <InfoContent>
             <Info>
@@ -243,17 +277,18 @@ function MatchingMyTeam() {
           </InfoContent>
         </InfoBox>
       </Content>
+      <Alarm>상대팀 미팅학개론을 캡쳐해서 팀원들에게 공유해보세요!</Alarm>
       <Footer>
         <ButtonBox>
           <ApplyButton
             onClick={() => {
-              setOpenModal(true);
+              setOpenModal1(true);
             }}
           >
-            수정하기
+            수락하기
           </ApplyButton>
-          <ApplyButton onClick={() => navigate('/matching')}>
-            뒤로가기
+          <ApplyButton onClick={() => setOpenModal2(true)}>
+            거절하기
           </ApplyButton>
         </ButtonBox>
       </Footer>
@@ -261,20 +296,30 @@ function MatchingMyTeam() {
   );
 }
 
-export default MatchingMyTeam;
+export default MatchingOtherTeam;
 
 const Title = styled.div`
-  width: 90%;
-  margin-top: 8%;
-  height: 13%;
-  min-height: 13%;
+  display: flex;
+  align-items: center;
+  margin-top: 5%;
+  width: 100%;
+  font-weight: 600;
+  font-size: 14px;
+  color: #777777;
 `;
 
-const Maintitle = styled.div`
-  width: 100%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+const SLeftArrow = styled(LeftArrow)`
+  padding-right: 4%;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Alarm = styled.div`
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  width: 90%;
 `;
 
 const Pink = styled.span`
@@ -283,7 +328,6 @@ const Pink = styled.span`
 
 const Content = styled.div`
   width: 90%;
-  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -387,7 +431,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
+  margin-top: 5%;
   padding-bottom: 5%;
 `;
 
@@ -405,10 +449,16 @@ const ModalContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-const ModalText = styled.div`
+const ModalText1 = styled.div`
   margin-top: 3%;
   text-align: center;
-  width: 220px;
+  width: 230px;
+`;
+
+const ModalText2 = styled.div`
+  margin-top: 3%;
+  text-align: center;
+  width: 250px;
 `;
 
 const ModalButton = styled(Button)`
