@@ -8,6 +8,7 @@ import MainLayout from '../layout/MainLayout';
 import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
 import Section from '../components/Section';
+import PrimaryButton from '../components/PrimaryButton';
 
 function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
@@ -65,7 +66,7 @@ function Main() {
       </Section>
 
       <Section my="32px" center>
-        <StartButton onClick={handleStart}>매칭 시작하기</StartButton>
+        <PrimaryButton onClick={handleStart}>매칭 시작하기</PrimaryButton>
       </Section>
 
       <MainFooter />
