@@ -201,19 +201,19 @@ const Main = () => {
             align_item="start"
           >
             <StyledText size="5px" position="static" font="Pretendard" color="#515151">
-              노온
+              미팅학개론
             </StyledText>
             <StyledText size="5px" position="static" font="Pretendard" color="#515151">
-              대표자 남한솔 사업자등록번호 811-29-00871
+              대표자 금아름 사업자등록번호 : 172-20-01807
             </StyledText>
             <StyledText size="5px" position="static" font="Pretendard" color="#515151">
-              통신판매업신고 : 2021-서울성북-1613
+              통신판매번호 : 2023-서울동대문-0225
             </StyledText>
             <StyledText size="5px" position="static" font="Pretendard" color="#515151">
-              연락처 : 070-8064-3036 / noon.official.info@gmail.com
+              연락처 : 010-2802-0270 / noon.official.info@gmail.com
             </StyledText>
             <StyledText size="5px" position="static" font="Pretendard" color="#515151">
-              주소지 서울시 성북구 장월로 1마길 56 DAC 스타트업 인큐베이팅센터
+              주소지 : 서울시 동대문구 휘경로 20, 3층
             </StyledText>
           </StyledDiv>
         </StyledDiv>
