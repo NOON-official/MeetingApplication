@@ -23,6 +23,7 @@ import TicketBuyPage from './pages/myinfo/ticket/buy';
 import TicketCouponPage from './pages/myinfo/ticket/coupon';
 import TicketHistoryPage from './pages/myinfo/ticket/history';
 import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
+import AuthSigninPage from './pages/auth/signin';
 
 const Router = createBrowserRouter([
   {
@@ -112,6 +113,10 @@ const Router = createBrowserRouter([
       {
         path: 'apply/complete',
         element: <Complete />,
+      },
+      {
+        path: '/auth/signin',
+        element: <AuthSigninPage />,
       },
       {
         path: '/auth/signin/kakao/success',

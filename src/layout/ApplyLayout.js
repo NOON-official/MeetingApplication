@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-
 import TopHeader from './header/TopHeader';
 
-function ApplyLayout({ children }) {
+export default function ApplyLayout({ children }) {
   return (
     <Container>
       <Header>
@@ -12,7 +11,6 @@ function ApplyLayout({ children }) {
     </Container>
   );
 }
-export default ApplyLayout;
 
 const Container = styled.div`
   display: flex;
