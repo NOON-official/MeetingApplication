@@ -5,7 +5,6 @@ import App from './App';
 import Guide from './pages/guide';
 import Matching from './pages/matching';
 import MyInfo from './pages/myinfo';
-import KakaoCallback from './util/login/MainPageLoginCallback';
 import Account from './pages/myinfo/account';
 import TicketPage from './pages/myinfo/ticket';
 import Myteam from './pages/matching/myteam';
@@ -23,6 +22,7 @@ import Agree from './pages/apply/agree';
 import TicketBuyPage from './pages/myinfo/ticket/buy';
 import TicketCouponPage from './pages/myinfo/ticket/coupon';
 import TicketHistoryPage from './pages/myinfo/ticket/history';
+import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
 
 const Router = createBrowserRouter([
   {
@@ -114,8 +114,8 @@ const Router = createBrowserRouter([
         element: <Complete />,
       },
       {
-        path: '/auth/kakao/main/callback',
-        element: <KakaoCallback />,
+        path: '/auth/signin/kakao/success',
+        element: <KakakoLoginSuccessPage />,
       },
     ],
   },
