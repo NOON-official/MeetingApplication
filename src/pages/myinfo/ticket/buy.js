@@ -6,10 +6,10 @@ import Section from '../../../components/Section';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as Checkbox } from '../../../asset/svg/Checkbox.svg';
 import { ReactComponent as CheckboxChecked } from '../../../asset/svg/CheckboxChecked.svg';
-import { ReactComponent as CouponLogo } from '../../../asset/svg/CouponLogo.svg';
 import Accordion from '../../../components/Accordion';
 import { useGetPageDataQuery } from '../../../features/tickets/ticketApi';
 import PrimaryButton from '../../../components/PrimaryButton';
+import CouponItem from '../../../components/CouponItem';
 
 export default function TicketBuyPage() {
   const [selectedProduct, setSelectedProduct] = useState(1);
@@ -61,31 +61,21 @@ export default function TicketBuyPage() {
           title={<AccordionTitle>쿠폰 적용</AccordionTitle>}
           content={
             <CouponList>
-              <CouponItem onClick={() => toggleCoupon(1)}>
-                {selectedCoupon === 1 ? <CheckboxChecked /> : <Checkbox />}
-                <CouponBox>
-                  <CouponLogo />
-                  <CouponBoxContent>
-                    <CouponTitle>미팅학개론 50% 할인 쿠폰</CouponTitle>
-                    <div>
-                      <CouponExpireText>2023. 01. 31 까지</CouponExpireText>
-                      <CouponTipText>*이용권 1장에만 사용 가능</CouponTipText>
-                    </div>
-                  </CouponBoxContent>
-                </CouponBox>
-              </CouponItem>
-              <CouponItem className="disabled" onClick={() => toggleCoupon(2)}>
-                {selectedCoupon === 2 ? <CheckboxChecked /> : <Checkbox />}
-                <CouponBox>
-                  <CouponLogo />
-                  <CouponBoxContent>
-                    <CouponTitle>미팅학개론 1회 무료 이용 쿠폰</CouponTitle>
-                    <div>
-                      <CouponExpireText>2023. 01. 31 까지</CouponExpireText>
-                    </div>
-                  </CouponBoxContent>
-                </CouponBox>
-              </CouponItem>
+              <CouponItem
+                onClick={() => toggleCoupon(1)}
+                checked={selectedCoupon === 1}
+                disabled={false}
+                title="미팅학개론 50% 할인 쿠폰"
+                expireText="2023. 01. 31 까지"
+                tipText="*이용권 1장에만 사용 가능"
+              />
+              <CouponItem
+                onClick={() => toggleCoupon(2)}
+                checked={selectedCoupon === 2}
+                disabled
+                title="미팅학개론 1회 무료 이용 쿠폰"
+                expireText="2023. 01. 31 까지"
+              />
             </CouponList>
           }
         />
@@ -169,50 +159,6 @@ const CouponList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
-const CouponItem = styled.div`
-  display: flex;
-  align-items: center;
-  > svg {
-    padding: 15px;
-  }
-
-  &.disabled {
-    pointer-events: none;
-    filter: grayscale(1);
-  }
-`;
-
-const CouponBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid #eb8888;
-  border-radius: 3px;
-  padding: 10px 12px;
-`;
-
-const CouponBoxContent = styled.div`
-  width: 100%;
-`;
-
-const CouponTitle = styled.div`
-  font-weight: 500;
-  font-size: 13px;
-  color: #eb8888;
-  margin-bottom: 4px;
-`;
-
-const CouponExpireText = styled.span`
-  font-size: 10px;
-  color: #777777;
-`;
-
-const CouponTipText = styled.span`
-  font-weight: 400;
-  font-size: 6px;
-  color: #777777;
-  margin-left: 4px;
 `;
 
 const TotalPriceBox = styled.div`
