@@ -7,9 +7,7 @@ import Matching from './pages/matching';
 import MatchingMyteam from './pages/matching/myteam';
 import MatchingOtherteam from './pages/matching/otherteam';
 import MyInfo from './pages/myinfo';
-import KakaoCallback from './util/login/MainPageLoginCallback';
 import Account from './pages/myinfo/account';
-import Ticket from './pages/myinfo/ticket';
 import Apply1 from './pages/apply/1';
 import Invite from './pages/apply/invite';
 import Apply2 from './pages/apply/2';
@@ -20,6 +18,10 @@ import Apply6 from './pages/apply/6';
 import Certification from './pages/apply/certification';
 import Complete from './pages/apply/complete';
 import Agree from './pages/apply/agree';
+import TicketBuyPage from './pages/myinfo/ticket/buy';
+import TicketCouponPage from './pages/myinfo/ticket/coupon';
+import TicketHistoryPage from './pages/myinfo/ticket/history';
+import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
 
 const Router = createBrowserRouter([
   {
@@ -56,7 +58,19 @@ const Router = createBrowserRouter([
       },
       {
         path: 'myinfo/ticket',
-        element: <Ticket />,
+        element: <TicketPage />,
+      },
+      {
+        path: 'myinfo/ticket/buy',
+        element: <TicketBuyPage />,
+      },
+      {
+        path: 'myinfo/ticket/coupon',
+        element: <TicketCouponPage />,
+      },
+      {
+        path: 'myinfo/ticket/history',
+        element: <TicketHistoryPage />,
       },
       {
         path: 'apply/1',
@@ -99,8 +113,8 @@ const Router = createBrowserRouter([
         element: <Complete />,
       },
       {
-        path: '/auth/kakao/main/callback',
-        element: <KakaoCallback />,
+        path: '/auth/signin/kakao/success',
+        element: <KakakoLoginSuccessPage />,
       },
     ],
   },

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Button } from 'antd';
 import { useCallback } from 'react';
 import theme from '../style/theme';
 import { ReactComponent as MainImg } from '../asset/svg/MainImg.svg';
@@ -9,6 +8,7 @@ import MainLayout from '../layout/MainLayout';
 import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
 import Section from '../components/Section';
+import PrimaryButton from '../components/PrimaryButton';
 
 function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
@@ -66,7 +66,7 @@ function Main() {
       </Section>
 
       <Section my="32px" center>
-        <StartButton onClick={handleStart}>매칭 시작하기</StartButton>
+        <PrimaryButton onClick={handleStart}>매칭 시작하기</PrimaryButton>
       </Section>
 
       <MainFooter />
@@ -185,18 +185,4 @@ const Number = styled.p`
   font-family: 'Nanum JungHagSaeng';
   font-weight: 400;
   font-size: 15px;
-`;
-
-const StartButton = styled(Button).attrs({ type: 'text' })`
-  height: auto;
-  font-family: 'Nanum JungHagSaeng';
-  padding: 10px 50px;
-  border-radius: 10px;
-  background-color: ${(props) => props.theme.pink};
-
-  > span {
-    font-weight: 400;
-    font-size: 24px;
-    color: white;
-  }
 `;
