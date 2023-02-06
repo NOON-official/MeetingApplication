@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ReactComponent as Header } from '../../asset/svg/Header.svg';
+import { ReactComponent as Person } from '../../asset/svg/Person.svg';
 import theme from '../../style/theme';
-import KakaoLoigin from '../../util/login/kakaoLogin';
+import KakaoLoginLink from '../../components/KakaoLoginLink';
 
-function TopHeader() {
-  const [login, setLogin] = useState(false);
-  const loginHandler = useCallback(() => {
-    setLogin((prev) => !prev);
-  }, []);
+export default function TopHeader() {
+  const { accessToken } = useSelector((state) => state.user);
   return (
     <Container>
       <Logo>
@@ -17,14 +15,20 @@ function TopHeader() {
           <Header />
         </Link>
       </Logo>
-      <LoginBox onClick={loginHandler}>
-        {login ? <KakaoLoigin /> : <Text>로그아웃</Text>}
+      <LoginBox>
+        {accessToken ? (
+          <Link to="/myinfo">
+            <Person />
+          </Link>
+        ) : (
+          <KakaoLoginLink>
+            <LoginText>로그인</LoginText>
+          </KakaoLoginLink>
+        )}
       </LoginBox>
     </Container>
   );
 }
-
-export default TopHeader;
 
 const Container = styled.div`
   padding: 10px 30px;
@@ -51,7 +55,7 @@ const Logo = styled.div`
   padding-left: ${theme.width * 5}px;
 `;
 
-const Text = styled.div`
+const LoginText = styled.div`
   font-weight: 400;
   font-size: 11px;
   color: #858585;
