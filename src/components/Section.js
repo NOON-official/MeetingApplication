@@ -9,4 +9,12 @@ const Section = styled.section`
   text-align: ${({ center }) => (center ? 'center' : 'left')};
 `;
 
+export const SectionTitle = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  color: ${(props) => props.theme.grey};
+  padding-left: 20px;
+  padding-bottom: 10px;
+`;
+
 export default Section;
