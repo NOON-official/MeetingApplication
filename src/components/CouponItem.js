@@ -36,7 +36,7 @@ export default function CouponItem({
   );
 }
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
   > svg {
@@ -49,7 +49,7 @@ export const Container = styled.div`
   }
 `;
 
-export const CouponBox = styled.div`
+const CouponBox = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
@@ -58,23 +58,23 @@ export const CouponBox = styled.div`
   padding: 10px 12px;
 `;
 
-export const CouponBoxContent = styled.div`
+const CouponBoxContent = styled.div`
   width: 100%;
 `;
 
-export const CouponTitle = styled.div`
+const CouponTitle = styled.div`
   font-weight: 500;
   font-size: 13px;
   color: #eb8888;
   margin-bottom: 4px;
 `;
 
-export const CouponExpireText = styled.span`
+const CouponExpireText = styled.span`
   font-size: 10px;
   color: #777777;
 `;
 
-export const CouponTipText = styled.span`
+const CouponTipText = styled.span`
   font-weight: 400;
   font-size: 6px;
   color: #777777;
