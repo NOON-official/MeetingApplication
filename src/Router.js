@@ -7,7 +7,7 @@ import Matching from './pages/matching';
 import MyInfo from './pages/myinfo';
 import KakaoCallback from './util/login/MainPageLoginCallback';
 import Account from './pages/myinfo/account';
-import Ticket from './pages/myinfo/ticket';
+import TicketPage from './pages/myinfo/ticket';
 import Myteam from './pages/matching/myteam';
 import Result from './pages/matching/result';
 import Apply1 from './pages/apply/1';
@@ -20,6 +20,9 @@ import Apply6 from './pages/apply/6';
 import Certification from './pages/apply/certification';
 import Complete from './pages/apply/complete';
 import Agree from './pages/apply/agree';
+import TicketBuyPage from './pages/myinfo/ticket/buy';
+import TicketCouponPage from './pages/myinfo/ticket/coupon';
+import TicketHistoryPage from './pages/myinfo/ticket/history';
 
 const Router = createBrowserRouter([
   {
@@ -56,7 +59,19 @@ const Router = createBrowserRouter([
       },
       {
         path: 'myinfo/ticket',
-        element: <Ticket />,
+        element: <TicketPage />,
+      },
+      {
+        path: 'myinfo/ticket/buy',
+        element: <TicketBuyPage />,
+      },
+      {
+        path: 'myinfo/ticket/coupon',
+        element: <TicketCouponPage />,
+      },
+      {
+        path: 'myinfo/ticket/history',
+        element: <TicketHistoryPage />,
       },
       {
         path: 'apply/1',
