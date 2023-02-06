@@ -1,41 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { login } from './asyncActions';
+import jwtDecode from 'jwt-decode';
+import { STORAGE_KEY_ACCESS_TOKEN } from '../../config/constants';
+import { logout } from './asyncActions';
 
 export const initialState = {
-  loginLoading: false, // 로그인 시도중
-  loginDone: false,
-  loginError: null,
-  logoutLoading: false, // 로그아웃 시도중
-  logoutDone: false,
-  logoutError: null,
+  accessToken: localStorage.getItem('accessToken'),
+  name: null,
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loginLoading: (state) => {
-      state.loginLoading = true;
-      state.loginDone = false;
-      state.loginError = null;
-    },
-    loginDone: (state, action) => {
-      state.loginLoading = false;
-      state.me = action.payload;
-      state.loginDone = true;
-    },
-    loginError: (state, action) => {
-      state.loginLoading = false;
-      state.loginError = action.payload;
+    setAccessToken: (state, action) => {
+      state.accessToken = action.payload;
+
+      const payload = jwtDecode(action.payload);
+      state.name = payload.name;
+
+      localStorage.setItem(STORAGE_KEY_ACCESS_TOKEN, action.payload);
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.loginDone = true;
+    builder.addCase(logout.fulfilled, (state) => {
+      state.accessToken = null;
+      state.name = null;
+      localStorage.removeItem(STORAGE_KEY_ACCESS_TOKEN);
     });
   },
 });
 
-export const { loginLoading, loginDone, loginError } = userSlice.actions;
+export const { setAccessToken } = userSlice.actions;
 
 export default userSlice.reducer;
