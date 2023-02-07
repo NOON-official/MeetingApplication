@@ -58,10 +58,6 @@ const Router = createBrowserRouter([
         element: <Account />,
       },
       {
-        path: 'myinfo/ticket',
-        element: <TicketPage />,
-      },
-      {
         path: 'myinfo/ticket/buy',
         element: <TicketBuyPage />,
       },
