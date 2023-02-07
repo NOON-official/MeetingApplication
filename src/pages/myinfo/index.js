@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Button, Col, notification, Row } from 'antd';
 import { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as KakaoTalk } from '../../asset/svg/KakaoTalk.svg';
@@ -13,10 +14,14 @@ import coffeeImg from '../../asset/img/coffee.png';
 import Section from '../../components/Section';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
 import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
+import { logout } from '../../features/user/asyncActions';
+import SigninView from '../../components/Auth/SigninView';
 
 function MyInfo() {
   const [api, contextHolder] = notification.useNotification();
   const [isNoticeOpened, setIsNoticeOpened] = useState(false);
+  const dispatch = useDispatch();
+  const { accessToken } = useSelector((state) => state.user);
 
   const inviteCode = 'ABCD123';
 
@@ -29,6 +34,14 @@ function MyInfo() {
       className: 'ant-notification-no-description',
     });
   }, [inviteCode]);
+
+  if (!accessToken) {
+    return (
+      <MainLayout>
+        <SigninView />
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>
@@ -60,7 +73,9 @@ function MyInfo() {
         </MenuBox>
       </Section>
       <Section my="8px" style={{ textAlign: 'right' }}>
-        <LogoutButton type="text">로그아웃</LogoutButton>
+        <LogoutButton type="text" onClick={() => dispatch(logout())}>
+          로그아웃
+        </LogoutButton>
       </Section>
       <Section>
         <InvitationTitle>친구 초대 이벤트</InvitationTitle>
