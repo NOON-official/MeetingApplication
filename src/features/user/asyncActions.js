@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { SERVER_URL } from '../../config/constants';
+import backend from '../../util/backend';
 
 export const login = createAsyncThunk(
   'user/login',
@@ -15,7 +15,7 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk('user/logout', async () => {
-  const response = await axios.post(`${SERVER_URL}/user/logout`);
+  const response = await backend.get(`/auth/signout`);
 
   return response.data;
 });
