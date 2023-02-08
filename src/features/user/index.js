@@ -31,7 +31,7 @@ const userSlice = createSlice({
       const { accessToken } = action.payload;
       state.accessToken = accessToken;
 
-      const payload = jwtDecode(action.payload);
+      const payload = jwtDecode(accessToken);
       state.id = payload.sub;
 
       localStorage.setItem(STORAGE_KEY_ACCESS_TOKEN, accessToken);
