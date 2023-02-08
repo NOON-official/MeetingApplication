@@ -11,7 +11,7 @@ import Accordion from '../../../components/Accordion';
 import PrimaryButton from '../../../components/PrimaryButton';
 import CouponItem from '../../../components/CouponItem';
 import {
-  useGetCouponsQuery,
+  useGetUserCouponsQuery,
   useGetOrdersPageDataQuery,
 } from '../../../features/backendApi';
 
@@ -19,7 +19,7 @@ export default function TicketBuyPage() {
   const [selectedProductId, setSelectedProductId] = useState(1);
   const [selectedCouponId, setSelectedCouponId] = useState();
   const { data: pageData } = useGetOrdersPageDataQuery();
-  const { data: couponData } = useGetCouponsQuery();
+  const { data: couponData } = useGetUserCouponsQuery();
 
   const totalPrice = useMemo(() => {
     const product = pageData?.Products.find((p) => p.id === selectedProductId);

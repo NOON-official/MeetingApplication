@@ -7,13 +7,16 @@ import PrimaryModal from '../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../components/PrimaryButton';
 import Section from '../../components/Section';
 import { MEMBER_COUNT_LABELS } from '../../config/constants';
-import { useGetMyInfoQuery, useGetTeamsQuery } from '../../features/backendApi';
+import {
+  useGetMyInfoQuery,
+  useGetUserTeamsQuery,
+} from '../../features/backendApi';
 import MyinfoLayout from '../../layout/MyinfoLayout';
 
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
   const { data: myInfo } = useGetMyInfoQuery();
-  const { data: teamsData } = useGetTeamsQuery();
+  const { data: teamsData } = useGetUserTeamsQuery();
 
   return (
     <MyinfoLayout title="계정 관리">
