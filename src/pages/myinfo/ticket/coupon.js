@@ -1,13 +1,27 @@
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
 import dayjs from 'dayjs';
+import { useCallback } from 'react';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import Section, { SectionTitle } from '../../../components/Section';
 import CouponItem from '../../../components/CouponItem';
 import { useGetCouponsQuery } from '../../../features/backendApi';
+import backend from '../../../util/backend';
 
 export default function TicketCouponPage() {
   const { data: couponData } = useGetCouponsQuery();
+
+  const registerCoupon = useCallback(async () => {
+    try {
+      const { data } = await backend.put('/coupons/register');
+      // TODO : 쿠폰 발급이 완성된 후 테스트 해볼것
+      console.log(data);
+      alert('쿠폰이 등록되었습니다');
+    } catch (e) {
+      console.error(e);
+      alert('올바르지 않은 쿠폰번호 입니다');
+    }
+  });
 
   return (
     <MyinfoLayout title="보유 쿠폰">
@@ -16,7 +30,7 @@ export default function TicketCouponPage() {
         <CouponCodeBox>
           <CouponCodeTitle>쿠폰 코드</CouponCodeTitle>
           <CouponCodeInput placeholder="ABCD1234" />
-          <RegisterButton>등록하기</RegisterButton>
+          <RegisterButton onClick={registerCoupon}>등록하기</RegisterButton>
         </CouponCodeBox>
       </Section>
       <Section my="24px">
