@@ -4,8 +4,15 @@ import MenuBox, { LinkButton, MenuItem } from '../../../components/MenuBox';
 import Section from '../../../components/Section';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as RightArrow } from '../../../asset/svg/RightArrow.svg';
+import {
+  useGetCouponCountQuery,
+  useGetTicketCountQuery,
+} from '../../../features/backendApi';
 
 export default function TicketPage() {
+  const { data: ticketData } = useGetTicketCountQuery();
+  const { data: couponData } = useGetCouponCountQuery();
+
   return (
     <MyinfoLayout title="이용권 현황">
       <Section>
@@ -13,13 +20,13 @@ export default function TicketPage() {
           <InfoCard>
             <InfoTitle>미사용 이용권</InfoTitle>
             <InfoContent>
-              <span>1</span>장
+              <span>{ticketData?.ticketCount}</span>장
             </InfoContent>
           </InfoCard>
           <InfoCard>
             <InfoTitle>할인 쿠폰</InfoTitle>
             <InfoContent>
-              <span>1</span>장
+              <span>{couponData?.couponCount}</span>장
             </InfoContent>
           </InfoCard>
         </CardContainer>
