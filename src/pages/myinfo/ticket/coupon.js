@@ -5,11 +5,11 @@ import { useCallback } from 'react';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import Section, { SectionTitle } from '../../../components/Section';
 import CouponItem from '../../../components/CouponItem';
-import { useGetCouponsQuery } from '../../../features/backendApi';
+import { useGetUserCouponsQuery } from '../../../features/backendApi';
 import backend from '../../../util/backend';
 
 export default function TicketCouponPage() {
-  const { data: couponData } = useGetCouponsQuery();
+  const { data: couponData } = useGetUserCouponsQuery();
 
   const registerCoupon = useCallback(async () => {
     try {
