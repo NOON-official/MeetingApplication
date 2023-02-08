@@ -17,13 +17,13 @@ export default function TicketHistoryPage() {
 
   const orders = useMemo(() => {
     const products = orderPageData?.Products;
-    const coupons = couponPageData?.Coupons;
+    const couponTypes = couponPageData?.CouponTypes;
 
     return orderData
       ? orderData.orders.map((order) => ({
           ...order,
           product: products?.find((p) => p.id === order.productType),
-          coupon: coupons?.find((c) => c.id === order.couponType),
+          couponType: couponTypes?.find((c) => c.id === order.couponType),
         }))
       : [];
   });
@@ -45,7 +45,7 @@ export default function TicketHistoryPage() {
                 </Flex>
                 <Flex gap="10px">
                   <HistoryTip>
-                    {order.coupon ? `*${order.coupon.name} 사용` : ''}
+                    {order.couponType ? `*${order.couponType.name} 사용` : ''}
                   </HistoryTip>
                   <HistoryTip />
                   <HistoryDate>
