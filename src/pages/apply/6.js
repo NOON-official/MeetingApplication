@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import Mbti from '../../asset/Mbti';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
@@ -14,13 +15,13 @@ function Apply6Page() {
     gender,
     memberCount,
     universities,
-    availableDate,
-    area,
+    availableDates,
+    areas,
     members,
     drink,
     prefSameUniversity,
     prefAge,
-    prefVibe,
+    prefVibes,
   } = useSelector((store) => store.apply);
   const navigate = useNavigate();
 
@@ -84,26 +85,6 @@ function Apply6Page() {
                 })}
               </SmallContent>
             </Info>
-            <Info>
-              <SmallTitle>선호 날짜</SmallTitle>
-              <SmallContent>
-                {availableDate.map((a) => {
-                  return (
-                    <div key={a}>
-                      {a[6]}월 {a.substring(8, 10)}일 /
-                    </div>
-                  );
-                })}
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>선호 지역</SmallTitle>
-              <SmallContent>
-                {area.map((a) => {
-                  return <div key={a}> {SchoolContent[a]} /</div>;
-                })}
-              </SmallContent>
-            </Info>
           </InfoContent>
           <InfoContent>
             <Info>
@@ -139,14 +120,14 @@ function Apply6Page() {
               <SmallTitle>MBTI</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].mbti}</div>
-                  <div>{members[1].mbti}</div>
+                  <div>{Mbti[members[0].mbti].name}</div>
+                  <div>{Mbti[members[1].mbti].name}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].mbti}</div>
-                  <div>{members[1].mbti}</div>
-                  <div>{members[2].mbti}</div>
+                  <div>{Mbti[members[0].mbti].name}</div>
+                  <div>{Mbti[members[1].mbti].name}</div>
+                  <div>{Mbti[members[2].mbti].name}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -154,14 +135,14 @@ function Apply6Page() {
               <SmallTitle>포지션</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].position}</div>
-                  <div>{members[1].position}</div>
+                  <div>{Mbti[members[0].mbti].name}</div>
+                  <div>{Mbti[members[1].mbti].name}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].position}</div>
-                  <div>{members[1].position}</div>
-                  <div>{members[2].position}</div>
+                  <div>{Mbti[members[0].mbti].name}</div>
+                  <div>{Mbti[members[1].mbti].name}</div>
+                  <div>{Mbti[members[2].mbti].name}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -209,7 +190,7 @@ function Apply6Page() {
             <Info>
               <SmallTitle>분위기</SmallTitle>
               <SmallContent>
-                {prefVibe.map((a) => {
+                {prefVibes.map((a) => {
                   return <div key={a}>{VibeContent[a]}</div>;
                 })}
               </SmallContent>
@@ -217,6 +198,26 @@ function Apply6Page() {
             <Info>
               <SmallTitle>주량 레벨</SmallTitle>
               <SmallContent>Level {drink}</SmallContent>
+            </Info>
+            <Info>
+              <SmallTitle>선호 날짜</SmallTitle>
+              <SmallContent>
+                {availableDates.map((a) => {
+                  return (
+                    <div key={a}>
+                      {a[6]}월 {a.substring(8, 10)}일 /
+                    </div>
+                  );
+                })}
+              </SmallContent>
+            </Info>
+            <Info>
+              <SmallTitle>선호 지역</SmallTitle>
+              <SmallContent>
+                {areas.map((a) => {
+                  return <div key={a}> {SchoolContent[a]} /</div>;
+                })}
+              </SmallContent>
             </Info>
           </InfoContent>
         </InfoBox>

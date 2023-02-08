@@ -16,7 +16,7 @@ import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
 function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, prefAge, prefSameUniversity, prefVibe, drink } =
+  const { finishedStep, prefAge, prefSameUniversity, prefVibes, drink } =
     useSelector((store) => store.apply);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ function Apply5Page() {
 
   const [ageRange, setAgeRange] = useState(prefAge.length ? prefAge : [23, 25]);
   const [sameSchool, setSameSchool] = useState(prefSameUniversity);
-  const [prefMood, setPrefMood] = useState(prefVibe);
+  const [prefMood, setPrefMood] = useState(prefVibes);
   const [alchol, setAlchol] = useState(drink);
 
   const setModal = (bool) => {
@@ -77,7 +77,7 @@ function Apply5Page() {
       submitStep5({
         prefAge: ageRange,
         prefSameUniversity: sameSchool,
-        prefVibe: prefMood,
+        prefVibes: prefMood,
         drink: alchol,
       }),
     );

@@ -20,13 +20,13 @@ export default function Apply2() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
-  const { finishedStep, availableDate, area } = useSelector(
+  const { finishedStep, availableDates, areas } = useSelector(
     (store) => store.apply,
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [selectDate, setSelectDate] = useState(availableDate);
-  const [selectedArea, setSelectedArea] = useState(area);
+  const [selectDate, setSelectDate] = useState(availableDates);
+  const [selectedArea, setSelectedArea] = useState(areas);
 
   useEffect(() => {
     if (finishedStep < 1) {
@@ -77,8 +77,8 @@ export default function Apply2() {
     }
     dispatch(
       submitStep2({
-        availableDate: [...selectDate.map((a) => a.format())],
-        area: selectedArea,
+        availableDates: [...selectDate.map((a) => a.format())],
+        areas: selectedArea,
       }),
     );
     navigate('/apply/3');
@@ -117,27 +117,27 @@ export default function Apply2() {
       </Title>
       <ChooseBox>
         <ChooseButton
-          isActive={selectedArea.includes(1)}
+          isActive={selectedArea?.includes(1)}
           onChange={(isActive) => handleArea(1, isActive)}
           content="강남"
         />
         <ChooseButton
-          isActive={selectedArea.includes(2)}
+          isActive={selectedArea?.includes(2)}
           onChange={(isActive) => handleArea(2, isActive)}
           content="건대"
         />
         <ChooseButton
-          isActive={selectedArea.includes(3)}
+          isActive={selectedArea?.includes(3)}
           onChange={(isActive) => handleArea(3, isActive)}
           content="신촌"
         />
         <ChooseButton
-          isActive={selectedArea.includes(4)}
+          isActive={selectedArea?.includes(4)}
           onChange={(isActive) => handleArea(4, isActive)}
           content="홍대"
         />
         <ChooseButton
-          isActive={selectedArea.includes(5)}
+          isActive={selectedArea?.includes(5)}
           onChange={(isActive) => handleArea(5, isActive)}
           content="상관없음"
         />
