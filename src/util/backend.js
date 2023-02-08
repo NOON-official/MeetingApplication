@@ -17,11 +17,17 @@ const setupToken = (config) => {
 
 /** @type {import('axios').AxiosStatic} */
 const backend = {
-  async get(url, config) {
+  get(url, config) {
     return axios.get(SERVER_URL + url, setupToken(config));
   },
   post(url, data, config) {
     return axios.post(SERVER_URL + url, data, setupToken(config));
+  },
+  put(url, data, config) {
+    return axios.put(SERVER_URL + url, data, setupToken(config));
+  },
+  delete(url, config) {
+    return axios.delete(SERVER_URL + url, setupToken(config));
   },
 };
 

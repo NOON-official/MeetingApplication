@@ -1,59 +1,75 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
+import dayjs from 'dayjs';
 import MenuBox, { MenuItem } from '../../../components/MenuBox';
 import Section from '../../../components/Section';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as Checkbox } from '../../../asset/svg/Checkbox.svg';
 import { ReactComponent as CheckboxChecked } from '../../../asset/svg/CheckboxChecked.svg';
 import Accordion from '../../../components/Accordion';
-import { useGetPageDataQuery } from '../../../features/tickets/ticketApi';
 import PrimaryButton from '../../../components/PrimaryButton';
 import CouponItem from '../../../components/CouponItem';
+import {
+  useGetUserCouponsQuery,
+  useGetOrdersPageDataQuery,
+} from '../../../features/backendApi';
 
 export default function TicketBuyPage() {
-  const [selectedProduct, setSelectedProduct] = useState(1);
-  const [selectedCoupon, setSelectedCoupon] = useState();
-  const { data } = useGetPageDataQuery();
+  const [selectedProductId, setSelectedProductId] = useState(1);
+  const [selectedCouponId, setSelectedCouponId] = useState();
+  const { data: pageData } = useGetOrdersPageDataQuery();
+  const { data: couponData } = useGetUserCouponsQuery();
 
-  console.log(data);
+  const totalPrice = useMemo(() => {
+    const product = pageData?.Products.find((p) => p.id === selectedProductId);
+    let price = product ? product.price : 0;
+
+    if (selectedCouponId) {
+      const coupon = couponData?.coupons.find((p) => p.id === selectedCouponId);
+      if (coupon) {
+        price -= price * (coupon.discountRate / 100);
+      }
+    }
+    return price;
+  });
 
   const toggleCoupon = useCallback((couponId) => {
-    if (selectedCoupon === couponId) {
-      setSelectedCoupon(undefined);
+    if (selectedCouponId === couponId) {
+      setSelectedCouponId(undefined);
       return;
     }
-    setSelectedCoupon(couponId);
+    setSelectedCouponId(couponId);
   });
 
   return (
     <MyinfoLayout title="이용권 구매">
       <Section>
         <MenuBox>
-          <MenuItem>
-            <CheckboxButton onClick={() => setSelectedProduct(1)}>
-              <ProductTitleBox>
-                {selectedProduct === 1 ? <CheckboxChecked /> : <Checkbox />}
-                <ProductTitleText>이용권 1장</ProductTitleText>
-              </ProductTitleBox>
-              <ProductPriceBox>
-                <span className="price">5,000원</span>
-              </ProductPriceBox>
-            </CheckboxButton>
-          </MenuItem>
-          <MenuItem>
-            <CheckboxButton onClick={() => setSelectedProduct(3)}>
-              <ProductTitleBox>
-                {selectedProduct === 3 ? <CheckboxChecked /> : <Checkbox />}
-                <ProductTitleText>이용권 3장</ProductTitleText>
-                <ProductDiscountText>10% 할인</ProductDiscountText>
-              </ProductTitleBox>
-              <ProductPriceBox>
-                <span className="discount">10,000원</span>
-                <span className="price">9,000원</span>
-              </ProductPriceBox>
-            </CheckboxButton>
-          </MenuItem>
+          {pageData?.Products.map((product) => (
+            <MenuItem key={product.id}>
+              <CheckboxButton onClick={() => setSelectedProductId(product.id)}>
+                <ProductTitleBox>
+                  {selectedProductId === product.id ? (
+                    <CheckboxChecked />
+                  ) : (
+                    <Checkbox />
+                  )}
+                  <ProductTitleText>{product.name}</ProductTitleText>
+                </ProductTitleBox>
+                <ProductPriceBox>
+                  {product.originalPrice !== product.price && (
+                    <span className="discount">
+                      {product.originalPrice.toLocaleString()}원
+                    </span>
+                  )}
+                  <span className="price">
+                    {product.price.toLocaleString()}원
+                  </span>
+                </ProductPriceBox>
+              </CheckboxButton>
+            </MenuItem>
+          ))}
         </MenuBox>
       </Section>
       <Section my="24px">
@@ -61,21 +77,21 @@ export default function TicketBuyPage() {
           title={<AccordionTitle>쿠폰 적용</AccordionTitle>}
           content={
             <CouponList>
-              <CouponItem
-                onClick={() => toggleCoupon(1)}
-                checked={selectedCoupon === 1}
-                disabled={false}
-                title="미팅학개론 50% 할인 쿠폰"
-                expireText="2023. 01. 31 까지"
-                tipText="*이용권 1장에만 사용 가능"
-              />
-              <CouponItem
-                onClick={() => toggleCoupon(2)}
-                checked={selectedCoupon === 2}
-                disabled
-                title="미팅학개론 1회 무료 이용 쿠폰"
-                expireText="2023. 01. 31 까지"
-              />
+              {couponData?.coupons.length === 0 && (
+                <NoCouponText>사용 가능한 쿠폰이 없어요</NoCouponText>
+              )}
+              {couponData?.coupons.map((coupon) => (
+                <CouponItem
+                  onClick={() => toggleCoupon(coupon.id)}
+                  checked={selectedCouponId === coupon.id}
+                  disabled={false}
+                  title="미팅학개론 50% 할인 쿠폰"
+                  expireText={`${dayjs(coupon.expiresAt).format(
+                    'YYYY. MM. DD',
+                  )} 까지`}
+                  tipText="*이용권 1장에만 사용 가능"
+                />
+              ))}
             </CouponList>
           }
         />
@@ -83,7 +99,7 @@ export default function TicketBuyPage() {
       <Section>
         <TotalPriceBox>
           <span>최종 결제 금액</span>
-          <span>5,000원</span>
+          <span>{totalPrice.toLocaleString()}원</span>
         </TotalPriceBox>
       </Section>
       <Section my="20px" center>
@@ -193,4 +209,10 @@ const WarningDescription = styled.ul`
 
 const WarningAccordion = styled(Accordion)`
   background-color: #ece9e9;
+`;
+
+const NoCouponText = styled.span`
+  font-size: 14px;
+  color: #777777;
+  padding: 12px 0;
 `;

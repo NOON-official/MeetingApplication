@@ -9,6 +9,7 @@ import theme from './style/theme';
 import Router from './Router';
 import antdTheme from './style/antdTheme';
 import store from './store';
+import JwtProvider from './providers/JwtProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,5 +19,6 @@ root.render(
         <RouterProvider router={Router} />
       </ConfigProvider>
     </ThemeProvider>
+    <JwtProvider />
   </Provider>,
 );
