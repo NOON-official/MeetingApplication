@@ -11,13 +11,13 @@ export const SearchedUniversities = (props) => {
   const { searchKeyWord, selectedUniversities, setSelectedUniversities } =
     props;
   const data = Universities.filter((c) => {
-    return c.univ.indexOf(searchKeyWord) > -1;
+    return c.name.indexOf(searchKeyWord) > -1;
   });
   return data.map((c) => (
     <SearchedUniversity
       onClick={() => {
-        if (selectedUniversities.length < 3) {
-          if (selectedUniversities.some((u) => u.univ === c.univ)) {
+        if (selectedUniversities?.length < 3) {
+          if (selectedUniversities?.some((u) => u.name === c.name)) {
             window.alert('이미 선택한 대학교입니다.');
           } else
             OnUniversityClick(c, setSelectedUniversities, selectedUniversities);
@@ -25,7 +25,7 @@ export const SearchedUniversities = (props) => {
       }}
       key={c}
     >
-      {c.univ}
+      {c.name}
     </SearchedUniversity>
   ));
 };
