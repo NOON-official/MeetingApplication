@@ -13,7 +13,7 @@ import MyinfoLayout from '../../layout/MyinfoLayout';
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
   const { data: myInfo } = useGetMyInfoQuery();
-  const { data: teams } = useGetTeamsQuery();
+  const { data: teamsData } = useGetTeamsQuery();
 
   return (
     <MyinfoLayout title="계정 관리">
@@ -36,10 +36,11 @@ export default function Account() {
           content={
             <HistoryContainer>
               <HistoryListText>
-                규원 님은 지금까지 <span>4회</span> 미팅 신청했어요!
+                {myInfo?.nickname} 님은 지금까지{' '}
+                <span>{teamsData?.teams.length}회</span> 미팅 신청했어요!
               </HistoryListText>
               <HistoryList>
-                {teams?.map((team) => (
+                {teamsData?.teams.map((team) => (
                   <HistoryItem key={team.id}>
                     <HistoryTitleText>
                       {MEMBER_COUNT_LABELS[team.memberCount]} 미팅
