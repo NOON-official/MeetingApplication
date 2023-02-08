@@ -22,8 +22,9 @@ export default function Apply1Page() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [selectedUniversities, setSelectedUniversities] =
-    useState(universities);
+  const [selectedUniversities, setSelectedUniversities] = useState(
+    universities.name,
+  );
   const [man, setMan] = useState(gender);
   const [meetingMember, setmeetingMember] = useState(memberCount);
   const [searchKeyWord, setSearchKeyWord] = useState('0');
@@ -41,7 +42,7 @@ export default function Apply1Page() {
   });
 
   const handleSubmit = useCallback(() => {
-    if (selectedUniversities.length < 1) {
+    if (selectedUniversities?.length < 1) {
       setOpenModal(true);
       return;
     }
@@ -91,22 +92,22 @@ export default function Apply1Page() {
       </Title>
       <ScrollDiv>
         <UniversityDiv>
-          {selectedUniversities.length === 0 ? null : (
+          {selectedUniversities?.length === 0 ? null : (
             <SelectedDiv>
-              {selectedUniversities.map((data) => {
+              {selectedUniversities?.map((data) => {
                 // eslint-disable-next-line prefer-const
                 // let univ = binarySearch(Universities, data);
 
                 return (
                   <SelectedNumUniversity
                     onDelete={() => {
-                      const deleteUniv = selectedUniversities.filter(
+                      const deleteUniv = selectedUniversities?.filter(
                         (value) => value !== data,
                       );
                       setSelectedUniversities(deleteUniv);
                     }}
                     key={data}
-                    university={data.univ}
+                    university={data.name}
                     selectedUniversities={selectedUniversities}
                   />
                 );
