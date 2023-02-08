@@ -39,7 +39,7 @@ export default function Account() {
                 규원 님은 지금까지 <span>4회</span> 미팅 신청했어요!
               </HistoryListText>
               <HistoryList>
-                {teams.map((team) => (
+                {teams?.map((team) => (
                   <HistoryItem key={team.id}>
                     <HistoryTitleText>
                       {MEMBER_COUNT_LABELS[team.memberCount]} 미팅
