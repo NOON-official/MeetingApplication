@@ -7,9 +7,9 @@ import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as Checkbox } from '../../../asset/svg/Checkbox.svg';
 import { ReactComponent as CheckboxChecked } from '../../../asset/svg/CheckboxChecked.svg';
 import Accordion from '../../../components/Accordion';
-import { useGetPageDataQuery } from '../../../features/tickets/ticketApi';
 import PrimaryButton from '../../../components/PrimaryButton';
 import CouponItem from '../../../components/CouponItem';
+import { useGetPageDataQuery } from '../../../features/backendApi';
 
 export default function TicketBuyPage() {
   const [selectedProduct, setSelectedProduct] = useState(1);
