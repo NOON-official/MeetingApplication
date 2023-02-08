@@ -1,10 +1,28 @@
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
+import dayjs from 'dayjs';
+import { useCallback } from 'react';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import Section, { SectionTitle } from '../../../components/Section';
 import CouponItem from '../../../components/CouponItem';
+import { useGetUserCouponsQuery } from '../../../features/backendApi';
+import backend from '../../../util/backend';
 
 export default function TicketCouponPage() {
+  const { data: couponData } = useGetUserCouponsQuery();
+
+  const registerCoupon = useCallback(async () => {
+    try {
+      const { data } = await backend.put('/coupons/register');
+      // TODO : 쿠폰 발급이 완성된 후 테스트 해볼것
+      console.log(data);
+      alert('쿠폰이 등록되었습니다');
+    } catch (e) {
+      console.error(e);
+      alert('올바르지 않은 쿠폰번호 입니다');
+    }
+  });
+
   return (
     <MyinfoLayout title="보유 쿠폰">
       <Section>
@@ -12,20 +30,24 @@ export default function TicketCouponPage() {
         <CouponCodeBox>
           <CouponCodeTitle>쿠폰 코드</CouponCodeTitle>
           <CouponCodeInput placeholder="ABCD1234" />
-          <RegisterButton>등록하기</RegisterButton>
+          <RegisterButton onClick={registerCoupon}>등록하기</RegisterButton>
         </CouponCodeBox>
       </Section>
       <Section my="24px">
-        <SectionTitle>보유 쿠폰 2</SectionTitle>
+        <SectionTitle>보유 쿠폰 {couponData?.coupons.length}</SectionTitle>
         <CouponListBox>
-          <CouponItem
-            title="미팅학개론 1회 50% 할인 쿠폰"
-            expireText="2023. 01. 31 까지"
-          />
-          <CouponItem
-            title="미팅학개론 1회 무료 이용 쿠폰"
-            expireText="2023. 01. 31 까지"
-          />
+          {couponData?.coupons.length === 0 && (
+            <NoCouponText>사용 가능한 쿠폰이 없어요</NoCouponText>
+          )}
+          {couponData?.coupons.map((coupon) => (
+            <CouponItem
+              title="미팅학개론 50% 할인 쿠폰"
+              expireText={`${dayjs(coupon.expiresAt).format(
+                'YYYY. MM. DD',
+              )} 까지`}
+              tipText="*이용권 1장에만 사용 가능"
+            />
+          ))}
         </CouponListBox>
       </Section>
     </MyinfoLayout>
@@ -86,4 +108,10 @@ const CouponListBox = styled.div`
   border-radius: 10px;
   padding: 22px 44px;
   gap: 8px;
+`;
+
+const NoCouponText = styled.span`
+  font-size: 14px;
+  color: #777777;
+  padding: 12px 0;
 `;

@@ -1,33 +1,60 @@
+import dayjs from 'dayjs';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 import Flex from '../../../components/Flex';
 import Section from '../../../components/Section';
+import {
+  useGetCouponsPageDataQuery,
+  useGetOrdersPageDataQuery,
+  useGetUserOrdersQuery,
+} from '../../../features/backendApi';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 
 export default function TicketHistoryPage() {
+  const { data: orderPageData } = useGetOrdersPageDataQuery();
+  const { data: couponPageData } = useGetCouponsPageDataQuery();
+  const { data: orderData } = useGetUserOrdersQuery();
+
+  const orders = useMemo(() => {
+    const products = orderPageData?.Products;
+    const coupons = couponPageData?.Coupons;
+
+    return orderData
+      ? orderData.orders.map((order) => ({
+          ...order,
+          product: products?.find((p) => p.id === order.productType),
+          coupon: coupons?.find((c) => c.id === order.couponType),
+        }))
+      : [];
+  });
+
   return (
     <MyinfoLayout title="결제 내역">
       <Section>
         <HistoryListBox>
-          <HistoryItem>
-            <Flex>
-              <HistoryTitle>이용권 5장 구매</HistoryTitle>
-              <HistoryPrice>20,000원</HistoryPrice>
-            </Flex>
-            <Flex gap="10px">
-              <HistoryTip />
-              <HistoryDate>2023. 01. 17 12:50AM 결제</HistoryDate>
-            </Flex>
-          </HistoryItem>
-          <HistoryItem>
-            <Flex>
-              <HistoryTitle>이용권 1장 구매</HistoryTitle>
-              <HistoryPrice>2,500원</HistoryPrice>
-            </Flex>
-            <Flex gap="10px">
-              <HistoryTip>*50% 할인 쿠폰 사용</HistoryTip>
-              <HistoryDate>2023. 01. 17 12:50AM 결제</HistoryDate>
-            </Flex>
-          </HistoryItem>
+          {orders.length === 0 ? (
+            <NoOrderText>결제 내역이 없습니다</NoOrderText>
+          ) : (
+            orders.map((order) => (
+              <HistoryItem key={order.id}>
+                <Flex>
+                  <HistoryTitle>{order.product?.name} 구매</HistoryTitle>
+                  <HistoryPrice>
+                    {order.totalAmount.toLocaleString()}원
+                  </HistoryPrice>
+                </Flex>
+                <Flex gap="10px">
+                  <HistoryTip>
+                    {order.coupon ? `*${order.coupon.name} 사용` : ''}
+                  </HistoryTip>
+                  <HistoryTip />
+                  <HistoryDate>
+                    {dayjs(order.createdAt).format('YYYY. MM. DD HH:mmA')} 결제
+                  </HistoryDate>
+                </Flex>
+              </HistoryItem>
+            ))
+          )}
         </HistoryListBox>
       </Section>
     </MyinfoLayout>
@@ -75,4 +102,11 @@ const HistoryTip = styled.div`
 const HistoryDate = styled.div`
   font-size: 10px;
   color: #777777;
+`;
+
+const NoOrderText = styled.div`
+  font-size: 14px;
+  color: #777777;
+  padding: 12px 0;
+  text-align: center;
 `;
