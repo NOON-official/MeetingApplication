@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import jwtDecode from 'jwt-decode';
 import { STORAGE_KEY_ACCESS_TOKEN } from '../../config/constants';
-import { logout } from './asyncActions';
+import { getMyInfo, logout } from './asyncActions';
 
 export const initialState = {
   accessToken: localStorage.getItem('accessToken'),
-  name: null,
+  id: null,
 };
 
 const userSlice = createSlice({
@@ -16,15 +16,18 @@ const userSlice = createSlice({
       state.accessToken = action.payload;
 
       const payload = jwtDecode(action.payload);
-      state.name = payload.name;
+      state.id = payload.sub;
 
       localStorage.setItem(STORAGE_KEY_ACCESS_TOKEN, action.payload);
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(getMyInfo.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
     builder.addCase(logout.fulfilled, (state) => {
       state.accessToken = null;
-      state.name = null;
+      state.id = null;
       localStorage.removeItem(STORAGE_KEY_ACCESS_TOKEN);
     });
   },

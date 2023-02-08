@@ -1,12 +1,11 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import backend from '../../util/backend';
 
-export const login = createAsyncThunk(
-  'user/login',
+export const getMyInfo = createAsyncThunk(
+  'user/getMyInfo',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/user/login', data);
+      const response = await backend.get('/users/my-info', data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
