@@ -1,14 +1,19 @@
 import { Button, Card, Col, Row, Space } from 'antd';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Accordion from '../../components/Accordion';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../components/PrimaryButton';
 import Section from '../../components/Section';
+import { MEMBER_COUNT_LABELS } from '../../config/constants';
+import { useGetMyInfoQuery, useGetTeamsQuery } from '../../features/backendApi';
 import MyinfoLayout from '../../layout/MyinfoLayout';
 
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
+  const { data: myInfo } = useGetMyInfoQuery();
+  const { data: teams } = useGetTeamsQuery();
 
   return (
     <MyinfoLayout title="계정 관리">
@@ -17,11 +22,11 @@ export default function Account() {
         <InfoCard>
           <Row>
             <Col span={4}>이름</Col>
-            <Col span={20}>문규원</Col>
+            <Col span={20}>{myInfo?.nickname}</Col>
           </Row>
           <Row>
             <Col span={4}>전화번호</Col>
-            <Col span={20}>010-7777-7777</Col>
+            <Col span={20}>{myInfo?.phone}</Col>
           </Row>
         </InfoCard>
       </Section>
@@ -34,20 +39,22 @@ export default function Account() {
                 규원 님은 지금까지 <span>4회</span> 미팅 신청했어요!
               </HistoryListText>
               <HistoryList>
-                <HistoryItem>
-                  <HistoryTitleText>2:2 미팅</HistoryTitleText>
-                  <div>
-                    <HistoryDateText>2023. 01. 10 02:40AM</HistoryDateText>
-                    <HistoryStatusText>신청 완료</HistoryStatusText>
-                  </div>
-                </HistoryItem>
-                <HistoryItem>
-                  <HistoryTitleText>2:2 미팅</HistoryTitleText>
-                  <div>
-                    <HistoryDateText>2023. 01. 10 02:40AM</HistoryDateText>
-                    <HistoryStatusText>신청 완료</HistoryStatusText>
-                  </div>
-                </HistoryItem>
+                {teams.map((team) => (
+                  <HistoryItem>
+                    <HistoryTitleText>
+                      {MEMBER_COUNT_LABELS[team.memberCount]} 미팅
+                    </HistoryTitleText>
+                    <div>
+                      <HistoryDateText>
+                        {dayjs(team.createdAt).format('YYYY. MM. DD HH:mmA')}{' '}
+                        2023. 01. 10 02:40AM
+                      </HistoryDateText>
+                      <HistoryStatusText>
+                        {team.chatCreatedAt ? '매칭 완료' : '신청 완료'}
+                      </HistoryStatusText>
+                    </div>
+                  </HistoryItem>
+                ))}
               </HistoryList>
             </HistoryContainer>
           }
