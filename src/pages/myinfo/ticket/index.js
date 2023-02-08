@@ -5,13 +5,13 @@ import Section from '../../../components/Section';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as RightArrow } from '../../../asset/svg/RightArrow.svg';
 import {
-  useGetCouponCountQuery,
-  useGetTicketCountQuery,
+  useGetUserCouponCountQuery,
+  useGetUserTicketCountQuery,
 } from '../../../features/backendApi';
 
 export default function TicketPage() {
-  const { data: ticketData } = useGetTicketCountQuery();
-  const { data: couponData } = useGetCouponCountQuery();
+  const { data: ticketData } = useGetUserTicketCountQuery();
+  const { data: couponData } = useGetUserCouponCountQuery();
 
   return (
     <MyinfoLayout title="이용권 현황">
