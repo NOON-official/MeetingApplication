@@ -40,7 +40,7 @@ export default function Account() {
               </HistoryListText>
               <HistoryList>
                 {teams.map((team) => (
-                  <HistoryItem>
+                  <HistoryItem key={team.id}>
                     <HistoryTitleText>
                       {MEMBER_COUNT_LABELS[team.memberCount]} 미팅
                     </HistoryTitleText>

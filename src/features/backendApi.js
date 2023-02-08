@@ -20,11 +20,26 @@ export const backendApi = createApi({
     getTeams: builder.query({
       query: () => `users/teams`,
     }),
-    getPageData: builder.query({
+    getTicketCount: builder.query({
+      query: () => `users/tickets/count`,
+    }),
+    getCoupons: builder.query({
+      query: () => `users/coupons`,
+    }),
+    getCouponCount: builder.query({
+      query: () => `users/coupons/count`,
+    }),
+    getOrdersPageData: builder.query({
       query: () => `orders/pagedata`,
     }),
   }),
 });
 
-export const { useGetMyInfoQuery, useGetTeamsQuery, useGetPageDataQuery } =
-  backendApi;
+export const {
+  useGetMyInfoQuery,
+  useGetTeamsQuery,
+  useGetTicketCountQuery,
+  useGetCouponsQuery,
+  useGetCouponCountQuery,
+  useGetOrdersPageDataQuery,
+} = backendApi;
