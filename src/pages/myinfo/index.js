@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Button, Col, notification, Row } from 'antd';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MainFooter from '../../layout/footer/MainFooter';
@@ -16,24 +16,37 @@ import PrimaryModal from '../../components/Modal/PrimaryModal';
 import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
 import { logout } from '../../features/user/asyncActions';
 import SigninView from '../../components/Auth/SigninView';
+import {
+  useGetUserInvitationCountQuery,
+  useGetUserReferralIdQuery,
+} from '../../features/backendApi';
 
 function MyInfo() {
   const [api, contextHolder] = notification.useNotification();
   const [isNoticeOpened, setIsNoticeOpened] = useState(false);
   const dispatch = useDispatch();
   const { accessToken } = useSelector((state) => state.user);
+  const { data: userInvitationData } = useGetUserInvitationCountQuery();
+  const invitationCount = useMemo(
+    () => userInvitationData?.invitationCount || 0 % 4,
+    [userInvitationData],
+  );
+  const { data: referralIdData } = useGetUserReferralIdQuery();
 
-  const inviteCode = 'ABCD123';
+  const referralId = useMemo(
+    () => referralIdData?.referralId || '',
+    [referralIdData],
+  );
 
   const copyToClipboard = useCallback(() => {
-    navigator.clipboard.writeText(inviteCode);
+    navigator.clipboard.writeText(referralId);
     api.open({
       key: 'clipboard',
       message: `클립보드에 복사되었습니다`,
       placement: 'bottom',
       className: 'ant-notification-no-description',
     });
-  }, [inviteCode]);
+  }, [referralId]);
 
   if (!accessToken) {
     return (
@@ -86,11 +99,15 @@ function MyInfo() {
             스타벅스 커피 1잔 쿠폰을 드려요!
           </InvitationSubtitle>
           <Coupons>
-            <Circle isActive>1</Circle>
-            <Circle>2</Circle>
-            <Circle>3</Circle>
-            <Circle>
-              {false ? <img src={coffeeImg} /> : <img src={coffeeGreyImg} />}
+            <Circle isActive={invitationCount >= 1}>1</Circle>
+            <Circle isActive={invitationCount >= 2}>2</Circle>
+            <Circle isActive={invitationCount >= 3}>3</Circle>
+            <Circle isActive={invitationCount >= 4}>
+              {invitationCount === 4 ? (
+                <img src={coffeeImg} />
+              ) : (
+                <img src={coffeeGreyImg} />
+              )}
             </Circle>
           </Coupons>
           <InvitationDescription>
@@ -115,7 +132,7 @@ function MyInfo() {
         <Row gutter={16}>
           <Col span={12}>
             <CopyButton block onClick={copyToClipboard}>
-              {inviteCode} <Copy />
+              {referralId} <Copy />
             </CopyButton>
           </Col>
           <Col span={12}>
