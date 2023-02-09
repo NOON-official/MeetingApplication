@@ -7,10 +7,6 @@ import Mbti from '../asset/Mbti';
 import { ReactComponent as Plus } from '../asset/svg/Plus.svg';
 import { ReactComponent as Search } from '../asset/svg/Search.svg';
 import { ReactComponent as Question } from '../asset/svg/Question.svg';
-import { ReactComponent as Flower } from '../asset/svg/Flower.svg';
-import { ReactComponent as A } from '../asset/svg/A.svg';
-import { ReactComponent as Gagman } from '../asset/svg/Gagman.svg';
-import { ReactComponent as Music } from '../asset/svg/Music.svg';
 import { ReactComponent as Profile1 } from '../asset/svg/Profile1.svg';
 import { ReactComponent as Profile2 } from '../asset/svg/Profile2.svg';
 import { ReactComponent as Profile3 } from '../asset/svg/Profile3.svg';
@@ -32,22 +28,22 @@ function Teambox({ member, setMember, name }) {
 
   const handleCancelPlus1 = useCallback(() => {
     setMember({ ...member, role: 1 });
-    setRole('비주얼');
+    setRole(1);
   }, [member]);
 
   const handleCancelPlus2 = useCallback(() => {
     setMember({ ...member, role: 2 });
-    setRole('사회자');
+    setRole(2);
   }, [member]);
 
   const handleCancelPlus3 = useCallback(() => {
     setMember({ ...member, role: 3 });
-    setRole('개그맨');
+    setRole(3);
   }, [member]);
 
   const handleCancelPlus4 = useCallback(() => {
     setMember({ ...member, role: 4 });
-    setRole('깍두기');
+    setRole(4);
   }, [member]);
 
   const showModal2 = () => {
@@ -115,7 +111,7 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus1();
               }}
             >
-              <Flower />
+              <Profile1 />
               <Ttitle>존재만으로도 분위기를 녹이는 당신!</Ttitle>
               <Ttitle>바라만 보고 있어도 웃음이 나요</Ttitle>
             </WhiteBox>
@@ -131,7 +127,7 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus2();
               }}
             >
-              <A />
+              <Profile4 />
               <Ttitle>어색한 분위기를 풀어주는 당신은 미팅의 유재석!</Ttitle>
               <Ttitle>당신이 없다면 미팅이 진행되지 않아요</Ttitle>
             </WhiteBox>
@@ -147,7 +143,7 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus3();
               }}
             >
-              <Gagman />
+              <Profile3 />
               <Ttitle>리액션과 개그맨 뺨치는 입담으로</Ttitle>
               <Ttitle>상대방을 홀리는 당신!</Ttitle>
             </WhiteBox>
@@ -164,7 +160,7 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus4();
               }}
             >
-              <Music />
+              <Profile2 />
               <Ttitle>수줍음이 많은 당신</Ttitle>
               <Ttitle>순수한 매력에 상대방이 반할지도?</Ttitle>
             </WhiteBox>
@@ -189,8 +185,8 @@ function Teambox({ member, setMember, name }) {
           >
             <Option value="19">19세</Option>
             <Option value="20">20세</Option>
-            <Option value="22">22세</Option>
             <Option value="21">21세</Option>
+            <Option value="22">22세</Option>
             <Option value="23">23세</Option>
             <Option value="24">24세</Option>
             <Option value="25">25세</Option>
@@ -276,6 +272,7 @@ const Container = styled.div`
   border-radius: 10px;
   width: 340px;
   height: 200px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 
 const Title = styled.div`
