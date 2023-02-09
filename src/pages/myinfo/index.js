@@ -48,6 +48,34 @@ function MyInfo() {
     });
   }, [referralId]);
 
+  const shareThroughKakao = useCallback(() => {
+    // TODO : 메세지 내용 확인 받기
+    const url = `${process.env.REACT_APP_CLIENT_URL}/auth/signup?referralId=${referralId}`;
+    window.Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '미팅학개론',
+        description: '#대학 #미팅',
+        imageUrl:
+          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        link: {
+          // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+          mobileWebUrl: url,
+          webUrl: url,
+        },
+      },
+      buttons: [
+        {
+          title: '미팅하러 가기',
+          link: {
+            mobileWebUrl: url,
+            webUrl: url,
+          },
+        },
+      ],
+    });
+  });
+
   if (!accessToken) {
     return (
       <MainLayout>
@@ -136,7 +164,7 @@ function MyInfo() {
             </CopyButton>
           </Col>
           <Col span={12}>
-            <KakaoButton icon={<KakaoTalk />} block>
+            <KakaoButton icon={<KakaoTalk />} block onClick={shareThroughKakao}>
               카카오톡 공유하기
             </KakaoButton>
           </Col>
