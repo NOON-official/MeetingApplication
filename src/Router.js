@@ -24,6 +24,7 @@ import TicketCouponPage from './pages/myinfo/ticket/coupon';
 import TicketHistoryPage from './pages/myinfo/ticket/history';
 import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
 import AuthSigninPage from './pages/auth/signin';
+import AccountPhoneChangePage from './pages/myinfo/account/phone';
 
 const Router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo/account',
         element: <Account />,
+      },
+      {
+        path: 'myinfo/account/phone',
+        element: <AccountPhoneChangePage />,
       },
       {
         path: 'myinfo/ticket',

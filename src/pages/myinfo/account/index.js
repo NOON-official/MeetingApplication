@@ -4,18 +4,18 @@ import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Accordion from '../../components/Accordion';
-import PrimaryModal from '../../components/Modal/PrimaryModal';
-import PrimaryButton from '../../components/PrimaryButton';
-import Section from '../../components/Section';
-import { MEMBER_COUNT_LABELS } from '../../config/constants';
+import Accordion from '../../../components/Accordion';
+import PrimaryModal from '../../../components/Modal/PrimaryModal';
+import PrimaryButton from '../../../components/PrimaryButton';
+import Section from '../../../components/Section';
+import { MEMBER_COUNT_LABELS } from '../../../config/constants';
 import {
   useGetMyInfoQuery,
   useGetUserTeamsQuery,
-} from '../../features/backendApi';
-import { logout } from '../../features/user/asyncActions';
-import MyinfoLayout from '../../layout/MyinfoLayout';
-import backend from '../../util/backend';
+} from '../../../features/backendApi';
+import { logout } from '../../../features/user/asyncActions';
+import MyinfoLayout from '../../../layout/MyinfoLayout';
+import backend from '../../../util/backend';
 
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
@@ -47,7 +47,14 @@ export default function Account() {
           </Row>
           <Row>
             <Col span={4}>전화번호</Col>
-            <Col span={20}>{myInfo?.phone}</Col>
+            <Col span={20}>
+              {myInfo?.phone}{' '}
+              <PhoneChangeButton
+                onClick={() => navigate('/myinfo/account/phone')}
+              >
+                변경
+              </PhoneChangeButton>
+            </Col>
           </Row>
         </InfoCard>
       </Section>
@@ -195,5 +202,21 @@ const HistoryStatusText = styled.span`
 const ResignButton = styled(Button)`
   > span {
     color: ${(props) => props.theme.grey};
+  }
+`;
+
+const PhoneChangeButton = styled(Button).attrs({ type: 'text' })`
+  height: auto;
+  font-family: 'Nanum JungHagSaeng';
+  padding: 4px 12px;
+  border-radius: 10px;
+  background-color: ${(props) => props.theme.pink};
+  border: none;
+  box-shadow: none;
+
+  > span {
+    font-weight: 400;
+    font-size: 13px;
+    color: white;
   }
 `;
