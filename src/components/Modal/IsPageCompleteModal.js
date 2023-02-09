@@ -18,10 +18,10 @@ export default function IsPageCompleteModal({ open, setModal }) {
             <ErrorChar />
             <TextBox>
               <BlackText>아직</BlackText>
-              <ColorText>완료하지 않은 답변이</ColorText>
-              <BlackText>있어요.</BlackText>
+              <ColorText> 완료하지 않은 답변</ColorText>
+              <BlackText>이 있어요</BlackText>
             </TextBox>
-            <div>모든 항목에 응답해 주세요.</div>
+            <SmallText>모든 항목에 응답해 주세요!</SmallText>
             <SButton onClick={() => setModal(false)}>닫기</SButton>
           </Container>
         </Modal>
@@ -41,15 +41,20 @@ const TextBox = styled.div`
 `;
 const BlackText = styled.span`
   color: black;
-  font-size: 35px;
+  color: #525252;
+  font-size: 30px;
   font-family: 'Nanum JungHagSaeng';
 `;
 const ColorText = styled.span`
   color: ${theme.pink};
-  font-size: 35px;
+  font-size: 30px;
   font-family: 'Nanum JungHagSaeng';
 `;
-
+const SmallText = styled.span`
+  font-weight: 400;
+  font-size: 13px;
+  color: #525252;
+`;
 const SButton = styled(Button)`
   margin-top: 10%;
   width: 100%;
