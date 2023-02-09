@@ -91,7 +91,6 @@ function Apply5Page() {
         <Maintitle>
           <Pink>어떤 상대팀</Pink>을 원하시나요?
         </Maintitle>
-        <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title>
       <Title2>
         <Maintitle2>평균 나이</Maintitle2>
@@ -250,7 +249,7 @@ const ButtonBox = styled.div`
 `;
 
 const SSlider = styled(Slider)`
-  margin-top: 3%;
+  margin-top: 7%;
   width: 85%;
 `;
 
