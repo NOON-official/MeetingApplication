@@ -1,6 +1,8 @@
 import { Button, Card, Col, Row, Space } from 'antd';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Accordion from '../../components/Accordion';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
@@ -11,12 +13,28 @@ import {
   useGetMyInfoQuery,
   useGetUserTeamsQuery,
 } from '../../features/backendApi';
+import { logout } from '../../features/user/asyncActions';
 import MyinfoLayout from '../../layout/MyinfoLayout';
+import backend from '../../util/backend';
 
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
   const { data: myInfo } = useGetMyInfoQuery();
   const { data: teamsData } = useGetUserTeamsQuery();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const deleteAccount = useCallback(async () => {
+    try {
+      await backend.delete('/auth/account');
+      window.alert('탈퇴되었습니다');
+      dispatch(logout());
+      navigate('/');
+    } catch (e) {
+      console.error(e);
+      window.alert('탈퇴중 오류가 발생하였습니다');
+    }
+  });
 
   return (
     <MyinfoLayout title="계정 관리">
@@ -83,7 +101,7 @@ export default function Account() {
             지금 탈퇴하시면 미팅학개론에서의 모든 기록이 사라져요. 그래도
             탈퇴하시겠어요?
           </span>
-          <PrimaryButton>탈퇴하기</PrimaryButton>
+          <PrimaryButton onClick={deleteAccount}>탈퇴하기</PrimaryButton>
         </Space>
       </PrimaryModal>
     </MyinfoLayout>
