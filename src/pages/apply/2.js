@@ -84,6 +84,8 @@ export default function Apply2() {
     navigate('/apply/3');
   });
 
+  console.log(selectDate);
+
   return (
     <ApplyLayout>
       <NotEnoughDateModal open={openModal1} setModal={setModal1} />
@@ -93,7 +95,7 @@ export default function Apply2() {
         <Maintitle>
           <Pink>미팅 선호 날짜</Pink>를 알려주세요
         </Maintitle>
-        <Subtitle> 4일 이상 선택해 주세요</Subtitle>
+        <Subtitle> 많이 선택할수록 매칭 확률이 올라가요</Subtitle>
       </Title>
       <ScrollDiv>
         <CalendarDiv>
@@ -111,7 +113,7 @@ export default function Apply2() {
       </ScrollDiv>
       <Title>
         <Maintitle>
-          <Pink>미팅 선호 지역</Pink>를 알려주세요
+          <Pink>미팅 선호 지역</Pink>을 알려주세요
         </Maintitle>
         <Subtitle>중복선택이 가능해요</Subtitle>
       </Title>
