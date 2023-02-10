@@ -8,8 +8,8 @@ import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as Baloon } from '../../asset/svg/Baloon.svg';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
-import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { submitStep4 } from '../../features/apply';
+import NotEnoughIntroModal from '../../components/Modal/NotEnoughInroModal';
 
 function Apply4Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -52,10 +52,10 @@ function Apply4Page() {
 
   return (
     <ApplyLayout>
-      <IsPageCompleteModal open={openModal} setModal={setModal} />
+      <NotEnoughIntroModal open={openModal} setModal={setModal} />
       <Title>
         <Maintitle>
-          우리팀을 소개하는 <Pink>마지막 한줄</Pink>
+          우리팀을 소개하는 <Pink>마지막 한줄 어필</Pink>
         </Maintitle>
         <Subtitle>센스 넘치게 우리 팀을 소개할수록 매칭률이 올라가요!</Subtitle>
         <Subtitle>길게 쓰면 운명의 짝을 만날지도?</Subtitle>
