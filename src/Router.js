@@ -23,6 +23,9 @@ import TicketCouponPage from './pages/myinfo/ticket/coupon';
 import TicketHistoryPage from './pages/myinfo/ticket/history';
 import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
 import AuthSigninPage from './pages/auth/signin';
+import TicketPage from './pages/myinfo/ticket';
+import TicketBuySuccessPage from './pages/myinfo/ticket/buy/success';
+import TicketBuyFailPage from './pages/myinfo/ticket/buy/fail';
 
 const Router = createBrowserRouter([
   {
@@ -58,8 +61,20 @@ const Router = createBrowserRouter([
         element: <Account />,
       },
       {
+        path: 'myinfo/ticket',
+        element: <TicketPage />,
+      },
+      {
         path: 'myinfo/ticket/buy',
         element: <TicketBuyPage />,
+      },
+      {
+        path: 'myinfo/ticket/buy/success',
+        element: <TicketBuySuccessPage />,
+      },
+      {
+        path: 'myinfo/ticket/buy/fail',
+        element: <TicketBuyFailPage />,
       },
       {
         path: 'myinfo/ticket/coupon',
