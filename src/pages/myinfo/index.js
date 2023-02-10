@@ -20,6 +20,7 @@ import {
   useGetUserInvitationCountQuery,
   useGetUserReferralIdQuery,
 } from '../../features/backendApi';
+import { CLIENT_URL } from '../../config/constants';
 
 function MyInfo() {
   const [api, contextHolder] = notification.useNotification();
@@ -49,15 +50,16 @@ function MyInfo() {
   }, [referralId]);
 
   const shareThroughKakao = useCallback(() => {
-    // TODO : 메세지 내용 확인 받기
-    const url = `${process.env.REACT_APP_CLIENT_URL}/auth/signup?referralId=${referralId}`;
+    const url = `${CLIENT_URL}/auth/signup?referralId=${referralId}`;
+
     window.Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: '미팅학개론',
-        description: '#대학 #미팅',
-        imageUrl:
-          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        title:
+          '미팅에 재미를 더하다!💘\n쉽고 빠른 대학생 미팅 매칭 서비스, 미팅학개론',
+        description:
+          '🎁특별 선물🎁지금 해당 링크를 통해 접속하시면\n미팅학개론 50%할인 쿠폰을 드려요!',
+        imageUrl: `${CLIENT_URL}/assets/images/kakao-share-banner.png`,
         link: {
           // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
           mobileWebUrl: url,
