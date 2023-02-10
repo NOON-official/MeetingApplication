@@ -14,8 +14,6 @@ import NotEnoughDateModal from '../../components/Modal/NotEnoughDateModal';
 import NotEnoughPlaceModal from '../../components/Modal/NotEnoughPlaceModal';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
-// eslint-disable-next-line consistent-return
-
 export default function Apply2() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
@@ -28,11 +26,20 @@ export default function Apply2() {
   const [selectDate, setSelectDate] = useState(availableDates);
   const [selectedArea, setSelectedArea] = useState(areas);
 
+  const realDate = useCallback(() => {
+    if (typeof selectDate === 'object') {
+      setSelectDate(availableDates);
+    } else {
+      setSelectDate([...selectDate.map((a) => a.format())]);
+    }
+  }, []);
+
   useEffect(() => {
     if (finishedStep < 1) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
+    realDate();
   }, [finishedStep]);
 
   const handleArea = useCallback(
@@ -77,7 +84,7 @@ export default function Apply2() {
     }
     dispatch(
       submitStep2({
-        availableDates: [...selectDate.map((a) => a.format())],
+        availableDates: selectDate,
         areas: selectedArea,
       }),
     );
