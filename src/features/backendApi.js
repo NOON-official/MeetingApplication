@@ -32,6 +32,12 @@ export const backendApi = createApi({
     getUserOrders: builder.query({
       query: () => `users/orders`,
     }),
+    getUserInvitationCount: builder.query({
+      query: () => `users/invitations/count`,
+    }),
+    getUserReferralId: builder.query({
+      query: () => `users/referral-id`,
+    }),
     getOrdersPageData: builder.query({
       query: () => `orders/pagedata`,
     }),
@@ -48,6 +54,8 @@ export const {
   useGetUserCouponsQuery,
   useGetUserCouponCountQuery,
   useGetUserOrdersQuery,
+  useGetUserInvitationCountQuery,
+  useGetUserReferralIdQuery,
   useGetOrdersPageDataQuery,
   useGetCouponsPageDataQuery,
 } = backendApi;

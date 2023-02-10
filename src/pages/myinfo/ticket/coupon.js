@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
 import dayjs from 'dayjs';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import Section, { SectionTitle } from '../../../components/Section';
 import CouponItem from '../../../components/CouponItem';
-import { useGetUserCouponsQuery } from '../../../features/backendApi';
+import {
+  useGetCouponsPageDataQuery,
+  useGetUserCouponsQuery,
+} from '../../../features/backendApi';
 import backend from '../../../util/backend';
 
 export default function TicketCouponPage() {
+  const { data: couponPageData } = useGetCouponsPageDataQuery();
   const { data: couponData } = useGetUserCouponsQuery();
 
   const registerCoupon = useCallback(async () => {
@@ -23,6 +27,16 @@ export default function TicketCouponPage() {
     }
   });
 
+  const coupons = useMemo(() => {
+    const couponTypes = couponPageData?.CouponTypes;
+    return couponData
+      ? couponData.coupons.map((coupon) => ({
+          ...coupon,
+          type: couponTypes?.find((type) => type.id === coupon.typeId),
+        }))
+      : [];
+  });
+
   return (
     <MyinfoLayout title="보유 쿠폰">
       <Section>
@@ -34,12 +48,12 @@ export default function TicketCouponPage() {
         </CouponCodeBox>
       </Section>
       <Section my="24px">
-        <SectionTitle>보유 쿠폰 {couponData?.coupons.length}</SectionTitle>
+        <SectionTitle>보유 쿠폰 {coupons.length}</SectionTitle>
         <CouponListBox>
-          {couponData?.coupons.length === 0 && (
+          {coupons.length === 0 && (
             <NoCouponText>사용 가능한 쿠폰이 없어요</NoCouponText>
           )}
-          {couponData?.coupons.map((coupon) => (
+          {coupons.map((coupon) => (
             <CouponItem
               title="미팅학개론 50% 할인 쿠폰"
               expireText={`${dayjs(coupon.expiresAt).format(
