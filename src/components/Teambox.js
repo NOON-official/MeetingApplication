@@ -3,13 +3,10 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { Select, Modal, Input } from 'antd';
 import theme from '../style/theme';
+import Mbti from '../asset/Mbti';
 import { ReactComponent as Plus } from '../asset/svg/Plus.svg';
 import { ReactComponent as Search } from '../asset/svg/Search.svg';
 import { ReactComponent as Question } from '../asset/svg/Question.svg';
-import { ReactComponent as Flower } from '../asset/svg/Flower.svg';
-import { ReactComponent as A } from '../asset/svg/A.svg';
-import { ReactComponent as Gagman } from '../asset/svg/Gagman.svg';
-import { ReactComponent as Music } from '../asset/svg/Music.svg';
 import { ReactComponent as Profile1 } from '../asset/svg/Profile1.svg';
 import { ReactComponent as Profile2 } from '../asset/svg/Profile2.svg';
 import { ReactComponent as Profile3 } from '../asset/svg/Profile3.svg';
@@ -18,7 +15,7 @@ import { ReactComponent as Profile4 } from '../asset/svg/Profile4.svg';
 function Teambox({ member, setMember, name }) {
   const { Option } = Select;
 
-  const [profile, setProfile] = useState(member.position);
+  const [role, setRole] = useState(member.role);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
 
@@ -30,23 +27,23 @@ function Teambox({ member, setMember, name }) {
   };
 
   const handleCancelPlus1 = useCallback(() => {
-    setMember({ ...member, position: '비주얼' });
-    setProfile('비주얼');
+    setMember({ ...member, role: 1 });
+    setRole(1);
   }, [member]);
 
   const handleCancelPlus2 = useCallback(() => {
-    setMember({ ...member, position: '사회자' });
-    setProfile('사회자');
+    setMember({ ...member, role: 2 });
+    setRole(2);
   }, [member]);
 
   const handleCancelPlus3 = useCallback(() => {
-    setMember({ ...member, position: '개그맨' });
-    setProfile('개그맨');
+    setMember({ ...member, role: 3 });
+    setRole(3);
   }, [member]);
 
   const handleCancelPlus4 = useCallback(() => {
-    setMember({ ...member, position: '깍두기' });
-    setProfile('깍두기');
+    setMember({ ...member, role: 4 });
+    setRole(4);
   }, [member]);
 
   const showModal2 = () => {
@@ -67,7 +64,7 @@ function Teambox({ member, setMember, name }) {
 
   const handleMbtiChange = useCallback(
     (value) => {
-      setMember({ ...member, mbti: value.label });
+      setMember({ ...member, mbti: parseInt(value) });
     },
     [member],
   );
@@ -80,16 +77,16 @@ function Teambox({ member, setMember, name }) {
   );
 
   const profileimg = useMemo(() => {
-    if (profile === '비주얼') {
+    if (role === 1) {
       return <Profile1 />;
     }
-    if (profile === '사회자') {
+    if (role === 2) {
       return <Profile4 />;
     }
-    if (profile === '개그맨') {
+    if (role === 3) {
       return <Profile3 />;
     }
-    if (profile === '깍두기') {
+    if (role === 4) {
       return <Profile2 />;
     }
     return <Plus />;
@@ -114,7 +111,7 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus1();
               }}
             >
-              <Flower />
+              <Profile1 />
               <Ttitle>존재만으로도 분위기를 녹이는 당신!</Ttitle>
               <Ttitle>바라만 보고 있어도 웃음이 나요</Ttitle>
             </WhiteBox>
@@ -130,7 +127,7 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus2();
               }}
             >
-              <A />
+              <Profile4 />
               <Ttitle>어색한 분위기를 풀어주는 당신은 미팅의 유재석!</Ttitle>
               <Ttitle>당신이 없다면 미팅이 진행되지 않아요</Ttitle>
             </WhiteBox>
@@ -146,7 +143,7 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus3();
               }}
             >
-              <Gagman />
+              <Profile3 />
               <Ttitle>리액션과 개그맨 뺨치는 입담으로</Ttitle>
               <Ttitle>상대방을 홀리는 당신!</Ttitle>
             </WhiteBox>
@@ -163,7 +160,7 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus4();
               }}
             >
-              <Music />
+              <Profile2 />
               <Ttitle>수줍음이 많은 당신</Ttitle>
               <Ttitle>순수한 매력에 상대방이 반할지도?</Ttitle>
             </WhiteBox>
@@ -188,8 +185,8 @@ function Teambox({ member, setMember, name }) {
           >
             <Option value="19">19세</Option>
             <Option value="20">20세</Option>
-            <Option value="22">22세</Option>
             <Option value="21">21세</Option>
+            <Option value="22">22세</Option>
             <Option value="23">23세</Option>
             <Option value="24">24세</Option>
             <Option value="25">25세</Option>
@@ -202,30 +199,29 @@ function Teambox({ member, setMember, name }) {
         <Info>
           <BigTitle>MBTI</BigTitle>
           <SSelect
-            defaultValue={member.mbti}
+            defaultValue={Mbti[member.mbti - 1]?.name}
             showSearch={false}
             bordered={false}
             optionFilterProp="children"
             suffixIcon={<SSearch />}
             onChange={handleMbtiChange}
-            labelInValue
           >
-            <Option value="ISTJ">ISTJ</Option>
-            <Option value="ISTP">ISTP</Option>
-            <Option value="INFJ">INFJ</Option>
-            <Option value="INTJ">INTJ</Option>
-            <Option value="ISFJ">ISFJ</Option>
-            <Option value="ISFP">ISFP</Option>
-            <Option value="INFP">INFP</Option>
-            <Option value="INTP">INTP</Option>
-            <Option value="ESTJ">ESTJ</Option>
-            <Option value="ESTP">ESTP</Option>
-            <Option value="ENFJ">ENFJ</Option>
-            <Option value="ENTJ">ENTJ</Option>
-            <Option value="ESFJ">ESFJ</Option>
-            <Option value="ESFP">ESFP</Option>
-            <Option value="ENFP">ENFP</Option>
-            <Option value="ENTP">ENTP</Option>
+            <Option value="1">ENFJ</Option>
+            <Option value="2">ENTJ</Option>
+            <Option value="3">ENFP</Option>
+            <Option value="4">ENTP</Option>
+            <Option value="5">ESFP</Option>
+            <Option value="6">ESFJ</Option>
+            <Option value="7">ESTP</Option>
+            <Option value="8">ESTJ</Option>
+            <Option value="9">INFP</Option>
+            <Option value="10">INFJ</Option>
+            <Option value="11">INTP</Option>
+            <Option value="12">ISTP</Option>
+            <Option value="13">ISFP</Option>
+            <Option value="14">ISFJ</Option>
+            <Option value="15">ISTJ</Option>
+            <Option value="16">INTJ</Option>
           </SSelect>
         </Info>
         <Info>
@@ -238,7 +234,7 @@ function Teambox({ member, setMember, name }) {
             autoComplete="off"
             required
             onBlur={() => {
-              setMember({ ...member, similar: s });
+              setMember({ ...member, appearance: s });
             }}
           />
           <SQuestion onClick={showModal2} />
@@ -276,6 +272,7 @@ const Container = styled.div`
   border-radius: 10px;
   width: 340px;
   height: 200px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 
 const Title = styled.div`

@@ -17,11 +17,11 @@ export default function NotEnoughDateModal({ open, setModal }) {
           <Container>
             <ErrorChar />
             <TextBox>
-              <BlackText>미팅선호날짜는 최소</BlackText>
-              <ColorText>4일 이상</ColorText>
-              <BlackText>선택해주세요</BlackText>
+              <BlackText>미팅 선호 날짜는 최소</BlackText>
+              <ColorText> 4일 이상</ColorText>
+              <BlackText> 선택해 주세요</BlackText>
             </TextBox>
-            <div>많이선택할수록 매칭확률이 올라가요!</div>
+            <SmallText>많이선택할수록 매칭확률이 올라가요!</SmallText>
             <SButton onClick={() => setModal(false)}>닫기</SButton>
           </Container>
         </Modal>
@@ -40,8 +40,7 @@ const TextBox = styled.div`
   text-align: center;
 `;
 const BlackText = styled.span`
-  color: black;
-  font-size: 30px;
+  font-size: 27px;
   font-family: 'Nanum JungHagSaeng';
 `;
 const ColorText = styled.span`
@@ -49,7 +48,11 @@ const ColorText = styled.span`
   font-size: 30px;
   font-family: 'Nanum JungHagSaeng';
 `;
-
+const SmallText = styled.span`
+  font-weight: 400;
+  font-size: 13px;
+  color: #525252;
+`;
 const SButton = styled(Button)`
   margin-top: 10%;
   width: 100%;

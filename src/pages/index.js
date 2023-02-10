@@ -16,7 +16,7 @@ function Main() {
   const navigate = useNavigate();
 
   const handleStart = useCallback(() => {
-    navigate(`/apply/${finishedStep + 1}`);
+    navigate('/apply/agree');
   }, [finishedStep]);
 
   const twoman = 25;
