@@ -14,25 +14,32 @@ import NotEnoughDateModal from '../../components/Modal/NotEnoughDateModal';
 import NotEnoughPlaceModal from '../../components/Modal/NotEnoughPlaceModal';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 
-// eslint-disable-next-line consistent-return
-
 export default function Apply2() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
-  const { finishedStep, availableDate, area } = useSelector(
+  const { finishedStep, availableDates, areas } = useSelector(
     (store) => store.apply,
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [selectDate, setSelectDate] = useState(availableDate);
-  const [selectedArea, setSelectedArea] = useState(area);
+  const [selectDate, setSelectDate] = useState(availableDates);
+  const [selectedArea, setSelectedArea] = useState(areas);
+
+  const realDate = useCallback(() => {
+    if (typeof selectDate === 'object') {
+      setSelectDate(availableDates);
+    } else {
+      setSelectDate([...selectDate.map((a) => a.format())]);
+    }
+  }, []);
 
   useEffect(() => {
     if (finishedStep < 1) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
+    realDate();
   }, [finishedStep]);
 
   const handleArea = useCallback(
@@ -77,12 +84,14 @@ export default function Apply2() {
     }
     dispatch(
       submitStep2({
-        availableDate: [...selectDate.map((a) => a.format())],
-        area: selectedArea,
+        availableDates: selectDate,
+        areas: selectedArea,
       }),
     );
     navigate('/apply/3');
   });
+
+  console.log(selectDate);
 
   return (
     <ApplyLayout>
@@ -93,7 +102,7 @@ export default function Apply2() {
         <Maintitle>
           <Pink>미팅 선호 날짜</Pink>를 알려주세요
         </Maintitle>
-        <Subtitle> 4일 이상 선택해 주세요</Subtitle>
+        <Subtitle> 많이 선택할수록 매칭 확률이 올라가요</Subtitle>
       </Title>
       <ScrollDiv>
         <CalendarDiv>
@@ -111,33 +120,33 @@ export default function Apply2() {
       </ScrollDiv>
       <Title>
         <Maintitle>
-          <Pink>미팅 선호 지역</Pink>를 알려주세요
+          <Pink>미팅 선호 지역</Pink>을 알려주세요
         </Maintitle>
         <Subtitle>중복선택이 가능해요</Subtitle>
       </Title>
       <ChooseBox>
         <ChooseButton
-          isActive={selectedArea.includes(1)}
+          isActive={selectedArea?.includes(1)}
           onChange={(isActive) => handleArea(1, isActive)}
           content="강남"
         />
         <ChooseButton
-          isActive={selectedArea.includes(2)}
+          isActive={selectedArea?.includes(2)}
           onChange={(isActive) => handleArea(2, isActive)}
           content="건대"
         />
         <ChooseButton
-          isActive={selectedArea.includes(3)}
+          isActive={selectedArea?.includes(3)}
           onChange={(isActive) => handleArea(3, isActive)}
           content="신촌"
         />
         <ChooseButton
-          isActive={selectedArea.includes(4)}
+          isActive={selectedArea?.includes(4)}
           onChange={(isActive) => handleArea(4, isActive)}
           content="홍대"
         />
         <ChooseButton
-          isActive={selectedArea.includes(5)}
+          isActive={selectedArea?.includes(5)}
           onChange={(isActive) => handleArea(5, isActive)}
           content="상관없음"
         />
