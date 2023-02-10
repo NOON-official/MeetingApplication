@@ -2,17 +2,18 @@ import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import theme from '../../style/theme';
 import BinaryButton from '../../components/BinaryButton';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
-import SelectedNumUniversity from '../../util/SelectedUniversity';
-import { SearchedUniversities } from '../../util/SearchedUniversities';
 import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
 import { ReactComponent as Bottom } from '../../asset/svg/B.svg';
+import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
 import { submitStep1 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import Universities from '../../asset/Universities';
 
 export default function Apply1Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -26,7 +27,11 @@ export default function Apply1Page() {
     useState(universities);
   const [man, setMan] = useState(gender);
   const [meetingMember, setmeetingMember] = useState(memberCount);
-  const [searchKeyWord, setSearchKeyWord] = useState('0');
+  const [searchKeyWord, setSearchKeyWord] = useState(0);
+
+  const SearchedUniv = Universities.filter(
+    (c) => c.name.indexOf(searchKeyWord) > -1,
+  );
 
   const inputChange = (e) => {
     setSearchKeyWord(e.target.value);
@@ -41,7 +46,7 @@ export default function Apply1Page() {
   });
 
   const handleSubmit = useCallback(() => {
-    if (selectedUniversities.length < 1) {
+    if (selectedUniversities?.length < 1) {
       setOpenModal(true);
       return;
     }
@@ -89,48 +94,49 @@ export default function Apply1Page() {
         </Maintitle>
         <Subtitle>팀원들의 모든 학교를 말해주세요</Subtitle>
       </Title>
-      <ScrollDiv>
-        <UniversityDiv>
-          {selectedUniversities.length === 0 ? null : (
-            <SelectedDiv>
-              {selectedUniversities.map((data) => {
-                // eslint-disable-next-line prefer-const
-                // let univ = binarySearch(Universities, data);
-
-                return (
-                  <SelectedNumUniversity
-                    onDelete={() => {
-                      const deleteUniv = selectedUniversities.filter(
-                        (value) => value !== data,
+      <CollegeBox>
+        <SelectedBox>
+          {selectedUniversities
+            ? selectedUniversities.map((a) => (
+                <SelectedUniversity key={a}>
+                  {Universities[a - 1].name}
+                  <SXbutton
+                    onClick={() => {
+                      setSelectedUniversities(
+                        selectedUniversities.filter((b) => b !== a),
                       );
-                      setSelectedUniversities(deleteUniv);
                     }}
-                    key={data}
-                    university={data.univ}
-                    selectedUniversities={selectedUniversities}
                   />
-                );
-              })}
-            </SelectedDiv>
-          )}
-          <SearchDiv>
-            <SearchInput
-              onChange={inputChange}
-              name="universitySearch"
-              placeholder="학교를 검색해주세요"
-              autoComplete="off"
-            />
-            <SearchIcon />
-          </SearchDiv>
-          <SearchListDiv>
-            <SearchedUniversities
-              searchKeyWord={searchKeyWord}
-              selectedUniversities={selectedUniversities}
-              setSelectedUniversities={setSelectedUniversities}
-            />
-          </SearchListDiv>
-        </UniversityDiv>
-      </ScrollDiv>
+                </SelectedUniversity>
+              ))
+            : null}
+        </SelectedBox>
+        <SearchBox>
+          <SearchInput
+            onChange={inputChange}
+            name="universitySearch"
+            placeholder="학교를 검색해주세요"
+            autoComplete="off"
+          />
+          <SearchIcon />
+        </SearchBox>
+        <SearchList>
+          {SearchedUniv.map((a) => (
+            <SearchedUniversity
+              key={a.id}
+              onClick={() => {
+                if (
+                  !selectedUniversities.includes(a.id) &&
+                  selectedUniversities.length < 3
+                )
+                  setSelectedUniversities([a.id, ...selectedUniversities]);
+              }}
+            >
+              {a.name}
+            </SearchedUniversity>
+          ))}
+        </SearchList>
+      </CollegeBox>
       <SBottom />
       <Footer>
         <ProgressBar page={1} />
@@ -169,7 +175,7 @@ const Pink = styled.span`
 `;
 
 const ChooseBox = styled.div`
-  margin-top: 4%;
+  margin-top: 9%;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -206,45 +212,27 @@ const ButtonBox = styled.div`
   margin-top: 5%;
 `;
 
-const SelectedDiv = styled.div`
-  margin-bottom: 5%;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: '0 0 0 5%';
-  align-items: center;
-  width: 92%;
-`;
-const UniversityDiv = styled.div`
+const CollegeBox = styled.div`
+  margin-top: 5%;
+  width: 90%;
   display: flex;
   flex-direction: column;
-  height: 60%;
-  width: 100%;
 `;
 
-const ScrollDiv = styled.div`
-  height: 25%;
-  width: 90%;
-  align-items: flex-start;
-  margin-top: 8%;
-`;
-
-const SearchDiv = styled.div`
+const SearchBox = styled.div`
+  margin-top: 5%;
+  width: 95%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-direction: row;
-  width: 90%;
   border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #eb8888;
+  border: 1px solid #eb8888;
   padding: 0 5px 0 5px;
   height: 40px;
 `;
+
 const SearchInput = styled.input`
   display: flex;
-  width: 100%;
+  width: 90%;
   height: 100%;
   font-size: 20px;
   border: 0;
@@ -254,7 +242,35 @@ const SearchInput = styled.input`
   color: #eb8888;
   font-family: Nanum JungHagSaeng;
 `;
-const SearchListDiv = styled.div`
+const SelectedBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+`;
+
+const SelectedUniversity = styled.div`
+  margin-top: 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 400;
+  font-size: 13px;
+  color: #ffffff;
+  width: 40%;
+  height: 45px;
+  background: #eb8888;
+  border-radius: 10px;
+  padding: 0 3%;
+`;
+
+const SXbutton = styled(Xbutton)`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SearchList = styled.div`
   margin-left: 2%;
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none; /* 파이어폭스 */
@@ -266,8 +282,21 @@ const SearchListDiv = styled.div`
   align-items: center;
   flex-direction: column;
   height: 200px;
-  width: 90%;
+  width: 100%;
   &:hover {
     cursor: pointer;
   }
+`;
+
+const SearchedUniversity = styled.div`
+  display: flex;
+  min-height: 40px;
+  height: 40px;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  color: #eb8888;
+  font-size: 14px;
+  border-bottom: 1px solid #f6eeee;
+  overflow-x: hidden;
 `;

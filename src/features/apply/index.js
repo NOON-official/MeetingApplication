@@ -7,14 +7,14 @@ const initialState = {
   gender: 1, // 1: 남자, 2: 여자
   memberCount: 2, // 2: 2대2, 3: 3대3
   universities: [],
-  availableDate: [],
-  area: [],
-  intro: '',
+  availableDates: [],
+  areas: [],
   members: [{}, {}, {}],
+  intro: '',
   drink: 3,
   prefSameUniversity: false,
   prefAge: [23, 25],
-  prefVibe: [],
+  prefVibes: [],
 };
 
 const applySlice = createSlice({
@@ -43,14 +43,13 @@ const applySlice = createSlice({
       );
     },
     submitStep2: (state, action) => {
-      const { availableDate, area } = action.payload;
+      const { availableDates, areas } = action.payload;
 
       state.finishedStep = 2;
-      state.availableDate = availableDate;
-      state.area = area;
+      state.availableDates = availableDates;
+      state.areas = areas;
 
       const stored = localStorage.getItem('apply-data');
-      console.log(state.finishedStep);
       localStorage.setItem(
         APPLY_STORAGE_KEY,
         JSON.stringify({
@@ -93,13 +92,13 @@ const applySlice = createSlice({
       );
     },
     submitStep5: (state, action) => {
-      const { drink, prefAge, prefSameUniversity, prefVibe } = action.payload;
+      const { drink, prefAge, prefSameUniversity, prefVibes } = action.payload;
 
       state.finishedStep = 5;
       state.drink = drink;
       state.prefAge = prefAge;
       state.prefSameUniversity = prefSameUniversity;
-      state.prefVibe = prefVibe;
+      state.prefVibes = prefVibes;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(

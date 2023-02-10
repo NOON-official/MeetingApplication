@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Input, Button, Modal } from 'antd';
+import { createTeam, phone } from '../../features/apply/asyncAction';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
@@ -11,7 +12,8 @@ import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg
 function CertificationPage() {
   const vaildcheck = true;
 
-  const { finishedStep } = useSelector((store) => store.apply);
+  const { finishedStep, ...applydata } = useSelector((store) => store.apply);
+  const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [authorizeNumber, setAuthorizeNumber] = useState('');
   const [openModal, setOpenModal] = useState(false);
@@ -88,7 +90,10 @@ function CertificationPage() {
           </PhoneNumber>
         </PhoneBox>
         <SubmitButton
-          onClick={SubmitPhoneNumber}
+          onClick={() => {
+            SubmitPhoneNumber();
+            dispatch(phone(phoneNumber));
+          }}
           disabled={!regex.test(phoneNumber) || submitOk1}
         >
           인증번호요청
@@ -117,6 +122,7 @@ function CertificationPage() {
         <SubmitButton
           onClick={() => {
             setOpenModal(true);
+            dispatch(createTeam(applydata));
           }}
           disabled={!vaildcheck}
         >
