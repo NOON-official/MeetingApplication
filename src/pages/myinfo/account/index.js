@@ -1,22 +1,40 @@
 import { Button, Card, Col, Row, Space } from 'antd';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Accordion from '../../components/Accordion';
-import PrimaryModal from '../../components/Modal/PrimaryModal';
-import PrimaryButton from '../../components/PrimaryButton';
-import Section from '../../components/Section';
-import { MEMBER_COUNT_LABELS } from '../../config/constants';
+import Accordion from '../../../components/Accordion';
+import PrimaryModal from '../../../components/Modal/PrimaryModal';
+import PrimaryButton from '../../../components/PrimaryButton';
+import Section from '../../../components/Section';
+import { MEMBER_COUNT_LABELS } from '../../../config/constants';
 import {
   useGetMyInfoQuery,
   useGetUserTeamsQuery,
-} from '../../features/backendApi';
-import MyinfoLayout from '../../layout/MyinfoLayout';
+} from '../../../features/backendApi';
+import { logout } from '../../../features/user/asyncActions';
+import MyinfoLayout from '../../../layout/MyinfoLayout';
+import backend from '../../../util/backend';
 
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
   const { data: myInfo } = useGetMyInfoQuery();
   const { data: teamsData } = useGetUserTeamsQuery();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const deleteAccount = useCallback(async () => {
+    try {
+      await backend.delete('/auth/account');
+      window.alert('탈퇴되었습니다');
+      dispatch(logout());
+      navigate('/');
+    } catch (e) {
+      console.error(e);
+      window.alert('탈퇴중 오류가 발생하였습니다');
+    }
+  });
 
   return (
     <MyinfoLayout title="계정 관리">
@@ -29,7 +47,14 @@ export default function Account() {
           </Row>
           <Row>
             <Col span={4}>전화번호</Col>
-            <Col span={20}>{myInfo?.phone}</Col>
+            <Col span={20}>
+              {myInfo?.phone}{' '}
+              <PhoneChangeButton
+                onClick={() => navigate('/myinfo/account/phone')}
+              >
+                변경
+              </PhoneChangeButton>
+            </Col>
           </Row>
         </InfoCard>
       </Section>
@@ -83,7 +108,7 @@ export default function Account() {
             지금 탈퇴하시면 미팅학개론에서의 모든 기록이 사라져요. 그래도
             탈퇴하시겠어요?
           </span>
-          <PrimaryButton>탈퇴하기</PrimaryButton>
+          <PrimaryButton onClick={deleteAccount}>탈퇴하기</PrimaryButton>
         </Space>
       </PrimaryModal>
     </MyinfoLayout>
@@ -177,5 +202,21 @@ const HistoryStatusText = styled.span`
 const ResignButton = styled(Button)`
   > span {
     color: ${(props) => props.theme.grey};
+  }
+`;
+
+const PhoneChangeButton = styled(Button).attrs({ type: 'text' })`
+  height: auto;
+  font-family: 'Nanum JungHagSaeng';
+  padding: 4px 12px;
+  border-radius: 10px;
+  background-color: ${(props) => props.theme.pink};
+  border: none;
+  box-shadow: none;
+
+  > span {
+    font-weight: 400;
+    font-size: 13px;
+    color: white;
   }
 `;
