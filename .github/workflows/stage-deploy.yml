@@ -3,7 +3,7 @@ name: stage-deploy
 on:
   push:
     branches:
-      - stage # 브랜치에서 push 이벤트가 일어났을 때 실행 /
+      - stage # 브랜치에서 push 이벤트가 일어났을 때 실행
 
 jobs:
   AUTO_DEPLOY:
