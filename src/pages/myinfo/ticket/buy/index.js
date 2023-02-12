@@ -2,37 +2,45 @@ import { useCallback, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import dayjs from 'dayjs';
-import MenuBox, { MenuItem } from '../../../components/MenuBox';
-import Section from '../../../components/Section';
-import MyinfoLayout from '../../../layout/MyinfoLayout';
-import { ReactComponent as Checkbox } from '../../../asset/svg/Checkbox.svg';
-import { ReactComponent as CheckboxChecked } from '../../../asset/svg/CheckboxChecked.svg';
-import Accordion from '../../../components/Accordion';
-import PrimaryButton from '../../../components/PrimaryButton';
-import CouponItem from '../../../components/CouponItem';
+import { loadTossPayments } from '@tosspayments/payment-sdk';
+import { v4 as uuidv4 } from 'uuid';
+import MenuBox, { MenuItem } from '../../../../components/MenuBox';
+import Section from '../../../../components/Section';
+import MyinfoLayout from '../../../../layout/MyinfoLayout';
+import { ReactComponent as Checkbox } from '../../../../asset/svg/Checkbox.svg';
+import { ReactComponent as CheckboxChecked } from '../../../../asset/svg/CheckboxChecked.svg';
+import Accordion from '../../../../components/Accordion';
+import PrimaryButton from '../../../../components/PrimaryButton';
+import CouponItem from '../../../../components/CouponItem';
 import {
   useGetUserCouponsQuery,
   useGetOrdersPageDataQuery,
-} from '../../../features/backendApi';
+  useGetMyInfoQuery,
+} from '../../../../features/backendApi';
+import {
+  CLIENT_URL,
+  STORAGE_KEY_ORDER_DATA,
+} from '../../../../config/constants';
+import backend from '../../../../util/backend';
 
 export default function TicketBuyPage() {
   const [selectedProductId, setSelectedProductId] = useState(1);
-  const [selectedCouponId, setSelectedCouponId] = useState();
+  const [selectedCouponId, setSelectedCouponId] = useState(null);
   const { data: pageData } = useGetOrdersPageDataQuery();
   const { data: couponData } = useGetUserCouponsQuery();
+  const { data: userData } = useGetMyInfoQuery();
+  const selectedProduct = useMemo(() =>
+    pageData?.Products.find((p) => p.id === selectedProductId),
+  );
+  const selectedCoupon = useMemo(() =>
+    couponData?.coupons.find((p) => p.id === selectedCouponId),
+  );
+  const price = useMemo(() => (selectedProduct ? selectedProduct.price : 0));
+  const discountAmount = useMemo(() =>
+    selectedCoupon ? price * (selectedCoupon.discountRate / 100) : 0,
+  );
 
-  const totalPrice = useMemo(() => {
-    const product = pageData?.Products.find((p) => p.id === selectedProductId);
-    let price = product ? product.price : 0;
-
-    if (selectedCouponId) {
-      const coupon = couponData?.coupons.find((p) => p.id === selectedCouponId);
-      if (coupon) {
-        price -= price * (coupon.discountRate / 100);
-      }
-    }
-    return price;
-  });
+  const totalAmount = useMemo(() => price - discountAmount);
 
   const toggleCoupon = useCallback((couponId) => {
     if (selectedCouponId === couponId) {
@@ -40,6 +48,52 @@ export default function TicketBuyPage() {
       return;
     }
     setSelectedCouponId(couponId);
+  });
+
+  const makePayment = useCallback(async () => {
+    const tossPayments = await loadTossPayments(
+      process.env.REACT_APP_TOSS_PAYMENT_CLIENT_KEY,
+    );
+    const orderId = uuidv4();
+    const orderData = {
+      productId: selectedProductId,
+      price,
+      discountAmount,
+      totalAmount,
+      couponId: selectedCouponId,
+    };
+    // 금액이 0원이면 바로결제
+    if (totalAmount === 0) {
+      try {
+        await backend.post('/orders', orderData);
+        window.alert('이용권이 구매되었습니다');
+      } catch (e) {
+        window.alert('오류가 발생하였습니다');
+        console.error(e);
+      }
+      return;
+    }
+
+    // 결제할 금액이 있다면
+    // 임시 주문정보 세션스토리지에 저장
+    sessionStorage.setItem(STORAGE_KEY_ORDER_DATA, JSON.stringify(orderData));
+    try {
+      await tossPayments.requestPayment('카드', {
+        amount: totalAmount,
+        orderId,
+        orderName: selectedProduct?.name,
+        customerName: userData?.nickname,
+        successUrl: `${CLIENT_URL}/myinfo/ticket/buy/success`,
+        failUrl: `${CLIENT_URL}/myinfo/ticket/buy/fail`,
+      });
+    } catch (error) {
+      if (error.code === 'USER_CANCEL') {
+        // 결제 고객이 결제창을 닫았을 때 에러 처리
+      } else if (error.code === 'INVALID_CARD_COMPANY') {
+        // 유효하지 않은 카드 코드에 대한 에러 처리
+        window.alert('유효하지 않은 카드 코드입니다');
+      }
+    }
   });
 
   return (
@@ -99,11 +153,11 @@ export default function TicketBuyPage() {
       <Section>
         <TotalPriceBox>
           <span>최종 결제 금액</span>
-          <span>{totalPrice.toLocaleString()}원</span>
+          <span>{totalAmount.toLocaleString()}원</span>
         </TotalPriceBox>
       </Section>
       <Section my="20px" center>
-        <PrimaryButton>구매하기</PrimaryButton>
+        <PrimaryButton onClick={makePayment}>구매하기</PrimaryButton>
       </Section>
       <Section my="68px">
         <WarningAccordion
