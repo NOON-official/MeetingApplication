@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button, Input } from 'antd';
+import backend from '../../util/backend';
 import ApplyLayout from '../../layout/ApplyLayout';
 
 function InvitePage() {
@@ -16,10 +17,11 @@ function InvitePage() {
     [inviteCode],
   );
   const NextPage = useCallback(() => {
+    if (inviteCode != null) {
+      backend.post('/invitations', { referralId: inviteCode });
+    }
     navigate('/apply/1');
   });
-
-  console.log(inviteCode);
 
   return (
     <ApplyLayout>

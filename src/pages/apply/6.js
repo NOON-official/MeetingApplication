@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import Universities from '../../asset/Universities';
 import Mbti from '../../asset/Mbti';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
@@ -81,7 +82,11 @@ function Apply6Page() {
               <SmallTitle>학교</SmallTitle>
               <SmallContent>
                 {universities.map((a) => {
-                  return <div key={a['key']}>{a['univ']} /</div>;
+                  return (
+                    <div key={Universities[a - 1].id}>
+                      {Universities[a - 1].name} /
+                    </div>
+                  );
                 })}
               </SmallContent>
             </Info>

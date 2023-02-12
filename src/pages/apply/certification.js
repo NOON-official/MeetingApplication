@@ -50,7 +50,12 @@ function CertificationPage() {
   );
 
   const SubmitAuthorizeNumber = useCallback(() => {
-    backend.post('/auth/phone/code', { phone: p, code: authorizeNumber });
+    try {
+      backend.post('/auth/phone/code', { phone: p, code: authorizeNumber });
+      window.alert('인증이 완료되었습니다');
+    } catch (e) {
+      window.alert('인증번호가 틀렸습니다');
+    }
     setSubmitOk2(true);
   }, [authorizeNumber]);
 
