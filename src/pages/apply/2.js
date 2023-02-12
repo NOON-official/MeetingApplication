@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Calendar } from 'react-multi-date-picker';
+import { Calendar, DateObject } from 'react-multi-date-picker';
 import ChooseButton from '../../components/ChooseButton';
 import { submitStep2 } from '../../features/apply';
 import theme from '../../style/theme';
@@ -23,23 +23,16 @@ export default function Apply2() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [selectDate, setSelectDate] = useState(availableDates);
+  const [selectDate, setSelectDate] = useState(
+    availableDates.map((d) => new DateObject(d)),
+  );
   const [selectedArea, setSelectedArea] = useState(areas);
-
-  const realDate = useCallback(() => {
-    if (typeof selectDate === 'object') {
-      setSelectDate(availableDates);
-    } else {
-      setSelectDate([...selectDate.map((a) => a.format())]);
-    }
-  }, []);
 
   useEffect(() => {
     if (finishedStep < 1) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
-    realDate();
   }, [finishedStep]);
 
   const handleArea = useCallback(
@@ -84,14 +77,12 @@ export default function Apply2() {
     }
     dispatch(
       submitStep2({
-        availableDates: selectDate,
+        availableDates: [...selectDate.map((a) => a.format())],
         areas: selectedArea,
       }),
     );
     navigate('/apply/3');
   });
-
-  console.log(selectDate);
 
   return (
     <ApplyLayout>
