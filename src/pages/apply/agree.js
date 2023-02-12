@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from 'antd';
+import backend from '../../util/backend';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
@@ -23,6 +24,12 @@ function AgreePage() {
   }, [agree1, agree2, agree3, agree4]);
 
   const NextPage = useCallback(() => {
+    backend.post('/users/agreements', {
+      service: agree1,
+      privacy: agree2,
+      age: agree3,
+      marketing: agree4,
+    });
     navigate('/apply/invite');
   });
 
