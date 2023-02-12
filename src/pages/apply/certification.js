@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Input, Button, Modal } from 'antd';
-import { createTeam, phone } from '../../features/apply/asyncAction';
+import backend from '../../util/backend';
+import { createTeam } from '../../features/apply/asyncAction';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
@@ -14,7 +15,8 @@ function CertificationPage() {
 
   const { finishedStep, ...applydata } = useSelector((store) => store.apply);
   const dispatch = useDispatch();
-  const [phoneNumber, setPhoneNumber] = useState('');
+
+  const [p, setP] = useState('');
   const [authorizeNumber, setAuthorizeNumber] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [submitOk1, setSubmitOk1] = useState(false);
@@ -29,16 +31,16 @@ function CertificationPage() {
     }
   }, [finishedStep]);
 
-  const handleNumber = useCallback(
+  const handlePhoneNumber = useCallback(
     (e) => {
-      setPhoneNumber(e.target.value);
+      setP(e.target.value);
     },
-    [phoneNumber],
+    [p],
   );
   const SubmitPhoneNumber = useCallback(() => {
+    backend.post('/auth/phone', { phone: p });
     setSubmitOk1(true);
-    console.log(phoneNumber);
-  }, [phoneNumber]);
+  });
 
   const handleAuthorizeNumber = useCallback(
     (e) => {
@@ -48,8 +50,8 @@ function CertificationPage() {
   );
 
   const SubmitAuthorizeNumber = useCallback(() => {
+    backend.post('/auth/phone/code', { phone: p, code: authorizeNumber });
     setSubmitOk2(true);
-    console.log(authorizeNumber);
   }, [authorizeNumber]);
 
   return (
@@ -82,8 +84,8 @@ function CertificationPage() {
           <PhoneNumber>
             <InputBox>
               <SInput
-                value={phoneNumber}
-                onChange={handleNumber}
+                value={p}
+                onChange={handlePhoneNumber}
                 placeholder="전화번호 입력"
               />
             </InputBox>
@@ -92,9 +94,8 @@ function CertificationPage() {
         <SubmitButton
           onClick={() => {
             SubmitPhoneNumber();
-            dispatch(phone(phoneNumber));
           }}
-          disabled={!regex.test(phoneNumber) || submitOk1}
+          disabled={!regex.test(p) || submitOk1}
         >
           인증번호요청
         </SubmitButton>
@@ -113,7 +114,7 @@ function CertificationPage() {
         </PhoneBox>
         <SubmitButton
           onClick={SubmitAuthorizeNumber}
-          disabled={!authorizeNumber || !regex.test(phoneNumber) || submitOk2}
+          disabled={!authorizeNumber || !regex.test(p) || submitOk2}
         >
           인증번호확인
         </SubmitButton>
