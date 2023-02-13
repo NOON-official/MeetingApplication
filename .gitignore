@@ -23,7 +23,3 @@ yarn-debug.log*
 yarn-error.log*
 
 deploy.sh
-
-.env.development
-.env.production
-.env.stage
