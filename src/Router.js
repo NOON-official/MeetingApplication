@@ -26,6 +26,7 @@ import AuthSigninPage from './pages/auth/signin';
 import TicketPage from './pages/myinfo/ticket';
 import TicketBuySuccessPage from './pages/myinfo/ticket/buy/success';
 import TicketBuyFailPage from './pages/myinfo/ticket/buy/fail';
+import AccountPhoneChangePage from './pages/myinfo/account/phone';
 
 const Router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo/account',
         element: <Account />,
+      },
+      {
+        path: 'myinfo/account/phone',
+        element: <AccountPhoneChangePage />,
       },
       {
         path: 'myinfo/ticket',
