@@ -33,8 +33,6 @@ function AgreePage() {
     navigate('/apply/invite');
   });
 
-  console.log(agree1, agree2, agree3, agree4);
-
   return (
     <ApplyLayout>
       <Title>

@@ -16,11 +16,17 @@ function InvitePage() {
     },
     [inviteCode],
   );
-  const NextPage = useCallback(() => {
-    if (inviteCode != null) {
-      backend.post('/invitations', { referralId: inviteCode });
+  const NextPage = useCallback(async () => {
+    if (inviteCode !== '') {
+      try {
+        await backend.post('/invitations', { referralId: inviteCode });
+        navigate('/apply/1');
+      } catch (e) {
+        window.alert('초대코드가 올바르지않습니다!');
+      }
+    } else {
+      navigate('/apply/1');
     }
-    navigate('/apply/1');
   });
 
   return (
