@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button, Input } from 'antd';
+import backend from '../../util/backend';
 import ApplyLayout from '../../layout/ApplyLayout';
 
 function InvitePage() {
@@ -15,11 +16,18 @@ function InvitePage() {
     },
     [inviteCode],
   );
-  const NextPage = useCallback(() => {
-    navigate('/apply/1');
+  const NextPage = useCallback(async () => {
+    if (inviteCode !== '') {
+      try {
+        await backend.post('/invitations', { referralId: inviteCode });
+        navigate('/apply/1');
+      } catch (e) {
+        window.alert('초대코드가 올바르지않습니다!');
+      }
+    } else {
+      navigate('/apply/1');
+    }
   });
-
-  console.log(inviteCode);
 
   return (
     <ApplyLayout>

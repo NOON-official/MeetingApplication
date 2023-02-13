@@ -4,21 +4,21 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Input, Button, Modal } from 'antd';
-import { createTeam, phone } from '../../features/apply/asyncAction';
+import backend from '../../util/backend';
+import { createTeam } from '../../features/apply/asyncAction';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 
 function CertificationPage() {
-  const vaildcheck = true;
-
+  const [vaildcheck, setValidCheck] = useState(false);
   const { finishedStep, ...applydata } = useSelector((store) => store.apply);
   const dispatch = useDispatch();
-  const [phoneNumber, setPhoneNumber] = useState('');
+
+  const [p, setP] = useState('');
   const [authorizeNumber, setAuthorizeNumber] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [submitOk1, setSubmitOk1] = useState(false);
-  const [submitOk2, setSubmitOk2] = useState(false);
   const navigate = useNavigate();
   const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
@@ -29,16 +29,16 @@ function CertificationPage() {
     }
   }, [finishedStep]);
 
-  const handleNumber = useCallback(
+  const handlePhoneNumber = useCallback(
     (e) => {
-      setPhoneNumber(e.target.value);
+      setP(e.target.value);
     },
-    [phoneNumber],
+    [p],
   );
   const SubmitPhoneNumber = useCallback(() => {
+    backend.post('/auth/phone', { phone: p });
     setSubmitOk1(true);
-    console.log(phoneNumber);
-  }, [phoneNumber]);
+  });
 
   const handleAuthorizeNumber = useCallback(
     (e) => {
@@ -47,9 +47,18 @@ function CertificationPage() {
     [authorizeNumber],
   );
 
-  const SubmitAuthorizeNumber = useCallback(() => {
-    setSubmitOk2(true);
-    console.log(authorizeNumber);
+  const SubmitAuthorizeNumber = useCallback(async () => {
+    try {
+      await backend.post('/auth/phone/code', {
+        phone: p,
+        code: authorizeNumber,
+      });
+      window.alert('인증이 완료되었습니다');
+      setValidCheck(true);
+    } catch (e) {
+      window.alert('인증번호가 틀렸습니다');
+      setValidCheck(false);
+    }
   }, [authorizeNumber]);
 
   return (
@@ -82,8 +91,8 @@ function CertificationPage() {
           <PhoneNumber>
             <InputBox>
               <SInput
-                value={phoneNumber}
-                onChange={handleNumber}
+                value={p}
+                onChange={handlePhoneNumber}
                 placeholder="전화번호 입력"
               />
             </InputBox>
@@ -92,9 +101,8 @@ function CertificationPage() {
         <SubmitButton
           onClick={() => {
             SubmitPhoneNumber();
-            dispatch(phone(phoneNumber));
           }}
-          disabled={!regex.test(phoneNumber) || submitOk1}
+          disabled={!regex.test(p) || submitOk1}
         >
           인증번호요청
         </SubmitButton>
@@ -113,7 +121,7 @@ function CertificationPage() {
         </PhoneBox>
         <SubmitButton
           onClick={SubmitAuthorizeNumber}
-          disabled={!authorizeNumber || !regex.test(phoneNumber) || submitOk2}
+          disabled={!authorizeNumber || !regex.test(p) || vaildcheck}
         >
           인증번호확인
         </SubmitButton>
