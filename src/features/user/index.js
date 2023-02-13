@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import jwtDecode from 'jwt-decode';
 import { STORAGE_KEY_ACCESS_TOKEN } from '../../config/constants';
-import { logout, refreshJwtToken } from './asyncActions';
+import { loadUserAgreements, logout, refreshJwtToken } from './asyncActions';
 
 export const initialState = {
   accessToken: localStorage.getItem('accessToken'),
   id: null,
+  agreement: null,
 };
 
 const userSlice = createSlice({
@@ -40,6 +41,10 @@ const userSlice = createSlice({
       state.accessToken = null;
       state.id = null;
       localStorage.removeItem(STORAGE_KEY_ACCESS_TOKEN);
+    });
+    builder.addCase(loadUserAgreements.fulfilled, (state, action) => {
+      state.agreement = action.payload;
+      console.log(action.payload);
     });
   },
 });
