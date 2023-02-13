@@ -11,8 +11,7 @@ import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 
 function CertificationPage() {
-  const vaildcheck = true;
-
+  const [vaildcheck, setValidCheck] = useState(false);
   const { finishedStep, ...applydata } = useSelector((store) => store.apply);
   const dispatch = useDispatch();
 
@@ -20,7 +19,6 @@ function CertificationPage() {
   const [authorizeNumber, setAuthorizeNumber] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [submitOk1, setSubmitOk1] = useState(false);
-  const [submitOk2, setSubmitOk2] = useState(false);
   const navigate = useNavigate();
   const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
@@ -49,14 +47,18 @@ function CertificationPage() {
     [authorizeNumber],
   );
 
-  const SubmitAuthorizeNumber = useCallback(() => {
+  const SubmitAuthorizeNumber = useCallback(async () => {
     try {
-      backend.post('/auth/phone/code', { phone: p, code: authorizeNumber });
+      await backend.post('/auth/phone/code', {
+        phone: p,
+        code: authorizeNumber,
+      });
       window.alert('인증이 완료되었습니다');
+      setValidCheck(true);
     } catch (e) {
       window.alert('인증번호가 틀렸습니다');
+      setValidCheck(false);
     }
-    setSubmitOk2(true);
   }, [authorizeNumber]);
 
   return (
@@ -119,7 +121,7 @@ function CertificationPage() {
         </PhoneBox>
         <SubmitButton
           onClick={SubmitAuthorizeNumber}
-          disabled={!authorizeNumber || !regex.test(p) || submitOk2}
+          disabled={!authorizeNumber || !regex.test(p) || vaildcheck}
         >
           인증번호확인
         </SubmitButton>
