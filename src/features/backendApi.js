@@ -44,6 +44,12 @@ export const backendApi = createApi({
     getCouponsPageData: builder.query({
       query: () => `coupons/pagedata`,
     }),
+    getTeamMembersCountOneWeek: builder.query({
+      query: () => `teams/members/count/one-week`,
+    }),
+    getTeamCounts: builder.query({
+      query: () => `teams/counts`,
+    }),
   }),
 });
 
@@ -58,4 +64,6 @@ export const {
   useGetUserReferralIdQuery,
   useGetOrdersPageDataQuery,
   useGetCouponsPageDataQuery,
+  useGetTeamMembersCountOneWeekQuery,
+  useGetTeamCountsQuery,
 } = backendApi;
