@@ -1,7 +1,10 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { STORAGE_KEY_ACCESS_TOKEN } from '../config/constants';
-import { refreshJwtToken } from '../features/user/asyncActions';
+import {
+  loadUserAgreements,
+  refreshJwtToken,
+} from '../features/user/asyncActions';
 import useInterval from '../hooks/useInterval';
 
 export default function JwtProvider() {
@@ -15,6 +18,7 @@ export default function JwtProvider() {
     }
 
     dispatch(refreshJwtToken());
+    dispatch(loadUserAgreements());
   }, [dispatch]);
 
   // JWT 토큰 초기 Refresh
