@@ -250,7 +250,7 @@ const MenuItem = styled.div`
   justify-content: flex-start;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 35px;
+  padding: 20px 30px;
   background: #ffffff;
   border-radius: 10px;
   font-weight: 600;
