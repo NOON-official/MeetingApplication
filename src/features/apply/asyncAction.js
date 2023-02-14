@@ -13,8 +13,14 @@ export const createTeam = createAsyncThunk(
   },
 );
 
-export const updateTeam = createAsyncThunk('apply/updateTeam', async (data) => {
-  const { id } = data;
-  const response = await backend.post(`/teams/${id}`);
-  return response.data;
-});
+export const updateTeam = createAsyncThunk(
+  'apply/updateTeam',
+  async (userid, applydata, { rejectWithValue }) => {
+    try {
+      const response = await backend.patch(`/teams/${userid}`, applydata);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
