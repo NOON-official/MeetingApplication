@@ -10,9 +10,18 @@ import MainFooter from '../layout/footer/MainFooter';
 import Section from '../components/Section';
 import PrimaryButton from '../components/PrimaryButton';
 import backend from '../util/backend';
+import {
+  useGetTeamCountsQuery,
+  useGetTeamMembersCountOneWeekQuery,
+} from '../features/backendApi';
+
+const teamsPerRound = 10;
 
 function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
+  const { data: membersData } = useGetTeamMembersCountOneWeekQuery();
+  const { data: teamData } = useGetTeamCountsQuery();
+
   const navigate = useNavigate();
 
   const handleStart = useCallback(async () => {
@@ -24,19 +33,17 @@ function Main() {
     }
   }, [finishedStep]);
 
-  const twoman = 25;
-  const twogirl = 10;
-  const threeman = 3;
-  const threegirl = 24;
+  const twoman = teamData?.['2vs2']['male'];
+  const twogirl = teamData?.['2vs2']['female'];
+  const threeman = teamData?.['3vs3']['male'];
+  const threegirl = teamData?.['3vs3']['female'];
 
   return (
     <MainLayout>
       <Section mx="10px" my="12px">
         <ImgBox>
           <UserCountText>
-            <span>1</span>
-            <span>0</span>
-            <span>0</span>
+            <span>{membersData?.memberCount}</span>
           </UserCountText>
           <MainImg />
         </ImgBox>
@@ -49,10 +56,10 @@ function Main() {
           <TotalBar>
             <Number>{twoman}</Number>
             <LeftBar>
-              <LeftBarProgress progress={twoman} />
+              <LeftBarProgress progress={twoman / teamsPerRound} />
             </LeftBar>
             <RightBar>
-              <RightBarProgress progress={twogirl} />
+              <RightBarProgress progress={twogirl / teamsPerRound} />
             </RightBar>
             <Number>{twogirl}</Number>
           </TotalBar>
@@ -60,10 +67,10 @@ function Main() {
           <TotalBar>
             <Number>{threeman}</Number>
             <LeftBar>
-              <LeftBarProgress progress={threeman} />
+              <LeftBarProgress progress={threeman / teamsPerRound} />
             </LeftBar>
             <RightBar>
-              <RightBarProgress progress={threegirl} />
+              <RightBarProgress progress={threegirl / teamsPerRound} />
             </RightBar>
             <Number>{threegirl}</Number>
           </TotalBar>
@@ -163,9 +170,7 @@ const RightBar = styled.div`
 const LeftBarProgress = styled.div`
   position: absolute;
   max-width: 110px;
-  ${({ progress }) => {
-    return progress ? `width: ${progress * 4.4}px` : `width: 0`;
-  }};
+  width: ${({ progress }) => (progress ? progress * 110 : 0)}px;
   height: 18px;
   background: #bfe0ff;
   border-top-left-radius: 10px;
@@ -175,9 +180,7 @@ const LeftBarProgress = styled.div`
 const RightBarProgress = styled.div`
   position: absolute;
   max-width: 110px;
-  ${({ progress }) => {
-    return progress ? `width: ${progress * 4.4}px` : `width: 0`;
-  }};
+  width: ${({ progress }) => (progress ? progress * 110 : 0)}px;
   height: 18px;
   background: #ffbfbf;
   border-top-right-radius: 10px;
