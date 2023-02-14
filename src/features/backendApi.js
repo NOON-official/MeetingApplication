@@ -50,6 +50,12 @@ export const backendApi = createApi({
     getTeamCounts: builder.query({
       query: () => `teams/counts`,
     }),
+    getUserTeamIdData: builder.query({
+      query: () => `users/team-id`,
+    }),
+    getMatchingStatus: builder.query({
+      query: () => `users/matchings/status`,
+    }),
   }),
 });
 
@@ -66,4 +72,6 @@ export const {
   useGetCouponsPageDataQuery,
   useGetTeamMembersCountOneWeekQuery,
   useGetTeamCountsQuery,
+  useGetUserTeamIdDataQuery,
+  useGetMatchingStatusQuery,
 } = backendApi;
