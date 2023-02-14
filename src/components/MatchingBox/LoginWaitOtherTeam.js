@@ -1,14 +1,16 @@
+// 로그인하고 매칭증에 상대방의 수락여부기다릴때 매칭조회페이지
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from 'antd';
-import { ReactComponent as Meetinge } from '../../asset/svg/RainBowMeetinge.svg';
+import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 
-// 로그인하고 매칭증에 상대방이랑 매칭됬을 때 매칭조회페이지
+// 로그인하고 매칭증에 상대방찾고 있을 때 매칭조회페이지
 
-export default function LoginMatchOk() {
+export default function LoginWaitOtherTeam({ status }) {
   const navigate = useNavigate();
+
+  console.log(status);
 
   return (
     <>
@@ -30,16 +32,10 @@ export default function LoginMatchOk() {
         </RightTop>
       </Top>
       <WhiteBox>
-        <Meetinge />
-        <TextBox>여러분의 상대팀이 매칭되었습니다.</TextBox>
-        <TextBox2>상대팀의 미팅학개론을 확인해 주세요!</TextBox2>
-        <MeetingButton
-          onClick={() => {
-            navigate('/matching/otherteam');
-          }}
-        >
-          결과 조회하기
-        </MeetingButton>
+        <SBigO />
+        <TextBox>상대팀의 수락 여부를 확인하고 있어요.</TextBox>
+        <TextBox2>조금만 기다려 주세요!</TextBox2>
+        <TextBox3>확인 후 알람을 드릴게요.</TextBox3>
       </WhiteBox>
     </>
   );
@@ -85,10 +81,14 @@ const WhiteBox = styled.div`
   border-radius: 10px;
 `;
 
+const SBigO = styled(BigO)`
+  margin-right: 5%;
+`;
+
 const TextBox = styled.div`
-  margin-top: 10%;
+  margin-top: 20%;
   text-align: center;
-  width: 93%;
+  width: 100%;
   color: #1a1a1a;
   font-weight: 400;
   font-size: 30px;
@@ -97,44 +97,18 @@ const TextBox = styled.div`
 
 const TextBox2 = styled.div`
   text-align: center;
-  width: 100%;
+  width: 60%;
   color: #1a1a1a;
   font-weight: 400;
   font-size: 30px;
   font-family: 'Nanum JungHagSaeng';
 `;
 
-const MeetingButton = styled(Button)`
-  font-family: 'Nanum JungHagSaeng';
-  color: #ffffff;
+const TextBox3 = styled.div`
+  text-align: center;
+  width: 65%;
+  color: #1a1a1a;
   font-weight: 400;
-  font-size: 24px;
-  text-align: center;
-  border: none;
-  margin-top: 20%;
-  width: 160px;
-  height: 50px;
-  background: #eb8888;
-  border-radius: 10px;
-`;
-
-const Container = styled.div`
-  padding-top: 5%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-const ModalText = styled.div`
-  margin-top: 3%;
-  text-align: center;
-  width: 275px;
-`;
-
-const SButton = styled(Button)`
-  margin-top: 10%;
-  width: 100%;
-  height: 50px;
-  color: white;
-  background-color: ${(props) => props.theme.pink};
+  font-size: 30px;
+  font-family: 'Nanum JungHagSaeng';
 `;
