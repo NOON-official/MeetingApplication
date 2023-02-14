@@ -9,8 +9,10 @@ import { createTeam } from '../../features/apply/asyncAction';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
+import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 
 function CertificationPage() {
+  const { data: userTeamId } = useGetUserTeamIdDataQuery();
   const [vaildcheck, setValidCheck] = useState(false);
   const { finishedStep, ...applydata } = useSelector((store) => store.apply);
   const dispatch = useDispatch();
@@ -60,6 +62,23 @@ function CertificationPage() {
       setValidCheck(false);
     }
   }, [authorizeNumber]);
+
+  const handleSubmitData = useCallback(async () => {
+    if (userTeamId?.teamId === null) {
+      dispatch(createTeam(applydata));
+      window.alert('저장되었습니다!');
+    }
+    if (userTeamId?.teamId !== null) {
+      try {
+        await backend.patch(`/teams/${userTeamId?.teamId}`, { applydata });
+        window.alert('수정되었습니다!');
+      } catch (e) {
+        window.alert('취소중 오류가 발생하였습니다');
+      }
+    }
+  });
+
+  console.log(userTeamId);
 
   return (
     <ApplyLayout>
@@ -130,7 +149,7 @@ function CertificationPage() {
         <SubmitButton
           onClick={() => {
             setOpenModal(true);
-            dispatch(createTeam(applydata));
+            handleSubmitData();
           }}
           disabled={!vaildcheck}
         >

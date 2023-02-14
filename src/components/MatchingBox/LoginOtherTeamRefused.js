@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button, Modal } from 'antd';
 import backend from '../../util/backend';
-import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
+import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 
-// 로그인하고 매칭증에 상대방찾고 있을 때 매칭조회페이지
+// 로그인하고 매칭증에 상대방이 거절했을 때 매칭조회페이지
 
-export default function LoginWaitMatch({ teamId, status }) {
+export default function LoginOtherTeamRefused({ teamId, status }) {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const navigate = useNavigate();
@@ -46,17 +46,23 @@ export default function LoginWaitMatch({ teamId, status }) {
         footer={null}
       >
         <Container>
-          <ModalText1>
-            지금 정보를 수정하시면 매칭이 늦어져요. 그래도 괜찮으신가요?
-          </ModalText1>
           <SButton
             onClick={() => {
-              navigate('/apply/1');
+              navigate('/apply/6');
               setOpenModal1(false);
             }}
           >
-            수정하러 가기
+            기존 정보로 재매칭
           </SButton>
+          <SButton2
+            onClick={() => {
+              navigate('/apply/1');
+              window.localStorage.removeItem('apply-data');
+              setOpenModal1(false);
+            }}
+          >
+            새로운 정보로 재매칭
+          </SButton2>
         </Container>
       </Modal>
 
@@ -100,20 +106,25 @@ export default function LoginWaitMatch({ teamId, status }) {
         </RightTop>
       </Top>
       <WhiteBox>
-        <SBigO />
-        <TextBox>상대팀을 찾고 있어요!</TextBox>
-        <TextBox2>조금만 기다려 주시면 곧 매칭해드릴게요.</TextBox2>
-        <MeetingButton href="https://furry-bank-197.notion.site/A-to-Z-0ac3369582fa4f43bbfd568d267433e7">
-          미팅 팁 보러가기
+        <SSadFace />
+        <TextBox>조건에 부합하는 팀이 없어</TextBox>
+        <TextBox2>아쉽게도 이번에는 상대팀이</TextBox2>
+        <TextBox2>매칭되지 않았어요.</TextBox2>
+        <MeetingButton
+          onClick={() => {
+            setOpenModal1(true);
+          }}
+        >
+          재매칭하기
         </MeetingButton>
       </WhiteBox>
       <WhiteBox2>
         <MenuItem
           onClick={() => {
-            setOpenModal1(true);
+            setOpenModal2(true);
           }}
         >
-          프로필 수정하기 <RightArrow />
+          매칭 중단하기 <RightArrow />
         </MenuItem>
         <Line />
         <MenuItem
@@ -122,14 +133,6 @@ export default function LoginWaitMatch({ teamId, status }) {
           }}
         >
           이용권 구매하러 가기 <RightArrow />
-        </MenuItem>
-        <Line />
-        <MenuItem
-          onClick={() => {
-            setOpenModal2(true);
-          }}
-        >
-          매칭 중단하기 <RightArrow />
         </MenuItem>
       </WhiteBox2>
     </>
@@ -176,8 +179,9 @@ const WhiteBox = styled.div`
   border-radius: 10px;
 `;
 
-const SBigO = styled(BigO)`
+const SSadFace = styled(SadFace)`
   margin-right: 5%;
+  margin-top: 5%;
 `;
 
 const TextBox = styled.div`
@@ -192,7 +196,7 @@ const TextBox = styled.div`
 
 const TextBox2 = styled.div`
   text-align: center;
-  width: 55%;
+  width: 100%;
   color: #1a1a1a;
   font-weight: 400;
   font-size: 30px;
@@ -206,7 +210,7 @@ const MeetingButton = styled.a`
   font-size: 24px;
   text-align: center;
   border: none;
-  margin-top: 20%;
+  margin-top: 15%;
   width: 160px;
   height: 50px;
   line-height: 50px;
@@ -253,16 +257,9 @@ const Line = styled.div`
 `;
 
 const Container = styled.div`
-  padding-top: 5%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-`;
-
-const ModalText1 = styled.div`
-  margin-top: 3%;
-  text-align: center;
-  width: 230px;
 `;
 
 const ModalText2 = styled.div`
@@ -273,7 +270,15 @@ const ModalText2 = styled.div`
 
 const SButton = styled(Button)`
   margin-top: 10%;
-  width: 100%;
+  width: 60%;
+  height: 50px;
+  color: white;
+  background-color: ${(props) => props.theme.pink};
+`;
+
+const SButton2 = styled(Button)`
+  margin-top: 5%;
+  width: 60%;
   height: 50px;
   color: white;
   background-color: ${(props) => props.theme.pink};
