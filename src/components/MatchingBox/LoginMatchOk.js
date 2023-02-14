@@ -117,24 +117,3 @@ const MeetingButton = styled(Button)`
   background: #eb8888;
   border-radius: 10px;
 `;
-
-const Container = styled.div`
-  padding-top: 5%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-const ModalText = styled.div`
-  margin-top: 3%;
-  text-align: center;
-  width: 275px;
-`;
-
-const SButton = styled(Button)`
-  margin-top: 10%;
-  width: 100%;
-  height: 50px;
-  color: white;
-  background-color: ${(props) => props.theme.pink};
-`;
