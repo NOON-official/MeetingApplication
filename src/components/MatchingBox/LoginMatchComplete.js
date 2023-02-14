@@ -1,17 +1,53 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import { ReactComponent as Meetinge } from '../../asset/svg/RainBowMeetinge.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
+import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 
-// 로그인하고 매칭증에 상대방이랑 매칭됬을 때 매칭조회페이지
+// 로그인하고 매칭증에 둘다수락했을때 매칭조회페이지
 
-export default function LoginMatchOk() {
+export default function LoginMatchComplete() {
+  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
+
+  const handleCancel = () => {
+    setOpenModal(false);
+  };
 
   return (
     <>
+      <Modal
+        width="380px"
+        open={openModal}
+        onCancel={handleCancel}
+        centered
+        footer={null}
+      >
+        <Container>
+          <ModalText1>새로운 미팅을 신청하러 가시겠어요?</ModalText1>
+          <ModalText2>지금 수락된 미팅은 그대로 진행됩니다.</ModalText2>
+          <SButton
+            onClick={() => {
+              navigate('/apply/6');
+              setOpenModal(false);
+            }}
+          >
+            기존 정보로 매칭 시작하기
+          </SButton>
+          <SButton2
+            onClick={() => {
+              navigate('/apply/1');
+              window.localStorage.removeItem('apply-data');
+              setOpenModal(false);
+            }}
+          >
+            새로 정보 입력하기
+          </SButton2>
+        </Container>
+      </Modal>
       <Top>
         <LeftTop>
           매칭결과
@@ -31,16 +67,24 @@ export default function LoginMatchOk() {
       </Top>
       <WhiteBox>
         <Meetinge />
-        <TextBox>여러분의 상대팀이 매칭되었습니다.</TextBox>
-        <TextBox2>상대팀의 미팅학개론을 확인해 주세요!</TextBox2>
+        <TextBox>상대팀이 수락하셨습니다.</TextBox>
+        <TextBox2>상대팀과의 단톡방을 개설해드릴</TextBox2>
+        <TextBox2>예정이니 조금만 기다려 주세요!</TextBox2>
         <MeetingButton
           onClick={() => {
             navigate('/matching/otherteam');
           }}
         >
-          결과 조회하기
+          상대팀 프로필 조회하기
         </MeetingButton>
       </WhiteBox>
+      <WhiteBox2
+        onClick={() => {
+          setOpenModal(true);
+        }}
+      >
+        한번 더 미팅하러 가기 <RightArrow />
+      </WhiteBox2>
     </>
   );
 }
@@ -85,6 +129,22 @@ const WhiteBox = styled.div`
   border-radius: 10px;
 `;
 
+const WhiteBox2 = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px;
+  padding: 20px 35px;
+  background: #ffffff;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #777777;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const TextBox = styled.div`
   margin-top: 10%;
   text-align: center;
@@ -108,7 +168,7 @@ const MeetingButton = styled(Button)`
   font-family: 'Nanum JungHagSaeng';
   color: #ffffff;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 23px;
   text-align: center;
   border: none;
   margin-top: 20%;
@@ -125,15 +185,28 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-const ModalText = styled.div`
+const ModalText1 = styled.div`
   margin-top: 3%;
   text-align: center;
-  width: 275px;
+  width: 210px;
+`;
+
+const ModalText2 = styled.div`
+  text-align: center;
+  width: 220px;
 `;
 
 const SButton = styled(Button)`
   margin-top: 10%;
-  width: 100%;
+  width: 60%;
+  height: 50px;
+  color: white;
+  background-color: ${(props) => props.theme.pink};
+`;
+
+const SButton2 = styled(Button)`
+  margin-top: 3%;
+  width: 60%;
   height: 50px;
   color: white;
   background-color: ${(props) => props.theme.pink};
