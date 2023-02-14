@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Modal, Button } from 'antd';
+import { ReactComponent as LeftArrow } from '../../asset/svg/LeftArrow.svg';
 import theme from '../../style/theme';
+import Universities from '../../asset/Universities';
+import Mbti from '../../asset/Mbti';
 import ApplyLayout from '../../layout/ApplyLayout';
-import ApplyButton from '../../components/ApplyButton';
 
 function MatchingMyTeam() {
   const {
@@ -14,13 +16,13 @@ function MatchingMyTeam() {
     gender,
     memberCount,
     universities,
-    availableDate,
-    area,
+    availableDates,
+    areas,
     members,
     drink,
     prefSameUniversity,
     prefAge,
-    prefVibe,
+    prefVibes,
   } = useSelector((store) => store.apply);
   const navigate = useNavigate();
 
@@ -69,12 +71,15 @@ function MatchingMyTeam() {
           </ModalButton>
         </ModalContainer>
       </Modal>
-      <Title>
-        <Maintitle>
-          <Pink>당신만의 미팅학개론</Pink>을 정리해 드립니다
-        </Maintitle>
-      </Title>
       <Content>
+        <TopBox>
+          <SLeftArrow
+            onClick={() => {
+              navigate('/matching');
+            }}
+          />{' '}
+          &nbsp;&nbsp;&nbsp;우리팀 프로필 조회
+        </TopBox>
         <InfoBox>
           <InfoTitle>
             1. <Pink>우리는</Pink> 이런 팀이에요!
@@ -92,27 +97,11 @@ function MatchingMyTeam() {
               <SmallTitle>학교</SmallTitle>
               <SmallContent>
                 {universities.map((a) => {
-                  return <div key={a['key']}>{a['univ']} /</div>;
-                })}
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>선호 날짜</SmallTitle>
-              <SmallContent>
-                {availableDate.map((a) => {
                   return (
-                    <div key={a}>
-                      {a[6]}월 {a.substring(8, 10)}일 /
+                    <div key={Universities[a - 1].id}>
+                      {Universities[a - 1].name} /
                     </div>
                   );
-                })}
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>선호 지역</SmallTitle>
-              <SmallContent>
-                {area.map((a) => {
-                  return <div key={a}> {SchoolContent[a]} /</div>;
                 })}
               </SmallContent>
             </Info>
@@ -151,14 +140,14 @@ function MatchingMyTeam() {
               <SmallTitle>MBTI</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].mbti}</div>
-                  <div>{members[1].mbti}</div>
+                  <div>{Mbti[members[0].mbti].name}</div>
+                  <div>{Mbti[members[1].mbti].name}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].mbti}</div>
-                  <div>{members[1].mbti}</div>
-                  <div>{members[2].mbti}</div>
+                  <div>{Mbti[members[0].mbti].name}</div>
+                  <div>{Mbti[members[1].mbti].name}</div>
+                  <div>{Mbti[members[2].mbti].name}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -166,14 +155,14 @@ function MatchingMyTeam() {
               <SmallTitle>포지션</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].position}</div>
-                  <div>{members[1].position}</div>
+                  <div>{Mbti[members[0].mbti].name}</div>
+                  <div>{Mbti[members[1].mbti].name}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].position}</div>
-                  <div>{members[1].position}</div>
-                  <div>{members[2].position}</div>
+                  <div>{Mbti[members[0].mbti].name}</div>
+                  <div>{Mbti[members[1].mbti].name}</div>
+                  <div>{Mbti[members[2].mbti].name}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -219,9 +208,29 @@ function MatchingMyTeam() {
           </InfoTitle>
           <InfoContent>
             <Info>
+              <SmallTitle>선호 날짜</SmallTitle>
+              <SmallContent>
+                {availableDates.map((a) => {
+                  return (
+                    <div key={a}>
+                      {a[6]}월 {a.substring(8, 10)}일 /
+                    </div>
+                  );
+                })}
+              </SmallContent>
+            </Info>
+            <Info>
+              <SmallTitle>선호 지역</SmallTitle>
+              <SmallContent>
+                {areas.map((a) => {
+                  return <div key={a}> {SchoolContent[a]} /</div>;
+                })}
+              </SmallContent>
+            </Info>
+            <Info>
               <SmallTitle>분위기</SmallTitle>
               <SmallContent>
-                {prefVibe.map((a) => {
+                {prefVibes.map((a) => {
                   return <div key={a}>{VibeContent[a]}</div>;
                 })}
               </SmallContent>
@@ -243,50 +252,37 @@ function MatchingMyTeam() {
           </InfoContent>
         </InfoBox>
       </Content>
-      <Footer>
-        <ButtonBox>
-          <ApplyButton
-            onClick={() => {
-              setOpenModal(true);
-            }}
-          >
-            수정하기
-          </ApplyButton>
-          <ApplyButton onClick={() => navigate('/matching')}>
-            뒤로가기
-          </ApplyButton>
-        </ButtonBox>
-      </Footer>
     </ApplyLayout>
   );
 }
 
 export default MatchingMyTeam;
 
-const Title = styled.div`
-  width: 90%;
-  margin-top: 8%;
-  height: 13%;
-  min-height: 13%;
-`;
-
-const Maintitle = styled.div`
-  width: 100%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
-`;
-
 const Pink = styled.span`
   color: ${theme.pink};
 `;
 
 const Content = styled.div`
+  padding-bottom: 5%;
   width: 90%;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const TopBox = styled.div`
+  width: 100%;
+  font-weight: 600;
+  font-size: 14px;
+  color: #777777;
+  margin-top: 8%;
+`;
+
+const SLeftArrow = styled(LeftArrow)`
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const InfoBox = styled.div`
@@ -380,22 +376,6 @@ const MemberProfile2 = styled.div`
   color: #777777;
   font-weight: 400;
   font-size: 21px;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 10%;
-  padding-bottom: 5%;
-`;
-
-const ButtonBox = styled.div`
-  width: 90%;
-  display: flex;
-  justify-content: center;
-  justify-content: space-between;
 `;
 
 const ModalContainer = styled.div`

@@ -9,6 +9,7 @@ import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
 import Section from '../components/Section';
 import PrimaryButton from '../components/PrimaryButton';
+import backend from '../util/backend';
 import {
   useGetTeamCountsQuery,
   useGetTeamMembersCountOneWeekQuery,
@@ -23,8 +24,13 @@ function Main() {
 
   const navigate = useNavigate();
 
-  const handleStart = useCallback(() => {
-    navigate('/apply/agree');
+  const handleStart = useCallback(async () => {
+    try {
+      await backend.get('/users/agreements');
+      navigate('/apply/1');
+    } catch {
+      navigate('/apply/agree');
+    }
   }, [finishedStep]);
 
   const twoman = teamData?.['2vs2']['male'];
