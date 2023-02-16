@@ -15,12 +15,8 @@ export const createTeam = createAsyncThunk(
 
 export const updateTeam = createAsyncThunk(
   'apply/updateTeam',
-  async (userid, applydata, { rejectWithValue }) => {
-    try {
-      const response = await backend.patch(`/teams/${userid}`, applydata);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+  async (userid, data) => {
+    const response = await backend.patch(`/teams/${userid}`, data);
+    return response.data;
   },
 );
