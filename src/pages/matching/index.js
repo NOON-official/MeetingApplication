@@ -24,7 +24,7 @@ function Matching() {
   const { data: matchingStatus } = useGetMatchingStatusQuery();
   const { accessToken } = useSelector((state) => state.user);
 
-  const state = 8;
+  const state = 3;
 
   console.log(userTeamId?.teamId);
   console.log(matchingStatus);
@@ -39,27 +39,36 @@ function Matching() {
     if (state === 2) {
       return (
         <LoginWaitMatch teamId={userTeamId?.teamId} status={matchingStatus} />
-      ); // 수정하기 안됌!!!!
+      ); // 완료
     }
     if (state === 3) {
       return (
         <LoginMatchOk teamId={userTeamId?.teamId} status={matchingStatus} />
-      ); // 상대방정보 api 어디??!!!!
+      ); // 완료
     }
     if (state === 4) {
       return <LoginWaitOtherTeam />;
     } // 완료
     if (state === 5) {
-      return <LoginMatchComplete />;
-    } // 상대방정보 api 어디??!!!!
+      return <LoginMatchComplete status={matchingStatus} />;
+    } // 완료
     if (state === 6) {
-      return <LoginMatchFail />;
+      return (
+        <LoginMatchFail teamId={userTeamId?.teamId} status={matchingStatus} />
+      );
     } // 완료
     if (state === 7) {
-      return <LoginOtherTeamRefused />;
+      return (
+        <LoginOtherTeamRefused
+          teamId={userTeamId?.teamId}
+          status={matchingStatus}
+        />
+      );
     } // 완료
     if (state === 8) {
-      return <LoginNoAnswer />;
+      return (
+        <LoginNoAnswer teamId={userTeamId?.teamId} status={matchingStatus} />
+      );
     }
     if (state === 9) {
       return <LoginRefuse />;
