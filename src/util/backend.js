@@ -26,6 +26,9 @@ const backend = {
   put(url, data, config) {
     return axios.put(SERVER_URL + url, data, setupToken(config));
   },
+  patch(url, data, config) {
+    return axios.patch(SERVER_URL + url, data, setupToken(config));
+  },
   delete(url, config) {
     return axios.delete(SERVER_URL + url, setupToken(config));
   },
