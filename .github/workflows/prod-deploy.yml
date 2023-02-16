@@ -1,9 +1,9 @@
-name: stage-deploy
+name: prod-deploy
 
 on:
   push:
     branches:
-      - stage # 브랜치에서 push 이벤트가 일어났을 때 실행
+      - prod # 브랜치에서 push 이벤트가 일어났을 때 실행
 
 jobs:
   AUTO_DEPLOY:
@@ -13,8 +13,8 @@ jobs:
       - name: multiple command
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.STAGE_HOST }}
-          username: ${{ secrets.STAGE_USER_NAME }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd ~/client
