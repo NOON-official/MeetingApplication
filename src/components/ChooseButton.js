@@ -14,12 +14,12 @@ export default function ChooseButton(props) {
 }
 
 const BigButton = styled.button`
-  margin-top: 3%;
+  margin-top: 5%;
   background: #f6eeee;
   border-radius: 10px;
   border: none;
   font-family: 'Nanum JungHagSaeng';
-  width: 360px;
+  width: 100%;
   height: 45px;
   font-weight: 400;
   font-size: 20px;
