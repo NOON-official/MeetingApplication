@@ -1,26 +1,44 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useCallback, useEffect } from 'react';
 
 import { Modal, Button } from 'antd';
 import { ReactComponent as LeftArrow } from '../../asset/svg/LeftArrow.svg';
+import Universities from '../../asset/Universities';
+import Mbti from '../../asset/Mbti';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
+import backend from '../../util/backend';
 
 function MatchingOtherTeam() {
-  const {
-    intro,
-    gender,
-    memberCount,
-    universities,
-    availableDate,
-    area,
-    members,
-    drink,
-    prefVibe,
-  } = useSelector((store) => store.apply);
+  const [myteamId, setMyteamId] = useState('');
+  const [matchingId, setMatchingId] = useState('');
+  const [otherTeamData, setOtherTeamData] = useState({});
+  const [matchingStatus, setMatchingStatus] = useState('');
+
+  const getMatchingId = useCallback(async () => {
+    const matchingstatus = await backend.get('/users/matchings/status');
+    const teamid = await backend.get(`/users/team-id`);
+    const matchingid = await backend.get(
+      `/teams/${teamid.data.teamId}/matching-id`,
+    );
+    const matchingdata = await backend.get(
+      `/matchings/${matchingid.data.matchingId}`,
+    );
+    const pureotherTeamData = await backend.get(
+      `/teams/${matchingdata.data.partnerTeamId}`,
+    );
+    setMatchingStatus(matchingstatus.data.matchingStatus);
+    setMyteamId(teamid.data.teamId);
+    setMatchingId(matchingid.data.matchingId);
+    setOtherTeamData(pureotherTeamData.data);
+  }, []);
+
+  useEffect(() => {
+    getMatchingId();
+  }, []);
+
   const navigate = useNavigate();
 
   const [openModal1, setOpenModal1] = useState(false);
@@ -39,6 +57,26 @@ function MatchingOtherTeam() {
     setOpenModal3(false);
   };
 
+  const handleOkay = useCallback(async () => {
+    try {
+      await backend.put(`/matchings/${matchingId}/teams/${myteamId}/accept`);
+      setOpenModal3(true);
+    } catch {
+      setOpenModal1(true);
+    }
+  });
+
+  const handleRefuse = useCallback(async () => {
+    await backend.put(`/matchings/${matchingId}/teams/${myteamId}/refuse`);
+  });
+
+  const RoleContent = {
+    1: '비주얼',
+    2: '사회자',
+    3: '개그맨',
+    4: '깍두기',
+  };
+
   const SchoolContent = {
     1: '강남',
     2: '건대',
@@ -55,245 +93,262 @@ function MatchingOtherTeam() {
     5: '술게임 못해도 챙겨주는 훈훈한 분위기',
   };
 
-  return (
-    <ApplyLayout>
-      <Modal
-        width="380px"
-        open={openModal1}
-        onCancel={handleCancel1}
-        centered
-        footer={null}
-      >
-        <ModalContainer>
-          <ModalText1>수락하기 위해서는 이용권이 필요해요</ModalText1>
-          <ModalText1>상대팀이 거절할 경우 이용권이 반환돼요.</ModalText1>
-          <ModalButton
-            onClick={() => {
-              handleCancel1();
-              navigate('/myinfo/ticket');
-            }}
-          >
-            이용권구매하기
-          </ModalButton>
-        </ModalContainer>
-      </Modal>
-      <Modal
-        width="380px"
-        open={openModal3}
-        onCancel={handleCancel3}
-        centered
-        footer={null}
-      >
-        <ModalContainer>
-          <ModalText1>수락하시면 이용권 한장이 사용돼요.</ModalText1>
-          <ModalText1>만약 상대팀이 거절할경우</ModalText1>
-          <ModalText1>이용권이 봔환되요.</ModalText1>
-          <ModalButton
-            onClick={() => {
-              handleCancel3();
-              navigate('/matching');
-            }}
-          >
-            수락하기
-          </ModalButton>
-        </ModalContainer>
-      </Modal>
-      <Modal
-        width="380px"
-        open={openModal2}
-        onCancel={handleCancel2}
-        centered
-        footer={null}
-      >
-        <ModalContainer>
-          <ModalText2>
-            거절하시면 상대팀과 다시 매칭될수 없어요. 그래도 거절하시겠어요?
-          </ModalText2>
-          <ModalButton
-            onClick={() => {
-              handleCancel2();
-              navigate('/matching');
-            }}
-          >
-            거절하기
-          </ModalButton>
-        </ModalContainer>
-      </Modal>
-      <Content>
-        <Title>
-          <SLeftArrow
-            onClick={() => {
-              navigate('/matching');
-            }}
-          />
-          상대팀 미팅학개론
-        </Title>
-        <InfoBox>
-          <InfoTitle>
-            1. <Pink>상대는</Pink> 이런 팀이에요!
-          </InfoTitle>
-          <InfoContent>
-            <Info>
-              <SmallTitle>성별</SmallTitle>
-              <SmallContent>{gender === 1 ? '남성' : '여성'}</SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>인원수</SmallTitle>
-              <SmallContent>{memberCount === 2 ? '2명' : '3명'}</SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>학교</SmallTitle>
-              <SmallContent>
-                {universities.map((a) => {
-                  return <div key={a['key']}>{a['univ']} /</div>;
-                })}
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>선호 날짜</SmallTitle>
-              <SmallContent>
-                {availableDate.map((a) => {
-                  return (
-                    <div key={a}>
-                      {a[6]}월 {a.substring(8, 10)}일 /
-                    </div>
-                  );
-                })}
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>선호 지역</SmallTitle>
-              <SmallContent>
-                {area.map((a) => {
-                  return <div key={a}> {SchoolContent[a]} /</div>;
-                })}
-              </SmallContent>
-            </Info>
-          </InfoContent>
-          <InfoContent>
-            <Info>
-              {memberCount === 2 ? (
-                <Member>
-                  <div>대표자</div>
-                  <div>팀원 1</div>
-                </Member>
-              ) : (
-                <Member2>
-                  <div>대표자</div>
-                  <div>팀원 1</div>
-                  <div>팀원 2</div>
-                </Member2>
-              )}
-            </Info>
-            <Info>
-              <SmallTitle>나이</SmallTitle>
-              {memberCount === 2 ? (
-                <MemberProfile>
-                  <div>{members[0].age}세</div>
-                  <div>{members[1].age}세</div>
-                </MemberProfile>
-              ) : (
-                <MemberProfile2>
-                  <div>{members[0].age}세</div>
-                  <div>{members[1].age}세</div>
-                  <div>{members[2].age}세</div>
-                </MemberProfile2>
-              )}
-            </Info>
-            <Info>
-              <SmallTitle>MBTI</SmallTitle>
-              {memberCount === 2 ? (
-                <MemberProfile>
-                  <div>{members[0].mbti}</div>
-                  <div>{members[1].mbti}</div>
-                </MemberProfile>
-              ) : (
-                <MemberProfile2>
-                  <div>{members[0].mbti}</div>
-                  <div>{members[1].mbti}</div>
-                  <div>{members[2].mbti}</div>
-                </MemberProfile2>
-              )}
-            </Info>
-            <Info>
-              <SmallTitle>포지션</SmallTitle>
-              {memberCount === 2 ? (
-                <MemberProfile>
-                  <div>{members[0].position}</div>
-                  <div>{members[1].position}</div>
-                </MemberProfile>
-              ) : (
-                <MemberProfile2>
-                  <div>{members[0].position}</div>
-                  <div>{members[1].position}</div>
-                  <div>{members[2].position}</div>
-                </MemberProfile2>
-              )}
-            </Info>
-            <Info>
-              <SmallTitle>닮은꼴</SmallTitle>
-              {memberCount === 2 ? (
-                <MemberProfile>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
-                </MemberProfile>
-              ) : (
-                <MemberProfile2>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
-                  <div>{members[2].similar}</div>
-                </MemberProfile2>
-              )}
-            </Info>
-          </InfoContent>
-        </InfoBox>
-        <InfoBox>
-          <InfoTitle>
-            3. <Pink>미팅</Pink>은 이랬으면 좋겠어요!
-          </InfoTitle>
-          <InfoContent>
-            <Info>
-              <SmallTitle>분위기</SmallTitle>
-              <SmallContent>
-                {prefVibe.map((a) => {
-                  return <div key={a}>{VibeContent[a]}</div>;
-                })}
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>주량 레벨</SmallTitle>
-              <SmallContent>Level {drink}</SmallContent>
-            </Info>
-          </InfoContent>
-        </InfoBox>
-        <InfoBox>
-          <InfoTitle>
-            4. 상대팀 <Pink>한 줄 어필</Pink>
-          </InfoTitle>
-          <InfoContent>
-            <Info>
-              <SmallContent>{intro}</SmallContent>
-            </Info>
-          </InfoContent>
-        </InfoBox>
-      </Content>
-      <Alarm>상대팀 미팅학개론을 캡쳐해서 팀원들에게 공유해보세요!</Alarm>
-      <Footer>
-        <ButtonBox>
-          <ApplyButton
-            onClick={() => {
-              setOpenModal1(true);
-            }}
-          >
-            수락하기
-          </ApplyButton>
-          <ApplyButton onClick={() => setOpenModal2(true)}>
-            거절하기
-          </ApplyButton>
-        </ButtonBox>
-      </Footer>
-    </ApplyLayout>
-  );
+  if (otherTeamData?.members?.length > 0) {
+    return (
+      <ApplyLayout>
+        <Modal
+          width="380px"
+          open={openModal1}
+          onCancel={handleCancel1}
+          centered
+          footer={null}
+        >
+          <ModalContainer>
+            <ModalText1>수락하기 위해서는 이용권이 필요해요</ModalText1>
+            <ModalText1>상대팀이 거절할 경우 이용권이 반환돼요.</ModalText1>
+            <ModalButton
+              onClick={() => {
+                handleCancel1();
+                navigate('/myinfo/ticket');
+              }}
+            >
+              이용권구매하기
+            </ModalButton>
+          </ModalContainer>
+        </Modal>
+        <Modal
+          width="380px"
+          open={openModal2}
+          onCancel={handleCancel2}
+          centered
+          footer={null}
+        >
+          <ModalContainer>
+            <ModalText2>
+              거절하시면 상대팀과 다시 매칭될수 없어요. 그래도 거절하시겠어요?
+            </ModalText2>
+            <ModalButton
+              onClick={() => {
+                handleRefuse();
+                handleCancel2();
+                navigate('/matching');
+              }}
+            >
+              거절하기
+            </ModalButton>
+          </ModalContainer>
+        </Modal>
+        <Modal
+          width="380px"
+          open={openModal3}
+          onCancel={handleCancel3}
+          centered
+          footer={null}
+        >
+          <ModalContainer>
+            <ModalText1>수락하시면 이용권 한장이 사용돼요.</ModalText1>
+            <ModalText1>만약 상대팀이 거절할경우</ModalText1>
+            <ModalText1>이용권이 봔환되요.</ModalText1>
+            <ModalButton
+              onClick={() => {
+                handleCancel3();
+                navigate('/matching');
+              }}
+            >
+              수락하기
+            </ModalButton>
+          </ModalContainer>
+        </Modal>
+        <Content>
+          <Title>
+            <SLeftArrow
+              onClick={() => {
+                navigate('/matching');
+              }}
+            />
+            상대팀 미팅학개론
+          </Title>
+          <InfoBox>
+            <InfoTitle>
+              1. <Pink>상대는</Pink> 이런 팀이에요!
+            </InfoTitle>
+            <InfoContent>
+              <Info>
+                <SmallTitle>성별</SmallTitle>
+                <SmallContent>
+                  {otherTeamData?.gender === 1 ? '남성' : '여성'}
+                </SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>인원수</SmallTitle>
+                <SmallContent>
+                  {otherTeamData?.memberCount === 2 ? '2명' : '3명'}
+                </SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>학교</SmallTitle>
+                <SmallContent>
+                  {otherTeamData?.universities?.map((a) => {
+                    return (
+                      <div key={Universities[a - 1].id}>
+                        {Universities[a - 1].name} /
+                      </div>
+                    );
+                  })}
+                </SmallContent>
+              </Info>
+            </InfoContent>
+            <InfoContent>
+              <Info>
+                {otherTeamData?.memberCount === 2 ? (
+                  <Member>
+                    <div>대표자</div>
+                    <div>팀원 1</div>
+                  </Member>
+                ) : (
+                  <Member2>
+                    <div>대표자</div>
+                    <div>팀원 1</div>
+                    <div>팀원 2</div>
+                  </Member2>
+                )}
+              </Info>
+              <Info>
+                <SmallTitle>나이</SmallTitle>
+                {otherTeamData?.memberCount === 2 ? (
+                  <MemberProfile>
+                    <div>{otherTeamData?.members['0'].age}세</div>
+                    <div>{otherTeamData?.members['1'].age}세</div>
+                  </MemberProfile>
+                ) : (
+                  <MemberProfile2>
+                    <div>{otherTeamData?.members['0'].age}세</div>
+                    <div>{otherTeamData?.members['1'].age}세</div>
+                    <div>{otherTeamData?.members['2'].age}세</div>
+                  </MemberProfile2>
+                )}
+              </Info>
+              <Info>
+                <SmallTitle>MBTI</SmallTitle>
+                {otherTeamData?.memberCount === 2 ? (
+                  <MemberProfile>
+                    <div>{Mbti[otherTeamData?.members[0].mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[1].mbti].name}</div>
+                  </MemberProfile>
+                ) : (
+                  <MemberProfile2>
+                    <div>{Mbti[otherTeamData?.members[0].mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[1].mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[2].mbti].name}</div>
+                  </MemberProfile2>
+                )}
+              </Info>
+              <Info>
+                <SmallTitle>포지션</SmallTitle>
+                {otherTeamData?.memberCount === 2 ? (
+                  <MemberProfile>
+                    <div>{RoleContent[otherTeamData?.members[0].role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[1].role]}</div>
+                  </MemberProfile>
+                ) : (
+                  <MemberProfile2>
+                    <div>{RoleContent[otherTeamData?.members[0].role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[1].role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[2].role]}</div>
+                  </MemberProfile2>
+                )}
+              </Info>
+              <Info>
+                <SmallTitle>닮은꼴</SmallTitle>
+                {otherTeamData?.memberCount === 2 ? (
+                  <MemberProfile>
+                    <div>{otherTeamData?.members[0].similar}</div>
+                    <div>{otherTeamData?.members[1].similar}</div>
+                  </MemberProfile>
+                ) : (
+                  <MemberProfile2>
+                    <div>{otherTeamData?.members[0].similar}</div>
+                    <div>{otherTeamData?.members[1].similar}</div>
+                    <div>{otherTeamData?.members[2].similar}</div>
+                  </MemberProfile2>
+                )}
+              </Info>
+            </InfoContent>
+          </InfoBox>
+          <InfoBox>
+            <InfoTitle>
+              3. <Pink>미팅</Pink>은 이랬으면 좋겠어요!
+            </InfoTitle>
+            <InfoContent>
+              <Info>
+                <SmallTitle>선호 날짜</SmallTitle>
+                <SmallContent>
+                  {otherTeamData?.availableDates.map((a) => {
+                    return (
+                      <div key={a}>
+                        {a[6]}월 {a.substring(8, 10)}일 /
+                      </div>
+                    );
+                  })}
+                </SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>선호 지역</SmallTitle>
+                <SmallContent>
+                  {otherTeamData?.areas.map((a) => {
+                    return <div key={a}> {SchoolContent[a]} /</div>;
+                  })}
+                </SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>분위기</SmallTitle>
+                <SmallContent>
+                  {otherTeamData?.prefVibes.map((a) => {
+                    return <div key={a}>{VibeContent[a]}</div>;
+                  })}
+                </SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>주량 레벨</SmallTitle>
+                <SmallContent>Level {otherTeamData?.drink}</SmallContent>
+              </Info>
+            </InfoContent>
+          </InfoBox>
+          <InfoBox>
+            <InfoTitle>
+              4. 상대팀 <Pink>한 줄 어필</Pink>
+            </InfoTitle>
+            <InfoContent>
+              <Info>
+                <SmallContent>{otherTeamData?.intro}</SmallContent>
+              </Info>
+            </InfoContent>
+          </InfoBox>
+        </Content>
+        <Alarm>상대팀 미팅학개론을 캡쳐해서 팀원들에게 공유해보세요!</Alarm>
+        {matchingStatus === 'MATCHED' ? (
+          <Footer>
+            <ButtonBox>
+              <ApplyButton
+                onClick={() => {
+                  handleOkay();
+                }}
+              >
+                수락하기
+              </ApplyButton>
+              <ApplyButton
+                onClick={() => {
+                  setOpenModal2(true);
+                }}
+              >
+                거절하기
+              </ApplyButton>
+            </ButtonBox>
+          </Footer>
+        ) : null}
+      </ApplyLayout>
+    );
+  }
 }
 
 export default MatchingOtherTeam;
@@ -316,6 +371,7 @@ const SLeftArrow = styled(LeftArrow)`
 `;
 
 const Alarm = styled.div`
+  margin-top: 10%;
   font-weight: 600;
   font-size: 14px;
   text-align: center;
@@ -328,6 +384,7 @@ const Pink = styled.span`
 
 const Content = styled.div`
   width: 90%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -431,7 +488,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 5%;
+  margin-top: 8%;
   padding-bottom: 5%;
 `;
 
