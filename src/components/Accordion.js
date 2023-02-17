@@ -21,7 +21,7 @@ export default function Accordion(props) {
           {props.content}
           {props.link && (
             <div>
-              <MoreButton href={props.link}>
+              <MoreButton href={props.link} target="_blank">
                 {props.linkText || '자세히 보기'} →
               </MoreButton>
             </div>
