@@ -15,8 +15,10 @@ function MatchingOtherTeam() {
   const [myteamId, setMyteamId] = useState('');
   const [matchingId, setMatchingId] = useState('');
   const [otherTeamData, setOtherTeamData] = useState({});
+  const [matchingStatus, setMatchingStatus] = useState('');
 
   const getMatchingId = useCallback(async () => {
+    const matchingstatus = await backend.get('/users/matchings/status');
     const teamid = await backend.get(`/users/team-id`);
     const matchingid = await backend.get(
       `/teams/${teamid.data.teamId}/matching-id`,
@@ -27,6 +29,7 @@ function MatchingOtherTeam() {
     const pureotherTeamData = await backend.get(
       `/teams/${matchingdata.data.partnerTeamId}`,
     );
+    setMatchingStatus(matchingstatus.data.matchingStatus);
     setMyteamId(teamid.data.teamId);
     setMatchingId(matchingid.data.matchingId);
     setOtherTeamData(pureotherTeamData.data);
@@ -323,24 +326,26 @@ function MatchingOtherTeam() {
           </InfoBox>
         </Content>
         <Alarm>상대팀 미팅학개론을 캡쳐해서 팀원들에게 공유해보세요!</Alarm>
-        <Footer>
-          <ButtonBox>
-            <ApplyButton
-              onClick={() => {
-                handleOkay();
-              }}
-            >
-              수락하기
-            </ApplyButton>
-            <ApplyButton
-              onClick={() => {
-                setOpenModal2(true);
-              }}
-            >
-              거절하기
-            </ApplyButton>
-          </ButtonBox>
-        </Footer>
+        {matchingStatus === 'MATCHED' ? (
+          <Footer>
+            <ButtonBox>
+              <ApplyButton
+                onClick={() => {
+                  handleOkay();
+                }}
+              >
+                수락하기
+              </ApplyButton>
+              <ApplyButton
+                onClick={() => {
+                  setOpenModal2(true);
+                }}
+              >
+                거절하기
+              </ApplyButton>
+            </ButtonBox>
+          </Footer>
+        ) : null}
       </ApplyLayout>
     );
   }
