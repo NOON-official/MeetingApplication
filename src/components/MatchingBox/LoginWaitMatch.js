@@ -10,7 +10,7 @@ import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 
 // 로그인하고 매칭증에 상대방찾고 있을 때 매칭조회페이지
 
-export default function LoginWaitMatch({ teamId, status }) {
+export default function LoginWaitMatch({ teamId }) {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const navigate = useNavigate();
@@ -33,8 +33,6 @@ export default function LoginWaitMatch({ teamId, status }) {
       window.alert('취소중 오류가 발생하였습니다');
     }
   });
-
-  console.log(status);
 
   return (
     <>
