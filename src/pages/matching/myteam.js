@@ -48,212 +48,226 @@ function MatchingMyTeam() {
     5: '술게임 못해도 챙겨주는 훈훈한 분위기',
   };
 
-  return (
-    <ApplyLayout>
-      <Modal
-        width="380px"
-        open={openModal}
-        onCancel={handleCancel}
-        centered
-        footer={null}
-      >
-        <ModalContainer>
-          <ModalText>
-            지금 정보를 수정하면 매칭이 늦어져요. 그래도 괜찮으신가요?
-          </ModalText>
-          <ModalButton
-            onClick={() => {
-              handleCancel();
-              navigate('/apply/1');
-            }}
-          >
-            수정하러가기
-          </ModalButton>
-        </ModalContainer>
-      </Modal>
-      <Content>
-        <TopBox>
-          <SLeftArrow
-            onClick={() => {
-              navigate('/matching');
-            }}
-          />{' '}
-          &nbsp;&nbsp;&nbsp;우리팀 프로필 조회
-        </TopBox>
-        <InfoBox>
-          <InfoTitle>
-            1. <Pink>우리는</Pink> 이런 팀이에요!
-          </InfoTitle>
-          <InfoContent>
-            <Info>
-              <SmallTitle>성별</SmallTitle>
-              <SmallContent>{gender === 1 ? '남성' : '여성'}</SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>인원수</SmallTitle>
-              <SmallContent>{memberCount === 2 ? '2명' : '3명'}</SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>학교</SmallTitle>
-              <SmallContent>
-                {universities.map((a) => {
-                  return (
-                    <div key={Universities[a - 1].id}>
-                      {Universities[a - 1].name} /
-                    </div>
-                  );
-                })}
-              </SmallContent>
-            </Info>
-          </InfoContent>
-          <InfoContent>
-            <Info>
-              {memberCount === 2 ? (
-                <Member>
-                  <div>대표자</div>
-                  <div>팀원 1</div>
-                </Member>
-              ) : (
-                <Member2>
-                  <div>대표자</div>
-                  <div>팀원 1</div>
-                  <div>팀원 2</div>
-                </Member2>
-              )}
-            </Info>
-            <Info>
-              <SmallTitle>나이</SmallTitle>
-              {memberCount === 2 ? (
-                <MemberProfile>
-                  <div>{members[0].age}세</div>
-                  <div>{members[1].age}세</div>
-                </MemberProfile>
-              ) : (
-                <MemberProfile2>
-                  <div>{members[0].age}세</div>
-                  <div>{members[1].age}세</div>
-                  <div>{members[2].age}세</div>
-                </MemberProfile2>
-              )}
-            </Info>
-            <Info>
-              <SmallTitle>MBTI</SmallTitle>
-              {memberCount === 2 ? (
-                <MemberProfile>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
-                </MemberProfile>
-              ) : (
-                <MemberProfile2>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
-                  <div>{Mbti[members[2].mbti].name}</div>
-                </MemberProfile2>
-              )}
-            </Info>
-            <Info>
-              <SmallTitle>포지션</SmallTitle>
-              {memberCount === 2 ? (
-                <MemberProfile>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
-                </MemberProfile>
-              ) : (
-                <MemberProfile2>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
-                  <div>{Mbti[members[2].mbti].name}</div>
-                </MemberProfile2>
-              )}
-            </Info>
-            <Info>
-              <SmallTitle>닮은꼴</SmallTitle>
-              {memberCount === 2 ? (
-                <MemberProfile>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
-                </MemberProfile>
-              ) : (
-                <MemberProfile2>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
-                  <div>{members[2].similar}</div>
-                </MemberProfile2>
-              )}
-            </Info>
-          </InfoContent>
-        </InfoBox>
-        <InfoBox>
-          <InfoTitle>
-            2. <Pink>상대</Pink>는 이런 팀을 원해요!
-          </InfoTitle>
-          <InfoContent>
-            <Info>
-              <SmallTitle>평균 나이</SmallTitle>
-              <SmallContent>
-                {prefAge[0]} ~ {prefAge[1]}세
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>학교</SmallTitle>
-              <SmallContent>
-                {prefSameUniversity ? '상관없어요' : '같은학교는 싫어요'}
-              </SmallContent>
-            </Info>
-          </InfoContent>
-        </InfoBox>
-        <InfoBox>
-          <InfoTitle>
-            3. <Pink>미팅</Pink>은 이랬으면 좋겠어요!
-          </InfoTitle>
-          <InfoContent>
-            <Info>
-              <SmallTitle>선호 날짜</SmallTitle>
-              <SmallContent>
-                {availableDates.map((a) => {
-                  return (
-                    <div key={a}>
-                      {a[6]}월 {a.substring(8, 10)}일 /
-                    </div>
-                  );
-                })}
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>선호 지역</SmallTitle>
-              <SmallContent>
-                {areas.map((a) => {
-                  return <div key={a}> {SchoolContent[a]} /</div>;
-                })}
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>분위기</SmallTitle>
-              <SmallContent>
-                {prefVibes.map((a) => {
-                  return <div key={a}>{VibeContent[a]}</div>;
-                })}
-              </SmallContent>
-            </Info>
-            <Info>
-              <SmallTitle>주량 레벨</SmallTitle>
-              <SmallContent>Level {drink}</SmallContent>
-            </Info>
-          </InfoContent>
-        </InfoBox>
-        <InfoBox>
-          <InfoTitle>
-            4. 우리팀 <Pink>한 줄 어필</Pink>
-          </InfoTitle>
-          <InfoContent>
-            <Info>
-              <SmallContent>{intro}</SmallContent>
-            </Info>
-          </InfoContent>
-        </InfoBox>
-      </Content>
-    </ApplyLayout>
-  );
+  if (
+    intro &&
+    gender &&
+    memberCount &&
+    universities &&
+    availableDates &&
+    areas &&
+    members &&
+    drink &&
+    prefSameUniversity &&
+    prefAge &&
+    prefVibes
+  ) {
+    return (
+      <ApplyLayout>
+        <Modal
+          width="380px"
+          open={openModal}
+          onCancel={handleCancel}
+          centered
+          footer={null}
+        >
+          <ModalContainer>
+            <ModalText>
+              지금 정보를 수정하면 매칭이 늦어져요. 그래도 괜찮으신가요?
+            </ModalText>
+            <ModalButton
+              onClick={() => {
+                handleCancel();
+                navigate('/apply/1');
+              }}
+            >
+              수정하러가기
+            </ModalButton>
+          </ModalContainer>
+        </Modal>
+        <Content>
+          <TopBox>
+            <SLeftArrow
+              onClick={() => {
+                navigate('/matching');
+              }}
+            />{' '}
+            &nbsp;&nbsp;&nbsp;우리팀 프로필 조회
+          </TopBox>
+          <InfoBox>
+            <InfoTitle>
+              1. <Pink>우리는</Pink> 이런 팀이에요!
+            </InfoTitle>
+            <InfoContent>
+              <Info>
+                <SmallTitle>성별</SmallTitle>
+                <SmallContent>{gender === 1 ? '남성' : '여성'}</SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>인원수</SmallTitle>
+                <SmallContent>{memberCount === 2 ? '2명' : '3명'}</SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>학교</SmallTitle>
+                <SmallContent>
+                  {universities.map((a) => {
+                    return (
+                      <div key={Universities[a - 1].id}>
+                        {Universities[a - 1].name} /
+                      </div>
+                    );
+                  })}
+                </SmallContent>
+              </Info>
+            </InfoContent>
+            <InfoContent>
+              <Info>
+                {memberCount === 2 ? (
+                  <Member>
+                    <div>대표자</div>
+                    <div>팀원 1</div>
+                  </Member>
+                ) : (
+                  <Member2>
+                    <div>대표자</div>
+                    <div>팀원 1</div>
+                    <div>팀원 2</div>
+                  </Member2>
+                )}
+              </Info>
+              <Info>
+                <SmallTitle>나이</SmallTitle>
+                {memberCount === 2 ? (
+                  <MemberProfile>
+                    <div>{members[0].age}세</div>
+                    <div>{members[1].age}세</div>
+                  </MemberProfile>
+                ) : (
+                  <MemberProfile2>
+                    <div>{members[0].age}세</div>
+                    <div>{members[1].age}세</div>
+                    <div>{members[2].age}세</div>
+                  </MemberProfile2>
+                )}
+              </Info>
+              <Info>
+                <SmallTitle>MBTI</SmallTitle>
+                {memberCount === 2 ? (
+                  <MemberProfile>
+                    <div>{Mbti[members[0].mbti].name}</div>
+                    <div>{Mbti[members[1].mbti].name}</div>
+                  </MemberProfile>
+                ) : (
+                  <MemberProfile2>
+                    <div>{Mbti[members[0].mbti].name}</div>
+                    <div>{Mbti[members[1].mbti].name}</div>
+                    <div>{Mbti[members[2].mbti].name}</div>
+                  </MemberProfile2>
+                )}
+              </Info>
+              <Info>
+                <SmallTitle>포지션</SmallTitle>
+                {memberCount === 2 ? (
+                  <MemberProfile>
+                    <div>{Mbti[members[0].mbti].name}</div>
+                    <div>{Mbti[members[1].mbti].name}</div>
+                  </MemberProfile>
+                ) : (
+                  <MemberProfile2>
+                    <div>{Mbti[members[0].mbti].name}</div>
+                    <div>{Mbti[members[1].mbti].name}</div>
+                    <div>{Mbti[members[2].mbti].name}</div>
+                  </MemberProfile2>
+                )}
+              </Info>
+              <Info>
+                <SmallTitle>닮은꼴</SmallTitle>
+                {memberCount === 2 ? (
+                  <MemberProfile>
+                    <div>{members[0].similar}</div>
+                    <div>{members[1].similar}</div>
+                  </MemberProfile>
+                ) : (
+                  <MemberProfile2>
+                    <div>{members[0].similar}</div>
+                    <div>{members[1].similar}</div>
+                    <div>{members[2].similar}</div>
+                  </MemberProfile2>
+                )}
+              </Info>
+            </InfoContent>
+          </InfoBox>
+          <InfoBox>
+            <InfoTitle>
+              2. <Pink>상대</Pink>는 이런 팀을 원해요!
+            </InfoTitle>
+            <InfoContent>
+              <Info>
+                <SmallTitle>평균 나이</SmallTitle>
+                <SmallContent>
+                  {prefAge[0]} ~ {prefAge[1]}세
+                </SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>학교</SmallTitle>
+                <SmallContent>
+                  {prefSameUniversity ? '상관없어요' : '같은학교는 싫어요'}
+                </SmallContent>
+              </Info>
+            </InfoContent>
+          </InfoBox>
+          <InfoBox>
+            <InfoTitle>
+              3. <Pink>미팅</Pink>은 이랬으면 좋겠어요!
+            </InfoTitle>
+            <InfoContent>
+              <Info>
+                <SmallTitle>선호 날짜</SmallTitle>
+                <SmallContent>
+                  {availableDates.map((a) => {
+                    return (
+                      <div key={a}>
+                        {a[6]}월 {a.substring(8, 10)}일 /
+                      </div>
+                    );
+                  })}
+                </SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>선호 지역</SmallTitle>
+                <SmallContent>
+                  {areas.map((a) => {
+                    return <div key={a}> {SchoolContent[a]} /</div>;
+                  })}
+                </SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>분위기</SmallTitle>
+                <SmallContent>
+                  {prefVibes.map((a) => {
+                    return <div key={a}>{VibeContent[a]}</div>;
+                  })}
+                </SmallContent>
+              </Info>
+              <Info>
+                <SmallTitle>주량 레벨</SmallTitle>
+                <SmallContent>Level {drink}</SmallContent>
+              </Info>
+            </InfoContent>
+          </InfoBox>
+          <InfoBox>
+            <InfoTitle>
+              4. 우리팀 <Pink>한 줄 어필</Pink>
+            </InfoTitle>
+            <InfoContent>
+              <Info>
+                <SmallContent>{intro}</SmallContent>
+              </Info>
+            </InfoContent>
+          </InfoBox>
+        </Content>
+      </ApplyLayout>
+    );
+  }
 }
 
 export default MatchingMyTeam;

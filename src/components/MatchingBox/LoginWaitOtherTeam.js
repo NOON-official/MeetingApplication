@@ -7,10 +7,8 @@ import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 
 // 로그인하고 매칭증에 상대방찾고 있을 때 매칭조회페이지
 
-export default function LoginWaitOtherTeam({ status }) {
+export default function LoginWaitOtherTeam() {
   const navigate = useNavigate();
-
-  console.log(status);
 
   return (
     <>
