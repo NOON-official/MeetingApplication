@@ -10,7 +10,7 @@ import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 
 // 로그인하고 매칭증에 상대방이 거절했을 때 매칭조회페이지
 
-export default function LoginOtherTeamRefused({ teamId, status }) {
+export default function LoginOtherTeamRefused({ teamId }) {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const navigate = useNavigate();
@@ -33,8 +33,6 @@ export default function LoginOtherTeamRefused({ teamId, status }) {
       window.alert('취소중 오류가 발생하였습니다');
     }
   });
-
-  console.log(status);
 
   return (
     <>
@@ -203,7 +201,7 @@ const TextBox2 = styled.div`
   font-family: 'Nanum JungHagSaeng';
 `;
 
-const MeetingButton = styled.a`
+const MeetingButton = styled(Button)`
   font-family: 'Nanum JungHagSaeng';
   color: #ffffff;
   font-weight: 400;
@@ -213,7 +211,6 @@ const MeetingButton = styled.a`
   margin-top: 15%;
   width: 160px;
   height: 50px;
-  line-height: 50px;
   background: #eb8888;
   border-radius: 10px;
 `;
