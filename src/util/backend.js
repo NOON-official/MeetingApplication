@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SERVER_URL, STORAGE_KEY_ACCESS_TOKEN } from '../config/constants';
+import { API_URL, STORAGE_KEY_ACCESS_TOKEN } from '../config/constants';
 
 const setupToken = (config) => {
   const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
@@ -18,16 +18,16 @@ const setupToken = (config) => {
 /** @type {import('axios').AxiosStatic} */
 const backend = {
   get(url, config) {
-    return axios.get(SERVER_URL + url, setupToken(config));
+    return axios.get(API_URL + url, setupToken(config));
   },
   post(url, data, config) {
-    return axios.post(SERVER_URL + url, data, setupToken(config));
+    return axios.post(API_URL + url, data, setupToken(config));
   },
   put(url, data, config) {
-    return axios.put(SERVER_URL + url, data, setupToken(config));
+    return axios.put(API_URL + url, data, setupToken(config));
   },
   delete(url, config) {
-    return axios.delete(SERVER_URL + url, setupToken(config));
+    return axios.delete(API_URL + url, setupToken(config));
   },
 };
 
