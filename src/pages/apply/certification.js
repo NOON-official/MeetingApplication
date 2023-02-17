@@ -70,15 +70,13 @@ function CertificationPage() {
     }
     if (userTeamId?.teamId !== null) {
       try {
-        await backend.patch(`/teams/${userTeamId?.teamId}`, { applydata });
+        await backend.patch(`/teams/${userTeamId?.teamId}`, applydata);
         window.alert('수정되었습니다!');
       } catch (e) {
-        window.alert('취소중 오류가 발생하였습니다');
+        window.alert('수정중 오류가 발생하였습니다');
       }
     }
   });
-
-  console.log(userTeamId);
 
   return (
     <ApplyLayout>
