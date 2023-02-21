@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import theme from '../style/theme';
+
 import { ReactComponent as MainImg } from '../asset/svg/MainImg.svg';
+import { ReactComponent as FixedButton } from '../asset/svg/FixedButton.svg';
+import { ReactComponent as Main1 } from '../asset/svg/Main1.svg';
+import { ReactComponent as Main2 } from '../asset/svg/Main2.svg';
+import { ReactComponent as Main3 } from '../asset/svg/Main3.svg';
+import { ReactComponent as Main4 } from '../asset/svg/Main4.svg';
+import { ReactComponent as Main5 } from '../asset/svg/Main5.svg';
 import MainLayout from '../layout/MainLayout';
 import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
@@ -21,15 +28,29 @@ function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
   const { data: membersData } = useGetTeamMembersCountOneWeekQuery();
   const { data: teamData } = useGetTeamCountsQuery();
-
+  const [matchingStatus, setMatchingStatus] = useState('');
+  const [agreements, setAgreements] = useState('');
   const navigate = useNavigate();
 
-  const handleStart = useCallback(async () => {
-    try {
-      await backend.get('/users/agreements');
-      navigate('/apply/1');
-    } catch {
-      navigate('/apply/agree');
+  const getInformation = useCallback(async () => {
+    const matchingstatus = await backend.get('/users/matchings/status');
+    const agreement = await backend.get('/users/agreements');
+    setMatchingStatus(matchingstatus.data.matchingStatus);
+    setAgreements(agreement);
+  }, []);
+
+  useEffect(() => {
+    getInformation();
+  }, []);
+
+  const handleStart = useCallback(() => {
+    if (matchingStatus === null) {
+      if (agreements === null) {
+        navigate('/apply/agree');
+      }
+      navigate(`/apply/${finishedStep}`);
+    } else {
+      window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
     }
   }, [finishedStep]);
 
@@ -76,11 +97,17 @@ function Main() {
           </TotalBar>
         </MatchingBox>
       </Section>
-
       <Section my="32px" center>
         <PrimaryButton onClick={handleStart}>매칭 시작하기</PrimaryButton>
       </Section>
-
+      <Section mx="8px" center>
+        <Main1 />
+        <Main2 />
+        <Main3 />
+        <Main4 />
+        <Main5 />
+        <FixButton onClick={handleStart} />
+      </Section>
       <MainFooter />
       <BottomFooter />
     </MainLayout>
@@ -193,4 +220,13 @@ const Number = styled.p`
   font-family: 'Nanum JungHagSaeng';
   font-weight: 400;
   font-size: 15px;
+`;
+
+const FixButton = styled(FixedButton)`
+  position: sticky;
+  bottom: 30px;
+  left: 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
