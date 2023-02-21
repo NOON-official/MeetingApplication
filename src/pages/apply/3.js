@@ -40,12 +40,12 @@ function Apply3Page() {
   const handleSubmit = useCallback(() => {
     if (memberCount === 2) {
       if (
-        member1.age ||
-        member1.role ||
-        member1.mbti ||
-        member2.age ||
-        member2.role ||
-        member2.mbti
+        !member1.age ||
+        !member1.role ||
+        !member1.mbti ||
+        !member2.age ||
+        !member2.role ||
+        !member2.mbti
       ) {
         setOpenModal(true);
       } else {
@@ -57,15 +57,15 @@ function Apply3Page() {
         navigate('/apply/4');
       }
     } else if (
-      member1.age ||
-      member1.role ||
-      member1.mbti ||
-      member2.age ||
-      member2.role ||
-      member2.mbti ||
-      member3.age ||
-      member3.role ||
-      member3.mbti
+      !member1.age ||
+      !member1.role ||
+      !member1.mbti ||
+      !member2.age ||
+      !member2.role ||
+      !member2.mbti ||
+      !member3.age ||
+      !member3.role ||
+      !member3.mbti
     ) {
       setOpenModal(true);
     } else {
