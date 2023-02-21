@@ -44,7 +44,6 @@ const userSlice = createSlice({
     });
     builder.addCase(loadUserAgreements.fulfilled, (state, action) => {
       state.agreement = action.payload;
-      console.log(action.payload);
     });
   },
 });
