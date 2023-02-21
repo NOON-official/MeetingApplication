@@ -162,14 +162,14 @@ function Apply6Page() {
               <SmallTitle>닮은꼴</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
+                  <div>{members[0].appearance}</div>
+                  <div>{members[1].appearance}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
-                  <div>{members[2].similar}</div>
+                  <div>{members[0].appearance}</div>
+                  <div>{members[1].appearance}</div>
+                  <div>{members[2].appearance}</div>
                 </MemberProfile2>
               )}
             </Info>
