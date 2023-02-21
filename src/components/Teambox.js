@@ -53,7 +53,7 @@ function Teambox({ member, setMember, name }) {
     setIsModalOpen2(false);
   };
 
-  const [s, setS] = useState(member.similar);
+  const [s, setS] = useState(member.appearance);
 
   const handleAgeChange = useCallback(
     (value) => {
