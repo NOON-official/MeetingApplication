@@ -22,8 +22,6 @@ import {
   useGetTeamMembersCountOneWeekQuery,
 } from '../features/backendApi';
 
-const teamsPerRound = 10;
-
 function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
   const { data: membersData } = useGetTeamMembersCountOneWeekQuery();
@@ -35,6 +33,7 @@ function Main() {
   const getInformation = useCallback(async () => {
     const matchingstatus = await backend.get('/users/matchings/status');
     const agreement = await backend.get('/users/agreements');
+
     setMatchingStatus(matchingstatus.data.matchingStatus);
     setAgreements(agreement);
   }, []);
@@ -54,6 +53,7 @@ function Main() {
     }
   }, [finishedStep]);
 
+  const teamsPerRound = teamData?.['teamsPerRound'];
   const twoman = teamData?.['2vs2']['male'];
   const twogirl = teamData?.['2vs2']['female'];
   const threeman = teamData?.['3vs3']['male'];
@@ -72,7 +72,9 @@ function Main() {
 
       <Section>
         <MatchingBox>
-          <Title>50명이 채워지면 바로 매칭됩니다.</Title>
+          <Title>{`${
+            teamsPerRound * 2
+          }팀이 채워지면 바로 매칭이 시작됩니다!`}</Title>
           <SubTitle>2 : 2</SubTitle>
           <TotalBar>
             <Number>{twoman}</Number>
