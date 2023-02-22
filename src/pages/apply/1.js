@@ -81,8 +81,8 @@ export default function Apply1Page() {
         <ChooseTitle>인원 수</ChooseTitle>
         <BinaryButton
           state={meetingMember === 2}
-          condition1="2:2"
-          condition2="3:3"
+          condition1="2:2 미팅"
+          condition2="3:3 미팅"
           onChange={(result) =>
             result ? setmeetingMember(2) : setmeetingMember(3)
           }
