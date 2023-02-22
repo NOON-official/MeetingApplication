@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
-
+import { ReactComponent as MatchingText10 } from '../../asset/svg/MatchingText10.svg';
 // 로그인하고 매칭증에 상대방찾고 있을 때 매칭조회페이지
 
 export default function LoginWaitOtherTeam() {
@@ -31,9 +31,7 @@ export default function LoginWaitOtherTeam() {
       </Top>
       <WhiteBox>
         <SBigO />
-        <TextBox>상대팀의 수락 여부를 확인하고 있어요.</TextBox>
-        <TextBox2>조금만 기다려 주세요!</TextBox2>
-        <TextBox3>확인 후 알람을 드릴게요.</TextBox3>
+        <SMatchingText10 />
       </WhiteBox>
     </>
   );
@@ -83,30 +81,6 @@ const SBigO = styled(BigO)`
   margin-right: 5%;
 `;
 
-const TextBox = styled.div`
+const SMatchingText10 = styled(MatchingText10)`
   margin-top: 20%;
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const TextBox2 = styled.div`
-  text-align: center;
-  width: 60%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const TextBox3 = styled.div`
-  text-align: center;
-  width: 65%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
 `;
