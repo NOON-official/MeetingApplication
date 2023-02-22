@@ -9,6 +9,7 @@ import backend from '../../util/backend';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
+import { ReactComponent as MatchingText6 } from '../../asset/svg/MatchingText6.svg';
 
 export default function LoginNoAnswer({ teamId }) {
   const [openModal1, setOpenModal1] = useState(false);
@@ -105,9 +106,7 @@ export default function LoginNoAnswer({ teamId }) {
       </Top>
       <WhiteBox>
         <SSadFace />
-        <TextBox>응답 시간이 지나서</TextBox>
-        <TextBox2>매칭이 취소됐어요.</TextBox2>
-        <SmallText>다음에는 꼭 24시간 이내 응답을 부탁드려요.</SmallText>
+        <SMatchingText6 />
         <MeetingButton
           onClick={() => {
             setOpenModal1(true);
@@ -182,33 +181,8 @@ const SSadFace = styled(SadFace)`
   margin-top: 5%;
 `;
 
-const TextBox = styled.div`
+const SMatchingText6 = styled(MatchingText6)`
   margin-top: 20%;
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const TextBox2 = styled.div`
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const SmallText = styled.div`
-  margin-top: 5%;
-  text-align: center;
-  width: 100%;
-  color: #777777;
-  font-weight: 400;
-  font-size: 20px;
-  font-family: 'Nanum JungHagSaeng';
 `;
 
 const MeetingButton = styled(Button)`

@@ -93,7 +93,13 @@ function MatchingOtherTeam() {
     5: '술게임 못해도 챙겨주는 훈훈한 분위기',
   };
 
-  if (otherTeamData?.members?.length > 0) {
+  console.log(otherTeamData);
+
+  if (
+    otherTeamData !== undefined &&
+    otherTeamData?.prefAge !== undefined &&
+    otherTeamData?.members !== undefined
+  ) {
     return (
       <ApplyLayout>
         <Modal
@@ -217,14 +223,14 @@ function MatchingOtherTeam() {
                 <SmallTitle>나이</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{otherTeamData?.members['0'].age}세</div>
-                    <div>{otherTeamData?.members['1'].age}세</div>
+                    <div>{otherTeamData?.members[0]?.age}세</div>
+                    <div>{otherTeamData?.members[1]?.age}세</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{otherTeamData?.members['0'].age}세</div>
-                    <div>{otherTeamData?.members['1'].age}세</div>
-                    <div>{otherTeamData?.members['2'].age}세</div>
+                    <div>{otherTeamData?.members[0]?.age}세</div>
+                    <div>{otherTeamData?.members[1]?.age}세</div>
+                    <div>{otherTeamData?.members[2]?.age}세</div>
                   </MemberProfile2>
                 )}
               </Info>
@@ -232,14 +238,14 @@ function MatchingOtherTeam() {
                 <SmallTitle>MBTI</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{Mbti[otherTeamData?.members[0].mbti].name}</div>
-                    <div>{Mbti[otherTeamData?.members[1].mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[0]?.mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[1]?.mbti].name}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{Mbti[otherTeamData?.members[0].mbti].name}</div>
-                    <div>{Mbti[otherTeamData?.members[1].mbti].name}</div>
-                    <div>{Mbti[otherTeamData?.members[2].mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[0]?.mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[1]?.mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[2]?.mbti].name}</div>
                   </MemberProfile2>
                 )}
               </Info>
@@ -247,14 +253,14 @@ function MatchingOtherTeam() {
                 <SmallTitle>포지션</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{RoleContent[otherTeamData?.members[0].role]}</div>
-                    <div>{RoleContent[otherTeamData?.members[1].role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[0]?.role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[1]?.role]}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{RoleContent[otherTeamData?.members[0].role]}</div>
-                    <div>{RoleContent[otherTeamData?.members[1].role]}</div>
-                    <div>{RoleContent[otherTeamData?.members[2].role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[0]?.role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[1]?.role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[2]?.role]}</div>
                   </MemberProfile2>
                 )}
               </Info>
@@ -262,14 +268,14 @@ function MatchingOtherTeam() {
                 <SmallTitle>닮은꼴</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{otherTeamData?.members[0].similar}</div>
-                    <div>{otherTeamData?.members[1].similar}</div>
+                    <div>{otherTeamData?.members[0]?.appearance}</div>
+                    <div>{otherTeamData?.members[1]?.appearance}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{otherTeamData?.members[0].similar}</div>
-                    <div>{otherTeamData?.members[1].similar}</div>
-                    <div>{otherTeamData?.members[2].similar}</div>
+                    <div>{otherTeamData?.members[0]?.appearance}</div>
+                    <div>{otherTeamData?.members[1]?.appearance}</div>
+                    <div>{otherTeamData?.members[2]?.appearance}</div>
                   </MemberProfile2>
                 )}
               </Info>
