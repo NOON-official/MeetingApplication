@@ -6,6 +6,7 @@ import { Button, Modal } from 'antd';
 import { ReactComponent as Meetinge } from '../../asset/svg/RainBowMeetinge.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
+import { ReactComponent as MatchingText7 } from '../../asset/svg/MatchingText7.svg';
 
 // 로그인하고 매칭증에 둘다수락했을때 매칭조회페이지
 
@@ -67,9 +68,7 @@ export default function LoginMatchComplete() {
       </Top>
       <WhiteBox>
         <Meetinge />
-        <TextBox>상대팀이 수락하셨습니다.</TextBox>
-        <TextBox2>상대팀과의 단톡방을 개설해드릴</TextBox2>
-        <TextBox2>예정이니 조금만 기다려 주세요!</TextBox2>
+        <SMatchingText7 />
         <MeetingButton
           onClick={() => {
             navigate('/matching/otherteam');
@@ -145,23 +144,8 @@ const WhiteBox2 = styled.div`
   }
 `;
 
-const TextBox = styled.div`
-  margin-top: 10%;
-  text-align: center;
-  width: 93%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const TextBox2 = styled.div`
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
+const SMatchingText7 = styled(MatchingText7)`
+  margin-top: 20%;
 `;
 
 const MeetingButton = styled(Button)`
