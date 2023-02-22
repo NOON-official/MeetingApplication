@@ -29,8 +29,16 @@ function Apply5Page() {
   }, [finishedStep]);
 
   const marks = {
-    20: { label: <SliderText>20세</SliderText> },
-    29: { label: <SliderText>29세</SliderText> },
+    20: { label: <SliderText>20</SliderText> },
+    21: { label: <SliderText>21</SliderText> },
+    22: { label: <SliderText>22</SliderText> },
+    23: { label: <SliderText>23</SliderText> },
+    24: { label: <SliderText>24</SliderText> },
+    25: { label: <SliderText>25</SliderText> },
+    26: { label: <SliderText>26</SliderText> },
+    27: { label: <SliderText>27</SliderText> },
+    28: { label: <SliderText>28</SliderText> },
+    29: { label: <SliderText>29</SliderText> },
   };
   const marks2 = {
     1: { label: <SliderText>Level 1</SliderText> },
@@ -38,6 +46,10 @@ function Apply5Page() {
     3: { label: <SliderText>3</SliderText> },
     4: { label: <SliderText>4</SliderText> },
     5: { label: <SliderText>5</SliderText> },
+  };
+
+  const trackStyle = {
+    backgroundColor: '#EB8888',
   };
 
   const [ageRange, setAgeRange] = useState(prefAge.length ? prefAge : [23, 25]);
@@ -98,7 +110,8 @@ function Apply5Page() {
       </Title2>
       <SSlider
         onAfterChange={onAfterChange}
-        tooltip={{ placement: 'bottom' }}
+        trackStyle={trackStyle}
+        tooltip={{ placement: 'top' }}
         marks={marks}
         defaultValue={ageRange}
         max={29}
@@ -158,10 +171,17 @@ function Apply5Page() {
         <Maintitle2>주량 레벨</Maintitle2>
         <Subtitle2>우리팀의 평균 주량을 알려주세요</Subtitle2>
       </Title2>
-      <AlcholMiddle>한 병 반</AlcholMiddle>
+      <AlcholInfo>
+        <AlcholContent>반 병</AlcholContent>
+        <AlcholContent>한 병</AlcholContent>
+        <AlcholContent>한 병 반</AlcholContent>
+        <AlcholContent>두 병</AlcholContent>
+        <AlcholContent>술고래</AlcholContent>
+      </AlcholInfo>
       <SSlider
         onChange={setAlchol}
         value={alchol}
+        trackStyle={trackStyle}
         tooltip={{
           open: false,
         }}
@@ -251,6 +271,12 @@ const ButtonBox = styled.div`
 const SSlider = styled(Slider)`
   margin-top: 7%;
   width: 85%;
+  .custom-slider .ant-slider-mark-text {
+    display: none;
+  }
+  .custom-slider .ant-slider-mark-text-active {
+    display: block;
+  }
 `;
 
 const SliderText = styled.p`
@@ -275,14 +301,20 @@ const ChooseBox2 = styled.div`
   flex-direction: column;
 `;
 
-const AlcholMiddle = styled.div`
-  text-align: center;
+const AlcholInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-weight: 700;
   font-size: 14px;
-  margin-top: 5%;
+  margin-top: 8%;
   width: 90%;
   color: #eb8888;
 `;
+
+const AlcholContent = styled.div`
+  text-align: center;
+`;
+
 const SBottom = styled(Bottom)`
   margin-left: 57%;
   margin-top: 4%;

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import { ReactComponent as Meetinge } from '../../asset/svg/RainBowMeetinge.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
-
+import { ReactComponent as MatchingText4 } from '../../asset/svg/MatchingText4.svg';
 // 로그인하고 매칭증에 상대방이랑 매칭됬을 때 매칭조회페이지
 
 export default function LoginMatchOk() {
@@ -31,8 +31,7 @@ export default function LoginMatchOk() {
       </Top>
       <WhiteBox>
         <Meetinge />
-        <TextBox>여러분의 상대팀이 매칭되었습니다.</TextBox>
-        <TextBox2>상대팀의 미팅학개론을 확인해 주세요!</TextBox2>
+        <SMatchingText4 />
         <MeetingButton
           onClick={() => {
             navigate('/matching/otherteam');
@@ -85,23 +84,8 @@ const WhiteBox = styled.div`
   border-radius: 10px;
 `;
 
-const TextBox = styled.div`
-  margin-top: 10%;
-  text-align: center;
-  width: 93%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const TextBox2 = styled.div`
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
+const SMatchingText4 = styled(MatchingText4)`
+  margin-top: 20%;
 `;
 
 const MeetingButton = styled(Button)`

@@ -55,7 +55,7 @@ export default function LoginRefuse({ teamId }) {
       },
     );
     setHandleContent(true);
-  }, []);
+  }, [refuseReason, personalReason]);
 
   if (handleContent === false) {
     return (
@@ -78,7 +78,6 @@ export default function LoginRefuse({ teamId }) {
             content="우리 팀 내부 사정이 생겼어요"
           />
           <ChooseButtonLast>
-            {' '}
             <ChooseInput
               value={personalReason}
               maxLength={10}
@@ -98,6 +97,7 @@ export default function LoginRefuse({ teamId }) {
       </WhiteBox>
     );
   }
+
   return <LoginMatchFailed />;
 }
 
