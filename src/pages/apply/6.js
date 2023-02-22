@@ -41,6 +41,13 @@ function Apply6Page() {
     navigate('/apply/certification');
   });
 
+  const RoleContent = {
+    1: '비주얼',
+    2: '사회자',
+    3: '개그맨',
+    4: '깍두기',
+  };
+
   const SchoolContent = {
     1: '강남',
     2: '건대',
@@ -140,14 +147,14 @@ function Apply6Page() {
               <SmallTitle>포지션</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
+                  <div>{RoleContent[members[0].role]}</div>
+                  <div>{RoleContent[members[1].role]}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
-                  <div>{Mbti[members[2].mbti].name}</div>
+                  <div>{RoleContent[members[0].role]}</div>
+                  <div>{RoleContent[members[1].role]}</div>
+                  <div>{RoleContent[members[2].role]}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -155,14 +162,14 @@ function Apply6Page() {
               <SmallTitle>닮은꼴</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
+                  <div>{members[0].appearance}</div>
+                  <div>{members[1].appearance}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
-                  <div>{members[2].similar}</div>
+                  <div>{members[0].appearance}</div>
+                  <div>{members[1].appearance}</div>
+                  <div>{members[2].appearance}</div>
                 </MemberProfile2>
               )}
             </Info>
