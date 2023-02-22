@@ -39,7 +39,14 @@ function Apply3Page() {
 
   const handleSubmit = useCallback(() => {
     if (memberCount === 2) {
-      if (Object.keys(member1).length < 3 || Object.keys(member2).length < 3) {
+      if (
+        !member1.age ||
+        !member1.role ||
+        !member1.mbti ||
+        !member2.age ||
+        !member2.role ||
+        !member2.mbti
+      ) {
         setOpenModal(true);
       } else {
         dispatch(
@@ -50,9 +57,15 @@ function Apply3Page() {
         navigate('/apply/4');
       }
     } else if (
-      Object.keys(member1).length < 3 ||
-      Object.keys(member2).length < 3 ||
-      Object.keys(member3).length < 3
+      !member1.age ||
+      !member1.role ||
+      !member1.mbti ||
+      !member2.age ||
+      !member2.role ||
+      !member2.mbti ||
+      !member3.age ||
+      !member3.role ||
+      !member3.mbti
     ) {
       setOpenModal(true);
     } else {
