@@ -23,6 +23,7 @@ function Matching() {
   const getInformation = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
     const matchingstatus = await backend.get('/users/matchings/status');
+
     setMyteamId(teamid.data.teamId);
     setMatchingStatus(matchingstatus.data.matchingStatus);
   }, []);
