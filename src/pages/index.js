@@ -46,12 +46,13 @@ function Main() {
     if (matchingStatus === null) {
       if (agreements === null) {
         navigate('/apply/agree');
+      } else {
+        navigate(`/apply/${finishedStep + 1}`);
       }
-      navigate(`/apply/${finishedStep}`);
     } else {
       window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
     }
-  }, [finishedStep]);
+  }, [matchingStatus, finishedStep]);
 
   const teamsPerRound = teamData?.['teamsPerRound'];
   const twoman = teamData?.['2vs2']['male'];
@@ -61,7 +62,7 @@ function Main() {
 
   return (
     <MainLayout>
-      <Section mx="10px" my="12px">
+      <Section>
         <ImgBox>
           <UserCountText>
             <span>{membersData?.memberCount}</span>
@@ -71,11 +72,9 @@ function Main() {
       </Section>
 
       <Section>
+        <TopTitle>신청 현황</TopTitle>
         <MatchingBox>
-          <Title>{`${
-            teamsPerRound * 2
-          }팀이 채워지면 바로 매칭이 시작됩니다!`}</Title>
-          <SubTitle>2 : 2</SubTitle>
+          <SubTitle>2 : 2 미팅</SubTitle>
           <TotalBar>
             <Number>{twoman}</Number>
             <LeftBar>
@@ -86,7 +85,7 @@ function Main() {
             </RightBar>
             <Number>{twogirl}</Number>
           </TotalBar>
-          <SubTitle>3 : 3</SubTitle>
+          <SubTitle>3 : 3 미팅</SubTitle>
           <TotalBar>
             <Number>{threeman}</Number>
             <LeftBar>
@@ -97,18 +96,23 @@ function Main() {
             </RightBar>
             <Number>{threegirl}</Number>
           </TotalBar>
+          <Title>{`미팅 별로 ${
+            teamsPerRound * 2
+          }팀이 채워지면 바로 매칭이 시작됩니다!`}</Title>
         </MatchingBox>
       </Section>
-      <Section my="32px" center>
+      <Section my="30px" center>
         <PrimaryButton onClick={handleStart}>매칭 시작하기</PrimaryButton>
       </Section>
-      <Section mx="8px" center>
-        <Main1 />
-        <Main2 />
-        <Main3 />
-        <Main4 />
-        <Main5 />
-        <FixButton onClick={handleStart} />
+      <Section center>
+        <Main1 width="90%" />
+        <ImgBox2>
+          <Main2 width="90%" height="auto" />
+          <Main3 width="90%" height="auto" />
+          <Main4 width="90%" height="auto" />
+          <Main5 width="90%" height="auto" />
+          <FixButton onClick={handleStart} />
+        </ImgBox2>
       </Section>
       <MainFooter />
       <BottomFooter />
@@ -118,23 +122,40 @@ function Main() {
 
 export default Main;
 
+const TopTitle = styled.div`
+  margin-left: 5%;
+  font-weight: 400;
+  font-size: 13px;
+  color: #635e5e;
+`;
+
 const ImgBox = styled.div`
+  margin-top: 35px;
+  margin-right: 20px;
   position: relative;
   max-width: 100%;
   display: flex;
   justify-content: center;
 
   > svg {
-    width: 100%;
+    width: 80%;
     height: auto;
   }
 `;
 
+const ImgBox2 = styled.div`
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const UserCountText = styled.div`
   position: absolute;
-  top: 9.3%;
+  top: 4%;
   right: 27%;
-
   > span {
     font-family: 'Nanum JungHagSaeng';
     font-weight: 400;
@@ -150,20 +171,23 @@ const MatchingBox = styled.div`
   font-family: 'Nanum JungHagSaeng';
   font-weight: 400;
   font-size: 20px;
-  padding: 11px 10px 8px 9px;
-  height: 140px;
+  padding: 10px;
+  height: 150px;
   background: #ffffff;
   border-radius: 10px;
   text-align: center;
 `;
 
 const Title = styled.p`
+  margin-top: 5%;
   width: 100%;
   color: ${theme.pink};
 `;
 
 const SubTitle = styled.p`
   width: 100%;
+  font-weight: 400;
+  font-size: 18px;
   color: black;
   margin-top: 5px;
 `;
@@ -225,6 +249,7 @@ const Number = styled.p`
 `;
 
 const FixButton = styled(FixedButton)`
+  width: 75%;
   position: sticky;
   bottom: 30px;
   left: 10px;
