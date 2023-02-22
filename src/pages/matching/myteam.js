@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect, useCallback } from 'react';
 
 import { Modal, Button } from 'antd';
 import { ReactComponent as LeftArrow } from '../../asset/svg/LeftArrow.svg';
@@ -9,27 +8,33 @@ import theme from '../../style/theme';
 import Universities from '../../asset/Universities';
 import Mbti from '../../asset/Mbti';
 import ApplyLayout from '../../layout/ApplyLayout';
+import backend from '../../util/backend';
 
 function MatchingMyTeam() {
-  const {
-    intro,
-    gender,
-    memberCount,
-    universities,
-    availableDates,
-    areas,
-    members,
-    drink,
-    prefSameUniversity,
-    prefAge,
-    prefVibes,
-  } = useSelector((store) => store.apply);
+  const [myTeamData, setMyTeamData] = useState('');
+
+  const getMatchingId = useCallback(async () => {
+    const teamid = await backend.get(`/users/team-id`);
+    const myteamdata = await backend.get(`/teams/${teamid.data.teamId}`);
+    setMyTeamData(myteamdata.data);
+  }, []);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getMatchingId();
+  }, []);
 
   const [openModal, setOpenModal] = useState(false);
 
   const handleCancel = () => {
     setOpenModal(false);
+  };
+
+  const RoleContent = {
+    1: '비주얼',
+    2: '사회자',
+    3: '개그맨',
+    4: '깍두기',
   };
 
   const SchoolContent = {
@@ -49,17 +54,9 @@ function MatchingMyTeam() {
   };
 
   if (
-    intro &&
-    gender &&
-    memberCount &&
-    universities &&
-    availableDates &&
-    areas &&
-    members &&
-    drink &&
-    prefSameUniversity &&
-    prefAge &&
-    prefVibes
+    myTeamData !== undefined &&
+    myTeamData?.prefAge !== undefined &&
+    myTeamData?.members !== undefined
   ) {
     return (
       <ApplyLayout>
@@ -100,16 +97,20 @@ function MatchingMyTeam() {
             <InfoContent>
               <Info>
                 <SmallTitle>성별</SmallTitle>
-                <SmallContent>{gender === 1 ? '남성' : '여성'}</SmallContent>
+                <SmallContent>
+                  {myTeamData?.gender === 1 ? '남성' : '여성'}
+                </SmallContent>
               </Info>
               <Info>
                 <SmallTitle>인원수</SmallTitle>
-                <SmallContent>{memberCount === 2 ? '2명' : '3명'}</SmallContent>
+                <SmallContent>
+                  {myTeamData?.memberCount === 2 ? '2명' : '3명'}
+                </SmallContent>
               </Info>
               <Info>
                 <SmallTitle>학교</SmallTitle>
                 <SmallContent>
-                  {universities.map((a) => {
+                  {myTeamData?.universities?.map((a) => {
                     return (
                       <div key={Universities[a - 1].id}>
                         {Universities[a - 1].name} /
@@ -121,7 +122,7 @@ function MatchingMyTeam() {
             </InfoContent>
             <InfoContent>
               <Info>
-                {memberCount === 2 ? (
+                {myTeamData?.memberCount === 2 ? (
                   <Member>
                     <div>대표자</div>
                     <div>팀원 1</div>
@@ -136,61 +137,61 @@ function MatchingMyTeam() {
               </Info>
               <Info>
                 <SmallTitle>나이</SmallTitle>
-                {memberCount === 2 ? (
+                {myTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{members[0].age}세</div>
-                    <div>{members[1].age}세</div>
+                    <div>{myTeamData?.members[0]?.age}세</div>
+                    <div>{myTeamData?.members[1]?.age}세</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{members[0].age}세</div>
-                    <div>{members[1].age}세</div>
-                    <div>{members[2].age}세</div>
+                    <div>{myTeamData?.members[0]?.age}세</div>
+                    <div>{myTeamData?.members[1]?.age}세</div>
+                    <div>{myTeamData?.members[2]?.age}세</div>
                   </MemberProfile2>
                 )}
               </Info>
               <Info>
                 <SmallTitle>MBTI</SmallTitle>
-                {memberCount === 2 ? (
+                {myTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{Mbti[members[0].mbti].name}</div>
-                    <div>{Mbti[members[1].mbti].name}</div>
+                    <div>{Mbti[myTeamData?.members[0]?.mbti].name}</div>
+                    <div>{Mbti[myTeamData?.members[1]?.mbti].name}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{Mbti[members[0].mbti].name}</div>
-                    <div>{Mbti[members[1].mbti].name}</div>
-                    <div>{Mbti[members[2].mbti].name}</div>
+                    <div>{Mbti[myTeamData?.members[0]?.mbti].name}</div>
+                    <div>{Mbti[myTeamData?.members[1]?.mbti].name}</div>
+                    <div>{Mbti[myTeamData?.members[2]?.mbti].name}</div>
                   </MemberProfile2>
                 )}
               </Info>
               <Info>
                 <SmallTitle>포지션</SmallTitle>
-                {memberCount === 2 ? (
+                {myTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{Mbti[members[0].mbti].name}</div>
-                    <div>{Mbti[members[1].mbti].name}</div>
+                    <div>{RoleContent[myTeamData?.members[0]?.role]}</div>
+                    <div>{RoleContent[myTeamData?.members[1]?.role]}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{Mbti[members[0].mbti].name}</div>
-                    <div>{Mbti[members[1].mbti].name}</div>
-                    <div>{Mbti[members[2].mbti].name}</div>
+                    <div>{RoleContent[myTeamData?.members[0]?.role]}</div>
+                    <div>{RoleContent[myTeamData?.members[1]?.role]}</div>
+                    <div>{RoleContent[myTeamData?.members[2]?.role]}</div>
                   </MemberProfile2>
                 )}
               </Info>
               <Info>
                 <SmallTitle>닮은꼴</SmallTitle>
-                {memberCount === 2 ? (
+                {myTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{members[0].similar}</div>
-                    <div>{members[1].similar}</div>
+                    <div>{myTeamData?.members[0]?.appearance}</div>
+                    <div>{myTeamData?.members[1]?.appearance}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{members[0].similar}</div>
-                    <div>{members[1].similar}</div>
-                    <div>{members[2].similar}</div>
+                    <div>{myTeamData?.members[0]?.appearance}</div>
+                    <div>{myTeamData?.members[1]?.appearance}</div>
+                    <div>{myTeamData?.members[2]?.appearance}</div>
                   </MemberProfile2>
                 )}
               </Info>
@@ -204,13 +205,15 @@ function MatchingMyTeam() {
               <Info>
                 <SmallTitle>평균 나이</SmallTitle>
                 <SmallContent>
-                  {prefAge[0]} ~ {prefAge[1]}세
+                  {myTeamData?.prefAge[0]} ~ {myTeamData?.prefAge[1]}세
                 </SmallContent>
               </Info>
               <Info>
                 <SmallTitle>학교</SmallTitle>
                 <SmallContent>
-                  {prefSameUniversity ? '상관없어요' : '같은학교는 싫어요'}
+                  {myTeamData?.prefSameUniversity
+                    ? '상관없어요'
+                    : '같은학교는 싫어요'}
                 </SmallContent>
               </Info>
             </InfoContent>
@@ -223,7 +226,7 @@ function MatchingMyTeam() {
               <Info>
                 <SmallTitle>선호 날짜</SmallTitle>
                 <SmallContent>
-                  {availableDates.map((a) => {
+                  {myTeamData?.availableDates?.map((a) => {
                     return (
                       <div key={a}>
                         {a[6]}월 {a.substring(8, 10)}일 /
@@ -235,7 +238,7 @@ function MatchingMyTeam() {
               <Info>
                 <SmallTitle>선호 지역</SmallTitle>
                 <SmallContent>
-                  {areas.map((a) => {
+                  {myTeamData?.areas?.map((a) => {
                     return <div key={a}> {SchoolContent[a]} /</div>;
                   })}
                 </SmallContent>
@@ -243,14 +246,14 @@ function MatchingMyTeam() {
               <Info>
                 <SmallTitle>분위기</SmallTitle>
                 <SmallContent>
-                  {prefVibes.map((a) => {
+                  {myTeamData?.prefVibes?.map((a) => {
                     return <div key={a}>{VibeContent[a]}</div>;
                   })}
                 </SmallContent>
               </Info>
               <Info>
                 <SmallTitle>주량 레벨</SmallTitle>
-                <SmallContent>Level {drink}</SmallContent>
+                <SmallContent>Level {myTeamData?.drink}</SmallContent>
               </Info>
             </InfoContent>
           </InfoBox>
@@ -260,7 +263,7 @@ function MatchingMyTeam() {
             </InfoTitle>
             <InfoContent>
               <Info>
-                <SmallContent>{intro}</SmallContent>
+                <SmallContent>{myTeamData?.intro}</SmallContent>
               </Info>
             </InfoContent>
           </InfoBox>
