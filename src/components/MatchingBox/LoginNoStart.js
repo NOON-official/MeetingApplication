@@ -5,6 +5,7 @@ import { useCallback } from 'react';
 import { Button } from 'antd';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
+import { ReactComponent as MatchingText2 } from '../../asset/svg/MatchingText2.svg';
 import backend from '../../util/backend';
 
 // 로그인하고 매칭시작안했을 때 매칭조회페이지
@@ -25,8 +26,7 @@ export default function LoginNoStart() {
     <>
       <WhiteBox>
         <SBigO />
-        <TextBox>여러분을 기다리는 분들이 있어요.</TextBox>
-        <TextBox2>미팅 한 번!?</TextBox2>
+        <SMatchingText2 />
         <MeetingButton onClick={handleStart}>미팅할래요</MeetingButton>
       </WhiteBox>
       <WhiteBox2
@@ -54,23 +54,8 @@ const SBigO = styled(BigO)`
   margin-right: 5%;
 `;
 
-const TextBox = styled.div`
+const SMatchingText2 = styled(MatchingText2)`
   margin-top: 20%;
-  text-align: center;
-  width: 85%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const TextBox2 = styled.div`
-  text-align: center;
-  width: 80%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
 `;
 
 const MeetingButton = styled(Button)`
