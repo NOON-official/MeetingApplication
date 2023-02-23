@@ -137,7 +137,7 @@ function MatchingOtherTeam() {
               onClick={() => {
                 handleRefuse();
                 handleCancel2();
-                navigate('/matching');
+                navigate('/matching/refuse');
               }}
             >
               거절하기
@@ -238,14 +238,14 @@ function MatchingOtherTeam() {
                 <SmallTitle>MBTI</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{Mbti[otherTeamData?.members[0]?.mbti].name}</div>
-                    <div>{Mbti[otherTeamData?.members[1]?.mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[0]?.mbti]?.name}</div>
+                    <div>{Mbti[otherTeamData?.members[1]?.mbti]?.name}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{Mbti[otherTeamData?.members[0]?.mbti].name}</div>
-                    <div>{Mbti[otherTeamData?.members[1]?.mbti].name}</div>
-                    <div>{Mbti[otherTeamData?.members[2]?.mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[0]?.mbti]?.name}</div>
+                    <div>{Mbti[otherTeamData?.members[1]?.mbti]?.name}</div>
+                    <div>{Mbti[otherTeamData?.members[2]?.mbti]?.name}</div>
                   </MemberProfile2>
                 )}
               </Info>
@@ -355,6 +355,7 @@ function MatchingOtherTeam() {
       </ApplyLayout>
     );
   }
+  return null;
 }
 
 export default MatchingOtherTeam;
