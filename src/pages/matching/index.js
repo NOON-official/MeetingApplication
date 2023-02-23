@@ -9,11 +9,11 @@ import LoginMatchComplete from '../../components/MatchingBox/LoginMatchComplete'
 import LoginMatchFail from '../../components/MatchingBox/LoginMatchFail';
 import LoginOtherTeamRefused from '../../components/MatchingBox/LoginOtherTeamRefused';
 import LoginNoAnswer from '../../components/MatchingBox/LoginNoAnswer';
-import LoginRefuse from '../../components/MatchingBox/LoginRefuse';
 import NoLogin from '../../components/MatchingBox/NoLogin';
 import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import backend from '../../util/backend';
+import LoginMatchFailed from '../../components/MatchingBox/LoginMatchFailed';
 
 function Matching() {
   const [myteamId, setMyteamId] = useState('');
@@ -63,7 +63,7 @@ function Matching() {
       return <LoginNoAnswer teamId={myteamId} />; // 무응답!
     }
     if (matchingStatus === 'OURTEAM_REFUSED') {
-      return <LoginRefuse teamId={myteamId} />; // 우리팀 거절!
+      return <LoginMatchFailed teamId={myteamId} />; // 우리팀 거절!
     }
     return null;
   });
