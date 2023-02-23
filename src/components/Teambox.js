@@ -371,6 +371,9 @@ const SSelect = styled(Select)`
   min-width: 100px;
   color: red;
   font-family: 'Nanum JungHagSaeng';
+  .ant-select {
+    touch-action: none;
+  }
 `;
 
 const SSearch = styled(Search)`

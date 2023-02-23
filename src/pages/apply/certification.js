@@ -19,16 +19,22 @@ function CertificationPage() {
 
   const [p, setP] = useState('');
   const [authorizeNumber, setAuthorizeNumber] = useState('');
+  const [matchingStatus, setMatchingStatus] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [submitOk1, setSubmitOk1] = useState(false);
   const navigate = useNavigate();
   const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+  const getInformation = useCallback(async () => {
+    const matchingstatus = await backend.get('/users/matchings/status');
+    setMatchingStatus(matchingstatus.data.matchingStatus);
+  }, []);
 
   useEffect(() => {
     if (finishedStep < 5) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
+    getInformation();
   }, [finishedStep]);
 
   const handlePhoneNumber = useCallback(
@@ -64,17 +70,20 @@ function CertificationPage() {
   }, [authorizeNumber]);
 
   const handleSubmitData = useCallback(async () => {
-    if (userTeamId?.teamId === null) {
-      dispatch(createTeam(applydata));
-      window.alert('저장되었습니다!');
-    }
-    if (userTeamId?.teamId !== null) {
+    if (matchingStatus === 'APPLIED') {
       try {
         await backend.patch(`/teams/${userTeamId?.teamId}`, applydata);
         window.alert('수정되었습니다!');
       } catch (e) {
         window.alert('수정중 오류가 발생하였습니다');
       }
+    } else if (matchingStatus === null) {
+      dispatch(createTeam(applydata));
+      window.alert('저장되었습니다!');
+    } else {
+      await backend.delete(`/teams/${userTeamId?.teamId}`);
+      dispatch(createTeam(applydata));
+      window.alert('저장되었습니다!');
     }
   });
 
