@@ -116,7 +116,7 @@ const Subtitle = styled.p`
   font-size: 13px;
 `;
 const Text = styled.div`
-  margin-top: 7%;
+  margin-top: 20%;
   padding-bottom: 10%;
   width: 100%;
   display: flex;
