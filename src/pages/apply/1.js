@@ -175,7 +175,6 @@ const Pink = styled.span`
 `;
 
 const ChooseBox = styled.div`
-  margin-top: 9%;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -192,7 +191,6 @@ const ChooseTitle = styled.span`
 
 const SBottom = styled(Bottom)`
   margin-left: 57%;
-  margin-top: 4%;
 `;
 
 const Footer = styled.div`
