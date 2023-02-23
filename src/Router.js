@@ -6,6 +6,7 @@ import Guide from './pages/guide';
 import Matching from './pages/matching';
 import MatchingMyteam from './pages/matching/myteam';
 import MatchingOtherteam from './pages/matching/otherteam';
+import MatchingRefuse from './pages/matching/refuse';
 import MyInfo from './pages/myinfo';
 import Account from './pages/myinfo/account';
 import Agree from './pages/apply/agree';
@@ -52,6 +53,10 @@ const Router = createBrowserRouter([
       {
         path: 'matching/otherteam',
         element: <MatchingOtherteam />,
+      },
+      {
+        path: 'matching/refuse',
+        element: <MatchingRefuse />,
       },
       {
         path: 'myinfo',
