@@ -2,18 +2,17 @@
 
 import styled from 'styled-components';
 import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button, Input } from 'antd';
 import backend from '../../util/backend';
 import ChooseButton from '../ChooseButton';
-import LoginMatchFailed from './LoginMatchFailed';
 
 export default function LoginRefuse({ teamId }) {
-  const [handleContent, setHandleContent] = useState(false);
   const [matchingId, setMatchingId] = useState('');
   const [refuseReason, setRefuseReason] = useState([]);
   const [personalReason, setPersonalReason] = useState('');
-
+  const navigate = useNavigate();
   const getMatchingId = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
     const matchingid = await backend.get(
@@ -54,51 +53,46 @@ export default function LoginRefuse({ teamId }) {
         other: personalReason,
       },
     );
-    setHandleContent(true);
+    navigate('/matching');
   }, [refuseReason, personalReason]);
-
-  if (handleContent === false) {
-    return (
-      <WhiteBox>
-        <TextBox>거절하신 이유가 뭘까요?</TextBox>
-        <ChooseBox>
-          <ChooseButton
-            isActive={refuseReason.includes(1)}
-            onChange={(isActive) => handleRefuseReason(1, isActive)}
-            content="학교가 마음에 들지 않아요"
+  return (
+    <WhiteBox>
+      <TextBox>거절하신 이유가 뭘까요?</TextBox>
+      <ChooseBox>
+        <ChooseButton
+          isActive={refuseReason.includes(1)}
+          onChange={(isActive) => handleRefuseReason(1, isActive)}
+          content="학교가 마음에 들지 않아요"
+        />
+        <ChooseButton
+          isActive={refuseReason.includes(2)}
+          onChange={(isActive) => handleRefuseReason(2, isActive)}
+          content="한 줄 소개가 마음에 들지 않아요"
+        />
+        <ChooseButton
+          isActive={refuseReason.includes(3)}
+          onChange={(isActive) => handleRefuseReason(3, isActive)}
+          content="우리 팀 내부 사정이 생겼어요"
+        />
+        <ChooseButtonLast>
+          <ChooseInput
+            value={personalReason}
+            maxLength={10}
+            placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;기타(직접 작성해 주세요)"
+            onChange={handlePersonalReason}
+            autoComplete="off"
           />
-          <ChooseButton
-            isActive={refuseReason.includes(2)}
-            onChange={(isActive) => handleRefuseReason(2, isActive)}
-            content="한 줄 소개가 마음에 들지 않아요"
-          />
-          <ChooseButton
-            isActive={refuseReason.includes(3)}
-            onChange={(isActive) => handleRefuseReason(3, isActive)}
-            content="우리 팀 내부 사정이 생겼어요"
-          />
-          <ChooseButtonLast>
-            <ChooseInput
-              value={personalReason}
-              maxLength={10}
-              placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;기타(직접 작성해 주세요)"
-              onChange={handlePersonalReason}
-              autoComplete="off"
-            />
-          </ChooseButtonLast>
-        </ChooseBox>
-        <MeetingButton
-          onClick={() => {
-            handleSubmit();
-          }}
-        >
-          결과 보내기
-        </MeetingButton>
-      </WhiteBox>
-    );
-  }
-
-  return <LoginMatchFailed />;
+        </ChooseButtonLast>
+      </ChooseBox>
+      <MeetingButton
+        onClick={() => {
+          handleSubmit();
+        }}
+      >
+        결과 보내기
+      </MeetingButton>
+    </WhiteBox>
+  );
 }
 
 const WhiteBox = styled.div`
