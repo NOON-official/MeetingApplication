@@ -8,6 +8,7 @@ import backend from '../../util/backend';
 import { createTeam } from '../../features/apply/asyncAction';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
+import { ReactComponent as ModalTextPhone } from '../../asset/svg/ModalTextPhone.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 
@@ -89,13 +90,14 @@ function CertificationPage() {
 
   return (
     <ApplyLayout>
-      <Modal open={openModal} centered footer={null} closable={false}>
-        <TextBox>
-          <BlackText>
-            매칭 결과가 추후에 <ColorText>문자</ColorText>로 전송됩니다.
-          </BlackText>
-          <BlackText>꼭 확인해 주세요!</BlackText>
-        </TextBox>
+      <Modal
+        open={openModal}
+        centered
+        footer={null}
+        width="380px"
+        closable={false}
+      >
+        <SModalTextPhone />
         <SButton
           onClick={() => {
             setOpenModal(false);
@@ -250,19 +252,9 @@ const Footer = styled.div`
   margin-bottom: 60%;
 `;
 
-const TextBox = styled.div`
-  width: 100%;
-  text-align: center;
-`;
-const BlackText = styled.span`
-  color: black;
-  font-size: 31px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-const ColorText = styled.span`
-  color: ${(props) => props.theme.pink};
-  font-size: 31px;
-  font-family: 'Nanum JungHagSaeng';
+const SModalTextPhone = styled(ModalTextPhone)`
+  margin-top: 3%;
+  margin-left: 15%;
 `;
 
 const SButton = styled(Button)`
