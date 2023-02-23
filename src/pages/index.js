@@ -107,10 +107,10 @@ function Main() {
       <Section center>
         <Main1 width="90%" />
         <ImgBox2>
-          <Main2 width="90%" height="auto" />
-          <Main3 width="90%" height="auto" />
-          <Main4 width="90%" height="auto" />
-          <Main5 width="90%" height="auto" />
+          <Main2 width="90%" />
+          <Main3 width="90%" />
+          <Main4 width="90%" />
+          <Main5 width="90%" />
           <FixButton onClick={handleStart} />
         </ImgBox2>
       </Section>

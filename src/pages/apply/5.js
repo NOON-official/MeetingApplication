@@ -207,14 +207,10 @@ export default Apply5Page;
 const Title = styled.div`
   width: 90%;
   margin-top: 8%;
-  height: 13%;
-  min-height: 13%;
 `;
 const Title2 = styled.div`
-  margin-top: 3%;
+  margin-top: 8%;
   width: 90%;
-  height: 10%;
-  min-height: 10%;
 `;
 
 const Maintitle = styled.div`
@@ -295,7 +291,6 @@ const ChooseBox = styled.div`
 `;
 
 const ChooseBox2 = styled.div`
-  margin-top: 3%;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -317,5 +312,5 @@ const AlcholContent = styled.div`
 
 const SBottom = styled(Bottom)`
   margin-left: 57%;
-  margin-top: 4%;
+  margin-top: 20%;
 `;

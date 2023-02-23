@@ -13,6 +13,7 @@ export default function ApplyLayout({ children }) {
 }
 
 const Container = styled.div`
+  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -20,14 +21,15 @@ const Container = styled.div`
 
 const Header = styled.header`
   width: 100%;
-  height: 7vh;
 `;
 
 const Content = styled.div`
+  max-width: 425px;
   background-color: rgb(245, 245, 245);
-  min-height: 93vh;
-  width: 400px;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  overflow-y: scroll;
 `;
