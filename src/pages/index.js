@@ -31,14 +31,21 @@ function Main() {
   const navigate = useNavigate();
 
   const getInformation = useCallback(async () => {
-    const matchingstatus = await backend.get('/users/matchings/status');
-    const agreement = await backend.get('/users/agreements');
+    try {
+      await backend.get('/users/agreements');
+      setAgreements('yes');
+    } catch (e) {
+      setAgreements(null);
+    }
+  }, [agreements]);
 
+  const getMatchingInfo = useCallback(async () => {
+    const matchingstatus = await backend.get('/users/matchings/status');
     setMatchingStatus(matchingstatus.data.matchingStatus);
-    setAgreements(agreement);
-  }, []);
+  }, [matchingStatus]);
 
   useEffect(() => {
+    getMatchingInfo();
     getInformation();
   }, []);
 
@@ -59,6 +66,9 @@ function Main() {
   const twogirl = teamData?.['2vs2']['female'];
   const threeman = teamData?.['3vs3']['male'];
   const threegirl = teamData?.['3vs3']['female'];
+
+  console.log(matchingStatus);
+  console.log(agreements);
 
   return (
     <MainLayout>
