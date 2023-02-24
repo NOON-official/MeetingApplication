@@ -1,41 +1,31 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Input, Button, Modal } from 'antd';
 import backend from '../../util/backend';
-import { createTeam } from '../../features/apply/asyncAction';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as ModalTextPhone } from '../../asset/svg/ModalTextPhone.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
-import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 
 function CertificationPage() {
-  const { data: userTeamId } = useGetUserTeamIdDataQuery();
   const [vaildcheck, setValidCheck] = useState(false);
-  const { finishedStep, ...applydata } = useSelector((store) => store.apply);
-  const dispatch = useDispatch();
+  const { finishedStep } = useSelector((store) => store.apply);
 
   const [p, setP] = useState('');
   const [authorizeNumber, setAuthorizeNumber] = useState('');
-  const [matchingStatus, setMatchingStatus] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [submitOk1, setSubmitOk1] = useState(false);
   const navigate = useNavigate();
   const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-  const getInformation = useCallback(async () => {
-    const matchingstatus = await backend.get('/users/matchings/status');
-    setMatchingStatus(matchingstatus.data.matchingStatus);
-  }, []);
 
   useEffect(() => {
     if (finishedStep < 5) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
-    getInformation();
   }, [finishedStep]);
 
   const handlePhoneNumber = useCallback(
@@ -69,24 +59,6 @@ function CertificationPage() {
       setValidCheck(false);
     }
   }, [authorizeNumber]);
-
-  const handleSubmitData = useCallback(async () => {
-    if (matchingStatus === 'APPLIED') {
-      try {
-        await backend.patch(`/teams/${userTeamId?.teamId}`, applydata);
-        window.alert('수정되었습니다!');
-      } catch (e) {
-        window.alert('수정중 오류가 발생하였습니다');
-      }
-    } else if (matchingStatus === null) {
-      dispatch(createTeam(applydata));
-      window.alert('저장되었습니다!');
-    } else {
-      await backend.delete(`/teams/${userTeamId?.teamId}`);
-      dispatch(createTeam(applydata));
-      window.alert('저장되었습니다!');
-    }
-  });
 
   return (
     <ApplyLayout>
@@ -158,7 +130,6 @@ function CertificationPage() {
         <SubmitButton
           onClick={() => {
             setOpenModal(true);
-            handleSubmitData();
           }}
           disabled={!vaildcheck}
         >
