@@ -9,6 +9,7 @@ import MatchingOtherteam from './pages/matching/otherteam';
 import MatchingRefuse from './pages/matching/refuse';
 import MyInfo from './pages/myinfo';
 import Account from './pages/myinfo/account';
+import ApplyNotLogIn from './pages/apply/notlogin';
 import Agree from './pages/apply/agree';
 import Invite from './pages/apply/invite';
 import Apply1 from './pages/apply/1';
@@ -93,6 +94,10 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo/ticket/history',
         element: <TicketHistoryPage />,
+      },
+      {
+        path: 'apply/notlogin',
+        element: <ApplyNotLogIn />,
       },
       {
         path: 'apply/agree',
