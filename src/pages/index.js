@@ -18,14 +18,14 @@ import Section from '../components/Section';
 import PrimaryButton from '../components/PrimaryButton';
 import backend from '../util/backend';
 import {
-  useGetTeamCountsQuery,
+  useGetTeamCountQuery,
   useGetTeamMembersCountOneWeekQuery,
 } from '../features/backendApi';
 
 function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
   const { data: membersData } = useGetTeamMembersCountOneWeekQuery();
-  const { data: teamData } = useGetTeamCountsQuery();
+  const { data: teamData } = useGetTeamCountQuery();
   const [matchingStatus, setMatchingStatus] = useState('');
   const [agreements, setAgreements] = useState('');
   const navigate = useNavigate();
@@ -96,7 +96,7 @@ function Main() {
             </RightBar>
             <Number>{threegirl}</Number>
           </TotalBar>
-          <Title>{`미팅 별로 ${
+          <Title>{`미팅별로 ${
             teamsPerRound * 2
           }팀이 채워지면 바로 매칭이 시작됩니다!`}</Title>
         </MatchingBox>
