@@ -10,6 +10,7 @@ import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 
 function Complete() {
+  const { accessToken } = useSelector((state) => state.user);
   const [userTeamId, setUserTeamId] = useState('');
   const [matchingStatus, setMatchingStatus] = useState('');
   const { finishedStep, ...applydata } = useSelector((store) => store.apply);
@@ -24,6 +25,10 @@ function Complete() {
   }, []);
 
   useEffect(() => {
+    if (!accessToken) {
+      window.alert('잘못된 접근입니다');
+      navigate('/');
+    }
     getInformation();
   }, []);
 
@@ -39,7 +44,7 @@ function Complete() {
       dispatch(createTeam(applydata));
       window.alert('저장되었습니다!');
     } else {
-      await backend.delete(`/teams/${userTeamId?.teamId}`);
+      await backend.delete(`/teams/${userTeamId}`);
       dispatch(createTeam(applydata));
       window.alert('저장되었습니다!');
     }
