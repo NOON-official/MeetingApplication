@@ -24,6 +24,7 @@ import {
 
 function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
+  const { accessToken } = useSelector((state) => state.user);
   const { data: membersData } = useGetTeamMembersCountOneWeekQuery();
   const { data: teamData } = useGetTeamCountQuery();
   const [matchingStatus, setMatchingStatus] = useState('');
@@ -50,7 +51,9 @@ function Main() {
   }, []);
 
   const handleStart = useCallback(() => {
-    if (matchingStatus === null) {
+    if (!accessToken) {
+      navigate('/apply/notlogin');
+    } else if (matchingStatus === null) {
       if (agreements === null) {
         navigate('/apply/agree');
       } else {
@@ -59,7 +62,7 @@ function Main() {
     } else {
       window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
     }
-  }, [matchingStatus, finishedStep]);
+  }, [matchingStatus, finishedStep, agreements]);
 
   const teamsPerRound = teamData?.['teamsPerRound'];
   const twoman = teamData?.['2vs2']['male'];
