@@ -1,13 +1,31 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as Header } from '../../asset/svg/Header.svg';
 import { ReactComponent as Person } from '../../asset/svg/Person.svg';
 import theme from '../../style/theme';
 import KakaoLoginLink from '../../components/KakaoLoginLink';
+import { setAccessToken } from '../../features/user';
 
 export default function TopHeader() {
   const { accessToken } = useSelector((state) => state.user);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const access = searchParams.get('access');
+
+    if (access) {
+      dispatch(setAccessToken(access));
+
+      // query에 남아있는 access token 삭제
+      searchParams.delete('access');
+      setSearchParams(searchParams);
+    }
+  }, [searchParams]);
+
   return (
     <Container>
       <Logo>
