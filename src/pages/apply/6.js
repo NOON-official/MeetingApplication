@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Universities from '../../asset/Universities';
+import backend from '../../util/backend';
 import Mbti from '../../asset/Mbti';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
@@ -26,11 +27,19 @@ function Apply6Page() {
   } = useSelector((store) => store.apply);
   const navigate = useNavigate();
 
+  const [userPhone, setUserPhone] = useState('');
+
+  const getInformation = useCallback(async () => {
+    const userData = await backend.get('/users/my-info');
+    setUserPhone(userData.data.phone);
+  }, []);
+
   useEffect(() => {
     if (finishedStep < 5) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
+    getInformation();
   }, [finishedStep]);
 
   const handleBefore = useCallback(() => {
@@ -38,7 +47,11 @@ function Apply6Page() {
   });
 
   const handleSubmit = useCallback(() => {
-    navigate('/apply/certification');
+    if (userPhone === null) {
+      navigate('/apply/certification');
+    } else {
+      navigate('/apply/complete');
+    }
   });
 
   const RoleContent = {

@@ -24,6 +24,7 @@ import {
 
 function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
+  const { accessToken } = useSelector((state) => state.user);
   const { data: membersData } = useGetTeamMembersCountOneWeekQuery();
   const { data: teamData } = useGetTeamCountQuery();
   const [matchingStatus, setMatchingStatus] = useState('');
@@ -31,19 +32,28 @@ function Main() {
   const navigate = useNavigate();
 
   const getInformation = useCallback(async () => {
-    const matchingstatus = await backend.get('/users/matchings/status');
-    const agreement = await backend.get('/users/agreements');
+    try {
+      await backend.get('/users/agreements');
+      setAgreements('yes');
+    } catch (e) {
+      setAgreements(null);
+    }
+  }, [agreements]);
 
+  const getMatchingInfo = useCallback(async () => {
+    const matchingstatus = await backend.get('/users/matchings/status');
     setMatchingStatus(matchingstatus.data.matchingStatus);
-    setAgreements(agreement);
-  }, []);
+  }, [matchingStatus]);
 
   useEffect(() => {
+    getMatchingInfo();
     getInformation();
   }, []);
 
   const handleStart = useCallback(() => {
-    if (matchingStatus === null) {
+    if (!accessToken) {
+      navigate('/apply/notlogin');
+    } else if (matchingStatus === null) {
       if (agreements === null) {
         navigate('/apply/agree');
       } else {
@@ -52,13 +62,16 @@ function Main() {
     } else {
       window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
     }
-  }, [matchingStatus, finishedStep]);
+  }, [matchingStatus, finishedStep, agreements]);
 
   const teamsPerRound = teamData?.['teamsPerRound'];
   const twoman = teamData?.['2vs2']['male'];
   const twogirl = teamData?.['2vs2']['female'];
   const threeman = teamData?.['3vs3']['male'];
   const threegirl = teamData?.['3vs3']['female'];
+
+  console.log(matchingStatus);
+  console.log(agreements);
 
   return (
     <MainLayout>

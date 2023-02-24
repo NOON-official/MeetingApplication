@@ -68,9 +68,6 @@ function Matching() {
     return null;
   });
 
-  console.log(myteamId);
-  console.log(matchingStatus);
-
   return (
     <MainLayout>
       {MatchingBox}
