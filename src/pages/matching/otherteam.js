@@ -330,28 +330,28 @@ function MatchingOtherTeam() {
               </Info>
             </InfoContent>
           </InfoBox>
+          <Alarm>상대팀 미팅학개론을 캡쳐해서 팀원들에게 공유해보세요!</Alarm>
+          {matchingStatus === 'MATCHED' ? (
+            <Footer>
+              <ButtonBox>
+                <ApplyButton
+                  onClick={() => {
+                    handleOkay();
+                  }}
+                >
+                  수락하기
+                </ApplyButton>
+                <ApplyButton
+                  onClick={() => {
+                    setOpenModal2(true);
+                  }}
+                >
+                  거절하기
+                </ApplyButton>
+              </ButtonBox>
+            </Footer>
+          ) : null}
         </Content>
-        <Alarm>상대팀 미팅학개론을 캡쳐해서 팀원들에게 공유해보세요!</Alarm>
-        {matchingStatus === 'MATCHED' ? (
-          <Footer>
-            <ButtonBox>
-              <ApplyButton
-                onClick={() => {
-                  handleOkay();
-                }}
-              >
-                수락하기
-              </ApplyButton>
-              <ApplyButton
-                onClick={() => {
-                  setOpenModal2(true);
-                }}
-              >
-                거절하기
-              </ApplyButton>
-            </ButtonBox>
-          </Footer>
-        ) : null}
       </ApplyLayout>
     );
   }
@@ -392,6 +392,7 @@ const Pink = styled.span`
 const Content = styled.div`
   width: 90%;
   height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -495,12 +496,12 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 8%;
+  margin-top: 10%;
   padding-bottom: 5%;
 `;
 
 const ButtonBox = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: center;
   justify-content: space-between;
