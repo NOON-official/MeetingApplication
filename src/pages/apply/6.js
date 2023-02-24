@@ -47,7 +47,7 @@ function Apply6Page() {
   });
 
   const handleSubmit = useCallback(() => {
-    if (userPhone === '') {
+    if (userPhone === null) {
       navigate('/apply/certification');
     } else {
       navigate('/apply/complete');
