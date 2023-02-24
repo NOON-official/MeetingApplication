@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import Universities from '../../asset/Universities';
 
 export default function Apply1Page() {
+  const { accessToken } = useSelector((state) => state.user);
   const [openModal, setOpenModal] = useState(false);
   const { gender, memberCount, universities } = useSelector(
     (store) => store.apply,
@@ -28,6 +29,13 @@ export default function Apply1Page() {
   const [man, setMan] = useState(gender);
   const [meetingMember, setmeetingMember] = useState(memberCount);
   const [searchKeyWord, setSearchKeyWord] = useState(0);
+
+  useEffect(() => {
+    if (!accessToken) {
+      window.alert('잘못된 접근입니다');
+      navigate('/');
+    }
+  }, []);
 
   const SearchedUniv = Universities.filter(
     (c) => c.name.indexOf(searchKeyWord) > -1,
