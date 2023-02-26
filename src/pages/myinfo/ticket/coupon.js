@@ -55,11 +55,11 @@ export default function TicketCouponPage() {
           )}
           {coupons.map((coupon) => (
             <CouponItem
-              title="미팅학개론 50% 할인 쿠폰"
+              title={coupon.type.name}
               expireText={`${dayjs(coupon.expiresAt).format(
                 'YYYY. MM. DD',
               )} 까지`}
-              tipText="*이용권 1장에만 사용 가능"
+              tipText={`*${coupon.type.condition}`}
             />
           ))}
         </CouponListBox>
