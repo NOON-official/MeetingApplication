@@ -2,7 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import backend from '../../util/backend';
 
 export const logout = createAsyncThunk('user/logout', async () => {
-  const response = await backend.get(`/auth/signout`);
+  const response = await backend.get(`/auth/signout`, {
+    withCredentials: true,
+  });
 
   return response.data;
 });
