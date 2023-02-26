@@ -26,7 +26,9 @@ export default function Account() {
 
   const deleteAccount = useCallback(async () => {
     try {
-      await backend.delete('/auth/account');
+      await backend.delete('/auth/account', {
+        withCredentials: true,
+      });
       window.alert('탈퇴되었습니다');
       dispatch(logout());
       navigate('/');
