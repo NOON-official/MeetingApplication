@@ -1,4 +1,4 @@
-import { useCallback, useState, useMemo } from 'react';
+import { useEffect, useCallback, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from 'antd';
@@ -32,8 +32,16 @@ export default function TicketBuyPage() {
   const [selectedCouponId, setSelectedCouponId] = useState(null);
   const { data: pageData } = useGetOrdersPageDataQuery();
   const { data: couponPageData } = useGetCouponsPageDataQuery();
-  const { data: couponData } = useGetUserCouponsQuery();
+  const { data: couponData, refetch } = useGetUserCouponsQuery();
   const { data: userData } = useGetMyInfoQuery();
+
+  const handleRefetchCouponData = () => {
+    refetch();
+  };
+
+  useEffect(() => {
+    handleRefetchCouponData();
+  }, [couponData]);
 
   const coupons = useMemo(() => {
     const couponTypes = couponPageData?.CouponTypes;
