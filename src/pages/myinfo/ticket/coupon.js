@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
 import dayjs from 'dayjs';
-import { useCallback, useMemo } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import Section, { SectionTitle } from '../../../components/Section';
 import CouponItem from '../../../components/CouponItem';
@@ -13,7 +13,15 @@ import backend from '../../../util/backend';
 
 export default function TicketCouponPage() {
   const { data: couponPageData } = useGetCouponsPageDataQuery();
-  const { data: couponData } = useGetUserCouponsQuery();
+  const { data: couponData, refetch } = useGetUserCouponsQuery();
+
+  const handleRefetchCouponData = () => {
+    refetch();
+  };
+
+  useEffect(() => {
+    handleRefetchCouponData();
+  }, [couponData]);
 
   const registerCoupon = useCallback(async () => {
     try {
