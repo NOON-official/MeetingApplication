@@ -166,8 +166,10 @@ export default function TicketBuyPage() {
       try {
         await backend.post('/orders', orderData);
         window.alert('이용권이 구매되었습니다');
+        navigate('../myinfo/ticket', { replace: true });
       } catch (e) {
         window.alert('오류가 발생하였습니다');
+        navigate('../myinfo/ticket', { replace: true });
         console.error(e);
       }
       return;
