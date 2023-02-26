@@ -15,6 +15,7 @@ import PrimaryButton from '../../../../components/PrimaryButton';
 import CouponItem from '../../../../components/CouponItem';
 import {
   useGetUserCouponsQuery,
+  useGetCouponsPageDataQuery,
   useGetOrdersPageDataQuery,
   useGetMyInfoQuery,
 } from '../../../../features/backendApi';
@@ -30,17 +31,30 @@ export default function TicketBuyPage() {
   const [selectedProductId, setSelectedProductId] = useState(1);
   const [selectedCouponId, setSelectedCouponId] = useState(null);
   const { data: pageData } = useGetOrdersPageDataQuery();
+  const { data: couponPageData } = useGetCouponsPageDataQuery();
   const { data: couponData } = useGetUserCouponsQuery();
   const { data: userData } = useGetMyInfoQuery();
+
+  const coupons = useMemo(() => {
+    const couponTypes = couponPageData?.CouponTypes;
+    return couponData
+      ? couponData.coupons.map((coupon) => ({
+          ...coupon,
+          type: couponTypes?.find((type) => type.id === coupon.typeId),
+        }))
+      : [];
+  });
+
   const selectedProduct = useMemo(() =>
     pageData?.Products.find((p) => p.id === selectedProductId),
   );
   const selectedCoupon = useMemo(() =>
-    couponData?.coupons.find((p) => p.id === selectedCouponId),
+    coupons.find((p) => p.id === selectedCouponId),
   );
+
   const price = useMemo(() => (selectedProduct ? selectedProduct.price : 0));
   const discountAmount = useMemo(() =>
-    selectedCoupon ? price * (selectedCoupon.discountRate / 100) : 0,
+    selectedCoupon ? price * (selectedCoupon.type.discountRate / 100) : 0,
   );
 
   const totalAmount = useMemo(() => price - discountAmount);
@@ -152,8 +166,10 @@ export default function TicketBuyPage() {
       try {
         await backend.post('/orders', orderData);
         window.alert('이용권이 구매되었습니다');
+        navigate('../myinfo/ticket', { replace: true });
       } catch (e) {
         window.alert('오류가 발생하였습니다');
+        navigate('../myinfo/ticket', { replace: true });
         console.error(e);
       }
       return;
@@ -219,19 +235,19 @@ export default function TicketBuyPage() {
           title={<AccordionTitle>쿠폰 적용</AccordionTitle>}
           content={
             <CouponList>
-              {couponData?.coupons.length === 0 && (
+              {coupons.length === 0 && (
                 <NoCouponText>사용 가능한 쿠폰이 없어요</NoCouponText>
               )}
-              {couponData?.coupons.map((coupon) => (
+              {coupons.map((coupon) => (
                 <CouponItem
                   onClick={() => toggleCoupon(coupon.id)}
                   checked={selectedCouponId === coupon.id}
                   disabled={false}
-                  title="미팅학개론 50% 할인 쿠폰"
+                  title={coupon.type.name}
                   expireText={`${dayjs(coupon.expiresAt).format(
                     'YYYY. MM. DD',
                   )} 까지`}
-                  tipText="*이용권 1장에만 사용 가능"
+                  tipText={`*${coupon.type.condition}`}
                 />
               ))}
             </CouponList>
