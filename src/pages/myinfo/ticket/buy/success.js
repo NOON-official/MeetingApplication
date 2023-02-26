@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import {
   STORAGE_KEY_ORDER_DATA,
   STORAGE_KEY_PAYPLE_ORDER_DATA,
@@ -8,6 +8,7 @@ import MyinfoLayout from '../../../../layout/MyinfoLayout';
 import backend from '../../../../util/backend';
 
 export default function TicketBuySuccessPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const finishOrder = useCallback(async () => {
@@ -26,9 +27,11 @@ export default function TicketBuySuccessPage() {
       });
 
       window.alert('이용권이 구매되었습니다');
+      navigate('../myinfo/ticket', { replace: true });
     } catch (e) {
       window.alert('오류가 발생하였습니다');
       console.error(e);
+      navigate('../myinfo/ticket', { replace: true });
     }
   }, [searchParams]);
 
