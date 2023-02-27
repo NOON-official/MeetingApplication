@@ -28,9 +28,12 @@ export default function TicketBuySuccessPage() {
 
       window.alert('이용권이 구매되었습니다');
       navigate('../myinfo/ticket', { replace: true });
-    } catch (e) {
-      window.alert('오류가 발생하였습니다');
-      console.error(e);
+    } catch (error) {
+      if (error.response.status === 400) {
+        window.alert(error.response.data.message);
+      } else {
+        window.alert('오류가 발생하였습니다');
+      }
       navigate('../myinfo/ticket', { replace: true });
     }
   }, [searchParams]);
@@ -40,7 +43,7 @@ export default function TicketBuySuccessPage() {
   }, [finishOrder]);
 
   return (
-    <MyinfoLayout title="이용권 구매 성공페이지">
+    <MyinfoLayout title="이용권 구매">
       {searchParams.get('paymentKey')} <br />
       {searchParams.get('orderId')} <br />
       {searchParams.get('amount')}
