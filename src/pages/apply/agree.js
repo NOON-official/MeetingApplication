@@ -7,6 +7,7 @@ import backend from '../../util/backend';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function AgreePage() {
   const [agree1, setAgree1] = useState(false);
@@ -86,6 +87,7 @@ function AgreePage() {
           다음
         </SubmitButton>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }

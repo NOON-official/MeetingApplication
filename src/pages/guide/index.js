@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Section from '../../components/Section';
 import Accordion from '../../components/Accordion';
 import MainLayout from '../../layout/MainLayout';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 const guides = [
   {
@@ -67,6 +68,7 @@ export default function Guide() {
           ))}
         </Container>
       </Section>
+      <div>{ChannelTalk.showChannelButton()}</div>
     </MainLayout>
   );
 }
