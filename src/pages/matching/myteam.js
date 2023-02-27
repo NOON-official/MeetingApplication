@@ -53,6 +53,14 @@ function MatchingMyTeam() {
     5: '술게임 못해도 챙겨주는 훈훈한 분위기',
   };
 
+  const AlcholContent = {
+    1: '(소주 반 병)',
+    2: '(소주 한 병)',
+    3: '(소주 한 병 반)',
+    4: '(소주 두 병)',
+    5: '(술고래)',
+  };
+
   if (
     myTeamData !== undefined &&
     myTeamData?.prefAge !== undefined &&
@@ -253,7 +261,9 @@ function MatchingMyTeam() {
               </Info>
               <Info>
                 <SmallTitle>주량 레벨</SmallTitle>
-                <SmallContent>Level {myTeamData?.drink}</SmallContent>
+                <SmallContent>
+                  Level {myTeamData?.drink} {AlcholContent[myTeamData?.drink]}
+                </SmallContent>
               </Info>
             </InfoContent>
           </InfoBox>

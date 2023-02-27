@@ -12,8 +12,8 @@ const initialState = {
   members: [{}, {}, {}],
   intro: '',
   drink: 3,
-  prefSameUniversity: false,
-  prefAge: [23, 25],
+  prefSameUniversity: true,
+  prefAge: [22, 27],
   prefVibes: [],
 };
 
