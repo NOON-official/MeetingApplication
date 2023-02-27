@@ -58,7 +58,7 @@ function Complete() {
         <SBigO />
         <TextBox>
           <BlackText>미팅 신청이 완료되었습니다!</BlackText>
-          <BlackText>매칭이 완료되면 문자를 드릴께요.</BlackText>
+          <BlackText>매칭이 완료되면 문자를 드릴게요.</BlackText>
         </TextBox>
         <SubmitButton
           onClick={() => {
