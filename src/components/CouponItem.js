@@ -50,6 +50,7 @@ const Container = styled.div`
 `;
 
 const CouponBox = styled.div`
+  min-width: 249px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -72,11 +73,11 @@ const CouponTitle = styled.div`
 const CouponExpireText = styled.span`
   font-size: 10px;
   color: #777777;
+  margin-right: 4px;
 `;
 
 const CouponTipText = styled.span`
   font-weight: 400;
   font-size: 6px;
   color: #777777;
-  margin-left: 4px;
 `;
