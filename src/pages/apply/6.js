@@ -78,6 +78,14 @@ function Apply6Page() {
     5: '술게임 못해도 챙겨주는 훈훈한 분위기',
   };
 
+  const AlcholContent = {
+    1: '(소주 반 병)',
+    2: '(소주 한 병)',
+    3: '(소주 한 병 반)',
+    4: '(소주 두 병)',
+    5: '(술고래)',
+  };
+
   return (
     <ApplyLayout>
       <Title>
@@ -223,7 +231,9 @@ function Apply6Page() {
             </Info>
             <Info>
               <SmallTitle>주량 레벨</SmallTitle>
-              <SmallContent>Level {drink}</SmallContent>
+              <SmallContent>
+                Level {drink} {AlcholContent[drink]}
+              </SmallContent>
             </Info>
             <Info>
               <SmallTitle>선호 날짜</SmallTitle>

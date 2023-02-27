@@ -107,7 +107,7 @@ function Apply5Page() {
       </Title>
       <Title2>
         <Maintitle2>평균 나이</Maintitle2>
-        <Subtitle2>범위를 넓게 선택해야 매칭확률이 상승해요</Subtitle2>
+        <Subtitle2>범위를 넓게 선택해야 매칭 확률이 상승해요</Subtitle2>
       </Title2>
       <SSlider
         onAfterChange={onAfterChange}
@@ -124,11 +124,11 @@ function Apply5Page() {
       </Title2>
       <ChooseBox>
         <BinaryButton
-          state={sameSchool === false}
-          condition1="같은학교는 싫어요"
-          condition2="상관없음"
+          state={sameSchool}
+          condition1="상관없음"
+          condition2="같은 학교는 싫어요"
           onChange={(result) =>
-            result ? setSameSchool(false) : setSameSchool(true)
+            result ? setSameSchool(true) : setSameSchool(false)
           }
         />
       </ChooseBox>
@@ -136,16 +136,16 @@ function Apply5Page() {
         <Maintitle>
           <Pink>미팅</Pink>은 어땠으면 좋겠어요?
         </Maintitle>
-        <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title>
       <Title2>
         <Maintitle2>분위기</Maintitle2>
+        <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title2>
       <ChooseBox2>
         <ChooseButton
           isActive={prefMood.includes(1)}
           onChange={(isActive) => handleVibe(1, isActive)}
-          content="코로나 때문에 못한 연애오늘?!"
+          content="코로나 때문에 못한 연애 오늘?!"
         />
         <ChooseButton
           isActive={prefMood.includes(2)}
