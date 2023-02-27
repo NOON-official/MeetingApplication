@@ -266,9 +266,11 @@ export default function TicketBuyPage() {
                     !coupon.type.applicableProducts.includes(selectedProductId)
                   }
                   title={coupon.type.name}
-                  expireText={`${dayjs(coupon.expiresAt).format(
-                    'YYYY. MM. DD',
-                  )} 까지`}
+                  expireText={
+                    coupon.expiresAt
+                      ? `${dayjs(coupon.expiresAt).format('YYYY. MM. DD')} 까지`
+                      : ' '
+                  }
                   tipText={`*${coupon.type.condition}`}
                 />
               ))}
