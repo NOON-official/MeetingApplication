@@ -110,7 +110,7 @@ function Apply6Page() {
             <Info>
               <SmallTitle>학교</SmallTitle>
               <SmallContent>
-                {universities.map((a) => {
+                {universities?.map((a) => {
                   return (
                     <div key={Universities[a - 1].id}>
                       {Universities[a - 1].name} /
@@ -139,14 +139,14 @@ function Apply6Page() {
               <SmallTitle>나이</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].age}세</div>
-                  <div>{members[1].age}세</div>
+                  <div>{members[0]?.age}세</div>
+                  <div>{members[1]?.age}세</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].age}세</div>
-                  <div>{members[1].age}세</div>
-                  <div>{members[2].age}세</div>
+                  <div>{members[0]?.age}세</div>
+                  <div>{members[1]?.age}세</div>
+                  <div>{members[2]?.age}세</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -154,14 +154,14 @@ function Apply6Page() {
               <SmallTitle>MBTI</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
+                  <div>{Mbti[members[0]?.mbti]?.name}</div>
+                  <div>{Mbti[members[1]?.mbti]?.name}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
-                  <div>{Mbti[members[2].mbti].name}</div>
+                  <div>{Mbti[members[0]?.mbti]?.name}</div>
+                  <div>{Mbti[members[1]?.mbti]?.name}</div>
+                  <div>{Mbti[members[2]?.mbti]?.name}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -169,14 +169,14 @@ function Apply6Page() {
               <SmallTitle>포지션</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{RoleContent[members[0].role]}</div>
-                  <div>{RoleContent[members[1].role]}</div>
+                  <div>{RoleContent[members[0]?.role]}</div>
+                  <div>{RoleContent[members[1]?.role]}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{RoleContent[members[0].role]}</div>
-                  <div>{RoleContent[members[1].role]}</div>
-                  <div>{RoleContent[members[2].role]}</div>
+                  <div>{RoleContent[members[0]?.role]}</div>
+                  <div>{RoleContent[members[1]?.role]}</div>
+                  <div>{RoleContent[members[2]?.role]}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -184,14 +184,14 @@ function Apply6Page() {
               <SmallTitle>닮은꼴</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].appearance}</div>
-                  <div>{members[1].appearance}</div>
+                  <div>{members[0]?.appearance}</div>
+                  <div>{members[1]?.appearance}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].appearance}</div>
-                  <div>{members[1].appearance}</div>
-                  <div>{members[2].appearance}</div>
+                  <div>{members[0]?.appearance}</div>
+                  <div>{members[1]?.appearance}</div>
+                  <div>{members[2]?.appearance}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -224,7 +224,7 @@ function Apply6Page() {
             <Info>
               <SmallTitle>분위기</SmallTitle>
               <SmallContent>
-                {prefVibes.map((a) => {
+                {prefVibes?.map((a) => {
                   return <div key={a}>{VibeContent[a]}</div>;
                 })}
               </SmallContent>
@@ -238,7 +238,7 @@ function Apply6Page() {
             <Info>
               <SmallTitle>선호 날짜</SmallTitle>
               <SmallContent>
-                {availableDates.map((a) => {
+                {availableDates?.map((a) => {
                   return (
                     <div key={a}>
                       {a[6]}월 {a.substring(8, 10)}일 /
@@ -250,7 +250,7 @@ function Apply6Page() {
             <Info>
               <SmallTitle>선호 지역</SmallTitle>
               <SmallContent>
-                {areas.map((a) => {
+                {areas?.map((a) => {
                   return <div key={a}> {SchoolContent[a]} /</div>;
                 })}
               </SmallContent>
