@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import Flex from '../../../components/Flex';
 import Section from '../../../components/Section';
@@ -13,7 +13,15 @@ import MyinfoLayout from '../../../layout/MyinfoLayout';
 export default function TicketHistoryPage() {
   const { data: orderPageData } = useGetOrdersPageDataQuery();
   const { data: couponPageData } = useGetCouponsPageDataQuery();
-  const { data: orderData } = useGetUserOrdersQuery();
+  const { data: orderData, refetch } = useGetUserOrdersQuery();
+
+  const handleRefetchOrderData = () => {
+    refetch();
+  };
+
+  useEffect(() => {
+    handleRefetchOrderData();
+  }, [orderData]);
 
   const orders = useMemo(() => {
     const products = orderPageData?.Products;
