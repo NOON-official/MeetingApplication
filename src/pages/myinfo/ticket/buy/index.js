@@ -67,12 +67,24 @@ export default function TicketBuyPage() {
 
   const totalAmount = useMemo(() => price - discountAmount);
 
-  const toggleCoupon = useCallback((couponId) => {
-    if (selectedCouponId === couponId) {
+  useEffect(() => {
+    if (selectedCoupon) {
+      const isValidCoupon =
+        selectedCoupon.type.applicableProducts.includes(selectedProductId);
+
+      // 적용 불가한 쿠폰인 경우 쿠폰 선택 해제
+      if (!isValidCoupon) {
+        setSelectedCouponId(undefined);
+      }
+    }
+  }, [selectedProductId]);
+
+  const toggleCoupon = useCallback((coupon) => {
+    if (selectedCouponId === coupon.id) {
       setSelectedCouponId(undefined);
       return;
     }
-    setSelectedCouponId(couponId);
+    setSelectedCouponId(coupon.id);
   });
 
   // const makePayment = useCallback(async () => {
@@ -248,9 +260,11 @@ export default function TicketBuyPage() {
               )}
               {coupons.map((coupon) => (
                 <CouponItem
-                  onClick={() => toggleCoupon(coupon.id)}
+                  onClick={() => toggleCoupon(coupon)}
                   checked={selectedCouponId === coupon.id}
-                  disabled={false}
+                  disabled={
+                    !coupon.type.applicableProducts.includes(selectedProductId)
+                  }
                   title={coupon.type.name}
                   expireText={`${dayjs(coupon.expiresAt).format(
                     'YYYY. MM. DD',
