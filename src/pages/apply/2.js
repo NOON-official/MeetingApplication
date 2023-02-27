@@ -14,6 +14,7 @@ import NotEnoughDateModal from '../../components/Modal/NotEnoughDateModal';
 import NotEnoughPlaceModal from '../../components/Modal/NotEnoughPlaceModal';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { ReactComponent as Earth } from '../../asset/svg/Earth.svg';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 export default function Apply2() {
   const [openModal1, setOpenModal1] = useState(false);
@@ -114,7 +115,7 @@ export default function Apply2() {
         <Maintitle>
           <Pink>미팅 선호 지역</Pink>을 알려주세요
         </Maintitle>
-        <Subtitle>중복선택이 가능해요</Subtitle>
+        <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title2>
       <ChooseBox>
         <ChooseButton
@@ -151,6 +152,7 @@ export default function Apply2() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }

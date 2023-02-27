@@ -11,6 +11,7 @@ import { ReactComponent as Main2 } from '../asset/svg/Main2.svg';
 import { ReactComponent as Main3 } from '../asset/svg/Main3.svg';
 import { ReactComponent as Main4 } from '../asset/svg/Main4.svg';
 import { ReactComponent as Main5 } from '../asset/svg/Main5.svg';
+import ChannelTalk from '../asset/ChannelTalk';
 import MainLayout from '../layout/MainLayout';
 import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
@@ -30,6 +31,13 @@ function Main() {
   const [matchingStatus, setMatchingStatus] = useState('');
   const [agreements, setAgreements] = useState('');
   const navigate = useNavigate();
+  const setting = {
+    pluginKey: process.env.REACT_APP_CHANNEL_TALK_PLUGIN,
+    memberId: window.localStorage.id,
+    profile: {
+      name: window.localStorage.nickname,
+    },
+  };
 
   const getInformation = useCallback(async () => {
     try {
@@ -127,6 +135,7 @@ function Main() {
           <FixButton onClick={handleStart} />
         </ImgBox2>
       </Section>
+      <div>{ChannelTalk.boot(setting)}</div>
       <MainFooter />
       <BottomFooter />
     </MainLayout>
