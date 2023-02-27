@@ -14,6 +14,7 @@ import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import backend from '../../util/backend';
 import LoginMatchFailed from '../../components/MatchingBox/LoginMatchFailed';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Matching() {
   const [myteamId, setMyteamId] = useState('');
@@ -72,6 +73,7 @@ function Matching() {
     <MainLayout>
       {MatchingBox}
       <MainFooter />
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </MainLayout>
   );
 }
