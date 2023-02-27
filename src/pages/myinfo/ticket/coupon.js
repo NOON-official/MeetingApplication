@@ -64,9 +64,11 @@ export default function TicketCouponPage() {
           {coupons.map((coupon) => (
             <CouponItem
               title={coupon.type.name}
-              expireText={`${dayjs(coupon.expiresAt).format(
-                'YYYY. MM. DD',
-              )} 까지`}
+              expireText={
+                coupon.expiresAt
+                  ? `${dayjs(coupon.expiresAt).format('YYYY. MM. DD')} 까지`
+                  : ' '
+              }
               tipText={`*${coupon.type.condition}`}
             />
           ))}
