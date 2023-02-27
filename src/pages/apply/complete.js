@@ -8,6 +8,7 @@ import backend from '../../util/backend';
 import { createTeam } from '../../features/apply/asyncAction';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Complete() {
   const { accessToken } = useSelector((state) => state.user);
@@ -67,6 +68,7 @@ function Complete() {
           메인으로 가기
         </SubmitButton>
       </Container>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }

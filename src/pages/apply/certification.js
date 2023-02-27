@@ -9,6 +9,7 @@ import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as ModalTextPhone } from '../../asset/svg/ModalTextPhone.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function CertificationPage() {
   const [vaildcheck, setValidCheck] = useState(false);
@@ -136,6 +137,7 @@ function CertificationPage() {
           매칭신청완료
         </SubmitButton>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }

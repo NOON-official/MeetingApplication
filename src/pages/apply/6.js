@@ -9,6 +9,7 @@ import Mbti from '../../asset/Mbti';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply6Page() {
   const {
@@ -263,6 +264,7 @@ function Apply6Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }

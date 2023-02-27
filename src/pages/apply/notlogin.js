@@ -8,6 +8,7 @@ import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import KakaoLoginLink from '../../components/KakaoLoginLink';
 import { setAccessToken } from '../../features/user';
 import ApplyLayout from '../../layout/ApplyLayout';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 export default function NotLoginPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,6 +45,7 @@ export default function NotLoginPage() {
           </KakaoButton>
         </KakaoLoginLink>
       </Container>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
