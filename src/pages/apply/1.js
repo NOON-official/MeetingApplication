@@ -14,6 +14,7 @@ import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
 import { submitStep1 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import Universities from '../../asset/Universities';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 export default function Apply1Page() {
   const { accessToken } = useSelector((state) => state.user);
@@ -153,6 +154,7 @@ export default function Apply1Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }

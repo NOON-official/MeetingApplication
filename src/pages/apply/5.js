@@ -13,6 +13,7 @@ import { ReactComponent as Bottom } from '../../asset/svg/Apply5Bottom.svg';
 import ChooseButton from '../../components/ChooseButton';
 import { submitStep5 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -198,6 +199,7 @@ function Apply5Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }

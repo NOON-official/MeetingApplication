@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Button, Input } from 'antd';
 import backend from '../../util/backend';
 import ApplyLayout from '../../layout/ApplyLayout';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function InvitePage() {
   const [inviteCode, setInviteCode] = useState('');
@@ -45,6 +46,7 @@ function InvitePage() {
       <Footer>
         <SubmitButton onClick={NextPage}>미팅 시작하기</SubmitButton>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
