@@ -10,6 +10,7 @@ import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { submitStep3 } from '../../features/apply';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply3Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -116,6 +117,7 @@ function Apply3Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
