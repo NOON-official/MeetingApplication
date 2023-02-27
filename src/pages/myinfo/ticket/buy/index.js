@@ -30,10 +30,25 @@ export default function TicketBuyPage() {
   const navigate = useNavigate();
   const [selectedProductId, setSelectedProductId] = useState(1);
   const [selectedCouponId, setSelectedCouponId] = useState(null);
+  const [selectedPayMethodId, setSelectedPayMethodId] = useState(1);
   const { data: pageData } = useGetOrdersPageDataQuery();
   const { data: couponPageData } = useGetCouponsPageDataQuery();
   const { data: couponData, refetch } = useGetUserCouponsQuery();
   const { data: userData } = useGetMyInfoQuery();
+  const payMethods = [
+    {
+      id: 1,
+      name: '신용/체크카드',
+      payplePcdPayType: 'card',
+      payplePcdCardVer: '02', // 앱카드 결제
+    },
+    {
+      id: 2,
+      name: '계좌이체',
+      payplePcdPayType: 'transfer',
+      payplePcdCardVer: '01', // 간편 결제
+    },
+  ];
 
   const handleRefetchCouponData = () => {
     refetch();
@@ -146,7 +161,7 @@ export default function TicketBuyPage() {
     } = res;
 
     // 결제 요청 성공 로직
-    if (PCD_PAY_RST === 'success' && PCD_PAY_CODE === '0000') {
+    if (PCD_PAY_RST === 'success' && PCD_PAY_CODE.includes('0000')) {
       const paypleOrderData = {
         authKey: PCD_AUTH_KEY,
         payReqKey: PCD_PAY_REQKEY,
@@ -165,8 +180,6 @@ export default function TicketBuyPage() {
     // 결제 실패 로직
     else {
       window.alert(PCD_PAY_MSG);
-
-      navigate(' /myinfo/ticket/buy/fail');
     }
   };
 
@@ -190,7 +203,6 @@ export default function TicketBuyPage() {
       } catch (e) {
         window.alert('오류가 발생하였습니다');
         navigate('../myinfo/ticket', { replace: true });
-        console.error(e);
       }
       return;
     }
@@ -204,9 +216,13 @@ export default function TicketBuyPage() {
 
     // 페이플 결제 요청
     const paypleOrderData = {
-      PCD_PAY_TYPE: 'card', // card | transfer
+      PCD_PAY_TYPE: payMethods?.find(
+        (payMethod) => payMethod.id === selectedPayMethodId,
+      ).payplePcdPayType,
       PCD_PAY_WORK: 'CERT',
-      PCD_CARD_VER: '01', // 페이플 간편결제
+      PCD_CARD_VER: payMethods?.find(
+        (payMethod) => payMethod.id === selectedPayMethodId,
+      ).payplePcdCardVer,
       PCD_PAYER_NAME: userData?.nickname,
       PCD_PAY_GOODS: selectedProduct?.name, // 필수
       PCD_PAY_TOTAL: totalAmount, // 필수
@@ -278,7 +294,32 @@ export default function TicketBuyPage() {
           }
         />
       </Section>
-      <Section>
+      <Section my="20px">
+        <PayMethodContainer>
+          <PayMethodTitleBox>
+            <PayMethodTitle>결제 방법</PayMethodTitle>
+          </PayMethodTitleBox>
+          <PayMethodContentBox>
+            {payMethods?.map((payMethod) => (
+              <MenuItem key={payMethod.id}>
+                <CheckboxButton
+                  onClick={() => setSelectedPayMethodId(payMethod.id)}
+                >
+                  <PayMethodTitleBox>
+                    {selectedPayMethodId === payMethod.id ? (
+                      <CheckboxChecked />
+                    ) : (
+                      <Checkbox />
+                    )}
+                    <ProductTitleText>{payMethod.name}</ProductTitleText>
+                  </PayMethodTitleBox>
+                </CheckboxButton>
+              </MenuItem>
+            ))}
+          </PayMethodContentBox>
+        </PayMethodContainer>
+      </Section>
+      <Section my="20px" center>
         <TotalPriceBox>
           <span>최종 결제 금액</span>
           <span>{totalAmount.toLocaleString()}원</span>
@@ -363,12 +404,12 @@ const TotalPriceBox = styled.div`
   display: flex;
   justify-content: space-between;
   background: #ffffff;
-  border: 0.5px solid #777777;
+  border: 0.5px solid #eb8888;
   border-radius: 10px;
   padding: 16px 42px;
   font-weight: 700;
   font-size: 18px;
-  color: #777777;
+  color: #eb8888;
 `;
 
 const WarningDescription = styled.ul`
@@ -397,4 +438,36 @@ const NoCouponText = styled.span`
   font-size: 14px;
   color: #777777;
   padding: 12px 0;
+`;
+
+const PayMethodContainer = styled.div`
+  background-color: #ffffff;
+  border: 1px solid #f1ecec;
+  border-radius: 10px;
+  padding: 0 22px;
+`;
+
+const PayMethodTitleBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+`;
+
+const PayMethodTitle = styled.div`
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #777777;
+`;
+
+const PayMethodContentBox = styled.div`
+  border-top: 1px solid #f1ecec;
+  font-size: 11px;
+  line-height: 13px;
+  padding: 15px 0;
+
+  > p {
+    margin: 8px 0;
+  }
 `;
