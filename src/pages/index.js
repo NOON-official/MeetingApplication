@@ -86,7 +86,15 @@ function Main() {
       <Section>
         <ImgBox>
           <UserCountText>
-            <span>{membersData?.memberCount}</span>
+            <CountBox>
+              {Math.floor(parseInt(membersData?.memberCount) / 100)}
+            </CountBox>
+            <CountBox>
+              {Math.floor((parseInt(membersData?.memberCount) % 100) / 10)}
+            </CountBox>
+            <CountBox>
+              {Math.floor(parseInt(membersData?.memberCount) % 10)}
+            </CountBox>
           </UserCountText>
           <MainImg />
         </ImgBox>
@@ -176,13 +184,18 @@ const ImgBox2 = styled.div`
 
 const UserCountText = styled.div`
   position: absolute;
-  top: 4%;
-  right: 27%;
-  > span {
-    font-family: 'Nanum JungHagSaeng';
-    font-weight: 400;
-    font-size: 26px;
-  }
+  top: 6%;
+  right: 23%;
+`;
+
+const CountBox = styled.span`
+  position: relative;
+  overflow: hidden;
+  border: 0.3px solid rgba(197, 200, 206, 0.5);
+  padding: 2px;
+  margin-left: 2px;
+  font-size: 15px;
+  background-color: white;
 `;
 
 const MatchingBox = styled.div`
