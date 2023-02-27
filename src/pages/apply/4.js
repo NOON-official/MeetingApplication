@@ -10,6 +10,7 @@ import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import { submitStep4 } from '../../features/apply';
 import NotEnoughIntroModal from '../../components/Modal/NotEnoughInroModal';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply4Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -84,6 +85,7 @@ function Apply4Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
