@@ -105,7 +105,7 @@ function CertificationPage() {
           }}
           disabled={!regex.test(p) || submitOk1}
         >
-          인증번호요청
+          인증번호 요청
         </SubmitButton>
         <PhoneBox>
           인증번호
@@ -124,7 +124,7 @@ function CertificationPage() {
           onClick={SubmitAuthorizeNumber}
           disabled={!authorizeNumber || !regex.test(p) || vaildcheck}
         >
-          인증번호확인
+          인증번호 확인
         </SubmitButton>
       </Conatiner>
       <Footer>
@@ -134,7 +134,7 @@ function CertificationPage() {
           }}
           disabled={!vaildcheck}
         >
-          매칭신청완료
+          매칭 신청 완료
         </SubmitButton>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
