@@ -50,7 +50,7 @@ const Container = styled.div`
 `;
 
 const CouponBox = styled.div`
-  min-width: 249px;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 12px;
