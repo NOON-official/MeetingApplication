@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 import { ReactComponent as MatchingText10 } from '../../asset/svg/MatchingText10.svg';
-// 로그인하고 매칭증에 상대방찾고 있을 때 매칭조회페이지
 
 export default function LoginWaitOtherTeam() {
   const navigate = useNavigate();
@@ -17,7 +16,7 @@ export default function LoginWaitOtherTeam() {
           매칭결과
           <SCircleArrow
             onClick={() => {
-              navigate('/matching');
+              window.location.reload();
             }}
           />
         </LeftTop>
