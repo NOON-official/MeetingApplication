@@ -92,7 +92,7 @@ export default function LoginOtherTeamRefused({ teamId }) {
           매칭결과
           <SCircleArrow
             onClick={() => {
-              navigate('/matching');
+              window.location.reload();
             }}
           />
         </LeftTop>
