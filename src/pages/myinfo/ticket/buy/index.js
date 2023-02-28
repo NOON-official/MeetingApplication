@@ -295,31 +295,33 @@ export default function TicketBuyPage() {
           }
         />
       </Section>
-      <Section my="20px">
-        <PayMethodContainer>
-          <PayMethodTitleBox>
-            <PayMethodTitle>결제 방법</PayMethodTitle>
-          </PayMethodTitleBox>
-          <PayMethodContentBox>
-            {payMethods?.map((payMethod) => (
-              <MenuItem key={payMethod.id}>
-                <CheckboxButton
-                  onClick={() => setSelectedPayMethodId(payMethod.id)}
-                >
-                  <PayMethodTitleBox>
-                    {selectedPayMethodId === payMethod.id ? (
-                      <CheckboxChecked />
-                    ) : (
-                      <Checkbox />
-                    )}
-                    <ProductTitleText>{payMethod.name}</ProductTitleText>
-                  </PayMethodTitleBox>
-                </CheckboxButton>
-              </MenuItem>
-            ))}
-          </PayMethodContentBox>
-        </PayMethodContainer>
-      </Section>
+      {totalAmount !== 0 && (
+        <Section my="20px">
+          <PayMethodContainer>
+            <PayMethodTitleBox>
+              <PayMethodTitle>결제 방법</PayMethodTitle>
+            </PayMethodTitleBox>
+            <PayMethodContentBox>
+              {payMethods?.map((payMethod) => (
+                <MenuItem key={payMethod.id}>
+                  <CheckboxButton
+                    onClick={() => setSelectedPayMethodId(payMethod.id)}
+                  >
+                    <PayMethodTitleBox>
+                      {selectedPayMethodId === payMethod.id ? (
+                        <CheckboxChecked />
+                      ) : (
+                        <Checkbox />
+                      )}
+                      <ProductTitleText>{payMethod.name}</ProductTitleText>
+                    </PayMethodTitleBox>
+                  </CheckboxButton>
+                </MenuItem>
+              ))}
+            </PayMethodContentBox>
+          </PayMethodContainer>
+        </Section>
+      )}
       <Section my="20px" center>
         <TotalPriceBox>
           <span>최종 결제 금액</span>
