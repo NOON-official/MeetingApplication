@@ -54,7 +54,7 @@ export default function LoginMatchComplete() {
           매칭결과
           <SCircleArrow
             onClick={() => {
-              navigate('/matching');
+              window.location.reload();
             }}
           />
         </LeftTop>
