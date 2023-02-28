@@ -27,14 +27,14 @@ export default function TicketBuySuccessPage() {
       });
 
       window.alert('이용권이 구매되었습니다');
-      navigate('../myinfo/ticket', { replace: true });
+      navigate('../myinfo/ticket', { replace: true }); // 이용권 현황 페이지
     } catch (error) {
       if (error.response.status === 400) {
         window.alert(error.response.data.message);
       } else {
         window.alert('오류가 발생하였습니다');
       }
-      navigate('../myinfo/ticket', { replace: true });
+      navigate('../myinfo/ticket/buy', { replace: true }); // 이용권 구매 페이지
     }
   }, [searchParams]);
 
