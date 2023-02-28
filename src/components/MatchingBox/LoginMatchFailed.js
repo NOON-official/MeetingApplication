@@ -91,7 +91,7 @@ export default function LoginMatchFailed({ teamId }) {
           매칭결과
           <SCircleArrow
             onClick={() => {
-              navigate('/matching');
+              window.location.reload();
             }}
           />
         </LeftTop>
