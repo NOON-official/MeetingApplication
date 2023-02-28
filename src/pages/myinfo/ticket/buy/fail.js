@@ -4,7 +4,8 @@ import MyinfoLayout from '../../../../layout/MyinfoLayout';
 export default function TicketBuyFailPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  navigate('../myinfo/ticket', { replace: true });
+
+  navigate('../myinfo/ticket/buy', { replace: true });
 
   return (
     <MyinfoLayout title="이용권 구매 실패페이지">
