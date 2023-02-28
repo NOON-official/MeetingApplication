@@ -85,7 +85,7 @@ export default function TicketBuyPage() {
   useEffect(() => {
     if (selectedCoupon) {
       const isValidCoupon =
-        selectedCoupon.type.applicableProducts.includes(selectedProductId);
+        selectedCoupon?.type?.applicableProducts?.includes(selectedProductId);
 
       // 적용 불가한 쿠폰인 경우 쿠폰 선택 해제
       if (!isValidCoupon) {
@@ -202,7 +202,6 @@ export default function TicketBuyPage() {
         navigate('../myinfo/ticket', { replace: true });
       } catch (e) {
         window.alert('오류가 발생하였습니다');
-        navigate('../myinfo/ticket', { replace: true });
       }
       return;
     }
@@ -279,7 +278,9 @@ export default function TicketBuyPage() {
                   onClick={() => toggleCoupon(coupon)}
                   checked={selectedCouponId === coupon.id}
                   disabled={
-                    !coupon.type.applicableProducts.includes(selectedProductId)
+                    !coupon?.type?.applicableProducts?.includes(
+                      selectedProductId,
+                    )
                   }
                   title={coupon.type.name}
                   expireText={
