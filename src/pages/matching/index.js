@@ -10,7 +10,6 @@ import LoginMatchFail from '../../components/MatchingBox/LoginMatchFail';
 import LoginOtherTeamRefused from '../../components/MatchingBox/LoginOtherTeamRefused';
 import LoginNoAnswer from '../../components/MatchingBox/LoginNoAnswer';
 import NoLogin from '../../components/MatchingBox/NoLogin';
-import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import backend from '../../util/backend';
 import LoginMatchFailed from '../../components/MatchingBox/LoginMatchFailed';
@@ -72,7 +71,6 @@ function Matching() {
   return (
     <MainLayout>
       {MatchingBox}
-      <MainFooter />
       <div>{ChannelTalk.hideChannelButton()}</div>
     </MainLayout>
   );

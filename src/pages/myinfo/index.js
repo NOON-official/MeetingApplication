@@ -50,7 +50,7 @@ function MyInfo() {
   }, [referralId]);
 
   const shareThroughKakao = useCallback(() => {
-    const url = `${CLIENT_URL}/auth/signup?referralId=${referralId}`;
+    const url = `${CLIENT_URL}/?referralId=${referralId}`;
 
     window.Kakao.Share.sendDefault({
       objectType: 'feed',

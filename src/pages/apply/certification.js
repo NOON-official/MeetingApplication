@@ -65,20 +65,22 @@ function CertificationPage() {
     <ApplyLayout>
       <Modal
         open={openModal}
-        centered
         footer={null}
+        centered
         width="380px"
         closable={false}
       >
-        <SModalTextPhone />
-        <SButton
-          onClick={() => {
-            setOpenModal(false);
-            navigate('/apply/complete');
-          }}
-        >
-          닫기
-        </SButton>
+        <ModalContainer>
+          <SModalTextPhone />
+          <SButton
+            onClick={() => {
+              setOpenModal(false);
+              navigate('/apply/complete');
+            }}
+          >
+            닫기
+          </SButton>
+        </ModalContainer>
       </Modal>
       <Title>
         <Maintitle>
@@ -225,10 +227,14 @@ const Footer = styled.div`
   margin-bottom: 60%;
 `;
 
-const SModalTextPhone = styled(ModalTextPhone)`
-  margin-top: 3%;
-  margin-left: 15%;
+const ModalContainer = styled.div`
+  padding-top: 5%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
+
+const SModalTextPhone = styled(ModalTextPhone)``;
 
 const SButton = styled(Button)`
   margin-top: 10%;
