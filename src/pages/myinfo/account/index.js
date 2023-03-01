@@ -26,7 +26,9 @@ export default function Account() {
 
   const deleteAccount = useCallback(async () => {
     try {
-      await backend.delete('/auth/account');
+      await backend.delete('/auth/account', {
+        withCredentials: true,
+      });
       window.alert('탈퇴되었습니다');
       dispatch(logout());
       navigate('/');
@@ -76,7 +78,6 @@ export default function Account() {
                     <div>
                       <HistoryDateText>
                         {dayjs(team.createdAt).format('YYYY. MM. DD HH:mmA')}{' '}
-                        2023. 01. 10 02:40AM
                       </HistoryDateText>
                       <HistoryStatusText>
                         {team.chatCreatedAt ? '매칭 완료' : '신청 완료'}

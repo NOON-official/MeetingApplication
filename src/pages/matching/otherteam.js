@@ -93,7 +93,21 @@ function MatchingOtherTeam() {
     5: '술게임 못해도 챙겨주는 훈훈한 분위기',
   };
 
-  if (otherTeamData?.members?.length > 0) {
+  const AlcholContent = {
+    1: '(소주 반 병)',
+    2: '(소주 한 병)',
+    3: '(소주 한 병 반)',
+    4: '(소주 두 병)',
+    5: '(술고래)',
+  };
+
+  console.log(otherTeamData);
+
+  if (
+    otherTeamData !== undefined &&
+    otherTeamData?.prefAge !== undefined &&
+    otherTeamData?.members !== undefined
+  ) {
     return (
       <ApplyLayout>
         <Modal
@@ -131,7 +145,7 @@ function MatchingOtherTeam() {
               onClick={() => {
                 handleRefuse();
                 handleCancel2();
-                navigate('/matching');
+                navigate('/matching/refuse');
               }}
             >
               거절하기
@@ -217,14 +231,14 @@ function MatchingOtherTeam() {
                 <SmallTitle>나이</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{otherTeamData?.members['0'].age}세</div>
-                    <div>{otherTeamData?.members['1'].age}세</div>
+                    <div>{otherTeamData?.members[0]?.age}세</div>
+                    <div>{otherTeamData?.members[1]?.age}세</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{otherTeamData?.members['0'].age}세</div>
-                    <div>{otherTeamData?.members['1'].age}세</div>
-                    <div>{otherTeamData?.members['2'].age}세</div>
+                    <div>{otherTeamData?.members[0]?.age}세</div>
+                    <div>{otherTeamData?.members[1]?.age}세</div>
+                    <div>{otherTeamData?.members[2]?.age}세</div>
                   </MemberProfile2>
                 )}
               </Info>
@@ -232,14 +246,14 @@ function MatchingOtherTeam() {
                 <SmallTitle>MBTI</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{Mbti[otherTeamData?.members[0].mbti].name}</div>
-                    <div>{Mbti[otherTeamData?.members[1].mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[0]?.mbti]?.name}</div>
+                    <div>{Mbti[otherTeamData?.members[1]?.mbti]?.name}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{Mbti[otherTeamData?.members[0].mbti].name}</div>
-                    <div>{Mbti[otherTeamData?.members[1].mbti].name}</div>
-                    <div>{Mbti[otherTeamData?.members[2].mbti].name}</div>
+                    <div>{Mbti[otherTeamData?.members[0]?.mbti]?.name}</div>
+                    <div>{Mbti[otherTeamData?.members[1]?.mbti]?.name}</div>
+                    <div>{Mbti[otherTeamData?.members[2]?.mbti]?.name}</div>
                   </MemberProfile2>
                 )}
               </Info>
@@ -247,14 +261,14 @@ function MatchingOtherTeam() {
                 <SmallTitle>포지션</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{RoleContent[otherTeamData?.members[0].role]}</div>
-                    <div>{RoleContent[otherTeamData?.members[1].role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[0]?.role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[1]?.role]}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{RoleContent[otherTeamData?.members[0].role]}</div>
-                    <div>{RoleContent[otherTeamData?.members[1].role]}</div>
-                    <div>{RoleContent[otherTeamData?.members[2].role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[0]?.role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[1]?.role]}</div>
+                    <div>{RoleContent[otherTeamData?.members[2]?.role]}</div>
                   </MemberProfile2>
                 )}
               </Info>
@@ -262,14 +276,14 @@ function MatchingOtherTeam() {
                 <SmallTitle>닮은꼴</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{otherTeamData?.members[0].similar}</div>
-                    <div>{otherTeamData?.members[1].similar}</div>
+                    <div>{otherTeamData?.members[0]?.appearance}</div>
+                    <div>{otherTeamData?.members[1]?.appearance}</div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{otherTeamData?.members[0].similar}</div>
-                    <div>{otherTeamData?.members[1].similar}</div>
-                    <div>{otherTeamData?.members[2].similar}</div>
+                    <div>{otherTeamData?.members[0]?.appearance}</div>
+                    <div>{otherTeamData?.members[1]?.appearance}</div>
+                    <div>{otherTeamData?.members[2]?.appearance}</div>
                   </MemberProfile2>
                 )}
               </Info>
@@ -310,7 +324,10 @@ function MatchingOtherTeam() {
               </Info>
               <Info>
                 <SmallTitle>주량 레벨</SmallTitle>
-                <SmallContent>Level {otherTeamData?.drink}</SmallContent>
+                <SmallContent>
+                  Level {otherTeamData?.drink}{' '}
+                  {AlcholContent[otherTeamData?.drink]}
+                </SmallContent>
               </Info>
             </InfoContent>
           </InfoBox>
@@ -324,31 +341,32 @@ function MatchingOtherTeam() {
               </Info>
             </InfoContent>
           </InfoBox>
+          <Alarm>상대팀 미팅학개론을 캡쳐해서 팀원들에게 공유해보세요!</Alarm>
+          {matchingStatus === 'MATCHED' ? (
+            <Footer>
+              <ButtonBox>
+                <ApplyButton
+                  onClick={() => {
+                    handleOkay();
+                  }}
+                >
+                  수락하기
+                </ApplyButton>
+                <ApplyButton
+                  onClick={() => {
+                    setOpenModal2(true);
+                  }}
+                >
+                  거절하기
+                </ApplyButton>
+              </ButtonBox>
+            </Footer>
+          ) : null}
         </Content>
-        <Alarm>상대팀 미팅학개론을 캡쳐해서 팀원들에게 공유해보세요!</Alarm>
-        {matchingStatus === 'MATCHED' ? (
-          <Footer>
-            <ButtonBox>
-              <ApplyButton
-                onClick={() => {
-                  handleOkay();
-                }}
-              >
-                수락하기
-              </ApplyButton>
-              <ApplyButton
-                onClick={() => {
-                  setOpenModal2(true);
-                }}
-              >
-                거절하기
-              </ApplyButton>
-            </ButtonBox>
-          </Footer>
-        ) : null}
       </ApplyLayout>
     );
   }
+  return null;
 }
 
 export default MatchingOtherTeam;
@@ -385,6 +403,7 @@ const Pink = styled.span`
 const Content = styled.div`
   width: 90%;
   height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -488,12 +507,12 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 8%;
+  margin-top: 10%;
   padding-bottom: 5%;
 `;
 
 const ButtonBox = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: center;
   justify-content: space-between;

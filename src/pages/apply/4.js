@@ -10,6 +10,7 @@ import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import { submitStep4 } from '../../features/apply';
 import NotEnoughIntroModal from '../../components/Modal/NotEnoughInroModal';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply4Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -55,7 +56,7 @@ function Apply4Page() {
       <NotEnoughIntroModal open={openModal} setModal={setModal} />
       <Title>
         <Maintitle>
-          우리팀을 소개하는 <Pink>마지막 한줄 어필</Pink>
+          우리팀을 소개하는 <Pink>마지막 한 줄 어필</Pink>
         </Maintitle>
         <Subtitle>센스 넘치게 우리 팀을 소개할수록 매칭률이 올라가요!</Subtitle>
         <Subtitle>길게 쓰면 운명의 짝을 만날지도?</Subtitle>
@@ -84,6 +85,7 @@ function Apply4Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -116,7 +118,7 @@ const Subtitle = styled.p`
   font-size: 13px;
 `;
 const Text = styled.div`
-  margin-top: 7%;
+  margin-top: 20%;
   padding-bottom: 10%;
   width: 100%;
   display: flex;

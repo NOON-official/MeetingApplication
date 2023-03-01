@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MenuBox, { LinkButton, MenuItem } from '../../../components/MenuBox';
@@ -10,8 +11,26 @@ import {
 } from '../../../features/backendApi';
 
 export default function TicketPage() {
-  const { data: ticketData } = useGetUserTicketCountQuery();
-  const { data: couponData } = useGetUserCouponCountQuery();
+  const { data: ticketData, refetch: refetchTicketData } =
+    useGetUserTicketCountQuery();
+  const { data: couponData, refetch: refetchCouponData } =
+    useGetUserCouponCountQuery();
+
+  const handleRefetchTicketData = () => {
+    refetchTicketData();
+  };
+
+  const handleRefetchCouponData = () => {
+    refetchCouponData();
+  };
+
+  useEffect(() => {
+    handleRefetchTicketData();
+  }, [ticketData]);
+
+  useEffect(() => {
+    handleRefetchCouponData();
+  }, [couponData]);
 
   return (
     <MyinfoLayout title="이용권 현황">

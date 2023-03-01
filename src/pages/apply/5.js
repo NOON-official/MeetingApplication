@@ -13,6 +13,7 @@ import { ReactComponent as Bottom } from '../../asset/svg/Apply5Bottom.svg';
 import ChooseButton from '../../components/ChooseButton';
 import { submitStep5 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -29,8 +30,16 @@ function Apply5Page() {
   }, [finishedStep]);
 
   const marks = {
-    20: { label: <SliderText>20세</SliderText> },
-    29: { label: <SliderText>29세</SliderText> },
+    20: { label: <SliderText>20</SliderText> },
+    21: { label: <SliderText>21</SliderText> },
+    22: { label: <SliderText>22</SliderText> },
+    23: { label: <SliderText>23</SliderText> },
+    24: { label: <SliderText>24</SliderText> },
+    25: { label: <SliderText>25</SliderText> },
+    26: { label: <SliderText>26</SliderText> },
+    27: { label: <SliderText>27</SliderText> },
+    28: { label: <SliderText>28</SliderText> },
+    29: { label: <SliderText>29</SliderText> },
   };
   const marks2 = {
     1: { label: <SliderText>Level 1</SliderText> },
@@ -38,6 +47,10 @@ function Apply5Page() {
     3: { label: <SliderText>3</SliderText> },
     4: { label: <SliderText>4</SliderText> },
     5: { label: <SliderText>5</SliderText> },
+  };
+
+  const trackStyle = {
+    backgroundColor: '#EB8888',
   };
 
   const [ageRange, setAgeRange] = useState(prefAge.length ? prefAge : [23, 25]);
@@ -94,11 +107,12 @@ function Apply5Page() {
       </Title>
       <Title2>
         <Maintitle2>평균 나이</Maintitle2>
-        <Subtitle2>범위를 넓게 선택해야 매칭확률이 상승해요</Subtitle2>
+        <Subtitle2>범위를 넓게 선택해야 매칭 확률이 상승해요</Subtitle2>
       </Title2>
       <SSlider
         onAfterChange={onAfterChange}
-        tooltip={{ placement: 'bottom' }}
+        trackStyle={trackStyle}
+        tooltip={{ placement: 'top' }}
         marks={marks}
         defaultValue={ageRange}
         max={29}
@@ -110,11 +124,11 @@ function Apply5Page() {
       </Title2>
       <ChooseBox>
         <BinaryButton
-          state={sameSchool === false}
-          condition1="같은학교는 싫어요"
-          condition2="상관없음"
+          state={sameSchool}
+          condition1="상관없음"
+          condition2="같은 학교는 싫어요"
           onChange={(result) =>
-            result ? setSameSchool(false) : setSameSchool(true)
+            result ? setSameSchool(true) : setSameSchool(false)
           }
         />
       </ChooseBox>
@@ -122,16 +136,16 @@ function Apply5Page() {
         <Maintitle>
           <Pink>미팅</Pink>은 어땠으면 좋겠어요?
         </Maintitle>
-        <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title>
       <Title2>
         <Maintitle2>분위기</Maintitle2>
+        <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title2>
       <ChooseBox2>
         <ChooseButton
           isActive={prefMood.includes(1)}
           onChange={(isActive) => handleVibe(1, isActive)}
-          content="코로나 때문에 못한 연애오늘?!"
+          content="코로나 때문에 못한 연애 오늘?!"
         />
         <ChooseButton
           isActive={prefMood.includes(2)}
@@ -158,10 +172,17 @@ function Apply5Page() {
         <Maintitle2>주량 레벨</Maintitle2>
         <Subtitle2>우리팀의 평균 주량을 알려주세요</Subtitle2>
       </Title2>
-      <AlcholMiddle>한 병 반</AlcholMiddle>
+      <AlcholInfo>
+        <AlcholContent>반 병</AlcholContent>
+        <AlcholContent>한 병</AlcholContent>
+        <AlcholContent>한 병 반</AlcholContent>
+        <AlcholContent>두 병</AlcholContent>
+        <AlcholContent>술고래</AlcholContent>
+      </AlcholInfo>
       <SSlider
         onChange={setAlchol}
         value={alchol}
+        trackStyle={trackStyle}
         tooltip={{
           open: false,
         }}
@@ -178,6 +199,7 @@ function Apply5Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -187,14 +209,10 @@ export default Apply5Page;
 const Title = styled.div`
   width: 90%;
   margin-top: 8%;
-  height: 13%;
-  min-height: 13%;
 `;
 const Title2 = styled.div`
-  margin-top: 3%;
+  margin-top: 8%;
   width: 90%;
-  height: 10%;
-  min-height: 10%;
 `;
 
 const Maintitle = styled.div`
@@ -251,6 +269,12 @@ const ButtonBox = styled.div`
 const SSlider = styled(Slider)`
   margin-top: 7%;
   width: 85%;
+  .custom-slider .ant-slider-mark-text {
+    display: none;
+  }
+  .custom-slider .ant-slider-mark-text-active {
+    display: block;
+  }
 `;
 
 const SliderText = styled.p`
@@ -269,21 +293,26 @@ const ChooseBox = styled.div`
 `;
 
 const ChooseBox2 = styled.div`
-  margin-top: 3%;
   width: 90%;
   display: flex;
   flex-direction: column;
 `;
 
-const AlcholMiddle = styled.div`
-  text-align: center;
+const AlcholInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-weight: 700;
   font-size: 14px;
-  margin-top: 5%;
+  margin-top: 8%;
   width: 90%;
   color: #eb8888;
 `;
+
+const AlcholContent = styled.div`
+  text-align: center;
+`;
+
 const SBottom = styled(Bottom)`
   margin-left: 57%;
-  margin-top: 4%;
+  margin-top: 20%;
 `;

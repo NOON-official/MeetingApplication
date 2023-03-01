@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import Flex from '../../../components/Flex';
 import Section from '../../../components/Section';
@@ -13,7 +13,15 @@ import MyinfoLayout from '../../../layout/MyinfoLayout';
 export default function TicketHistoryPage() {
   const { data: orderPageData } = useGetOrdersPageDataQuery();
   const { data: couponPageData } = useGetCouponsPageDataQuery();
-  const { data: orderData } = useGetUserOrdersQuery();
+  const { data: orderData, refetch } = useGetUserOrdersQuery();
+
+  const handleRefetchOrderData = () => {
+    refetch();
+  };
+
+  useEffect(() => {
+    handleRefetchOrderData();
+  }, [orderData]);
 
   const orders = useMemo(() => {
     const products = orderPageData?.Products;
@@ -22,8 +30,8 @@ export default function TicketHistoryPage() {
     return orderData
       ? orderData.orders.map((order) => ({
           ...order,
-          product: products?.find((p) => p.id === order.productType),
-          couponType: couponTypes?.find((c) => c.id === order.couponType),
+          product: products?.find((p) => p.id === order.productId),
+          couponType: couponTypes?.find((c) => c.id === order.couponTypeId),
         }))
       : [];
   });
@@ -45,7 +53,13 @@ export default function TicketHistoryPage() {
                 </Flex>
                 <Flex gap="10px">
                   <HistoryTip>
-                    {order.couponType ? `*${order.couponType.name} 사용` : ''}
+                    {order.couponType
+                      ? `*${
+                          order.couponType.name.startsWith('미팅학개론')
+                            ? order.couponType.name.split('미팅학개론')[1]
+                            : order.couponType.name
+                        } 사용`
+                      : ''}
                   </HistoryTip>
                   <HistoryTip />
                   <HistoryDate>

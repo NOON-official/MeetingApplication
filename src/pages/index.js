@@ -1,38 +1,84 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-unsafe-optional-chaining */
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import theme from '../style/theme';
-import { ReactComponent as MainImg } from '../asset/svg/MainImg.svg';
+
+import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
+import { ReactComponent as FixedButton } from '../asset/svg/FixedButton.svg';
+import { ReactComponent as Main1 } from '../asset/svg/Main1.svg';
+import { ReactComponent as Main2 } from '../asset/svg/Main2.svg';
+import { ReactComponent as Main3 } from '../asset/svg/Main3.svg';
+import { ReactComponent as Main4 } from '../asset/svg/Main4.svg';
+import { ReactComponent as Main5 } from '../asset/svg/Main5.svg';
+import ChannelTalk from '../asset/ChannelTalk';
 import MainLayout from '../layout/MainLayout';
 import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
 import Section from '../components/Section';
-import PrimaryButton from '../components/PrimaryButton';
 import backend from '../util/backend';
 import {
-  useGetTeamCountsQuery,
+  useGetTeamCountQuery,
   useGetTeamMembersCountOneWeekQuery,
 } from '../features/backendApi';
 
-const teamsPerRound = 10;
-
 function Main() {
+  const params = new URLSearchParams(window.location.search);
+  const referralId = params.get('referralId');
   const { finishedStep } = useSelector((store) => store.apply);
-  const { data: membersData } = useGetTeamMembersCountOneWeekQuery();
-  const { data: teamData } = useGetTeamCountsQuery();
-
+  const { accessToken } = useSelector((state) => state.user);
+  const { data: teamData } = useGetTeamCountQuery();
+  const { data: userCount } = useGetTeamMembersCountOneWeekQuery();
+  const [matchingStatus, setMatchingStatus] = useState('');
+  const [agreements, setAgreements] = useState('');
   const navigate = useNavigate();
+  const setting = {
+    pluginKey: process.env.REACT_APP_CHANNEL_TALK_PLUGIN,
+    memberId: window.localStorage.id,
+    profile: {
+      name: window.localStorage.nickname,
+    },
+  };
 
-  const handleStart = useCallback(async () => {
+  const getInformation = useCallback(async () => {
     try {
       await backend.get('/users/agreements');
-      navigate('/apply/1');
-    } catch {
-      navigate('/apply/agree');
+      setAgreements('yes');
+    } catch (e) {
+      setAgreements(null);
     }
-  }, [finishedStep]);
+  }, [agreements]);
 
+  const getMatchingInfo = useCallback(async () => {
+    const matchingstatus = await backend.get('/users/matchings/status');
+    setMatchingStatus(matchingstatus.data.matchingStatus);
+  }, [matchingStatus]);
+
+  useEffect(() => {
+    if (referralId !== null) {
+      sessionStorage.setItem('referralId', referralId);
+    }
+    getMatchingInfo();
+    getInformation();
+  }, []);
+
+  const handleStart = useCallback(() => {
+    if (!accessToken) {
+      navigate('/apply/notlogin');
+    } else if (matchingStatus === null) {
+      if (agreements === null) {
+        navigate('/apply/agree');
+      } else {
+        navigate(`/apply/${finishedStep + 1}`);
+      }
+    } else {
+      window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
+    }
+  }, [matchingStatus, finishedStep, agreements]);
+
+  const teamsPerRound = teamData?.['teamsPerRound'];
   const twoman = teamData?.['2vs2']['male'];
   const twogirl = teamData?.['2vs2']['female'];
   const threeman = teamData?.['3vs3']['male'];
@@ -40,19 +86,33 @@ function Main() {
 
   return (
     <MainLayout>
-      <Section mx="10px" my="12px">
+      <Section>
         <ImgBox>
           <UserCountText>
-            <span>{membersData?.memberCount}</span>
+            <CountBox>
+              {!isNaN(userCount?.memberCount)
+                ? Math.floor(userCount?.memberCount / 100)
+                : '0'}
+            </CountBox>
+            <CountBox>
+              {!isNaN(userCount?.memberCount)
+                ? Math.floor((userCount?.memberCount % 100) / 10)
+                : '0'}
+            </CountBox>
+            <CountBox>
+              {!isNaN(userCount?.memberCount)
+                ? Math.floor(userCount?.memberCount % 10)
+                : '0'}
+            </CountBox>
           </UserCountText>
           <MainImg />
         </ImgBox>
       </Section>
 
-      <Section>
+      <Section my="35px">
+        <TopTitle>신청 현황</TopTitle>
         <MatchingBox>
-          <Title>50명이 채워지면 바로 매칭됩니다.</Title>
-          <SubTitle>2 : 2</SubTitle>
+          <SubTitle>2 : 2 미팅</SubTitle>
           <TotalBar>
             <Number>{twoman}</Number>
             <LeftBar>
@@ -63,7 +123,7 @@ function Main() {
             </RightBar>
             <Number>{twogirl}</Number>
           </TotalBar>
-          <SubTitle>3 : 3</SubTitle>
+          <SubTitle>3 : 3 미팅</SubTitle>
           <TotalBar>
             <Number>{threeman}</Number>
             <LeftBar>
@@ -74,13 +134,22 @@ function Main() {
             </RightBar>
             <Number>{threegirl}</Number>
           </TotalBar>
+          <Title>{`미팅별로 ${
+            teamsPerRound * 2
+          }팀이 채워지면 바로 매칭이 시작됩니다!`}</Title>
         </MatchingBox>
       </Section>
 
-      <Section my="32px" center>
-        <PrimaryButton onClick={handleStart}>매칭 시작하기</PrimaryButton>
+      <Section center>
+        <Main1 width="90%" />
+        <Main2 width="90%" />
+        <Main3 width="90%" />
+        <Main4 width="90%" />
+        <Main5 width="90%" />
+        <FixButton onClick={handleStart} />
       </Section>
 
+      <div>{ChannelTalk.boot(setting)}</div>
       <MainFooter />
       <BottomFooter />
     </MainLayout>
@@ -89,28 +158,42 @@ function Main() {
 
 export default Main;
 
+const TopTitle = styled.div`
+  margin-left: 5%;
+  font-weight: 400;
+  font-size: 13px;
+  color: #635e5e;
+`;
+
 const ImgBox = styled.div`
+  margin-top: 35px;
+  margin-right: 30px;
   position: relative;
   max-width: 100%;
   display: flex;
   justify-content: center;
 
   > svg {
-    width: 100%;
+    width: 85%;
     height: auto;
   }
 `;
 
 const UserCountText = styled.div`
   position: absolute;
-  top: 9.3%;
-  right: 27%;
+  top: 6%;
+  right: 22%;
+`;
 
-  > span {
-    font-family: 'Nanum JungHagSaeng';
-    font-weight: 400;
-    font-size: 26px;
-  }
+const CountBox = styled.span`
+  position: relative;
+  overflow: hidden;
+  border: 0.3px solid rgba(197, 200, 206, 0.5);
+  border-radius: 20px;
+  padding: 2px;
+  margin-left: 2px;
+  font-size: 13px;
+  background-color: white;
 `;
 
 const MatchingBox = styled.div`
@@ -121,20 +204,23 @@ const MatchingBox = styled.div`
   font-family: 'Nanum JungHagSaeng';
   font-weight: 400;
   font-size: 20px;
-  padding: 11px 10px 8px 9px;
-  height: 140px;
+  padding: 10px;
+  height: 150px;
   background: #ffffff;
   border-radius: 10px;
   text-align: center;
 `;
 
 const Title = styled.p`
+  margin-top: 5%;
   width: 100%;
   color: ${theme.pink};
 `;
 
 const SubTitle = styled.p`
   width: 100%;
+  font-weight: 400;
+  font-size: 18px;
   color: black;
   margin-top: 5px;
 `;
@@ -193,4 +279,14 @@ const Number = styled.p`
   font-family: 'Nanum JungHagSaeng';
   font-weight: 400;
   font-size: 15px;
+`;
+
+const FixButton = styled(FixedButton)`
+  width: 75%;
+  position: sticky;
+  bottom: 40px;
+  left: 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

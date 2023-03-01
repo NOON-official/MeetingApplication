@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Section from '../../components/Section';
 import Accordion from '../../components/Accordion';
-import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 const guides = [
   {
@@ -17,12 +17,11 @@ const guides = [
   },
   {
     title: '신청 방법',
-    content: `<ol>
-    <li>친구들과 팀을 만드신 후 <em>대표자만</em> 미팅학개론에 접속합니다.</li>
-    <li>순차적으로 정보를 입력하고 신청을 완료합니다.</li>
-    <li>미팅을 위한 모든 준비가 끝났어요! 20팀이 차는 즉시 매칭이 시작됩니다. 매칭이 완료되는 대로 연락을
-    드리니 설레는 마음으로 기다려 주세요!✨</li>
-    </ol><br/>
+    content: `
+    1. 친구들과 팀을 만드신 후 <em>대표자만</em> 미팅학개론에 접속합니다.<br/>
+    2. 순차적으로 정보를 입력하고 신청을 완료합니다.<br/>
+    3. 미팅을 위한 모든 준비가 끝났어요! 20팀이 차는 즉시 매칭이 시작됩니다. 매칭이 완료되는 대로 연락을
+    드리니 설레는 마음으로 기다려 주세요!✨<br/><br/>
     🚩FINISH! 매칭된 상대팀의 미팅학개론을 확인하신 후 수락해 주세요. 이용권을 결제해 주신 뒤 상대팀도 수락하면 <em>단톡방까지 개설</em>해 드립니다.🤩`,
   },
   {
@@ -69,7 +68,7 @@ export default function Guide() {
           ))}
         </Container>
       </Section>
-      <MainFooter />
+      <div>{ChannelTalk.showChannelButton()}</div>
     </MainLayout>
   );
 }

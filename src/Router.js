@@ -6,8 +6,10 @@ import Guide from './pages/guide';
 import Matching from './pages/matching';
 import MatchingMyteam from './pages/matching/myteam';
 import MatchingOtherteam from './pages/matching/otherteam';
+import MatchingRefuse from './pages/matching/refuse';
 import MyInfo from './pages/myinfo';
 import Account from './pages/myinfo/account';
+import ApplyNotLogIn from './pages/apply/notlogin';
 import Agree from './pages/apply/agree';
 import Invite from './pages/apply/invite';
 import Apply1 from './pages/apply/1';
@@ -21,7 +23,7 @@ import Complete from './pages/apply/complete';
 import TicketBuyPage from './pages/myinfo/ticket/buy';
 import TicketCouponPage from './pages/myinfo/ticket/coupon';
 import TicketHistoryPage from './pages/myinfo/ticket/history';
-import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
+// import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
 import AuthSigninPage from './pages/auth/signin';
 import TicketPage from './pages/myinfo/ticket';
 import TicketBuySuccessPage from './pages/myinfo/ticket/buy/success';
@@ -52,6 +54,10 @@ const Router = createBrowserRouter([
       {
         path: 'matching/otherteam',
         element: <MatchingOtherteam />,
+      },
+      {
+        path: 'matching/refuse',
+        element: <MatchingRefuse />,
       },
       {
         path: 'myinfo',
@@ -88,6 +94,10 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo/ticket/history',
         element: <TicketHistoryPage />,
+      },
+      {
+        path: 'apply/notlogin',
+        element: <ApplyNotLogIn />,
       },
       {
         path: 'apply/agree',
@@ -133,10 +143,11 @@ const Router = createBrowserRouter([
         path: '/auth/signin',
         element: <AuthSigninPage />,
       },
-      {
-        path: '/auth/signin/kakao/success',
-        element: <KakakoLoginSuccessPage />,
-      },
+      // 삭제해도 됨
+      // {
+      //   path: '/auth/signin/kakao/success',
+      //   element: <KakakoLoginSuccessPage />,
+      // },
     ],
   },
 ]);

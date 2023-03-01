@@ -9,6 +9,7 @@ import backend from '../../util/backend';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
+import { ReactComponent as MatchingText5 } from '../../asset/svg/MatchingText5.svg';
 
 export default function LoginMatchFailed({ teamId }) {
   const [openModal1, setOpenModal1] = useState(false);
@@ -90,7 +91,7 @@ export default function LoginMatchFailed({ teamId }) {
           매칭결과
           <SCircleArrow
             onClick={() => {
-              navigate('/matching');
+              window.location.reload();
             }}
           />
         </LeftTop>
@@ -104,8 +105,7 @@ export default function LoginMatchFailed({ teamId }) {
       </Top>
       <WhiteBox>
         <SSadFace />
-        <TextBox>이대로 그만두기에는 너무 아쉽지</TextBox>
-        <TextBox2>않나요? 한번 더 도전해봐요.</TextBox2>
+        <SMatchingText5 />
         <MeetingButton
           onClick={() => {
             setOpenModal1(true);
@@ -180,33 +180,8 @@ const SSadFace = styled(SadFace)`
   margin-top: 5%;
 `;
 
-const TextBox = styled.div`
+const SMatchingText5 = styled(MatchingText5)`
   margin-top: 20%;
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const TextBox2 = styled.div`
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const SmallText = styled.div`
-  margin-top: 5%;
-  text-align: center;
-  width: 100%;
-  color: #777777;
-  font-weight: 400;
-  font-size: 20px;
-  font-family: 'Nanum JungHagSaeng';
 `;
 
 const MeetingButton = styled(Button)`

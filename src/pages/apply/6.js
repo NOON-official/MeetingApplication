@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Universities from '../../asset/Universities';
+import backend from '../../util/backend';
 import Mbti from '../../asset/Mbti';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply6Page() {
   const {
@@ -26,11 +28,19 @@ function Apply6Page() {
   } = useSelector((store) => store.apply);
   const navigate = useNavigate();
 
+  const [userPhone, setUserPhone] = useState('');
+
+  const getInformation = useCallback(async () => {
+    const userData = await backend.get('/users/my-info');
+    setUserPhone(userData.data.phone);
+  }, []);
+
   useEffect(() => {
     if (finishedStep < 5) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
+    getInformation();
   }, [finishedStep]);
 
   const handleBefore = useCallback(() => {
@@ -38,8 +48,19 @@ function Apply6Page() {
   });
 
   const handleSubmit = useCallback(() => {
-    navigate('/apply/certification');
+    if (userPhone === null) {
+      navigate('/apply/certification');
+    } else {
+      navigate('/apply/complete');
+    }
   });
+
+  const RoleContent = {
+    1: '비주얼',
+    2: '사회자',
+    3: '개그맨',
+    4: '깍두기',
+  };
 
   const SchoolContent = {
     1: '강남',
@@ -55,6 +76,14 @@ function Apply6Page() {
     3: '왁자지껄 이 밤이 떠나가라!',
     4: '술게임 한 수 배우러 왔습니다',
     5: '술게임 못해도 챙겨주는 훈훈한 분위기',
+  };
+
+  const AlcholContent = {
+    1: '(소주 반 병)',
+    2: '(소주 한 병)',
+    3: '(소주 한 병 반)',
+    4: '(소주 두 병)',
+    5: '(술고래)',
   };
 
   return (
@@ -81,7 +110,7 @@ function Apply6Page() {
             <Info>
               <SmallTitle>학교</SmallTitle>
               <SmallContent>
-                {universities.map((a) => {
+                {universities?.map((a) => {
                   return (
                     <div key={Universities[a - 1].id}>
                       {Universities[a - 1].name} /
@@ -110,14 +139,14 @@ function Apply6Page() {
               <SmallTitle>나이</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].age}세</div>
-                  <div>{members[1].age}세</div>
+                  <div>{members[0]?.age}세</div>
+                  <div>{members[1]?.age}세</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].age}세</div>
-                  <div>{members[1].age}세</div>
-                  <div>{members[2].age}세</div>
+                  <div>{members[0]?.age}세</div>
+                  <div>{members[1]?.age}세</div>
+                  <div>{members[2]?.age}세</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -125,14 +154,14 @@ function Apply6Page() {
               <SmallTitle>MBTI</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
+                  <div>{Mbti[members[0]?.mbti]?.name}</div>
+                  <div>{Mbti[members[1]?.mbti]?.name}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
-                  <div>{Mbti[members[2].mbti].name}</div>
+                  <div>{Mbti[members[0]?.mbti]?.name}</div>
+                  <div>{Mbti[members[1]?.mbti]?.name}</div>
+                  <div>{Mbti[members[2]?.mbti]?.name}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -140,14 +169,14 @@ function Apply6Page() {
               <SmallTitle>포지션</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
+                  <div>{RoleContent[members[0]?.role]}</div>
+                  <div>{RoleContent[members[1]?.role]}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{Mbti[members[0].mbti].name}</div>
-                  <div>{Mbti[members[1].mbti].name}</div>
-                  <div>{Mbti[members[2].mbti].name}</div>
+                  <div>{RoleContent[members[0]?.role]}</div>
+                  <div>{RoleContent[members[1]?.role]}</div>
+                  <div>{RoleContent[members[2]?.role]}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -155,14 +184,14 @@ function Apply6Page() {
               <SmallTitle>닮은꼴</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
+                  <div>{members[0]?.appearance}</div>
+                  <div>{members[1]?.appearance}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{members[0].similar}</div>
-                  <div>{members[1].similar}</div>
-                  <div>{members[2].similar}</div>
+                  <div>{members[0]?.appearance}</div>
+                  <div>{members[1]?.appearance}</div>
+                  <div>{members[2]?.appearance}</div>
                 </MemberProfile2>
               )}
             </Info>
@@ -195,19 +224,21 @@ function Apply6Page() {
             <Info>
               <SmallTitle>분위기</SmallTitle>
               <SmallContent>
-                {prefVibes.map((a) => {
+                {prefVibes?.map((a) => {
                   return <div key={a}>{VibeContent[a]}</div>;
                 })}
               </SmallContent>
             </Info>
             <Info>
               <SmallTitle>주량 레벨</SmallTitle>
-              <SmallContent>Level {drink}</SmallContent>
+              <SmallContent>
+                Level {drink} {AlcholContent[drink]}
+              </SmallContent>
             </Info>
             <Info>
               <SmallTitle>선호 날짜</SmallTitle>
               <SmallContent>
-                {availableDates.map((a) => {
+                {availableDates?.map((a) => {
                   return (
                     <div key={a}>
                       {a[6]}월 {a.substring(8, 10)}일 /
@@ -219,7 +250,7 @@ function Apply6Page() {
             <Info>
               <SmallTitle>선호 지역</SmallTitle>
               <SmallContent>
-                {areas.map((a) => {
+                {areas?.map((a) => {
                   return <div key={a}> {SchoolContent[a]} /</div>;
                 })}
               </SmallContent>
@@ -243,6 +274,7 @@ function Apply6Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -252,8 +284,6 @@ export default Apply6Page;
 const Title = styled.div`
   width: 90%;
   margin-top: 8%;
-  height: 13%;
-  min-height: 13%;
 `;
 
 const Maintitle = styled.div`
