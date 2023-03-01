@@ -57,7 +57,8 @@ function Complete() {
       <Container>
         <SBigO />
         <TextBox>
-          <BlackText>미팅 신청이 완료되었습니다!</BlackText>
+          <BlackText>미팅 신청을 완료하려면</BlackText>
+          <BlackText>완료하기 버튼을 눌러주세요!</BlackText>
           <BlackText>매칭이 완료되면 문자를 드릴게요.</BlackText>
         </TextBox>
         <SubmitButton
@@ -65,7 +66,7 @@ function Complete() {
             handleSubmitData();
           }}
         >
-          메인으로 가기
+          완료하기
         </SubmitButton>
       </Container>
       <div>{ChannelTalk.hideChannelButton()}</div>
@@ -76,7 +77,7 @@ function Complete() {
 export default Complete;
 
 const Container = styled.div`
-  margin-top: 30%;
+  margin-top: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,7 +107,7 @@ const SubmitButton = styled(Button)`
   font-size: 24px;
   text-align: center;
   border: none;
-  margin-top: 75%;
+  margin-top: 40%;
   width: 100%;
   height: 50px;
   background: #eb8888;
