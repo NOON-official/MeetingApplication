@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-unsafe-optional-chaining */
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -18,15 +19,20 @@ import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
 import Section from '../components/Section';
 import backend from '../util/backend';
-import { useGetTeamCountQuery } from '../features/backendApi';
+import {
+  useGetTeamCountQuery,
+  useGetTeamMembersCountOneWeekQuery,
+} from '../features/backendApi';
 
 function Main() {
+  const params = new URLSearchParams(window.location.search);
+  const referralId = params.get('referralId');
   const { finishedStep } = useSelector((store) => store.apply);
   const { accessToken } = useSelector((state) => state.user);
   const { data: teamData } = useGetTeamCountQuery();
+  const { data: userCount } = useGetTeamMembersCountOneWeekQuery();
   const [matchingStatus, setMatchingStatus] = useState('');
   const [agreements, setAgreements] = useState('');
-  const [userCount, setUserCount] = useState('');
   const navigate = useNavigate();
   const setting = {
     pluginKey: process.env.REACT_APP_CHANNEL_TALK_PLUGIN,
@@ -47,12 +53,13 @@ function Main() {
 
   const getMatchingInfo = useCallback(async () => {
     const matchingstatus = await backend.get('/users/matchings/status');
-    const usercount = await backend.get('/teams/members/count/one-week');
     setMatchingStatus(matchingstatus.data.matchingStatus);
-    setUserCount(usercount.data.memberCount);
   }, [matchingStatus]);
 
   useEffect(() => {
+    if (referralId !== null) {
+      sessionStorage.setItem('referralId', referralId);
+    }
     getMatchingInfo();
     getInformation();
   }, []);
@@ -77,17 +84,26 @@ function Main() {
   const threeman = teamData?.['3vs3']['male'];
   const threegirl = teamData?.['3vs3']['female'];
 
-  console.log(matchingStatus);
-  console.log(agreements);
-
   return (
     <MainLayout>
       <Section>
         <ImgBox>
           <UserCountText>
-            <CountBox>{Math.floor(userCount / 100)}</CountBox>
-            <CountBox>{Math.floor((userCount % 100) / 10)}</CountBox>
-            <CountBox>{Math.floor(userCount % 10)}</CountBox>
+            <CountBox>
+              {!isNaN(userCount?.memberCount)
+                ? Math.floor(userCount?.memberCount / 100)
+                : '0'}
+            </CountBox>
+            <CountBox>
+              {!isNaN(userCount?.memberCount)
+                ? Math.floor((userCount?.memberCount % 100) / 10)
+                : '0'}
+            </CountBox>
+            <CountBox>
+              {!isNaN(userCount?.memberCount)
+                ? Math.floor(userCount?.memberCount % 10)
+                : '0'}
+            </CountBox>
           </UserCountText>
           <MainImg />
         </ImgBox>
