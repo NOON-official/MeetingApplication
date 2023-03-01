@@ -13,6 +13,8 @@ import ProgressBar from '../../components/ProgressBar';
 import NotEnoughDateModal from '../../components/Modal/NotEnoughDateModal';
 import NotEnoughPlaceModal from '../../components/Modal/NotEnoughPlaceModal';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import { ReactComponent as Earth } from '../../asset/svg/Earth.svg';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 export default function Apply2() {
   const [openModal1, setOpenModal1] = useState(false);
@@ -109,12 +111,12 @@ export default function Apply2() {
           />
         </CalendarDiv>
       </ScrollDiv>
-      <Title>
+      <Title2>
         <Maintitle>
           <Pink>미팅 선호 지역</Pink>을 알려주세요
         </Maintitle>
-        <Subtitle>중복선택이 가능해요</Subtitle>
-      </Title>
+        <Subtitle>중복 선택이 가능해요</Subtitle>
+      </Title2>
       <ChooseBox>
         <ChooseButton
           isActive={selectedArea?.includes(1)}
@@ -142,6 +144,7 @@ export default function Apply2() {
           content="상관없음"
         />
       </ChooseBox>
+      <SEarth />
       <Footer>
         <ProgressBar page={2} />
         <ButtonBox>
@@ -149,6 +152,7 @@ export default function Apply2() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -157,6 +161,13 @@ const Title = styled.div`
   width: 90%;
   margin-top: 8%;
   height: 13%;
+  min-height: 13%;
+`;
+
+const Title2 = styled.div`
+  width: 90%;
+  margin-top: 15%;
+  height: 10%;
   min-height: 13%;
 `;
 
@@ -195,7 +206,6 @@ const ButtonBox = styled.div`
 `;
 
 const ChooseBox = styled.div`
-  margin-top: 3%;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -239,5 +249,10 @@ const CalendarDiv = styled.div`
 const ScrollDiv = styled.div`
   width: 90%;
   align-items: flex-start;
-  margin-top: 8%;
+  margin-top: 3%;
+`;
+
+const SEarth = styled(Earth)`
+  margin-top: 20%;
+  margin-left: 15%;
 `;

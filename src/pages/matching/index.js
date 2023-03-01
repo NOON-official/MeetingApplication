@@ -9,11 +9,11 @@ import LoginMatchComplete from '../../components/MatchingBox/LoginMatchComplete'
 import LoginMatchFail from '../../components/MatchingBox/LoginMatchFail';
 import LoginOtherTeamRefused from '../../components/MatchingBox/LoginOtherTeamRefused';
 import LoginNoAnswer from '../../components/MatchingBox/LoginNoAnswer';
-import LoginRefuse from '../../components/MatchingBox/LoginRefuse';
 import NoLogin from '../../components/MatchingBox/NoLogin';
-import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import backend from '../../util/backend';
+import LoginMatchFailed from '../../components/MatchingBox/LoginMatchFailed';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Matching() {
   const [myteamId, setMyteamId] = useState('');
@@ -23,6 +23,7 @@ function Matching() {
   const getInformation = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
     const matchingstatus = await backend.get('/users/matchings/status');
+
     setMyteamId(teamid.data.teamId);
     setMatchingStatus(matchingstatus.data.matchingStatus);
   }, []);
@@ -62,18 +63,15 @@ function Matching() {
       return <LoginNoAnswer teamId={myteamId} />; // 무응답!
     }
     if (matchingStatus === 'OURTEAM_REFUSED') {
-      return <LoginRefuse teamId={myteamId} />; // 우리팀 거절!
+      return <LoginMatchFailed teamId={myteamId} />; // 우리팀 거절!
     }
     return null;
   });
 
-  console.log(myteamId);
-  console.log(matchingStatus);
-
   return (
     <MainLayout>
       {MatchingBox}
-      <MainFooter />
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </MainLayout>
   );
 }

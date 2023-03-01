@@ -1,12 +1,56 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useState, useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Button } from 'antd';
+import backend from '../../util/backend';
+import { createTeam } from '../../features/apply/asyncAction';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Complete() {
+  const { accessToken } = useSelector((state) => state.user);
+  const [userTeamId, setUserTeamId] = useState('');
+  const [matchingStatus, setMatchingStatus] = useState('');
+  const { finishedStep, ...applydata } = useSelector((store) => store.apply);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const getInformation = useCallback(async () => {
+    const userteamid = await backend.get('/users/team-id');
+    const matchingstatus = await backend.get('/users/matchings/status');
+    setUserTeamId(userteamid.data.teamId);
+    setMatchingStatus(matchingstatus.data.matchingStatus);
+  }, []);
+
+  useEffect(() => {
+    if (!accessToken) {
+      window.alert('잘못된 접근입니다');
+      navigate('/');
+    }
+    getInformation();
+  }, []);
+
+  const handleSubmitData = useCallback(async () => {
+    if (matchingStatus === 'APPLIED') {
+      try {
+        await backend.patch(`/teams/${userTeamId}`, applydata);
+        window.alert('수정되었습니다!');
+      } catch (e) {
+        window.alert('수정중 오류가 발생하였습니다');
+      }
+    } else if (matchingStatus === null) {
+      dispatch(createTeam(applydata));
+      window.alert('저장되었습니다!');
+    } else {
+      await backend.delete(`/teams/${userTeamId}`);
+      dispatch(createTeam(applydata));
+      window.alert('저장되었습니다!');
+    }
+    navigate('/');
+  });
 
   return (
     <ApplyLayout>
@@ -14,16 +58,17 @@ function Complete() {
         <SBigO />
         <TextBox>
           <BlackText>미팅 신청이 완료되었습니다!</BlackText>
-          <BlackText>매칭이 완료되면 문자를 드릴께요.</BlackText>
+          <BlackText>매칭이 완료되면 문자를 드릴게요.</BlackText>
         </TextBox>
         <SubmitButton
           onClick={() => {
-            navigate('/');
+            handleSubmitData();
           }}
         >
           메인으로 가기
         </SubmitButton>
       </Container>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }

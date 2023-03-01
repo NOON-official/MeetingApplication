@@ -8,7 +8,16 @@ export default function MyinfoHeader({ title }) {
   const navigate = useNavigate();
 
   const goBack = useCallback(() => {
-    navigate(-1);
+    // 이용권 구매 페이지인 경우
+    if (window.location.pathname === '/myinfo/ticket/buy') {
+      navigate('/myinfo/ticket');
+    }
+    // 이용권 현황 페이지인 경우
+    else if (window.location.pathname === '/myinfo/ticket') {
+      navigate('/myinfo');
+    } else {
+      navigate(-1);
+    }
   });
 
   return (

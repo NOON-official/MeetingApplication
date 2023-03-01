@@ -7,7 +7,7 @@ import backend from '../../util/backend';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
-
+import { ReactComponent as MatchingText3 } from '../../asset/svg/MatchingText3.svg';
 // 로그인하고 매칭증에 상대방찾고 있을 때 매칭조회페이지
 
 export default function LoginWaitMatch({ teamId }) {
@@ -85,7 +85,7 @@ export default function LoginWaitMatch({ teamId }) {
           매칭결과
           <SCircleArrow
             onClick={() => {
-              navigate('/matching');
+              window.location.reload();
             }}
           />
         </LeftTop>
@@ -99,8 +99,7 @@ export default function LoginWaitMatch({ teamId }) {
       </Top>
       <WhiteBox>
         <SBigO />
-        <TextBox>상대팀을 찾고 있어요!</TextBox>
-        <TextBox2>조금만 기다려 주시면 곧 매칭해드릴게요.</TextBox2>
+        <SMatchingText3 />
         <MeetingButton href="https://furry-bank-197.notion.site/A-to-Z-0ac3369582fa4f43bbfd568d267433e7">
           미팅 팁 보러가기
         </MeetingButton>
@@ -178,23 +177,8 @@ const SBigO = styled(BigO)`
   margin-right: 5%;
 `;
 
-const TextBox = styled.div`
+const SMatchingText3 = styled(MatchingText3)`
   margin-top: 20%;
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const TextBox2 = styled.div`
-  text-align: center;
-  width: 55%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
 `;
 
 const MeetingButton = styled.a`
