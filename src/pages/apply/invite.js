@@ -8,7 +8,8 @@ import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
 
 function InvitePage() {
-  const [inviteCode, setInviteCode] = useState('');
+  const referralId = sessionStorage.getItem('referralId');
+  const [inviteCode, setInviteCode] = useState(referralId);
   const navigate = useNavigate();
 
   const handleInviteCode = useCallback(
@@ -29,6 +30,8 @@ function InvitePage() {
       navigate('/apply/1');
     }
   });
+
+  console.log(referralId);
 
   return (
     <ApplyLayout>
