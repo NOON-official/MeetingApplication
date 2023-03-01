@@ -31,6 +31,7 @@ export default function Account() {
       });
       window.alert('탈퇴되었습니다');
       dispatch(logout());
+      localStorage.clear();
       navigate('/');
     } catch (e) {
       console.error(e);
