@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import styled from 'styled-components';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as Header } from '../../asset/svg/Header.svg';
@@ -9,25 +9,14 @@ import theme from '../../style/theme';
 import KakaoLoginLink from '../../components/KakaoLoginLink';
 import KakaoLoginLink2 from '../../components/KakaoLoginLink2';
 import { setAccessToken } from '../../features/user';
-import backend from '../../util/backend';
 
 export default function TopHeader() {
   const { accessToken } = useSelector((state) => state.user);
-  const [agreements, setAgreements] = useState('');
+  const agreements = localStorage.getItem('agree');
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
-  const getInformation = useCallback(async () => {
-    try {
-      await backend.get('/users/agreements');
-      setAgreements('yes');
-    } catch (e) {
-      setAgreements(null);
-    }
-  }, [agreements]);
-
   useEffect(() => {
-    getInformation();
     const access = searchParams.get('access');
 
     if (access) {
@@ -38,8 +27,6 @@ export default function TopHeader() {
       setSearchParams(searchParams);
     }
   }, [searchParams]);
-
-  console.log(agreements);
 
   return (
     <Container>
