@@ -75,6 +75,7 @@ const Subtitle = styled.p`
 `;
 
 const Conatiner = styled.div`
+  margin-top: 50px;
   margin-bottom: 35%;
   display: flex;
   flex-direction: column;
