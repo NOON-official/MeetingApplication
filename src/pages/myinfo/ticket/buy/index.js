@@ -295,7 +295,7 @@ export default function TicketBuyPage() {
           }
         />
       </Section>
-      {totalAmount !== 0 && (
+      {/* {totalAmount !== 0 && (
         <Section my="20px">
           <PayMethodContainer>
             <PayMethodTitleBox>
@@ -321,7 +321,7 @@ export default function TicketBuyPage() {
             </PayMethodContentBox>
           </PayMethodContainer>
         </Section>
-      )}
+      )} */}
       <Section my="20px" center>
         <TotalPriceBox>
           <span>최종 결제 금액</span>
