@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import styled from 'styled-components';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
@@ -8,24 +8,13 @@ import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import KakaoLoginLink from '../KakaoLoginLink';
 import KakaoLoginLink2 from '../KakaoLoginLink2';
 import { setAccessToken } from '../../features/user';
-import backend from '../../util/backend';
 
 export default function SigninView() {
-  const [agreements, setAgreements] = useState('');
+  const agreements = localStorage.getItem('agree');
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
-  const getInformation = useCallback(async () => {
-    try {
-      await backend.get('/users/agreements');
-      setAgreements('yes');
-    } catch (e) {
-      setAgreements(null);
-    }
-  }, [agreements]);
-
   useEffect(() => {
-    getInformation();
     const access = searchParams.get('access');
 
     if (access) {
@@ -36,6 +25,8 @@ export default function SigninView() {
       setSearchParams(searchParams);
     }
   }, [searchParams]);
+
+  console.log(agreements);
 
   return (
     <Container>
