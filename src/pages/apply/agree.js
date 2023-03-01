@@ -51,7 +51,18 @@ function AgreePage() {
               setAgree1((prev) => !prev);
             }}
           >
-            {agree1 ? <CheckValid /> : <CheckInvalid />}서비스 이용약관 동의
+            {agree1 ? <CheckValid /> : <CheckInvalid />}
+            {agree1 ? (
+              <a
+                href="https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7"
+                target="_blank"
+                rel="noreferrer"
+              >
+                서비스 이용약관 동의
+              </a>
+            ) : (
+              '서비스 이용약관 동의'
+            )}
             <Pink>&nbsp;&nbsp;(필수)</Pink>
           </CheckingContent>
           <CheckingContent
@@ -59,8 +70,19 @@ function AgreePage() {
               setAgree2((prev) => !prev);
             }}
           >
-            {agree2 ? <CheckValid /> : <CheckInvalid />}개인정보 수집 및 이용
-            동의<Pink>&nbsp;&nbsp;(필수)</Pink>
+            {agree2 ? <CheckValid /> : <CheckInvalid />}
+            {agree2 ? (
+              <a
+                href="https://www.notion.so/c83f4127e3c54b7080c333aa31a4cc03"
+                target="_blank"
+                rel="noreferrer"
+              >
+                개인정보 수집 및 이용 동의
+              </a>
+            ) : (
+              '개인정보 수집 및 이용 동의'
+            )}
+            <Pink>&nbsp;&nbsp;(필수)</Pink>
           </CheckingContent>
           <CheckingContent
             onClick={() => {
