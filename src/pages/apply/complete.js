@@ -57,16 +57,16 @@ function Complete() {
       <Container>
         <SBigO />
         <TextBox>
-          <BlackText>미팅 신청을 완료하려면</BlackText>
-          <BlackText>완료하기 버튼을 눌러주세요!</BlackText>
-          <BlackText>매칭이 완료되면 문자를 드릴게요.</BlackText>
+          <BlackText>저장하기 버튼을 누르면</BlackText>
+          <BlackText>미팅 신청이 완료돼요!</BlackText>
+          <BlackText>매칭이 되면 문자를 드릴게요.</BlackText>
         </TextBox>
         <SubmitButton
           onClick={() => {
             handleSubmitData();
           }}
         >
-          완료하기
+          저장하기
         </SubmitButton>
       </Container>
       <div>{ChannelTalk.hideChannelButton()}</div>
@@ -107,7 +107,7 @@ const SubmitButton = styled(Button)`
   font-size: 24px;
   text-align: center;
   border: none;
-  margin-top: 40%;
+  margin-top: 10%;
   width: 100%;
   height: 50px;
   background: #eb8888;
