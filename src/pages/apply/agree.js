@@ -32,6 +32,7 @@ function AgreePage() {
       marketing: agree4,
     });
     navigate('/apply/invite');
+    localStorage.setItem('agree', 'yes');
   });
 
   return (
