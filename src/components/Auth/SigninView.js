@@ -1,18 +1,31 @@
 import { Button } from 'antd';
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import KakaoLoginLink from '../KakaoLoginLink';
+import KakaoLoginLink2 from '../KakaoLoginLink2';
 import { setAccessToken } from '../../features/user';
+import backend from '../../util/backend';
 
 export default function SigninView() {
+  const [agreements, setAgreements] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
+  const getInformation = useCallback(async () => {
+    try {
+      await backend.get('/users/agreements');
+      setAgreements('yes');
+    } catch (e) {
+      setAgreements(null);
+    }
+  }, [agreements]);
+
   useEffect(() => {
+    getInformation();
     const access = searchParams.get('access');
 
     if (access) {
@@ -35,11 +48,19 @@ export default function SigninView() {
         <br />
         카카오톡 로그인이 필요해요.
       </SigninDescription>
-      <KakaoLoginLink>
-        <KakaoButton icon={<KakaoSignin />} block>
-          카카오 로그인
-        </KakaoButton>
-      </KakaoLoginLink>
+      {agreements === null ? (
+        <KakaoLink2>
+          <KakaoButton icon={<KakaoSignin />} block>
+            카카오 로그인
+          </KakaoButton>
+        </KakaoLink2>
+      ) : (
+        <KakaoLink>
+          <KakaoButton icon={<KakaoSignin />} block>
+            카카오 로그인
+          </KakaoButton>
+        </KakaoLink>
+      )}
     </Container>
   );
 }
@@ -68,6 +89,10 @@ const SigninDescription = styled.div`
 `;
 
 const KakaoLink = styled(KakaoLoginLink)`
+  display: block;
+`;
+
+const KakaoLink2 = styled(KakaoLoginLink2)`
   display: block;
 `;
 
