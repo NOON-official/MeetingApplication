@@ -10,7 +10,6 @@ import Router from './Router';
 import antdTheme from './style/antdTheme';
 import store from './store';
 import JwtProvider from './providers/JwtProvider';
-import RefferalIdCheck from './providers/RefferalIdCheck';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +20,5 @@ root.render(
       </ConfigProvider>
     </ThemeProvider>
     <JwtProvider />
-    <RefferalIdCheck />
   </Provider>,
 );
