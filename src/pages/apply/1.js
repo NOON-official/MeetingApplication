@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,8 +14,10 @@ import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
 import { submitStep1 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import Universities from '../../asset/Universities';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 export default function Apply1Page() {
+  const { accessToken } = useSelector((state) => state.user);
   const [openModal, setOpenModal] = useState(false);
   const { gender, memberCount, universities } = useSelector(
     (store) => store.apply,
@@ -28,6 +30,13 @@ export default function Apply1Page() {
   const [man, setMan] = useState(gender);
   const [meetingMember, setmeetingMember] = useState(memberCount);
   const [searchKeyWord, setSearchKeyWord] = useState(0);
+
+  useEffect(() => {
+    if (!accessToken) {
+      window.alert('잘못된 접근입니다');
+      navigate('/');
+    }
+  }, []);
 
   const SearchedUniv = Universities.filter(
     (c) => c.name.indexOf(searchKeyWord) > -1,
@@ -81,8 +90,8 @@ export default function Apply1Page() {
         <ChooseTitle>인원 수</ChooseTitle>
         <BinaryButton
           state={meetingMember === 2}
-          condition1="2:2"
-          condition2="3:3"
+          condition1="2:2 미팅"
+          condition2="3:3 미팅"
           onChange={(result) =>
             result ? setmeetingMember(2) : setmeetingMember(3)
           }
@@ -145,6 +154,7 @@ export default function Apply1Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -175,7 +185,6 @@ const Pink = styled.span`
 `;
 
 const ChooseBox = styled.div`
-  margin-top: 9%;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -192,7 +201,6 @@ const ChooseTitle = styled.span`
 
 const SBottom = styled(Bottom)`
   margin-left: 57%;
-  margin-top: 4%;
 `;
 
 const Footer = styled.div`

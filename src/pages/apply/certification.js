@@ -1,21 +1,19 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Input, Button, Modal } from 'antd';
 import backend from '../../util/backend';
-import { createTeam } from '../../features/apply/asyncAction';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
+import { ReactComponent as ModalTextPhone } from '../../asset/svg/ModalTextPhone.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
-import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function CertificationPage() {
-  const { data: userTeamId } = useGetUserTeamIdDataQuery();
   const [vaildcheck, setValidCheck] = useState(false);
-  const { finishedStep, ...applydata } = useSelector((store) => store.apply);
-  const dispatch = useDispatch();
+  const { finishedStep } = useSelector((store) => store.apply);
 
   const [p, setP] = useState('');
   const [authorizeNumber, setAuthorizeNumber] = useState('');
@@ -63,38 +61,26 @@ function CertificationPage() {
     }
   }, [authorizeNumber]);
 
-  const handleSubmitData = useCallback(async () => {
-    if (userTeamId?.teamId === null) {
-      dispatch(createTeam(applydata));
-      window.alert('저장되었습니다!');
-    }
-    if (userTeamId?.teamId !== null) {
-      try {
-        await backend.patch(`/teams/${userTeamId?.teamId}`, applydata);
-        window.alert('수정되었습니다!');
-      } catch (e) {
-        window.alert('수정중 오류가 발생하였습니다');
-      }
-    }
-  });
-
   return (
     <ApplyLayout>
-      <Modal open={openModal} centered footer={null} closable={false}>
-        <TextBox>
-          <BlackText>
-            매칭 결과가 추후에 <ColorText>문자</ColorText>로 전송됩니다.
-          </BlackText>
-          <BlackText>꼭 확인해 주세요!</BlackText>
-        </TextBox>
-        <SButton
-          onClick={() => {
-            setOpenModal(false);
-            navigate('/apply/complete');
-          }}
-        >
-          닫기
-        </SButton>
+      <Modal
+        open={openModal}
+        footer={null}
+        centered
+        width="380px"
+        closable={false}
+      >
+        <ModalContainer>
+          <SModalTextPhone />
+          <SButton
+            onClick={() => {
+              setOpenModal(false);
+              navigate('/apply/complete');
+            }}
+          >
+            닫기
+          </SButton>
+        </ModalContainer>
       </Modal>
       <Title>
         <Maintitle>
@@ -121,7 +107,7 @@ function CertificationPage() {
           }}
           disabled={!regex.test(p) || submitOk1}
         >
-          인증번호요청
+          인증번호 요청
         </SubmitButton>
         <PhoneBox>
           인증번호
@@ -140,20 +126,20 @@ function CertificationPage() {
           onClick={SubmitAuthorizeNumber}
           disabled={!authorizeNumber || !regex.test(p) || vaildcheck}
         >
-          인증번호확인
+          인증번호 확인
         </SubmitButton>
       </Conatiner>
       <Footer>
         <SubmitButton
           onClick={() => {
             setOpenModal(true);
-            handleSubmitData();
           }}
           disabled={!vaildcheck}
         >
-          매칭신청완료
+          매칭 신청 완료
         </SubmitButton>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -241,20 +227,14 @@ const Footer = styled.div`
   margin-bottom: 60%;
 `;
 
-const TextBox = styled.div`
-  width: 100%;
-  text-align: center;
+const ModalContainer = styled.div`
+  padding-top: 5%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
-const BlackText = styled.span`
-  color: black;
-  font-size: 31px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-const ColorText = styled.span`
-  color: ${(props) => props.theme.pink};
-  font-size: 31px;
-  font-family: 'Nanum JungHagSaeng';
-`;
+
+const SModalTextPhone = styled(ModalTextPhone)``;
 
 const SButton = styled(Button)`
   margin-top: 10%;

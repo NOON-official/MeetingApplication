@@ -53,7 +53,7 @@ function Teambox({ member, setMember, name }) {
     setIsModalOpen2(false);
   };
 
-  const [s, setS] = useState(member.similar);
+  const [s, setS] = useState(member.appearance);
 
   const handleAgeChange = useCallback(
     (value) => {
@@ -99,11 +99,11 @@ function Teambox({ member, setMember, name }) {
         <Profile onClick={showModal}>{profileimg}</Profile>
         <SModal
           footer={null}
-          title="포지션선택"
+          title="포지션 선택"
           open={isModalOpen}
           onCancel={handleCancel}
         >
-          <ModalTitle>나는 미팅에서 어떤포지션?</ModalTitle>
+          <ModalTitle>나는 미팅에서 어떤 포지션?</ModalTitle>
           <Position>
             <WhiteBox
               onClick={() => {
@@ -111,7 +111,9 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus1();
               }}
             >
-              <Profile1 />
+              <WhiteBoxPf>
+                <Profile1 />
+              </WhiteBoxPf>
               <Ttitle>존재만으로도 분위기를 녹이는 당신!</Ttitle>
               <Ttitle>바라만 보고 있어도 웃음이 나요</Ttitle>
             </WhiteBox>
@@ -127,7 +129,9 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus2();
               }}
             >
-              <Profile4 />
+              <WhiteBoxPf>
+                <Profile4 />
+              </WhiteBoxPf>
               <Ttitle>어색한 분위기를 풀어주는 당신은 미팅의 유재석!</Ttitle>
               <Ttitle>당신이 없다면 미팅이 진행되지 않아요</Ttitle>
             </WhiteBox>
@@ -143,7 +147,9 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus3();
               }}
             >
-              <Profile3 />
+              <WhiteBoxPf>
+                <Profile3 />
+              </WhiteBoxPf>
               <Ttitle>리액션과 개그맨 뺨치는 입담으로</Ttitle>
               <Ttitle>상대방을 홀리는 당신!</Ttitle>
             </WhiteBox>
@@ -160,7 +166,9 @@ function Teambox({ member, setMember, name }) {
                 handleCancelPlus4();
               }}
             >
-              <Profile2 />
+              <WhiteBoxPf>
+                <Profile2 />
+              </WhiteBoxPf>
               <Ttitle>수줍음이 많은 당신</Ttitle>
               <Ttitle>순수한 매력에 상대방이 반할지도?</Ttitle>
             </WhiteBox>
@@ -247,9 +255,9 @@ function Teambox({ member, setMember, name }) {
             <Info2>
               <p>
                 자신이 <Highlight>닮은 연예인</Highlight>이나{' '}
-                <Highlight>동물</Highlight>등을 적어주세요!
+                <Highlight>동물</Highlight> 등을 적어주세요!
               </p>
-              <Sp>생각해봐도 없다면 적지않아도 괜찮아요.</Sp>
+              <Sp>생각해봐도 없다면 적지 않아도 괜찮아요.</Sp>
               <p>다만 닮은꼴을 입력하면 우리팀 구성원을 </p>
               <p>더 재미있게 소개할 수 있답니다!</p>
             </Info2>
@@ -317,6 +325,10 @@ const Profile = styled.div`
   border-radius: 50%;
 `;
 
+const WhiteBoxPf = styled.div`
+  padding-top: 20px;
+`;
+
 const ProfileTitle = styled.div`
   display: flex;
   justify-content: center;
@@ -325,6 +337,7 @@ const ProfileTitle = styled.div`
   font-size: 24px;
   color: #999999;
   font-family: 'Nanum JungHagSaeng';
+  margin-bottom: 15px;
 `;
 
 const RightBox = styled.div`
@@ -371,6 +384,9 @@ const SSelect = styled(Select)`
   min-width: 100px;
   color: red;
   font-family: 'Nanum JungHagSaeng';
+  .ant-select {
+    touch-action: none;
+  }
 `;
 
 const SSearch = styled(Search)`

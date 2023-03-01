@@ -1,6 +1,7 @@
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import { ReactComponent as ErrorChar } from '../../asset/svg/ErrorMessageCharacter.svg';
+import { ReactComponent as ModalTextDate } from '../../asset/svg/ModalTextDate.svg';
 import theme from '../../style/theme';
 
 export default function NotEnoughDateModal({ open, setModal }) {
@@ -16,12 +17,7 @@ export default function NotEnoughDateModal({ open, setModal }) {
         >
           <Container>
             <ErrorChar />
-            <TextBox>
-              <BlackText>미팅 선호 날짜는 최소</BlackText>
-              <ColorText> 4일 이상</ColorText>
-              <BlackText> 선택해 주세요</BlackText>
-            </TextBox>
-            <SmallText>많이선택할수록 매칭확률이 올라가요!</SmallText>
+            <ModalTextDate />
             <SButton onClick={() => setModal(false)}>닫기</SButton>
           </Container>
         </Modal>

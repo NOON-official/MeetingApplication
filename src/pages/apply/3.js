@@ -10,6 +10,7 @@ import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { submitStep3 } from '../../features/apply';
+import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply3Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -39,7 +40,14 @@ function Apply3Page() {
 
   const handleSubmit = useCallback(() => {
     if (memberCount === 2) {
-      if (Object.keys(member1).length < 3 || Object.keys(member2).length < 3) {
+      if (
+        !member1.age ||
+        !member1.role ||
+        !member1.mbti ||
+        !member2.age ||
+        !member2.role ||
+        !member2.mbti
+      ) {
         setOpenModal(true);
       } else {
         dispatch(
@@ -50,9 +58,15 @@ function Apply3Page() {
         navigate('/apply/4');
       }
     } else if (
-      Object.keys(member1).length < 3 ||
-      Object.keys(member2).length < 3 ||
-      Object.keys(member3).length < 3
+      !member1.age ||
+      !member1.role ||
+      !member1.mbti ||
+      !member2.age ||
+      !member2.role ||
+      !member2.mbti ||
+      !member3.age ||
+      !member3.role ||
+      !member3.mbti
     ) {
       setOpenModal(true);
     } else {
@@ -103,6 +117,7 @@ function Apply3Page() {
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
+      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -112,8 +127,7 @@ export default Apply3Page;
 const Title = styled.div`
   width: 90%;
   margin-top: 8%;
-  height: 13%;
-  min-height: 13%;
+  height: 10%;
 `;
 
 const Maintitle = styled.div`

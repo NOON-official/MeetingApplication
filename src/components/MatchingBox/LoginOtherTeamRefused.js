@@ -7,6 +7,7 @@ import backend from '../../util/backend';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
+import { ReactComponent as MatchingText9 } from '../../asset/svg/MatchingText9.svg';
 
 // 로그인하고 매칭증에 상대방이 거절했을 때 매칭조회페이지
 
@@ -91,7 +92,7 @@ export default function LoginOtherTeamRefused({ teamId }) {
           매칭결과
           <SCircleArrow
             onClick={() => {
-              navigate('/matching');
+              window.location.reload();
             }}
           />
         </LeftTop>
@@ -105,9 +106,7 @@ export default function LoginOtherTeamRefused({ teamId }) {
       </Top>
       <WhiteBox>
         <SSadFace />
-        <TextBox>조건에 부합하는 팀이 없어</TextBox>
-        <TextBox2>아쉽게도 이번에는 상대팀이</TextBox2>
-        <TextBox2>매칭되지 않았어요.</TextBox2>
+        <SMatchingText9 />
         <MeetingButton
           onClick={() => {
             setOpenModal1(true);
@@ -182,23 +181,8 @@ const SSadFace = styled(SadFace)`
   margin-top: 5%;
 `;
 
-const TextBox = styled.div`
+const SMatchingText9 = styled(MatchingText9)`
   margin-top: 20%;
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const TextBox2 = styled.div`
-  text-align: center;
-  width: 100%;
-  color: #1a1a1a;
-  font-weight: 400;
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
 `;
 
 const MeetingButton = styled(Button)`
