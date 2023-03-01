@@ -8,7 +8,8 @@ import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
 
 function InvitePage() {
-  const [inviteCode, setInviteCode] = useState('');
+  const referralId = sessionStorage.getItem('referralId');
+  const [inviteCode, setInviteCode] = useState(referralId);
   const navigate = useNavigate();
 
   const handleInviteCode = useCallback(
@@ -18,7 +19,7 @@ function InvitePage() {
     [inviteCode],
   );
   const NextPage = useCallback(async () => {
-    if (inviteCode !== '') {
+    if (inviteCode !== null) {
       try {
         await backend.post('/invitations', { referralId: inviteCode });
         navigate('/apply/1');
@@ -29,6 +30,8 @@ function InvitePage() {
       navigate('/apply/1');
     }
   });
+
+  console.log(referralId);
 
   return (
     <ApplyLayout>
@@ -75,6 +78,7 @@ const Subtitle = styled.p`
 `;
 
 const Conatiner = styled.div`
+  margin-top: 50px;
   margin-bottom: 35%;
   display: flex;
   flex-direction: column;
