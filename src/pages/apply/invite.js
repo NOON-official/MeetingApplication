@@ -19,7 +19,7 @@ function InvitePage() {
     [inviteCode],
   );
   const NextPage = useCallback(async () => {
-    if (inviteCode !== '') {
+    if (inviteCode !== null) {
       try {
         await backend.post('/invitations', { referralId: inviteCode });
         navigate('/apply/1');
