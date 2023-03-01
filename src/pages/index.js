@@ -66,7 +66,7 @@ function Main() {
 
   const handleStart = useCallback(() => {
     if (!accessToken) {
-      navigate('/apply/notlogin');
+      navigate('/myinfo');
     } else if (matchingStatus === null) {
       if (agreements === null) {
         navigate('/apply/agree');
