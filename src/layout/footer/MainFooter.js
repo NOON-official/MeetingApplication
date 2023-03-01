@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import theme from '../../style/theme';
-
 function MainFooter() {
   return (
     <Footer>
@@ -11,12 +9,6 @@ function MainFooter() {
         </SLink>
         <SLink href="https://furry-bank-197.notion.site/c83f4127e3c54b7080c333aa31a4cc03">
           개인정보처리방침
-        </SLink>
-        <SLink href="https://furry-bank-197.notion.site/303cd8bbdefc41a3bf088b30a4c98f84">
-          공지사항
-        </SLink>
-        <SLink href="https://furry-bank-197.notion.site/aaa47097d9b24192a739a3f7aafa8556">
-          문의사항
         </SLink>
       </HeaderFooter>
     </Footer>
