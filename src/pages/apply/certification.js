@@ -136,7 +136,7 @@ function CertificationPage() {
           }}
           disabled={!vaildcheck}
         >
-          매칭 신청하기
+          매칭 완료하기
         </SubmitButton>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
