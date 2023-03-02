@@ -246,14 +246,39 @@ function MatchingOtherTeam() {
                 <SmallTitle>MBTI</SmallTitle>
                 {otherTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{Mbti[otherTeamData?.members[0]?.mbti]?.name}</div>
-                    <div>{Mbti[otherTeamData?.members[1]?.mbti]?.name}</div>
+                    <div>
+                      {
+                        Mbti[parseInt(otherTeamData?.members[0]?.mbti) - 1]
+                          ?.name
+                      }
+                    </div>
+                    <div>
+                      {
+                        Mbti[parseInt(otherTeamData?.members[1]?.mbti) - 1]
+                          ?.name
+                      }
+                    </div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{Mbti[otherTeamData?.members[0]?.mbti]?.name}</div>
-                    <div>{Mbti[otherTeamData?.members[1]?.mbti]?.name}</div>
-                    <div>{Mbti[otherTeamData?.members[2]?.mbti]?.name}</div>
+                    <div>
+                      {
+                        Mbti[parseInt(otherTeamData?.members[0]?.mbti) - 1]
+                          ?.name
+                      }
+                    </div>
+                    <div>
+                      {
+                        Mbti[parseInt(otherTeamData?.members[1]?.mbti) - 1]
+                          ?.name
+                      }
+                    </div>
+                    <div>
+                      {
+                        Mbti[parseInt(otherTeamData?.members[2]?.mbti) - 1]
+                          ?.name
+                      }
+                    </div>
                   </MemberProfile2>
                 )}
               </Info>
