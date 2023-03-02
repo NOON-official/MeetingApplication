@@ -4,11 +4,11 @@ const Mbti = [
     id: 1,
   },
   {
-    name: 'ENTJ',
+    name: 'ENFP',
     id: 2,
   },
   {
-    name: 'ENFP',
+    name: 'ENTJ',
     id: 3,
   },
   {
@@ -16,43 +16,43 @@ const Mbti = [
     id: 4,
   },
   {
-    name: 'ESFP',
+    name: 'ESFJ',
     id: 5,
   },
   {
-    name: 'ESFJ',
+    name: 'ESFP',
     id: 6,
   },
   {
-    name: 'ESTP',
+    name: 'ESTJ',
     id: 7,
   },
   {
-    name: 'ESTJ',
+    name: 'ESTP',
     id: 8,
   },
   {
-    name: 'INFP',
+    name: 'INFJ',
     id: 9,
   },
   {
-    name: 'INFJ',
+    name: 'INFP',
     id: 10,
   },
   {
-    name: 'INTP',
+    name: 'INTJ',
     id: 11,
   },
   {
-    name: 'ISTP',
+    name: 'INTP',
     id: 12,
   },
   {
-    name: 'ISFP',
+    name: 'ISFJ',
     id: 13,
   },
   {
-    name: 'ISFJ',
+    name: 'ISFP',
     id: 14,
   },
   {
@@ -60,7 +60,7 @@ const Mbti = [
     id: 15,
   },
   {
-    name: 'INTJ',
+    name: 'ISTP',
     id: 16,
   },
 ];

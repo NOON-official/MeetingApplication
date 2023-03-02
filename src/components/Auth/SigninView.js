@@ -6,11 +6,9 @@ import { useDispatch } from 'react-redux';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import KakaoLoginLink from '../KakaoLoginLink';
-import KakaoLoginLink2 from '../KakaoLoginLink2';
 import { setAccessToken } from '../../features/user';
 
 export default function SigninView() {
-  const agreements = localStorage.getItem('agree');
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
@@ -26,8 +24,6 @@ export default function SigninView() {
     }
   }, [searchParams]);
 
-  console.log(agreements);
-
   return (
     <Container>
       <ImageContainer>
@@ -39,19 +35,11 @@ export default function SigninView() {
         <br />
         카카오톡 로그인이 필요해요.
       </SigninDescription>
-      {agreements === null ? (
-        <KakaoLink2>
-          <KakaoButton icon={<KakaoSignin />} block>
-            카카오 로그인
-          </KakaoButton>
-        </KakaoLink2>
-      ) : (
-        <KakaoLink>
-          <KakaoButton icon={<KakaoSignin />} block>
-            카카오 로그인
-          </KakaoButton>
-        </KakaoLink>
-      )}
+      <KakaoLink>
+        <KakaoButton icon={<KakaoSignin />} block>
+          카카오 로그인
+        </KakaoButton>
+      </KakaoLink>
     </Container>
   );
 }
@@ -80,10 +68,6 @@ const SigninDescription = styled.div`
 `;
 
 const KakaoLink = styled(KakaoLoginLink)`
-  display: block;
-`;
-
-const KakaoLink2 = styled(KakaoLoginLink2)`
   display: block;
 `;
 
