@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -17,6 +17,19 @@ function AgreePage() {
 
   const navigate = useNavigate();
 
+  const getInformation = useCallback(async () => {
+    try {
+      await backend.get('/users/agreements');
+      navigate('/');
+    } catch (e) {
+      navigate('/apply/agree');
+    }
+  }, []);
+
+  useEffect(() => {
+    getInformation();
+  }, []);
+
   const handleAgree = useCallback(() => {
     setAgree1(true);
     setAgree2(true);
@@ -32,7 +45,6 @@ function AgreePage() {
       marketing: agree4,
     });
     navigate('/apply/invite');
-    localStorage.setItem('agree', 'yes');
   });
 
   return (
@@ -53,13 +65,13 @@ function AgreePage() {
           >
             {agree1 ? <CheckValid /> : <CheckInvalid />}
             {agree1 ? (
-              <a
+              <SA
                 href="https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7"
                 target="_blank"
                 rel="noreferrer"
               >
                 서비스 이용약관 동의
-              </a>
+              </SA>
             ) : (
               '서비스 이용약관 동의'
             )}
@@ -72,13 +84,13 @@ function AgreePage() {
           >
             {agree2 ? <CheckValid /> : <CheckInvalid />}
             {agree2 ? (
-              <a
+              <SA
                 href="https://www.notion.so/c83f4127e3c54b7080c333aa31a4cc03"
                 target="_blank"
                 rel="noreferrer"
               >
                 개인정보 수집 및 이용 동의
-              </a>
+              </SA>
             ) : (
               '개인정보 수집 및 이용 동의'
             )}
@@ -116,6 +128,11 @@ function AgreePage() {
 }
 
 export default AgreePage;
+
+const SA = styled.a`
+  text-decoration: none;
+  color: black;
+`;
 
 const Title = styled.div`
   width: 90%;
