@@ -159,9 +159,9 @@ function Apply6Page() {
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
+                  <div>{Mbti[parseInt(members[0]?.mbti) - 1]?.name}</div>
                   <div>{Mbti[parseInt(members[1]?.mbti) - 1]?.name}</div>
                   <div>{Mbti[parseInt(members[2]?.mbti) - 1]?.name}</div>
-                  <div>{Mbti[parseInt(members[3]?.mbti) - 1]?.name}</div>
                 </MemberProfile2>
               )}
             </Info>
