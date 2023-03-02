@@ -215,21 +215,21 @@ function Teambox({ member, setMember, name }) {
             onChange={handleMbtiChange}
           >
             <Option value="1">ENFJ</Option>
-            <Option value="2">ENTJ</Option>
-            <Option value="3">ENFP</Option>
+            <Option value="2">ENFP</Option>
+            <Option value="3">ENTJ</Option>
             <Option value="4">ENTP</Option>
-            <Option value="5">ESFP</Option>
-            <Option value="6">ESFJ</Option>
-            <Option value="7">ESTP</Option>
-            <Option value="8">ESTJ</Option>
-            <Option value="9">INFP</Option>
-            <Option value="10">INFJ</Option>
-            <Option value="11">INTP</Option>
-            <Option value="12">ISTP</Option>
-            <Option value="13">ISFP</Option>
-            <Option value="14">ISFJ</Option>
+            <Option value="5">ESFJ</Option>
+            <Option value="6">ESFP</Option>
+            <Option value="7">ESTJ</Option>
+            <Option value="8">ESTP</Option>
+            <Option value="9">INFJ</Option>
+            <Option value="10">INFP</Option>
+            <Option value="11">INTJ</Option>
+            <Option value="12">INTP</Option>
+            <Option value="13">ISFJ</Option>
+            <Option value="14">ISFP</Option>
             <Option value="15">ISTJ</Option>
-            <Option value="16">INTJ</Option>
+            <Option value="16">ISTP</Option>
           </SSelect>
         </Info>
         <Info>
