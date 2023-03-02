@@ -162,14 +162,24 @@ function MatchingMyTeam() {
                 <SmallTitle>MBTI</SmallTitle>
                 {myTeamData?.memberCount === 2 ? (
                   <MemberProfile>
-                    <div>{Mbti[myTeamData?.members[0]?.mbti].name}</div>
-                    <div>{Mbti[myTeamData?.members[1]?.mbti].name}</div>
+                    <div>
+                      {Mbti[parseInt(myTeamData?.members[0]?.mbti) - 1].name}
+                    </div>
+                    <div>
+                      {Mbti[parseInt(myTeamData?.members[1]?.mbti) - 1].name}
+                    </div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
-                    <div>{Mbti[myTeamData?.members[0]?.mbti].name}</div>
-                    <div>{Mbti[myTeamData?.members[1]?.mbti].name}</div>
-                    <div>{Mbti[myTeamData?.members[2]?.mbti].name}</div>
+                    <div>
+                      {Mbti[parseInt(myTeamData?.members[0]?.mbti) - 1].name}
+                    </div>
+                    <div>
+                      {Mbti[parseInt(myTeamData?.members[1]?.mbti) - 1].name}
+                    </div>
+                    <div>
+                      {Mbti[parseInt(myTeamData?.members[2]?.mbti) - 1].name}
+                    </div>
                   </MemberProfile2>
                 )}
               </Info>
