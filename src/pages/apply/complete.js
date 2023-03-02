@@ -49,7 +49,7 @@ function Complete() {
       dispatch(createTeam(applydata));
       window.alert('저장되었습니다!');
     }
-    navigate('/');
+    navigate('/matching');
   });
 
   return (
@@ -107,7 +107,7 @@ const SubmitButton = styled(Button)`
   font-size: 24px;
   text-align: center;
   border: none;
-  margin-top: 10%;
+  margin-top: 25px;
   width: 100%;
   height: 50px;
   background: #eb8888;
