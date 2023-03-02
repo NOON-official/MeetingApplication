@@ -284,7 +284,7 @@ const Number = styled.p`
 const FixButton = styled(FixedButton)`
   width: 75%;
   position: sticky;
-  bottom: 40px;
+  bottom: 10vh;
   left: 10px;
   &:hover {
     cursor: pointer;
