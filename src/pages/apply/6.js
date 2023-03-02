@@ -154,14 +154,14 @@ function Apply6Page() {
               <SmallTitle>MBTI</SmallTitle>
               {memberCount === 2 ? (
                 <MemberProfile>
-                  <div>{Mbti[members[0]?.mbti]?.name}</div>
-                  <div>{Mbti[members[1]?.mbti]?.name}</div>
+                  <div>{Mbti[parseInt(members[0]?.mbti) - 1]?.name}</div>
+                  <div>{Mbti[parseInt(members[1]?.mbti) - 1]?.name}</div>
                 </MemberProfile>
               ) : (
                 <MemberProfile2>
-                  <div>{Mbti[members[0]?.mbti]?.name}</div>
-                  <div>{Mbti[members[1]?.mbti]?.name}</div>
-                  <div>{Mbti[members[2]?.mbti]?.name}</div>
+                  <div>{Mbti[parseInt(members[1]?.mbti) - 1]?.name}</div>
+                  <div>{Mbti[parseInt(members[2]?.mbti) - 1]?.name}</div>
+                  <div>{Mbti[parseInt(members[3]?.mbti) - 1]?.name}</div>
                 </MemberProfile2>
               )}
             </Info>
