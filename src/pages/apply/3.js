@@ -19,9 +19,9 @@ function Apply3Page() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [member1, setMember1] = useState(members[0]);
-  const [member2, setMember2] = useState(members[1]);
-  const [member3, setMember3] = useState(members[2]);
+  const [member1, setMember1] = useState(members[0] || {});
+  const [member2, setMember2] = useState(members[1] || {});
+  const [member3, setMember3] = useState(members[2] || {});
 
   useEffect(() => {
     if (finishedStep < 2) {
