@@ -107,7 +107,11 @@ function MyInfo() {
           </MenuItem>
           <MenuItem>
             <LinkButton
-              href="https://docs.google.com/forms/d/e/1FAIpQLScjiIvjK7UTXLeR5c5C4unZWXKarGR0sq_9TjMqi51IKtyvUg/viewform"
+              onClick={() => {
+                window.open(
+                  'https://docs.google.com/forms/d/e/1FAIpQLScjiIvjK7UTXLeR5c5C4unZWXKarGR0sq_9TjMqi51IKtyvUg/viewform',
+                );
+              }}
               target="_blank"
             >
               제안하기 <RightArrow />
