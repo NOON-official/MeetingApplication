@@ -1,18 +1,21 @@
-import { Button } from 'antd';
 import styled from 'styled-components';
 
 export const MenuItem = styled.div``;
 
-export const LinkButton = styled(Button).attrs({ type: 'text', block: true })`
+export const LinkButton = styled.button`
+  width: 100%;
+  border: none;
+  background-color: white;
   display: flex;
+  color: ${(props) => props.theme.grey};
+  font-weight: 600;
+  font-size: 14px;
   justify-content: space-between;
   align-items: center;
   height: 50px;
   padding: 4px 8px;
-  > span {
-    font-weight: 600;
-    font-size: 14px;
-    color: ${(props) => props.theme.grey};
+  &:hover {
+    cursor: pointer;
   }
 `;
 

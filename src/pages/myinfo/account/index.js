@@ -120,8 +120,8 @@ export default function Account() {
 const Subtitle = styled.div`
   font-size: 14px;
   color: ${(props) => props.theme.grey};
-  padding-left: 20px;
-  padding-bottom: 2px;
+  padding-left: 6px;
+  padding-bottom: 5px;
 `;
 
 const InfoCard = styled(Card)`
