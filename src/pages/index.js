@@ -134,9 +134,7 @@ function Main() {
             </RightBar>
             <Number>{threegirl}</Number>
           </TotalBar>
-          <Title>{`미팅별로 ${
-            teamsPerRound * 2
-          }팀이 채워지면 바로 매칭이 시작됩니다!`}</Title>
+          <Title>조건이 맞는 상대팀이 나타나면 바로 매칭됩니다!</Title>
         </MatchingBox>
       </Section>
 
