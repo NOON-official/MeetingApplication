@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import theme from '../style/theme';
 
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
+import { ReactComponent as PresentBox } from '../asset/svg/PresentBox.svg';
 import { ReactComponent as FixedButton } from '../asset/svg/FixedButton.svg';
 import { ReactComponent as Main1 } from '../asset/svg/Main1.svg';
 import { ReactComponent as Main2 } from '../asset/svg/Main2.svg';
@@ -86,7 +87,7 @@ function Main() {
 
   return (
     <MainLayout>
-      <Section>
+      <MainBox>
         <ImgBox>
           <UserCountText>
             <CountBox>
@@ -107,7 +108,16 @@ function Main() {
           </UserCountText>
           <MainImg />
         </ImgBox>
-      </Section>
+        {accessToken ? (
+          <SPresentBox
+            onClick={() => {
+              if (accessToken) {
+                navigate('/myinfo');
+              }
+            }}
+          />
+        ) : null}
+      </MainBox>
 
       <Section my="35px">
         <TopTitle>신청 현황</TopTitle>
@@ -156,6 +166,10 @@ function Main() {
 
 export default Main;
 
+const MainBox = styled.section`
+  position: relative;
+`;
+
 const TopTitle = styled.div`
   margin-left: 5%;
   font-weight: 400;
@@ -172,15 +186,24 @@ const ImgBox = styled.div`
   justify-content: center;
 
   > svg {
-    width: 85%;
+    width: 75%;
     height: auto;
+  }
+`;
+
+const SPresentBox = styled(PresentBox)`
+  position: absolute;
+  top: 3%;
+  right: 10%;
+  &:hover {
+    cursor: pointer;
   }
 `;
 
 const UserCountText = styled.div`
   position: absolute;
-  top: 6%;
-  right: 22%;
+  top: 7%;
+  right: 25%;
 `;
 
 const CountBox = styled.span`

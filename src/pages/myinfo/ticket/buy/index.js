@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import MenuBox, { MenuItem } from '../../../../components/MenuBox';
 import Section from '../../../../components/Section';
 import MyinfoLayout from '../../../../layout/MyinfoLayout';
+import { ReactComponent as FreindHalf } from '../../../../asset/svg/FreindHalf.svg';
 import { ReactComponent as Checkbox } from '../../../../asset/svg/Checkbox.svg';
 import { ReactComponent as CheckboxChecked } from '../../../../asset/svg/CheckboxChecked.svg';
 import Accordion from '../../../../components/Accordion';
@@ -239,6 +240,7 @@ export default function TicketBuyPage() {
     <MyinfoLayout title="이용권 구매">
       <Section>
         <MenuBox>
+          <SFreindHalf />
           {pageData?.Products.map((product) => (
             <MenuItem key={product.id}>
               <CheckboxButton onClick={() => setSelectedProductId(product.id)}>
@@ -250,6 +252,13 @@ export default function TicketBuyPage() {
                   )}
                   <ProductTitleText>{product.name}</ProductTitleText>
                 </ProductTitleBox>
+                {product.id === 2 ? <DisCount>10% 할인</DisCount> : null}
+                {product.id === 3 ? (
+                  <DisCount>&nbsp;&nbsp;&nbsp;&nbsp;25% 할인</DisCount>
+                ) : null}
+                {product.id === 4 ? (
+                  <DisCount>&nbsp;&nbsp;40% 할인</DisCount>
+                ) : null}
                 <ProductPriceBox>
                   {product.originalPrice !== product.price && (
                     <span className="discount">
@@ -443,34 +452,14 @@ const NoCouponText = styled.span`
   padding: 12px 0;
 `;
 
-const PayMethodContainer = styled.div`
-  background-color: #ffffff;
-  border: 1px solid #f1ecec;
-  border-radius: 10px;
-  padding: 0 22px;
+const DisCount = styled.span`
+  margin-right: 80px;
+  font-size: 10px;
+  color: #eb8888;
 `;
 
-const PayMethodTitleBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-`;
-
-const PayMethodTitle = styled.div`
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  color: #777777;
-`;
-
-const PayMethodContentBox = styled.div`
-  border-top: 1px solid #f1ecec;
-  font-size: 11px;
-  line-height: 13px;
-  padding: 15px 0;
-
-  > p {
-    margin: 8px 0;
-  }
+const SFreindHalf = styled(FreindHalf)`
+  position: absolute;
+  top: -7%;
+  right: 1%;
 `;
