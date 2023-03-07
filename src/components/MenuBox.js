@@ -20,6 +20,7 @@ export const LinkButton = styled.button`
 `;
 
 const MenuBox = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
