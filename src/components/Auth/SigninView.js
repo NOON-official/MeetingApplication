@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
+import { ReactComponent as Seconds } from '../../asset/svg/30seconds.svg';
 import KakaoLoginLink from '../KakaoLoginLink';
 import { setAccessToken } from '../../features/user';
 
@@ -36,6 +37,7 @@ export default function SigninView() {
         카카오톡 로그인이 필요해요.
       </SigninDescription>
       <KakaoLink>
+        <SSeconds />
         <KakaoButton icon={<KakaoSignin />} block>
           카카오 로그인
         </KakaoButton>
@@ -55,8 +57,7 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 12px;
-  margin-top: 60px;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 `;
 
 const SigninDescription = styled.div`
@@ -64,17 +65,21 @@ const SigninDescription = styled.div`
   font-size: 25px;
   text-align: center;
   color: #1a1a1a;
-  margin-bottom: 52px;
+  margin-bottom: 30px;
 `;
 
 const KakaoLink = styled(KakaoLoginLink)`
   display: block;
 `;
 
+const SSeconds = styled(Seconds)`
+  margin-left: 22%;
+`;
+
 const KakaoButton = styled(Button)`
   background-color: #fee500;
   height: auto;
-  padding: 16px;
+  padding: 10px;
   border-radius: 10px;
   border: 1px solid #fee500;
   &:not(:disabled):hover {
