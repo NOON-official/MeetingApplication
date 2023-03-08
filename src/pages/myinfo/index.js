@@ -12,7 +12,7 @@ import coffeeGreyImg from '../../asset/img/coffee-grey.png';
 import coffeeImg from '../../asset/img/coffee.png';
 import Section from '../../components/Section';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
-import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
+import { MenuBox, LinkButton, MenuItem } from '../../components/MenuBox';
 import { logout } from '../../features/user/asyncActions';
 import SigninView from '../../components/Auth/SigninView';
 import {
