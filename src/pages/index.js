@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import theme from '../style/theme';
 
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
-import { ReactComponent as PresentBox } from '../asset/svg/PresentBox.svg';
+import PresentBox from '../asset/img/Present.png';
 import { ReactComponent as FixedButton } from '../asset/svg/FixedButton.svg';
 import { ReactComponent as Main1 } from '../asset/svg/Main1.svg';
 import { ReactComponent as Main2 } from '../asset/svg/Main2.svg';
@@ -108,15 +108,12 @@ function Main() {
           </UserCountText>
           <MainImg />
         </ImgBox>
-        {accessToken ? (
-          <SPresentBox
-            onClick={() => {
-              if (accessToken) {
-                navigate('/myinfo');
-              }
-            }}
-          />
-        ) : null}
+        <SImg
+          src={PresentBox}
+          onClick={() => {
+            navigate('/myinfo');
+          }}
+        />
       </MainBox>
 
       <Section my="35px">
@@ -191,7 +188,7 @@ const ImgBox = styled.div`
   }
 `;
 
-const SPresentBox = styled(PresentBox)`
+const SImg = styled.img`
   position: absolute;
   top: 3%;
   right: 10%;
