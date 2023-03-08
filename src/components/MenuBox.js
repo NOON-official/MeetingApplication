@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const MenuItem = styled.div``;
+export const MenuItem = styled.div`
+  font-family: ${(props) => props.theme.primaryFont};
+`;
 
 export const LinkButton = styled.button`
   width: 100%;
@@ -8,6 +10,7 @@ export const LinkButton = styled.button`
   background-color: white;
   display: flex;
   color: ${(props) => props.theme.grey};
+  font-family: ${(props) => props.theme.primaryFont};
   font-weight: 600;
   font-size: 14px;
   justify-content: space-between;
@@ -19,7 +22,7 @@ export const LinkButton = styled.button`
   }
 `;
 
-const MenuBox = styled.div`
+export const MenuBox = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
