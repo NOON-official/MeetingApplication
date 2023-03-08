@@ -3,7 +3,6 @@ import { Button, Col, notification, Row } from 'antd';
 import { useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as KakaoTalk } from '../../asset/svg/KakaoTalk.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
@@ -176,7 +175,6 @@ function MyInfo() {
           </Col>
         </Row>
       </Section>
-      <MainFooter />
       <PrimaryModal
         title="유의사항"
         open={isNoticeOpened}
