@@ -3,7 +3,6 @@ import { Button, Col, notification, Row } from 'antd';
 import { useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import MainFooter from '../../layout/footer/MainFooter';
 import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as KakaoTalk } from '../../asset/svg/KakaoTalk.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
@@ -13,7 +12,7 @@ import coffeeGreyImg from '../../asset/img/coffee-grey.png';
 import coffeeImg from '../../asset/img/coffee.png';
 import Section from '../../components/Section';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
-import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
+import { MenuBox, LinkButton, MenuItem } from '../../components/MenuBox';
 import { logout } from '../../features/user/asyncActions';
 import SigninView from '../../components/Auth/SigninView';
 import {
@@ -176,7 +175,6 @@ function MyInfo() {
           </Col>
         </Row>
       </Section>
-      <MainFooter />
       <PrimaryModal
         title="유의사항"
         open={isNoticeOpened}
