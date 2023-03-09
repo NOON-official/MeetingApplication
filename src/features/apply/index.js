@@ -110,6 +110,22 @@ const applySlice = createSlice({
         }),
       );
     },
+    submitDate: (state, action) => {
+      const { availableDates } = action.payload;
+
+      state.finishedStep = 5; // 날짜만 재선택하는 경우이므로
+      state.availableDates = availableDates;
+
+      const stored = localStorage.getItem('apply-data');
+      localStorage.setItem(
+        APPLY_STORAGE_KEY,
+        JSON.stringify({
+          ...JSON.parse(stored),
+          ...action.payload,
+          finishedStep: state.finishedStep,
+        }),
+      );
+    },
   },
 });
 
@@ -119,6 +135,7 @@ export const {
   submitStep3,
   submitStep4,
   submitStep5,
+  submitDate,
 } = applySlice.actions;
 
 export default applySlice.reducer;
