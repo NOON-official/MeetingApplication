@@ -26,7 +26,9 @@ export default function Apply2() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectDate, setSelectDate] = useState(
-    availableDates.map((d) => new DateObject(d)),
+    availableDates
+      .map((d) => new DateObject(d))
+      .filter((d) => d.format() >= new DateObject().format()), // 오늘 이상 날짜만 선택
   );
   const [selectedArea, setSelectedArea] = useState(areas);
 
@@ -79,7 +81,7 @@ export default function Apply2() {
     }
     dispatch(
       submitStep2({
-        availableDates: [...selectDate.map((a) => a.format())],
+        availableDates: [...selectDate.map((a) => a.format()).sort()], // 오름차순 정렬
         areas: selectedArea,
       }),
     );

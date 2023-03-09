@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 import { Button, Modal } from 'antd';
+import { DateObject } from 'react-multi-date-picker';
+import SelectCalendarModal from '../Modal/SelectCalendarModal';
 import backend from '../../util/backend';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
@@ -12,6 +14,8 @@ import { ReactComponent as MatchingText8 } from '../../asset/svg/MatchingText8.s
 // 로그인하고 매칭증에 조건 안맞아 매칭실패했을때 매칭조회페이지
 
 export default function LoginWaitFail({ teamId }) {
+  const { finishedStep, availableDates } = useSelector((store) => store.apply);
+  const [openSelectCalendarModal, setOpenSelectCalendarModal] = useState(false);
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const navigate = useNavigate();
@@ -35,8 +39,16 @@ export default function LoginWaitFail({ teamId }) {
     }
   });
 
+  const setSelectCalendarModal = (bool) => {
+    setOpenSelectCalendarModal(bool);
+  };
+
   return (
     <>
+      <SelectCalendarModal
+        open={openSelectCalendarModal}
+        setModal={setSelectCalendarModal}
+      />
       <Modal
         width="380px"
         open={openModal1}
@@ -47,7 +59,20 @@ export default function LoginWaitFail({ teamId }) {
         <Container>
           <SButton
             onClick={() => {
-              navigate('/apply/6');
+              const selectedDate = availableDates
+                .map((d) => new DateObject(d))
+                .filter((d) => d.format() >= new DateObject().format());
+              // 기존 신청 정보가 없는 경우
+              if (finishedStep < 5) {
+                window.alert('잘못된 접근입니다');
+                navigate(`/apply/${finishedStep + 1}`);
+              }
+              // 가능한 날짜가 4일 미만인 경우
+              else if (selectedDate.length < 4) {
+                setSelectCalendarModal(true);
+              } else {
+                navigate('/apply/6');
+              }
               setOpenModal1(false);
             }}
           >
