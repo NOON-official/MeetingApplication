@@ -25,7 +25,7 @@ jobs:
       - name: multiple command
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.STAGE_HOST }}
+          host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
