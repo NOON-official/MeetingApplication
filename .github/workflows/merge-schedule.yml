@@ -8,7 +8,7 @@ on:
       - opened
       - edited
   schedule:
-    - cron: '45 11 * * *' # UTC 11:45 -> 한국 20:45 //test2
+    - cron: '5 12 * * *' # UTC 12:05 -> 한국 21:05 //test3
 
 jobs:
   merge_schedule:
@@ -17,3 +17,16 @@ jobs:
       - uses: gr2m/merge-schedule-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  AUTO_DEPLOY:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: multiple command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.STAGE_HOST }}
+          username: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/client
+            ./deploy.sh
