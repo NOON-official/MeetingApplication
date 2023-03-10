@@ -124,9 +124,8 @@ const RegisterButton = styled(Button).attrs({ type: 'text' })`
 
 const CouponListBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-direction: column;
+  justify-content: space-between;
   background-color: white;
   border: 1px solid #f8f3f3;
   border-radius: 10px;
