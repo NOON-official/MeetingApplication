@@ -1,24 +1,24 @@
-name: Merge Schedule
+name: Prod Merge & Deploy Schedule
 
 on:
   pull_request:
     branches:
-      - stage
+      - prod
     types:
       - opened
       - edited
   schedule:
-    - cron: '10 13 * * *' # UTC 13:10 -> 한국 22:10  //test3
+    - cron: '0 20 * * *' # 실행 시간: UTC 20:00(한국 05:00)
 
 jobs:
-  merge_schedule:
+  merge: # 1. pull request merge
     runs-on: ubuntu-latest
     steps:
       - uses: gr2m/merge-schedule-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  AUTO_DEPLOY:
-    needs: merge_schedule # merge_schedule이 완료된 후 실행
+  deploy: # 2. ec2 배포
+    needs: merge # merge가 완료된 후 실행
     name: deploy
     runs-on: ubuntu-latest
     steps:
