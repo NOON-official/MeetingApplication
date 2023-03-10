@@ -1,0 +1,23 @@
+name: Merge Schedule
+
+on:
+  pull_request:
+    branches:
+      - stage
+    types:
+      - opened
+      - edited
+  schedule:
+    - cron: '40 10 * * *' # UTC 10:30 -> 한국 19:40
+
+jobs:
+  merge_schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: gr2m/merge-schedule-action@v2
+        with:
+          # Require all pull request statuses to be successful before
+          # merging. Default is `false`.
+          require_statuses_success: 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
