@@ -8,13 +8,12 @@ on:
       - opened
       - edited
   schedule:
-    - cron: '30 11 * * *' # UTC 11:30 -> 한국 20:30
+    - cron: '45 11 * * *' # UTC 11:45 -> 한국 20:45 //test2
 
 jobs:
   merge_schedule:
     runs-on: ubuntu-latest
     steps:
       - uses: gr2m/merge-schedule-action@v2
-        with:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
