@@ -8,7 +8,7 @@ on:
       - opened
       - edited
   schedule:
-    - cron: '0 11 * * *' # UTC 11:00 -> 한국 20:00
+    - cron: '0 11 * * *' # UTC 11:00 -> 한국 20:00 //test
 
 jobs:
   merge_schedule:
