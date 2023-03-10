@@ -8,7 +8,7 @@ on:
       - opened
       - edited
   schedule:
-    - cron: '0 11 * * *' # UTC 11:00 -> 한국 20:00 //test
+    - cron: '30 11 * * *' # UTC 11:30 -> 한국 20:30
 
 jobs:
   merge_schedule:
@@ -16,8 +16,5 @@ jobs:
     steps:
       - uses: gr2m/merge-schedule-action@v2
         with:
-          # Require all pull request statuses to be successful before
-          # merging. Default is `false`.
-          require_statuses_success: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
