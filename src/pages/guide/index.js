@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ReactComponent as Chtalk } from '../../asset/svg/ChannelTalk.svg';
 import Section from '../../components/Section';
 import Accordion from '../../components/Accordion';
 import MainLayout from '../../layout/MainLayout';
@@ -31,8 +32,6 @@ const guides = [
   {
     title: '이용권 관련',
     content: `<em>미팅 1회 이용권은 5,000원입니다.</em><br/><br/>🍯TIP! 여러 장의 이용권을 한 번에 구매하실 경우 할인된 가격으로 좀 더 저렴하게 구매 가능합니다.☺️<br/><br/>매칭 후 수락하면 이용권 1장이 사용됩니다.<br/>상대팀이 거절했을 경우에는 이용권을 되돌려 드립니다.`,
-    link: `/myinfo/ticket/buy`,
-    linkText: '구경하러 가기',
   },
   {
     title: '이용권 환불',
@@ -51,10 +50,23 @@ const guides = [
 ];
 
 export default function Guide() {
+  const setting = {
+    pluginKey: process.env.REACT_APP_CHANNEL_TALK_PLUGIN,
+    memberId: window.localStorage.id,
+    profile: {
+      name: window.localStorage.nickname,
+    },
+    customLauncherSelector: ' #custom-button-1',
+    hideChannelButtonOnBoot: true,
+  };
+
   return (
     <MainLayout>
       <Section my="32px">
         <Container>
+          <CustomChannelTalk id="custom-button-1">
+            {ChannelTalk.boot(setting)}
+          </CustomChannelTalk>
           {guides.map((guide) => (
             <Accordion
               {...guide}
@@ -68,7 +80,6 @@ export default function Guide() {
           ))}
         </Container>
       </Section>
-      <div>{ChannelTalk.showChannelButton()}</div>
     </MainLayout>
   );
 }
@@ -77,6 +88,17 @@ const Container = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
+  > svg {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+const CustomChannelTalk = styled(Chtalk)`
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ContentWrapper = styled.p`
