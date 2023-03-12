@@ -22,7 +22,7 @@ export const LinkButton = styled.button`
   }
 `;
 
-export const MenuBox = styled.div`
+const MenuBox = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
