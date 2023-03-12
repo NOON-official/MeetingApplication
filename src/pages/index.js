@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
+import { Button } from 'antd';
 import theme from '../style/theme';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
 import PresentBox from '../asset/img/Present.png';
-import { ReactComponent as FixedButton } from '../asset/svg/FixedButton.svg';
 import { ReactComponent as Main1 } from '../asset/svg/Main1.svg';
 import { ReactComponent as Main2 } from '../asset/svg/Main2.svg';
 import { ReactComponent as Main3 } from '../asset/svg/Main3.svg';
@@ -128,7 +128,7 @@ function Main() {
         <Main3 width="90%" />
         <Main4 width="90%" />
         <Main5 width="90%" />
-        <FixButton onClick={handleStart} />
+        <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
       </Section>
       <MainFooter />
       <BottomFooter />
@@ -275,11 +275,16 @@ const Number = styled.p`
   font-size: 15px;
 `;
 
-const FixButton = styled(FixedButton)`
+const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   width: 75%;
   position: sticky;
   bottom: 10vh;
   left: 10px;
+
+  &.ant-btn {
+    height: 56px;
+    background-color: #ffa1a1;
+  }
   &:hover {
     cursor: pointer;
   }
