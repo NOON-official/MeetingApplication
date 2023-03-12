@@ -16,21 +16,13 @@ export default function TicketPage() {
   const { data: couponData, refetch: refetchCouponData } =
     useGetUserCouponCountQuery();
 
-  const handleRefetchTicketData = () => {
+  useEffect(() => {
     refetchTicketData();
-  };
+  }, [refetchTicketData]);
 
-  const handleRefetchCouponData = () => {
+  useEffect(() => {
     refetchCouponData();
-  };
-
-  useEffect(() => {
-    handleRefetchTicketData();
-  }, [ticketData]);
-
-  useEffect(() => {
-    handleRefetchCouponData();
-  }, [couponData]);
+  }, [refetchCouponData]);
 
   return (
     <MyinfoLayout title="이용권 현황">
