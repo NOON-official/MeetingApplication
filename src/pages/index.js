@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import theme from '../style/theme';
-
+import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
 import PresentBox from '../asset/img/Present.png';
 import { ReactComponent as FixedButton } from '../asset/svg/FixedButton.svg';
@@ -87,12 +87,7 @@ function Main() {
     <MainLayout>
       <MainBox>
         <ImgBox>
-          <UserCountText>
-            <CountBox>{memberCount[0]}</CountBox>
-            <CountBox>{memberCount[1]}</CountBox>
-            <CountBox>{memberCount[2]}</CountBox>
-            <CountBox>{memberCount[3]}</CountBox>
-          </UserCountText>
+          <CounterBox end={userCountData?.memberCount || 0} />
           <MainImg />
         </ImgBox>
         <SImg
