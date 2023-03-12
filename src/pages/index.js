@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 import theme from '../style/theme';
-
+import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
 import PresentBox from '../asset/img/Present.png';
 import { ReactComponent as FixedButton } from '../asset/svg/FixedButton.svg';
@@ -31,7 +31,7 @@ function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
   const { accessToken } = useSelector((state) => state.user);
   const { data: teamData } = useGetTeamCountQuery();
-  const { data: userCount } = useGetTeamMembersCountOneWeekQuery();
+  const { data: userCountData } = useGetTeamMembersCountOneWeekQuery();
   const [matchingStatus, setMatchingStatus] = useState('');
   const [agreements, setAgreements] = useState('');
   const navigate = useNavigate();
@@ -82,23 +82,7 @@ function Main() {
     <MainLayout>
       <MainBox>
         <ImgBox>
-          <UserCountText>
-            <CountBox>
-              {!isNaN(userCount?.memberCount)
-                ? Math.floor(userCount?.memberCount / 100)
-                : '0'}
-            </CountBox>
-            <CountBox>
-              {!isNaN(userCount?.memberCount)
-                ? Math.floor((userCount?.memberCount % 100) / 10)
-                : '0'}
-            </CountBox>
-            <CountBox>
-              {!isNaN(userCount?.memberCount)
-                ? Math.floor(userCount?.memberCount % 10)
-                : '0'}
-            </CountBox>
-          </UserCountText>
+          <CounterBox end={userCountData?.memberCount || 0} />
           <MainImg />
         </ImgBox>
         <SImg
@@ -200,8 +184,8 @@ const CountBox = styled.span`
   overflow: hidden;
   border: 0.3px solid rgba(197, 200, 206, 0.5);
   border-radius: 20px;
-  padding: 2px;
-  margin-left: 2px;
+  padding: 0.5px;
+  margin-left: 0.5px;
   font-size: 13px;
   background-color: white;
 `;
