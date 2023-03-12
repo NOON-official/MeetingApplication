@@ -1,28 +1,25 @@
 /* eslint-disable react/function-component-definition */
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
-const CounterBox = (props) => {
-  function Counter(end = props.end, start = 0) {
-    const [count, setCount] = useState(start);
+const CounterBox = ({ end }) => {
+  const [count, setCount] = useState(0);
 
-    useEffect(() => {
-      let currentNumber = end;
-      const counter = setInterval(() => {
-        setCount(Math.ceil(end - currentNumber));
+  useEffect(() => {
+    let currentNumber = end;
+    const counter = setInterval(() => {
+      setCount(Math.ceil(end - currentNumber));
 
-        if (currentNumber < 1) {
-          clearInterval(counter);
-        }
-        const step = currentNumber / 30;
-        currentNumber -= step;
-      }, 20);
-    }, [end, start]);
+      if (currentNumber < 1) {
+        clearInterval(counter);
+      }
+      const step = currentNumber / 30;
+      currentNumber -= step;
+    }, 20);
+  }, [end]);
 
-    return count;
-  }
-  const memberCount = `${Counter() || 0}`.padStart(4, '0');
-  Counter();
+  const memberCount = useMemo(() => `${count || 0}`.padStart(4, '0'), [count]);
+
   return (
     <UserCountText>
       <CountBox>{memberCount[0]}</CountBox>
