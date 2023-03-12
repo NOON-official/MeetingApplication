@@ -22,6 +22,7 @@ import backend from '../util/backend';
 import {
   useGetTeamCountQuery,
   useGetTeamMembersCountOneWeekQuery,
+  useGetUserAgreementsQuery,
 } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
 
@@ -33,36 +34,27 @@ function Main() {
   const { data: teamData } = useGetTeamCountQuery();
   const { data: userCountData } = useGetTeamMembersCountOneWeekQuery();
   const [matchingStatus, setMatchingStatus] = useState('');
-  const [agreements, setAgreements] = useState('');
-  const navigate = useNavigate();
+  const { data: agreementsData } = useGetUserAgreementsQuery();
 
-  const getInformation = useCallback(async () => {
-    try {
-      await backend.get('/users/agreements');
-      setAgreements('yes');
-    } catch (e) {
-      setAgreements(null);
-    }
-  }, [agreements]);
+  const navigate = useNavigate();
 
   const getMatchingInfo = useCallback(async () => {
     const matchingstatus = await backend.get('/users/matchings/status');
     setMatchingStatus(matchingstatus.data.matchingStatus);
-  }, [matchingStatus]);
+  }, []);
 
   useEffect(() => {
     if (referralId !== null) {
       sessionStorage.setItem('referralId', referralId);
     }
     getMatchingInfo();
-    getInformation();
-  }, []);
+  }, [getMatchingInfo, referralId]);
 
   const handleStart = useCallback(() => {
     if (!accessToken) {
       navigate('/myinfo');
-    } else if (matchingStatus === null) {
-      if (agreements === null) {
+    } else if (['NOT_RESPONDED', null].includes(matchingStatus)) {
+      if (!agreementsData) {
         navigate('/apply/agree');
       } else {
         navigate(`/apply/${finishedStep + 1}`);
@@ -70,7 +62,7 @@ function Main() {
     } else {
       window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
     }
-  }, [matchingStatus, finishedStep, agreements]);
+  }, [accessToken, matchingStatus, navigate, agreementsData, finishedStep]);
 
   const teamsPerRound = teamData?.['teamsPerRound'];
   const twoman = teamData?.['2vs2']['male'];
