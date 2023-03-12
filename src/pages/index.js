@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import theme from '../style/theme';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
@@ -77,11 +77,6 @@ function Main() {
   const twogirl = teamData?.['2vs2']['female'];
   const threeman = teamData?.['3vs3']['male'];
   const threegirl = teamData?.['3vs3']['female'];
-
-  const memberCount = useMemo(
-    () => `${userCountData?.memberCount || 0}`.padStart(4, '0'),
-    [],
-  );
 
   return (
     <MainLayout>
