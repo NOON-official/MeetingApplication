@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
+import { Button } from 'antd';
 import theme from '../style/theme';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
 import PresentBox from '../asset/img/Present.png';
-import { ReactComponent as FixedButton } from '../asset/svg/FixedButton.svg';
 import { ReactComponent as Main1 } from '../asset/svg/Main1.svg';
 import { ReactComponent as Main2 } from '../asset/svg/Main2.svg';
 import { ReactComponent as Main3 } from '../asset/svg/Main3.svg';
@@ -22,6 +22,7 @@ import backend from '../util/backend';
 import {
   useGetTeamCountQuery,
   useGetTeamMembersCountOneWeekQuery,
+  useGetUserAgreementsQuery,
 } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
 
@@ -33,36 +34,27 @@ function Main() {
   const { data: teamData } = useGetTeamCountQuery();
   const { data: userCountData } = useGetTeamMembersCountOneWeekQuery();
   const [matchingStatus, setMatchingStatus] = useState('');
-  const [agreements, setAgreements] = useState('');
-  const navigate = useNavigate();
+  const { data: agreementsData } = useGetUserAgreementsQuery();
 
-  const getInformation = useCallback(async () => {
-    try {
-      await backend.get('/users/agreements');
-      setAgreements('yes');
-    } catch (e) {
-      setAgreements(null);
-    }
-  }, [agreements]);
+  const navigate = useNavigate();
 
   const getMatchingInfo = useCallback(async () => {
     const matchingstatus = await backend.get('/users/matchings/status');
     setMatchingStatus(matchingstatus.data.matchingStatus);
-  }, [matchingStatus]);
+  }, []);
 
   useEffect(() => {
     if (referralId !== null) {
       sessionStorage.setItem('referralId', referralId);
     }
     getMatchingInfo();
-    getInformation();
-  }, []);
+  }, [getMatchingInfo, referralId]);
 
   const handleStart = useCallback(() => {
     if (!accessToken) {
       navigate('/myinfo');
-    } else if (matchingStatus === null) {
-      if (agreements === null) {
+    } else if (['NOT_RESPONDED', null].includes(matchingStatus)) {
+      if (!agreementsData) {
         navigate('/apply/agree');
       } else {
         navigate(`/apply/${finishedStep + 1}`);
@@ -70,7 +62,7 @@ function Main() {
     } else {
       window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
     }
-  }, [matchingStatus, finishedStep, agreements]);
+  }, [accessToken, matchingStatus, navigate, agreementsData, finishedStep]);
 
   const teamsPerRound = teamData?.['teamsPerRound'];
   const twoman = teamData?.['2vs2']['male'];
@@ -128,7 +120,7 @@ function Main() {
         <Main3 width="90%" />
         <Main4 width="90%" />
         <Main5 width="90%" />
-        <FixButton onClick={handleStart} />
+        <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
       </Section>
       <MainFooter />
       <BottomFooter />
@@ -275,11 +267,16 @@ const Number = styled.p`
   font-size: 15px;
 `;
 
-const FixButton = styled(FixedButton)`
+const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   width: 75%;
   position: sticky;
   bottom: 10vh;
   left: 10px;
+
+  &.ant-btn {
+    height: 56px;
+    background-color: #ffa1a1;
+  }
   &:hover {
     cursor: pointer;
   }
