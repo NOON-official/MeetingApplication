@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
 
 import { Select, Modal, Input } from 'antd';
 import theme from '../style/theme';
@@ -18,6 +18,13 @@ function Teambox({ member, setMember, name }) {
   const [role, setRole] = useState(member.role);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(member).length === 0 && name === '대표자') {
+      setMember({ ...member, role: 1 });
+      setRole(1);
+    }
+  }, []);
 
   const showModal = () => {
     setIsModalOpen(true);
