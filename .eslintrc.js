@@ -13,6 +13,7 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
     'airbnb',
     'plugin:prettier/recommended',
   ],
@@ -21,7 +22,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'unused-imports'],
+  plugins: ['react', 'react-hooks', 'unused-imports'],
   rules: {
     'prettier/prettier': 'warn',
     'react/react-in-jsx-scope': 'off',

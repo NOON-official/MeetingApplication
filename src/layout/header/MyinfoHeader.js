@@ -18,7 +18,7 @@ export default function MyinfoHeader({ title }) {
     } else {
       navigate(-1);
     }
-  });
+  }, [navigate]);
 
   return (
     <Container>
