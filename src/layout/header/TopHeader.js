@@ -24,7 +24,7 @@ export default function TopHeader() {
       searchParams.delete('access');
       setSearchParams(searchParams);
     }
-  }, [searchParams]);
+  }, [dispatch, searchParams, setSearchParams]);
 
   return (
     <Container>
