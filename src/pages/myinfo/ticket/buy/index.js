@@ -345,9 +345,10 @@ export default function TicketBuyPage() {
           title={<AccordionTitle>유의사항</AccordionTitle>}
           content={
             <WarningDescription>
-              <li>환불은 10일 이내 채널톡으로 문의 주시면 가능합니다.</li>
+              <li>환불은 구매 후 10일 이내 채널톡 문의 주시면 가능합니다.</li>
               <li>구매한 이용권은 매칭이 최종 성사되면 자동 차감됩니다.</li>
               <li>상대방이 거절할 경우 이용권은 자동으로 환급됩니다.</li>
+              <li>쿠폰 사용 후 환불 요청 시 쿠폰은 환급되지 않습니다.</li>
             </WarningDescription>
           }
         />
