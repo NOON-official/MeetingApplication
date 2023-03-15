@@ -85,7 +85,7 @@ function Main() {
         />
       </MainBox>
 
-      <Section my="35px">
+      {/* <Section my="35px">
         <TopTitle>신청 현황</TopTitle>
         <MatchingBox>
           <SubTitle>2 : 2 미팅</SubTitle>
@@ -112,7 +112,7 @@ function Main() {
           </TotalBar>
           <Title>조건이 맞는 상대팀이 나타나면 바로 매칭됩니다!</Title>
         </MatchingBox>
-      </Section>
+      </Section> */}
 
       <Section center>
         <Main1 width="90%" />
