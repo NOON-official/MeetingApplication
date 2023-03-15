@@ -37,5 +37,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     ...a11yOff,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'no-alert': 'off',
   },
 };
