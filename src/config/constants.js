@@ -6,7 +6,6 @@ export const API_URL = `${SERVER_URL}/api`;
 export const STORAGE_KEY_ACCESS_TOKEN = 'accessToken';
 export const STORAGE_KEY_REFRESH_TOKEN = 'refresh';
 export const STORAGE_KEY_ORDER_DATA = 'order-data';
-export const STORAGE_KEY_PAYPLE_ORDER_DATA = 'payple-order-data';
 
 export const MEMBER_COUNT_LABELS = {
   2: '2:2',
