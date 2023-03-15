@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import dayjs from 'dayjs';
-// import { loadTossPayments } from '@tosspayments/payment-sdk';
+import { loadTossPayments } from '@tosspayments/payment-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import MenuBox, { MenuItem } from '../../../../components/MenuBox';
 import Section from '../../../../components/Section';
@@ -21,9 +21,8 @@ import {
   useGetMyInfoQuery,
 } from '../../../../features/backendApi';
 import {
-  // CLIENT_URL,
+  CLIENT_URL,
   STORAGE_KEY_ORDER_DATA,
-  STORAGE_KEY_PAYPLE_ORDER_DATA,
 } from '../../../../config/constants';
 import backend from '../../../../util/backend';
 
@@ -31,25 +30,10 @@ export default function TicketBuyPage() {
   const navigate = useNavigate();
   const [selectedProductId, setSelectedProductId] = useState(1);
   const [selectedCouponId, setSelectedCouponId] = useState(null);
-  const [selectedPayMethodId, setSelectedPayMethodId] = useState(1);
   const { data: pageData } = useGetOrdersPageDataQuery();
   const { data: couponPageData } = useGetCouponsPageDataQuery();
   const { data: couponData, refetch } = useGetUserCouponsQuery();
   const { data: userData } = useGetMyInfoQuery();
-  const payMethods = [
-    {
-      id: 1,
-      name: '신용/체크카드',
-      payplePcdPayType: 'card',
-      payplePcdCardVer: '02', // 앱카드 결제
-    },
-    {
-      id: 2,
-      name: '계좌이체',
-      payplePcdPayType: 'transfer',
-      payplePcdCardVer: '01', // 간편 결제
-    },
-  ];
 
   const handleRefetchCouponData = () => {
     refetch();
@@ -103,90 +87,11 @@ export default function TicketBuyPage() {
     setSelectedCouponId(coupon.id);
   });
 
-  // const makePayment = useCallback(async () => {
-  //   const tossPayments = await loadTossPayments(
-  //     process.env.REACT_APP_TOSS_PAYMENT_CLIENT_KEY,
-  //   );
-  //   const orderId = uuidv4();
-  //   const orderData = {
-  //     productId: selectedProductId,
-  //     price,
-  //     discountAmount,
-  //     totalAmount,
-  //     couponId: selectedCouponId,
-  //   };
-  //   // 금액이 0원이면 바로결제
-  //   if (totalAmount === 0) {
-  //     try {
-  //       await backend.post('/orders', orderData);
-  //       window.alert('이용권이 구매되었습니다');
-  //     } catch (e) {
-  //       window.alert('오류가 발생하였습니다');
-  //       console.error(e);
-  //     }
-  //     return;
-  //   }
-
-  //   // 결제할 금액이 있다면
-  //   // 임시 주문정보 세션스토리지에 저장
-  //   sessionStorage.setItem(STORAGE_KEY_ORDER_DATA, JSON.stringify(orderData));
-  //   try {
-  //     await tossPayments.requestPayment('카드', {
-  //       amount: totalAmount,
-  //       orderId,
-  //       orderName: selectedProduct?.name,
-  //       customerName: userData?.nickname,
-  //       successUrl: `${CLIENT_URL}/myinfo/ticket/buy/success`,
-  //       failUrl: `${CLIENT_URL}/myinfo/ticket/buy/fail`,
-  //     });
-  //   } catch (error) {
-  //     if (error.code === 'USER_CANCEL') {
-  //       // 결제 고객이 결제창을 닫았을 때 에러 처리
-  //     } else if (error.code === 'INVALID_CARD_COMPANY') {
-  //       // 유효하지 않은 카드 코드에 대한 에러 처리
-  //       window.alert('유효하지 않은 카드 코드입니다');
-  //     }
-  //   }
-  // });
-
-  // 페이플 결제 요청 결과 콜백 함수
-  const getPaypleResult = (res) => {
-    const {
-      PCD_PAY_RST,
-      PCD_PAY_CODE,
-      PCD_PAY_MSG,
-      PCD_AUTH_KEY,
-      PCD_PAY_REQKEY,
-      PCD_PAYER_ID,
-      PCD_PAY_TOTAL,
-    } = res;
-
-    // 결제 요청 성공 로직
-    if (PCD_PAY_RST === 'success' && PCD_PAY_CODE.includes('0000')) {
-      const paypleOrderData = {
-        authKey: PCD_AUTH_KEY,
-        payReqKey: PCD_PAY_REQKEY,
-        payerId: PCD_PAYER_ID,
-        amount: PCD_PAY_TOTAL,
-      };
-
-      sessionStorage.setItem(
-        STORAGE_KEY_PAYPLE_ORDER_DATA,
-        JSON.stringify(paypleOrderData),
-      );
-
-      // 서버에서 결제요청 재컨펌
-      navigate('/myinfo/ticket/buy/success');
-    }
-    // 결제 실패 로직
-    else {
-      window.alert(PCD_PAY_MSG);
-    }
-  };
-
   const makePayment = useCallback(async () => {
+    const tossPayments = await loadTossPayments(
+      process.env.REACT_APP_TOSS_PAYMENT_CLIENT_KEY,
+    );
     const orderId = uuidv4();
-
     const orderData = {
       productId: selectedProductId,
       price,
@@ -194,7 +99,6 @@ export default function TicketBuyPage() {
       totalAmount,
       couponId: selectedCouponId,
     };
-
     // 금액이 0원이면 바로결제
     if (totalAmount === 0) {
       try {
@@ -210,30 +114,26 @@ export default function TicketBuyPage() {
     // 결제할 금액이 있다면
     // 임시 주문정보 세션스토리지에 저장
     sessionStorage.setItem(STORAGE_KEY_ORDER_DATA, JSON.stringify(orderData));
-
-    // 페이플 파트너 인증 요청
-    const { data } = await backend.get('/orders/payple/auth');
-
-    // 페이플 결제 요청
-    const paypleOrderData = {
-      PCD_PAY_TYPE: payMethods?.find(
-        (payMethod) => payMethod.id === selectedPayMethodId,
-      ).payplePcdPayType,
-      PCD_PAY_WORK: 'CERT',
-      PCD_CARD_VER: payMethods?.find(
-        (payMethod) => payMethod.id === selectedPayMethodId,
-      ).payplePcdCardVer,
-      PCD_PAYER_NAME: userData?.nickname,
-      PCD_PAY_GOODS: selectedProduct?.name, // 필수
-      PCD_PAY_TOTAL: totalAmount, // 필수
-      PCD_AUTH_KEY: data.AuthKey, // 파트너 인증시 받은 AuthKey 값
-      PCD_PAY_OID: orderId,
-      PCD_PAY_URL: data.return_url, // 파트너 인증시 받은 return_url 값
-      callbackFunction: getPaypleResult, // 결제요청 결과 수신 callback 함수
-    };
-
-    // 페이플 결제 요청
-    window.PaypleCpayAuthCheck(paypleOrderData);
+    try {
+      await tossPayments.requestPayment('카드', {
+        amount: totalAmount,
+        orderId,
+        orderName: selectedProduct?.name,
+        customerName: userData?.nickname,
+        successUrl: `${CLIENT_URL}/myinfo/ticket/buy/success`,
+        failUrl: `${CLIENT_URL}/myinfo/ticket/buy/fail`,
+      });
+    } catch (error) {
+      // 결제 고객이 결제창을 닫았을 경우 OR 사용자에 의해 취소된 경우
+      if (
+        error.code === 'USER_CANCEL' ||
+        error.code === 'PAY_PROCESS_CANCELED'
+      ) {
+        // pass
+      } else {
+        window.alert('결제중 오류가 발생하였습니다.');
+      }
+    }
   });
 
   return (
@@ -304,33 +204,6 @@ export default function TicketBuyPage() {
           }
         />
       </Section>
-      {/* {totalAmount !== 0 && (
-        <Section my="20px">
-          <PayMethodContainer>
-            <PayMethodTitleBox>
-              <PayMethodTitle>결제 방법</PayMethodTitle>
-            </PayMethodTitleBox>
-            <PayMethodContentBox>
-              {payMethods?.map((payMethod) => (
-                <MenuItem key={payMethod.id}>
-                  <CheckboxButton
-                    onClick={() => setSelectedPayMethodId(payMethod.id)}
-                  >
-                    <PayMethodTitleBox>
-                      {selectedPayMethodId === payMethod.id ? (
-                        <CheckboxChecked />
-                      ) : (
-                        <Checkbox />
-                      )}
-                      <ProductTitleText>{payMethod.name}</ProductTitleText>
-                    </PayMethodTitleBox>
-                  </CheckboxButton>
-                </MenuItem>
-              ))}
-            </PayMethodContentBox>
-          </PayMethodContainer>
-        </Section>
-      )} */}
       <Section my="20px" center>
         <TotalPriceBox>
           <span>최종 결제 금액</span>
@@ -376,12 +249,6 @@ const ProductTitleText = styled.span`
   color: #777777;
   font-size: 14px;
   margin-left: 18px;
-`;
-
-const ProductDiscountText = styled.span`
-  color: #eb8888;
-  font-size: 10px;
-  margin-left: 14px;
 `;
 
 const ProductPriceBox = styled.div`
