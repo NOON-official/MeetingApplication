@@ -81,7 +81,9 @@ function Apply4Page() {
           (아, 참고로 잘생겼습니다^^)"
         />
       </Text>
-      <Baloon />
+      <SBaloon>
+        <Baloon />
+      </SBaloon>
       <Footer>
         <ProgressBar page={4} />
         <ButtonBox>
@@ -161,4 +163,10 @@ const ButtonBox = styled.div`
   justify-content: center;
   justify-content: space-between;
   margin-top: 5%;
+`;
+
+const SBaloon = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
 `;
