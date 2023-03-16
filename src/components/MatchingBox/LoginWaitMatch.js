@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'antd';
 import backend from '../../util/backend';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
+import { ReactComponent as ProcessBar2 } from '../../asset/svg/ProcessBar2.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 import { ReactComponent as MatchingText3 } from '../../asset/svg/MatchingText3.svg';
@@ -80,62 +81,75 @@ export default function LoginWaitMatch({ teamId }) {
           </SButton>
         </Container>
       </Modal>
-      <Top>
-        <LeftTop>
-          매칭결과
-          <SCircleArrow
+      <Content>
+        <ProcessBar2 />
+        <Top>
+          <LeftTop>
+            매칭결과
+            <SCircleArrow
+              onClick={() => {
+                window.location.reload();
+              }}
+            />
+          </LeftTop>
+          <RightTop
             onClick={() => {
-              window.location.reload();
+              navigate('/matching/myteam');
             }}
-          />
-        </LeftTop>
-        <RightTop
-          onClick={() => {
-            navigate('/matching/myteam');
-          }}
-        >
-          우리 팀 프로필 조회하기
-        </RightTop>
-      </Top>
-      <WhiteBox>
-        <SBigO />
-        <SMatchingText3 />
-        <MeetingButton href="https://furry-bank-197.notion.site/A-to-Z-0ac3369582fa4f43bbfd568d267433e7">
-          미팅 팁 보러가기
-        </MeetingButton>
-      </WhiteBox>
-      <WhiteBox2>
-        <MenuItem
-          onClick={() => {
-            setOpenModal1(true);
-          }}
-        >
-          프로필 수정하기 <RightArrow />
-        </MenuItem>
-        <Line />
-        <MenuItem
-          onClick={() => {
-            navigate('/myinfo/ticket');
-          }}
-        >
-          이용권 구매하러 가기 <RightArrow />
-        </MenuItem>
-        <Line />
-        <MenuItem
-          onClick={() => {
-            setOpenModal2(true);
-          }}
-        >
-          매칭 중단하기 <RightArrow />
-        </MenuItem>
-      </WhiteBox2>
+          >
+            우리 팀 프로필 조회하기
+          </RightTop>
+        </Top>
+        <WhiteBox>
+          <SBigO />
+          <SMatchingText3 />
+          <MeetingButton href="https://furry-bank-197.notion.site/A-to-Z-0ac3369582fa4f43bbfd568d267433e7">
+            미팅 팁 보러가기
+          </MeetingButton>
+        </WhiteBox>
+        <WhiteBox2>
+          <MenuItem
+            onClick={() => {
+              setOpenModal1(true);
+            }}
+          >
+            프로필 수정하기 <RightArrow />
+          </MenuItem>
+          <Line />
+          <MenuItem
+            onClick={() => {
+              navigate('/myinfo/ticket');
+            }}
+          >
+            이용권 구매하러 가기 <RightArrow />
+          </MenuItem>
+          <Line />
+          <MenuItem
+            onClick={() => {
+              setOpenModal2(true);
+            }}
+          >
+            매칭 중단하기 <RightArrow />
+          </MenuItem>
+        </WhiteBox2>
+      </Content>
     </>
   );
 }
+
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+`;
+
 const Top = styled.div`
+  width: 334px;
   display: flex;
   justify-content: space-between;
-  margin: 30px;
+  margin-top: 20px;
   color: #777777;
 `;
 
@@ -164,11 +178,12 @@ const RightTop = styled.div`
 `;
 
 const WhiteBox = styled.div`
+  width: 334px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
-  padding: 40px 22px 70px 22px;
+  margin-top: 10px;
+  padding: 25px 0;
   background: #ffffff;
   border-radius: 10px;
 `;
@@ -178,7 +193,7 @@ const SBigO = styled(BigO)`
 `;
 
 const SMatchingText3 = styled(MatchingText3)`
-  margin-top: 20%;
+  margin-top: 5%;
 `;
 
 const MeetingButton = styled.a`
@@ -188,7 +203,7 @@ const MeetingButton = styled.a`
   font-size: 24px;
   text-align: center;
   border: none;
-  margin-top: 20%;
+  margin-top: 7%;
   width: 160px;
   height: 50px;
   line-height: 50px;
@@ -197,6 +212,7 @@ const MeetingButton = styled.a`
 `;
 
 const WhiteBox2 = styled.div`
+  width: 334px;
   display: flex;
   flex-direction: column;
   align-items: center;
