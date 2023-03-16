@@ -152,13 +152,6 @@ export default function TicketBuyPage() {
                   )}
                   <ProductTitleText>{product.name}</ProductTitleText>
                 </ProductTitleBox>
-                {product.id === 2 ? <DisCount>10% 할인</DisCount> : null}
-                {product.id === 3 ? (
-                  <DisCount>&nbsp;&nbsp;&nbsp;&nbsp;25% 할인</DisCount>
-                ) : null}
-                {product.id === 4 ? (
-                  <DisCount>&nbsp;&nbsp;40% 할인</DisCount>
-                ) : null}
                 <ProductPriceBox>
                   {product.originalPrice !== product.price && (
                     <span className="discount">
@@ -318,12 +311,6 @@ const NoCouponText = styled.span`
   font-size: 14px;
   color: #777777;
   padding: 12px 0;
-`;
-
-const DisCount = styled.span`
-  margin-right: 80px;
-  font-size: 10px;
-  color: #eb8888;
 `;
 
 const SFreindHalf = styled(FreindHalf)`
