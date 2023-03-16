@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
+import { ReactComponent as ProcessBar3 } from '../../asset/svg/ProcessBar3.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 import { ReactComponent as MatchingText10 } from '../../asset/svg/MatchingText10.svg';
 
@@ -10,7 +11,8 @@ export default function LoginWaitOtherTeam() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <Content>
+      <ProcessBar3 />
       <Top>
         <LeftTop>
           매칭결과
@@ -32,13 +34,23 @@ export default function LoginWaitOtherTeam() {
         <SBigO />
         <SMatchingText10 />
       </WhiteBox>
-    </>
+    </Content>
   );
 }
+
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+`;
+
 const Top = styled.div`
+  width: 334px;
   display: flex;
   justify-content: space-between;
-  margin: 30px;
+  margin-top: 20px;
   color: #777777;
 `;
 
@@ -67,11 +79,12 @@ const RightTop = styled.div`
 `;
 
 const WhiteBox = styled.div`
+  width: 334px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
-  padding: 40px 22px 70px 22px;
+  margin-top: 10px;
+  padding: 50px 0;
   background: #ffffff;
   border-radius: 10px;
 `;
@@ -81,5 +94,5 @@ const SBigO = styled(BigO)`
 `;
 
 const SMatchingText10 = styled(MatchingText10)`
-  margin-top: 20%;
+  margin-top: 10%;
 `;

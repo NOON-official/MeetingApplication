@@ -4,6 +4,8 @@ import { useCallback } from 'react';
 
 import { Button } from 'antd';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
+import { ReactComponent as Minute } from '../../asset/svg/5Minute.svg';
+import { ReactComponent as ProcessBar1 } from '../../asset/svg/ProcessBar1.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as MatchingText2 } from '../../asset/svg/MatchingText2.svg';
 import backend from '../../util/backend';
@@ -23,10 +25,12 @@ export default function LoginNoStart() {
   }, []);
 
   return (
-    <>
+    <Content>
+      <ProcessBar1 />
       <WhiteBox>
         <SBigO />
         <SMatchingText2 />
+        <SMinute />
         <MeetingButton onClick={handleStart}>미팅할래요</MeetingButton>
       </WhiteBox>
       <WhiteBox2
@@ -36,16 +40,26 @@ export default function LoginNoStart() {
       >
         이용권 구매하러 가기 <RightArrow />
       </WhiteBox2>
-    </>
+    </Content>
   );
 }
 
-const WhiteBox = styled.div`
+const Content = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
-  padding: 40px 22px 70px 22px;
+  margin-top: 30px;
+`;
+
+const WhiteBox = styled.div`
+  position: relative;
+  width: 334px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  padding: 40px 0;
   background: #ffffff;
   border-radius: 10px;
 `;
@@ -55,7 +69,12 @@ const SBigO = styled(BigO)`
 `;
 
 const SMatchingText2 = styled(MatchingText2)`
-  margin-top: 20%;
+  margin-top: 15%;
+`;
+
+const SMinute = styled(Minute)`
+  position: absolute;
+  top: 75%;
 `;
 
 const MeetingButton = styled(Button)`
@@ -73,10 +92,11 @@ const MeetingButton = styled(Button)`
 `;
 
 const WhiteBox2 = styled.div`
+  width: 264px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px;
+  margin: 20px 0;
   padding: 20px 35px;
   background: #ffffff;
   border-radius: 10px;

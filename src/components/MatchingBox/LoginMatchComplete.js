@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Button, Modal } from 'antd';
 import { DateObject } from 'react-multi-date-picker';
 import SelectCalendarModal from '../Modal/SelectCalendarModal';
+import { ReactComponent as ProcessBar4 } from '../../asset/svg/ProcessBar4.svg';
 import { ReactComponent as Meetinge } from '../../asset/svg/RainBowMeetinge.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
@@ -75,48 +76,61 @@ export default function LoginMatchComplete() {
           </SButton2>
         </Container>
       </Modal>
-      <Top>
-        <LeftTop>
-          매칭결과
-          <SCircleArrow
+      <Content>
+        <ProcessBar4 />
+        <Top>
+          <LeftTop>
+            매칭결과
+            <SCircleArrow
+              onClick={() => {
+                window.location.reload();
+              }}
+            />
+          </LeftTop>
+          <RightTop
             onClick={() => {
-              window.location.reload();
+              navigate('/matching/myteam');
             }}
-          />
-        </LeftTop>
-        <RightTop
+          >
+            우리 팀 프로필 조회하기
+          </RightTop>
+        </Top>
+        <WhiteBox>
+          <Meetinge />
+          <SMatchingText7 />
+          <MeetingButton
+            onClick={() => {
+              navigate('/matching/otherteam');
+            }}
+          >
+            상대팀 프로필 조회하기
+          </MeetingButton>
+        </WhiteBox>
+        <WhiteBox2
           onClick={() => {
-            navigate('/matching/myteam');
+            setOpenModal(true);
           }}
         >
-          우리 팀 프로필 조회하기
-        </RightTop>
-      </Top>
-      <WhiteBox>
-        <Meetinge />
-        <SMatchingText7 />
-        <MeetingButton
-          onClick={() => {
-            navigate('/matching/otherteam');
-          }}
-        >
-          상대팀 프로필 조회하기
-        </MeetingButton>
-      </WhiteBox>
-      <WhiteBox2
-        onClick={() => {
-          setOpenModal(true);
-        }}
-      >
-        한번 더 미팅하러 가기 <RightArrow />
-      </WhiteBox2>
+          한번 더 미팅하러 가기 <RightArrow />
+        </WhiteBox2>
+      </Content>
     </>
   );
 }
+
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+`;
+
 const Top = styled.div`
+  width: 334px;
   display: flex;
   justify-content: space-between;
-  margin: 30px;
+  margin-top: 20px;
   color: #777777;
 `;
 
@@ -145,16 +159,18 @@ const RightTop = styled.div`
 `;
 
 const WhiteBox = styled.div`
+  width: 334px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
-  padding: 40px 22px 70px 22px;
+  margin-top: 10px;
+  padding: 25px 0;
   background: #ffffff;
   border-radius: 10px;
 `;
 
 const WhiteBox2 = styled.div`
+  width: 264px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -171,7 +187,7 @@ const WhiteBox2 = styled.div`
 `;
 
 const SMatchingText7 = styled(MatchingText7)`
-  margin-top: 20%;
+  margin-top: 5%;
 `;
 
 const MeetingButton = styled(Button)`
@@ -181,7 +197,7 @@ const MeetingButton = styled(Button)`
   font-size: 23px;
   text-align: center;
   border: none;
-  margin-top: 20%;
+  margin-top: 7%;
   width: 160px;
   height: 50px;
   background: #eb8888;
