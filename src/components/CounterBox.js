@@ -29,22 +29,20 @@ const CounterBox = ({ end }) => {
     </UserCountText>
   );
 };
-const UserCountText = styled.div`
-  position: absolute;
-  top: 7.5%;
-  right: 25%;
+const UserCountText = styled.span`
   display: flex;
 `;
 
 const CountBox = styled.span`
   position: relative;
+  color: #000000;
   width: 8px;
   display: inline-block;
   border: 0.3px solid rgba(197, 200, 206, 0.5);
-  border-radius: 20px;
+  border-radius: 3px;
   padding: 0.5px;
-  margin-left: 0.5px;
+  margin-left: 2px;
   font-size: 13px;
-  background-color: white;
+  background: rgba(223, 223, 223, 0.3);
 `;
 export default CounterBox;
