@@ -6,6 +6,7 @@ import { Button, Modal } from 'antd';
 import { DateObject } from 'react-multi-date-picker';
 import SelectCalendarModal from '../Modal/SelectCalendarModal';
 import backend from '../../util/backend';
+import { ReactComponent as ProcessBar1 } from '../../asset/svg/ProcessBar1.svg';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
@@ -112,58 +113,71 @@ export default function LoginOtherTeamRefused({ teamId }) {
           </SButton>
         </Container>
       </Modal>
-      <Top>
-        <LeftTop>
-          매칭결과
-          <SCircleArrow
+      <Content>
+        <ProcessBar1 />
+        <Top>
+          <LeftTop>
+            매칭결과
+            <SCircleArrow
+              onClick={() => {
+                window.location.reload();
+              }}
+            />
+          </LeftTop>
+          <RightTop
             onClick={() => {
-              window.location.reload();
+              navigate('/matching/myteam');
             }}
-          />
-        </LeftTop>
-        <RightTop
-          onClick={() => {
-            navigate('/matching/myteam');
-          }}
-        >
-          우리 팀 프로필 조회하기
-        </RightTop>
-      </Top>
-      <WhiteBox>
-        <SSadFace />
-        <SMatchingText9 />
-        <MeetingButton
-          onClick={() => {
-            setOpenModal1(true);
-          }}
-        >
-          재매칭하기
-        </MeetingButton>
-      </WhiteBox>
-      <WhiteBox2>
-        <MenuItem
-          onClick={() => {
-            setOpenModal2(true);
-          }}
-        >
-          매칭 중단하기 <RightArrow />
-        </MenuItem>
-        <Line />
-        <MenuItem
-          onClick={() => {
-            navigate('/myinfo/ticket');
-          }}
-        >
-          이용권 구매하러 가기 <RightArrow />
-        </MenuItem>
-      </WhiteBox2>
+          >
+            우리 팀 프로필 조회하기
+          </RightTop>
+        </Top>
+        <WhiteBox>
+          <SSadFace />
+          <SMatchingText9 />
+          <MeetingButton
+            onClick={() => {
+              setOpenModal1(true);
+            }}
+          >
+            재매칭하기
+          </MeetingButton>
+        </WhiteBox>
+        <WhiteBox2>
+          <MenuItem
+            onClick={() => {
+              setOpenModal2(true);
+            }}
+          >
+            매칭 중단하기 <RightArrow />
+          </MenuItem>
+          <Line />
+          <MenuItem
+            onClick={() => {
+              navigate('/myinfo/ticket');
+            }}
+          >
+            이용권 구매하러 가기 <RightArrow />
+          </MenuItem>
+        </WhiteBox2>
+      </Content>
     </>
   );
 }
+
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+`;
+
 const Top = styled.div`
+  width: 334px;
   display: flex;
   justify-content: space-between;
-  margin: 30px;
+  margin-top: 20px;
   color: #777777;
 `;
 
@@ -192,11 +206,12 @@ const RightTop = styled.div`
 `;
 
 const WhiteBox = styled.div`
+  width: 334px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
-  padding: 40px 22px 70px 22px;
+  margin-top: 10px;
+  padding: 25px 0;
   background: #ffffff;
   border-radius: 10px;
 `;
@@ -217,7 +232,7 @@ const MeetingButton = styled(Button)`
   font-size: 24px;
   text-align: center;
   border: none;
-  margin-top: 15%;
+  margin-top: 10%;
   width: 160px;
   height: 50px;
   background: #eb8888;
@@ -225,6 +240,7 @@ const MeetingButton = styled(Button)`
 `;
 
 const WhiteBox2 = styled.div`
+  width: 334px;
   display: flex;
   flex-direction: column;
   align-items: center;
