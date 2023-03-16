@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from 'antd';
 import { ReactComponent as Meetinge } from '../../asset/svg/RainBowMeetinge.svg';
+import { ReactComponent as ProcessBar3 } from '../../asset/svg/ProcessBar3.svg';
 import { ReactComponent as CircleArrow } from '../../asset/svg/CircleArrow.svg';
 import { ReactComponent as MatchingText4 } from '../../asset/svg/MatchingText4.svg';
 // 로그인하고 매칭증에 상대방이랑 매칭됬을 때 매칭조회페이지
@@ -11,7 +12,8 @@ export default function LoginMatchOk() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <Content>
+      <ProcessBar3 />
       <Top>
         <LeftTop>
           매칭결과
@@ -40,13 +42,23 @@ export default function LoginMatchOk() {
           결과 조회하기
         </MeetingButton>
       </WhiteBox>
-    </>
+    </Content>
   );
 }
+
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+`;
+
 const Top = styled.div`
+  width: 334px;
   display: flex;
   justify-content: space-between;
-  margin: 30px;
+  margin-top: 20px;
   color: #777777;
 `;
 
@@ -75,17 +87,18 @@ const RightTop = styled.div`
 `;
 
 const WhiteBox = styled.div`
+  width: 334px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
-  padding: 40px 22px 70px 22px;
+  margin-top: 10px;
+  padding: 50px 0;
   background: #ffffff;
   border-radius: 10px;
 `;
 
 const SMatchingText4 = styled(MatchingText4)`
-  margin-top: 20%;
+  margin-top: 5%;
 `;
 
 const MeetingButton = styled(Button)`
@@ -95,7 +108,7 @@ const MeetingButton = styled(Button)`
   font-size: 24px;
   text-align: center;
   border: none;
-  margin-top: 20%;
+  margin-top: 7%;
   width: 160px;
   height: 50px;
   background: #eb8888;

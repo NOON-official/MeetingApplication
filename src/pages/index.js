@@ -9,11 +9,12 @@ import theme from '../style/theme';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
 import PresentBox from '../asset/img/Present.png';
-import { ReactComponent as Main1 } from '../asset/svg/Main1.svg';
-import { ReactComponent as Main2 } from '../asset/svg/Main2.svg';
-import { ReactComponent as Main3 } from '../asset/svg/Main3.svg';
-import { ReactComponent as Main4 } from '../asset/svg/Main4.svg';
-import { ReactComponent as Main5 } from '../asset/svg/Main5.svg';
+import Main1 from '../asset/img/Main1.png';
+import Main2 from '../asset/img/Main2.png';
+import Main3 from '../asset/img/Main3.png';
+import Main4 from '../asset/img/Main4.png';
+import Main5 from '../asset/img/Main5.png';
+import Main6 from '../asset/img/Main6.png';
 import MainLayout from '../layout/MainLayout';
 import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
@@ -72,20 +73,26 @@ function Main() {
 
   return (
     <MainLayout>
-      <MainBox>
+      <Section>
         <ImgBox>
-          <CounterBox end={userCountData?.memberCount || 0} />
           <MainImg />
+          <SImg
+            src={PresentBox}
+            onClick={() => {
+              navigate('/myinfo');
+            }}
+          />
         </ImgBox>
-        <SImg
-          src={PresentBox}
-          onClick={() => {
-            navigate('/myinfo');
-          }}
-        />
-      </MainBox>
-
-      <Section my="35px">
+        <CountTitle>
+          <MainTitle>
+            지금까지 &nbsp;
+            <CounterBox end={userCountData?.memberCount || 0} /> 명이
+            미팅학개론과 함께했어요
+          </MainTitle>
+        </CountTitle>
+      </Section>
+      {/*
+      <Section my="50px">
         <TopTitle>신청 현황</TopTitle>
         <MatchingBox>
           <SubTitle>2 : 2 미팅</SubTitle>
@@ -113,13 +120,14 @@ function Main() {
           <Title>조건이 맞는 상대팀이 나타나면 바로 매칭됩니다!</Title>
         </MatchingBox>
       </Section>
-
-      <Section center>
-        <Main1 width="90%" />
-        <Main2 width="90%" />
-        <Main3 width="90%" />
-        <Main4 width="90%" />
-        <Main5 width="90%" />
+      */}
+      <Section my="50px" center>
+        <SImg2 src={Main1} />
+        <SImg2 src={Main2} />
+        <SImg2 src={Main3} />
+        <SImg2 src={Main4} />
+        <SImg2 src={Main5} />
+        <SImg2 src={Main6} />
         <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
       </Section>
       <MainFooter />
@@ -131,8 +139,24 @@ function Main() {
 
 export default Main;
 
-const MainBox = styled.section`
-  position: relative;
+const CountTitle = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const MainTitle = styled.div`
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #635e5e;
+  font-weight: 400;
+  font-size: 14px;
+  height: 33px;
+  width: 290px;
+  background: rgba(255, 191, 191, 0.15);
+  border-radius: 10px;
 `;
 
 const TopTitle = styled.div`
@@ -143,8 +167,8 @@ const TopTitle = styled.div`
 `;
 
 const ImgBox = styled.div`
-  margin-top: 35px;
-  margin-right: 30px;
+  margin-top: 50px;
+  margin-right: 25px;
   position: relative;
   max-width: 100%;
   display: flex;
@@ -158,28 +182,15 @@ const ImgBox = styled.div`
 
 const SImg = styled.img`
   position: absolute;
-  top: 3%;
-  right: 10%;
+  bottom: -15%;
+  right: 5%;
   &:hover {
     cursor: pointer;
   }
 `;
 
-const UserCountText = styled.div`
-  position: absolute;
-  top: 7%;
-  right: 25%;
-`;
-
-const CountBox = styled.span`
-  position: relative;
-  overflow: hidden;
-  border: 0.3px solid rgba(197, 200, 206, 0.5);
-  border-radius: 20px;
-  padding: 0.5px;
-  margin-left: 0.5px;
-  font-size: 13px;
-  background-color: white;
+const SImg2 = styled.img`
+  width: 100%;
 `;
 
 const MatchingBox = styled.div`
@@ -272,7 +283,7 @@ const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   position: sticky;
   bottom: 10vh;
   left: 10px;
-
+  margin-top: 15px;
   &.ant-btn {
     height: 56px;
     background-color: #ffa1a1;
