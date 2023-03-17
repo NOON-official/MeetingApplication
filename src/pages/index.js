@@ -22,7 +22,7 @@ import Section from '../components/Section';
 import backend from '../util/backend';
 import {
   useGetTeamCountQuery,
-  useGetTeamMembersCountOneWeekQuery,
+  useGetTeamMembersCountTotalQuery,
   useGetUserAgreementsQuery,
 } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
@@ -33,7 +33,7 @@ function Main() {
   const { finishedStep } = useSelector((store) => store.apply);
   const { accessToken } = useSelector((state) => state.user);
   const { data: teamData } = useGetTeamCountQuery();
-  const { data: userCountData } = useGetTeamMembersCountOneWeekQuery();
+  const { data: userCountData } = useGetTeamMembersCountTotalQuery();
   const [matchingStatus, setMatchingStatus] = useState('');
   const { data: agreementsData } = useGetUserAgreementsQuery();
 
