@@ -54,6 +54,7 @@ function Apply4Page() {
   return (
     <ApplyLayout>
       <NotEnoughIntroModal open={openModal} setModal={setModal} />
+      <ProgressBar page={4} />
       <Title>
         <Maintitle>
           우리팀을 소개하는 <Pink>마지막 한 줄 어필</Pink>
@@ -85,7 +86,6 @@ function Apply4Page() {
         <Baloon />
       </SBaloon>
       <Footer>
-        <ProgressBar page={4} />
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
