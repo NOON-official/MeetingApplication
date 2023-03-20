@@ -72,6 +72,7 @@ export default function Apply1Page() {
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
+      <ProgressBar page={1} />
       <Title>
         <Maintitle>
           <Pink>기본 정보</Pink>를 알려주세요
@@ -148,7 +149,6 @@ export default function Apply1Page() {
       </CollegeBox>
       <SBottom />
       <Footer>
-        <ProgressBar page={1} />
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>

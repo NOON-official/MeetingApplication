@@ -103,6 +103,7 @@ function Apply3Page() {
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
+      <ProgressBar page={3} />
       <Title>
         <Maintitle>
           <Pink>우리팀의 구성원</Pink>을 소개해 주세요!
@@ -111,7 +112,6 @@ function Apply3Page() {
       </Title>
       {teamboxcount}
       <Footer>
-        <ProgressBar page={3} />
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
