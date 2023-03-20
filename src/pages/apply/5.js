@@ -100,6 +100,7 @@ function Apply5Page() {
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
+      <ProgressBar page={5} />
       <Title>
         <Maintitle>
           <Pink>어떤 상대팀</Pink>을 원하시나요?
@@ -193,7 +194,6 @@ function Apply5Page() {
       />
       <SBottom />
       <Footer>
-        <ProgressBar page={5} />
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>

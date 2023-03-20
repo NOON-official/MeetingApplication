@@ -93,6 +93,7 @@ export default function Apply2() {
       <NotEnoughDateModal open={openModal1} setModal={setModal1} />
       <NotEnoughPlaceModal open={openModal2} setModal={setModal2} />
       <IsPageCompleteModal open={openModal3} setModal={setModal3} />
+      <ProgressBar page={2} />
       <Title>
         <Maintitle>
           <Pink>미팅 선호 날짜</Pink>를 알려주세요
@@ -148,7 +149,6 @@ export default function Apply2() {
       </ChooseBox>
       <SEarth />
       <Footer>
-        <ProgressBar page={2} />
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
