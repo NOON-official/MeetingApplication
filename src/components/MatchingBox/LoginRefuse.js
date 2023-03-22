@@ -44,7 +44,7 @@ export default function LoginRefuse({ teamId }) {
   );
 
   const handleSubmit = useCallback(async () => {
-    await backend.post(
+    await backend.patch(
       `/matchings/${matchingId}/teams/${teamId}/refuse-reason`,
       {
         reason1: refuseReason.includes(1),
