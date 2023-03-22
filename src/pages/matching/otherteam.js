@@ -10,8 +10,11 @@ import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import backend from '../../util/backend';
+import { useGetUserTicketCountQuery } from '../../features/backendApi';
 
 function MatchingOtherTeam() {
+  const { data: ticketData, refetch: refetchTicketData } =
+    useGetUserTicketCountQuery();
   const [myteamId, setMyteamId] = useState('');
   const [matchingId, setMatchingId] = useState('');
   const [otherTeamData, setOtherTeamData] = useState({});
@@ -39,6 +42,10 @@ function MatchingOtherTeam() {
     getMatchingId();
   }, []);
 
+  useEffect(() => {
+    refetchTicketData();
+  }, [refetchTicketData]);
+
   const navigate = useNavigate();
 
   const [openModal1, setOpenModal1] = useState(false);
@@ -60,7 +67,6 @@ function MatchingOtherTeam() {
   const handleOkay = useCallback(async () => {
     try {
       await backend.put(`/matchings/${matchingId}/teams/${myteamId}/accept`);
-      setOpenModal3(true);
     } catch {
       setOpenModal1(true);
     }
@@ -68,6 +74,14 @@ function MatchingOtherTeam() {
 
   const handleRefuse = useCallback(async () => {
     await backend.put(`/matchings/${matchingId}/teams/${myteamId}/refuse`);
+    await backend.post(
+      `/matchings/${matchingId}/teams/${myteamId}/refuse-reason`,
+      {
+        reason1: false,
+        reason2: false,
+        reason3: false,
+      },
+    );
   });
 
   const RoleContent = {
@@ -100,8 +114,6 @@ function MatchingOtherTeam() {
     4: '(소주 두 병)',
     5: '(술고래)',
   };
-
-  console.log(otherTeamData);
 
   if (
     otherTeamData !== undefined &&
@@ -162,9 +174,10 @@ function MatchingOtherTeam() {
           <ModalContainer>
             <ModalText1>수락하시면 이용권 한장이 사용돼요.</ModalText1>
             <ModalText1>만약 상대팀이 거절할경우</ModalText1>
-            <ModalText1>이용권이 봔환되요.</ModalText1>
+            <ModalText1>이용권이 반환되요.</ModalText1>
             <ModalButton
               onClick={() => {
+                handleOkay();
                 handleCancel3();
                 navigate('/matching');
               }}
@@ -372,7 +385,11 @@ function MatchingOtherTeam() {
               <ButtonBox>
                 <ApplyButton
                   onClick={() => {
-                    handleOkay();
+                    if (ticketData?.ticketCount > 0) {
+                      setOpenModal3(true);
+                    } else {
+                      setOpenModal1(true);
+                    }
                   }}
                 >
                   수락하기
