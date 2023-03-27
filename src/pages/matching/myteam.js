@@ -121,7 +121,7 @@ function MatchingMyTeam() {
                   {myTeamData?.universities?.map((a) => {
                     return (
                       <div key={Universities[a - 1].id}>
-                        {Universities[a - 1].name} /
+                        {Universities[a - 1]?.name} /
                       </div>
                     );
                   })}
@@ -163,22 +163,22 @@ function MatchingMyTeam() {
                 {myTeamData?.memberCount === 2 ? (
                   <MemberProfile>
                     <div>
-                      {Mbti[parseInt(myTeamData?.members[0]?.mbti) - 1].name}
+                      {Mbti[parseInt(myTeamData?.members[0]?.mbti) - 1]?.name}
                     </div>
                     <div>
-                      {Mbti[parseInt(myTeamData?.members[1]?.mbti) - 1].name}
+                      {Mbti[parseInt(myTeamData?.members[1]?.mbti) - 1]?.name}
                     </div>
                   </MemberProfile>
                 ) : (
                   <MemberProfile2>
                     <div>
-                      {Mbti[parseInt(myTeamData?.members[0]?.mbti) - 1].name}
+                      {Mbti[parseInt(myTeamData?.members[0]?.mbti) - 1]?.name}
                     </div>
                     <div>
-                      {Mbti[parseInt(myTeamData?.members[1]?.mbti) - 1].name}
+                      {Mbti[parseInt(myTeamData?.members[1]?.mbti) - 1]?.name}
                     </div>
                     <div>
-                      {Mbti[parseInt(myTeamData?.members[2]?.mbti) - 1].name}
+                      {Mbti[parseInt(myTeamData?.members[2]?.mbti) - 1]?.name}
                     </div>
                   </MemberProfile2>
                 )}
