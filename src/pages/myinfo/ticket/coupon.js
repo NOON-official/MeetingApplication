@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
 import dayjs from 'dayjs';
-import { useEffect, useCallback, useMemo } from 'react';
+import { useEffect, useCallback, useMemo, useState } from 'react';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import Section, { SectionTitle } from '../../../components/Section';
 import CouponItem from '../../../components/CouponItem';
@@ -14,6 +14,7 @@ import backend from '../../../util/backend';
 export default function TicketCouponPage() {
   const { data: couponPageData } = useGetCouponsPageDataQuery();
   const { data: couponData, refetch } = useGetUserCouponsQuery();
+  const [couponCode, setCouponCode] = useState();
 
   const handleRefetchCouponData = () => {
     refetch();
@@ -23,15 +24,26 @@ export default function TicketCouponPage() {
     handleRefetchCouponData();
   }, [couponData]);
 
+  const handleCouponCode = useCallback(
+    (e) => {
+      setCouponCode(e.target.value);
+    },
+    [couponCode],
+  );
+
   const registerCoupon = useCallback(async () => {
-    try {
-      const { data } = await backend.put('/coupons/register');
-      // TODO : 쿠폰 발급이 완성된 후 테스트 해볼것
-      console.log(data);
-      alert('쿠폰이 등록되었습니다');
-    } catch (e) {
-      console.error(e);
-      alert('올바르지 않은 쿠폰번호 입니다');
+    if (couponCode) {
+      try {
+        await backend.put('/coupons/register', { code: couponCode });
+        alert('쿠폰이 등록되었습니다');
+        handleRefetchCouponData();
+      } catch (e) {
+        if (e.response.data.message === 'already issued coupon') {
+          alert('이미 등록된 쿠폰입니다');
+        } else {
+          alert('올바르지 않은 쿠폰번호 입니다');
+        }
+      }
     }
   });
 
@@ -51,7 +63,11 @@ export default function TicketCouponPage() {
         <SectionTitle>쿠폰 등록</SectionTitle>
         <CouponCodeBox>
           <CouponCodeTitle>쿠폰 코드</CouponCodeTitle>
-          <CouponCodeInput placeholder="ABCD1234" />
+          <CouponCodeInput
+            value={couponCode}
+            onChange={handleCouponCode}
+            placeholder="ABCD1234"
+          />
           <RegisterButton onClick={registerCoupon}>등록하기</RegisterButton>
         </CouponCodeBox>
       </Section>
