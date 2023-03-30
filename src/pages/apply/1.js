@@ -38,6 +38,15 @@ export default function Apply1Page() {
     }
   }, []);
 
+  const countMember = useCallback(() => {
+    if (meetingMember === 3) {
+      setmeetingMember(null);
+    }
+    if (meetingMember === null) {
+      setmeetingMember(3);
+    }
+  }, [meetingMember]);
+
   const SearchedUniv = Universities.filter(
     (c) => c.name.indexOf(searchKeyWord) > -1,
   );
@@ -55,7 +64,7 @@ export default function Apply1Page() {
   });
 
   const handleSubmit = useCallback(() => {
-    if (selectedUniversities?.length < 1) {
+    if (selectedUniversities?.length < 1 || meetingMember === null) {
       setOpenModal(true);
       return;
     }
@@ -87,17 +96,24 @@ export default function Apply1Page() {
           onChange={(result) => (result ? setMan(1) : setMan(2))}
         />
       </ChooseBox>
-      <ChooseBox>
+      <ChooseBox2>
         <ChooseTitle>인원 수</ChooseTitle>
-        <BinaryButton
+        <PeopleCountBox>
+          <ThreePeople isActive={meetingMember === 3} onClick={countMember}>
+            3:3 미팅
+          </ThreePeople>
+          <AlertBox> ℹ️ 3:3 미팅 신청만 가능해요!</AlertBox>
+        </PeopleCountBox>
+        {/* 2:2 미팅선택버튼 */}
+        {/* <BinaryButton
           state={meetingMember === 2}
           condition1="2:2 미팅"
           condition2="3:3 미팅"
           onChange={(result) =>
             result ? setmeetingMember(2) : setmeetingMember(3)
           }
-        />
-      </ChooseBox>
+        /> */}
+      </ChooseBox2>
       <Title>
         <Maintitle>
           <Pink>우리 팀의 학교</Pink>를 알려주세요
@@ -192,6 +208,13 @@ const ChooseBox = styled.div`
   padding-bottom: 10%;
 `;
 
+const ChooseBox2 = styled.div`
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 10%;
+`;
+
 const ChooseTitle = styled.span`
   padding-bottom: 5%;
   color: #777777;
@@ -218,6 +241,36 @@ const ButtonBox = styled.div`
   justify-content: center;
   justify-content: space-between;
   margin-top: 5%;
+`;
+
+const PeopleCountBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+const ThreePeople = styled.button`
+  margin-right: 5px;
+  border-radius: 14px;
+  height: 40px;
+  width: 162px;
+  background: ${(props) => (props.isActive ? '#EB8888' : 'F6EEEE')};
+  color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
+  border-color: transparent;
+  font-family: 'Nanum JungHagSaeng';
+  font-size: 18px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const AlertBox = styled.div`
+  font-family: 'Nanum JungHagSaeng';
+  width: 50%;
+  font-weight: 400;
+  font-size: 20px;
+  color: #969696;
 `;
 
 const CollegeBox = styled.div`
