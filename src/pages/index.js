@@ -58,7 +58,7 @@ function Main() {
       if (!agreementsData) {
         navigate('/apply/agree');
       } else {
-        navigate(`/apply/${finishedStep + 1}`);
+        navigate(`/apply/1`);
       }
     } else {
       window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
