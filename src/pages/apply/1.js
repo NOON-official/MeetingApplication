@@ -38,6 +38,7 @@ export default function Apply1Page() {
     }
     if (memberCount === 2) {
       localStorage.removeItem('apply-data');
+      window.location.reload();
     }
   }, []);
 
