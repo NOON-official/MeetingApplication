@@ -12,11 +12,13 @@ export default function KakakoLoginSuccessPage() {
   const navigate = useNavigate();
 
   const checkAgreements = useCallback(async () => {
-    const { data } = await backend.get('/users/agreements');
+    try {
+      const { data } = await backend.get('/users/agreements');
 
-    if (data) {
-      navigate('/');
-    } else {
+      if (data) {
+        navigate('/');
+      }
+    } catch (e) {
       navigate('/apply/agree');
     }
   }, [navigate]);
