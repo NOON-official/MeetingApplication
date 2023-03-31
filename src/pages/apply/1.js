@@ -36,6 +36,9 @@ export default function Apply1Page() {
       window.alert('잘못된 접근입니다');
       navigate('/');
     }
+    if (memberCount === 2) {
+      localStorage.removeItem('apply-data');
+    }
   }, []);
 
   const countMember = useCallback(() => {
