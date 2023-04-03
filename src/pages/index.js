@@ -65,15 +65,28 @@ function Main() {
     }
   }, [accessToken, matchingStatus, navigate, agreementsData, finishedStep]);
 
-  const teamsPerRound = teamData?.['teamsPerRound'];
-  const twoman = teamData?.['2vs2']['male'];
-  const twogirl = teamData?.['2vs2']['female'];
+  // const teamsPerRound = teamData?.['teamsPerRound'];
+  // const twoman = teamData?.['2vs2']['male'];
+  // const twogirl = teamData?.['2vs2']['female'];
   const threeman = teamData?.['3vs3']['male'];
   const threegirl = teamData?.['3vs3']['female'];
+  const threemanProportion = threeman / (threeman + threegirl);
+  const threegirlProportion = threegirl / (threeman + threegirl);
+  const threemanProportionNum = Math.round(
+    (threeman / (threeman + threegirl)) * 10,
+  );
+  const threegirlProportionNum = 10 - threemanProportionNum;
 
   return (
     <MainLayout>
       <Section>
+        <CountTitle>
+          <MainTitle>
+            지금까지 &nbsp;
+            <CounterBox end={userCountData?.memberCount || 0} /> 명이
+            미팅학개론과 함께했어요
+          </MainTitle>
+        </CountTitle>
         <ImgBox>
           <MainImg />
           <SImg
@@ -83,44 +96,24 @@ function Main() {
             }}
           />
         </ImgBox>
-        <CountTitle>
-          <MainTitle>
-            지금까지 &nbsp;
-            <CounterBox end={userCountData?.memberCount || 0} /> 명이
-            미팅학개론과 함께했어요
-          </MainTitle>
-        </CountTitle>
       </Section>
-      {/*
       <Section my="50px">
-        <TopTitle>신청 현황</TopTitle>
+        <TopTitle>현재 성비</TopTitle>
         <MatchingBox>
-          <SubTitle>2 : 2 미팅</SubTitle>
-          <TotalBar>
-            <Number>{twoman}</Number>
-            <LeftBar>
-              <LeftBarProgress progress={twoman / teamsPerRound} />
-            </LeftBar>
-            <RightBar>
-              <RightBarProgress progress={twogirl / teamsPerRound} />
-            </RightBar>
-            <Number>{twogirl}</Number>
-          </TotalBar>
           <SubTitle>3 : 3 미팅</SubTitle>
           <TotalBar>
-            <Number>{threeman}</Number>
+            <Number>{threemanProportionNum}</Number>
             <LeftBar>
-              <LeftBarProgress progress={threeman / teamsPerRound} />
+              <LeftBarProgress progress={threemanProportion} />
             </LeftBar>
             <RightBar>
-              <RightBarProgress progress={threegirl / teamsPerRound} />
+              <RightBarProgress progress={threegirlProportion} />
             </RightBar>
-            <Number>{threegirl}</Number>
+            <Number>{threegirlProportionNum}</Number>
           </TotalBar>
-          <Title>조건이 맞는 상대팀이 나타나면 바로 매칭됩니다!</Title>
         </MatchingBox>
       </Section>
-      */}
+
       <Section my="50px" center>
         <SImg2 src={Main1} />
         <SImg2 src={Main2} />
@@ -161,13 +154,14 @@ const MainTitle = styled.div`
 
 const TopTitle = styled.div`
   margin-left: 5%;
+  padding-top: 20px;
   font-weight: 400;
   font-size: 13px;
   color: #635e5e;
 `;
 
 const ImgBox = styled.div`
-  margin-top: 50px;
+  margin-top: 20px;
   margin-right: 25px;
   position: relative;
   max-width: 100%;
@@ -202,17 +196,17 @@ const MatchingBox = styled.div`
   font-weight: 400;
   font-size: 20px;
   padding: 10px;
-  height: 150px;
+  height: 75px;
   background: #ffffff;
   border-radius: 10px;
   text-align: center;
 `;
 
-const Title = styled.p`
-  margin-top: 5%;
-  width: 100%;
-  color: ${theme.pink};
-`;
+// const Title = styled.p`
+//   margin-top: 5%;
+//   width: 100%;
+//   color: ${theme.pink};
+// `;
 
 const SubTitle = styled.p`
   width: 100%;
@@ -223,16 +217,14 @@ const SubTitle = styled.p`
 `;
 
 const TotalBar = styled.div`
-  margin-top: 10px;
   display: flex;
   justify-content: center;
 `;
 
 const LeftBar = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   position: relative;
-  width: 110px;
   height: 18px;
   background: white;
   border: 1px solid #f1ecec;
@@ -241,8 +233,9 @@ const LeftBar = styled.div`
 `;
 
 const RightBar = styled.div`
+  display: flex;
+  justify-content: flex-end;
   position: relative;
-  width: 110px;
   height: 18px;
   background: white;
   border: 1px solid #f1ecec;
@@ -251,9 +244,8 @@ const RightBar = styled.div`
 `;
 
 const LeftBarProgress = styled.div`
-  position: absolute;
-  max-width: 110px;
-  width: ${({ progress }) => (progress ? progress * 110 : 0)}px;
+  max-width: 220px;
+  width: ${({ progress }) => (progress ? progress * 220 : 0)}px;
   height: 18px;
   background: #bfe0ff;
   border-top-left-radius: 10px;
@@ -261,9 +253,8 @@ const LeftBarProgress = styled.div`
 `;
 
 const RightBarProgress = styled.div`
-  position: absolute;
-  max-width: 110px;
-  width: ${({ progress }) => (progress ? progress * 110 : 0)}px;
+  max-width: 220px;
+  width: ${({ progress }) => (progress ? progress * 220 : 0)}px;
   height: 18px;
   background: #ffbfbf;
   border-top-right-radius: 10px;
