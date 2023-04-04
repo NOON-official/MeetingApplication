@@ -105,6 +105,14 @@ function MyInfo() {
             </Link>
           </MenuItem>
           <MenuItem>
+            <Link to="/myinfo/ticket/coupon">
+              <LinkButton>
+                쿠폰 등록
+                <RightArrow />
+              </LinkButton>
+            </Link>
+          </MenuItem>
+          <MenuItem>
             <LinkButton
               onClick={() => {
                 window.open(
