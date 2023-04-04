@@ -52,13 +52,6 @@ export default function TicketPage() {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/myinfo/ticket/coupon">
-              <LinkButton>
-                보유 쿠폰 <RightArrow />
-              </LinkButton>
-            </Link>
-          </MenuItem>
-          <MenuItem>
             <Link to="/myinfo/ticket/history">
               <LinkButton>
                 결제 내역 <RightArrow />
