@@ -79,50 +79,51 @@ function Main() {
 
   return (
     <MainLayout>
-      <Section>
-        <CountTitle>
-          <MainTitle>
-            지금까지 &nbsp;
-            <CounterBox end={userCountData?.memberCount || 0} /> 명이
-            미팅학개론과 함께했어요
-          </MainTitle>
-        </CountTitle>
-        <ImgBox>
-          <MainImg />
-          <SImg
-            src={PresentBox}
-            onClick={() => {
-              navigate('/myinfo');
-            }}
-          />
-        </ImgBox>
-      </Section>
-      <Section my="50px">
-        <TopTitle>현재 성비</TopTitle>
-        <MatchingBox>
-          <SubTitle>3 : 3 미팅</SubTitle>
-          <TotalBar>
-            <Number>{threemanProportionNum}</Number>
-            <LeftBar>
-              <LeftBarProgress progress={threemanProportion} />
-            </LeftBar>
-            <RightBar>
-              <RightBarProgress progress={threegirlProportion} />
-            </RightBar>
-            <Number>{threegirlProportionNum}</Number>
-          </TotalBar>
-        </MatchingBox>
-      </Section>
-
-      <Section my="50px" center>
-        <SImg2 src={Main1} />
-        <SImg2 src={Main2} />
-        <SImg2 src={Main3} />
-        <SImg2 src={Main4} />
-        <SImg2 src={Main5} />
-        <SImg2 src={Main6} />
+      <div style={{ textAlign: 'center' }}>
+        <Section>
+          <CountTitle>
+            <MainTitle>
+              지금까지 &nbsp;
+              <CounterBox end={userCountData?.memberCount || 0} /> 명이
+              미팅학개론과 함께했어요
+            </MainTitle>
+          </CountTitle>
+          <ImgBox>
+            <MainImg />
+            <SImg
+              src={PresentBox}
+              onClick={() => {
+                navigate('/myinfo');
+              }}
+            />
+          </ImgBox>
+        </Section>
+        <Section my="50px">
+          <TopTitle>현재 성비</TopTitle>
+          <MatchingBox>
+            <SubTitle>3 : 3 미팅</SubTitle>
+            <TotalBar>
+              <Number>{threemanProportionNum}</Number>
+              <LeftBar>
+                <LeftBarProgress progress={threemanProportion} />
+              </LeftBar>
+              <RightBar>
+                <RightBarProgress progress={threegirlProportion} />
+              </RightBar>
+              <Number>{threegirlProportionNum}</Number>
+            </TotalBar>
+          </MatchingBox>
+        </Section>
+        <Section my="50px" center style={{ marginBottom: '30px' }}>
+          <SImg2 src={Main1} />
+          <SImg2 src={Main2} />
+          <SImg2 src={Main3} />
+          <SImg2 src={Main4} />
+          <SImg2 src={Main5} />
+          <SImg2 src={Main6} />
+        </Section>
         <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
-      </Section>
+      </div>
       <MainFooter />
       <BottomFooter />
       <div>{ChannelTalk.hideChannelButton()}</div>
@@ -139,7 +140,7 @@ const CountTitle = styled.div`
 `;
 
 const MainTitle = styled.div`
-  margin-top: 70px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,14 +155,13 @@ const MainTitle = styled.div`
 
 const TopTitle = styled.div`
   margin-left: 5%;
-  padding-top: 20px;
   font-weight: 400;
   font-size: 13px;
   color: #635e5e;
 `;
 
 const ImgBox = styled.div`
-  margin-top: 20px;
+  margin-top: 15px;
   margin-right: 25px;
   position: relative;
   max-width: 100%;
@@ -169,14 +169,14 @@ const ImgBox = styled.div`
   justify-content: center;
 
   > svg {
-    width: 75%;
+    width: 290px;
     height: auto;
   }
 `;
 
 const SImg = styled.img`
   position: absolute;
-  bottom: -15%;
+  bottom: -8%;
   right: 5%;
   &:hover {
     cursor: pointer;
@@ -273,8 +273,7 @@ const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   width: 75%;
   position: sticky;
   bottom: 10vh;
-  left: 10px;
-  margin-top: 15px;
+  margin: 0 auto;
   &.ant-btn {
     height: 56px;
     background-color: #ffa1a1;
