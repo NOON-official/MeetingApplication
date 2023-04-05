@@ -272,7 +272,7 @@ const Number = styled.p`
 const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   width: 75%;
   position: sticky;
-  bottom: 10vh;
+  bottom: 120px;
   margin: 0 auto;
   &.ant-btn {
     height: 56px;
