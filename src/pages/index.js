@@ -161,7 +161,6 @@ const TopTitle = styled.div`
 `;
 
 const ImgBox = styled.div`
-  margin-top: 15px;
   margin-right: 25px;
   position: relative;
   max-width: 100%;
