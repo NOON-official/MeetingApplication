@@ -13,7 +13,7 @@ const initialState = {
   intro: '',
   drink: 3,
   prefSameUniversity: true,
-  prefAge: [22, 27],
+  prefAge: [20, 29],
   prefVibes: [],
 };
 
