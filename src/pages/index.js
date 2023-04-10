@@ -105,10 +105,10 @@ function Main() {
             <TotalBar>
               <Number>{threemanProportionNum}</Number>
               <LeftBar>
-                <LeftBarProgress progress={threemanProportion} />
+                <LeftBarProgress progress={1 / 2} />
               </LeftBar>
               <RightBar>
-                <RightBarProgress progress={threegirlProportion} />
+                <RightBarProgress progress={1 / 2} />
               </RightBar>
               <Number>{threegirlProportionNum}</Number>
             </TotalBar>
