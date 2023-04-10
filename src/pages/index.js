@@ -103,14 +103,14 @@ function Main() {
           <MatchingBox>
             <SubTitle>3 : 3 미팅</SubTitle>
             <TotalBar>
-              <Number>{threemanProportionNum}</Number>
+              <Number>{5}</Number>
               <LeftBar>
                 <LeftBarProgress progress={1 / 2} />
               </LeftBar>
               <RightBar>
                 <RightBarProgress progress={1 / 2} />
               </RightBar>
-              <Number>{threegirlProportionNum}</Number>
+              <Number>{5}</Number>
             </TotalBar>
           </MatchingBox>
         </Section>
