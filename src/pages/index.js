@@ -99,7 +99,7 @@ function Main() {
             />
           </ImgBox>
         </Section>
-        <Section my="50px">
+        <Section my="50px" style={{ marginBottom: '25px' }}>
           <TopTitle>현재 성비</TopTitle>
           <MatchingBox>
             <SubTitle>3 : 3 미팅</SubTitle>
@@ -115,7 +115,7 @@ function Main() {
             </TotalBar>
           </MatchingBox>
         </Section>
-        <Section my="50px">
+        <Section my="50px" style={{ marginTop: '25px' }}>
           <TopTitle>소요 시간</TopTitle>
           <TimeBox>
             <SubTitle2>최근 3일 동안 평균</SubTitle2>
@@ -353,7 +353,7 @@ const SubTitle2 = styled.div`
   font-size: 14px;
   color: #4a4a4a;
   margin-top: 5px;
-  padding-left: 33px;
+  padding-left: 12px;
 `;
 
 const CImg = styled.img`
