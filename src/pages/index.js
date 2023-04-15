@@ -15,6 +15,7 @@ import Main3 from '../asset/img/Main3.png';
 import Main4 from '../asset/img/Main4.png';
 import Main5 from '../asset/img/Main5.png';
 import Main6 from '../asset/img/Main6.png';
+import Clock from '../asset/svg/MainClock.svg';
 import MainLayout from '../layout/MainLayout';
 import BottomFooter from '../layout/footer/BottomFooter';
 import MainFooter from '../layout/footer/MainFooter';
@@ -98,7 +99,7 @@ function Main() {
             />
           </ImgBox>
         </Section>
-        <Section my="50px">
+        <Section my="50px" style={{ marginBottom: '25px' }}>
           <TopTitle>현재 성비</TopTitle>
           <MatchingBox>
             <SubTitle>3 : 3 미팅</SubTitle>
@@ -113,6 +114,23 @@ function Main() {
               <Number>{5}</Number>
             </TotalBar>
           </MatchingBox>
+        </Section>
+        <Section my="50px" style={{ marginTop: '25px' }}>
+          <TopTitle>소요 시간</TopTitle>
+          <TimeBox>
+            <SubTitle2>최근 3일 동안 평균</SubTitle2>
+            <AverageTime>
+              <CImg src={Clock} />
+              <AverageTimeNumber>
+                <Pink>
+                  {4}시간 {37}분
+                </Pink>{' '}
+              </AverageTimeNumber>
+              <AverageTimeDescription>
+                안에 매칭되었어요!
+              </AverageTimeDescription>
+            </AverageTime>
+          </TimeBox>
         </Section>
         <Section my="50px" center style={{ marginBottom: '30px' }}>
           <SImg2 src={Main1} />
@@ -155,9 +173,9 @@ const MainTitle = styled.div`
 
 const TopTitle = styled.div`
   margin-left: 5%;
-  font-weight: 400;
-  font-size: 13px;
-  color: #635e5e;
+  font-weight: 300;
+  font-size: 15px;
+  color: #000000;
 `;
 
 const ImgBox = styled.div`
@@ -190,15 +208,28 @@ const MatchingBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 20px;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
+  margin-top: 7px;
+  font-weight: 300;
   font-size: 20px;
   padding: 10px;
-  height: 75px;
+  height: auto;
   background: #ffffff;
   border-radius: 10px;
   text-align: center;
+`;
+
+const TimeBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 7px;
+  font-weight: 300;
+  font-size: 20px;
+  padding: 10px;
+  height: auto;
+  background: #ffffff;
+  border-radius: 10px;
+  text-align: left;
 `;
 
 // const Title = styled.p`
@@ -209,15 +240,17 @@ const MatchingBox = styled.div`
 
 const SubTitle = styled.p`
   width: 100%;
-  font-weight: 400;
-  font-size: 18px;
+  font-weight: 300;
+  font-size: 14px;
   color: black;
   margin-top: 5px;
+  padding-bottom: 10px;
 `;
 
 const TotalBar = styled.div`
   display: flex;
   justify-content: center;
+  padding-bottom: 12px;
 `;
 
 const LeftBar = styled.div`
@@ -263,9 +296,10 @@ const RightBarProgress = styled.div`
 const Number = styled.p`
   width: 10px;
   padding: 0 10px;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 15px;
+  font-weight: 300;
+  font-size: 14px;
+  color: #4a4a4a;
+  padding-top: 3px;
 `;
 
 const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
@@ -280,4 +314,50 @@ const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const Pink = styled.span`
+  color: ${theme.pink};
+  font-size: 22px;
+`;
+
+const AverageTime = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 260px;
+  text-align: left;
+  padding-bottom: 5px;
+`;
+
+const AverageTimeNumber = styled.p`
+  font-weight: 500;
+  font-size: 35px;
+  color: black;
+  display: inline-block;
+  width: 105px;
+`;
+
+const AverageTimeDescription = styled.p`
+  font-weight: 300;
+  font-size: 16px;
+  color: black;
+  display: inline-block;
+  width: 120px;
+  padding-top: 15px;
+  padding-left: 5px;
+`;
+
+const SubTitle2 = styled.div`
+  width: 260px;
+  font-weight: 300;
+  font-size: 14px;
+  color: #4a4a4a;
+  margin-top: 5px;
+  padding-left: 12px;
+`;
+
+const CImg = styled.img`
+  display: inline-block;
+  width: 31px;
+  padding-top: 5px;
 `;
