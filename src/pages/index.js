@@ -244,7 +244,7 @@ const MainTitle = styled.div`
 
 const TopTitle = styled.div`
   margin-left: 5%;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 15px;
   color: #000000;
 `;
@@ -441,6 +441,7 @@ const Review = styled.div`
   align-items: center;
   font-weight: 400;
   font-size: 15px;
+  color: #000000;
 `;
 
 const Slider = styled.div`
