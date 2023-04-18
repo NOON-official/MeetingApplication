@@ -103,11 +103,13 @@ const Tag = styled.div`
 `;
 
 const StarBox = styled.div`
-  width: 85%;
+  width: 80%;
   margin-top: 8px;
+  margin-left: 5px;
 `;
 
 const Text = styled.p`
+  min-height: 80px;
   margin-top: 8px;
   font-style: normal;
   font-weight: 300;
