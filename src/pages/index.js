@@ -125,12 +125,12 @@ function Main() {
         <Section my="50px" style={{ marginTop: '25px' }}>
           <TopTitle>소요 시간</TopTitle>
           <TimeBox>
-            <SubTitle2>최근 3일 동안 평균</SubTitle2>
+            <SubTitle2>최근 7일 동안 평균</SubTitle2>
             <AverageTime>
               <CImg src={Clock} />
               <AverageTimeNumber>
                 <Pink>
-                  {4}시간 {37}분
+                  {6}시간 {13}분
                 </Pink>{' '}
               </AverageTimeNumber>
               <AverageTimeDescription>
