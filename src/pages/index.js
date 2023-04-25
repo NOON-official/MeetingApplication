@@ -132,7 +132,7 @@ function Main() {
               <CImg src={Clock} />
               <AverageTimeNumber>
                 <Pink>
-                  {6}시간 {13}분
+                  {8}시간 {8}분
                 </Pink>{' '}
               </AverageTimeNumber>
               <AverageTimeDescription>
