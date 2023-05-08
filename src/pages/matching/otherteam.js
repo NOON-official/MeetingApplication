@@ -174,7 +174,7 @@ function MatchingOtherTeam() {
           <ModalContainer>
             <ModalText1>수락하시면 이용권 한장이 사용돼요.</ModalText1>
             <ModalText1>만약 상대팀이 거절할경우</ModalText1>
-            <ModalText1>이용권이 반환되요.</ModalText1>
+            <ModalText1>이용권이 반환돼요.</ModalText1>
             <ModalButton
               onClick={() => {
                 handleOkay();
