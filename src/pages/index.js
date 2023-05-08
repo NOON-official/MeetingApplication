@@ -28,9 +28,10 @@ import SliderBox from '../components/SliderBox';
 import SliderBox2 from '../components/SliderBox2';
 import backend from '../util/backend';
 import {
-  useGetTeamCountQuery,
+  // useGetTeamCountQuery,
   useGetTeamMembersCountTotalQuery,
   useGetUserAgreementsQuery,
+  useGetMatchingAverageTimeQuery,
 } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
 
@@ -39,10 +40,11 @@ function Main() {
   const referralId = params.get('referralId');
   const { finishedStep } = useSelector((store) => store.apply);
   const { accessToken } = useSelector((state) => state.user);
-  const { data: teamData } = useGetTeamCountQuery();
+  // const { data: teamData } = useGetTeamCountQuery();
   const { data: userCountData } = useGetTeamMembersCountTotalQuery();
   const [matchingStatus, setMatchingStatus] = useState('');
   const { data: agreementsData } = useGetUserAgreementsQuery();
+  const { data: matchingAverageTime } = useGetMatchingAverageTimeQuery();
 
   const navigate = useNavigate();
 
@@ -75,14 +77,14 @@ function Main() {
   // const teamsPerRound = teamData?.['teamsPerRound'];
   // const twoman = teamData?.['2vs2']['male'];
   // const twogirl = teamData?.['2vs2']['female'];
-  const threeman = teamData?.['3vs3']['male'];
-  const threegirl = teamData?.['3vs3']['female'];
-  const threemanProportion = threeman / (threeman + threegirl);
-  const threegirlProportion = threegirl / (threeman + threegirl);
-  const threemanProportionNum = Math.round(
-    (threeman / (threeman + threegirl)) * 10,
-  );
-  const threegirlProportionNum = 10 - threemanProportionNum;
+  // const threeman = teamData?.['3vs3']['male'];
+  // const threegirl = teamData?.['3vs3']['female'];
+  // const threemanProportion = threeman / (threeman + threegirl);
+  // const threegirlProportion = threegirl / (threeman + threegirl);
+  // const threemanProportionNum = Math.round(
+  //   (threeman / (threeman + threegirl)) * 10,
+  // );
+  // const threegirlProportionNum = 10 - threemanProportionNum;
 
   const slider1 = useRef(null);
   const slider2 = useRef(null);
@@ -132,7 +134,8 @@ function Main() {
               <CImg src={Clock} />
               <AverageTimeNumber>
                 <Pink>
-                  {6}시간 {13}분
+                  {String(matchingAverageTime?.hours).padStart(2, '0')}시간{' '}
+                  {String(matchingAverageTime?.minutes).padStart(2, '0')}분
                 </Pink>{' '}
               </AverageTimeNumber>
               <AverageTimeDescription>
@@ -439,7 +442,7 @@ const Pink = styled.span`
 const AverageTime = styled.div`
   display: flex;
   justify-content: center;
-  width: 260px;
+  width: 276px;
   text-align: left;
   padding-bottom: 5px;
 `;
@@ -449,7 +452,7 @@ const AverageTimeNumber = styled.p`
   font-size: 35px;
   color: black;
   display: inline-block;
-  width: 105px;
+  width: auto;
 `;
 
 const AverageTimeDescription = styled.p`
@@ -457,7 +460,7 @@ const AverageTimeDescription = styled.p`
   font-size: 16px;
   color: black;
   display: inline-block;
-  width: 120px;
+  width: auto;
   padding-top: 15px;
   padding-left: 5px;
 `;
