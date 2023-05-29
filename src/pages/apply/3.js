@@ -98,7 +98,7 @@ function Apply3Page() {
       );
     }
     return null;
-  });
+  }, [memberCount]);
 
   return (
     <ApplyLayout>
