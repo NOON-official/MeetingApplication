@@ -34,9 +34,9 @@ function Apply3Page() {
     setOpenModal(bool);
   };
 
-  const handleBefore = useCallback(() => {
+  const handleBefore = () => {
     navigate('/apply/2');
-  });
+  };
 
   const handleSubmit = useCallback(() => {
     if (memberCount === 2) {
