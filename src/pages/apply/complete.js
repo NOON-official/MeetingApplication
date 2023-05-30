@@ -31,7 +31,7 @@ function Complete() {
       navigate('/');
     }
     getInformation();
-  }, []);
+  }, [accessToken]);
 
   const handleSubmitData = useCallback(async () => {
     if (matchingStatus === 'APPLIED') {
