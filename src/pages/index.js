@@ -110,7 +110,7 @@ function Main() {
             />
           </ImgBox>
         </Section>
-        <Section my="50px" style={{ marginBottom: '25px' }}>
+        {/* <Section my="50px" style={{ marginBottom: '25px' }}>
           <TopTitle>현재 성비</TopTitle>
           <MatchingBox>
             <SubTitle>3 : 3 미팅</SubTitle>
@@ -125,8 +125,8 @@ function Main() {
               <Number>{5}</Number>
             </TotalBar>
           </MatchingBox>
-        </Section>
-        <Section my="35px" style={{ marginTop: '25px' }}>
+        </Section> */}
+        <Section my="35px" style={{ marginTop: '50px' }}>
           <TopTitle>소요 시간</TopTitle>
           <TimeBox>
             <SubTitle2>최근 7일 동안 평균</SubTitle2>
