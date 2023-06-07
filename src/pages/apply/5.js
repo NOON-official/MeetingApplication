@@ -95,7 +95,7 @@ function Apply5Page() {
       }),
     );
     navigate('/apply/6');
-  });
+  }, [ageRange, sameSchool, prefMood, alchol]);
 
   return (
     <ApplyLayout>

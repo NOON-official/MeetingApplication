@@ -24,7 +24,7 @@ function AgreePage() {
     } catch (e) {
       navigate('/apply/agree');
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     getInformation();
