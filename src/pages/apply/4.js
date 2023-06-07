@@ -45,7 +45,7 @@ function Apply4Page() {
       }),
     );
     navigate('/apply/5');
-  });
+  }, [introduce]);
 
   const setModal = (bool) => {
     setOpenModal(bool);
