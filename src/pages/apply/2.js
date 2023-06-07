@@ -62,9 +62,9 @@ export default function Apply2() {
     setOpenModal3(bool);
   };
 
-  const handleBefore = useCallback(() => {
+  const handleBefore = () => {
     navigate('/apply/1');
-  });
+  };
 
   const handleSubmit = useCallback(() => {
     if (selectDate.length < 4 && selectedArea < 1) {
@@ -86,7 +86,7 @@ export default function Apply2() {
       }),
     );
     navigate('/apply/3');
-  });
+  }, [selectDate, selectedArea]);
 
   return (
     <ApplyLayout>
