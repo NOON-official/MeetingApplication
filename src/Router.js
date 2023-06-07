@@ -28,6 +28,8 @@ import TicketBuySuccessPage from './pages/myinfo/ticket/buy/success';
 import TicketBuyFailPage from './pages/myinfo/ticket/buy/fail';
 import AccountPhoneChangePage from './pages/myinfo/account/phone';
 import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
+import ApplyInformation from './pages/apply/information';
+import ApplyUniversity from './pages/apply/university';
 
 const Router = createBrowserRouter([
   {
@@ -133,6 +135,14 @@ const Router = createBrowserRouter([
       {
         path: 'apply/complete',
         element: <Complete />,
+      },
+      {
+        path: 'apply/information',
+        element: <ApplyInformation />,
+      },
+      {
+        path: 'apply/university',
+        element: <ApplyUniversity />,
       },
       {
         path: '/auth/signin',
