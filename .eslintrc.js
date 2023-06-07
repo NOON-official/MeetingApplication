@@ -24,7 +24,7 @@ module.exports = {
   },
   plugins: ['react', 'react-hooks', 'unused-imports'],
   rules: {
-    'prettier/prettier': 'warn',
+    'prettier/prettier': ['warn', { endOfLine: 'auto' }],
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/prop-types': 'off',

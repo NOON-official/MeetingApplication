@@ -40,7 +40,7 @@ export default function Apply1Page() {
       localStorage.removeItem('apply-data');
       window.location.reload();
     }
-  }, []);
+  }, [accessToken, memberCount]);
 
   const countMember = useCallback(() => {
     if (meetingMember === 3) {
@@ -63,9 +63,9 @@ export default function Apply1Page() {
     setOpenModal(bool);
   };
 
-  const handleBefore = useCallback(() => {
+  const handleBefore = () => {
     navigate('/');
-  });
+  };
 
   const handleSubmit = useCallback(() => {
     if (selectedUniversities?.length < 1 || meetingMember === null) {
@@ -80,7 +80,7 @@ export default function Apply1Page() {
       }),
     );
     navigate('/apply/2');
-  });
+  }, [man, meetingMember, selectedUniversities]);
 
   return (
     <ApplyLayout>
