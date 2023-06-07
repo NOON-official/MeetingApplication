@@ -1,7 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
 import { Button } from 'antd';
 import backend from '../../util/backend';
 import ApplyLayout from '../../layout/ApplyLayout';
@@ -44,7 +43,7 @@ function AgreePage() {
       age: agree3,
       marketing: agree4,
     });
-    navigate('/apply/invite');
+    navigate('/apply/information');
   });
 
   return (

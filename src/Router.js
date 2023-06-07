@@ -17,6 +17,8 @@ import Apply3 from './pages/apply/3';
 import Apply4 from './pages/apply/4';
 import Apply5 from './pages/apply/5';
 import Apply6 from './pages/apply/6';
+import ApplyInformation from './pages/apply/information';
+import ApplyUniversity from './pages/apply/university';
 import Certification from './pages/apply/certification';
 import Complete from './pages/apply/complete';
 import TicketBuyPage from './pages/myinfo/ticket/buy';
@@ -133,6 +135,14 @@ const Router = createBrowserRouter([
       {
         path: 'apply/complete',
         element: <Complete />,
+      },
+      {
+        path: 'apply/information',
+        element: <ApplyInformation />,
+      },
+      {
+        path: 'apply/university',
+        element: <ApplyUniversity />,
       },
       {
         path: '/auth/signin',

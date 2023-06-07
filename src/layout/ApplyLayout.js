@@ -17,6 +17,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const Header = styled.header`
@@ -26,10 +27,10 @@ const Header = styled.header`
 const Content = styled.div`
   max-width: 425px;
   background-color: rgb(245, 245, 245);
-  height: 100%;
+  height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 `;

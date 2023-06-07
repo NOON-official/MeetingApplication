@@ -50,7 +50,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
+&:hover {
+	cursor: pointer;
+}
 
 `;
 
