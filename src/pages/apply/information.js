@@ -17,6 +17,7 @@ function ApplyInformation() {
   const NextPage = useCallback(() => {
     backend.patch('/my-info', {
       birth: selectAge,
+      gender: man === 1 ? '남자' : '여자',
     });
     navigate('/apply/university');
   });
