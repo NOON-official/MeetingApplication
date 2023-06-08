@@ -46,7 +46,13 @@ function InvitePage() {
       </Conatiner>
       <Footer>
         <SubmitButton onClick={NextPage}>바로 미팅하러 가기</SubmitButton>
-        <MainButton onClick={() => navigate('/')}>메인으로 가기</MainButton>
+        <MainButton
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          메인으로 가기
+        </MainButton>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>

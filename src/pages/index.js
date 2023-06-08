@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState, useRef } from 'react';
-import { Button, Carousel } from 'antd';
+import { Button, Carousel, Space } from 'antd';
 import theme from '../style/theme';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
@@ -34,6 +34,8 @@ import {
   useGetMatchingAverageTimeQuery,
 } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
+import PrimaryModal from '../components/Modal/PrimaryModal';
+import PrimaryButton from '../components/PrimaryButton';
 
 function Main() {
   const params = new URLSearchParams(window.location.search);
@@ -45,6 +47,7 @@ function Main() {
   const [matchingStatus, setMatchingStatus] = useState('');
   const { data: agreementsData } = useGetUserAgreementsQuery();
   const { data: matchingAverageTime } = useGetMatchingAverageTimeQuery();
+  const needMoreInfo = localStorage.getItem('needMoreInfo');
 
   const navigate = useNavigate();
 
@@ -92,6 +95,30 @@ function Main() {
   return (
     <MainLayout>
       <div style={{ textAlign: 'center' }}>
+        <PrimaryModal
+          title=" "
+          open={needMoreInfo === 'true'}
+          footer={null}
+          closeIcon
+        >
+          <Space
+            direction="vertical"
+            style={{
+              padding: '15px 0',
+              textAlign: 'center',
+              width: '100%',
+            }}
+          >
+            <span>새로운 회원 정보가 필요해요!</span>
+            <PrimaryButton
+              onClick={() => {
+                navigate('/apply/information');
+              }}
+            >
+              입력하러 가기
+            </PrimaryButton>
+          </Space>
+        </PrimaryModal>
         <Section>
           <CountTitle>
             <MainTitle>

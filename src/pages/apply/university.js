@@ -17,10 +17,15 @@ export default function ApplyUniversity() {
   const [searchKeyWord, setSearchKeyWord] = useState(0);
 
   const NextPage = useCallback(() => {
-    backend.patch('/university', {
-      university: selectedUniversity,
-    });
-    navigate('/apply/invite');
+    try {
+      backend.patch('/users/university', {
+        university: Number(selectedUniversity),
+      });
+      localStorage.setItem('needMoreInfo', 'false');
+      navigate('/apply/invite');
+    } catch (err) {
+      alert('오류가 발생했습니다. 잠시 후에 시도해주세요.');
+    }
   });
 
   const SearchedUniv = Universities.filter(
