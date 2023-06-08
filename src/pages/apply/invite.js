@@ -22,12 +22,12 @@ function InvitePage() {
     if (inviteCode !== null) {
       try {
         await backend.post('/invitations', { referralId: inviteCode });
-        navigate('/');
+        navigate('/apply/1');
       } catch (e) {
         window.alert('초대코드가 올바르지않습니다!');
       }
     } else {
-      navigate('/');
+      navigate('/apply/1');
     }
   });
 
