@@ -31,8 +31,6 @@ function InvitePage() {
     }
   });
 
-  console.log(referralId);
-
   return (
     <ApplyLayout>
       <Title>
@@ -47,7 +45,8 @@ function InvitePage() {
         />
       </Conatiner>
       <Footer>
-        <SubmitButton onClick={NextPage}>미팅 시작하기</SubmitButton>
+        <SubmitButton onClick={NextPage}>바로 미팅하러 가기</SubmitButton>
+        <MainButton onClick={() => navigate('/')}>메인으로 가기</MainButton>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
@@ -58,7 +57,7 @@ export default InvitePage;
 
 const Title = styled.div`
   width: 90%;
-  margin-top: 50%;
+  margin-top: 10%;
   height: 13%;
   min-height: 13%;
 `;
@@ -103,6 +102,20 @@ const SubmitButton = styled(Button)`
   width: 100%;
   height: 50px;
   background: #eb8888;
+  border-radius: 10px;
+`;
+
+const MainButton = styled(Button)`
+  margin-top: 5%;
+  font-family: 'Nanum JungHagSaeng';
+  color: #f2cbcb;
+  font-weight: 400;
+  font-size: 24px;
+  text-align: center;
+  border: 1px solid #f2cbcb;
+  width: 100%;
+  height: 50px;
+  background: transparent;
   border-radius: 10px;
 `;
 
