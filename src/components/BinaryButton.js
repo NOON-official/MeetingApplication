@@ -36,7 +36,7 @@ const SelectButton = styled.button`
   border-radius: 14px;
   height: 40px;
   width: ${(props) => props.width || '50%'};
-  max-width: 162px;
+  max-width: 180px;
   background-color: ${(props) => props.background_color};
   color: ${(props) => props.color};
   border-color: transparent;

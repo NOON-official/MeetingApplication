@@ -44,7 +44,7 @@ function AgreePage() {
       age: agree3,
       marketing: agree4,
     });
-    navigate('/apply/invite');
+    navigate('/apply/information');
   });
 
   return (
