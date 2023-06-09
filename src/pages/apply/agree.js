@@ -44,6 +44,7 @@ function AgreePage() {
       age: agree3,
       marketing: agree4,
     });
+    localStorage.setItem('needMoreInfo', 'true');
     navigate('/apply/information');
   });
 

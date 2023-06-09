@@ -15,10 +15,16 @@ function ApplyInformation() {
   const navigate = useNavigate();
 
   const NextPage = useCallback(() => {
-    backend.patch('/my-info', {
-      birth: selectAge,
-    });
-    navigate('/apply/university');
+    try {
+      backend.patch('/users/my-info', {
+        birth: selectAge,
+        gender: man === 1 ? 'male' : 'female',
+      });
+      localStorage.setItem('needMoreInfo', 'true');
+      navigate('/apply/university');
+    } catch {
+      alert('오류가 발생했습니다. 잠시 후에 시도해주세요.');
+    }
   });
 
   const handleAge = (e) => {
