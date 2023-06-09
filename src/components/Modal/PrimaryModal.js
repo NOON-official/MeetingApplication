@@ -14,6 +14,9 @@ const PrimaryModal = styled(Modal)`
     font-size: 14px;
     min-height: 14px;
   }
+  .ant-space-item {
+    margin-bottom: 15px;
+  }
 `;
 
 export default PrimaryModal;
