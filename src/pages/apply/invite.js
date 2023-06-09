@@ -22,12 +22,12 @@ function InvitePage() {
     if (inviteCode !== null) {
       try {
         await backend.post('/invitations', { referralId: inviteCode });
-        navigate('/');
+        navigate('/apply/1');
       } catch (e) {
         window.alert('초대코드가 올바르지않습니다!');
       }
     } else {
-      navigate('/');
+      navigate('/apply/1');
     }
   });
 
@@ -46,7 +46,13 @@ function InvitePage() {
       </Conatiner>
       <Footer>
         <SubmitButton onClick={NextPage}>바로 미팅하러 가기</SubmitButton>
-        <MainButton onClick={() => navigate('/')}>메인으로 가기</MainButton>
+        <MainButton
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          메인으로 가기
+        </MainButton>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
