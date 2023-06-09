@@ -34,7 +34,6 @@ export default function Account() {
       localStorage.clear();
       navigate('/');
     } catch (e) {
-      console.error(e);
       window.alert('탈퇴중 오류가 발생하였습니다');
     }
   });
