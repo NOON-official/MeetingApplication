@@ -42,14 +42,31 @@ function Main() {
   const referralId = params.get('referralId');
   const { finishedStep } = useSelector((store) => store.apply);
   const { accessToken } = useSelector((state) => state.user);
-  // const { data: teamData } = useGetTeamCountQuery();
-  const { data: userCountData } = useGetTeamMembersCountTotalQuery();
+  const navigate = useNavigate();
+
   const [matchingStatus, setMatchingStatus] = useState('');
+  const { data: userCountData } = useGetTeamMembersCountTotalQuery();
   const { data: agreementsData } = useGetUserAgreementsQuery();
   const { data: matchingAverageTime } = useGetMatchingAverageTimeQuery();
+
   const needMoreInfo = localStorage.getItem('needMoreInfo');
 
-  const navigate = useNavigate();
+  const getInfo = async () => {
+    try {
+      const info = await backend.get('/users/my-info');
+      if (info.data.university === null) {
+        localStorage.setItem('needMoreInfo', 'true');
+      } else {
+        localStorage.setItem('needMoreInfo', 'false');
+      }
+    } catch (err) {
+      localStorage.setItem('needMoreInfo', 'false');
+    }
+  };
+
+  useEffect(() => {
+    getInfo();
+  }, []);
 
   const getMatchingInfo = useCallback(async () => {
     const matchingstatus = await backend.get('/users/matchings/status');
