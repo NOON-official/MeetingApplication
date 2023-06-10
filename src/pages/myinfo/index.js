@@ -127,7 +127,13 @@ function MyInfo() {
         </MenuBox>
       </Section>
       <Section my="8px" style={{ textAlign: 'right' }}>
-        <LogoutButton type="text" onClick={() => dispatch(logout())}>
+        <LogoutButton
+          type="text"
+          onClick={() => {
+            dispatch(logout());
+            localStorage.removeItem('needMoreInfo');
+          }}
+        >
           로그아웃
         </LogoutButton>
       </Section>
