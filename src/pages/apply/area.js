@@ -30,7 +30,7 @@ const Date = [
   },
 ];
 
-export default function Apply2() {
+export default function ApplyArea() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
@@ -40,7 +40,6 @@ export default function Apply2() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [selectedDate, setSelectedDate] = useState();
   const [selectedArea, setSelectedArea] = useState(areas);
 
   useEffect(() => {
@@ -78,17 +77,17 @@ export default function Apply2() {
   };
 
   const handleSubmit = useCallback(() => {
-    if (selectedDate === undefined) {
-      setOpenModal3(true);
+    if (selectedArea === undefined) {
+      setOpenModal2(true);
       return;
     }
     dispatch(
       submitStep2({
-        availableDates: selectedDate,
+        areas: selectedArea,
       }),
     );
-    navigate('/apply/area');
-  }, [selectedDate]);
+    navigate('/apply/3');
+  }, [selectedArea]);
 
   // if (selectDate.length < 4 && selectedArea < 1) {
   //   setOpenModal3(true);
@@ -116,33 +115,15 @@ export default function Apply2() {
       <NotEnoughDateModal open={openModal1} setModal={setModal1} />
       <NotEnoughPlaceModal open={openModal2} setModal={setModal2} />
       <IsPageCompleteModal open={openModal3} setModal={setModal3} />
-      <ProgressBar page={2} />
+      <ProgressBar page={3} />
+
       <Title>
-        <Maintitle>
-          <Pink>미팅 선호 일정</Pink>을 알려주세요
-        </Maintitle>
-      </Title>
-
-      <ChooseBox>
-        {Date.map((x) => {
-          return (
-            <ChooseButton
-              key={x.id}
-              isActive={selectedDate === x.id}
-              content={x.date}
-              onChange={() => setSelectedDate(x.id)}
-            />
-          );
-        })}
-      </ChooseBox>
-
-      {/* <Title2>
         <Maintitle>
           <Pink>미팅 선호 지역</Pink>을 알려주세요
         </Maintitle>
         <Subtitle>중복 선택이 가능해요</Subtitle>
-      </Title2> */}
-      {/* <ChooseBox>
+      </Title>
+      <ChooseBox>
         <ChooseButton
           isActive={selectedArea?.includes(1)}
           onChange={(isActive) => handleArea(1, isActive)}
@@ -166,9 +147,9 @@ export default function Apply2() {
         <ChooseButton
           isActive={selectedArea?.includes(5)}
           onChange={(isActive) => handleArea(5, isActive)}
-          content="상관없음"
+          content="상관 없어요"
         />
-      </ChooseBox> */}
+      </ChooseBox>
       <SEarth />
       <Footer>
         <ButtonBox>
