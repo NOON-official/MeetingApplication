@@ -25,12 +25,11 @@ const applySlice = createSlice({
   },
   reducers: {
     submitStep1: (state, action) => {
-      const { gender, memberCount, universities } = action.payload;
+      const { memberCount } = action.payload;
 
       state.finishedStep = 1;
-      state.gender = gender;
       state.memberCount = memberCount;
-      state.universities = universities;
+      // state.universities = universities;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(

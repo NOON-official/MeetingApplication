@@ -30,6 +30,7 @@ import AccountPhoneChangePage from './pages/myinfo/account/phone';
 import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
 import ApplyInformation from './pages/apply/information';
 import ApplyUniversity from './pages/apply/university';
+import ApplyArea from './pages/apply/area';
 
 const Router = createBrowserRouter([
   {
@@ -127,6 +128,10 @@ const Router = createBrowserRouter([
       {
         path: 'apply/6',
         element: <Apply6 />,
+      },
+      {
+        path: 'apply/area',
+        element: <ApplyArea />,
       },
       {
         path: 'apply/certification',
