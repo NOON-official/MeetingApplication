@@ -3,7 +3,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ChooseButton from '../../components/ChooseButton';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
@@ -14,19 +13,26 @@ import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { ReactComponent as Earth } from '../../asset/svg/Earth.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
 import { submitStep2 } from '../../features/apply';
+import AreaAccordion from '../../components/AreaAccordion';
 
-const Date = [
+const DATA = [
   {
     id: 1,
-    date: '평일',
+    title: '서울 / 경기',
+    content: ['강남', '건대', '시촌', '홍대', '수원', '인천'],
+    option: '',
   },
   {
     id: 2,
-    date: '주말',
+    title: '대구',
+    content: ['경대 북문', '계대 앞', '동성로', '영대역'],
+    option: '',
   },
   {
     id: 3,
-    date: '둘 다 좋아요',
+    title: '부산',
+    content: ['경대 앞', '부산대 앞', '서면', '해운대'],
+    option: 'hidden',
   },
 ];
 
@@ -41,7 +47,7 @@ export default function ApplyArea() {
   const navigate = useNavigate();
 
   const [selectedArea, setSelectedArea] = useState(areas);
-
+//   console.log(selectedArea);
   useEffect(() => {
     if (finishedStep < 1) {
       window.alert('잘못된 접근입니다');
@@ -73,7 +79,7 @@ export default function ApplyArea() {
   };
 
   const handleBefore = () => {
-    navigate('/apply/1');
+    navigate('/apply/2');
   };
 
   const handleSubmit = useCallback(() => {
@@ -123,33 +129,35 @@ export default function ApplyArea() {
         </Maintitle>
         <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title>
-      <ChooseBox>
-        <ChooseButton
-          isActive={selectedArea?.includes(1)}
-          onChange={(isActive) => handleArea(1, isActive)}
-          content="강남"
-        />
-        <ChooseButton
-          isActive={selectedArea?.includes(2)}
-          onChange={(isActive) => handleArea(2, isActive)}
-          content="건대"
-        />
-        <ChooseButton
-          isActive={selectedArea?.includes(3)}
-          onChange={(isActive) => handleArea(3, isActive)}
-          content="신촌"
-        />
-        <ChooseButton
-          isActive={selectedArea?.includes(4)}
-          onChange={(isActive) => handleArea(4, isActive)}
-          content="홍대"
-        />
-        <ChooseButton
-          isActive={selectedArea?.includes(5)}
-          onChange={(isActive) => handleArea(5, isActive)}
-          content="상관 없어요"
-        />
-      </ChooseBox>
+      {/* {DATA.map((x) => {
+        return (
+          <AreaAccordion
+            key={x.id}
+            title={x.title}
+            content={x.content}
+            option={x.option}
+            onChange={() => setSelectedArea(x.content)}
+          />
+        );
+      })} */}
+      <AreaAccordion
+        title="서울 / 경기"
+        content={['강남', '건대', '신촌', '홍대', '수원', '인천']}
+        option=""
+        onChange={(result) => setSelectedArea(result)}
+      />
+      <AreaAccordion
+        title="대구"
+        content={['경대 북문', '계대 앞', '동성로', '영대역']}
+        option=""
+        onChange={(result) => setSelectedArea(result)}
+      />
+      <AreaAccordion
+        title="부산"
+        content={['경대 앞', '부산대 앞', '서면', '해운대']}
+        option="hidden"
+        onChange={(result) => setSelectedArea(result)}
+      />
       <SEarth />
       <Footer>
         <ButtonBox>
@@ -164,8 +172,8 @@ export default function ApplyArea() {
 
 const Title = styled.div`
   width: 90%;
-  min-height: 8%;
-  margin-top: 30px;
+  min-height: 90px;
+  margin-top: 20px;
 `;
 
 const Maintitle = styled.div`
@@ -200,62 +208,6 @@ const ButtonBox = styled.div`
   justify-content: center;
   justify-content: space-between;
   margin-top: 5%;
-`;
-
-const ChooseBox = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ChooseDate = styled.button`
-  margin: 0 5px 15px 0;
-  border-radius: 10px;
-  height: 40px;
-  width: 100%;
-  background: ${(props) => (props.isActive ? '#EB8888' : 'F6EEEE')};
-  color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
-  border-color: transparent;
-  font-family: 'Nanum JungHagSaeng';
-  font-size: 18px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const CalendarDiv = styled.div`
-  padding-left: 8%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  .custom-calendar.rmdp-shadow {
-    box-shadow: none;
-  }
-  .custom-calendar.rmdp-wrapper {
-    border: 1px solid #f49393;
-    border-radius: 10px;
-  }
-  .rmdp-arrow {
-    border: solid black;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    height: 3px;
-    margin-top: 5px;
-    padding: 2px;
-    width: 3px;
-  }
-  .rmdp-week-day {
-    color: black;
-    cursor: default;
-    font-size: 12px;
-    font-weight: 400;
-  }
-  .rmdp-day.rmdp-selected span:not(.highlight) {
-    background-color: #f49393;
-    box-shadow: 0 0 3px #8798ad;
-    color: #fff;
-  }
 `;
 
 const ScrollDiv = styled.div`
