@@ -1,39 +1,41 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as PinkDownArrow } from '../asset/svg/PinkDownArrow.svg';
 import { ReactComponent as PinkUpArrow } from '../asset/svg/PinkUpArrow.svg';
 
 export default function AreaAccordion(props) {
-  const [isShown, setIsShown] = useState(false);
-
-  const handleToggle = () => {
-    setIsShown((prev) => !prev);
-  };
-
-  const [selected, setSelected] = useState([]);
-  console.log(selected);
   return (
     <ChooseBox>
-      <AreaButton onClick={handleToggle}>
+      <AreaButton
+        onClick={() => {
+          if (props.selectedCity === props.title) {
+            props.setSelectedCity('');
+            return;
+          }
+          props.setSelectedCity(props.title);
+        }}
+      >
         <AreaTitle>{props.title}</AreaTitle>
-        {isShown ? (
+        {props.isShown ? (
           <PinkDownArrow style={{ color: 'f6eeee' }} />
         ) : (
           <PinkUpArrow style={{ color: 'f6eeee' }} />
         )}
       </AreaButton>
-      {isShown ? (
+      {props.isShown ? (
         <MoreArea>
           {props.content.map((x) => {
             return (
               <Area
                 key={x}
+                isActive={props.selectedArea.includes(x)}
                 onClick={() => {
-                  if (selected.includes(x)) {
-                    setSelected(selected.filter((a) => a !== x));
+                  if (props.selectedArea.includes(x)) {
+                    props.setSelectedArea(
+                      props.selectedArea.filter((a) => a !== x),
+                    );
                     return;
                   }
-                  setSelected([...selected, x]);
+                  props.setSelectedArea([...props.selectedArea, x]);
                 }}
               >
                 {x}
@@ -41,19 +43,18 @@ export default function AreaAccordion(props) {
             );
           })}
 
-          {props.option === 'hidden' ? null : (
-            <AllArea
-              onClick={() => {
-                if (selected.length === 6) {
-                  setSelected([]);
-                  return;
-                }
-                setSelected(props.content);
-              }}
-            >
-              모두 좋아요
-            </AllArea>
-          )}
+          <AllArea
+            isActive={props.selectedArea.length === props.content.length}
+            onClick={() => {
+              if (props.selectedArea.length === props.content.length) {
+                props.setSelectedArea([]);
+                return;
+              }
+              props.setSelectedArea(props.content);
+            }}
+          >
+            모두 좋아요
+          </AllArea>
         </MoreArea>
       ) : null}
     </ChooseBox>
