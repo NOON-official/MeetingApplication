@@ -20,19 +20,16 @@ const DATA = [
     id: 1,
     title: '서울 / 경기',
     content: ['강남', '건대', '시촌', '홍대', '수원', '인천'],
-    option: '',
   },
   {
     id: 2,
     title: '대구',
     content: ['경대 북문', '계대 앞', '동성로', '영대역'],
-    option: '',
   },
   {
     id: 3,
     title: '부산',
     content: ['경대 앞', '부산대 앞', '서면', '해운대'],
-    option: 'hidden',
   },
 ];
 
@@ -46,25 +43,15 @@ export default function ApplyArea() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [selectedCity, setSelectedCity] = useState('');
   const [selectedArea, setSelectedArea] = useState(areas);
-//   console.log(selectedArea);
+
   useEffect(() => {
     if (finishedStep < 1) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
   }, [finishedStep]);
-
-  const handleArea = useCallback(
-    (val, isChecked) => {
-      if (isChecked) {
-        setSelectedArea([...selectedArea, val]);
-        return;
-      }
-      setSelectedArea(selectedArea.filter((v) => v !== val));
-    },
-    [selectedArea],
-  );
 
   const setModal1 = (bool) => {
     setOpenModal1(bool);
@@ -83,7 +70,7 @@ export default function ApplyArea() {
   };
 
   const handleSubmit = useCallback(() => {
-    if (selectedArea === undefined) {
+    if (selectedArea.length < 1) {
       setOpenModal2(true);
       return;
     }
@@ -95,69 +82,32 @@ export default function ApplyArea() {
     navigate('/apply/3');
   }, [selectedArea]);
 
-  // if (selectDate.length < 4 && selectedArea < 1) {
-  //   setOpenModal3(true);
-  //   return;
-  // }
-  // if (selectDate.length < 4) {
-  //   setOpenModal1(true);
-  //   return;
-  // }
-  // if (selectedArea < 1) {
-  //   setOpenModal2(true);
-  //   return;
-  // }
-  // dispatch(
-  //   submitStep2({
-  //     availableDates: [...selectDate.map((a) => a.format()).sort()], // 오름차순 정렬
-  //     areas: selectedArea,
-  //   }),
-  // );
-  // navigate('/apply/3');
-  // }, [selectDate, selectedArea]);
-
   return (
     <ApplyLayout>
       <NotEnoughDateModal open={openModal1} setModal={setModal1} />
       <NotEnoughPlaceModal open={openModal2} setModal={setModal2} />
       <IsPageCompleteModal open={openModal3} setModal={setModal3} />
       <ProgressBar page={3} />
-
       <Title>
         <Maintitle>
           <Pink>미팅 선호 지역</Pink>을 알려주세요
         </Maintitle>
         <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title>
-      {/* {DATA.map((x) => {
+      {DATA.map((x) => {
         return (
           <AreaAccordion
             key={x.id}
             title={x.title}
+            setSelectedCity={setSelectedCity}
+            setSelectedArea={setSelectedArea}
+            selectedCity={selectedCity}
+            selectedArea={selectedArea}
+            isShown={selectedCity === x.title}
             content={x.content}
-            option={x.option}
-            onChange={() => setSelectedArea(x.content)}
           />
         );
-      })} */}
-      <AreaAccordion
-        title="서울 / 경기"
-        content={['강남', '건대', '신촌', '홍대', '수원', '인천']}
-        option=""
-        onChange={(result) => setSelectedArea(result)}
-      />
-      <AreaAccordion
-        title="대구"
-        content={['경대 북문', '계대 앞', '동성로', '영대역']}
-        option=""
-        onChange={(result) => setSelectedArea(result)}
-      />
-      <AreaAccordion
-        title="부산"
-        content={['경대 앞', '부산대 앞', '서면', '해운대']}
-        option="hidden"
-        onChange={(result) => setSelectedArea(result)}
-      />
+      })}
       <SEarth />
       <Footer>
         <ButtonBox>
