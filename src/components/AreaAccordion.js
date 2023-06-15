@@ -3,39 +3,49 @@ import { ReactComponent as PinkDownArrow } from '../asset/svg/PinkDownArrow.svg'
 import { ReactComponent as PinkUpArrow } from '../asset/svg/PinkUpArrow.svg';
 
 export default function AreaAccordion(props) {
+  const {
+    selectedCity,
+    setSelectedCity,
+    selectedArea,
+    setSelectedArea,
+    title,
+    isShown,
+    content,
+  } = props;
+
   return (
     <ChooseBox>
       <AreaButton
         onClick={() => {
-          if (props.selectedCity === props.title) {
-            props.setSelectedCity('');
+          if (selectedCity === title) {
+            setSelectedCity('');
+            setSelectedArea([]);
             return;
           }
-          props.setSelectedCity(props.title);
+          setSelectedCity(title);
+          setSelectedArea([]);
         }}
       >
-        <AreaTitle>{props.title}</AreaTitle>
-        {props.isShown ? (
+        <AreaTitle>{title}</AreaTitle>
+        {isShown ? (
           <PinkDownArrow style={{ color: 'f6eeee' }} />
         ) : (
           <PinkUpArrow style={{ color: 'f6eeee' }} />
         )}
       </AreaButton>
-      {props.isShown ? (
+      {isShown ? (
         <MoreArea>
-          {props.content.map((x) => {
+          {content.map((x) => {
             return (
               <Area
                 key={x}
-                isActive={props.selectedArea.includes(x)}
+                isActive={selectedArea.includes(x)}
                 onClick={() => {
-                  if (props.selectedArea.includes(x)) {
-                    props.setSelectedArea(
-                      props.selectedArea.filter((a) => a !== x),
-                    );
+                  if (selectedArea.includes(x)) {
+                    setSelectedArea(selectedArea.filter((a) => a !== x).sort());
                     return;
                   }
-                  props.setSelectedArea([...props.selectedArea, x]);
+                  setSelectedArea([...selectedArea, x].sort());
                 }}
               >
                 {x}
@@ -44,13 +54,13 @@ export default function AreaAccordion(props) {
           })}
 
           <AllArea
-            isActive={props.selectedArea.length === props.content.length}
+            isActive={selectedArea[3] === content[3]}
             onClick={() => {
-              if (props.selectedArea.length === props.content.length) {
-                props.setSelectedArea([]);
+              if (selectedArea.length === content.length) {
+                setSelectedArea([]);
                 return;
               }
-              props.setSelectedArea(props.content);
+              setSelectedArea(content);
             }}
           >
             모두 좋아요
