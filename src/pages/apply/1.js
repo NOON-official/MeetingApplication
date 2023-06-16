@@ -26,10 +26,10 @@ export default function Apply1Page() {
       window.alert('잘못된 접근입니다');
       navigate('/');
     }
-    if (memberCount === 2) {
-      localStorage.removeItem('apply-data');
-      window.location.reload();
-    }
+    // if (memberCount === 2) {
+    //   localStorage.removeItem('apply-data');
+    //   window.location.reload();
+    // }
   }, [accessToken, memberCount]);
 
   const setModal = (bool) => {
