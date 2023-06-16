@@ -8,7 +8,8 @@ const initialState = {
   memberCount: 3, // 2: 2대2, 3: 3대3
   universities: [],
   availableDates: [],
-  areas: [],
+  areas: { city: 0, area: [] },
+  city: 0,
   members: [{}, {}, {}],
   intro: '',
   drink: 3,
@@ -46,7 +47,24 @@ const applySlice = createSlice({
 
       state.finishedStep = 2;
       state.availableDates = availableDates;
+      // state.areas = areas;
+
+      const stored = localStorage.getItem('apply-data');
+      localStorage.setItem(
+        APPLY_STORAGE_KEY,
+        JSON.stringify({
+          ...JSON.parse(stored),
+          ...action.payload,
+          finishedStep: state.finishedStep,
+        }),
+      );
+    },
+    submitArea: (state, action) => {
+      const { areas, city } = action.payload;
+
+      state.finishedStep = 3;
       state.areas = areas;
+      state.city = city;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -61,7 +79,7 @@ const applySlice = createSlice({
     submitStep3: (state, action) => {
       const { members } = action.payload;
 
-      state.finishedStep = 3;
+      state.finishedStep = 4;
       state.members = members;
 
       const stored = localStorage.getItem('apply-data');
@@ -135,6 +153,7 @@ export const {
   submitStep4,
   submitStep5,
   submitDate,
+  submitArea,
 } = applySlice.actions;
 
 export default applySlice.reducer;
