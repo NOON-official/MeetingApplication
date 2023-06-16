@@ -12,7 +12,7 @@ import NotEnoughPlaceModal from '../../components/Modal/NotEnoughPlaceModal';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { ReactComponent as Earth } from '../../asset/svg/Earth.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
-import { submitStep2 } from '../../features/apply';
+import { submitArea } from '../../features/apply';
 import AreaAccordion from '../../components/AreaAccordion';
 
 const DATA = [
@@ -34,20 +34,19 @@ const DATA = [
 ];
 
 export default function ApplyArea() {
+  const { finishedStep, areas, city } = useSelector((store) => store.apply);
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
-  const { finishedStep, availableDates, areas } = useSelector(
-    (store) => store.apply,
-  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [selectedCity, setSelectedCity] = useState('');
-  const [selectedArea, setSelectedArea] = useState(areas);
+  const [selectedArea, setSelectedArea] = useState({
+    city,
+    area: areas,
+  });
 
   useEffect(() => {
-    if (finishedStep < 1) {
+    if (finishedStep < 2) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
@@ -70,13 +69,14 @@ export default function ApplyArea() {
   };
 
   const handleSubmit = useCallback(() => {
-    if (selectedArea.length < 1) {
+    if (selectedArea.area.length < 1) {
       setOpenModal2(true);
       return;
     }
     dispatch(
-      submitStep2({
-        areas: selectedArea,
+      submitArea({
+        areas: selectedArea.area,
+        city: selectedArea.city,
       }),
     );
     navigate('/apply/3');
@@ -98,16 +98,15 @@ export default function ApplyArea() {
         return (
           <AreaAccordion
             key={x.id}
+            id={x.id}
             title={x.title}
-            setSelectedCity={setSelectedCity}
-            setSelectedArea={setSelectedArea}
-            selectedCity={selectedCity}
-            selectedArea={selectedArea}
-            isShown={selectedCity === x.title}
             content={x.content}
+            selectedArea={selectedArea}
+            setSelectedArea={setSelectedArea}
           />
         );
       })}
+
       <SEarth />
       <Footer>
         <ButtonBox>
@@ -158,12 +157,6 @@ const ButtonBox = styled.div`
   justify-content: center;
   justify-content: space-between;
   margin-top: 5%;
-`;
-
-const ScrollDiv = styled.div`
-  width: 90%;
-  align-items: flex-start;
-  margin-top: 3%;
 `;
 
 const SEarth = styled(Earth)`

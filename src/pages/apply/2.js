@@ -34,14 +34,11 @@ export default function Apply2() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
-  const { finishedStep, availableDates, areas } = useSelector(
-    (store) => store.apply,
-  );
+  const { finishedStep, availableDates } = useSelector((store) => store.apply);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [selectedDate, setSelectedDate] = useState();
-  const [selectedArea, setSelectedArea] = useState(areas);
+  const [selectedDate, setSelectedDate] = useState(availableDates);
 
   useEffect(() => {
     if (finishedStep < 1) {
@@ -49,17 +46,6 @@ export default function Apply2() {
       navigate(`/apply/${finishedStep + 1}`);
     }
   }, [finishedStep]);
-
-  const handleArea = useCallback(
-    (val, isChecked) => {
-      if (isChecked) {
-        setSelectedArea([...selectedArea, val]);
-        return;
-      }
-      setSelectedArea(selectedArea.filter((v) => v !== val));
-    },
-    [selectedArea],
-  );
 
   const setModal1 = (bool) => {
     setOpenModal1(bool);
@@ -90,27 +76,6 @@ export default function Apply2() {
     navigate('/apply/area');
   }, [selectedDate]);
 
-  // if (selectDate.length < 4 && selectedArea < 1) {
-  //   setOpenModal3(true);
-  //   return;
-  // }
-  // if (selectDate.length < 4) {
-  //   setOpenModal1(true);
-  //   return;
-  // }
-  // if (selectedArea < 1) {
-  //   setOpenModal2(true);
-  //   return;
-  // }
-  // dispatch(
-  //   submitStep2({
-  //     availableDates: [...selectDate.map((a) => a.format()).sort()], // 오름차순 정렬
-  //     areas: selectedArea,
-  //   }),
-  // );
-  // navigate('/apply/3');
-  // }, [selectDate, selectedArea]);
-
   return (
     <ApplyLayout>
       <NotEnoughDateModal open={openModal1} setModal={setModal1} />
@@ -136,39 +101,6 @@ export default function Apply2() {
         })}
       </ChooseBox>
 
-      {/* <Title2>
-        <Maintitle>
-          <Pink>미팅 선호 지역</Pink>을 알려주세요
-        </Maintitle>
-        <Subtitle>중복 선택이 가능해요</Subtitle>
-      </Title2> */}
-      {/* <ChooseBox>
-        <ChooseButton
-          isActive={selectedArea?.includes(1)}
-          onChange={(isActive) => handleArea(1, isActive)}
-          content="강남"
-        />
-        <ChooseButton
-          isActive={selectedArea?.includes(2)}
-          onChange={(isActive) => handleArea(2, isActive)}
-          content="건대"
-        />
-        <ChooseButton
-          isActive={selectedArea?.includes(3)}
-          onChange={(isActive) => handleArea(3, isActive)}
-          content="신촌"
-        />
-        <ChooseButton
-          isActive={selectedArea?.includes(4)}
-          onChange={(isActive) => handleArea(4, isActive)}
-          content="홍대"
-        />
-        <ChooseButton
-          isActive={selectedArea?.includes(5)}
-          onChange={(isActive) => handleArea(5, isActive)}
-          content="상관없음"
-        />
-      </ChooseBox> */}
       <SEarth />
       <Footer>
         <ButtonBox>
@@ -192,13 +124,6 @@ const Maintitle = styled.div`
   font-family: 'Nanum JungHagSaeng';
   font-weight: 400;
   font-size: 35px;
-`;
-
-const Subtitle = styled.p`
-  margin-top: 4%;
-  color: #aaaaaa;
-  font-weight: 400;
-  font-size: 13px;
 `;
 
 const Pink = styled.span`
@@ -225,62 +150,6 @@ const ChooseBox = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
-`;
-
-const ChooseDate = styled.button`
-  margin: 0 5px 15px 0;
-  border-radius: 10px;
-  height: 40px;
-  width: 100%;
-  background: ${(props) => (props.isActive ? '#EB8888' : 'F6EEEE')};
-  color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
-  border-color: transparent;
-  font-family: 'Nanum JungHagSaeng';
-  font-size: 18px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const CalendarDiv = styled.div`
-  padding-left: 8%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  .custom-calendar.rmdp-shadow {
-    box-shadow: none;
-  }
-  .custom-calendar.rmdp-wrapper {
-    border: 1px solid #f49393;
-    border-radius: 10px;
-  }
-  .rmdp-arrow {
-    border: solid black;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    height: 3px;
-    margin-top: 5px;
-    padding: 2px;
-    width: 3px;
-  }
-  .rmdp-week-day {
-    color: black;
-    cursor: default;
-    font-size: 12px;
-    font-weight: 400;
-  }
-  .rmdp-day.rmdp-selected span:not(.highlight) {
-    background-color: #f49393;
-    box-shadow: 0 0 3px #8798ad;
-    color: #fff;
-  }
-`;
-
-const ScrollDiv = styled.div`
-  width: 90%;
-  align-items: flex-start;
-  margin-top: 3%;
 `;
 
 const SEarth = styled(Earth)`
