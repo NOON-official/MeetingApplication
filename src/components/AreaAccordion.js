@@ -5,6 +5,11 @@ import { ReactComponent as PinkUpArrow } from '../asset/svg/PinkUpArrow.svg';
 export default function AreaAccordion(props) {
   const { id, title, content, selectedArea, setSelectedArea } = props;
 
+  const isOpen = selectedArea.city === id;
+
+  const isAllSelected =
+    isOpen && selectedArea.area.every((value, idx) => value === content[idx]);
+
   const handleCity = () => {
     setSelectedArea({ city: id, area: selectedArea.area });
   };
@@ -13,12 +18,12 @@ export default function AreaAccordion(props) {
     if (selectedArea.city === id && selectedArea.area.includes(x)) {
       setSelectedArea({
         city: id,
-        area: selectedArea.area.filter((area) => area !== x),
+        area: selectedArea.area.filter((area) => area !== x).sort(),
       });
     } else {
       setSelectedArea({
         city: id,
-        area: [...selectedArea.area, x],
+        area: [...selectedArea.area, x].sort(),
       });
     }
   };
@@ -30,8 +35,6 @@ export default function AreaAccordion(props) {
     }
     setSelectedArea({ city: id, area: content });
   };
-
-  const isOpen = selectedArea.city === id;
 
   return (
     <ChooseBox>
@@ -57,10 +60,7 @@ export default function AreaAccordion(props) {
             );
           })}
 
-          <AllArea
-            isActive={selectedArea.area === content}
-            onClick={selectAllAreas}
-          >
+          <AllArea isActive={isAllSelected} onClick={selectAllAreas}>
             모두 좋아요
           </AllArea>
         </MoreArea>
