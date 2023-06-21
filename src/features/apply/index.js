@@ -10,7 +10,7 @@ const initialState = {
   availableDates: [],
   areas: { city: 0, area: [] },
   city: 0,
-  members: [{}, {}, {}],
+  members: [],
   intro: '',
   drink: 3,
   prefSameUniversity: true,
