@@ -11,6 +11,7 @@ const initialState = {
   areas: { city: 0, area: [] },
   city: 0,
   members: [],
+  name: '',
   intro: '',
   drink: 3,
   prefSameUniversity: true,
@@ -93,10 +94,11 @@ const applySlice = createSlice({
       );
     },
     submitStep4: (state, action) => {
-      const { intro } = action.payload;
+      const { intro, name } = action.payload;
 
-      state.finishedStep = 4;
+      state.finishedStep = 5;
       state.intro = intro;
+      state.name = name;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
