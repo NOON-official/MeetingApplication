@@ -38,10 +38,11 @@ export default function ApplyArea() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [selectedArea, setSelectedArea] = useState({ city, area: areas });
   const [openCity, setOpenCity] = useState(selectedArea.city);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (finishedStep < 2) {
