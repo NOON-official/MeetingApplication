@@ -24,7 +24,7 @@ function Teambox({ member, setMember, name }) {
       setMember({ ...member, role: 1 });
       setRole(1);
     }
-  }, []);
+  }, [member]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -34,24 +34,24 @@ function Teambox({ member, setMember, name }) {
   };
 
   const handleCancelPlus1 = useCallback(() => {
-    setMember({ ...member, role: 1 });
+    setMember((prev) => ({ ...prev, role: 1 }));
     setRole(1);
-  }, [member]);
+  }, []);
 
   const handleCancelPlus2 = useCallback(() => {
-    setMember({ ...member, role: 2 });
+    setMember((prev) => ({ ...prev, role: 2 }));
     setRole(2);
-  }, [member]);
+  }, []);
 
   const handleCancelPlus3 = useCallback(() => {
-    setMember({ ...member, role: 3 });
+    setMember((prev) => ({ ...prev, role: 3 }));
     setRole(3);
-  }, [member]);
+  }, []);
 
   const handleCancelPlus4 = useCallback(() => {
-    setMember({ ...member, role: 4 });
+    setMember((prev) => ({ ...prev, role: 4 }));
     setRole(4);
-  }, [member]);
+  }, []);
 
   const showModal2 = () => {
     setIsModalOpen2(true);
@@ -60,28 +60,19 @@ function Teambox({ member, setMember, name }) {
     setIsModalOpen2(false);
   };
 
-  const [s, setS] = useState(member.appearance);
+  const [appearance, setAppearance] = useState(member.appearance);
 
-  const handleAgeChange = useCallback(
-    (value) => {
-      setMember({ ...member, age: parseInt(value) });
-    },
-    [member],
-  );
+  const handleAgeChange = useCallback((value) => {
+    setMember((prevMember) => ({ ...prevMember, age: parseInt(value) }));
+  }, []);
 
-  const handleMbtiChange = useCallback(
-    (value) => {
-      setMember({ ...member, mbti: parseInt(value) });
-    },
-    [member],
-  );
+  const handleMbtiChange = useCallback((value) => {
+    setMember((prevMember) => ({ ...prevMember, mbti: parseInt(value) }));
+  }, []);
 
-  const handleSimilarChange = useCallback(
-    (e) => {
-      setS(e.target.value);
-    },
-    [member],
-  );
+  const handleSimilarChange = useCallback((e) => {
+    setAppearance(e.target.value);
+  }, []);
 
   const profileimg = useMemo(() => {
     if (role === 1) {
@@ -242,14 +233,14 @@ function Teambox({ member, setMember, name }) {
         <Info>
           <BigTitle>닮은꼴</BigTitle>
           <SInput
-            value={s}
+            value={appearance}
             maxLength={5}
             onChange={handleSimilarChange}
             placeholder="(선택)"
             autoComplete="off"
             required
             onBlur={() => {
-              setMember({ ...member, appearance: s });
+              setMember({ ...member, appearance });
             }}
           />
           <SQuestion onClick={showModal2} />
