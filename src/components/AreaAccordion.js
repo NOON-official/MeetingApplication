@@ -3,15 +3,24 @@ import { ReactComponent as PinkDownArrow } from '../asset/svg/PinkDownArrow.svg'
 import { ReactComponent as PinkUpArrow } from '../asset/svg/PinkUpArrow.svg';
 
 export default function AreaAccordion(props) {
-  const { id, title, content, selectedArea, setSelectedArea } = props;
+  const {
+    id,
+    title,
+    content,
+    selectedArea,
+    setSelectedArea,
+    openCity,
+    setOpenCity,
+  } = props;
 
-  const isOpen = selectedArea.city === id;
+  const isOpen = openCity === id;
 
-  const isAllSelected =
-    isOpen && selectedArea.area.every((value, idx) => value === content[idx]);
+  const isAllSelected = selectedArea.area.every(
+    (value, idx) => value === content[idx],
+  );
 
   const handleCity = () => {
-    setSelectedArea({ city: id, area: selectedArea.area });
+    setOpenCity(id);
   };
 
   const handleArea = (x) => {
