@@ -4,13 +4,14 @@ import { useCallback, useMemo, useState, useEffect } from 'react';
 import { Select, Modal, Input } from 'antd';
 import theme from '../style/theme';
 import Mbti from '../asset/Mbti';
+import Universities from '../asset/Universities';
 import { ReactComponent as Plus } from '../asset/svg/Plus.svg';
-import { ReactComponent as Search } from '../asset/svg/Search.svg';
 import { ReactComponent as Question } from '../asset/svg/Question.svg';
 import { ReactComponent as Profile1 } from '../asset/svg/Profile1.svg';
 import { ReactComponent as Profile2 } from '../asset/svg/Profile2.svg';
 import { ReactComponent as Profile3 } from '../asset/svg/Profile3.svg';
 import { ReactComponent as Profile4 } from '../asset/svg/Profile4.svg';
+import { ReactComponent as SearchIcon } from '../asset/svg/SearchIcon.svg';
 
 function Teambox({ member, setMember, name }) {
   const { Option } = Select;
@@ -18,6 +19,7 @@ function Teambox({ member, setMember, name }) {
   const [role, setRole] = useState(member.role);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const [isModalOpen3, setIsModalOpen3] = useState(false);
 
   useEffect(() => {
     if (Object.keys(member).length === 0 && name === '대표자') {
@@ -31,6 +33,20 @@ function Teambox({ member, setMember, name }) {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  const showModal2 = () => {
+    setIsModalOpen2(true);
+  };
+  const handleCancel2 = () => {
+    setIsModalOpen2(false);
+  };
+
+  const showModal3 = () => {
+    setIsModalOpen3(true);
+  };
+  const handleCancel3 = () => {
+    setIsModalOpen3(false);
   };
 
   const handleCancelPlus1 = useCallback(() => {
@@ -53,15 +69,6 @@ function Teambox({ member, setMember, name }) {
     setRole(4);
   }, []);
 
-  const showModal2 = () => {
-    setIsModalOpen2(true);
-  };
-  const handleCancel2 = () => {
-    setIsModalOpen2(false);
-  };
-
-  const [appearance, setAppearance] = useState(member.appearance);
-
   const handleAgeChange = useCallback((value) => {
     setMember((prevMember) => ({ ...prevMember, age: parseInt(value) }));
   }, []);
@@ -69,6 +76,12 @@ function Teambox({ member, setMember, name }) {
   const handleMbtiChange = useCallback((value) => {
     setMember((prevMember) => ({ ...prevMember, mbti: parseInt(value) }));
   }, []);
+
+  const handleUnivChange = useCallback((value) => {
+    setMember((prevMember) => ({ ...prevMember, university: parseInt(value) }));
+  });
+
+  const [appearance, setAppearance] = useState(member.appearance);
 
   const handleSimilarChange = useCallback((e) => {
     setAppearance(e.target.value);
@@ -89,6 +102,18 @@ function Teambox({ member, setMember, name }) {
     }
     return <Plus />;
   });
+
+  const [selectedUniversity, setSelectedUniversity] = useState(
+    Universities[member.university - 1]?.name,
+  );
+  const [searchKeyWord, setSearchKeyWord] = useState(0);
+  const inputChange = (e) => {
+    setSearchKeyWord(e.target.value);
+  };
+
+  const SearchedUniv = Universities.filter(
+    (c) => c.name.indexOf(searchKeyWord) > -1,
+  );
 
   return (
     <Container>
@@ -185,6 +210,7 @@ function Teambox({ member, setMember, name }) {
             defaultValue={member.age}
             showSearch={false}
             bordered={false}
+            placeholder="(필수)"
             removeIcon
             showArrow={false}
             onChange={handleAgeChange}
@@ -203,15 +229,62 @@ function Teambox({ member, setMember, name }) {
           </SSelect>
         </Info>
         <Info>
+          <BigTitle>대학교</BigTitle>
+          <SInput
+            value={selectedUniversity}
+            placeholder="(필수)"
+            autoComplete="off"
+            required
+            onClick={showModal3}
+          />
+          <SearchIcon onClick={showModal3} />
+          <SModal
+            footer={null}
+            title="대학교 선택"
+            open={isModalOpen3}
+            onCancel={handleCancel3}
+          >
+            <ModalTitle>대학교를 검색하세요</ModalTitle>
+            <SearchBox>
+              <SearchInput
+                onChange={inputChange}
+                name="universitySearch"
+                placeholder="학교를 검색해주세요"
+                autoComplete="off"
+              />
+              <SearchIcon />
+            </SearchBox>
+            <SearchList>
+              {SearchedUniv.length === 415
+                ? null
+                : SearchedUniv.map((a) => (
+                    <SearchedUniversity
+                      key={a.id}
+                      onClick={() => {
+                        setSelectedUniversity(a.name);
+                        handleUnivChange(a.id);
+                        handleCancel3();
+                      }}
+                    >
+                      {a.name}
+                    </SearchedUniversity>
+                  ))}
+            </SearchList>
+          </SModal>
+        </Info>
+        <Info>
           <BigTitle>MBTI</BigTitle>
           <SSelect
             defaultValue={Mbti[member.mbti - 1]?.name}
             showSearch={false}
             bordered={false}
+            placeholder="(선택)"
             optionFilterProp="children"
-            suffixIcon={<SSearch />}
+            suffixIcon=""
+            maxLength={10}
             onChange={handleMbtiChange}
           >
+            <Option value="17">만나서 알려줌</Option>
             <Option value="1">ENFJ</Option>
             <Option value="2">ENFP</Option>
             <Option value="3">ENTJ</Option>
@@ -238,7 +311,6 @@ function Teambox({ member, setMember, name }) {
             onChange={handleSimilarChange}
             placeholder="(선택)"
             autoComplete="off"
-            required
             onBlur={() => {
               setMember({ ...member, appearance });
             }}
@@ -273,6 +345,7 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   background-color: ${theme.background};
   border: 1px solid #f1ecec;
   border-radius: 10px;
@@ -339,7 +412,6 @@ const ProfileTitle = styled.div`
 `;
 
 const RightBox = styled.div`
-  padding: 18px 0;
   padding-right: 20px;
   width: 169px;
   display: flex;
@@ -387,13 +459,66 @@ const SSelect = styled(Select)`
   }
 `;
 
-const SSearch = styled(Search)`
-  margin-right: -8px;
+const SearchBox = styled.div`
+  margin-top: 5%;
+  width: 95%;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #eb8888;
+  padding: 0 5px 0 5px;
+  height: 40px;
+  background-color: white;
+`;
+
+const SearchInput = styled.input`
+  display: flex;
+  width: 90%;
+  height: 100%;
+  font-size: 20px;
+  border: 0;
+  outline: none;
+  margin-left: 10px;
+  background-color: transparent;
+  color: #eb8888;
+  font-family: Nanum JungHagSaeng;
+`;
+
+const SearchList = styled.div`
+  margin-left: 2%;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+  ::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  }
+  overflow: scroll;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 200px;
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SearchedUniversity = styled.div`
+  display: flex;
+  min-height: 40px;
+  height: 40px;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  color: #eb8888;
+  font-size: 14px;
+  border-bottom: 1px solid #f6eeee;
+  overflow-x: hidden;
 `;
 
 const SInput = styled(Input)`
   text-align: center;
   width: 100px;
+
   border: none;
   background-color: ${theme.background};
 `;

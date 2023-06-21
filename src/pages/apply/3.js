@@ -13,18 +13,20 @@ import { submitStep3 } from '../../features/apply';
 import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply3Page() {
-  const [openModal, setOpenModal] = useState(false);
   const { finishedStep, members, memberCount } = useSelector(
     (store) => store.apply,
   );
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
   const [member1, setMember1] = useState(members[0] || {});
   const [member2, setMember2] = useState(members[1] || {});
   const [member3, setMember3] = useState(members[2] || {});
+  const [member4, setMember4] = useState(members[3] || {});
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (finishedStep < 2) {
+    if (finishedStep < 3) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
@@ -43,10 +45,10 @@ function Apply3Page() {
       if (
         !member1.age ||
         !member1.role ||
-        !member1.mbti ||
+        !member1.university ||
         !member2.age ||
         !member2.role ||
-        !member2.mbti
+        !member2.university
       ) {
         setOpenModal(true);
       } else {
@@ -57,34 +59,57 @@ function Apply3Page() {
         );
         navigate('/apply/4');
       }
+    } else if (memberCount === 3) {
+      if (
+        !member1.age ||
+        !member1.role ||
+        !member1.university ||
+        !member2.age ||
+        !member2.role ||
+        !member2.university ||
+        !member3.age ||
+        !member3.role ||
+        !member3.university
+      ) {
+        setOpenModal(true);
+      } else {
+        dispatch(
+          submitStep3({
+            members: [member1, member2, member3],
+          }),
+        );
+        navigate('/apply/4');
+      }
     } else if (
       !member1.age ||
       !member1.role ||
-      !member1.mbti ||
+      !member1.university ||
       !member2.age ||
       !member2.role ||
-      !member2.mbti ||
+      !member2.university ||
       !member3.age ||
       !member3.role ||
-      !member3.mbti
+      !member3.university ||
+      !member4.age ||
+      !member4.role ||
+      !member4.university
     ) {
       setOpenModal(true);
     } else {
       dispatch(
         submitStep3({
-          members: [member1, member2, member3],
+          members: [member1, member2, member3, member4],
         }),
       );
       navigate('/apply/4');
     }
   });
-
   const teamboxcount = useMemo(() => {
     if (memberCount === 2) {
       return (
         <>
           <Teambox member={member1} setMember={setMember1} name="대표자" />
-          <Teambox member={member2} setMember={setMember2} name="팀원 1" />
+          <Teambox member={member2} setMember={setMember2} name="팀원 2" />
         </>
       );
     }
@@ -94,6 +119,16 @@ function Apply3Page() {
           <Teambox member={member1} setMember={setMember1} name="대표자" />
           <Teambox member={member2} setMember={setMember2} name="팀원 2" />
           <Teambox member={member3} setMember={setMember3} name="팀원 3" />
+        </>
+      );
+    }
+    if (memberCount === 4) {
+      return (
+        <>
+          <Teambox member={member1} setMember={setMember1} name="대표자" />
+          <Teambox member={member2} setMember={setMember2} name="팀원 2" />
+          <Teambox member={member3} setMember={setMember3} name="팀원 3" />
+          <Teambox member={member4} setMember={setMember4} name="팀원 4" />
         </>
       );
     }
