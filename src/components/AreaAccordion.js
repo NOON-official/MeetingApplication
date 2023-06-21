@@ -14,10 +14,10 @@ export default function AreaAccordion(props) {
   } = props;
 
   const isOpen = openCity === id;
-
+  console.log(selectedArea);
   const isAllSelected =
-    selectedArea.area.length !== 0 &&
-    selectedArea.area.every((value, idx) => value === content[idx]);
+    selectedArea.area?.length !== 0 &&
+    selectedArea.area?.every((value, idx) => value === content[idx]);
 
   const handleCity = () => {
     setOpenCity(id);
@@ -61,7 +61,7 @@ export default function AreaAccordion(props) {
             return (
               <Area
                 key={x}
-                isActive={selectedArea.area.includes(x)}
+                isActive={selectedArea.area?.includes(x)}
                 onClick={() => handleArea(x)}
               >
                 {x}
