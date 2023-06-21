@@ -40,10 +40,8 @@ export default function ApplyArea() {
   const [openModal3, setOpenModal3] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [selectedArea, setSelectedArea] = useState({
-    city,
-    area: areas,
-  });
+  const [selectedArea, setSelectedArea] = useState({ city, area: areas });
+  const [openCity, setOpenCity] = useState(selectedArea.city);
 
   useEffect(() => {
     if (finishedStep < 2) {
@@ -103,6 +101,8 @@ export default function ApplyArea() {
             content={x.content}
             selectedArea={selectedArea}
             setSelectedArea={setSelectedArea}
+            openCity={openCity}
+            setOpenCity={setOpenCity}
           />
         );
       })}
