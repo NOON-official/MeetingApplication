@@ -32,6 +32,7 @@ import ApplyInformation from './pages/apply/information';
 import ApplyUniversity from './pages/apply/university';
 import ApplyArea from './pages/apply/area';
 import ApplyDrink from './pages/apply/drink';
+import ApplyKakaoId from './pages/apply/kakaoId';
 
 const Router = createBrowserRouter([
   {
@@ -153,6 +154,10 @@ const Router = createBrowserRouter([
       {
         path: 'apply/drink',
         element: <ApplyDrink />,
+      },
+      {
+        path: 'apply/kakaoId',
+        element: <ApplyKakaoId />,
       },
       {
         path: '/auth/signin',

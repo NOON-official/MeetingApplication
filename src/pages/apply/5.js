@@ -8,7 +8,6 @@ import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
-import { ReactComponent as Bottom } from '../../asset/svg/Apply5Bottom.svg';
 import ChooseButton from '../../components/ChooseButton';
 import { submitStep5 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
@@ -16,8 +15,9 @@ import ChannelTalk from '../../asset/ChannelTalk';
 
 function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, prefAge, prefSameUniversity, prefVibes, drink } =
-    useSelector((store) => store.apply);
+  const { finishedStep, prefAge, prefVibes } = useSelector(
+    (store) => store.apply,
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,13 +40,6 @@ function Apply5Page() {
     28: { label: <SliderText>28</SliderText> },
     29: { label: <SliderText>29</SliderText> },
   };
-  // const marks2 = {
-  //   1: { label: <SliderText>Level 1</SliderText> },
-  //   2: { label: <SliderText>2</SliderText> },
-  //   3: { label: <SliderText>3</SliderText> },
-  //   4: { label: <SliderText>4</SliderText> },
-  //   5: { label: <SliderText>5</SliderText> },
-  // };
 
   const trackStyle = {
     backgroundColor: '#EB8888',
@@ -54,7 +47,7 @@ function Apply5Page() {
 
   const [ageRange, setAgeRange] = useState(prefAge.length ? prefAge : [23, 25]);
   const [prefMood, setPrefMood] = useState(prefVibes);
-  console.log(ageRange);
+
   const setModal = (bool) => {
     setOpenModal(bool);
   };
@@ -100,6 +93,7 @@ function Apply5Page() {
     setPrefMood([1, 2]);
   };
   const formatter = (value) => `${value}세`;
+
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
@@ -145,30 +139,6 @@ function Apply5Page() {
           content="둘 다 좋아요"
         />
       </ChooseBox2>
-      {/* <Title2>
-        <Maintitle2>주량 레벨</Maintitle2>
-        <Subtitle2>우리팀의 평균 주량을 알려주세요</Subtitle2>
-      </Title2>
-      <AlcholInfo>
-        <AlcholContent>반 병</AlcholContent>
-        <AlcholContent>한 병</AlcholContent>
-        <AlcholContent>한 병 반</AlcholContent>
-        <AlcholContent>두 병</AlcholContent>
-        <AlcholContent>술고래</AlcholContent>
-      </AlcholInfo>
-      <SSlider
-        onChange={setAlchol}
-        value={alchol}
-        trackStyle={trackStyle}
-        tooltip={{
-          open: false,
-        }}
-        dots
-        marks={marks2}
-        max={5}
-        min={1}
-      /> */}
-      {/* <SBottom /> */}
       <Footer>
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
@@ -250,35 +220,8 @@ const SliderText = styled.p`
   font-family: 'Nanum JungHagSaeng';
 `;
 
-const ChooseBox = styled.div`
-  margin-top: 4%;
-  width: 90%;
-  display: flex;
-  justify-content: space-around;
-  padding-bottom: 10%;
-`;
-
 const ChooseBox2 = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
-`;
-
-const AlcholInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-weight: 700;
-  font-size: 14px;
-  margin-top: 8%;
-  width: 90%;
-  color: #eb8888;
-`;
-
-const AlcholContent = styled.div`
-  text-align: center;
-`;
-
-const SBottom = styled(Bottom)`
-  margin-left: 57%;
-  margin-top: 20%;
 `;
