@@ -73,7 +73,7 @@ export default function Apply2() {
         availableDates: selectedDate,
       }),
     );
-    navigate('/apply/area');
+    navigate('/apply/3area');
   }, [selectedDate]);
 
   return (

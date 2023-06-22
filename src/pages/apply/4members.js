@@ -9,10 +9,10 @@ import Teambox from '../../components/Teambox';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
-import { submitStep3 } from '../../features/apply';
+import { submitStep4 } from '../../features/apply';
 import ChannelTalk from '../../asset/ChannelTalk';
 
-function Apply3Page() {
+export default function Apply4Page() {
   const { finishedStep, members, memberCount } = useSelector(
     (store) => store.apply,
   );
@@ -37,7 +37,7 @@ function Apply3Page() {
   };
 
   const handleBefore = () => {
-    navigate('/apply/2');
+    navigate('/apply/3area');
   };
 
   const handleSubmit = useCallback(() => {
@@ -53,11 +53,11 @@ function Apply3Page() {
         setOpenModal(true);
       } else {
         dispatch(
-          submitStep3({
+          submitStep4({
             members: [member1, member2],
           }),
         );
-        navigate('/apply/4');
+        navigate('/apply/5teamName');
       }
     } else if (memberCount === 3) {
       if (
@@ -74,11 +74,11 @@ function Apply3Page() {
         setOpenModal(true);
       } else {
         dispatch(
-          submitStep3({
+          submitStep4({
             members: [member1, member2, member3],
           }),
         );
-        navigate('/apply/4');
+        navigate('/apply/5teamName');
       }
     } else if (
       !member1.age ||
@@ -97,11 +97,11 @@ function Apply3Page() {
       setOpenModal(true);
     } else {
       dispatch(
-        submitStep3({
+        submitStep4({
           members: [member1, member2, member3, member4],
         }),
       );
-      navigate('/apply/4');
+      navigate('/apply/5teamName');
     }
   });
   const teamboxcount = useMemo(() => {
@@ -156,8 +156,6 @@ function Apply3Page() {
     </ApplyLayout>
   );
 }
-
-export default Apply3Page;
 
 const Title = styled.div`
   width: 90%;
