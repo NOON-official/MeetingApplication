@@ -8,7 +8,7 @@ const initialState = {
   memberCount: 3, // 2: 2대2, 3: 3대3
   universities: [],
   availableDates: [],
-  areas: { city: 0, area: [] },
+  areas: [],
   city: 0,
   members: [],
   name: '',
@@ -32,7 +32,6 @@ const applySlice = createSlice({
 
       state.finishedStep = 1;
       state.memberCount = memberCount;
-      // state.universities = universities;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -45,11 +44,10 @@ const applySlice = createSlice({
       );
     },
     submitStep2: (state, action) => {
-      const { availableDates, areas } = action.payload;
+      const { availableDates } = action.payload;
 
       state.finishedStep = 2;
       state.availableDates = availableDates;
-      // state.areas = areas;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -61,7 +59,7 @@ const applySlice = createSlice({
         }),
       );
     },
-    submitArea: (state, action) => {
+    submitStep3: (state, action) => {
       const { areas, city } = action.payload;
 
       state.finishedStep = 3;
@@ -78,7 +76,7 @@ const applySlice = createSlice({
         }),
       );
     },
-    submitStep3: (state, action) => {
+    submitStep4: (state, action) => {
       const { members } = action.payload;
 
       state.finishedStep = 4;
@@ -94,7 +92,7 @@ const applySlice = createSlice({
         }),
       );
     },
-    submitStep4: (state, action) => {
+    submitStep5: (state, action) => {
       const { intro, name } = action.payload;
 
       state.finishedStep = 5;
@@ -111,13 +109,11 @@ const applySlice = createSlice({
         }),
       );
     },
-    submitStep5: (state, action) => {
-      const { drink, prefAge, prefSameUniversity, prefVibes } = action.payload;
+    submitStep6: (state, action) => {
+      const { prefAge, prefVibes } = action.payload;
 
-      state.finishedStep = 5;
-      // state.drink = drink;
+      state.finishedStep = 6;
       state.prefAge = prefAge;
-      // state.prefSameUniversity = prefSameUniversity;
       state.prefVibes = prefVibes;
 
       const stored = localStorage.getItem('apply-data');
@@ -130,10 +126,10 @@ const applySlice = createSlice({
         }),
       );
     },
-    submitDrink: (state, action) => {
+    submitStep7: (state, action) => {
       const { drink, moreMember } = action.payload;
 
-      state.finishedStep = 6;
+      state.finishedStep = 7;
       state.drink = drink;
       state.moreMember = moreMember;
 
@@ -147,10 +143,10 @@ const applySlice = createSlice({
         }),
       );
     },
-    submitId: (state, action) => {
+    submitStep8: (state, action) => {
       const { kakaoId } = action.payload;
 
-      state.finishedStep = 7;
+      state.finishedStep = 8;
       state.kakaoId = kakaoId;
 
       const stored = localStorage.getItem('apply-data');
@@ -188,10 +184,10 @@ export const {
   submitStep3,
   submitStep4,
   submitStep5,
+  submitStep6,
+  submitStep7,
+  submitStep8,
   submitDate,
-  submitArea,
-  submitDrink,
-  submitId,
 } = applySlice.actions;
 
 export default applySlice.reducer;

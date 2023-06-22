@@ -6,7 +6,7 @@ const Progress = styled.div`
   margin-top: 20px;
   position: relative;
   width: 90%;
-  height: 24px;
+  height: 20px;
   background-color: #f1ecec;
   border-radius: 20px;
 `;

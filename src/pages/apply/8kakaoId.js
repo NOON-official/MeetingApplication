@@ -8,13 +8,13 @@ import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
-import { submitId } from '../../features/apply';
+import { submitStep8 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
 import { ReactComponent as Bookmark } from '../../asset/svg/Bookmark.svg';
 import { ReactComponent as Bottom } from '../../asset/svg/Baloon.svg';
 
-export default function ApplyKakaoId() {
+export default function Apply8Page() {
   const [openModal, setOpenModal] = useState(false);
   const { finishedStep, kakaoId } = useSelector((store) => store.apply);
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function ApplyKakaoId() {
   const [Id, setId] = useState(kakaoId);
 
   useEffect(() => {
-    if (finishedStep < 6) {
+    if (finishedStep < 7) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
@@ -34,7 +34,7 @@ export default function ApplyKakaoId() {
   };
 
   const handleBefore = useCallback(() => {
-    navigate('/apply/drink');
+    navigate('/apply/7drink');
   });
 
   const handleSubmit = useCallback(() => {
@@ -43,7 +43,7 @@ export default function ApplyKakaoId() {
       return;
     }
     dispatch(
-      submitId({
+      submitStep8({
         kakaoId: Id,
       }),
     );
