@@ -34,15 +34,19 @@ const DATA = [
 ];
 
 export default function ApplyArea() {
-  const { finishedStep, areas } = useSelector((store) => store.apply);
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
-  const [selectedArea, setSelectedArea] = useState({ areas });
-  const [openCity, setOpenCity] = useState(selectedArea.city);
+  const { finishedStep, areas, city } = useSelector((store) => store.apply);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [cityArea, setCityArea] = useState({
+    SelectCity: city,
+    SelectArea: areas,
+  });
+  const [openCity, setOpenCity] = useState(city);
 
   useEffect(() => {
     if (finishedStep < 2) {
@@ -68,18 +72,18 @@ export default function ApplyArea() {
   };
 
   const handleSubmit = useCallback(() => {
-    if (selectedArea.area.length < 1) {
+    if (cityArea.SelectArea.length < 1) {
       setOpenModal2(true);
       return;
     }
     dispatch(
       submitArea({
-        areas: selectedArea.area,
-        city: selectedArea.city,
+        city: cityArea.SelectCity,
+        areas: cityArea.SelectArea,
       }),
     );
     navigate('/apply/3');
-  }, [selectedArea]);
+  }, [cityArea]);
 
   return (
     <ApplyLayout>
@@ -100,8 +104,8 @@ export default function ApplyArea() {
             id={x.id}
             title={x.title}
             content={x.content}
-            selectedArea={selectedArea}
-            setSelectedArea={setSelectedArea}
+            cityArea={cityArea}
+            setCityArea={setCityArea}
             openCity={openCity}
             setOpenCity={setOpenCity}
           />
