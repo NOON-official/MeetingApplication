@@ -63,7 +63,7 @@ export default function ApplyDrink() {
         moreMember: changeCount,
       }),
     );
-    navigate('/');
+    navigate('/apply/kakaoId');
   }, [alchol, changeCount]);
 
   return (
