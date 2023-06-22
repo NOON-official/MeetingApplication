@@ -133,7 +133,7 @@ export default function Apply4Page() {
       );
     }
     return null;
-  }, [memberCount]);
+  });
 
   return (
     <ApplyLayout>
