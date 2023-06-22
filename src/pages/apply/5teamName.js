@@ -5,15 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'antd';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
-import { ReactComponent as Baloon } from '../../asset/svg/Baloon.svg';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
-import { submitStep4 } from '../../features/apply';
+import { submitStep5 } from '../../features/apply';
 import NotEnoughIntroModal from '../../components/Modal/NotEnoughInroModal';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
 
-function Apply4Page() {
+export default function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
 
@@ -39,7 +38,7 @@ function Apply4Page() {
   }, []);
 
   const handleBefore = () => {
-    navigate('/apply/3');
+    navigate('/apply/4members');
   };
 
   const handleSubmit = useCallback(() => {
@@ -52,12 +51,12 @@ function Apply4Page() {
       return;
     }
     dispatch(
-      submitStep4({
+      submitStep5({
         intro: introduce,
         name: teamName,
       }),
     );
-    navigate('/apply/5');
+    navigate('/apply/6prefAge');
   }, [introduce, teamName]);
 
   const setModal = (bool) => {
@@ -115,9 +114,6 @@ function Apply4Page() {
           (아, 참고로 잘생겼습니다^^)"
         />
       </Text>
-      <SBaloon>
-        <Baloon />
-      </SBaloon>
       <Footer>
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
@@ -129,38 +125,31 @@ function Apply4Page() {
   );
 }
 
-export default Apply4Page;
-
 const Title = styled.div`
   width: 90%;
-  margin-top: 8%;
-  height: 10%;
-  /* min-height: 10%; */
+  margin: 6% 0 4%;
 `;
 
 const Maintitle = styled.div`
   width: 100%;
-  /* padding-bottom: 1%; */
   font-family: 'Nanum JungHagSaeng';
   font-weight: 400;
   font-size: 35px;
 `;
 
 const Pink = styled.span`
-  /* padding-bottom: 5%; */
   color: ${theme.pink};
 `;
 
 const Subtitle = styled.p`
-  margin: 2% 0;
+  margin-top: 3%;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
 `;
+
 const Text = styled.div`
-  /* margin-top: 20%; */
-  /* padding-bottom: 10%; */
   width: 100%;
   display: flex;
   justify-content: center;
@@ -178,7 +167,6 @@ const SInput = styled(Input)`
 const STextArea = styled(Input.TextArea)`
   background-color: white;
   width: 90%;
-  margin-top: 9%;
   border: 1px solid #f1ecec;
   border-radius: 10px;
 `;
@@ -186,7 +174,7 @@ const STextArea = styled(Input.TextArea)`
 const Alert = styled.p`
   z-index: 1;
   position: absolute;
-  top: 25%;
+  top: 10%;
   right: 10%;
   color: #aaaaaa;
   font-weight: 400;
@@ -208,11 +196,4 @@ const ButtonBox = styled.div`
   justify-content: center;
   justify-content: space-between;
   margin-top: 5%;
-`;
-
-const SBaloon = styled.div`
-  width: 90%;
-  margin-top: 15px;
-  display: flex;
-  justify-content: flex-end;
 `;

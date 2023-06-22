@@ -3,39 +3,48 @@ import { ReactComponent as PinkDownArrow } from '../asset/svg/PinkDownArrow.svg'
 import { ReactComponent as PinkUpArrow } from '../asset/svg/PinkUpArrow.svg';
 
 export default function AreaAccordion(props) {
-  const { id, title, content, cityArea, setCityArea, openCity, setOpenCity } =
-    props;
+  const {
+    id,
+    title,
+    content,
+    selectCity,
+    selectArea,
+    setSelectArea,
+    setSelectCity,
+    openCity,
+    setOpenCity,
+  } = props;
 
   const isOpen = openCity === id;
 
   const isAllSelected =
-    cityArea.SelectArea?.length !== 0 &&
-    cityArea.SelectArea?.every((value, idx) => value === content[idx]);
+    selectArea?.length !== 0 &&
+    selectArea?.every((value, idx) => value === content[idx]);
 
   const handleCity = () => {
     setOpenCity(id);
   };
 
   const handleArea = (x) => {
-    if (cityArea.SelectCity === id && cityArea.SelectArea.includes(x)) {
-      setCityArea({
-        SelectCity: id,
-        SelectArea: cityArea.SelectArea.filter((area) => area !== x).sort(),
-      });
+    setSelectCity(id);
+    if (selectCity === id && selectArea?.includes(x)) {
+      setSelectArea(selectArea?.filter((a) => x !== a).sort());
+      return;
+    }
+    if (selectCity !== id) {
+      setSelectArea([x]);
     } else {
-      setCityArea({
-        SelectCity: id,
-        SelectArea: [...cityArea.SelectArea, x].sort(),
-      });
+      setSelectArea([...selectArea, x].sort());
     }
   };
 
   const selectAllAreas = () => {
-    if (cityArea.SelectArea === content) {
-      setCityArea({ SelectCity: id, SelectArea: [] });
+    setSelectCity(id);
+    if (selectArea === content) {
+      setSelectArea([]);
       return;
     }
-    setCityArea({ SelectCity: id, SelectArea: content });
+    setSelectArea(content);
   };
 
   return (
@@ -54,7 +63,7 @@ export default function AreaAccordion(props) {
             return (
               <Area
                 key={x}
-                isActive={cityArea.SelectArea?.includes(x)}
+                isActive={selectArea?.includes(x)}
                 onClick={() => handleArea(x)}
               >
                 {x}
@@ -73,7 +82,6 @@ export default function AreaAccordion(props) {
 
 const ChooseBox = styled.div`
   width: 90%;
-  max-height: 420px;
   display: flex;
   flex-direction: column;
 `;
@@ -83,7 +91,7 @@ const AreaButton = styled.button`
   justify-content: space-around;
   align-items: center;
   padding: 0 22px;
-  margin-top: 5%;
+  margin-top: 2%;
   background: #f6eeee;
   border-radius: 10px;
   border: none;

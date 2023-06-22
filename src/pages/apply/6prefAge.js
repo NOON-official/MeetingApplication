@@ -8,22 +8,18 @@ import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
-import { ReactComponent as Bottom } from '../../asset/svg/Apply5Bottom.svg';
-import { submitDrink } from '../../features/apply';
+import ChooseButton from '../../components/ChooseButton';
+import { submitStep6 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
-import ChangeCountButton from '../../components/ChangeCountButton';
 
-export default function ApplyDrink() {
+export default function Apply6Page() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, drink, memberCount, moreMember } = useSelector(
+  const { finishedStep, prefAge, prefVibes } = useSelector(
     (store) => store.apply,
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [alchol, setAlchol] = useState(drink);
-  const [changeCount, setChangeCount] = useState(moreMember);
 
   useEffect(() => {
     if (finishedStep < 5) {
@@ -32,89 +28,122 @@ export default function ApplyDrink() {
     }
   }, [finishedStep]);
 
-  const marks2 = {
-    1: { label: <SliderText>Level 1</SliderText> },
-    2: { label: <SliderText>2</SliderText> },
-    3: { label: <SliderText>3</SliderText> },
-    4: { label: <SliderText>4</SliderText> },
-    5: { label: <SliderText>5</SliderText> },
+  const marks = {
+    20: { label: <SliderText>20</SliderText> },
+    21: { label: <SliderText>21</SliderText> },
+    22: { label: <SliderText>22</SliderText> },
+    23: { label: <SliderText>23</SliderText> },
+    24: { label: <SliderText>24</SliderText> },
+    25: { label: <SliderText>25</SliderText> },
+    26: { label: <SliderText>26</SliderText> },
+    27: { label: <SliderText>27</SliderText> },
+    28: { label: <SliderText>28</SliderText> },
+    29: { label: <SliderText>29</SliderText> },
   };
 
   const trackStyle = {
     backgroundColor: '#EB8888',
   };
 
+  const [ageRange, setAgeRange] = useState(prefAge.length ? prefAge : [23, 25]);
+  const [prefMood, setPrefMood] = useState(prefVibes);
+
   const setModal = (bool) => {
     setOpenModal(bool);
   };
 
+  const onAfterChange = (value) => {
+    setAgeRange(value);
+  };
+
+  const handleVibe = useCallback(
+    (val, isChecked) => {
+      if (isChecked) {
+        setPrefMood([...prefMood, val]);
+        return;
+      }
+      setPrefMood(prefMood.filter((v) => v !== val));
+    },
+    [prefMood],
+  );
+
   const handleBefore = useCallback(() => {
-    navigate('/apply/5');
+    navigate('/apply/5teamName');
   });
 
   const handleSubmit = useCallback(() => {
-    if (!alchol) {
+    if (prefMood.length === 0) {
       setOpenModal(true);
       return;
     }
     dispatch(
-      submitDrink({
-        drink: alchol,
-        moreMember: changeCount,
+      submitStep6({
+        prefAge: ageRange,
+        prefVibes: prefMood,
       }),
     );
-    navigate('/apply/kakaoId');
-  }, [alchol, changeCount]);
+    navigate('/apply/7drink');
+  }, [ageRange, prefMood]);
+
+  const selectAllMood = () => {
+    if (prefMood.includes(1) && prefMood.includes(2)) {
+      setPrefMood([]);
+      return;
+    }
+    setPrefMood([1, 2]);
+  };
+  const formatter = (value) => `${value}세`;
 
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
       <ProgressBar page={5} />
+      <Title>
+        <Maintitle>
+          <Pink>상대 팀 나이</Pink>를 지정해주세요
+        </Maintitle>
+        <Subtitle>범위를 넓게 선택해야 매칭 확률이 상승해요</Subtitle>
+      </Title>
+      <SSlider
+        onAfterChange={onAfterChange}
+        trackStyle={trackStyle}
+        tooltip={{ formatter, placement: 'bottom' }}
+        marks={marks}
+        defaultValue={ageRange}
+        max={29}
+        min={20}
+        range
+        included
+      />
 
       <Title>
         <Maintitle>
           <Pink>미팅</Pink>은 어땠으면 좋겠어요?
         </Maintitle>
-        <Subtitle>우리 팀의 평균 주량을 알려주세요</Subtitle>
       </Title>
 
-      <AlcholInfo>
-        <AlcholContent>반 병</AlcholContent>
-        <AlcholContent>한 병</AlcholContent>
-        <AlcholContent>한 병 반</AlcholContent>
-        <AlcholContent>두 병</AlcholContent>
-        <AlcholContent>술고래</AlcholContent>
-      </AlcholInfo>
-      <SSlider
-        onChange={setAlchol}
-        value={alchol}
-        trackStyle={trackStyle}
-        tooltip={{
-          open: false,
-        }}
-        dots
-        marks={marks2}
-        max={5}
-        min={1}
-      />
-
-      <Title>
-        <Maintitle>잠깐, 마지막으로!</Maintitle>
-        <Subtitle>미팅 인원 변경이 가능하다면 모두 체크해주세요</Subtitle>
-      </Title>
-
-      <ChangeCountButton
-        count={memberCount}
-        changeCount={changeCount}
-        setChangeCount={setChangeCount}
-      />
-
-      <SBottom />
+      <ChooseBox2>
+        <ChooseButton
+          isActive={prefMood.includes(1)}
+          onChange={(isActive) => handleVibe(1, isActive)}
+          content="좋은 사람 있으면 소개시켜줘"
+        />
+        <ChooseButton
+          isActive={prefMood.includes(2)}
+          onChange={(isActive) => handleVibe(2, isActive)}
+          content="친구는 다다익선! 찐친 만들어 보자"
+        />
+        <ChooseButton
+          isActive={prefMood.includes(1) && prefMood.includes(2)}
+          onChange={selectAllMood}
+          content="둘 다 좋아요"
+        />
+      </ChooseBox2>
       <Footer>
-        <ButtonBox2>
+        <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
-        </ButtonBox2>
+        </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
@@ -153,7 +182,7 @@ const Footer = styled.div`
   padding-bottom: 5%;
 `;
 
-const ButtonBox2 = styled.div`
+const ButtonBox = styled.div`
   width: 90%;
   display: flex;
   justify-content: center;
@@ -189,21 +218,8 @@ const SliderText = styled.p`
   font-family: 'Nanum JungHagSaeng';
 `;
 
-const AlcholInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-weight: 700;
-  font-size: 14px;
-  margin-top: 8%;
+const ChooseBox2 = styled.div`
   width: 90%;
-  color: #eb8888;
-`;
-
-const AlcholContent = styled.div`
-  text-align: center;
-`;
-
-const SBottom = styled(Bottom)`
-  margin-left: 57%;
-  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
 `;

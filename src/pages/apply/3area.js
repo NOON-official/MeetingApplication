@@ -12,7 +12,7 @@ import NotEnoughPlaceModal from '../../components/Modal/NotEnoughPlaceModal';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { ReactComponent as Earth } from '../../asset/svg/Earth.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
-import { submitArea } from '../../features/apply';
+import { submitStep3 } from '../../features/apply';
 import AreaAccordion from '../../components/AreaAccordion';
 
 const DATA = [
@@ -33,7 +33,7 @@ const DATA = [
   },
 ];
 
-export default function ApplyArea() {
+export default function Apply3Page() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
@@ -42,10 +42,8 @@ export default function ApplyArea() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [cityArea, setCityArea] = useState({
-    SelectCity: city,
-    SelectArea: areas,
-  });
+  const [selectCity, setSelectCity] = useState(city);
+  const [selectArea, setSelectArea] = useState(areas);
   const [openCity, setOpenCity] = useState(city);
 
   useEffect(() => {
@@ -72,18 +70,18 @@ export default function ApplyArea() {
   };
 
   const handleSubmit = useCallback(() => {
-    if (cityArea.SelectArea.length < 1) {
+    if (selectArea.length < 1) {
       setOpenModal2(true);
       return;
     }
     dispatch(
-      submitArea({
-        city: cityArea.SelectCity,
-        areas: cityArea.SelectArea,
+      submitStep3({
+        city: selectCity,
+        areas: selectArea,
       }),
     );
-    navigate('/apply/3');
-  }, [cityArea]);
+    navigate('/apply/4members');
+  }, [selectCity, selectArea]);
 
   return (
     <ApplyLayout>
@@ -104,15 +102,16 @@ export default function ApplyArea() {
             id={x.id}
             title={x.title}
             content={x.content}
-            cityArea={cityArea}
-            setCityArea={setCityArea}
+            selectCity={selectCity}
+            selectArea={selectArea}
+            setSelectCity={setSelectCity}
+            setSelectArea={setSelectArea}
             openCity={openCity}
             setOpenCity={setOpenCity}
           />
         );
       })}
-
-      <SEarth />
+      {openCity === 0 ? <SEarth /> : null}
       <Footer>
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
@@ -126,8 +125,8 @@ export default function ApplyArea() {
 
 const Title = styled.div`
   width: 90%;
-  min-height: 90px;
-  margin-top: 20px;
+  height: 80px;
+  margin-top: 3%;
 `;
 
 const Maintitle = styled.div`
@@ -153,9 +152,10 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
+  /* margin-top: 10%; */
   padding-bottom: 5%;
 `;
+
 const ButtonBox = styled.div`
   width: 90%;
   display: flex;
@@ -166,5 +166,5 @@ const ButtonBox = styled.div`
 
 const SEarth = styled(Earth)`
   margin-top: 20%;
-  margin-left: 15%;
+  margin-left: 57%;
 `;
