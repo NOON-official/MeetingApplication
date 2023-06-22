@@ -153,6 +153,6 @@ const ChooseBox = styled.div`
 `;
 
 const SEarth = styled(Earth)`
-  margin-top: 20%;
-  margin-left: 15%;
+  margin-top: 15%;
+  margin-left: 57%;
 `;
