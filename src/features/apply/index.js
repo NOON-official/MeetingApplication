@@ -147,6 +147,22 @@ const applySlice = createSlice({
         }),
       );
     },
+    submitId: (state, action) => {
+      const { kakaoId } = action.payload;
+
+      state.finishedStep = 7;
+      state.kakaoId = kakaoId;
+
+      const stored = localStorage.getItem('apply-data');
+      localStorage.setItem(
+        APPLY_STORAGE_KEY,
+        JSON.stringify({
+          ...JSON.parse(stored),
+          ...action.payload,
+          finishedStep: state.finishedStep,
+        }),
+      );
+    },
     submitDate: (state, action) => {
       const { availableDates } = action.payload;
 
@@ -175,6 +191,7 @@ export const {
   submitDate,
   submitArea,
   submitDrink,
+  submitId,
 } = applySlice.actions;
 
 export default applySlice.reducer;
