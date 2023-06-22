@@ -14,6 +14,7 @@ const initialState = {
   name: '',
   intro: '',
   drink: 3,
+  moreMember: [],
   prefSameUniversity: true,
   prefAge: [20, 29],
   prefVibes: [],
@@ -114,10 +115,27 @@ const applySlice = createSlice({
       const { drink, prefAge, prefSameUniversity, prefVibes } = action.payload;
 
       state.finishedStep = 5;
-      state.drink = drink;
+      // state.drink = drink;
       state.prefAge = prefAge;
-      state.prefSameUniversity = prefSameUniversity;
+      // state.prefSameUniversity = prefSameUniversity;
       state.prefVibes = prefVibes;
+
+      const stored = localStorage.getItem('apply-data');
+      localStorage.setItem(
+        APPLY_STORAGE_KEY,
+        JSON.stringify({
+          ...JSON.parse(stored),
+          ...action.payload,
+          finishedStep: state.finishedStep,
+        }),
+      );
+    },
+    submitDrink: (state, action) => {
+      const { drink, moreMember } = action.payload;
+
+      state.finishedStep = 6;
+      state.drink = drink;
+      state.moreMember = moreMember;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -156,6 +174,7 @@ export const {
   submitStep5,
   submitDate,
   submitArea,
+  submitDrink,
 } = applySlice.actions;
 
 export default applySlice.reducer;
