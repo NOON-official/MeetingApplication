@@ -13,12 +13,13 @@ import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
 
 export default function Apply1Page() {
+  const [openModal, setOpenModal] = useState(false);
   const { accessToken } = useSelector((state) => state.user);
   const { memberCount } = useSelector((store) => store.apply);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [openModal, setOpenModal] = useState(false);
   const [meetingMember, setMeetingMember] = useState(memberCount);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Apply1Page() {
     //   localStorage.removeItem('apply-data');
     //   window.location.reload();
     // }
-  }, [accessToken, memberCount]);
+  }, [accessToken]);
 
   const setModal = (bool) => {
     setOpenModal(bool);
@@ -64,7 +65,6 @@ export default function Apply1Page() {
         <Subtitle>나중에 참여 인원은 언제든지 수정할 수 있어요!</Subtitle>
       </Title>
       <ChooseBox>
-        <ChooseTitle>인원 수</ChooseTitle>
         <PeopleCountBox>
           <ThreePeople
             isActive={meetingMember === 2}
@@ -107,7 +107,7 @@ export default function Apply1Page() {
 const Title = styled.div`
   width: 90%;
   min-height: 8%;
-  margin-top: 20px;
+  margin: 20px 0;
 `;
 
 const Maintitle = styled.div`
@@ -133,13 +133,6 @@ const ChooseBox = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 10%;
-`;
-
-const ChooseTitle = styled.span`
-  padding-bottom: 5%;
-  color: #777777;
-  font-size: 14px;
-  font-weight: 500;
 `;
 
 const PeopleCountBox = styled.div`

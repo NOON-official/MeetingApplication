@@ -3,46 +3,39 @@ import { ReactComponent as PinkDownArrow } from '../asset/svg/PinkDownArrow.svg'
 import { ReactComponent as PinkUpArrow } from '../asset/svg/PinkUpArrow.svg';
 
 export default function AreaAccordion(props) {
-  const {
-    id,
-    title,
-    content,
-    selectedArea,
-    setSelectedArea,
-    openCity,
-    setOpenCity,
-  } = props;
+  const { id, title, content, cityArea, setCityArea, openCity, setOpenCity } =
+    props;
 
   const isOpen = openCity === id;
 
   const isAllSelected =
-    selectedArea.area?.length !== 0 &&
-    selectedArea.area?.every((value, idx) => value === content[idx]);
+    cityArea.SelectArea?.length !== 0 &&
+    cityArea.SelectArea?.every((value, idx) => value === content[idx]);
 
   const handleCity = () => {
     setOpenCity(id);
   };
 
   const handleArea = (x) => {
-    if (selectedArea.city === id && selectedArea.area.includes(x)) {
-      setSelectedArea({
-        city: id,
-        area: selectedArea.area.filter((area) => area !== x).sort(),
+    if (cityArea.SelectCity === id && cityArea.SelectArea.includes(x)) {
+      setCityArea({
+        SelectCity: id,
+        SelectArea: cityArea.SelectArea.filter((area) => area !== x).sort(),
       });
     } else {
-      setSelectedArea({
-        city: id,
-        area: [...selectedArea.area, x].sort(),
+      setCityArea({
+        SelectCity: id,
+        SelectArea: [...cityArea.SelectArea, x].sort(),
       });
     }
   };
 
   const selectAllAreas = () => {
-    if (selectedArea.area === content) {
-      setSelectedArea({ city: id, area: [] });
+    if (cityArea.SelectArea === content) {
+      setCityArea({ SelectCity: id, SelectArea: [] });
       return;
     }
-    setSelectedArea({ city: id, area: content });
+    setCityArea({ SelectCity: id, SelectArea: content });
   };
 
   return (
@@ -61,7 +54,7 @@ export default function AreaAccordion(props) {
             return (
               <Area
                 key={x}
-                isActive={selectedArea.area?.includes(x)}
+                isActive={cityArea.SelectArea?.includes(x)}
                 onClick={() => handleArea(x)}
               >
                 {x}
