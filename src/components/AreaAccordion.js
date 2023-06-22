@@ -14,7 +14,7 @@ export default function AreaAccordion(props) {
   } = props;
 
   const isOpen = openCity === id;
-  console.log(selectedArea);
+
   const isAllSelected =
     selectedArea.area?.length !== 0 &&
     selectedArea.area?.every((value, idx) => value === content[idx]);
