@@ -125,8 +125,9 @@ export default function Apply3Page() {
 
 const Title = styled.div`
   width: 90%;
-  height: 80px;
-  margin-top: 3%;
+  height: 5%;
+  min-height: 5%;
+  margin-top: 30px;
 `;
 
 const Maintitle = styled.div`

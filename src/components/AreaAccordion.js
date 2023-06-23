@@ -91,7 +91,7 @@ const AreaButton = styled.button`
   justify-content: space-around;
   align-items: center;
   padding: 0 22px;
-  margin-top: 2%;
+  margin-top: 3%;
   background: #f6eeee;
   border-radius: 10px;
   border: none;
@@ -118,7 +118,7 @@ const MoreArea = styled.div`
   align-items: center;
   flex-wrap: wrap;
   width: 90%;
-  margin: 10px auto;
+  margin: 2% auto;
 `;
 
 const Area = styled.button`

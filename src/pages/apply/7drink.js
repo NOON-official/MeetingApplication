@@ -12,6 +12,8 @@ import { submitStep7 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
 import ChangeCountButton from '../../components/ChangeCountButton';
+import { ReactComponent as Whale } from '../../asset/svg/Whale.svg';
+import { ReactComponent as Alchol } from '../../asset/svg/Alchol.svg';
 
 export default function Apply7Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -68,7 +70,7 @@ export default function Apply7Page() {
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
-      <ProgressBar page={5} />
+      <ProgressBar page={7} />
 
       <Title>
         <Maintitle>
@@ -80,9 +82,23 @@ export default function Apply7Page() {
       <AlcholInfo>
         <AlcholContent>반 병</AlcholContent>
         <AlcholContent>한 병</AlcholContent>
-        <AlcholContent>한 병 반</AlcholContent>
+        {alchol === 3 ? (
+          <AlcholContent>
+            한 병 반
+            <SAlchol />
+          </AlcholContent>
+        ) : (
+          <AlcholContent>한 병 반</AlcholContent>
+        )}
         <AlcholContent>두 병</AlcholContent>
-        <AlcholContent>술고래</AlcholContent>
+        {alchol === 5 ? (
+          <AlcholContent>
+            술고래
+            <SWhale />
+          </AlcholContent>
+        ) : (
+          <AlcholContent>술고래</AlcholContent>
+        )}
       </AlcholInfo>
       <SSlider
         onChange={setAlchol}
@@ -119,9 +135,25 @@ export default function Apply7Page() {
   );
 }
 
+const SAlchol = styled(Alchol)`
+  position: absolute;
+  right: 2px;
+  bottom: -66%;
+  z-index: 100;
+`;
+
+const SWhale = styled(Whale)`
+  position: absolute;
+  right: -1px;
+  bottom: -60%;
+  z-index: 100;
+`;
+
 const Title = styled.div`
   width: 90%;
-  margin-top: 8%;
+  height: 5%;
+  min-height: 5%;
+  margin-top: 30px;
 `;
 
 const Maintitle = styled.div`
@@ -160,7 +192,7 @@ const ButtonBox2 = styled.div`
 `;
 
 const SSlider = styled(Slider)`
-  margin-top: 7%;
+  margin-top: 3%;
   width: 85%;
   .custom-slider .ant-slider-mark-text {
     display: none;
@@ -181,6 +213,7 @@ const SSlider = styled(Slider)`
 `;
 
 const SliderText = styled.p`
+  margin-top: 12px;
   font-weight: 400;
   color: #b79292;
   font-size: 20px;
@@ -198,5 +231,6 @@ const AlcholInfo = styled.div`
 `;
 
 const AlcholContent = styled.div`
+  position: relative;
   text-align: center;
 `;
