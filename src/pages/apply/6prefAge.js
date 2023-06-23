@@ -97,7 +97,7 @@ export default function Apply6Page() {
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
-      <ProgressBar page={5} />
+      <ProgressBar page={6} />
       <Title>
         <Maintitle>
           <Pink>상대 팀 나이</Pink>를 지정해주세요
@@ -152,7 +152,9 @@ export default function Apply6Page() {
 
 const Title = styled.div`
   width: 90%;
-  margin-top: 8%;
+  height: 5%;
+  min-height: 5%;
+  margin-top: 30px;
 `;
 
 const Maintitle = styled.div`

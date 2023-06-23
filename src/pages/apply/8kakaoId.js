@@ -53,7 +53,7 @@ export default function Apply8Page() {
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
-      <ProgressBar page={5} />
+      <ProgressBar page={8} />
       <Title>
         <Maintitle>
           <Pink>카카오톡 ID나 전화번호</Pink>를 알려주세요
