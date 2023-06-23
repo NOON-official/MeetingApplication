@@ -106,7 +106,8 @@ export default function Apply1Page() {
 
 const Title = styled.div`
   width: 90%;
-  min-height: 8%;
+  height: 5%;
+  min-height: 5%;
   margin: 20px 0;
 `;
 
@@ -118,7 +119,7 @@ const Maintitle = styled.div`
 `;
 
 const Subtitle = styled.p`
-  margin-top: 4%;
+  margin-top: 5%;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 13px;
@@ -132,7 +133,7 @@ const ChooseBox = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 10%;
+  padding-bottom: 5%;
 `;
 
 const PeopleCountBox = styled.div`
@@ -141,24 +142,28 @@ const PeopleCountBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: 30px;
 `;
 
 const ThreePeople = styled.button`
-  margin: 0 5px 15px 0;
+  margin-top: 5%;
+  background: #f6eeee;
   border-radius: 10px;
-  height: 40px;
-  width: 100%;
-  background: ${(props) => (props.isActive ? '#EB8888' : 'F6EEEE')};
-  color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
-  border-color: transparent;
+  border: none;
   font-family: 'Nanum JungHagSaeng';
-  font-size: 18px;
+  width: 100%;
+  height: 45px;
+  font-weight: 400;
+  font-size: 20px;
+  color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
+  background: ${(props) => (props.isActive ? '#EB8888' : 'F6EEEE')};
   &:hover {
     cursor: pointer;
   }
 `;
 
 const SBottom = styled(Bottom)`
+  margin-top: 10%;
   margin-left: 57%;
 `;
 

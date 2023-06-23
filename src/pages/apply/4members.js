@@ -138,7 +138,7 @@ export default function Apply4Page() {
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
-      <ProgressBar page={3} />
+      <ProgressBar page={4} />
       <Title>
         <Maintitle>
           <Pink>우리팀의 구성원</Pink>을 소개해 주세요!
@@ -158,9 +158,11 @@ export default function Apply4Page() {
 }
 
 const Title = styled.div`
+  position: relative;
   width: 90%;
-  margin-top: 8%;
-  height: 10%;
+  height: 5%;
+  min-height: 5%;
+  margin-top: 30px;
 `;
 
 const Maintitle = styled.div`

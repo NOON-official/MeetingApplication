@@ -71,7 +71,7 @@ export default function Apply5Page() {
     <ApplyLayout>
       <NotEnoughIntroModal open={openModal} setModal={setModal} />
       <IsPageCompleteModal open={openModal2} setModal={setModal2} />
-      <ProgressBar page={4} />
+      <ProgressBar page={5} />
       <Title>
         <Maintitle>
           <Pink>우리 팀 이름</Pink>을 지어주세요
@@ -127,7 +127,9 @@ export default function Apply5Page() {
 
 const Title = styled.div`
   width: 90%;
-  margin: 6% 0 4%;
+  height: 5%;
+  min-height: 5%;
+  margin-top: 30px;
 `;
 
 const Maintitle = styled.div`
@@ -142,7 +144,7 @@ const Pink = styled.span`
 `;
 
 const Subtitle = styled.p`
-  margin-top: 3%;
+  margin: 5% 0;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 13px;
@@ -160,6 +162,7 @@ const SInput = styled(Input)`
   text-align: center;
   background-color: white;
   width: 90%;
+  height: 50px;
   border: 1px solid #f1ecec;
   border-radius: 10px;
 `;
@@ -167,6 +170,8 @@ const SInput = styled(Input)`
 const STextArea = styled(Input.TextArea)`
   background-color: white;
   width: 90%;
+  margin-top: 8%;
+  height: 500px;
   border: 1px solid #f1ecec;
   border-radius: 10px;
 `;
@@ -174,7 +179,7 @@ const STextArea = styled(Input.TextArea)`
 const Alert = styled.p`
   z-index: 1;
   position: absolute;
-  top: 10%;
+  top: 20%;
   right: 10%;
   color: #aaaaaa;
   font-weight: 400;
