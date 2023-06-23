@@ -157,10 +157,8 @@ const ButtonBox = styled.div`
   width: 70%;
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: center; */
   justify-content: space-between;
   align-items: center;
-  margin-top: 5%;
 `;
 
 const SingleButton = styled.div`
@@ -169,7 +167,7 @@ const SingleButton = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 50%;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 `;
 
 const SelectButton = styled.button`
@@ -178,7 +176,6 @@ const SelectButton = styled.button`
   height: 30px;
   max-width: 90px;
   background-color: #dfdfdf;
-  /* color: #b79292; */
   border-color: transparent;
   font-family: 'Nanum JungHagSaeng';
   font-size: 18px;
@@ -189,8 +186,6 @@ const TeamSubTitle = styled.div`
   color: #aaaaaa;
   font-weight: 400;
   font-size: 8px;
-  /* border: 1px solid black; */
-  /* display: block; */
   position: absolute;
   top: 30px;
   left: 30px;
@@ -203,8 +198,6 @@ const CountButton = styled.button`
   margin: 0 6px;
   border-radius: 5px;
   height: 27px;
-  /* min-width: 50px; */
-  /* max-width: 90px; */
   background-color: ${(props) => (props.isActive ? '#EB8888' : '#F6EEEE')};
   color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
   border-color: transparent;

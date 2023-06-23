@@ -115,7 +115,8 @@ export default function Apply2() {
 
 const Title = styled.div`
   width: 90%;
-  min-height: 8%;
+  height: 5%;
+  min-height: 5%;
   margin-top: 30px;
 `;
 
