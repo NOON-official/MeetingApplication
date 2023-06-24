@@ -5,22 +5,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'antd';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
-import { ReactComponent as Baloon } from '../../asset/svg/Baloon.svg';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
-import { submitStep4 } from '../../features/apply';
+import { submitStep5 } from '../../features/apply';
 import NotEnoughIntroModal from '../../components/Modal/NotEnoughInroModal';
+import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
 
-function Apply4Page() {
+export default function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, intro } = useSelector((store) => store.apply);
+  const [openModal2, setOpenModal2] = useState(false);
+
+  const { finishedStep, intro, name } = useSelector((store) => store.apply);
   const [introduce, setIntroduce] = useState(intro);
+  const [teamName, setTeamName] = useState(name);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (finishedStep < 3) {
+    if (finishedStep < 4) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
@@ -30,37 +33,66 @@ function Apply4Page() {
     setIntroduce(e.target.value);
   }, []);
 
-  const handleBefore = useCallback(() => {
-    navigate('/apply/3');
-  });
+  const handleTeamName = useCallback((e) => {
+    setTeamName(e.target.value);
+  }, []);
+
+  const handleBefore = () => {
+    navigate('/apply/4members');
+  };
 
   const handleSubmit = useCallback(() => {
+    if (!teamName) {
+      setOpenModal2(true);
+      return;
+    }
     if (introduce.length < 10) {
       setOpenModal(true);
       return;
     }
     dispatch(
-      submitStep4({
+      submitStep5({
         intro: introduce,
+        name: teamName,
       }),
     );
-    navigate('/apply/5');
-  }, [introduce]);
+    navigate('/apply/6prefAge');
+  }, [introduce, teamName]);
 
   const setModal = (bool) => {
     setOpenModal(bool);
   };
 
+  const setModal2 = (bool) => {
+    setOpenModal2(bool);
+  };
+
   return (
     <ApplyLayout>
       <NotEnoughIntroModal open={openModal} setModal={setModal} />
-      <ProgressBar page={4} />
+      <IsPageCompleteModal open={openModal2} setModal={setModal2} />
+      <ProgressBar page={5} />
+      <Title>
+        <Maintitle>
+          <Pink>우리 팀 이름</Pink>을 지어주세요
+        </Maintitle>
+      </Title>
+      <Text>
+        <SInput
+          value={teamName}
+          onChange={handleTeamName}
+          maxLength={10}
+          placeholder="미팅이와 아이들 (10자 이내)"
+        />
+      </Text>
       <Title>
         <Maintitle>
           우리팀을 소개하는 <Pink>마지막 한 줄 어필</Pink>
         </Maintitle>
-        <Subtitle>센스 넘치게 우리 팀을 소개할수록 매칭률이 올라가요!</Subtitle>
-        <Subtitle>길게 쓰면 운명의 짝을 만날지도?</Subtitle>
+        <Subtitle>
+          센스 넘치게 우리 팀을 소개할수록 매칭률이 올라가요!
+          <br /> 길게 쓰면 운명의 짝을 만날지도?
+        </Subtitle>
       </Title>
       <Text>
         <Alert>최소 글자수 10자</Alert>
@@ -70,7 +102,7 @@ function Apply4Page() {
           style={{
             height: '150px',
             resize: 'none',
-            padding: '25px',
+            padding: '20px',
           }}
           showCount
           minLength={10}
@@ -82,9 +114,6 @@ function Apply4Page() {
           (아, 참고로 잘생겼습니다^^)"
         />
       </Text>
-      <SBaloon>
-        <Baloon />
-      </SBaloon>
       <Footer>
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
@@ -96,13 +125,11 @@ function Apply4Page() {
   );
 }
 
-export default Apply4Page;
-
 const Title = styled.div`
   width: 90%;
-  margin-top: 8%;
-  height: 13%;
-  min-height: 13%;
+  height: 5%;
+  min-height: 5%;
+  margin-top: 30px;
 `;
 
 const Maintitle = styled.div`
@@ -112,28 +139,39 @@ const Maintitle = styled.div`
   font-size: 35px;
 `;
 
-const Pink = styled.div`
-  padding-bottom: 5%;
+const Pink = styled.span`
   color: ${theme.pink};
 `;
 
 const Subtitle = styled.p`
-  margin-top: 2%;
+  margin: 5% 0;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 13px;
+  line-height: 20px;
 `;
+
 const Text = styled.div`
-  margin-top: 20%;
-  padding-bottom: 10%;
   width: 100%;
   display: flex;
   justify-content: center;
   position: relative;
 `;
+
+const SInput = styled(Input)`
+  text-align: center;
+  background-color: white;
+  width: 90%;
+  height: 50px;
+  border: 1px solid #f1ecec;
+  border-radius: 10px;
+`;
+
 const STextArea = styled(Input.TextArea)`
   background-color: white;
   width: 90%;
+  margin-top: 8%;
+  height: 500px;
   border: 1px solid #f1ecec;
   border-radius: 10px;
 `;
@@ -141,7 +179,7 @@ const STextArea = styled(Input.TextArea)`
 const Alert = styled.p`
   z-index: 1;
   position: absolute;
-  top: 8%;
+  top: 20%;
   right: 10%;
   color: #aaaaaa;
   font-weight: 400;
@@ -163,10 +201,4 @@ const ButtonBox = styled.div`
   justify-content: center;
   justify-content: space-between;
   margin-top: 5%;
-`;
-
-const SBaloon = styled.div`
-  width: 90%;
-  display: flex;
-  justify-content: flex-end;
 `;
