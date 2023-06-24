@@ -328,7 +328,8 @@ const MainTitle = styled.div`
   font-weight: 400;
   font-size: 14px;
   height: 33px;
-  width: 290px;
+  padding-left: 12px;
+  padding-right: 12px;
   background: rgba(255, 191, 191, 0.15);
   border-radius: 10px;
 `;
