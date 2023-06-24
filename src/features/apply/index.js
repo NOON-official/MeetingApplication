@@ -9,9 +9,12 @@ const initialState = {
   universities: [],
   availableDates: [],
   areas: [],
-  members: [{}, {}, {}],
+  city: 0,
+  members: [],
+  name: '',
   intro: '',
   drink: 3,
+  moreMember: [],
   prefSameUniversity: true,
   prefAge: [20, 29],
   prefVibes: [],
@@ -25,12 +28,10 @@ const applySlice = createSlice({
   },
   reducers: {
     submitStep1: (state, action) => {
-      const { gender, memberCount, universities } = action.payload;
+      const { memberCount } = action.payload;
 
       state.finishedStep = 1;
-      state.gender = gender;
       state.memberCount = memberCount;
-      state.universities = universities;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -43,11 +44,10 @@ const applySlice = createSlice({
       );
     },
     submitStep2: (state, action) => {
-      const { availableDates, areas } = action.payload;
+      const { availableDates } = action.payload;
 
       state.finishedStep = 2;
       state.availableDates = availableDates;
-      state.areas = areas;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -60,10 +60,11 @@ const applySlice = createSlice({
       );
     },
     submitStep3: (state, action) => {
-      const { members } = action.payload;
+      const { areas, city } = action.payload;
 
       state.finishedStep = 3;
-      state.members = members;
+      state.areas = areas;
+      state.city = city;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -76,10 +77,10 @@ const applySlice = createSlice({
       );
     },
     submitStep4: (state, action) => {
-      const { intro } = action.payload;
+      const { members } = action.payload;
 
       state.finishedStep = 4;
-      state.intro = intro;
+      state.members = members;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -92,13 +93,61 @@ const applySlice = createSlice({
       );
     },
     submitStep5: (state, action) => {
-      const { drink, prefAge, prefSameUniversity, prefVibes } = action.payload;
+      const { intro, name } = action.payload;
 
       state.finishedStep = 5;
-      state.drink = drink;
+      state.intro = intro;
+      state.name = name;
+
+      const stored = localStorage.getItem('apply-data');
+      localStorage.setItem(
+        APPLY_STORAGE_KEY,
+        JSON.stringify({
+          ...JSON.parse(stored),
+          ...action.payload,
+          finishedStep: state.finishedStep,
+        }),
+      );
+    },
+    submitStep6: (state, action) => {
+      const { prefAge, prefVibes } = action.payload;
+
+      state.finishedStep = 6;
       state.prefAge = prefAge;
-      state.prefSameUniversity = prefSameUniversity;
       state.prefVibes = prefVibes;
+
+      const stored = localStorage.getItem('apply-data');
+      localStorage.setItem(
+        APPLY_STORAGE_KEY,
+        JSON.stringify({
+          ...JSON.parse(stored),
+          ...action.payload,
+          finishedStep: state.finishedStep,
+        }),
+      );
+    },
+    submitStep7: (state, action) => {
+      const { drink, moreMember } = action.payload;
+
+      state.finishedStep = 7;
+      state.drink = drink;
+      state.moreMember = moreMember;
+
+      const stored = localStorage.getItem('apply-data');
+      localStorage.setItem(
+        APPLY_STORAGE_KEY,
+        JSON.stringify({
+          ...JSON.parse(stored),
+          ...action.payload,
+          finishedStep: state.finishedStep,
+        }),
+      );
+    },
+    submitStep8: (state, action) => {
+      const { kakaoId } = action.payload;
+
+      state.finishedStep = 8;
+      state.kakaoId = kakaoId;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -135,6 +184,9 @@ export const {
   submitStep3,
   submitStep4,
   submitStep5,
+  submitStep6,
+  submitStep7,
+  submitStep8,
   submitDate,
 } = applySlice.actions;
 

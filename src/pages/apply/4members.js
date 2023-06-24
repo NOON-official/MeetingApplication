@@ -9,22 +9,24 @@ import Teambox from '../../components/Teambox';
 import ApplyButton from '../../components/ApplyButton';
 import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
-import { submitStep3 } from '../../features/apply';
+import { submitStep4 } from '../../features/apply';
 import ChannelTalk from '../../asset/ChannelTalk';
 
-function Apply3Page() {
-  const [openModal, setOpenModal] = useState(false);
+export default function Apply4Page() {
   const { finishedStep, members, memberCount } = useSelector(
     (store) => store.apply,
   );
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
   const [member1, setMember1] = useState(members[0] || {});
   const [member2, setMember2] = useState(members[1] || {});
   const [member3, setMember3] = useState(members[2] || {});
+  const [member4, setMember4] = useState(members[3] || {});
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (finishedStep < 2) {
+    if (finishedStep < 3) {
       window.alert('잘못된 접근입니다');
       navigate(`/apply/${finishedStep + 1}`);
     }
@@ -35,7 +37,7 @@ function Apply3Page() {
   };
 
   const handleBefore = () => {
-    navigate('/apply/2');
+    navigate('/apply/3area');
   };
 
   const handleSubmit = useCallback(() => {
@@ -43,48 +45,71 @@ function Apply3Page() {
       if (
         !member1.age ||
         !member1.role ||
-        !member1.mbti ||
+        !member1.university ||
         !member2.age ||
         !member2.role ||
-        !member2.mbti
+        !member2.university
       ) {
         setOpenModal(true);
       } else {
         dispatch(
-          submitStep3({
+          submitStep4({
             members: [member1, member2],
           }),
         );
-        navigate('/apply/4');
+        navigate('/apply/5teamName');
+      }
+    } else if (memberCount === 3) {
+      if (
+        !member1.age ||
+        !member1.role ||
+        !member1.university ||
+        !member2.age ||
+        !member2.role ||
+        !member2.university ||
+        !member3.age ||
+        !member3.role ||
+        !member3.university
+      ) {
+        setOpenModal(true);
+      } else {
+        dispatch(
+          submitStep4({
+            members: [member1, member2, member3],
+          }),
+        );
+        navigate('/apply/5teamName');
       }
     } else if (
       !member1.age ||
       !member1.role ||
-      !member1.mbti ||
+      !member1.university ||
       !member2.age ||
       !member2.role ||
-      !member2.mbti ||
+      !member2.university ||
       !member3.age ||
       !member3.role ||
-      !member3.mbti
+      !member3.university ||
+      !member4.age ||
+      !member4.role ||
+      !member4.university
     ) {
       setOpenModal(true);
     } else {
       dispatch(
-        submitStep3({
-          members: [member1, member2, member3],
+        submitStep4({
+          members: [member1, member2, member3, member4],
         }),
       );
-      navigate('/apply/4');
+      navigate('/apply/5teamName');
     }
   });
-
   const teamboxcount = useMemo(() => {
     if (memberCount === 2) {
       return (
         <>
           <Teambox member={member1} setMember={setMember1} name="대표자" />
-          <Teambox member={member2} setMember={setMember2} name="팀원 1" />
+          <Teambox member={member2} setMember={setMember2} name="팀원 2" />
         </>
       );
     }
@@ -97,13 +122,23 @@ function Apply3Page() {
         </>
       );
     }
+    if (memberCount === 4) {
+      return (
+        <>
+          <Teambox member={member1} setMember={setMember1} name="대표자" />
+          <Teambox member={member2} setMember={setMember2} name="팀원 2" />
+          <Teambox member={member3} setMember={setMember3} name="팀원 3" />
+          <Teambox member={member4} setMember={setMember4} name="팀원 4" />
+        </>
+      );
+    }
     return null;
   });
 
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
-      <ProgressBar page={3} />
+      <ProgressBar page={4} />
       <Title>
         <Maintitle>
           <Pink>우리팀의 구성원</Pink>을 소개해 주세요!
@@ -122,12 +157,12 @@ function Apply3Page() {
   );
 }
 
-export default Apply3Page;
-
 const Title = styled.div`
+  position: relative;
   width: 90%;
-  margin-top: 8%;
-  height: 10%;
+  height: 5%;
+  min-height: 5%;
+  margin-top: 30px;
 `;
 
 const Maintitle = styled.div`
