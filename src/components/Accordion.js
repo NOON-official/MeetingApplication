@@ -48,6 +48,7 @@ const TitleBox = styled.div`
     cursor: pointer;
   }
 `;
+
 const Title = styled.span`
   font-size: 12px;
 `;

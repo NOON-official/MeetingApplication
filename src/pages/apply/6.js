@@ -11,7 +11,7 @@ import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/ApplyButton';
 import ChannelTalk from '../../asset/ChannelTalk';
 
-function Apply6Page() {
+export default function Apply6() {
   const {
     finishedStep,
     intro,
@@ -278,8 +278,6 @@ function Apply6Page() {
     </ApplyLayout>
   );
 }
-
-export default Apply6Page;
 
 const Title = styled.div`
   width: 90%;
