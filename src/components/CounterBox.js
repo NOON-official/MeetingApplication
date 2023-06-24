@@ -18,14 +18,16 @@ const CounterBox = ({ end }) => {
     }, 20);
   }, [end]);
 
-  const memberCount = useMemo(() => `${count || 0}`.padStart(4, '0'), [count]);
+  const memberCount = useMemo(
+    () => `${count || 0}`.padStart(end.toString().length, '0').split(''),
+    [count],
+  );
 
   return (
     <UserCountText>
-      <CountBox>{memberCount[0]}</CountBox>
-      <CountBox>{memberCount[1]}</CountBox>
-      <CountBox>{memberCount[2]}</CountBox>
-      <CountBox>{memberCount[3]}</CountBox>
+      {memberCount?.map((m) => {
+        return <CountBox>{m}</CountBox>;
+      })}
     </UserCountText>
   );
 };
