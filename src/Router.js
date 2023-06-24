@@ -13,10 +13,12 @@ import Agree from './pages/apply/agree';
 import Invite from './pages/apply/invite';
 import Apply1 from './pages/apply/1';
 import Apply2 from './pages/apply/2';
-import Apply3 from './pages/apply/3';
-import Apply4 from './pages/apply/4';
-import Apply5 from './pages/apply/5';
-import Apply6 from './pages/apply/6';
+import Apply3Page from './pages/apply/3area';
+import Apply4Page from './pages/apply/4members';
+import Apply5Page from './pages/apply/5teamName';
+import Apply6Page from './pages/apply/6prefAge';
+import Apply7Page from './pages/apply/7drink';
+import Apply8Page from './pages/apply/8kakaoId';
 import Certification from './pages/apply/certification';
 import Complete from './pages/apply/complete';
 import TicketBuyPage from './pages/myinfo/ticket/buy';
@@ -30,6 +32,7 @@ import AccountPhoneChangePage from './pages/myinfo/account/phone';
 import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
 import ApplyInformation from './pages/apply/information';
 import ApplyUniversity from './pages/apply/university';
+import Apply6 from './pages/apply/6';
 
 const Router = createBrowserRouter([
   {
@@ -113,20 +116,32 @@ const Router = createBrowserRouter([
         element: <Apply2 />,
       },
       {
-        path: 'apply/3',
-        element: <Apply3 />,
+        path: 'apply/3area',
+        element: <Apply3Page />,
       },
       {
-        path: 'apply/4',
-        element: <Apply4 />,
+        path: 'apply/4members',
+        element: <Apply4Page />,
       },
       {
-        path: 'apply/5',
-        element: <Apply5 />,
+        path: 'apply/5teamName',
+        element: <Apply5Page />,
+      },
+      {
+        path: 'apply/6prefAge',
+        element: <Apply6Page />,
       },
       {
         path: 'apply/6',
         element: <Apply6 />,
+      },
+      {
+        path: 'apply/7drink',
+        element: <Apply7Page />,
+      },
+      {
+        path: 'apply/8kakaoId',
+        element: <Apply8Page />,
       },
       {
         path: 'apply/certification',
