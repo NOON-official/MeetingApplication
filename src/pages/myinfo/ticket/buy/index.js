@@ -169,6 +169,7 @@ export default function TicketBuyPage() {
       </Section>
       <Section my="24px">
         <Accordion
+          isShown
           title={<AccordionTitle>쿠폰 적용</AccordionTitle>}
           content={
             <CouponList>
