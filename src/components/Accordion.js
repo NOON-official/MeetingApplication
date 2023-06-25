@@ -5,7 +5,7 @@ import { ReactComponent as DownArrow } from '../asset/svg/DownArrow.svg';
 import { ReactComponent as UpArrow } from '../asset/svg/UpArrow.svg';
 
 export default function Accordion(props) {
-  const [isShown, setIsShown] = useState(false);
+  const [isShown, setIsShown] = useState(!!props.isShown); // isShown=true인 경우 default로 펼쳐진 상태
   const handleToggle = useCallback(() => {
     setIsShown((prev) => !prev);
   }, []);
