@@ -18,11 +18,11 @@ const BigButton = styled.button`
   background: #f6eeee;
   border-radius: 10px;
   border: none;
-  font-family: 'Nanum JungHagSaeng';
+  font-family: 'SCoreDream';
   width: 100%;
   height: 45px;
-  font-weight: 400;
-  font-size: 20px;
+  font-weight: 200;
+  font-size: 16px;
   color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
   background: ${(props) => (props.isActive ? '#EB8888' : 'F6EEEE')};
   &:hover {
