@@ -134,9 +134,8 @@ const Title = styled.div`
 
 const Maintitle = styled.div`
   width: 100%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 22px;
 `;
 
 const Pink = styled.span`
@@ -147,7 +146,7 @@ const Subtitle = styled.p`
   margin: 5% 0;
   color: #aaaaaa;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 20px;
 `;
 
