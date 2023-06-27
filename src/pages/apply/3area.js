@@ -82,7 +82,7 @@ export default function Apply3Page() {
     );
     navigate('/apply/4members');
   }, [selectCity, selectArea]);
-
+  console.log(selectArea);
   return (
     <ApplyLayout>
       <NotEnoughDateModal open={openModal1} setModal={setModal1} />
