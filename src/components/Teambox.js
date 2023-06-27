@@ -437,6 +437,9 @@ const Info = styled.div`
 
 const BigTitle = styled.div`
   width: 40px;
+  font-family: 'SCoreDream';
+  font-size: 13px;
+  font-weight: 200;
 `;
 
 const Ttitle = styled.div`
