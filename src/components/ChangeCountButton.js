@@ -23,148 +23,82 @@ export default function ChangeCountButton(props) {
     setChangeCount([...changeCount, a, b]);
   };
 
+  const selectButton = (member, title) => {
+    return (
+      <SingleButton>
+        <CheckIcon onClick={() => handleCount(member)}>
+          {changeCount.includes(member) ? <SelectCheck /> : <NotSelectCheck />}
+        </CheckIcon>
+        <CountButton
+          isActive={changeCount.includes(member)}
+          onClick={() => handleCount(member)}
+        >
+          {title}
+        </CountButton>
+      </SingleButton>
+    );
+  };
+
+  const selectAllButton = (member1, member2) => {
+    return (
+      <SingleButton>
+        <CheckIcon onClick={() => handleAllSelected(member1, member2)}>
+          {changeCount.includes(member1) && changeCount.includes(member2) ? (
+            <SelectCheck />
+          ) : (
+            <NotSelectCheck />
+          )}
+        </CheckIcon>
+        <CountButton
+          isActive={
+            changeCount.includes(member1) && changeCount.includes(member2)
+          }
+          onClick={() => handleAllSelected(member1, member2)}
+        >
+          모두 가능해요
+        </CountButton>
+      </SingleButton>
+    );
+  };
+
+  const ourTeamButton = (title) => {
+    return (
+      <SingleButton>
+        <OurTeamCheck />
+        <SelectButton>{title}</SelectButton>
+        <TeamSubTitle>현재 우리 팀 인원이에요</TeamSubTitle>
+      </SingleButton>
+    );
+  };
+
   return (
     <>
-      {count === 2 ? (
+      {count === 2 && (
         <ButtonBox>
-          <SingleButton>
-            <OurTeamCheck />
-            <SelectButton>2:2 미팅</SelectButton>
-            <TeamSubTitle>현재 우리 팀 인원이에요</TeamSubTitle>
-          </SingleButton>
-          <SingleButton>
-            <CheckIcon onClick={() => handleCount(3)}>
-              {changeCount.includes(3) ? <SelectCheck /> : <NotSelectCheck />}
-            </CheckIcon>
-            <CountButton
-              isActive={changeCount.includes(3)}
-              onClick={() => handleCount(3)}
-            >
-              3:3 미팅
-            </CountButton>
-          </SingleButton>
-          <SingleButton>
-            <CheckIcon onClick={() => handleCount(4)}>
-              {changeCount.includes(4) ? <SelectCheck /> : <NotSelectCheck />}
-            </CheckIcon>
-            <CountButton
-              isActive={changeCount.includes(4)}
-              onClick={() => handleCount(4)}
-            >
-              4:4 미팅
-            </CountButton>
-          </SingleButton>
-          <SingleButton>
-            <CheckIcon onClick={() => handleAllSelected(3, 4)}>
-              {changeCount.includes(3) && changeCount.includes(4) ? (
-                <SelectCheck />
-              ) : (
-                <NotSelectCheck />
-              )}
-            </CheckIcon>
-            <CountButton
-              isActive={changeCount.includes(3) && changeCount.includes(4)}
-              onClick={() => handleAllSelected(3, 4)}
-            >
-              모두 가능해요
-            </CountButton>
-          </SingleButton>
+          {ourTeamButton('2:2 미팅')}
+          {selectButton(3, '3:3 미팅')}
+          {selectButton(4, '4:4 미팅')}
+          {selectAllButton(3, 4)}
         </ButtonBox>
-      ) : null}
+      )}
 
-      {count === 3 ? (
+      {count === 3 && (
         <ButtonBox>
-          <SingleButton>
-            <CheckIcon onClick={() => handleCount(2)}>
-              {changeCount.includes(2) ? <SelectCheck /> : <NotSelectCheck />}
-            </CheckIcon>
-            <CountButton
-              isActive={changeCount.includes(2)}
-              onClick={() => handleCount(2)}
-            >
-              2:2 미팅
-            </CountButton>
-          </SingleButton>
-          <SingleButton>
-            <OurTeamCheck />
-            <SelectButton>3:3 미팅</SelectButton>
-            <TeamSubTitle>현재 우리 팀 인원이에요</TeamSubTitle>
-          </SingleButton>
-          <SingleButton>
-            <CheckIcon onClick={() => handleCount(4)}>
-              {changeCount.includes(4) ? <SelectCheck /> : <NotSelectCheck />}
-            </CheckIcon>
-            <CountButton
-              isActive={changeCount.includes(4)}
-              onClick={() => handleCount(4)}
-            >
-              4:4 미팅
-            </CountButton>
-          </SingleButton>
-          <SingleButton>
-            <CheckIcon onClick={() => handleAllSelected(2, 4)}>
-              {changeCount.includes(2) && changeCount.includes(4) ? (
-                <SelectCheck />
-              ) : (
-                <NotSelectCheck />
-              )}
-            </CheckIcon>
-            <CountButton
-              isActive={changeCount.includes(2) && changeCount.includes(4)}
-              onClick={() => handleAllSelected(2, 4)}
-            >
-              모두 가능해요
-            </CountButton>
-          </SingleButton>
+          {selectButton(2, '2:2 미팅')}
+          {ourTeamButton('3:3 미팅')}
+          {selectButton(4, '4:4 미팅')}
+          {selectAllButton(2, 4)}
         </ButtonBox>
-      ) : null}
+      )}
 
-      {count === 4 ? (
+      {count === 4 && (
         <ButtonBox>
-          <SingleButton>
-            <CheckIcon onClick={() => handleCount(2)}>
-              {changeCount.includes(2) ? <SelectCheck /> : <NotSelectCheck />}
-            </CheckIcon>
-            <CountButton
-              isActive={changeCount.includes(2)}
-              onClick={() => handleCount(2)}
-            >
-              2:2 미팅
-            </CountButton>
-          </SingleButton>
-          <SingleButton>
-            <CheckIcon onClick={() => handleCount(3)}>
-              {changeCount.includes(3) ? <SelectCheck /> : <NotSelectCheck />}
-            </CheckIcon>
-            <CountButton
-              isActive={changeCount.includes(3)}
-              onClick={() => handleCount(3)}
-            >
-              3:3 미팅
-            </CountButton>
-          </SingleButton>
-          <SingleButton>
-            <OurTeamCheck />
-            <SelectButton>4:4 미팅</SelectButton>
-            <TeamSubTitle>현재 우리 팀 인원이에요</TeamSubTitle>
-          </SingleButton>
-          <SingleButton>
-            <CheckIcon onClick={() => handleAllSelected(2, 3)}>
-              {changeCount.includes(2) && changeCount.includes(3) ? (
-                <SelectCheck />
-              ) : (
-                <NotSelectCheck />
-              )}
-            </CheckIcon>
-            <CountButton
-              isActive={changeCount.includes(2) && changeCount.includes(3)}
-              onClick={() => handleAllSelected(2, 3)}
-            >
-              모두 가능해요
-            </CountButton>
-          </SingleButton>
+          {selectButton(2, '2:2 미팅')}
+          {selectButton(3, '3:3 미팅')}
+          {ourTeamButton('4:4 미팅')}
+          {selectAllButton(2, 3)}
         </ButtonBox>
-      ) : null}
+      )}
     </>
   );
 }
