@@ -21,23 +21,23 @@ import MatchingCompleteModal from '../../components/Modal/MatchingCompleteModal'
 import { createTeam } from '../../features/apply/asyncAction';
 
 export default function Apply9Page() {
+  const { ...applydata } = useSelector((store) => store.apply);
   const {
     areas,
     availableDates,
     city,
     drink,
-    finishedStep,
     gender,
     intro,
     kakaoId,
+    finishedStep,
     memberCount,
     members,
     moreMember,
     teamName,
     prefAge,
     prefVibes,
-  } = useSelector((store) => store.apply);
-  const { ...applydata } = useSelector((store) => store.apply);
+  } = applydata;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -82,6 +82,7 @@ export default function Apply9Page() {
     } else if (matchingStatus === null) {
       dispatch(createTeam(applydata));
       // window.alert('저장되었습니다!');
+      setOpenModal(true);
     } else {
       await backend.delete(`/teams/${userTeamId}`);
       dispatch(createTeam(applydata));
@@ -89,8 +90,6 @@ export default function Apply9Page() {
     }
     if (userPhone === null) {
       navigate('/apply/10phone');
-    } else {
-      setOpenModal(true);
     }
   });
 
