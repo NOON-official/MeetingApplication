@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const ApplyButton = styled(Button).attrs({ type: 'button' })`
   font-weight: 400;
-  font-size: 24px;
-  font-family: 'Nanum JungHagSaeng';
+  font-size: 18px;
+  font-family: 'SCoreDream';
   background-color: white;
   width: 160px;
   height: 50px;

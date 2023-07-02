@@ -30,12 +30,12 @@ export default function ChangeCountButton(props) {
           <SingleButton>
             <OurTeamCheck />
             <SelectButton>2:2 미팅</SelectButton>
-            {count === 2 ? (
-              <TeamSubTitle>현재 우리 팀 인원이에요</TeamSubTitle>
-            ) : null}
+            <TeamSubTitle>현재 우리 팀 인원이에요</TeamSubTitle>
           </SingleButton>
           <SingleButton>
-            {changeCount.includes(3) ? <SelectCheck /> : <NotSelectCheck />}
+            <CheckIcon onClick={() => handleCount(3)}>
+              {changeCount.includes(3) ? <SelectCheck /> : <NotSelectCheck />}
+            </CheckIcon>
             <CountButton
               isActive={changeCount.includes(3)}
               onClick={() => handleCount(3)}
@@ -44,7 +44,9 @@ export default function ChangeCountButton(props) {
             </CountButton>
           </SingleButton>
           <SingleButton>
-            {changeCount.includes(4) ? <SelectCheck /> : <NotSelectCheck />}
+            <CheckIcon onClick={() => handleCount(4)}>
+              {changeCount.includes(4) ? <SelectCheck /> : <NotSelectCheck />}
+            </CheckIcon>
             <CountButton
               isActive={changeCount.includes(4)}
               onClick={() => handleCount(4)}
@@ -53,11 +55,13 @@ export default function ChangeCountButton(props) {
             </CountButton>
           </SingleButton>
           <SingleButton>
-            {changeCount.includes(3) && changeCount.includes(4) ? (
-              <SelectCheck />
-            ) : (
-              <NotSelectCheck />
-            )}
+            <CheckIcon onClick={() => handleAllSelected(3, 4)}>
+              {changeCount.includes(3) && changeCount.includes(4) ? (
+                <SelectCheck />
+              ) : (
+                <NotSelectCheck />
+              )}
+            </CheckIcon>
             <CountButton
               isActive={changeCount.includes(3) && changeCount.includes(4)}
               onClick={() => handleAllSelected(3, 4)}
@@ -71,7 +75,9 @@ export default function ChangeCountButton(props) {
       {count === 3 ? (
         <ButtonBox>
           <SingleButton>
-            {changeCount.includes(2) ? <SelectCheck /> : <NotSelectCheck />}
+            <CheckIcon onClick={() => handleCount(2)}>
+              {changeCount.includes(2) ? <SelectCheck /> : <NotSelectCheck />}
+            </CheckIcon>
             <CountButton
               isActive={changeCount.includes(2)}
               onClick={() => handleCount(2)}
@@ -85,7 +91,9 @@ export default function ChangeCountButton(props) {
             <TeamSubTitle>현재 우리 팀 인원이에요</TeamSubTitle>
           </SingleButton>
           <SingleButton>
-            {changeCount.includes(4) ? <SelectCheck /> : <NotSelectCheck />}
+            <CheckIcon onClick={() => handleCount(4)}>
+              {changeCount.includes(4) ? <SelectCheck /> : <NotSelectCheck />}
+            </CheckIcon>
             <CountButton
               isActive={changeCount.includes(4)}
               onClick={() => handleCount(4)}
@@ -94,11 +102,13 @@ export default function ChangeCountButton(props) {
             </CountButton>
           </SingleButton>
           <SingleButton>
-            {changeCount.includes(2) && changeCount.includes(4) ? (
-              <SelectCheck />
-            ) : (
-              <NotSelectCheck />
-            )}
+            <CheckIcon onClick={() => handleAllSelected(2, 4)}>
+              {changeCount.includes(2) && changeCount.includes(4) ? (
+                <SelectCheck />
+              ) : (
+                <NotSelectCheck />
+              )}
+            </CheckIcon>
             <CountButton
               isActive={changeCount.includes(2) && changeCount.includes(4)}
               onClick={() => handleAllSelected(2, 4)}
@@ -112,7 +122,9 @@ export default function ChangeCountButton(props) {
       {count === 4 ? (
         <ButtonBox>
           <SingleButton>
-            {changeCount.includes(2) ? <SelectCheck /> : <NotSelectCheck />}
+            <CheckIcon onClick={() => handleCount(2)}>
+              {changeCount.includes(2) ? <SelectCheck /> : <NotSelectCheck />}
+            </CheckIcon>
             <CountButton
               isActive={changeCount.includes(2)}
               onClick={() => handleCount(2)}
@@ -121,7 +133,9 @@ export default function ChangeCountButton(props) {
             </CountButton>
           </SingleButton>
           <SingleButton>
-            {changeCount.includes(3) ? <SelectCheck /> : <NotSelectCheck />}
+            <CheckIcon onClick={() => handleCount(3)}>
+              {changeCount.includes(3) ? <SelectCheck /> : <NotSelectCheck />}
+            </CheckIcon>
             <CountButton
               isActive={changeCount.includes(3)}
               onClick={() => handleCount(3)}
@@ -135,11 +149,13 @@ export default function ChangeCountButton(props) {
             <TeamSubTitle>현재 우리 팀 인원이에요</TeamSubTitle>
           </SingleButton>
           <SingleButton>
-            {changeCount.includes(2) && changeCount.includes(3) ? (
-              <SelectCheck />
-            ) : (
-              <NotSelectCheck />
-            )}
+            <CheckIcon onClick={() => handleAllSelected(2, 3)}>
+              {changeCount.includes(2) && changeCount.includes(3) ? (
+                <SelectCheck />
+              ) : (
+                <NotSelectCheck />
+              )}
+            </CheckIcon>
             <CountButton
               isActive={changeCount.includes(2) && changeCount.includes(3)}
               onClick={() => handleAllSelected(2, 3)}
@@ -154,7 +170,8 @@ export default function ChangeCountButton(props) {
 }
 
 const ButtonBox = styled.div`
-  width: 70%;
+  width: 90%;
+  margin-left: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -167,7 +184,13 @@ const SingleButton = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 50%;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
+`;
+
+const CheckIcon = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const SelectButton = styled.button`
@@ -177,15 +200,15 @@ const SelectButton = styled.button`
   max-width: 90px;
   background-color: #dfdfdf;
   border-color: transparent;
-  font-family: 'Nanum JungHagSaeng';
-  font-size: 18px;
+  font-family: 'SCoreDream';
+  font-size: 16px;
 `;
 
 const TeamSubTitle = styled.div`
-  margin-top: 4%;
+  margin: 5% 0;
   color: #aaaaaa;
   font-weight: 400;
-  font-size: 8px;
+  font-size: 12px;
   position: absolute;
   top: 30px;
   left: 30px;
@@ -201,8 +224,8 @@ const CountButton = styled.button`
   background-color: ${(props) => (props.isActive ? '#EB8888' : '#F6EEEE')};
   color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
   border-color: transparent;
-  font-family: 'Nanum JungHagSaeng';
-  font-size: 18px;
+  font-family: 'SCoreDream';
+  font-size: 16px;
   &:hover {
     cursor: pointer;
   }
