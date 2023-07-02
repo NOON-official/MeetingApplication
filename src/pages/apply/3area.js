@@ -44,7 +44,11 @@ export default function Apply3Page() {
 
   const [selectCity, setSelectCity] = useState(city);
   const [selectArea, setSelectArea] = useState(areas);
-  const [openCity, setOpenCity] = useState(city);
+  const [openIndex, setOpenIndex] = useState(city);
+
+  const handleButtonClick = (index) => {
+    setOpenIndex(index === openIndex ? null : index);
+  };
 
   useEffect(() => {
     if (finishedStep < 2) {
@@ -82,7 +86,7 @@ export default function Apply3Page() {
     );
     navigate('/apply/4members');
   }, [selectCity, selectArea]);
-  console.log(selectArea);
+
   return (
     <ApplyLayout>
       <NotEnoughDateModal open={openModal1} setModal={setModal1} />
@@ -95,23 +99,25 @@ export default function Apply3Page() {
         </Maintitle>
         <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title>
-      {DATA.map((x) => {
-        return (
-          <AreaAccordion
-            key={x.id}
-            id={x.id}
-            title={x.title}
-            content={x.content}
-            selectCity={selectCity}
-            selectArea={selectArea}
-            setSelectCity={setSelectCity}
-            setSelectArea={setSelectArea}
-            openCity={openCity}
-            setOpenCity={setOpenCity}
-          />
-        );
-      })}
-      {openCity === 0 ? <SEarth /> : null}
+      <Boxes>
+        {DATA.map((x) => {
+          return (
+            <AreaAccordion
+              key={x.id}
+              id={x.id}
+              title={x.title}
+              content={x.content}
+              selectCity={selectCity}
+              selectArea={selectArea}
+              setSelectCity={setSelectCity}
+              setSelectArea={setSelectArea}
+              handleButtonClick={() => handleButtonClick(x.id)}
+              isOpen={openIndex === x.id}
+            />
+          );
+        })}
+      </Boxes>
+      <SEarth />
       <Footer>
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
@@ -125,9 +131,9 @@ export default function Apply3Page() {
 
 const Title = styled.div`
   width: 90%;
-  height: 5%;
+  height: 7%;
   min-height: 5%;
-  margin-top: 30px;
+  margin-top: 5%;
 `;
 
 const Maintitle = styled.div`
@@ -137,10 +143,15 @@ const Maintitle = styled.div`
 `;
 
 const Subtitle = styled.p`
-  margin-top: 4%;
+  margin-top: 3%;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 15px;
+  height: 10%;
+`;
+
+const Boxes = styled.div`
+  width: 90%;
 `;
 
 const Pink = styled.span`
@@ -152,7 +163,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  /* margin-top: 10%; */
+  margin-top: 5%;
   padding-bottom: 5%;
 `;
 
@@ -165,6 +176,6 @@ const ButtonBox = styled.div`
 `;
 
 const SEarth = styled(Earth)`
-  margin-top: 20%;
+  margin-top: 5%;
   margin-left: 57%;
 `;
