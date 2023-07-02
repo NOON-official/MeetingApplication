@@ -12,21 +12,36 @@ import { ReactComponent as Profile2 } from '../asset/svg/Profile2.svg';
 import { ReactComponent as Profile3 } from '../asset/svg/Profile3.svg';
 import { ReactComponent as Profile4 } from '../asset/svg/Profile4.svg';
 import { ReactComponent as SearchIcon } from '../asset/svg/SearchIcon.svg';
+import backend from '../util/backend';
 
 function Teambox({ member, setMember, name }) {
   const { Option } = Select;
 
-  const [role, setRole] = useState(member.role);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [isModalOpen3, setIsModalOpen3] = useState(false);
 
+  const [role, setRole] = useState(member.role);
+  const [selectedUniversity, setSelectedUniversity] = useState(
+    Universities[member.university - 1]?.name,
+  );
+
   useEffect(() => {
     if (Object.keys(member).length === 0 && name === '대표자') {
-      setMember({ ...member, role: 1 });
       setRole(1);
+      const fetchData = async () => {
+        const userData = await backend.get('/users/my-info');
+        setSelectedUniversity(Universities[userData.data.university - 1].name);
+        setMember((prev) => ({
+          ...prev,
+          role: 1,
+          age: new Date().getFullYear() - userData.data.birth,
+          university: userData.data.university,
+        }));
+      };
+      fetchData();
     }
-  }, [member]);
+  }, [member, selectedUniversity]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -103,9 +118,6 @@ function Teambox({ member, setMember, name }) {
     return <Plus />;
   });
 
-  const [selectedUniversity, setSelectedUniversity] = useState(
-    Universities[member.university - 1]?.name,
-  );
   const [searchKeyWord, setSearchKeyWord] = useState(0);
   const inputChange = (e) => {
     setSearchKeyWord(e.target.value);
@@ -117,7 +129,7 @@ function Teambox({ member, setMember, name }) {
 
   return (
     <Container>
-      <Title>{name} ID Card &nbsp;&nbsp;&nbsp;</Title>
+      <Title />
       <LeftBox>
         <Profile onClick={showModal}>{profileimg}</Profile>
         <SModal
@@ -207,7 +219,7 @@ function Teambox({ member, setMember, name }) {
         <Info>
           <BigTitle>나이</BigTitle>
           <SSelect
-            defaultValue={member.age}
+            value={member.age !== undefined ? `만 ${member.age}세` : null}
             showSearch={false}
             bordered={false}
             placeholder="(필수)"
@@ -215,17 +227,17 @@ function Teambox({ member, setMember, name }) {
             showArrow={false}
             onChange={handleAgeChange}
           >
-            <Option value="19">19세</Option>
-            <Option value="20">20세</Option>
-            <Option value="21">21세</Option>
-            <Option value="22">22세</Option>
-            <Option value="23">23세</Option>
-            <Option value="24">24세</Option>
-            <Option value="25">25세</Option>
-            <Option value="26">26세</Option>
-            <Option value="27">27세</Option>
-            <Option value="28">28세</Option>
-            <Option value="29">29세</Option>
+            <Option value="19">만 19세</Option>
+            <Option value="20">만 20세</Option>
+            <Option value="21">만 21세</Option>
+            <Option value="22">만 22세</Option>
+            <Option value="23">만 23세</Option>
+            <Option value="24">만 24세</Option>
+            <Option value="25">만 25세</Option>
+            <Option value="26">만 26세</Option>
+            <Option value="27">만 27세</Option>
+            <Option value="28">만 28세</Option>
+            <Option value="29">만 29세</Option>
           </SSelect>
         </Info>
         <Info>
@@ -284,7 +296,7 @@ function Teambox({ member, setMember, name }) {
             maxLength={10}
             onChange={handleMbtiChange}
           >
-            <Option value="17">만나서 알려줌</Option>
+            <Option value="17">잘 모름</Option>
             <Option value="1">ENFJ</Option>
             <Option value="2">ENFP</Option>
             <Option value="3">ENTJ</Option>
@@ -401,13 +413,17 @@ const WhiteBoxPf = styled.div`
 `;
 
 const ProfileTitle = styled.div`
+  width: 59px;
+  height: 27px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 400;
-  font-size: 24px;
-  color: #999999;
-  font-family: 'Nanum JungHagSaeng';
+  font-weight: 200;
+  font-size: 13px;
+  border-radius: 7px;
+  color: white;
+  background-color: #eb8888;
+  font-family: 'SCoreDream';
   margin-bottom: 15px;
 `;
 
@@ -437,6 +453,9 @@ const Info = styled.div`
 
 const BigTitle = styled.div`
   width: 40px;
+  font-family: 'SCoreDream';
+  font-size: 13px;
+  font-weight: 200;
 `;
 
 const Ttitle = styled.div`

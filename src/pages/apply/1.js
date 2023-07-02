@@ -113,16 +113,15 @@ const Title = styled.div`
 
 const Maintitle = styled.div`
   width: 100%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 22px;
 `;
 
 const Subtitle = styled.p`
   margin-top: 5%;
   color: #aaaaaa;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 15px;
 `;
 
 const Pink = styled.span`
@@ -150,11 +149,11 @@ const ThreePeople = styled.button`
   background: #f6eeee;
   border-radius: 10px;
   border: none;
-  font-family: 'Nanum JungHagSaeng';
+  font-family: 'SCoreDream';
   width: 100%;
   height: 45px;
-  font-weight: 400;
-  font-size: 20px;
+  font-weight: 200;
+  font-size: 16px;
   color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
   background: ${(props) => (props.isActive ? '#EB8888' : 'F6EEEE')};
   &:hover {

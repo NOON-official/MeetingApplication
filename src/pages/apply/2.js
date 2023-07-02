@@ -15,21 +15,6 @@ import { ReactComponent as Earth } from '../../asset/svg/Earth.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
 import { submitStep2 } from '../../features/apply';
 
-const Date = [
-  {
-    id: 1,
-    date: '평일',
-  },
-  {
-    id: 2,
-    date: '주말',
-  },
-  {
-    id: 3,
-    date: '둘 다 좋아요',
-  },
-];
-
 export default function Apply2() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
@@ -57,6 +42,25 @@ export default function Apply2() {
 
   const setModal3 = (bool) => {
     setOpenModal3(bool);
+  };
+
+  const handleDate = useCallback(
+    (val, isChecked) => {
+      if (isChecked) {
+        setSelectedDate([...selectedDate, val]);
+        return;
+      }
+      setSelectedDate(selectedDate.filter((v) => v !== val));
+    },
+    [selectedDate],
+  );
+
+  const selectAllDate = () => {
+    if (selectedDate.includes(1) && selectedDate.includes(2)) {
+      setSelectedDate([]);
+      return;
+    }
+    setSelectedDate([1, 2]);
   };
 
   const handleBefore = () => {
@@ -89,16 +93,21 @@ export default function Apply2() {
       </Title>
 
       <ChooseBox>
-        {Date.map((x) => {
-          return (
-            <ChooseButton
-              key={x.id}
-              isActive={selectedDate === x.id}
-              content={x.date}
-              onChange={() => setSelectedDate(x.id)}
-            />
-          );
-        })}
+        <ChooseButton
+          isActive={selectedDate.includes(1)}
+          onChange={(isActive) => handleDate(1, isActive)}
+          content="평일"
+        />
+        <ChooseButton
+          isActive={selectedDate.includes(2)}
+          onChange={(isActive) => handleDate(2, isActive)}
+          content="주말"
+        />
+        <ChooseButton
+          isActive={selectedDate.includes(1) && selectedDate.includes(2)}
+          onChange={selectAllDate}
+          content="둘 다 좋아요"
+        />
       </ChooseBox>
 
       <SEarth />
@@ -122,9 +131,8 @@ const Title = styled.div`
 
 const Maintitle = styled.div`
   width: 100%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 22px;
 `;
 
 const Pink = styled.span`
@@ -139,6 +147,7 @@ const Footer = styled.div`
   margin-top: 10%;
   padding-bottom: 5%;
 `;
+
 const ButtonBox = styled.div`
   width: 90%;
   display: flex;
