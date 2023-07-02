@@ -47,7 +47,7 @@ export default function Apply8Page() {
         kakaoId: Id,
       }),
     );
-    navigate('/myinfo/account/phone');
+    navigate('/apply/9teamProfile');
   }, [Id]);
 
   return (
@@ -96,7 +96,7 @@ export default function Apply8Page() {
       <Footer>
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
-          <ApplyButton onClick={handleSubmit}>제출하기</ApplyButton>
+          <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
@@ -172,7 +172,6 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  /* margin-top: 6%; */
   padding-bottom: 5%;
 `;
 
