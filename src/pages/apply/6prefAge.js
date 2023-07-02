@@ -154,7 +154,7 @@ const Title = styled.div`
   width: 90%;
   height: 5%;
   min-height: 5%;
-  margin-top: 30px;
+  margin-top: 5%;
 `;
 
 const Maintitle = styled.div`

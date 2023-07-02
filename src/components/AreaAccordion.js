@@ -11,16 +11,11 @@ export default function AreaAccordion(props) {
     selectArea,
     setSelectArea,
     setSelectCity,
-    openCity,
-    setOpenCity,
+    handleButtonClick,
+    isOpen,
   } = props;
 
-  const isOpen = openCity === id;
   const isAllSelected = content.every((x) => selectArea.includes(x));
-
-  const handleCity = () => {
-    setOpenCity(id);
-  };
 
   const handleArea = (x) => {
     setSelectCity(id);
@@ -46,12 +41,12 @@ export default function AreaAccordion(props) {
 
   return (
     <ChooseBox>
-      <AreaButton onClick={handleCity}>
+      <AreaButton onClick={handleButtonClick}>
         <AreaTitle>{title}</AreaTitle>
         {isOpen ? (
-          <PinkDownArrow style={{ color: 'f6eeee' }} />
+          <PinkDownArrow style={{ color: '#f6eeee' }} />
         ) : (
-          <PinkUpArrow style={{ color: 'f6eeee' }} />
+          <PinkUpArrow style={{ color: '#f6eeee' }} />
         )}
       </AreaButton>
       {isOpen ? (
@@ -78,7 +73,7 @@ export default function AreaAccordion(props) {
 }
 
 const ChooseBox = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -95,8 +90,6 @@ const AreaButton = styled.button`
   font-family: 'SCoreDream';
   width: 100%;
   height: 45px;
-  font-weight: 200;
-  font-size: 16px;
   color: ${(props) => (props.isActive ? '#F6EEEE' : '#B79292')};
   background: ${(props) => (props.isActive ? '#EB8888' : 'F6EEEE')};
   &:hover {
@@ -105,7 +98,8 @@ const AreaButton = styled.button`
 `;
 
 const AreaTitle = styled.span`
-  font-size: 20px;
+  font-weight: 200;
+  font-size: 16px;
   flex-grow: 2;
 `;
 
