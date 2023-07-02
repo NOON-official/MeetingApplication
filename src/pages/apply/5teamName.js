@@ -16,9 +16,9 @@ export default function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
 
-  const { finishedStep, intro, name } = useSelector((store) => store.apply);
+  const { finishedStep, intro, teamName } = useSelector((store) => store.apply);
   const [introduce, setIntroduce] = useState(intro);
-  const [teamName, setTeamName] = useState(name);
+  const [name, setName] = useState(teamName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ export default function Apply5Page() {
   }, []);
 
   const handleTeamName = useCallback((e) => {
-    setTeamName(e.target.value);
+    setName(e.target.value);
   }, []);
 
   const handleBefore = () => {
@@ -42,7 +42,7 @@ export default function Apply5Page() {
   };
 
   const handleSubmit = useCallback(() => {
-    if (!teamName) {
+    if (!name) {
       setOpenModal2(true);
       return;
     }
@@ -53,11 +53,11 @@ export default function Apply5Page() {
     dispatch(
       submitStep5({
         intro: introduce,
-        name: teamName,
+        teamName: name,
       }),
     );
     navigate('/apply/6prefAge');
-  }, [introduce, teamName]);
+  }, [introduce, name]);
 
   const setModal = (bool) => {
     setOpenModal(bool);
@@ -79,7 +79,7 @@ export default function Apply5Page() {
       </Title>
       <Text>
         <SInput
-          value={teamName}
+          value={name}
           onChange={handleTeamName}
           maxLength={10}
           placeholder="미팅이와 아이들 (10자 이내)"
@@ -94,7 +94,7 @@ export default function Apply5Page() {
           <br /> 길게 쓰면 운명의 짝을 만날지도?
         </Subtitle>
       </Title>
-      <Text>
+      <Text2>
         <Alert>최소 글자수 10자</Alert>
         <STextArea
           value={introduce}
@@ -102,7 +102,7 @@ export default function Apply5Page() {
           style={{
             height: '150px',
             resize: 'none',
-            padding: '20px',
+            padding: '18px',
           }}
           showCount
           minLength={10}
@@ -113,7 +113,7 @@ export default function Apply5Page() {
           만약 재미없다면 집까지 앞구르기 하면서 가겠습니다.
           (아, 참고로 잘생겼습니다^^)"
         />
-      </Text>
+      </Text2>
       <Footer>
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
@@ -127,16 +127,14 @@ export default function Apply5Page() {
 
 const Title = styled.div`
   width: 90%;
-  height: 5%;
-  min-height: 5%;
-  margin-top: 30px;
+  height: 1%;
+  margin-top: 5%;
 `;
 
 const Maintitle = styled.div`
   width: 100%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 22px;
 `;
 
 const Pink = styled.span`
@@ -144,10 +142,10 @@ const Pink = styled.span`
 `;
 
 const Subtitle = styled.p`
-  margin: 5% 0;
+  margin: 6% 0;
   color: #aaaaaa;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 20px;
 `;
 
@@ -156,22 +154,28 @@ const Text = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  height: 5%;
 `;
 
 const SInput = styled(Input)`
   text-align: center;
   background-color: white;
   width: 90%;
-  height: 50px;
   border: 1px solid #f1ecec;
   border-radius: 10px;
+`;
+
+const Text2 = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
 `;
 
 const STextArea = styled(Input.TextArea)`
   background-color: white;
   width: 90%;
-  margin-top: 8%;
-  height: 500px;
+  margin-top: 13%;
   border: 1px solid #f1ecec;
   border-radius: 10px;
 `;
@@ -179,7 +183,7 @@ const STextArea = styled(Input.TextArea)`
 const Alert = styled.p`
   z-index: 1;
   position: absolute;
-  top: 20%;
+  top: 23%;
   right: 10%;
   color: #aaaaaa;
   font-weight: 400;

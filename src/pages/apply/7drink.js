@@ -34,11 +34,56 @@ export default function Apply7Page() {
   }, [finishedStep]);
 
   const marks2 = {
-    1: { label: <SliderText>Level 1</SliderText> },
-    2: { label: <SliderText>2</SliderText> },
-    3: { label: <SliderText>3</SliderText> },
-    4: { label: <SliderText>4</SliderText> },
-    5: { label: <SliderText>5</SliderText> },
+    1: {
+      label:
+        alchol === 1 ? (
+          <SliderText>
+            <SAlchol />
+            <br />
+            Level 1
+          </SliderText>
+        ) : null,
+    },
+    2: {
+      label:
+        alchol === 2 ? (
+          <SliderText>
+            <SAlchol />
+            <br />
+            Level 2
+          </SliderText>
+        ) : null,
+    },
+    3: {
+      label:
+        alchol === 3 ? (
+          <SliderText>
+            <SAlchol />
+            <br />
+            Level 3
+          </SliderText>
+        ) : null,
+    },
+    4: {
+      label:
+        alchol === 4 ? (
+          <SliderText>
+            <SAlchol />
+            <br />
+            Level 4
+          </SliderText>
+        ) : null,
+    },
+    5: {
+      label:
+        alchol === 5 ? (
+          <SliderText>
+            <SWhale />
+            <br />
+            Level 5
+          </SliderText>
+        ) : null,
+    },
   };
 
   const trackStyle = {
@@ -82,23 +127,9 @@ export default function Apply7Page() {
       <AlcholInfo>
         <AlcholContent>반 병</AlcholContent>
         <AlcholContent>한 병</AlcholContent>
-        {alchol === 3 ? (
-          <AlcholContent>
-            한 병 반
-            <SAlchol />
-          </AlcholContent>
-        ) : (
-          <AlcholContent>한 병 반</AlcholContent>
-        )}
+        <AlcholContent>한 병 반</AlcholContent>
         <AlcholContent>두 병</AlcholContent>
-        {alchol === 5 ? (
-          <AlcholContent>
-            술고래
-            <SWhale />
-          </AlcholContent>
-        ) : (
-          <AlcholContent>술고래</AlcholContent>
-        )}
+        <AlcholContent>술고래</AlcholContent>
       </AlcholInfo>
       <SSlider
         onChange={setAlchol}
@@ -118,11 +149,13 @@ export default function Apply7Page() {
         <Subtitle>미팅 인원 변경이 가능하다면 모두 체크해주세요</Subtitle>
       </Title>
 
-      <ChangeCountButton
-        count={memberCount}
-        changeCount={changeCount}
-        setChangeCount={setChangeCount}
-      />
+      <CountChangeInfo>
+        <ChangeCountButton
+          count={memberCount}
+          changeCount={changeCount}
+          setChangeCount={setChangeCount}
+        />
+      </CountChangeInfo>
 
       <Footer>
         <ButtonBox2>
@@ -136,31 +169,24 @@ export default function Apply7Page() {
 }
 
 const SAlchol = styled(Alchol)`
-  position: absolute;
-  right: 2px;
-  bottom: -66%;
-  z-index: 100;
+  z-index: 1;
 `;
 
 const SWhale = styled(Whale)`
-  position: absolute;
-  right: -1px;
-  bottom: -60%;
-  z-index: 100;
+  z-index: 1;
 `;
 
 const Title = styled.div`
   width: 90%;
   height: 5%;
   min-height: 5%;
-  margin-top: 30px;
+  margin-top: 5%;
 `;
 
 const Maintitle = styled.div`
   width: 100%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 22px;
 `;
 
 const Pink = styled.span`
@@ -171,7 +197,11 @@ const Subtitle = styled.p`
   margin-top: 4%;
   color: #aaaaaa;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 15px;
+`;
+
+const CountChangeInfo = styled.div`
+  margin-top: 10px;
 `;
 
 const Footer = styled.div`
@@ -194,6 +224,11 @@ const ButtonBox2 = styled.div`
 const SSlider = styled(Slider)`
   margin-top: 3%;
   width: 85%;
+  :where(.css-dev-only-do-not-override-sagpa3).ant-slider-horizontal
+    .ant-slider-mark {
+    top: -160%;
+    left: 0.2%;
+  }
   .custom-slider .ant-slider-mark-text {
     display: none;
   }
@@ -213,7 +248,6 @@ const SSlider = styled(Slider)`
 `;
 
 const SliderText = styled.p`
-  margin-top: 12px;
   font-weight: 400;
   color: #b79292;
   font-size: 20px;
