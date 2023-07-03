@@ -103,7 +103,7 @@ export default function LoginWaitMatch({ teamId }) {
         <WhiteBox>
           <SBigO />
           <SMatchingText3 />
-          <MeetingButton href="https://furry-bank-197.notion.site/A-to-Z-0ac3369582fa4f43bbfd568d267433e7">
+          <MeetingButton href="https://moingclub.notion.site/A-to-Z-0ac3369582fa4f43bbfd568d267433e7?pvs=4">
             미팅 팁 보러가기
           </MeetingButton>
         </WhiteBox>
