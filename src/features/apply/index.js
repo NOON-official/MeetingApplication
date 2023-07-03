@@ -6,18 +6,17 @@ const initialState = {
   finishedStep: 0,
   gender: 1, // 1: 남자, 2: 여자
   memberCount: 3, // 2: 2대2, 3: 3대3
-  universities: [],
   availableDates: [],
   areas: [],
   city: 0,
   members: [],
-  name: '',
+  teamName: '',
   intro: '',
   drink: 3,
   moreMember: [],
-  prefSameUniversity: true,
   prefAge: [20, 29],
   prefVibes: [],
+  kakaoId: '',
 };
 
 const applySlice = createSlice({
@@ -93,11 +92,11 @@ const applySlice = createSlice({
       );
     },
     submitStep5: (state, action) => {
-      const { intro, name } = action.payload;
+      const { intro, teamName } = action.payload;
 
       state.finishedStep = 5;
       state.intro = intro;
-      state.name = name;
+      state.teamName = teamName;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(

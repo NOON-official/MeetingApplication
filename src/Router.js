@@ -19,6 +19,7 @@ import Apply5Page from './pages/apply/5teamName';
 import Apply6Page from './pages/apply/6prefAge';
 import Apply7Page from './pages/apply/7drink';
 import Apply8Page from './pages/apply/8kakaoId';
+import Apply10Page from './pages/apply/10phone';
 import Certification from './pages/apply/certification';
 import Complete from './pages/apply/complete';
 import TicketBuyPage from './pages/myinfo/ticket/buy';
@@ -33,6 +34,7 @@ import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
 import ApplyInformation from './pages/apply/information';
 import ApplyUniversity from './pages/apply/university';
 import Apply6 from './pages/apply/6';
+import Apply9Page from './pages/apply/9teamProfile';
 
 const Router = createBrowserRouter([
   {
@@ -142,6 +144,14 @@ const Router = createBrowserRouter([
       {
         path: 'apply/8kakaoId',
         element: <Apply8Page />,
+      },
+      {
+        path: 'apply/9teamProfile',
+        element: <Apply9Page />,
+      },
+      {
+        path: 'apply/10phone',
+        element: <Apply10Page />,
       },
       {
         path: 'apply/certification',
