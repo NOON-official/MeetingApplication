@@ -116,11 +116,11 @@ export default function Apply6Page() {
         included
       />
 
-      <Title>
+      <Title2>
         <Maintitle>
           <Pink>미팅</Pink>은 어땠으면 좋겠어요?
         </Maintitle>
-      </Title>
+      </Title2>
 
       <ChooseBox2>
         <ChooseButton
@@ -152,9 +152,14 @@ export default function Apply6Page() {
 
 const Title = styled.div`
   width: 90%;
-  height: 5%;
-  min-height: 5%;
-  margin-top: 5%;
+  height: 60px;
+  margin-top: 7%;
+`;
+
+const Title2 = styled.div`
+  width: 90%;
+  height: 20px;
+  margin-top: 10%;
 `;
 
 const Maintitle = styled.div`
@@ -168,7 +173,7 @@ const Pink = styled.span`
 `;
 
 const Subtitle = styled.p`
-  margin-top: 4%;
+  margin-top: 5%;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 15px;

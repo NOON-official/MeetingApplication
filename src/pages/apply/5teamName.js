@@ -85,7 +85,7 @@ export default function Apply5Page() {
           placeholder="미팅이와 아이들 (10자 이내)"
         />
       </Text>
-      <Title>
+      <Title2>
         <Maintitle>
           우리팀을 소개하는 <Pink>마지막 한 줄 어필</Pink>
         </Maintitle>
@@ -93,7 +93,7 @@ export default function Apply5Page() {
           센스 넘치게 우리 팀을 소개할수록 매칭률이 올라가요!
           <br /> 길게 쓰면 운명의 짝을 만날지도?
         </Subtitle>
-      </Title>
+      </Title2>
       <Text2>
         <Alert>최소 글자수 10자</Alert>
         <STextArea
@@ -127,8 +127,14 @@ export default function Apply5Page() {
 
 const Title = styled.div`
   width: 90%;
-  height: 1%;
-  margin-top: 5%;
+  height: 30px;
+  margin-top: 7%;
+`;
+
+const Title2 = styled.div`
+  width: 90%;
+  height: 110px;
+  margin-top: 10%;
 `;
 
 const Maintitle = styled.div`
@@ -142,7 +148,7 @@ const Pink = styled.span`
 `;
 
 const Subtitle = styled.p`
-  margin: 6% 0;
+  margin: 8% 0;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 15px;
@@ -175,7 +181,7 @@ const Text2 = styled.div`
 const STextArea = styled(Input.TextArea)`
   background-color: white;
   width: 90%;
-  margin-top: 13%;
+  /* margin-top: 20%; */
   border: 1px solid #f1ecec;
   border-radius: 10px;
 `;
@@ -183,7 +189,7 @@ const STextArea = styled(Input.TextArea)`
 const Alert = styled.p`
   z-index: 1;
   position: absolute;
-  top: 23%;
+  top: 10%;
   right: 10%;
   color: #aaaaaa;
   font-weight: 400;

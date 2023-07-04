@@ -144,10 +144,10 @@ export default function Apply7Page() {
         min={1}
       />
 
-      <Title>
+      <Title2>
         <Maintitle>잠깐, 마지막으로!</Maintitle>
         <Subtitle>미팅 인원 변경이 가능하다면 모두 체크해주세요</Subtitle>
-      </Title>
+      </Title2>
 
       <CountChangeInfo>
         <ChangeCountButton
@@ -178,9 +178,14 @@ const SWhale = styled(Whale)`
 
 const Title = styled.div`
   width: 90%;
-  height: 5%;
-  min-height: 5%;
-  margin-top: 5%;
+  height: 60px;
+  margin-top: 7%;
+`;
+
+const Title2 = styled.div`
+  width: 90%;
+  height: 60px;
+  margin-top: 13%;
 `;
 
 const Maintitle = styled.div`
@@ -222,7 +227,7 @@ const ButtonBox2 = styled.div`
 `;
 
 const SSlider = styled(Slider)`
-  margin-top: 3%;
+  margin: 5% 0;
   width: 85%;
   :where(.css-dev-only-do-not-override-sagpa3).ant-slider-horizontal
     .ant-slider-mark {
@@ -259,7 +264,7 @@ const AlcholInfo = styled.div`
   justify-content: space-between;
   font-weight: 700;
   font-size: 14px;
-  margin-top: 8%;
+  margin: 5% 0;
   width: 90%;
   color: #eb8888;
 `;

@@ -11,7 +11,6 @@ import ProgressBar from '../../components/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
 import { submitStep4 } from '../../features/apply';
 import ChannelTalk from '../../asset/ChannelTalk';
-import { ReactComponent as ProgressText } from '../../asset/svg/ProgressText.svg';
 
 export default function Apply4Page() {
   const { finishedStep, members, memberCount } = useSelector(
@@ -158,18 +157,11 @@ export default function Apply4Page() {
   );
 }
 
-const SProgressText = styled(ProgressText)`
-  position: fixed;
-  top: 6%;
-  left: 30%;
-`;
-
 const Title = styled.div`
   position: relative;
   width: 90%;
-  height: 5%;
-  min-height: 5%;
-  margin-top: 5%;
+  height: 60px;
+  margin-top: 8%;
 `;
 
 const Maintitle = styled.div`
@@ -183,7 +175,7 @@ const Pink = styled.span`
 `;
 
 const Subtitle = styled.p`
-  margin-top: 4%;
+  margin-top: 5%;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 15px;
