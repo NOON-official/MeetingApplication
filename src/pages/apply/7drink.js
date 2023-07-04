@@ -35,54 +35,49 @@ export default function Apply7Page() {
 
   const marks2 = {
     1: {
-      label:
-        alchol === 1 ? (
-          <SliderText>
-            <SAlchol />
-            <br />
-            Level 1
-          </SliderText>
-        ) : null,
+      label: alchol === 1 && (
+        <SliderText>
+          <SAlchol />
+          <br />
+          Level 1
+        </SliderText>
+      ),
     },
     2: {
-      label:
-        alchol === 2 ? (
-          <SliderText>
-            <SAlchol />
-            <br />
-            Level 2
-          </SliderText>
-        ) : null,
+      label: alchol === 2 && (
+        <SliderText>
+          <SAlchol />
+          <br />
+          Level 2
+        </SliderText>
+      ),
     },
     3: {
-      label:
-        alchol === 3 ? (
-          <SliderText>
-            <SAlchol />
-            <br />
-            Level 3
-          </SliderText>
-        ) : null,
+      label: alchol === 3 && (
+        <SliderText>
+          <SAlchol />
+          <br />
+          Level 3
+        </SliderText>
+      ),
     },
     4: {
-      label:
-        alchol === 4 ? (
-          <SliderText>
-            <SAlchol />
-            <br />
-            Level 4
-          </SliderText>
-        ) : null,
+      label: alchol === 4 && (
+        <SliderText>
+          <SAlchol />
+          <br />
+          Level 4
+        </SliderText>
+      ),
     },
     5: {
-      label:
-        alchol === 5 ? (
-          <SliderText>
-            <SWhale />
-            <br />
-            Level 5
-          </SliderText>
-        ) : null,
+      label: alchol === 5 && (
+        <SliderText>
+          <SWhale />
+          <br />
+          Level 5
+        </SliderText>
+      ),
     },
   };
 
@@ -169,11 +164,11 @@ export default function Apply7Page() {
 }
 
 const SAlchol = styled(Alchol)`
-  z-index: 1;
+  /* z-index: 1; */
 `;
 
 const SWhale = styled(Whale)`
-  z-index: 1;
+  /* z-index: 1; */
 `;
 
 const Title = styled.div`
