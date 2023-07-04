@@ -63,6 +63,10 @@ const Mbti = [
     name: 'ISTP',
     id: 16,
   },
+  {
+    name: '잘 모름',
+    id: 17,
+  },
 ];
 
 export default Mbti;

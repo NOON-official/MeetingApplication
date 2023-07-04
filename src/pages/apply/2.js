@@ -124,9 +124,8 @@ export default function Apply2() {
 
 const Title = styled.div`
   width: 90%;
-  height: 5%;
-  min-height: 5%;
-  margin-top: 30px;
+  height: 40px;
+  margin-top: 5%;
 `;
 
 const Maintitle = styled.div`
@@ -144,7 +143,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
+  margin-top: 5%;
   padding-bottom: 5%;
 `;
 

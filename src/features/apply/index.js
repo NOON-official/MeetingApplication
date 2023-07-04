@@ -4,7 +4,6 @@ export const APPLY_STORAGE_KEY = 'apply-data';
 
 const initialState = {
   finishedStep: 0,
-  gender: 1, // 1: 남자, 2: 여자
   memberCount: 3, // 2: 2대2, 3: 3대3
   availableDates: [],
   areas: [],
