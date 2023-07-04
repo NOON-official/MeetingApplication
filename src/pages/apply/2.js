@@ -68,7 +68,7 @@ export default function Apply2() {
   };
 
   const handleSubmit = useCallback(() => {
-    if (selectedDate === undefined) {
+    if (selectedDate.length === 0) {
       setOpenModal3(true);
       return;
     }
