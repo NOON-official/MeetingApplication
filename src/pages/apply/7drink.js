@@ -36,47 +36,42 @@ export default function Apply7Page() {
   const marks2 = {
     1: {
       label: alchol === 1 && (
-        <SliderText>
+        <>
           <SAlchol />
-          <br />
-          Level 1
-        </SliderText>
+          <SliderText>Level 1</SliderText>
+        </>
       ),
     },
     2: {
       label: alchol === 2 && (
-        <SliderText>
+        <>
           <SAlchol />
-          <br />
-          Level 2
-        </SliderText>
+          <SliderText>Level 2</SliderText>
+        </>
       ),
     },
     3: {
       label: alchol === 3 && (
-        <SliderText>
+        <>
           <SAlchol />
-          <br />
-          Level 3
-        </SliderText>
+          <SliderText>Level 3</SliderText>
+        </>
       ),
     },
     4: {
       label: alchol === 4 && (
-        <SliderText>
+        <>
           <SAlchol />
-          <br />
-          Level 4
-        </SliderText>
+          <SliderText>Level 4</SliderText>
+        </>
       ),
     },
     5: {
       label: alchol === 5 && (
-        <SliderText>
+        <>
           <SWhale />
-          <br />
-          Level 5
-        </SliderText>
+          <SliderText>Level 5</SliderText>
+        </>
       ),
     },
   };
@@ -164,11 +159,11 @@ export default function Apply7Page() {
 }
 
 const SAlchol = styled(Alchol)`
-  /* z-index: 1; */
+  transform: translateX(2%) translateY(-60%);
 `;
 
 const SWhale = styled(Whale)`
-  /* z-index: 1; */
+  transform: translateX(-1%) translateY(-55%);
 `;
 
 const Title = styled.div`
@@ -224,30 +219,23 @@ const ButtonBox2 = styled.div`
 const SSlider = styled(Slider)`
   margin: 5% 0;
   width: 85%;
-  :where(.css-dev-only-do-not-override-sagpa3).ant-slider-horizontal
-    .ant-slider-mark {
-    top: -160%;
-    left: 0.2%;
-  }
+
   .custom-slider .ant-slider-mark-text {
     display: none;
   }
   .custom-slider .ant-slider-mark-text-active {
     display: block;
   }
-
-  :where(.css-dev-only-do-not-override-sagpa3).ant-slider
-    .ant-slider-handle::after {
-    box-shadow: 0 0 0 2px #eb8888;
+  .ant-slider-step .ant-slider-dot .ant-slider-dot-active {
+    display: block;
   }
-
-  :where(.css-dev-only-do-not-override-sagpa3).ant-slider
-    .ant-slider-dot-active {
+  .ant-slider-dot-active {
     display: none;
   }
 `;
 
 const SliderText = styled.p`
+  margin-top: -80%;
   font-weight: 400;
   color: #b79292;
   font-size: 20px;
@@ -255,11 +243,11 @@ const SliderText = styled.p`
 `;
 
 const AlcholInfo = styled.div`
+  margin: 3% 0;
+  font-weight: 700;
   display: flex;
   justify-content: space-between;
-  font-weight: 700;
   font-size: 14px;
-  margin: 5% 0;
   width: 90%;
   color: #eb8888;
 `;
