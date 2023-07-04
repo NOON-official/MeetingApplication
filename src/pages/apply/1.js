@@ -106,9 +106,8 @@ export default function Apply1Page() {
 
 const Title = styled.div`
   width: 90%;
-  height: 5%;
-  min-height: 5%;
-  margin: 20px 0;
+  height: 40px;
+  margin-top: 5%;
 `;
 
 const Maintitle = styled.div`
@@ -171,7 +170,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 6%;
+  margin-top: 5%;
   padding-bottom: 5%;
 `;
 
