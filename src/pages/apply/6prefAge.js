@@ -205,12 +205,10 @@ const SAgeSlider = styled(Slider)`
   .custom-slider .ant-slider-mark-text-active {
     display: block;
   }
-  :where(.css-dev-only-do-not-override-sagpa3).ant-slider
-    .ant-slider-dot-active {
+  .ant-slider-dot-active {
     display: none;
   }
-  :where(.css-dev-only-do-not-override-sagpa3).ant-slider
-    .ant-slider-handle::after {
+  .ant-slider-handle::after {
     box-shadow: 0 0 0 2px #eb8888;
   }
 `;
