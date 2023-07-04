@@ -131,9 +131,9 @@ export default function Apply3Page() {
 
 const Title = styled.div`
   width: 90%;
-  height: 7%;
-  min-height: 5%;
-  margin-top: 5%;
+  /* height: 10%; */
+  min-height: 10%;
+  margin-top: 30px;
 `;
 
 const Maintitle = styled.div`
@@ -147,11 +147,11 @@ const Subtitle = styled.p`
   color: #aaaaaa;
   font-weight: 400;
   font-size: 15px;
-  height: 10%;
 `;
 
 const Boxes = styled.div`
   width: 90%;
+  min-height: 50%;
 `;
 
 const Pink = styled.span`
@@ -176,6 +176,7 @@ const ButtonBox = styled.div`
 `;
 
 const SEarth = styled(Earth)`
+  height: 90px;
   margin-top: 5%;
   margin-left: 57%;
 `;

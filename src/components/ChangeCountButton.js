@@ -134,6 +134,7 @@ const SelectButton = styled.button`
   max-width: 90px;
   background-color: #dfdfdf;
   border-color: transparent;
+  color: #555555;
   font-family: 'SCoreDream';
   font-size: 16px;
 `;

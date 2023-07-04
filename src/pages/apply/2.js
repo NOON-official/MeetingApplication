@@ -144,7 +144,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
+  margin-top: 5%;
   padding-bottom: 5%;
 `;
 
