@@ -127,14 +127,14 @@ export default function Apply5Page() {
 
 const Title = styled.div`
   width: 90%;
-  height: 5vh;
-  margin-top: 5%;
+  height: 30px;
+  margin-top: 7%;
 `;
 
 const Title2 = styled.div`
   width: 90%;
-  height: 14vh;
-  margin-top: 5%;
+  height: 110px;
+  margin-top: 10%;
 `;
 
 const Maintitle = styled.div`
