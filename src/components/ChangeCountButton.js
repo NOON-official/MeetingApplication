@@ -131,7 +131,7 @@ const SelectButton = styled.button`
   margin: 0 6px;
   border-radius: 5px;
   height: 30px;
-  max-width: 90px;
+  max-width: 120px;
   background-color: #dfdfdf;
   border-color: transparent;
   color: #555555;
