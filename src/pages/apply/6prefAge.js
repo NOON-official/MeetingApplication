@@ -93,7 +93,7 @@ export default function Apply6Page() {
     setPrefMood([1, 2]);
   };
   const formatter = (value) => `${value}세`;
-  console.log(ageRange);
+
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
