@@ -93,7 +93,7 @@ export default function Apply6Page() {
     setPrefMood([1, 2]);
   };
   const formatter = (value) => `${value}세`;
-
+  console.log(ageRange);
   return (
     <ApplyLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
@@ -104,7 +104,7 @@ export default function Apply6Page() {
         </Maintitle>
         <Subtitle>범위를 넓게 선택해야 매칭 확률이 상승해요</Subtitle>
       </Title>
-      <SSlider
+      <SAgeSlider
         onAfterChange={onAfterChange}
         trackStyle={trackStyle}
         tooltip={{ formatter, placement: 'bottom' }}
@@ -196,7 +196,7 @@ const ButtonBox = styled.div`
   margin-top: 5%;
 `;
 
-const SSlider = styled(Slider)`
+const SAgeSlider = styled(Slider)`
   margin-top: 7%;
   width: 85%;
   .custom-slider .ant-slider-mark-text {
@@ -205,15 +205,13 @@ const SSlider = styled(Slider)`
   .custom-slider .ant-slider-mark-text-active {
     display: block;
   }
-
-  :where(.css-dev-only-do-not-override-sagpa3).ant-slider
-    .ant-slider-handle::after {
-    box-shadow: 0 0 0 2px #eb8888;
-  }
-
   :where(.css-dev-only-do-not-override-sagpa3).ant-slider
     .ant-slider-dot-active {
     display: none;
+  }
+  :where(.css-dev-only-do-not-override-sagpa3).ant-slider
+    .ant-slider-handle::after {
+    box-shadow: 0 0 0 2px #eb8888;
   }
 `;
 
