@@ -21,23 +21,22 @@ import MatchingCompleteModal from '../../components/Modal/MatchingCompleteModal'
 import { createTeam } from '../../features/apply/asyncAction';
 
 export default function Apply9Page() {
+  const { ...applydata } = useSelector((store) => store.apply);
   const {
     areas,
     availableDates,
     city,
     drink,
-    finishedStep,
-    gender,
     intro,
     kakaoId,
+    finishedStep,
     memberCount,
     members,
     moreMember,
     teamName,
     prefAge,
     prefVibes,
-  } = useSelector((store) => store.apply);
-  const { ...applydata } = useSelector((store) => store.apply);
+  } = applydata;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,6 +44,7 @@ export default function Apply9Page() {
   const [userPhone, setUserPhone] = useState('');
   const [userTeamId, setUserTeamId] = useState('');
   const [matchingStatus, setMatchingStatus] = useState('');
+  const [gender, setGender] = useState('');
 
   const setModal = (bool) => {
     setOpenModal(bool);
@@ -54,6 +54,7 @@ export default function Apply9Page() {
     const userData = await backend.get('/users/my-info');
     const userteamid = await backend.get('/users/team-id');
     const matchingstatus = await backend.get('/users/matchings/status');
+    setGender(userData.data.gender);
     setUserPhone(userData.data.phone);
     setUserTeamId(userteamid.data.teamId);
     setMatchingStatus(matchingstatus.data.matchingStatus);
@@ -82,6 +83,7 @@ export default function Apply9Page() {
     } else if (matchingStatus === null) {
       dispatch(createTeam(applydata));
       // window.alert('저장되었습니다!');
+      setOpenModal(true);
     } else {
       await backend.delete(`/teams/${userTeamId}`);
       dispatch(createTeam(applydata));
@@ -89,8 +91,6 @@ export default function Apply9Page() {
     }
     if (userPhone === null) {
       navigate('/apply/10phone');
-    } else {
-      setOpenModal(true);
     }
   });
 
@@ -152,7 +152,7 @@ export default function Apply9Page() {
             </TeamTitle>
             <TeamInfo>
               <Subtitle>성별</Subtitle>
-              <Content>{gender === 1 ? '남성' : '여성'}</Content>
+              <Content>{gender === 'male' ? '남성' : '여성'}</Content>
             </TeamInfo>
             <TeamInfo>
               <Subtitle>일정</Subtitle>
@@ -164,7 +164,7 @@ export default function Apply9Page() {
                 <SubContent>{CityContent[city]}</SubContent>
                 <Content>
                   {areas.map((area) => {
-                    return <span>{area}&nbsp;&nbsp;</span>;
+                    return <span key={area}>{area}&nbsp;&nbsp;</span>;
                   })}
                 </Content>
               </div>
@@ -195,7 +195,7 @@ export default function Apply9Page() {
           {members.map((member, idx) => {
             const { role, age, university, mbti, appearance } = member;
             return (
-              <Container>
+              <Container key={member}>
                 <Title2 />
                 <Box>
                   <LeftBox>
