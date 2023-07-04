@@ -30,12 +30,8 @@ export default function Apply9Page() {
     intro,
     kakaoId,
     finishedStep,
-    memberCount,
     members,
-    moreMember,
     teamName,
-    prefAge,
-    prefVibes,
   } = applydata;
   const navigate = useNavigate();
   const dispatch = useDispatch();
