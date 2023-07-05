@@ -24,7 +24,7 @@ export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
   const {
     areas,
-    availableDates,
+    teamAvailableDate,
     city,
     drink,
     intro,
@@ -69,24 +69,30 @@ export default function Apply9Page() {
   };
 
   const handleSubmit = useCallback(async () => {
-    if (matchingStatus === 'APPLIED') {
-      try {
-        await backend.patch(`/teams/${userTeamId}`, applydata);
-        window.alert('수정되었습니다!');
-      } catch (e) {
-        window.alert('수정중 오류가 발생하였습니다');
-      }
-    } else if (matchingStatus === null) {
-      dispatch(createTeam(applydata));
-      // window.alert('저장되었습니다!');
-      setOpenModal(true);
-    } else {
-      await backend.delete(`/teams/${userTeamId}`);
-      dispatch(createTeam(applydata));
-      window.alert('저장되었습니다!');
-    }
-    if (userPhone === null) {
-      navigate('/apply/10phone');
+    // if (matchingStatus === 'APPLIED') {
+    //   try {
+    //     await backend.patch(`/teams/${userTeamId}`, applydata);
+    //     window.alert('수정되었습니다!');
+    //   } catch (e) {
+    //     window.alert('수정중 오류가 발생하였습니다');
+    //   }
+    // } else if (matchingStatus === null) {
+    //   dispatch(createTeam(applydata));
+    //   window.alert('저장되었습니다!');
+    //   setOpenModal(true);
+    // } else {
+    //   await backend.delete(`/teams/${userTeamId}`);
+    //   dispatch(createTeam(applydata));
+    //   window.alert('저장되었습니다!');
+    // }
+    // if (userPhone === null) {
+    //   navigate('/apply/10phone');
+    // }
+    try {
+      await dispatch(createTeam(applydata));
+      window.alert('저장');
+    } catch (e) {
+      console.log(e);
     }
   });
 
@@ -107,9 +113,9 @@ export default function Apply9Page() {
   };
 
   let dates = '';
-  if (availableDates.includes(1) && availableDates.includes(2)) {
+  if (teamAvailableDate.includes(1) && teamAvailableDate.includes(2)) {
     dates = '모두 좋아요';
-  } else if (availableDates.includes(1)) {
+  } else if (teamAvailableDate.includes(1)) {
     dates = '평일';
   } else {
     dates = '주말';
