@@ -1,15 +1,18 @@
 import styled from 'styled-components';
-import MainTabs from './header/MainTabs';
 import TopHeader from './header/TopHeader';
+import BottomTabs from './header/BottomTabs';
 
 function MainLayout({ children }) {
   return (
     <Container>
       <Header>
         <TopHeader />
-        <MainTabs />
+        {/* <MainTabs /> */}
       </Header>
       <Content>{children}</Content>
+      <Footer>
+        <BottomTabs />
+      </Footer>
     </Container>
   );
 }
@@ -33,4 +36,11 @@ const Content = styled.div`
   height: 100%;
   background-color: ${(props) => props.theme.background};
   overflow-y: scroll;
+`;
+
+const Footer = styled.div`
+  max-width: 425px;
+  width: 100%;
+  height: 10%;
+  background-color: ${(props) => props.theme.background};
 `;
