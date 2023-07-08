@@ -16,24 +16,6 @@ import { submitStep3 } from '../../features/apply';
 import AreaAccordion from '../../components/AreaAccordion';
 import Area from '../../asset/Area';
 
-const DATA = [
-  {
-    id: 1,
-    title: '서울 / 경기',
-    content: ['강남', '건대', '수원', '신촌', '인천', '홍대'],
-  },
-  {
-    id: 2,
-    title: '대구',
-    content: ['경대 북문', '계대 앞', '동성로', '영대역'],
-  },
-  {
-    id: 3,
-    title: '부산',
-    content: ['경대 앞', '부산대 앞', '서면', '해운대'],
-  },
-];
-
 export default function Apply3Page() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
@@ -82,10 +64,7 @@ export default function Apply3Page() {
     dispatch(
       submitStep3({
         city: selectCity,
-        areas: selectArea.map((x) => {
-          const area = Area.find((a) => a.name === x);
-          return area ? area.id : null;
-        }),
+        areas: selectArea,
       }),
     );
     navigate('/apply/4members');
@@ -104,7 +83,7 @@ export default function Apply3Page() {
         <Subtitle>중복 선택이 가능해요</Subtitle>
       </Title>
       <Boxes>
-        {DATA.map((x) => {
+        {Area.map((x) => {
           return (
             <AreaAccordion
               key={x.id}

@@ -15,7 +15,7 @@ export default function AreaAccordion(props) {
     isOpen,
   } = props;
 
-  const isAllSelected = content.every((x) => selectArea.includes(x));
+  const areaIndex = content.map((x) => x.id);
 
   const handleArea = (x) => {
     setSelectCity(id);
@@ -30,13 +30,15 @@ export default function AreaAccordion(props) {
     }
   };
 
+  const isAllSelected = content.every((x) => selectArea.includes(x.id));
+
   const selectAllAreas = () => {
     setSelectCity(id);
-    if (selectArea === content) {
+    if (JSON.stringify(selectArea) === JSON.stringify(areaIndex)) {
       setSelectArea([]);
       return;
     }
-    setSelectArea(content);
+    setSelectArea(areaIndex);
   };
 
   return (
@@ -54,11 +56,11 @@ export default function AreaAccordion(props) {
           {content.map((x) => {
             return (
               <Area
-                key={x}
-                isActive={selectArea?.includes(x)}
-                onClick={() => handleArea(x)}
+                key={x.id}
+                isActive={selectArea?.includes(x.id)}
+                onClick={() => handleArea(x.id)}
               >
-                {x}
+                {x.name}
               </Area>
             );
           })}
