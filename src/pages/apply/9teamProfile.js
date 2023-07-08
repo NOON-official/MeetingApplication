@@ -19,6 +19,7 @@ import Mbti from '../../asset/Mbti';
 import backend from '../../util/backend';
 import MatchingCompleteModal from '../../components/Modal/MatchingCompleteModal';
 import { createTeam } from '../../features/apply/asyncAction';
+import Area from '../../asset/Area';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
@@ -165,8 +166,9 @@ export default function Apply9Page() {
               <div>
                 <SubContent>{CityContent[city]}</SubContent>
                 <Content>
-                  {areas.map((area) => {
-                    return <span key={area}>{area}&nbsp;&nbsp;</span>;
+                  {areas.map((id) => {
+                    const area = Area.find((a) => a.id === id);
+                    return area ? <span>{area.name}&nbsp;&nbsp;</span> : null;
                   })}
                 </Content>
               </div>

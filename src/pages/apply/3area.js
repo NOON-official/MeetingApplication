@@ -14,6 +14,7 @@ import { ReactComponent as Earth } from '../../asset/svg/Earth.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
 import { submitStep3 } from '../../features/apply';
 import AreaAccordion from '../../components/AreaAccordion';
+import Area from '../../asset/Area';
 
 const DATA = [
   {
@@ -81,7 +82,10 @@ export default function Apply3Page() {
     dispatch(
       submitStep3({
         city: selectCity,
-        areas: selectArea,
+        areas: selectArea.map((x) => {
+          const area = Area.find((a) => a.name === x);
+          return area ? area.id : null;
+        }),
       }),
     );
     navigate('/apply/4members');
