@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Carousel } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ApplyLayout from '../../layout/ApplyLayout';
 
+import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
 import theme from '../../style/theme';
 import { ReactComponent as Plus } from '../../asset/svg/Plus.svg';
@@ -13,13 +13,12 @@ import { ReactComponent as Profile1 } from '../../asset/svg/Profile1.svg';
 import { ReactComponent as Profile2 } from '../../asset/svg/Profile2.svg';
 import { ReactComponent as Profile3 } from '../../asset/svg/Profile3.svg';
 import { ReactComponent as Profile4 } from '../../asset/svg/Profile4.svg';
+import { createTeam } from '../../features/apply/asyncAction';
 import ApplyButton from '../../components/ApplyButton';
 import Universities from '../../asset/Universities';
 import Mbti from '../../asset/Mbti';
 import backend from '../../util/backend';
 import MatchingCompleteModal from '../../components/Modal/MatchingCompleteModal';
-import { createTeam } from '../../features/apply/asyncAction';
-import Area from '../../asset/Area';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
@@ -34,6 +33,7 @@ export default function Apply9Page() {
     members,
     teamName,
   } = applydata;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -69,6 +69,10 @@ export default function Apply9Page() {
     navigate('/apply/8kakaoId');
   };
 
+  const filteredData = { ...applydata };
+  delete filteredData.finishedStep;
+  delete filteredData.city;
+
   const handleSubmit = useCallback(async () => {
     // if (matchingStatus === 'APPLIED') {
     //   try {
@@ -90,7 +94,7 @@ export default function Apply9Page() {
     //   navigate('/apply/10phone');
     // }
     try {
-      await dispatch(createTeam(applydata));
+      await dispatch(createTeam(filteredData));
       window.alert('저장');
     } catch (e) {
       console.log(e);
@@ -126,6 +130,23 @@ export default function Apply9Page() {
     1: '서울 / 경기',
     2: '대구',
     3: '부산',
+  };
+
+  const AreaContent = {
+    1: '강남',
+    2: '건대',
+    3: '수원',
+    4: '신촌',
+    5: '인천',
+    6: '홍대',
+    7: '경대 북문',
+    8: '계대 앞',
+    9: '동성로',
+    10: '영대역',
+    11: '경대 앞',
+    12: '부산대 앞',
+    13: '서면',
+    14: '해운대',
   };
 
   const AlcholContent = {
@@ -166,9 +187,8 @@ export default function Apply9Page() {
               <div>
                 <SubContent>{CityContent[city]}</SubContent>
                 <Content>
-                  {areas.map((id) => {
-                    const area = Area.find((a) => a.id === id);
-                    return area ? <span>{area.name}&nbsp;&nbsp;</span> : null;
+                  {areas.map((x) => {
+                    return <span key={x}>{AreaContent[x]}&nbsp;&nbsp;</span>;
                   })}
                 </Content>
               </div>
