@@ -9,20 +9,10 @@ import { Button, Carousel, Space } from 'antd';
 import theme from '../style/theme';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
-import Clock from '../asset/svg/MainClock.svg';
 import { ReactComponent as SliderLArrow } from '../asset/svg/SliderLArrow.svg';
 import { ReactComponent as WriteReview } from '../asset/svg/WriteReview.svg';
 import { ReactComponent as SliderRArrow } from '../asset/svg/SliderRArrow.svg';
-import PresentBox from '../asset/img/Present.png';
-import Main1 from '../asset/img/Main1.png';
-import Main2 from '../asset/img/Main2.png';
-import Main3 from '../asset/img/Main3.png';
-import Main4 from '../asset/img/Main4.png';
-import Main5 from '../asset/img/Main5.png';
-import Main6 from '../asset/img/Main6.png';
 import MainLayout from '../layout/MainLayout';
-import BottomFooter from '../layout/footer/BottomFooter';
-import MainFooter from '../layout/footer/MainFooter';
 import Section from '../components/Section';
 import SliderBox from '../components/SliderBox';
 import SliderBox2 from '../components/SliderBox2';
@@ -111,7 +101,7 @@ function Main() {
 
   return (
     <MainLayout>
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', marginBottom: '10%' }}>
         <PrimaryModal
           title=" "
           open={needMoreInfo === 'true'}
@@ -146,14 +136,15 @@ function Main() {
           </CountTitle>
           <ImgBox>
             <MainImg />
-            <SImg
+            {/* <SImg
               src={PresentBox}
               onClick={() => {
                 navigate('/myinfo');
               }}
-            />
+            /> */}
           </ImgBox>
         </Section>
+        <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
         {/* <Section my="50px" style={{ marginBottom: '25px' }}>
           <TopTitle>현재 성비</TopTitle>
           <MatchingBox>
@@ -170,7 +161,7 @@ function Main() {
             </TotalBar>
           </MatchingBox>
         </Section> */}
-        <Section my="35px" style={{ marginTop: '50px' }}>
+        {/* <Section my="35px" style={{ marginTop: '50px' }}>
           <TopTitle>소요 시간</TopTitle>
           <TimeBox>
             <SubTitle2>최근 7일 동안 평균</SubTitle2>
@@ -187,7 +178,7 @@ function Main() {
               </AverageTimeDescription>
             </AverageTime>
           </TimeBox>
-        </Section>
+        </Section> */}
         <Section>
           <Review>
             미팅 후기
@@ -294,18 +285,17 @@ function Main() {
             <SliderRArrow onClick={() => slider2.current.next()} />
           </Slider>
         </Section>
-        <Section my="50px" center style={{ marginBottom: '30px' }}>
+        {/* <Section my="50px" center style={{ marginBottom: '30px' }}>
           <SImg2 src={Main1} />
           <SImg2 src={Main2} />
           <SImg2 src={Main3} />
           <SImg2 src={Main4} />
           <SImg2 src={Main5} />
           <SImg2 src={Main6} />
-        </Section>
-        <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
+        </Section> */}
       </div>
-      <MainFooter />
-      <BottomFooter />
+      {/* <MainFooter /> */}
+      {/* <BottomFooter /> */}
       <div>{ChannelTalk.hideChannelButton()}</div>
     </MainLayout>
   );
@@ -466,9 +456,9 @@ const Number = styled.p`
 
 const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   width: 75%;
-  position: sticky;
-  bottom: 120px;
-  margin: 0 auto;
+  /* position: sticky; */
+  /* bottom: 120px; */
+  margin: 10% auto;
   &.ant-btn {
     height: 56px;
     background-color: #ffa1a1;
