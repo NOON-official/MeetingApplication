@@ -73,6 +73,16 @@ export default function Apply9Page() {
   delete filteredData.finishedStep;
   delete filteredData.city;
 
+  filteredData.members = filteredData.members.map((member) => {
+    if (typeof member.mbti === 'undefined') {
+      return {
+        ...member,
+        mbti: 17,
+      };
+    }
+    return member;
+  });
+
   const handleSubmit = useCallback(async () => {
     // if (matchingStatus === 'APPLIED') {
     //   try {
@@ -90,12 +100,14 @@ export default function Apply9Page() {
     //   dispatch(createTeam(applydata));
     //   window.alert('저장되었습니다!');
     // }
-    // if (userPhone === null) {
-    //   navigate('/apply/10phone');
-    // }
+
     try {
       await dispatch(createTeam(filteredData));
-      window.alert('저장');
+      if (userPhone === '') {
+        navigate('/apply/10phone');
+      } else {
+        setOpenModal(true);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -242,7 +254,7 @@ export default function Apply9Page() {
                       <InfoContent>
                         {mbti === undefined || mbti === 17
                           ? '만나서 알려드려요'
-                          : Mbti[mbti]?.name}
+                          : Mbti[mbti - 1]?.name}
                       </InfoContent>
                     </Info>
                     <Info>
