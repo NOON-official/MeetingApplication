@@ -60,12 +60,14 @@ function SliderBox({ gender, age, star, text }) {
       </Top>
       <StarBox>{CountingStar(count)}</StarBox>
       <Text>
-        {text.split('\n').map((txt) => (
-          <>
-            {txt}
-            <br />
-          </>
-        ))}
+        {text.split('\n').map((txt) => {
+          return (
+            <span key={txt}>
+              {txt}
+              <br />
+            </span>
+          );
+        })}
       </Text>
     </Box>
   );
