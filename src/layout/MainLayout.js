@@ -31,6 +31,7 @@ const Header = styled.header`
 `;
 
 const Content = styled.div`
+  border: 1px solid blue;
   max-width: 425px;
   width: 100%;
   height: 100%;
@@ -41,6 +42,6 @@ const Content = styled.div`
 const Footer = styled.div`
   max-width: 425px;
   width: 100%;
-  height: 10%;
+  /* height: 20%; */
   background-color: ${(props) => props.theme.background};
 `;
