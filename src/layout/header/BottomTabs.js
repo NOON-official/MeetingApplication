@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { Link, useMatch } from 'react-router-dom';
+import { ReactComponent as MainHome } from '../../asset/svg/MainHome.svg';
+import { ReactComponent as MainHeart } from '../../asset/svg/MainHeart.svg';
+import { ReactComponent as MainMyPage } from '../../asset/svg/MainMyPage.svg';
 
 export default function BottomTabs() {
   const homeMatch = useMatch('/');
-  const guideMatch = useMatch('/guide');
   const matchingMatch = useMatch('/matching');
   const myinfoMatch = useMatch('/myinfo');
 
@@ -11,44 +13,55 @@ export default function BottomTabs() {
     <Container>
       <Menu isactive={homeMatch}>
         <SLink to="/" isactive={homeMatch}>
-          홈
+          <MainHome />
+          <Text>홈</Text>
         </SLink>
       </Menu>
 
       <Menu isactive={matchingMatch}>
         <SLink to="/matching" isactive={matchingMatch}>
-          매칭조회
+          <MainHeart />
+          <Text>매칭조회</Text>
         </SLink>
       </Menu>
+
       <Menu isactive={myinfoMatch}>
         <SLink to="/myinfo" isactive={myinfoMatch}>
-          마이 페이지
+          <MainMyPage />
+          <Text>마이 페이지</Text>
         </SLink>
       </Menu>
     </Container>
   );
 }
 
+const Text = styled.div`
+  margin-top: 10%;
+  font-size: 14px;
+`;
+
 const Container = styled.div`
-  border: 1px solid black;
+  border-top: 2px solid #bfbfbf;
   display: flex;
   justify-content: space-around;
-  padding: 10px 30px 3px 30px;
+  padding: 20px;
+  background-color: #ffffff;
 `;
 
 const Menu = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
+  justify-content: center;
   border-radius: 10px;
   width: 23%;
-  height: 30px;
-  background-color: ${(props) =>
-    `${props.isactive ? props.theme.pink : props.theme.background}`};
+  /* height: 30px; */
+  /* background-color: ${(props) =>
+    `${props.isactive ? props.theme.pink : props.theme.background}`}; */
 `;
 
 const SLink = styled(Link)`
-  color: ${(props) => `${props.isactive ? 'white' : '#858585'}`};
+  color: ${(props) => `${props.isactive ? '#6A6A6A' : '#6A6A6A'}`};
   font-weight: 400;
   font-size: 13px;
   width: 100%;
