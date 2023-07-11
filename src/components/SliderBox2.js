@@ -10,10 +10,10 @@ function SliderBox2({ rank, text }) {
       </Top>
       <Text>
         {text.split('\n').map((txt) => (
-          <>
+          <span key={txt}>
             {txt}
             <br />
-          </>
+          </span>
         ))}
       </Text>
     </Box>
