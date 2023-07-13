@@ -1,22 +1,16 @@
 import styled from 'styled-components';
 import TopHeader from './header/TopHeader';
-import BottomTabs from './header/BottomTabs';
 
-function MainLayout({ children }) {
+export default function TeamProfileLayout({ children }) {
   return (
     <Container>
       <Header>
         <TopHeader />
-        {/* <MainTabs /> */}
       </Header>
       <Content>{children}</Content>
-      <Footer>
-        <BottomTabs />
-      </Footer>
     </Container>
   );
 }
-export default MainLayout;
 
 const Container = styled.div`
   height: 100vh;
@@ -31,16 +25,12 @@ const Header = styled.header`
 `;
 
 const Content = styled.div`
-  border: 1px solid blue;
   max-width: 425px;
+  background-color: #fbfaf9;
+  height: 100vh;
   width: 100%;
-  height: 100%;
-  background-color: ${(props) => props.theme.background};
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   overflow-y: scroll;
-`;
-
-const Footer = styled.div`
-  max-width: 425px;
-  width: 100%;
-  background-color: ${(props) => props.theme.background};
 `;

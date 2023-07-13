@@ -36,6 +36,7 @@ import ApplyUniversity from './pages/apply/university';
 import Apply6 from './pages/apply/6';
 import Apply9Page from './pages/apply/9teamProfile';
 import Recommend from './pages/recommend';
+import OtherTeamProfile from './pages/recommend/otherTeamProfile';
 
 const Router = createBrowserRouter([
   {
@@ -181,6 +182,10 @@ const Router = createBrowserRouter([
       {
         path: '/recommend',
         element: <Recommend />,
+      },
+      {
+        path: '/recommend/otherteam',
+        element: <OtherTeamProfile />,
       },
     ],
   },
