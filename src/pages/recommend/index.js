@@ -1,15 +1,35 @@
-import React from 'react';
+import { useEffect, useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import styled from 'styled-components';
-import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as MainDoc } from '../../asset/svg/MainDoc.svg';
 import { ReactComponent as MainClock } from '../../asset/svg/MainClock.svg';
 import { ReactComponent as ClockSeparator } from '../../asset/svg/MainClockSeparator.svg';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkPink } from '../../asset/svg/UniversityMarkPink.svg';
+import backend from '../../util/backend';
+import NoProfile from '../../components/RecommendBox/NoProfile';
+import OtherTeamList from '../../components/RecommendBox/OtherTeamList';
 
 export default function Recommend() {
+  const [myteamId, setMyteamId] = useState('');
+  const [matchingStatus, setMatchingStatus] = useState('');
+  const { accessToken } = useSelector((state) => state.user);
+
+  const getInformation = useCallback(async () => {
+    const teamid = await backend.get(`/users/team-id`);
+    const matchingstatus = await backend.get('/users/matchings/status');
+
+    setMyteamId(teamid.data.teamId);
+    setMatchingStatus(matchingstatus.data.matchingStatus);
+  }, []);
+
+  useEffect(() => {
+    getInformation();
+  }, []);
+  console.log('ID', typeof myteamId);
   return (
-    <MainLayout>
+    <>
       {/* <RecommendModal /> */}
       <Section>
         <MainButton>
@@ -46,75 +66,9 @@ export default function Recommend() {
         </Content>
       </Container>
 
+      {!myteamId === '' ? <NoProfile /> : <OtherTeamList />}
       {/* <RecommendNoProfile /> */}
-
-      <Container2>
-        <TeamCard>
-          <Title2>
-            <TeamName>아름이와 아이들들들</TeamName>
-            <SUniversityMark />
-          </Title2>
-          <Subtitle2>
-            <Age>평균 24세</Age>
-            <MemberCount>3명</MemberCount>
-          </Subtitle2>
-          <Info>
-            안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
-            함께라면 안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-            3인방과 함께라면
-          </Info>
-          <Button>자세히 보기</Button>
-        </TeamCard>
-        <TeamCard>
-          <Title2>
-            <TeamName>아름이와</TeamName>
-            <SUniversityMark />
-          </Title2>
-          <Subtitle2>
-            <Age>평균 24세</Age>
-            <MemberCount>3명</MemberCount>
-          </Subtitle2>
-          <Info>
-            안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
-            함께라면안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-            3인방과 함께라면
-          </Info>
-          <Button>자세히 보기</Button>
-        </TeamCard>
-        <TeamCard>
-          <Title2>
-            <TeamName>아름이와아이들들들들</TeamName>
-            <SUniversityMark />
-          </Title2>
-          <Subtitle2>
-            <Age>평균 24세</Age>
-            <MemberCount>3명</MemberCount>
-          </Subtitle2>
-          <Info>
-            안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
-            함께라면안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-            3인방과 함께라면
-          </Info>
-          <Button>자세히 보기</Button>
-        </TeamCard>
-        <TeamCard>
-          <Title2>
-            <TeamName>서울대생 3명</TeamName>
-            <SUniversityMark />
-          </Title2>
-          <Subtitle2>
-            <Age>평균 24세</Age>
-            <MemberCount>3명</MemberCount>
-          </Subtitle2>
-          <Info>
-            안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
-            함께라면안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-            3인방과 함께라면
-          </Info>
-          <Button>자세히 보기</Button>
-        </TeamCard>
-      </Container2>
-    </MainLayout>
+    </>
   );
 }
 
