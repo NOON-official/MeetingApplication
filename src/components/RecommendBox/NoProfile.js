@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 
-export default function RecommendNoProfile() {
+export default function NoProfile() {
   return (
     <Container>
       <Title>프로필을 만든 후 확인할 수 있어요</Title>
