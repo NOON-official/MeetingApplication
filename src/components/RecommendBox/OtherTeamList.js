@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 
-export default function OtherTeamList() {
+export default function OtherTeamList({ isRecommend }) {
   return (
-    <Container2>
+    <Container>
       <TeamCard>
-        <Title2>
+        <Title>
           <TeamName>아름이와 아이들들들</TeamName>
           <SUniversityMark />
-        </Title2>
-        <Subtitle2>
+        </Title>
+        <Subtitle>
           <Age>평균 24세</Age>
           <MemberCount>3명</MemberCount>
-        </Subtitle2>
+        </Subtitle>
         <Info>
           안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
           함께라면 안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
@@ -21,14 +21,14 @@ export default function OtherTeamList() {
         <Button>자세히 보기</Button>
       </TeamCard>
       <TeamCard>
-        <Title2>
+        <Title>
           <TeamName>아름이와</TeamName>
           <SUniversityMark />
-        </Title2>
-        <Subtitle2>
+        </Title>
+        <Subtitle>
           <Age>평균 24세</Age>
           <MemberCount>3명</MemberCount>
-        </Subtitle2>
+        </Subtitle>
         <Info>
           안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
           함께라면안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
@@ -37,14 +37,14 @@ export default function OtherTeamList() {
         <Button>자세히 보기</Button>
       </TeamCard>
       <TeamCard>
-        <Title2>
+        <Title>
           <TeamName>아름이와아이들들들들</TeamName>
           <SUniversityMark />
-        </Title2>
-        <Subtitle2>
+        </Title>
+        <Subtitle>
           <Age>평균 24세</Age>
           <MemberCount>3명</MemberCount>
-        </Subtitle2>
+        </Subtitle>
         <Info>
           안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
           함께라면안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
@@ -53,14 +53,14 @@ export default function OtherTeamList() {
         <Button>자세히 보기</Button>
       </TeamCard>
       <TeamCard>
-        <Title2>
+        <Title>
           <TeamName>서울대생 3명</TeamName>
           <SUniversityMark />
-        </Title2>
-        <Subtitle2>
+        </Title>
+        <Subtitle>
           <Age>평균 24세</Age>
           <MemberCount>3명</MemberCount>
-        </Subtitle2>
+        </Subtitle>
         <Info>
           안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
           함께라면안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
@@ -68,11 +68,11 @@ export default function OtherTeamList() {
         </Info>
         <Button>자세히 보기</Button>
       </TeamCard>
-    </Container2>
+    </Container>
   );
 }
 
-const Container2 = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -81,26 +81,27 @@ const Container2 = styled.div`
 `;
 
 const TeamCard = styled.div`
-  border: 1px solid #d74683;
-  border-radius: 6px;
-  background-color: #ffffff;
   width: 40%;
   margin: 2% 0;
   padding: 4%;
+  border: 1px solid
+    ${({ isRecommend }) => (isRecommend ? '#d74683' : 'rgba(0, 0, 0, 0.1)')};
+  border-radius: 6px;
+  background-color: #ffffff;
 `;
 
-const Title2 = styled.div`
+const Title = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
 const TeamName = styled.span`
-  background-color: #ececec;
   padding: 5px 8px;
-  font-weight: 600;
-  font-size: 13px;
   border-radius: 2px;
+  background-color: #ececec;
+  font-size: 13px;
+  font-weight: 600;
   overflow: hidden;
   white-space: nowrap;
   word-break: break-all;
@@ -111,13 +112,13 @@ const SUniversityMark = styled(UniversityMark)`
   margin-left: 1%;
 `;
 
-const Subtitle2 = styled.div`
+const Subtitle = styled.div`
   display: flex;
   justify-content: space-between;
-  color: #626262;
-  font-size: 10px;
   width: 50%;
   margin: 5% 10%;
+  color: #626262;
+  font-size: 10px;
 `;
 
 const Age = styled.div``;
@@ -143,8 +144,10 @@ const Button = styled.div`
   width: 37%;
   margin: 7% auto 0;
   border-radius: 15px;
-  color: #ffffff;
-  background-color: #ff7ab2;
+  color: ${({ isRecommend }) =>
+    isRecommend ? '#ffffff' : 'rgba(235, 136, 136, 1)'};
+  background-color: ${({ isRecommend }) =>
+    isRecommend ? '#ff7ab2' : 'rgba(255, 237, 237, 1)'};
   font-size: 10px;
   font-weight: 500;
   text-align: center;

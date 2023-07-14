@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 
 export default function NoProfile() {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Title>프로필을 만든 후 확인할 수 있어요</Title>
       <SSadFace />
-      <Button>
+      <Button onClick={() => navigate('/apply/1')}>
         <CreateTeamBtn>만들러 가기</CreateTeamBtn>
       </Button>
     </Container>

@@ -13,21 +13,27 @@ import backend from '../../util/backend';
 import NoProfile from '../../components/RecommendBox/NoProfile';
 import OtherTeamList from '../../components/RecommendBox/OtherTeamList';
 import Timer from './timer';
+import MyTeamProfile from './myTeamProfile';
 
 export default function Recommend() {
   const navigate = useNavigate();
-  const [myteamId, setMyteamId] = useState('');
-
+  const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
+  const [teamProfile, setTeamProfile] = useState();
+  const [myTeamId, setMyTeamId] = useState('');
+  const setModal = (bool) => {
+    setOpenMyTeamProfile(bool);
+  };
   const { accessToken } = useSelector((state) => state.user);
 
   const getInformation = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
-    setMyteamId(teamid.data.teamId);
-    const profile = await backend.get(`/teams/${myteamId}`);
-    console.log(profile);
+    setMyTeamId(teamid.data.teamId);
+    const profile = await backend.get(`/teams/${myTeamId}`);
+    setTeamProfile(profile.data);
   }, []);
   // console.log(typeof myteamId, myteamId);
-
+  console.log('id', myTeamId);
+  console.log('profile', teamProfile);
   useEffect(() => {
     getInformation();
   }, []);
@@ -35,9 +41,10 @@ export default function Recommend() {
   return (
     <>
       {/* <RecommendModal /> */}
-      {myteamId ? (
+      <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
+      {myTeamId ? (
         <Section>
-          <MainButton onClick={() => navigate('/myteamprofile')}>
+          <MainButton onClick={() => setOpenMyTeamProfile(true)}>
             <SMainDoc />
             <BtnMainTitle>우리 팀 프로필 조회</BtnMainTitle>
           </MainButton>
@@ -51,7 +58,7 @@ export default function Recommend() {
         </Section>
       ) : (
         <Section>
-          <MainButton>
+          <MainButton onClick={() => navigate('/apply/1')}>
             <SMainGroup />
             <BtnMainTitle>우리 팀 프로필 만들기</BtnMainTitle>
           </MainButton>
@@ -72,7 +79,7 @@ export default function Recommend() {
 
       <Timer />
 
-      {myteamId ? <OtherTeamList /> : <NoProfile />}
+      {myTeamId ? <OtherTeamList /> : <NoProfile />}
       {/* <RecommendNoProfile /> */}
     </>
   );
@@ -97,6 +104,7 @@ const MainButton = styled.button`
   border: none;
   border-radius: 10px;
   background-color: #ffe8e8;
+  cursor: pointer;
 `;
 
 const SMainGroup = styled(MainGroup)`
