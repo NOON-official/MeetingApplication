@@ -19,7 +19,7 @@ export default function BottomTabs() {
       </Menu>
 
       <Menu isactive={matchingMatch}>
-        <SLink to="/matching" isactive={matchingMatch}>
+        <SLink to="/matching/applied" isactive={matchingMatch}>
           <MainHeart />
           <Text>매칭조회</Text>
         </SLink>
