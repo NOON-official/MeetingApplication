@@ -2,71 +2,77 @@ import { useEffect, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as MainDoc } from '../../asset/svg/MainDoc.svg';
 import { ReactComponent as MainClock } from '../../asset/svg/MainClock.svg';
 import { ReactComponent as ClockSeparator } from '../../asset/svg/MainClockSeparator.svg';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkPink } from '../../asset/svg/UniversityMarkPink.svg';
+import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
 import backend from '../../util/backend';
 import NoProfile from '../../components/RecommendBox/NoProfile';
 import OtherTeamList from '../../components/RecommendBox/OtherTeamList';
+import Timer from './timer';
 
 export default function Recommend() {
+  const navigate = useNavigate();
   const [myteamId, setMyteamId] = useState('');
-  const [matchingStatus, setMatchingStatus] = useState('');
+
   const { accessToken } = useSelector((state) => state.user);
 
   const getInformation = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
-    const matchingstatus = await backend.get('/users/matchings/status');
-
     setMyteamId(teamid.data.teamId);
-    setMatchingStatus(matchingstatus.data.matchingStatus);
+    const profile = await backend.get(`/teams/${myteamId}`);
+    console.log(profile);
   }, []);
+  // console.log(typeof myteamId, myteamId);
 
   useEffect(() => {
     getInformation();
   }, []);
-  console.log('ID', typeof myteamId);
+
   return (
     <>
       {/* <RecommendModal /> */}
-      <Section>
-        <MainButton>
-          <SMainDoc />
-          <BtnMainTitle>우리 팀 프로필 만들기</BtnMainTitle>
-        </MainButton>
-        <MainButton>
-          <SUniversityMarkPink />
-          <BtnTitle>
+      {myteamId ? (
+        <Section>
+          <MainButton onClick={() => navigate('/myteamprofile')}>
+            <SMainDoc />
             <BtnMainTitle>우리 팀 프로필 조회</BtnMainTitle>
-            <BtnSubtitle>아직 학교 인증 전이에요</BtnSubtitle>
-          </BtnTitle>
-        </MainButton>
-      </Section>
+          </MainButton>
+          <MainButton>
+            <SUniversityMarkPink />
+            <BtnTitle>
+              <BtnMainTitle>학교 인증하러 가기</BtnMainTitle>
+              <BtnSubtitle>아직 학교 인증 전이에요</BtnSubtitle>
+            </BtnTitle>
+          </MainButton>
+        </Section>
+      ) : (
+        <Section>
+          <MainButton>
+            <SMainGroup />
+            <BtnMainTitle>우리 팀 프로필 만들기</BtnMainTitle>
+          </MainButton>
+          <MainButton>
+            <SMainDoc />
+            <BtnMainTitle>우리 팀 프로필 조회</BtnMainTitle>
+          </MainButton>
+        </Section>
+      )}
 
       <Container>
         <Title>우리 팀 추천 매칭</Title>
         <Subtitle>
-          우리 팀 프로필에 맞는 팀들을 추천해 드려요 <br /> 새벽 5시에 매일
-          업데이트 돼요!
+          우리 팀 프로필에 맞는 팀들을 추천해 드려요 <br /> 매일 밤 11시에 추천
+          리스트가 업데이트 돼요!
         </Subtitle>
       </Container>
 
-      <Container>
-        <Content>
-          업데이트까지 <SMainClock />
-          <Clock>
-            <Box>22</Box>
-            <SSeparator />
-            <Box>19</Box>
-            <SSeparator />
-            <Box>51</Box>
-          </Clock>
-        </Content>
-      </Container>
+      <Timer />
 
-      {!myteamId === '' ? <NoProfile /> : <OtherTeamList />}
+      {myteamId ? <OtherTeamList /> : <NoProfile />}
       {/* <RecommendNoProfile /> */}
     </>
   );
@@ -91,6 +97,10 @@ const MainButton = styled.button`
   border: none;
   border-radius: 10px;
   background-color: #ffe8e8;
+`;
+
+const SMainGroup = styled(MainGroup)`
+  margin-right: 15px;
 `;
 
 const SMainDoc = styled(MainDoc)`
@@ -149,12 +159,17 @@ const SMainClock = styled(MainClock)`
   margin: 7px;
 `;
 
-const Clock = styled.span``;
+const Clock = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100px;
+`;
 
-const Box = styled.span`
-  width: 16px;
+const Box = styled.div`
+  width: 17px;
   height: 17px;
-  padding: 3px;
+  padding: 6px 4px 3px 4px;
   border-radius: 5px;
   color: #eb8888;
   background-color: #ffd8d8;
