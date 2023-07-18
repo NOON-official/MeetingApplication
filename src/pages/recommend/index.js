@@ -13,7 +13,7 @@ import backend from '../../util/backend';
 import NoProfile from '../../components/RecommendBox/NoProfile';
 import OtherTeamList from '../../components/RecommendBox/OtherTeamList';
 import Timer from './timer';
-import MyTeamProfile from './myTeamProfile';
+import MyTeamProfileModal from './myTeamProfileModal';
 
 export default function Recommend() {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export default function Recommend() {
   return (
     <>
       {/* <RecommendModal /> */}
-      <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
+      <MyTeamProfileModal open={openMyTeamProfile} setModal={setModal} />
       {myTeamId ? (
         <Section>
           <MainButton onClick={() => setOpenMyTeamProfile(true)}>
