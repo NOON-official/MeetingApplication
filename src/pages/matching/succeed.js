@@ -1,9 +1,77 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
+import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
+import OtherTeamNumberModal from '../../components/Modal/OtherTeamNumberModal';
 
 export default function MatchingSucceed() {
+  const DATAS = [
+    {
+      id: 1,
+      matchingId: 1,
+      teamName: '기웅내세요',
+      age: 24,
+      memberCount: 3,
+      intro: '안녕하세요',
+      isVerified: true,
+      matchedAt: '2023-07-15T21:37:26.886Z',
+      contact: 'meet',
+    },
+    {
+      id: 2,
+      matchingId: 3,
+      teamName: '아름이와 아이들',
+      age: 27,
+      memberCount: 2,
+      intro: '안녕하세요',
+      isVerified: false,
+      matchedAt: '2023-07-17T21:37:26.886Z',
+      contact: '0109934',
+    },
+    {
+      id: 3,
+      matchingId: 3,
+      teamName: '서울서울서울',
+      age: 27,
+      memberCount: 2,
+      intro: '안녕하세요',
+      isVerified: false,
+      matchedAt: '2023-07-14T21:37:26.886Z',
+      contact: '12341234',
+    },
+  ];
+
+  const [modalState, setModalState] = useState(
+    DATAS.map((team) => ({ teamId: team.id, open: false })),
+  );
+
+  const openModal = (teamId) => {
+    setModalState((prev) =>
+      prev.map((state) =>
+        state.teamId === teamId ? { ...state, open: true } : state,
+      ),
+    );
+  };
+
+  const closeModal = (teamId) => {
+    setModalState((prev) =>
+      prev.map((state) =>
+        state.teamId === teamId ? { ...state, open: false } : state,
+      ),
+    );
+  };
+
+  const remainingDays = (date) => {
+    const appliedDate = new Date(date);
+    const dueDate = new Date(appliedDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+    const currentDate = new Date();
+
+    return Math.ceil((dueDate - currentDate) / (24 * 60 * 60 * 1000));
+  };
+
   return (
     <MatchingLayout>
       <Container>
@@ -15,84 +83,57 @@ export default function MatchingSucceed() {
       </Container>
 
       <Container2>
-        <TeamCard>
-          <Date>
-            7월 3일 <RemainingDate>7일 남음</RemainingDate>
-          </Date>
-          <Content>
-            <Title>
-              <TeamName>아름이와 아이들들들</TeamName>
-              <SUniversityMark />
-            </Title>
-            <Subtitle>
-              <Age>평균 24세</Age>
-              <MemberCount>3명</MemberCount>
-            </Subtitle>
-            <Info>
-              안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-              3인방과 함께라면 안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다!
-              최강의 조합 3인방과 함께라면
-            </Info>
-            <ButtonBox>
-              <Button1>연락처 확인</Button1>
-              <Button2>자세히 보기</Button2>
-            </ButtonBox>
-          </Content>
-        </TeamCard>
-        <TeamCard>
-          <Date>
-            7월 3일 <RemainingDate>7일 남음</RemainingDate>
-          </Date>
-          <Content>
-            <Title>
-              <TeamName>아름이와 아이들들들</TeamName>
-              <SUniversityMark />
-            </Title>
-            <Subtitle>
-              <Age>평균 24세</Age>
-              <MemberCount>3명</MemberCount>
-            </Subtitle>
-            <Info>
-              안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-              3인방과 함께라면 안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다!
-              최강의 조합 3인방과 함께라면
-            </Info>
-            <ButtonBox>
-              <Button1>연락처 확인</Button1>
-              <Button2>자세히 보기</Button2>
-            </ButtonBox>
-          </Content>
-        </TeamCard>
-        <TeamCard>
-          <Date>
-            7월 3일 <RemainingDate>7일 남음</RemainingDate>
-          </Date>
-          <Content>
-            <Title>
-              <TeamName>아름이와 아이들들들</TeamName>
-              <SUniversityMark />
-            </Title>
-            <Subtitle>
-              <Age>평균 24세</Age>
-              <MemberCount>3명</MemberCount>
-            </Subtitle>
-            <Info>
-              안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-              3인방과 함께라면 안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다!
-              최강의 조합 3인방과 함께라면
-            </Info>
-            <ButtonBox>
-              <Button1>연락처 확인</Button1>
-              <Button2>자세히 보기</Button2>
-            </ButtonBox>
-          </Content>
-        </TeamCard>
+        {DATAS.map((team) => {
+          const {
+            id,
+            matchingId,
+            teamName,
+            age,
+            memberCount,
+            intro,
+            isVerified,
+            matchedAt,
+            contact,
+          } = team;
+
+          return (
+            <TeamCard key={id}>
+              <OtherTeamNumberModal
+                open={modalState.find((state) => state.teamId === team.id).open}
+                closeModal={() => closeModal(team.id)}
+                teamName={teamName}
+                contact={contact}
+              />
+              <ApplicationDate>
+                {dayjs(matchedAt).format('M월 DD일')}
+                <RemainingDate>{remainingDays(matchedAt)}일 남음</RemainingDate>
+              </ApplicationDate>
+              <Content>
+                <Title>
+                  <TeamName>{teamName}</TeamName>
+                  {isVerified ? <SUniversityMark /> : <SUniversityMarkGray />}
+                </Title>
+                <Subtitle>
+                  <Age>{`평균 ${age}세`}</Age>
+                  <MemberCount>{`${memberCount}명`}</MemberCount>
+                </Subtitle>
+                <Info>{`${intro}`}</Info>
+                <ButtonBox>
+                  <Button1 onClick={() => openModal(team.id)}>
+                    연락처 확인
+                  </Button1>
+                  <Button2>자세히 보기</Button2>
+                </ButtonBox>
+              </Content>
+            </TeamCard>
+          );
+        })}
       </Container2>
     </MatchingLayout>
   );
 }
 
-const Date = styled.div`
+const ApplicationDate = styled.div`
   margin: 0 0 5px 10px;
   font-size: 11px;
 `;
@@ -142,11 +183,11 @@ const Title = styled.div`
 `;
 
 const TeamName = styled.span`
-  background-color: #ececec;
   padding: 5px 8px;
+  background-color: #ececec;
+  border-radius: 2px;
   font-weight: 600;
   font-size: 13px;
-  border-radius: 2px;
   overflow: hidden;
   white-space: nowrap;
   word-break: break-all;
@@ -154,6 +195,10 @@ const TeamName = styled.span`
 `;
 
 const SUniversityMark = styled(UniversityMark)`
+  margin-left: 1%;
+`;
+
+const SUniversityMarkGray = styled(UniversityMarkGray)`
   margin-left: 1%;
 `;
 
@@ -200,6 +245,7 @@ const Button1 = styled.button`
   font-size: 10px;
   font-weight: 400;
   text-align: center;
+  cursor: pointer;
 `;
 
 const Button2 = styled.button`
@@ -211,4 +257,5 @@ const Button2 = styled.button`
   font-size: 10px;
   font-weight: 400;
   text-align: center;
+  cursor: pointer;
 `;
