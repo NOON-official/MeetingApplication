@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import TopHeader from './header/TopHeader';
 import BottomTabs from './header/BottomTabs';
-import MyTeamProfile from '../pages/recommend/myTeamProfile';
+import MyTeamProfile from '../pages/recommend/myTeamProfileModal';
 import { ReactComponent as MainDoc } from '../asset/svg/MainDoc.svg';
 import { ReactComponent as UniversityMarkPink } from '../asset/svg/UniversityMarkPink.svg';
 
