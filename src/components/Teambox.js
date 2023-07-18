@@ -43,6 +43,8 @@ function Teambox({ member, setMember, name }) {
     }
   }, [member, selectedUniversity]);
 
+  const date = new Date();
+
   const showModal = () => {
     setIsModalOpen(true);
   };

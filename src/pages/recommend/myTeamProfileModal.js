@@ -9,7 +9,7 @@ import ModifyProfileModal from '../../components/Modal/ModifyProfileModal';
 import StopMatchingModal from '../../components/Modal/StopMatchingModal';
 import backend from '../../util/backend';
 
-export default function MyTeamProfile({ open, setModal }) {
+export default function MyTeamProfileModal({ open, setModal }) {
   const members = [
     { role: 1, age: 21, university: 198 },
     { age: 22, university: 198, role: 2, mbti: 14, appearance: '룰루' },
@@ -29,7 +29,7 @@ export default function MyTeamProfile({ open, setModal }) {
   }, []);
 
   useEffect(() => {
-    getInformation();
+    // getInformation();
   }, []);
 
   return (
@@ -39,7 +39,7 @@ export default function MyTeamProfile({ open, setModal }) {
           open={open}
           footer={null}
           centered
-          width="450px"
+          width="380px"
           bodyStyle={{ backgroundColor: '#FBFAF9' }}
           closable
           onCancel={() => setModal(false)}
@@ -109,6 +109,7 @@ export default function MyTeamProfile({ open, setModal }) {
 
 const SModal = styled(Modal)`
   .ant-modal-content {
+    padding: 1%;
     background-color: #fbfaf9;
   }
 `;

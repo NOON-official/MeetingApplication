@@ -1,73 +1,73 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
+import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
+import { ReactComponent as CheckBoxUnfilled } from '../../asset/svg/CheckboxUnfilled.svg';
+import { ReactComponent as CheckBoxFilled } from '../../asset/svg/CheckboxFilled.svg';
+import OtherTeamProfileModal from '../../pages/recommend/otherTeamProfileModal';
 
-export default function OtherTeamList({ isRecommend }) {
+export default function OtherTeamList(props) {
+  const { teamList, clickEditBtn, deleteProfile, setDeleteProfile } = props;
+
+  const [openOtherTeamProfile, setOpenOtherTeamProfile] = useState(false);
+
+  const handleModal = (bool) => {
+    setOpenOtherTeamProfile(bool);
+  };
+
+  const editUI = (id) => {
+    if (deleteProfile.includes(id)) {
+      return (
+        <SCheckBoxFilled
+          onClick={() =>
+            setDeleteProfile(deleteProfile.filter((x) => x !== id))
+          }
+        />
+      );
+    }
+    return (
+      <SCheckboxUnfilled
+        onClick={() => setDeleteProfile([...deleteProfile, id])}
+      />
+    );
+  };
+
   return (
     <Container>
-      <TeamCard>
-        <Title>
-          <TeamName>아름이와 아이들들들</TeamName>
-          <SUniversityMark />
-        </Title>
-        <Subtitle>
-          <Age>평균 24세</Age>
-          <MemberCount>3명</MemberCount>
-        </Subtitle>
-        <Info>
-          안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
-          함께라면 안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-          3인방과 함께라면
-        </Info>
-        <Button>자세히 보기</Button>
-      </TeamCard>
-      <TeamCard>
-        <Title>
-          <TeamName>아름이와</TeamName>
-          <SUniversityMark />
-        </Title>
-        <Subtitle>
-          <Age>평균 24세</Age>
-          <MemberCount>3명</MemberCount>
-        </Subtitle>
-        <Info>
-          안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
-          함께라면안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-          3인방과 함께라면
-        </Info>
-        <Button>자세히 보기</Button>
-      </TeamCard>
-      <TeamCard>
-        <Title>
-          <TeamName>아름이와아이들들들들</TeamName>
-          <SUniversityMark />
-        </Title>
-        <Subtitle>
-          <Age>평균 24세</Age>
-          <MemberCount>3명</MemberCount>
-        </Subtitle>
-        <Info>
-          안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
-          함께라면안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-          3인방과 함께라면
-        </Info>
-        <Button>자세히 보기</Button>
-      </TeamCard>
-      <TeamCard>
-        <Title>
-          <TeamName>서울대생 3명</TeamName>
-          <SUniversityMark />
-        </Title>
-        <Subtitle>
-          <Age>평균 24세</Age>
-          <MemberCount>3명</MemberCount>
-        </Subtitle>
-        <Info>
-          안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방과
-          함께라면안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합
-          3인방과 함께라면
-        </Info>
-        <Button>자세히 보기</Button>
-      </TeamCard>
+      {teamList.map((team) => {
+        const {
+          id,
+          matchingId,
+          teamName,
+          age,
+          memberCount,
+          intro,
+          isVerified,
+          appliedAt,
+        } = team;
+
+        return (
+          <TeamCardWrapper key={id}>
+            {deleteProfile.includes(id) && clickEditBtn && <TeamCardOverlay />}
+            <OtherTeamProfileModal
+              open={openOtherTeamProfile}
+              setModal={handleModal}
+            />
+            <TeamCard>
+              <Title>
+                <TeamName>{teamName}</TeamName>
+                {isVerified ? <SUniversityMark /> : <SUniversityMarkGray />}
+              </Title>
+              <Subtitle>
+                <Age>{`평균 ${age}세`}</Age>
+                <MemberCount>{`${memberCount}명`}</MemberCount>
+              </Subtitle>
+              <Info>{`${intro}`}</Info>
+              {clickEditBtn ? editUI(id) : <Button>자세히 보기</Button>}
+            </TeamCard>
+          </TeamCardWrapper>
+        );
+      })}
     </Container>
   );
 }
@@ -77,13 +77,29 @@ const Container = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   width: 90%;
-  margin: 5% auto;
+  margin: 1% auto;
+`;
+
+const TeamCardWrapper = styled.div`
+  position: relative;
+  width: 48%;
+  height: 100%;
+  margin: 2% 0;
+`;
+
+const TeamCardOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background-color: rgba(73, 73, 73, 0.4);
+  pointer-events: none;
 `;
 
 const TeamCard = styled.div`
-  width: 40%;
-  margin: 2% 0;
-  padding: 4%;
+  padding: 6%;
   border: 1px solid
     ${({ isRecommend }) => (isRecommend ? '#d74683' : 'rgba(0, 0, 0, 0.1)')};
   border-radius: 6px;
@@ -109,6 +125,10 @@ const TeamName = styled.span`
 `;
 
 const SUniversityMark = styled(UniversityMark)`
+  margin-left: 1%;
+`;
+
+const SUniversityMarkGray = styled(UniversityMarkGray)`
   margin-left: 1%;
 `;
 
@@ -139,15 +159,27 @@ const Info = styled.div`
   -webkit-box-orient: vertical;
 `;
 
+const SCheckboxUnfilled = styled(CheckBoxUnfilled)`
+  width: 100%;
+  margin: 7% auto 0;
+`;
+
+const SCheckBoxFilled = styled(CheckBoxFilled)`
+  width: 100%;
+  margin: 7% auto 0;
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
+`;
+
 const Button = styled.div`
   padding: 5px 15px;
   width: 37%;
   margin: 7% auto 0;
   border-radius: 15px;
-  color: ${({ isRecommend }) =>
-    isRecommend ? '#ffffff' : 'rgba(235, 136, 136, 1)'};
+  color: ${({ isRecommend }) => (isRecommend ? '#ffffff' : '#EB8888')};
   background-color: ${({ isRecommend }) =>
-    isRecommend ? '#ff7ab2' : 'rgba(255, 237, 237, 1)'};
+    isRecommend ? '#ff7ab2' : '#FFEDED'};
   font-size: 10px;
   font-weight: 500;
   text-align: center;
