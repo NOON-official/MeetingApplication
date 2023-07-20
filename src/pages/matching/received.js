@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import MatchingLayout from '../../layout/MatchingLayout';
+import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 
 export default function MatchingReceived() {
@@ -43,35 +44,78 @@ export default function MatchingReceived() {
 
   return (
     <MatchingLayout>
-      <Container>
-        <Header>
-          {!clickEditBtn ? (
-            <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
-          ) : (
-            <EditBtn>
-              <Delete selected={deleteProfile.length > 0}>삭제</Delete>
-              <Cancel onClick={() => setClickEditBtn(false)}>취소</Cancel>
-            </EditBtn>
-          )}
-        </Header>
-        {clickEditBtn ? (
-          <Text>
-            <Pink>{deleteProfile.length}</Pink>/{DATAS.length}개 선택
-          </Text>
-        ) : (
-          <Text>상대팀의 프로필을 살펴본 뒤 미팅 의사를 알려주세요 😉</Text>
-        )}
-      </Container>
-      <OtherTeamList
-        isRecommend={false}
-        teamList={DATAS}
-        clickEditBtn={clickEditBtn}
-        deleteProfile={deleteProfile}
-        setDeleteProfile={setDeleteProfile}
-      />
+      {DATAS ? (
+        <>
+          <Container>
+            <Header>
+              {!clickEditBtn ? (
+                <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
+              ) : (
+                <EditBtn>
+                  <Delete selected={deleteProfile.length > 0}>삭제</Delete>
+                  <Cancel onClick={() => setClickEditBtn(false)}>취소</Cancel>
+                </EditBtn>
+              )}
+            </Header>
+            {clickEditBtn ? (
+              <Text>
+                <Pink>{deleteProfile.length}</Pink>/{DATAS.length}개 선택
+              </Text>
+            ) : (
+              <Text>상대팀의 프로필을 살펴본 뒤 미팅 의사를 알려주세요 😉</Text>
+            )}
+          </Container>
+          <OtherTeamList
+            isRecommend={false}
+            teamList={DATAS}
+            clickEditBtn={clickEditBtn}
+            deleteProfile={deleteProfile}
+            setDeleteProfile={setDeleteProfile}
+          />
+        </>
+      ) : (
+        <NoMeetingContainer>
+          <Title>신청 받은 미팅이 없어요</Title>
+          <SSadFace />
+        </NoMeetingContainer>
+      )}
     </MatchingLayout>
   );
 }
+
+const NoMeetingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 20% auto;
+`;
+
+const Title = styled.div`
+  margin: 2% 0;
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+const SSadFace = styled(SadFace)`
+  width: 45%;
+`;
+
+const Button = styled.div`
+  width: 40%;
+`;
+
+const CreateTeamBtn = styled.button`
+  width: 100%;
+  padding: 10px 5px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ffcdcd;
+  color: #eb8888;
+  font-size: 14px;
+  font-weight: 600;
+`;
 
 const Container = styled.div`
   width: 90%;
