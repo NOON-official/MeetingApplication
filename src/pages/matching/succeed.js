@@ -5,6 +5,7 @@ import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import OtherTeamNumberModal from '../../components/Modal/OtherTeamNumberModal';
+import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 
 export default function MatchingSucceed() {
   const DATAS = [
@@ -74,72 +75,78 @@ export default function MatchingSucceed() {
 
   return (
     <MatchingLayout>
-      <Container>
-        <Text>
-          상대팀도 수락하여 미팅이 최종 성사되었어요!🎉
-          <br />
-          7일 동안 상대팀의 카카오톡 ID/전화번호 확인이 가능해요
-        </Text>
-      </Container>
+      {DATAS ? (
+        <>
+          <Container>
+            <Text>
+              상대팀도 수락하여 미팅이 최종 성사되었어요!🎉
+              <br />
+              7일 동안 상대팀의 카카오톡 ID/전화번호 확인이 가능해요
+            </Text>
+          </Container>
+          <Container2>
+            {DATAS.map((team) => {
+              const {
+                id,
+                matchingId,
+                teamName,
+                age,
+                memberCount,
+                intro,
+                isVerified,
+                matchedAt,
+                contact,
+              } = team;
 
-      <Container2>
-        {DATAS.map((team) => {
-          const {
-            id,
-            matchingId,
-            teamName,
-            age,
-            memberCount,
-            intro,
-            isVerified,
-            matchedAt,
-            contact,
-          } = team;
-
-          return (
-            <TeamCard key={id}>
-              <OtherTeamNumberModal
-                open={modalState.find((state) => state.teamId === id).open}
-                closeModal={() => closeModal(id)}
-                teamName={teamName}
-                contact={contact}
-              />
-              <ApplicationDate>
-                {dayjs(matchedAt).format('M월 DD일')}
-                <RemainingDate>{remainingDays(matchedAt)}일 남음</RemainingDate>
-              </ApplicationDate>
-              <Content>
-                <Title>
-                  <TeamName>{teamName}</TeamName>
-                  {isVerified ? <SUniversityMark /> : <SUniversityMarkGray />}
-                </Title>
-                <Subtitle>
-                  <Age>{`평균 ${age}세`}</Age>
-                  <MemberCount>{`${memberCount}명`}</MemberCount>
-                </Subtitle>
-                <Info>{`${intro}`}</Info>
-                <ButtonBox>
-                  <Button1 onClick={() => openModal(id)}>연락처 확인</Button1>
-                  <Button2>자세히 보기</Button2>
-                </ButtonBox>
-              </Content>
-            </TeamCard>
-          );
-        })}
-      </Container2>
+              return (
+                <TeamCard key={id}>
+                  <OtherTeamNumberModal
+                    open={modalState.find((state) => state.teamId === id).open}
+                    closeModal={() => closeModal(id)}
+                    teamName={teamName}
+                    contact={contact}
+                  />
+                  <ApplicationDate>
+                    {dayjs(matchedAt).format('M월 DD일')}
+                    <RemainingDate>
+                      {remainingDays(matchedAt)}일 남음
+                    </RemainingDate>
+                  </ApplicationDate>
+                  <Content>
+                    <Title>
+                      <TeamName>{teamName}</TeamName>
+                      {isVerified ? (
+                        <SUniversityMark />
+                      ) : (
+                        <SUniversityMarkGray />
+                      )}
+                    </Title>
+                    <Subtitle>
+                      <Age>{`평균 ${age}세`}</Age>
+                      <MemberCount>{`${memberCount}명`}</MemberCount>
+                    </Subtitle>
+                    <Info>{`${intro}`}</Info>
+                    <ButtonBox>
+                      <Button1 onClick={() => openModal(id)}>
+                        연락처 확인
+                      </Button1>
+                      <Button2>자세히 보기</Button2>
+                    </ButtonBox>
+                  </Content>
+                </TeamCard>
+              );
+            })}
+          </Container2>
+        </>
+      ) : (
+        <NoMeetingContainer>
+          <Title2>최종 성사된 미팅이 없어요</Title2>
+          <SSadFace />
+        </NoMeetingContainer>
+      )}
     </MatchingLayout>
   );
 }
-
-const ApplicationDate = styled.div`
-  margin: 0 0 5px 10px;
-  font-size: 11px;
-`;
-
-const RemainingDate = styled.span`
-  margin-left: 10px;
-  color: rgba(255, 157, 157, 1);
-`;
 
 const Container = styled.div`
   width: 90%;
@@ -165,6 +172,16 @@ const Container2 = styled.div`
 const TeamCard = styled.div`
   width: 49%;
   margin: 2% 0;
+`;
+
+const ApplicationDate = styled.div`
+  margin: 0 0 5px 10px;
+  font-size: 11px;
+`;
+
+const RemainingDate = styled.span`
+  margin-left: 10px;
+  color: rgba(255, 157, 157, 1);
 `;
 
 const Content = styled.div`
@@ -256,4 +273,23 @@ const Button2 = styled.button`
   font-weight: 400;
   text-align: center;
   cursor: pointer;
+`;
+
+const NoMeetingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 20% auto;
+`;
+
+const Title2 = styled.div`
+  margin: 2% 0;
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+const SSadFace = styled(SadFace)`
+  width: 45%;
 `;
