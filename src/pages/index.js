@@ -24,7 +24,7 @@ import {
 import ChannelTalk from '../asset/ChannelTalk';
 import PrimaryModal from '../components/Modal/PrimaryModal';
 import PrimaryButton from '../components/PrimaryButton';
-import Recommend from './recommend';
+import Recommend from './MainRecommend';
 
 function Main() {
   const params = new URLSearchParams(window.location.search);

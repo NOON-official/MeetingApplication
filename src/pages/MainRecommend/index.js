@@ -1,5 +1,4 @@
 import { useEffect, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +13,7 @@ import NoProfile from '../../components/MainRecommend/NoProfile';
 import Timer from './timer';
 import MyTeamProfileModal from '../../components/MainRecommend/MyTeamProfileModal';
 import RecommendList from './recommendList';
+import RecommendModal from '../../components/Modal/RecommendModal';
 
 export default function Recommend() {
   const navigate = useNavigate();
@@ -23,7 +23,6 @@ export default function Recommend() {
   const setModal = (bool) => {
     setOpenMyTeamProfile(bool);
   };
-  const { accessToken } = useSelector((state) => state.user);
 
   const getInformation = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
@@ -38,7 +37,7 @@ export default function Recommend() {
 
   return (
     <>
-      {/* <RecommendModal /> */}
+      <RecommendModal />
       <MyTeamProfileModal open={openMyTeamProfile} setModal={setModal} />
       {myTeamId ? (
         <Section>
@@ -77,8 +76,7 @@ export default function Recommend() {
 
       <Timer />
 
-      {!myTeamId ? <RecommendList /> : <NoProfile />}
-      {/* <RecommendNoProfile /> */}
+      {myTeamId ? <RecommendList /> : <NoProfile />}
     </>
   );
 }
