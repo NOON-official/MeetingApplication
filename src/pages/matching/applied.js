@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import ChannelTalk from '../../asset/ChannelTalk';
 import MatchingLayout from '../../layout/MatchingLayout';
-import OtherTeamList from '../../components/MainRecommend/TeamList';
 import SigninView from '../../components/Auth/SigninView';
 import MainLayout from '../../layout/MainLayout';
+import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
+import OtherTeamList from '../../components/MainRecommend/TeamList';
 
 export default function MatchingApplied() {
   const ApplyDATAS = [
@@ -112,51 +113,104 @@ export default function MatchingApplied() {
 
   return (
     <MatchingLayout>
-      <Container>
-        <Header>
-          <Tab selected={selectTab === 1} onClick={() => handleTabChange(1)}>
-            응답을 기다려요(4)
-          </Tab>
-          <Tab selected={selectTab === 2} onClick={() => handleTabChange(2)}>
-            거절됐어요(3)
-          </Tab>
-          {!clickEditBtn ? (
-            <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
-          ) : (
-            <EditBtn>
-              <Delete selected={deleteProfile.length > 0}>삭제</Delete>
-              <Cancel
-                onClick={() => {
-                  setClickEditBtn(false);
-                  if (selectTab === 1) setDeleteProfile([]);
-                  else setDeleteRefuseProfile([]);
-                }}
+      {ApplyDATAS ? (
+        <>
+          <Container>
+            <Header>
+              <Tab
+                selected={selectTab === 1}
+                onClick={() => handleTabChange(1)}
               >
-                취소
-              </Cancel>
-            </EditBtn>
-          )}
-        </Header>
-        {selectTab === 1 ? (
-          subtitle()
-        ) : (
-          <Text>아쉽게도 상대팀이 미팅을 거절했어요 😢</Text>
-        )}
-      </Container>
-
-      <OtherTeamList
-        teamList={selectTab === 1 ? ApplyDATAS : RefuseDATAS}
-        clickEditBtn={clickEditBtn}
-        deleteProfile={selectTab === 1 ? deleteProfile : deleteRefuseProfile}
-        setDeleteProfile={
-          selectTab === 1 ? setDeleteProfile : setDeleteRefuseProfile
-        }
-      />
+                응답을 기다려요(4)
+              </Tab>
+              <Tab
+                selected={selectTab === 2}
+                onClick={() => handleTabChange(2)}
+              >
+                거절됐어요(3)
+              </Tab>
+              {!clickEditBtn ? (
+                <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
+              ) : (
+                <EditBtn>
+                  <Delete selected={deleteProfile.length > 0}>삭제</Delete>
+                  <Cancel
+                    onClick={() => {
+                      setClickEditBtn(false);
+                      if (selectTab === 1) setDeleteProfile([]);
+                      else setDeleteRefuseProfile([]);
+                    }}
+                  >
+                    취소
+                  </Cancel>
+                </EditBtn>
+              )}
+            </Header>
+            {selectTab === 1 ? (
+              subtitle()
+            ) : (
+              <Text>아쉽게도 상대팀이 미팅을 거절했어요 😢</Text>
+            )}
+          </Container>
+          <OtherTeamList
+            teamList={selectTab === 1 ? ApplyDATAS : RefuseDATAS}
+            clickEditBtn={clickEditBtn}
+            deleteProfile={
+              selectTab === 1 ? deleteProfile : deleteRefuseProfile
+            }
+            setDeleteProfile={
+              selectTab === 1 ? setDeleteProfile : setDeleteRefuseProfile
+            }
+          />
+        </>
+      ) : (
+        <NoMeetingContainer>
+          <Title>신청한 미팅이 없어요</Title>
+          <SSadFace />
+          <Button>
+            <CreateTeamBtn>신청하러 가기</CreateTeamBtn>
+          </Button>
+        </NoMeetingContainer>
+      )}
 
       <div>{ChannelTalk.hideChannelButton()}</div>
     </MatchingLayout>
   );
 }
+
+const NoMeetingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 20% auto;
+`;
+
+const Title = styled.div`
+  margin: 2% 0;
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+const SSadFace = styled(SadFace)`
+  width: 45%;
+`;
+
+const Button = styled.div`
+  width: 40%;
+`;
+
+const CreateTeamBtn = styled.button`
+  width: 100%;
+  padding: 10px 5px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ffcdcd;
+  color: #eb8888;
+  font-size: 14px;
+  font-weight: 600;
+`;
 
 const Container = styled.div`
   width: 90%;
