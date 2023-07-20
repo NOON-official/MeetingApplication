@@ -10,9 +10,9 @@ import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark
 import { ReactComponent as UniversityMarkPink } from '../../asset/svg/UniversityMarkPink.svg';
 import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
 import backend from '../../util/backend';
-import NoProfile from '../../components/RecommendBox/NoProfile';
+import NoProfile from '../../components/MainRecommend/NoProfile';
 import Timer from './timer';
-import MyTeamProfileModal from '../../components/RecommendBox/MyTeamProfileModal';
+import MyTeamProfileModal from '../../components/MainRecommend/MyTeamProfileModal';
 import RecommendList from './recommendList';
 
 export default function Recommend() {
@@ -35,40 +35,6 @@ export default function Recommend() {
   useEffect(() => {
     // getInformation();
   }, []);
-
-  const RECOMMENDLIST = [
-    {
-      id: 1,
-      matchingId: 7,
-      teamName: 'RefuseTeam',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 2,
-      matchingId: 8,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro:
-        '안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방 함께라면 안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의',
-      isVerified: false,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 3,
-      matchingId: 9,
-      teamName: '아름이와 아디르들들',
-      age: 26,
-      memberCount: 4,
-      intro: '안녕하세요. 반가워요.',
-      isVerified: true,
-      appliedAt: '2023-07-18T21:37:26.886Z',
-    },
-  ];
 
   return (
     <>
