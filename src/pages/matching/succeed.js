@@ -99,8 +99,8 @@ export default function MatchingSucceed() {
           return (
             <TeamCard key={id}>
               <OtherTeamNumberModal
-                open={modalState.find((state) => state.teamId === team.id).open}
-                closeModal={() => closeModal(team.id)}
+                open={modalState.find((state) => state.teamId === id).open}
+                closeModal={() => closeModal(id)}
                 teamName={teamName}
                 contact={contact}
               />
@@ -119,9 +119,7 @@ export default function MatchingSucceed() {
                 </Subtitle>
                 <Info>{`${intro}`}</Info>
                 <ButtonBox>
-                  <Button1 onClick={() => openModal(team.id)}>
-                    연락처 확인
-                  </Button1>
+                  <Button1 onClick={() => openModal(id)}>연락처 확인</Button1>
                   <Button2>자세히 보기</Button2>
                 </ButtonBox>
               </Content>
