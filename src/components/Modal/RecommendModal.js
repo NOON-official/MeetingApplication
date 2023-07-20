@@ -1,14 +1,50 @@
 import { Modal } from 'antd';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { ReactComponent as Magnifier } from '../../asset/svg/Magnifier.svg';
-import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton2.svg';
 
 export default function RecommendModal() {
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const now = new Date();
+    const targetTime = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      23,
+      0,
+      0,
+    );
+
+    const lastPopupTime = localStorage.getItem('lastPopupTime');
+
+    if (lastPopupTime) {
+      const lastTime = new Date(parseInt(lastPopupTime, 10));
+      if (now >= lastTime && now < targetTime) {
+        // 현재 시간이 이전 팝업이 뜬 시간 이후 && 밤 11시 전
+        setShowPopup(false);
+      } else {
+        setShowPopup(true);
+        localStorage.setItem('lastPopupTime', now.getTime().toString());
+      }
+    } else {
+      // 팝업 본 적 없을 때
+      setShowPopup(true);
+      localStorage.setItem('lastPopupTime', now.getTime().toString());
+    }
+  }, []);
+
   return (
     <div>
-      {/* {open ? ( */}
-      <Modal open footer={null} centered width="380px" closable={false}>
-        <SXbutton />
+      <Modal
+        open={showPopup}
+        footer={null}
+        centered
+        width="380px"
+        closable
+        onCancel={() => setShowPopup(false)}
+      >
         <Container>
           <TextBox>
             <BlackText>
@@ -23,29 +59,28 @@ export default function RecommendModal() {
           </TextBox>
         </Container>
       </Modal>
-      {/* ) : null} */}
     </div>
   );
 }
-const SXbutton = styled(Xbutton)`
-  padding-left: 95%;
-`;
-const SMagnifier = styled(Magnifier)``;
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 `;
+
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
+
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
 `;
+
 const BlackText = styled.span`
   color: #000000;
   font-size: 22px;
@@ -54,9 +89,9 @@ const BlackText = styled.span`
 `;
 
 const SmallText = styled.span`
-  /* font-weight: 400; */
-
   font-size: 14px;
   color: #525252;
   font-family: 'GmarketSans';
 `;
+
+const SMagnifier = styled(Magnifier)``;

@@ -34,7 +34,6 @@ import ApplyInformation from './pages/apply/information';
 import ApplyUniversity from './pages/apply/university';
 import Apply6 from './pages/apply/6';
 import Apply9Page from './pages/apply/9teamProfile';
-import Recommend from './pages/recommend';
 import MatchingApplied from './pages/matching/applied';
 import MatchingReceived from './pages/matching/received';
 import MatchingSucceed from './pages/matching/succeed';
@@ -188,10 +187,6 @@ const Router = createBrowserRouter([
       {
         path: '/auth/signin/kakao/success',
         element: <KakakoLoginSuccessPage />,
-      },
-      {
-        path: '/recommend',
-        element: <Recommend />,
       },
     ],
   },
