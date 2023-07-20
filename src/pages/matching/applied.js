@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import ChannelTalk from '../../asset/ChannelTalk';
 import MatchingLayout from '../../layout/MatchingLayout';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
+import SigninView from '../../components/Auth/SigninView';
+import MainLayout from '../../layout/MainLayout';
 
 export default function MatchingApplied() {
   const ApplyDATAS = [
@@ -72,7 +75,7 @@ export default function MatchingApplied() {
       appliedAt: '2023-07-18T21:37:26.886Z',
     },
   ];
-
+  const { accessToken } = useSelector((state) => state.user);
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfile, setDeleteProfile] = useState([]);
@@ -98,6 +101,14 @@ export default function MatchingApplied() {
       )}
     </Text>
   );
+
+  if (!accessToken) {
+    return (
+      <MainLayout>
+        <SigninView />
+      </MainLayout>
+    );
+  }
 
   return (
     <MatchingLayout>
