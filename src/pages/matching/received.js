@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import MatchingLayout from '../../layout/MatchingLayout';
-import OtherTeamList from '../../components/RecommendBox/TeamList';
+import OtherTeamList from '../../components/MainRecommend/TeamList';
 
 export default function MatchingReceived() {
   const DATAS = [

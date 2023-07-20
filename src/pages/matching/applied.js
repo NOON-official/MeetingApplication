@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ChannelTalk from '../../asset/ChannelTalk';
 import MatchingLayout from '../../layout/MatchingLayout';
-import OtherTeamList from '../../components/RecommendBox/TeamList';
+import OtherTeamList from '../../components/MainRecommend/TeamList';
 
 export default function MatchingApplied() {
   const ApplyDATAS = [

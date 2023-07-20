@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { Button, Carousel, Space } from 'antd';
-import theme from '../style/theme';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
 import { ReactComponent as SliderLArrow } from '../asset/svg/SliderLArrow.svg';
@@ -21,7 +20,6 @@ import {
   // useGetTeamCountQuery,
   useGetTeamMembersCountTotalQuery,
   useGetUserAgreementsQuery,
-  useGetMatchingAverageTimeQuery,
 } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
 import PrimaryModal from '../components/Modal/PrimaryModal';
@@ -38,7 +36,6 @@ function Main() {
   const [matchingStatus, setMatchingStatus] = useState('');
   const { data: userCountData } = useGetTeamMembersCountTotalQuery();
   const { data: agreementsData } = useGetUserAgreementsQuery();
-  const { data: matchingAverageTime } = useGetMatchingAverageTimeQuery();
 
   const needMoreInfo = localStorage.getItem('needMoreInfo');
 
@@ -84,18 +81,6 @@ function Main() {
       window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
     }
   }, [accessToken, matchingStatus, navigate, agreementsData, finishedStep]);
-
-  // const teamsPerRound = teamData?.['teamsPerRound'];
-  // const twoman = teamData?.['2vs2']['male'];
-  // const twogirl = teamData?.['2vs2']['female'];
-  // const threeman = teamData?.['3vs3']['male'];
-  // const threegirl = teamData?.['3vs3']['female'];
-  // const threemanProportion = threeman / (threeman + threegirl);
-  // const threegirlProportion = threegirl / (threeman + threegirl);
-  // const threemanProportionNum = Math.round(
-  //   (threeman / (threeman + threegirl)) * 10,
-  // );
-  // const threegirlProportionNum = 10 - threemanProportionNum;
 
   const slider1 = useRef(null);
   const slider2 = useRef(null);
@@ -299,8 +284,6 @@ function Main() {
       ) : (
         <Recommend />
       )}
-      {/* <MainFooter /> */}
-      {/* <BottomFooter /> */}
       <div>{ChannelTalk.hideChannelButton()}</div>
     </MainLayout>
   );
@@ -328,13 +311,6 @@ const MainTitle = styled.div`
   border-radius: 10px;
 `;
 
-const TopTitle = styled.div`
-  margin-left: 5%;
-  font-weight: 400;
-  font-size: 15px;
-  color: #000000;
-`;
-
 const ImgBox = styled.div`
   margin-right: 25px;
   position: relative;
@@ -348,121 +324,8 @@ const ImgBox = styled.div`
   }
 `;
 
-const SImg = styled.img`
-  position: absolute;
-  bottom: -8%;
-  right: 5%;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const SImg2 = styled.img`
-  width: 100%;
-`;
-
-const MatchingBox = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 7px;
-  font-weight: 300;
-  font-size: 20px;
-  padding: 10px;
-  height: auto;
-  background: #ffffff;
-  border-radius: 10px;
-  text-align: center;
-`;
-
-const TimeBox = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 7px;
-  font-weight: 300;
-  font-size: 20px;
-  padding: 10px;
-  height: auto;
-  background: #ffffff;
-  border-radius: 10px;
-  text-align: left;
-`;
-
-// const Title = styled.p`
-//   margin-top: 5%;
-//   width: 100%;
-//   color: ${theme.pink};
-// `;
-
-const SubTitle = styled.p`
-  width: 100%;
-  font-weight: 300;
-  font-size: 14px;
-  color: black;
-  margin-top: 5px;
-  padding-bottom: 10px;
-`;
-
-const TotalBar = styled.div`
-  display: flex;
-  justify-content: center;
-  padding-bottom: 12px;
-`;
-
-const LeftBar = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  position: relative;
-  height: 18px;
-  background: white;
-  border: 1px solid #f1ecec;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-`;
-
-const RightBar = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  height: 18px;
-  background: white;
-  border: 1px solid #f1ecec;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-`;
-
-const LeftBarProgress = styled.div`
-  max-width: 220px;
-  width: ${({ progress }) => (progress ? progress * 220 : 0)}px;
-  height: 18px;
-  background: #bfe0ff;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-`;
-
-const RightBarProgress = styled.div`
-  max-width: 220px;
-  width: ${({ progress }) => (progress ? progress * 220 : 0)}px;
-  height: 18px;
-  background: #ffbfbf;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-`;
-
-const Number = styled.p`
-  width: 10px;
-  padding: 0 10px;
-  font-weight: 300;
-  font-size: 14px;
-  color: #4a4a4a;
-  padding-top: 3px;
-`;
-
 const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   width: 75%;
-  /* position: sticky; */
-  /* bottom: 120px; */
   margin: 10% auto;
   &.ant-btn {
     height: 56px;
@@ -471,52 +334,6 @@ const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   &:hover {
     cursor: pointer;
   }
-`;
-
-const Pink = styled.span`
-  color: ${theme.pink};
-  font-size: 22px;
-`;
-
-const AverageTime = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 276px;
-  text-align: left;
-  padding-bottom: 5px;
-`;
-
-const AverageTimeNumber = styled.p`
-  font-weight: 500;
-  font-size: 35px;
-  color: black;
-  display: inline-block;
-  width: auto;
-`;
-
-const AverageTimeDescription = styled.p`
-  font-weight: 300;
-  font-size: 16px;
-  color: black;
-  display: inline-block;
-  width: auto;
-  padding-top: 15px;
-  padding-left: 5px;
-`;
-
-const SubTitle2 = styled.div`
-  width: 260px;
-  font-weight: 300;
-  font-size: 14px;
-  color: #4a4a4a;
-  margin-top: 5px;
-  padding-left: 12px;
-`;
-
-const CImg = styled.img`
-  display: inline-block;
-  width: 31px;
-  padding-top: 5px;
 `;
 
 const Review = styled.div`
