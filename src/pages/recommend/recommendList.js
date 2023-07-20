@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
-import OtherTeamProfileModal from '../../components/RecommendBox/OtherTeamProfileModal';
+import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
 
 export default function RecommendList() {
   const teamList = [
