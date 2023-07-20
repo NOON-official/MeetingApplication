@@ -235,7 +235,7 @@ const ButtonBox = styled.div`
 `;
 
 const Button1 = styled.button`
-  padding: 5px 8px;
+  padding: 5px 7px;
   border: none;
   border-radius: 15px;
   color: #ffffff;
@@ -247,7 +247,7 @@ const Button1 = styled.button`
 `;
 
 const Button2 = styled.button`
-  padding: 5px 10px;
+  padding: 5px 7px;
   border: none;
   border-radius: 15px;
   color: rgba(235, 136, 136, 1);
