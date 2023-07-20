@@ -18,6 +18,10 @@ export default function Timer() {
         0,
       ); // 밤 11시로 설정
 
+      if (now > deadline) {
+        deadline.setDate(deadline.getDate() + 1);
+      }
+
       const diff = deadline - now;
       const hours = Math.floor(diff / (1000 * 60 * 60))
         .toString()
@@ -52,7 +56,6 @@ export default function Timer() {
     </Container>
   );
 }
-
 const Container = styled.div`
   width: 90%;
   margin: 5% auto;
