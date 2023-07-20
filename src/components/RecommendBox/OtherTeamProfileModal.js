@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMarkBlack } from '../../asset/svg/UniversityMarkBlack.svg';
-import SliderBoxMembers from '../../components/SliderBoxMembers';
-import ApplyButton from '../../components/ApplyButton';
+import SliderBoxMembers from '../SliderBoxMembers';
+import ApplyButton from '../ApplyButton';
 import Area from '../../asset/Area';
 
-export default function OtherTeamProfileModal({ open, setModal }) {
+export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
   const DATA = {
     id: 1,
     ownerId: 1,
@@ -99,7 +99,7 @@ export default function OtherTeamProfileModal({ open, setModal }) {
           width="380px"
           bodyStyle={{ backgroundColor: '#FBFAF9' }}
           closable
-          onCancel={() => setModal(false)}
+          onCancel={() => closeModal()}
         >
           <TeamProfile>
             <TeamName>{teamName}</TeamName>

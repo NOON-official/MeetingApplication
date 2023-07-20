@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
-import SliderBoxMembers from '../../components/SliderBoxMembers';
-import ApplyButton from '../../components/ApplyButton';
-import ModifyProfileModal from '../../components/Modal/ModifyProfileModal';
-import StopMatchingModal from '../../components/Modal/StopMatchingModal';
+import SliderBoxMembers from '../SliderBoxMembers';
+import ApplyButton from '../ApplyButton';
+import ModifyProfileModal from '../Modal/ModifyProfileModal';
+import StopMatchingModal from '../Modal/StopMatchingModal';
 import backend from '../../util/backend';
 
 export default function MyTeamProfileModal({ open, setModal }) {

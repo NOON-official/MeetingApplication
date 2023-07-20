@@ -59,9 +59,6 @@ export const backendApi = createApi({
     getUserTeamIdData: builder.query({
       query: () => `users/team-id`,
     }),
-    getMatchingStatus: builder.query({
-      query: () => `users/matchings/status`,
-    }),
     getMatchingAverageTime: builder.query({
       query: () => `matchings/average-time/one-week`,
     }),
@@ -84,6 +81,5 @@ export const {
   useGetTeamMembersCountTotalQuery,
   useGetTeamCountQuery,
   useGetUserTeamIdDataQuery,
-  useGetMatchingStatusQuery,
   useGetMatchingAverageTimeQuery,
 } = backendApi;

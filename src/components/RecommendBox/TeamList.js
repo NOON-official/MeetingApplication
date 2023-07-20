@@ -4,7 +4,7 @@ import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import { ReactComponent as CheckBoxUnfilled } from '../../asset/svg/CheckboxUnfilled.svg';
 import { ReactComponent as CheckBoxFilled } from '../../asset/svg/CheckboxFilled.svg';
-import OtherTeamProfileModal from '../../pages/recommend/otherTeamProfileModal';
+import OtherTeamProfileModal from './OtherTeamProfileModal';
 
 export default function OtherTeamList(props) {
   const { teamList, clickEditBtn, deleteProfile, setDeleteProfile } = props;
@@ -100,8 +100,7 @@ const TeamCardOverlay = styled.div`
 
 const TeamCard = styled.div`
   padding: 6%;
-  border: 1px solid
-    ${({ isRecommend }) => (isRecommend ? '#d74683' : 'rgba(0, 0, 0, 0.1)')};
+  border: 1px solid #0000001a;
   border-radius: 6px;
   background-color: #ffffff;
 `;
@@ -162,6 +161,7 @@ const Info = styled.div`
 const SCheckboxUnfilled = styled(CheckBoxUnfilled)`
   width: 100%;
   margin: 7% auto 0;
+  cursor: pointer;
 `;
 
 const SCheckBoxFilled = styled(CheckBoxFilled)`
@@ -170,6 +170,7 @@ const SCheckBoxFilled = styled(CheckBoxFilled)`
   background-color: transparent;
   position: relative;
   z-index: 1;
+  cursor: pointer;
 `;
 
 const Button = styled.div`
@@ -177,10 +178,10 @@ const Button = styled.div`
   width: 37%;
   margin: 7% auto 0;
   border-radius: 15px;
-  color: ${({ isRecommend }) => (isRecommend ? '#ffffff' : '#EB8888')};
-  background-color: ${({ isRecommend }) =>
-    isRecommend ? '#ff7ab2' : '#FFEDED'};
+  color: #eb8888;
+  background-color: #ffeded;
   font-size: 10px;
   font-weight: 500;
   text-align: center;
+  cursor: pointer;
 `;
