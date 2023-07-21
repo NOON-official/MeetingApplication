@@ -1,18 +1,32 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import TopHeader from './header/TopHeader';
 import BottomTabs from './header/BottomTabs';
 import MyTeamProfile from '../components/MainRecommend/MyTeamProfileModal';
 import { ReactComponent as MainDoc } from '../asset/svg/MainDoc.svg';
 import { ReactComponent as UniversityMarkPink } from '../asset/svg/UniversityMarkPink.svg';
+import backend from '../util/backend';
 
 export default function MatchingLayout({ children }) {
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
+  const [teamProfile, setTeamProfile] = useState();
+  const [myTeamId, setMyTeamId] = useState('');
 
   const setModal = (bool) => {
     setOpenMyTeamProfile(bool);
   };
+
+  const getInformation = useCallback(async () => {
+    const teamid = await backend.get(`/users/team-id`);
+    const profile = await backend.get(`/teams/${teamid.data.teamId}`);
+    setMyTeamId(teamid.data.teamId);
+    setTeamProfile(profile.data);
+  }, []);
+
+  useEffect(() => {
+    getInformation();
+  }, []);
 
   const activeStyle = {
     padding: '4px',
@@ -35,7 +49,12 @@ export default function MatchingLayout({ children }) {
         <TopHeader />
       </Header>
       <Content>
-        <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
+        <MyTeamProfile
+          open={openMyTeamProfile}
+          setModal={setModal}
+          teamId={myTeamId}
+          profile={teamProfile}
+        />
         <Section>
           <MainButton onClick={() => setOpenMyTeamProfile(true)}>
             <SMainDoc />
