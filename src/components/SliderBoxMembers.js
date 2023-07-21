@@ -68,11 +68,7 @@ export default function SliderBoxMembers({ members }) {
                 </Info>
                 <Info>
                   <InfoTitle>닮은꼴</InfoTitle>
-                  <InfoContent>
-                    {appearance === undefined
-                      ? '만나서 알려드려요'
-                      : appearance}
-                  </InfoContent>
+                  <InfoContent>{appearance || '만나서 알려드려요'}</InfoContent>
                 </Info>
               </RightBox>
             </Box>
