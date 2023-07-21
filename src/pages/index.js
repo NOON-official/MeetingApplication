@@ -65,7 +65,7 @@ function Main() {
     if (referralId !== null) {
       sessionStorage.setItem('referralId', referralId);
     }
-    getMatchingInfo();
+    // getMatchingInfo();
   }, [getMatchingInfo, referralId]);
 
   const handleStart = useCallback(() => {
