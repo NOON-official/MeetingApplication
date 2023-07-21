@@ -36,6 +36,8 @@ export default function Recommend() {
     getInformation();
   }, []);
 
+  console.log(teamProfile);
+
   return (
     <>
       <RecommendModal />
