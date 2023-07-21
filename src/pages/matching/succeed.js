@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import MatchingLayout from '../../layout/MatchingLayout';
@@ -6,6 +5,8 @@ import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import OtherTeamNumberModal from '../../components/Modal/OtherTeamNumberModal';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
+import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
+import useModalState from '../../hooks/useModalState';
 
 export default function MatchingSucceed() {
   const DATAS = [
@@ -44,25 +45,8 @@ export default function MatchingSucceed() {
     },
   ];
 
-  const [modalState, setModalState] = useState(
-    DATAS.map((team) => ({ teamId: team.id, open: false })),
-  );
-
-  const openModal = (teamId) => {
-    setModalState((prev) =>
-      prev.map((state) =>
-        state.teamId === teamId ? { ...state, open: true } : state,
-      ),
-    );
-  };
-
-  const closeModal = (teamId) => {
-    setModalState((prev) =>
-      prev.map((state) =>
-        state.teamId === teamId ? { ...state, open: false } : state,
-      ),
-    );
-  };
+  const [modalState, openModal, closeModal] = useModalState(DATAS);
+  const [modalState2, openModal2, closeModal2] = useModalState(DATAS);
 
   const remainingDays = (date) => {
     const appliedDate = new Date(date);
@@ -88,7 +72,6 @@ export default function MatchingSucceed() {
             {DATAS.map((team) => {
               const {
                 id,
-                matchingId,
                 teamName,
                 age,
                 memberCount,
@@ -105,6 +88,11 @@ export default function MatchingSucceed() {
                     closeModal={() => closeModal(id)}
                     teamName={teamName}
                     contact={contact}
+                  />
+                  <OtherTeamProfileModal
+                    open={modalState2.find((state) => state.teamId === id).open}
+                    closeModal={() => closeModal2(id)}
+                    teamId={id}
                   />
                   <ApplicationDate>
                     {dayjs(matchedAt).format('M월 DD일')}
@@ -130,7 +118,9 @@ export default function MatchingSucceed() {
                       <Button1 onClick={() => openModal(id)}>
                         연락처 확인
                       </Button1>
-                      <Button2>자세히 보기</Button2>
+                      <Button2 onClick={() => openModal2(id)}>
+                        자세히 보기
+                      </Button2>
                     </ButtonBox>
                   </Content>
                 </TeamCard>
@@ -249,6 +239,10 @@ const ButtonBox = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 5%;
+
+  @media (max-width: 365px) {
+    flex-direction: column;
+  }
 `;
 
 const Button1 = styled.button`
@@ -256,23 +250,32 @@ const Button1 = styled.button`
   border: none;
   border-radius: 15px;
   color: #ffffff;
-  background-color: rgba(255, 157, 157, 1);
+  background-color: #ff9d9d;
   font-size: 10px;
   font-weight: 400;
   text-align: center;
   cursor: pointer;
+
+  @media (max-width: 365px) {
+    padding: 5px 10px;
+  }
 `;
 
 const Button2 = styled.button`
   padding: 5px 7px;
   border: none;
   border-radius: 15px;
-  color: rgba(235, 136, 136, 1);
-  background-color: rgba(255, 237, 237, 1);
+  color: #eb8888;
+  background-color: #ffeded;
   font-size: 10px;
   font-weight: 400;
   text-align: center;
   cursor: pointer;
+
+  @media (max-width: 365px) {
+    margin-top: 5%;
+    padding: 5px 10px;
+  }
 `;
 
 const NoMeetingContainer = styled.div`

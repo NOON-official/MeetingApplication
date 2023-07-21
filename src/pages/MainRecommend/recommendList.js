@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
+import useModalState from '../../hooks/useModalState';
 
 export default function RecommendList() {
   const teamList = [
@@ -33,57 +33,21 @@ export default function RecommendList() {
       isVerified: true,
       appliedAt: '2023-01-20T21:37:26.886Z',
     },
-    {
-      id: 4,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
   ];
 
-  const [modalState, setModalState] = useState(
-    teamList.map((team) => ({ teamId: team.id, open: false })),
-  );
-
-  const openModal = (teamId) => {
-    setModalState((prev) =>
-      prev.map((state) =>
-        state.teamId === teamId ? { ...state, open: true } : state,
-      ),
-    );
-  };
-
-  const closeModal = (teamId) => {
-    setModalState((prev) =>
-      prev.map((state) =>
-        state.teamId === teamId ? { ...state, open: false } : state,
-      ),
-    );
-  };
+  const [modalState, openModal, closeModal] = useModalState(teamList);
 
   return (
     <Container>
       {teamList.map((team) => {
-        const {
-          id,
-          matchingId,
-          teamName,
-          age,
-          memberCount,
-          intro,
-          isVerified,
-          appliedAt,
-        } = team;
+        const { id, teamName, age, memberCount, intro, isVerified } = team;
 
         return (
           <TeamCard key={id}>
             <OtherTeamProfileModal
               open={modalState.find((state) => state.teamId === id).open}
               closeModal={() => closeModal(id)}
-              teamId={1}
+              teamId={id}
             />
             <Title>
               <TeamName>{teamName}</TeamName>
