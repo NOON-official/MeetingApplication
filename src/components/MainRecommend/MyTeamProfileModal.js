@@ -9,7 +9,8 @@ import ApplyButton from '../ApplyButton';
 import ModifyProfileModal from '../Modal/ModifyProfileModal';
 import StopMatchingModal from '../Modal/StopMatchingModal';
 import SliderBoxMembers from '../SliderBoxMembers';
-import Area from '../../asset/Area';
+import AreaText from './AreaText';
+import DateText from './DateText';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal, teamId, profile } = props;
@@ -17,42 +18,12 @@ export default function MyTeamProfileModal(props) {
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
 
-  let dates = '';
-  if (
-    profile &&
-    profile.teamAvailableDate.includes(1) &&
-    profile.teamAvailableDate.includes(2)
-  ) {
-    dates = '모두 좋아요';
-  } else if (profile?.teamAvailableDate.includes(1)) {
-    dates = '평일';
-  } else {
-    dates = '주말';
-  }
-
   const AlcholContent = {
     1: '반 병',
     2: '한 병',
     3: '한 병 반',
     4: '두 병',
     5: '술고래',
-  };
-
-  const AreaContent = {
-    1: '강남',
-    2: '건대',
-    3: '수원',
-    4: '신촌',
-    5: '인천',
-    6: '홍대',
-    7: '경대 북문',
-    8: '계대 앞',
-    9: '동성로',
-    10: '영대역',
-    11: '경대 앞',
-    12: '부산대 앞',
-    13: '서면',
-    14: '해운대',
   };
 
   return (
@@ -82,15 +53,15 @@ export default function MyTeamProfileModal(props) {
           />
 
           <TeamProfile>
-            <TeamName>{profile?.teamName}</TeamName>
+            <TeamName>{profile.teamName}</TeamName>
             <TextBox>
               <Title>한 줄 어필</Title>
-              <Content>{profile?.intro}</Content>
+              <Content>{profile.intro}</Content>
             </TextBox>
             <TextBox>
               <Container>
                 <Title>기본 정보</Title>
-                {profile?.isVerified ? (
+                {profile.isVerified ? (
                   <>
                     <SUniversityMark />
                     <UniversityMarkText>대학 인증 완료</UniversityMarkText>
@@ -104,24 +75,13 @@ export default function MyTeamProfileModal(props) {
               </Container>
               <TeamInfo>
                 <Subtitle>일정</Subtitle>
-                <SubContent>{dates}</SubContent>
+                <SubContent>
+                  <DateText availableDates={profile.teamAvailableDate} />
+                </SubContent>
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>지역</Subtitle>
-                <div>
-                  <AreaCity>
-                    {
-                      Area.find((x) =>
-                        x.content.some((item) => item.id === profile.areas[0]),
-                      ).title
-                    }
-                  </AreaCity>
-                  <SubContent>
-                    {profile.areas.map((x) => {
-                      return <span key={x}>{AreaContent[x]}&nbsp;&nbsp;</span>;
-                    })}
-                  </SubContent>
-                </div>
+                <AreaText areaProps={profile.areas} />
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>주량</Subtitle>
@@ -218,7 +178,6 @@ const UniversityNoMarkText = styled.div`
 `;
 
 const TeamInfo = styled.div`
-  width: 90%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
