@@ -1,68 +1,25 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMarkBlack } from '../../asset/svg/UniversityMarkBlack.svg';
 import SliderBoxMembers from '../SliderBoxMembers';
 import ApplyButton from '../ApplyButton';
-import Area from '../../asset/Area';
+import backend from '../../util/backend';
+import AreaText from './AreaText';
+import DateText from './DateText';
 
 export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
-  const DATA = {
-    id: 1,
-    ownerId: 1,
-    gender: 1,
-    memberCount: 2,
-    memberCounts: [2, 3],
-    teamAvailableDate: [1, 2],
-    areas: [1, 3],
-    members: [
-      {
-        id: 1,
-        role: 1,
-        mbti: 13,
-        university: 1,
-        appearance: '차은우',
-        age: 23,
-      },
-      {
-        id: 2,
-        role: 3,
-        mbti: 16,
-        university: 5,
-        age: 23,
-      },
-    ],
-    teamName: '기웅내세요',
-    intro: '안녕하세요',
-    drink: 5,
-    prefAge: [23, 27],
-    prefVibes: [1, 2, 5],
-    isVerified: true,
-    createdAt: '2023-01-20T21:37:26.886Z',
-    updatedAt: '2023-01-20T21:37:26.886Z',
-    modifiedAt: '2023-01-20T21:37:26.886Z',
-    deletedAt: '2023-01-20T21:37:26.886Z',
-  };
+  const [teamProfile, setTeamProfile] = useState(null);
 
-  const {
-    teamAvailableDate,
-    areas,
-    members,
-    teamName,
-    intro,
-    drink,
-    isVerified,
-  } = DATA;
+  const getProfile = useCallback(async () => {
+    const profile = await backend.get(`/teams/${teamId}`);
+    setTeamProfile(profile.data);
+  }, []);
 
-  let dates = '';
-  if (teamAvailableDate.includes(1) && teamAvailableDate.includes(2)) {
-    dates = '모두 좋아요';
-  } else if (teamAvailableDate.includes(1)) {
-    dates = '평일';
-  } else {
-    dates = '주말';
-  }
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   const AlcholContent = {
     1: '반 병',
@@ -70,23 +27,6 @@ export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
     3: '한 병 반',
     4: '두 병',
     5: '술고래',
-  };
-
-  const AreaContent = {
-    1: '강남',
-    2: '건대',
-    3: '수원',
-    4: '신촌',
-    5: '인천',
-    6: '홍대',
-    7: '경대 북문',
-    8: '계대 앞',
-    9: '동성로',
-    10: '영대역',
-    11: '경대 앞',
-    12: '부산대 앞',
-    13: '서면',
-    14: '해운대',
   };
 
   return (
@@ -102,15 +42,15 @@ export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
           onCancel={() => closeModal()}
         >
           <TeamProfile>
-            <TeamName>{teamName}</TeamName>
+            <TeamName>{teamProfile.teamName}</TeamName>
             <TextBox>
               <Title>상대 팀 한 줄 어필</Title>
-              <Content>{intro}</Content>
+              <Content>{teamProfile.intro}</Content>
             </TextBox>
             <TextBox>
               <Container>
                 <Title>상대 팀 기본 정보</Title>
-                {isVerified ? (
+                {teamProfile.isVerified ? (
                   <>
                     <SUniversityMark />
                     <UniversityMarkText>대학 인증 완료</UniversityMarkText>
@@ -119,31 +59,22 @@ export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
               </Container>
               <TeamInfo>
                 <Subtitle>일정</Subtitle>
-                <SubContent>{dates}</SubContent>
+                <SubContent>
+                  <DateText availableDates={teamProfile.teamAvailableDate} />
+                </SubContent>
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>지역</Subtitle>
-                <div>
-                  <AreaCity>
-                    {
-                      Area.find((x) =>
-                        x.content.some((item) => item.id === areas[0]),
-                      ).title
-                    }
-                  </AreaCity>
-                  <SubContent>
-                    {areas.map((x) => {
-                      return <span key={x}>{AreaContent[x]}&nbsp;&nbsp;</span>;
-                    })}
-                  </SubContent>
-                </div>
+                <AreaText areaProps={teamProfile.areas} />
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>주량</Subtitle>
-                <SubContent>{`${AlcholContent[drink]} (Lv.${drink})`}</SubContent>
+                <SubContent>{`${AlcholContent[teamProfile.drink]} (Lv.${
+                  teamProfile.drink
+                })`}</SubContent>
               </TeamInfo>
             </TextBox>
-            <SliderBoxMembers members={members} />
+            <SliderBoxMembers members={teamProfile.members} />
           </TeamProfile>
           <Footer>
             <ButtonBox>
@@ -217,7 +148,6 @@ const UniversityMarkText = styled.div`
 `;
 
 const TeamInfo = styled.div`
-  width: 90%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -237,13 +167,6 @@ const Subtitle = styled.span`
 const SubContent = styled.div`
   font-size: 14px;
   font-weight: 500;
-`;
-
-const AreaCity = styled.div`
-  margin-bottom: 5px;
-  color: #777777;
-  font-weight: 400;
-  font-size: 14px;
 `;
 
 const Footer = styled.div`
