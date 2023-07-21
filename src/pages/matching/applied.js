@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import ChannelTalk from '../../asset/ChannelTalk';
@@ -7,80 +7,28 @@ import SigninView from '../../components/Auth/SigninView';
 import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
+import backend from '../../util/backend';
 
 export default function MatchingApplied() {
-  const ApplyDATAS = [
-    {
-      id: 1,
-      matchingId: 1,
-      teamName: '기웅내세요',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 2,
-      matchingId: 3,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 3,
-      matchingId: 5,
-      teamName: '아름이와 아디르들들',
-      age: 26,
-      memberCount: 4,
-      intro:
-        '안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방 함께라면 안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의',
-      isVerified: true,
-      appliedAt: '2023-07-18T21:37:26.886Z',
-    },
-  ];
-
-  const RefuseDATAS = [
-    {
-      id: 1,
-      matchingId: 7,
-      teamName: 'RefuseTeam',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 2,
-      matchingId: 8,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro:
-        '안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의 조합 3인방 함께라면 안녕하세요. 한국대학교 손석구, 최준, 뷔 입니다! 최강의',
-      isVerified: false,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 3,
-      matchingId: 9,
-      teamName: '아름이와 아디르들들',
-      age: 26,
-      memberCount: 4,
-      intro: '안녕하세요. 반가워요.',
-      isVerified: true,
-      appliedAt: '2023-07-18T21:37:26.886Z',
-    },
-  ];
   const { accessToken } = useSelector((state) => state.user);
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfile, setDeleteProfile] = useState([]);
   const [deleteRefuseProfile, setDeleteRefuseProfile] = useState([]);
+
+  const [applyData, setApplyData] = useState([]);
+  const [refuseData, setRefuseData] = useState(null);
+
+  const getApplyData = useCallback(async () => {
+    const apply = await backend.get(`/users/matchings/applied`);
+    setApplyData(apply.data.teams);
+    const refuse = await backend.get(`/users/matchings/refused`);
+    setRefuseData(refuse.data.teams);
+  }, []);
+
+  useEffect(() => {
+    getApplyData();
+  }, []);
 
   const handleTabChange = (tabIdx) => {
     if (selectTab === 1 && tabIdx === 2) {
@@ -95,7 +43,7 @@ export default function MatchingApplied() {
     <Text>
       {clickEditBtn ? (
         <>
-          <Pink>{deleteProfile.length}</Pink>/{ApplyDATAS.length}개 선택
+          <Pink>{deleteProfile.length}</Pink>/{applyData?.length}개 선택
         </>
       ) : (
         <>최대 24시간 이내에 상대팀의 미팅 의사를 확인해 볼게요 ⏱</>
@@ -113,7 +61,7 @@ export default function MatchingApplied() {
 
   return (
     <MatchingLayout>
-      {ApplyDATAS ? (
+      {applyData.length !== 0 ? (
         <>
           <Container>
             <Header>
@@ -121,17 +69,15 @@ export default function MatchingApplied() {
                 selected={selectTab === 1}
                 onClick={() => handleTabChange(1)}
               >
-                응답을 기다려요(4)
+                {`응답을 기다려요(${applyData.length})`}
               </Tab>
               <Tab
                 selected={selectTab === 2}
                 onClick={() => handleTabChange(2)}
               >
-                거절됐어요(3)
+                {`거절됐어요(${refuseData.length})`}
               </Tab>
-              {!clickEditBtn ? (
-                <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
-              ) : (
+              {clickEditBtn ? (
                 <EditBtn>
                   <Delete selected={deleteProfile.length > 0}>삭제</Delete>
                   <Cancel
@@ -144,6 +90,8 @@ export default function MatchingApplied() {
                     취소
                   </Cancel>
                 </EditBtn>
+              ) : (
+                <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
               )}
             </Header>
             {selectTab === 1 ? (
@@ -153,7 +101,7 @@ export default function MatchingApplied() {
             )}
           </Container>
           <OtherTeamList
-            teamList={selectTab === 1 ? ApplyDATAS : RefuseDATAS}
+            teamList={selectTab === 1 ? applyData : refuseData}
             clickEditBtn={clickEditBtn}
             deleteProfile={
               selectTab === 1 ? deleteProfile : deleteRefuseProfile

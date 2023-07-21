@@ -25,7 +25,7 @@ export default function MyTeamProfileModal(props) {
     4: '두 병',
     5: '술고래',
   };
-
+  console.log(profile);
   return (
     <div>
       {open ? (
@@ -51,47 +51,48 @@ export default function MyTeamProfileModal(props) {
             }}
             teamId={teamId}
           />
-
-          <TeamProfile>
-            <TeamName>{profile.teamName}</TeamName>
-            <TextBox>
-              <Title>한 줄 어필</Title>
-              <Content>{profile.intro}</Content>
-            </TextBox>
-            <TextBox>
-              <Container>
-                <Title>기본 정보</Title>
-                {profile.isVerified ? (
-                  <>
-                    <SUniversityMark />
-                    <UniversityMarkText>대학 인증 완료</UniversityMarkText>
-                  </>
-                ) : (
-                  <>
-                    <SUniversityMarkGray />
-                    <UniversityNoMarkText>대학 미인증</UniversityNoMarkText>
-                  </>
-                )}
-              </Container>
-              <TeamInfo>
-                <Subtitle>일정</Subtitle>
-                <SubContent>
-                  <DateText availableDates={profile.teamAvailableDate} />
-                </SubContent>
-              </TeamInfo>
-              <TeamInfo>
-                <Subtitle>지역</Subtitle>
-                <AreaText areaProps={profile.areas} />
-              </TeamInfo>
-              <TeamInfo>
-                <Subtitle>주량</Subtitle>
-                <SubContent>{`${AlcholContent[profile.drink]} (Lv.${
-                  profile.drink
-                })`}</SubContent>
-              </TeamInfo>
-            </TextBox>
-            <SliderBoxMembers members={profile.members} />
-          </TeamProfile>
+          {profile && (
+            <TeamProfile>
+              <TeamName>{profile?.teamName}</TeamName>
+              <TextBox>
+                <Title>한 줄 어필</Title>
+                <Content>{profile?.intro}</Content>
+              </TextBox>
+              <TextBox>
+                <Container>
+                  <Title>기본 정보</Title>
+                  {profile.isVerified ? (
+                    <>
+                      <SUniversityMark />
+                      <UniversityMarkText>대학 인증 완료</UniversityMarkText>
+                    </>
+                  ) : (
+                    <>
+                      <SUniversityMarkGray />
+                      <UniversityNoMarkText>대학 미인증</UniversityNoMarkText>
+                    </>
+                  )}
+                </Container>
+                <TeamInfo>
+                  <Subtitle>일정</Subtitle>
+                  <SubContent>
+                    <DateText availableDates={profile.teamAvailableDate} />
+                  </SubContent>
+                </TeamInfo>
+                <TeamInfo>
+                  <Subtitle>지역</Subtitle>
+                  <AreaText areaProps={profile.areas} />
+                </TeamInfo>
+                <TeamInfo>
+                  <Subtitle>주량</Subtitle>
+                  <SubContent>{`${AlcholContent[profile.drink]} (Lv.${
+                    profile.drink
+                  })`}</SubContent>
+                </TeamInfo>
+              </TextBox>
+              <SliderBoxMembers members={profile.members} />
+            </TeamProfile>
+          )}
 
           <Footer>
             <ButtonBox>
