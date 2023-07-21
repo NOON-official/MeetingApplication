@@ -1,36 +1,59 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
-import SliderBoxMembers from '../SliderBoxMembers';
+import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
+
 import ApplyButton from '../ApplyButton';
 import ModifyProfileModal from '../Modal/ModifyProfileModal';
 import StopMatchingModal from '../Modal/StopMatchingModal';
-import backend from '../../util/backend';
+import SliderBoxMembers from '../SliderBoxMembers';
+import Area from '../../asset/Area';
 
-export default function MyTeamProfileModal({ open, setModal }) {
-  const members = [
-    { role: 1, age: 21, university: 198 },
-    { age: 22, university: 198, role: 2, mbti: 14, appearance: '룰루' },
-  ];
+export default function MyTeamProfileModal(props) {
+  const { open, setModal, teamId, profile } = props;
 
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
 
-  const [myTeamId, setMyTeamId] = useState('');
-  const [myTeamProfile, setMyTeamProfile] = useState();
+  let dates = '';
+  if (
+    profile &&
+    profile.teamAvailableDate.includes(1) &&
+    profile.teamAvailableDate.includes(2)
+  ) {
+    dates = '모두 좋아요';
+  } else if (profile?.teamAvailableDate.includes(1)) {
+    dates = '평일';
+  } else {
+    dates = '주말';
+  }
 
-  const getInformation = useCallback(async () => {
-    const teamid = await backend.get(`/users/team-id`);
-    const ourteam = await backend.get(`/teams/${myTeamId}`);
-    setMyTeamId(teamid.data.teamId);
-    setMyTeamProfile(ourteam.data);
-  }, []);
+  const AlcholContent = {
+    1: '반 병',
+    2: '한 병',
+    3: '한 병 반',
+    4: '두 병',
+    5: '술고래',
+  };
 
-  useEffect(() => {
-    // getInformation();
-  }, []);
+  const AreaContent = {
+    1: '강남',
+    2: '건대',
+    3: '수원',
+    4: '신촌',
+    5: '인천',
+    6: '홍대',
+    7: '경대 북문',
+    8: '계대 앞',
+    9: '동성로',
+    10: '영대역',
+    11: '경대 앞',
+    12: '부산대 앞',
+    13: '서면',
+    14: '해운대',
+  };
 
   return (
     <div>
@@ -55,42 +78,61 @@ export default function MyTeamProfileModal({ open, setModal }) {
             setModal={() => {
               setIsStopMatchingModalOpen((prev) => !prev);
             }}
-            teamId={myTeamId}
+            teamId={teamId}
           />
+
           <TeamProfile>
-            <TeamName>한솔이와 바보들</TeamName>
+            <TeamName>{profile?.teamName}</TeamName>
             <TextBox>
               <Title>한 줄 어필</Title>
-              <Content>
-                안녕하세요. 한국대학교 손석구, 최준, 뷔입니다!최강의 조합
-                3인방과 함께라면 그 날은 꿀잼 보장.만약 재미없다면 집까지
-                앞구르기 하면서 가겠습니다.(아, 참고로 잘생겼습니다^^)
-              </Content>
+              <Content>{profile?.intro}</Content>
             </TextBox>
             <TextBox>
               <Container>
                 <Title>기본 정보</Title>
-                <SUniversityMark />
-                <UniversityMarkText>대학 인증 완료</UniversityMarkText>
+                {profile?.isVerified ? (
+                  <>
+                    <SUniversityMark />
+                    <UniversityMarkText>대학 인증 완료</UniversityMarkText>
+                  </>
+                ) : (
+                  <>
+                    <SUniversityMarkGray />
+                    <UniversityNoMarkText>대학 미인증</UniversityNoMarkText>
+                  </>
+                )}
               </Container>
               <TeamInfo>
                 <Subtitle>일정</Subtitle>
-                <SubContent>주말</SubContent>
+                <SubContent>{dates}</SubContent>
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>지역</Subtitle>
                 <div>
-                  <AreaCity>서울 / 경기</AreaCity>
-                  <SubContent>강남 신촌</SubContent>
+                  <AreaCity>
+                    {
+                      Area.find((x) =>
+                        x.content.some((item) => item.id === profile.areas[0]),
+                      ).title
+                    }
+                  </AreaCity>
+                  <SubContent>
+                    {profile.areas.map((x) => {
+                      return <span key={x}>{AreaContent[x]}&nbsp;&nbsp;</span>;
+                    })}
+                  </SubContent>
                 </div>
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>주량</Subtitle>
-                <SubContent>한 병 반 (Lv.3)</SubContent>
+                <SubContent>{`${AlcholContent[profile.drink]} (Lv.${
+                  profile.drink
+                })`}</SubContent>
               </TeamInfo>
             </TextBox>
-            <SliderBoxMembers members={members} />
+            <SliderBoxMembers members={profile.members} />
           </TeamProfile>
+
           <Footer>
             <ButtonBox>
               <ApplyButton onClick={() => setIsStopMatchingModalOpen(true)}>
@@ -161,8 +203,17 @@ const SUniversityMark = styled(UniversityMark)`
   margin: 0 10px 0 30px;
 `;
 
+const SUniversityMarkGray = styled(UniversityMarkGray)`
+  margin: 0 10px 0 30px;
+`;
+
 const UniversityMarkText = styled.div`
   color: #daadda;
+  font-size: 14px;
+`;
+
+const UniversityNoMarkText = styled.div`
+  color: #ababab;
   font-size: 14px;
 `;
 
