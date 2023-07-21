@@ -79,7 +79,7 @@ export default function RecommendList() {
         } = team;
 
         return (
-          <TeamCard>
+          <TeamCard key={id}>
             <OtherTeamProfileModal
               open={modalState.find((state) => state.teamId === id).open}
               closeModal={() => closeModal(id)}
