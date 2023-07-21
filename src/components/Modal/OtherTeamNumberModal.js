@@ -64,7 +64,6 @@ const Container = styled.div`
 `;
 
 const TextBox = styled.div`
-  /* border: 1px solid red; */
   margin-bottom: 5%;
   width: 100%;
   text-align: center;
@@ -75,7 +74,7 @@ const Section = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 20px;
+  padding: 5%;
   border: 1px solid #f1ecec;
   border-radius: 10px;
   color: #000000;
@@ -87,6 +86,11 @@ const Normal = styled.div`
   margin: 3% 0;
   color: rgba(119, 119, 119, 1);
   font-size: 13px;
+  text-align: left;
+
+  @media (max-width: 380px) {
+    word-break: keep-all;
+  }
 `;
 
 const Text = styled.div`

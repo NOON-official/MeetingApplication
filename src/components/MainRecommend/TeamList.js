@@ -1,19 +1,15 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import { ReactComponent as CheckBoxUnfilled } from '../../asset/svg/CheckboxUnfilled.svg';
 import { ReactComponent as CheckBoxFilled } from '../../asset/svg/CheckboxFilled.svg';
 import OtherTeamProfileModal from './OtherTeamProfileModal';
+import useModalState from '../../hooks/useModalState';
 
 export default function OtherTeamList(props) {
   const { teamList, clickEditBtn, deleteProfile, setDeleteProfile } = props;
 
-  const [openOtherTeamProfile, setOpenOtherTeamProfile] = useState(false);
-
-  const handleModal = (bool) => {
-    setOpenOtherTeamProfile(bool);
-  };
+  const [modalState, openModal, closeModal] = useModalState(teamList);
 
   const editUI = (id) => {
     if (deleteProfile.includes(id)) {
@@ -35,23 +31,15 @@ export default function OtherTeamList(props) {
   return (
     <Container>
       {teamList.map((team) => {
-        const {
-          id,
-          matchingId,
-          teamName,
-          age,
-          memberCount,
-          intro,
-          isVerified,
-          appliedAt,
-        } = team;
+        const { id, teamName, age, memberCount, intro, isVerified } = team;
 
         return (
           <TeamCardWrapper key={id}>
             {deleteProfile.includes(id) && clickEditBtn && <TeamCardOverlay />}
             <OtherTeamProfileModal
-              open={openOtherTeamProfile}
-              setModal={handleModal}
+              open={modalState.find((state) => state.teamId === id).open}
+              closeModal={() => closeModal(id)}
+              teamId={id}
             />
             <TeamCard>
               <Title>
@@ -63,7 +51,11 @@ export default function OtherTeamList(props) {
                 <MemberCount>{`${memberCount}명`}</MemberCount>
               </Subtitle>
               <Info>{`${intro}`}</Info>
-              {clickEditBtn ? editUI(id) : <Button>자세히 보기</Button>}
+              {clickEditBtn ? (
+                editUI(id)
+              ) : (
+                <Button onClick={() => openModal(id)}>자세히 보기</Button>
+              )}
             </TeamCard>
           </TeamCardWrapper>
         );
