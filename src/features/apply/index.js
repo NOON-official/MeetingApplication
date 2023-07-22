@@ -5,14 +5,14 @@ export const APPLY_STORAGE_KEY = 'apply-data';
 const initialState = {
   finishedStep: 0,
   memberCount: 3, // 2: 2대2, 3: 3대3
-  availableDates: [],
+  teamAvailableDate: [],
   areas: [],
   city: 0,
   members: [],
   teamName: '',
   intro: '',
   drink: 3,
-  moreMember: [],
+  memberCounts: [],
   prefAge: [20, 29],
   prefVibes: [],
   kakaoId: '',
@@ -42,10 +42,10 @@ const applySlice = createSlice({
       );
     },
     submitStep2: (state, action) => {
-      const { availableDates } = action.payload;
+      const { teamAvailableDate } = action.payload;
 
       state.finishedStep = 2;
-      state.availableDates = availableDates;
+      state.teamAvailableDate = teamAvailableDate;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
@@ -125,11 +125,11 @@ const applySlice = createSlice({
       );
     },
     submitStep7: (state, action) => {
-      const { drink, moreMember } = action.payload;
+      const { drink, memberCounts } = action.payload;
 
       state.finishedStep = 7;
       state.drink = drink;
-      state.moreMember = moreMember;
+      state.memberCounts = memberCounts;
 
       const stored = localStorage.getItem('apply-data');
       localStorage.setItem(
