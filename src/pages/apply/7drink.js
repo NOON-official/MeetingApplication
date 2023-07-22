@@ -17,14 +17,14 @@ import { ReactComponent as Alchol } from '../../asset/svg/Alchol.svg';
 
 export default function Apply7Page() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, drink, memberCount, moreMember } = useSelector(
+  const { finishedStep, drink, memberCount, memberCounts } = useSelector(
     (store) => store.apply,
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [alchol, setAlchol] = useState(drink);
-  const [changeCount, setChangeCount] = useState(moreMember);
+  const [changeCount, setChangeCount] = useState(memberCounts);
 
   useEffect(() => {
     if (finishedStep < 6) {
@@ -96,7 +96,7 @@ export default function Apply7Page() {
     dispatch(
       submitStep7({
         drink: alchol,
-        moreMember: changeCount,
+        memberCounts: changeCount,
       }),
     );
     navigate('/apply/8kakaoId');

@@ -189,7 +189,7 @@ const STextArea = styled(Input.TextArea)`
 const Alert = styled.p`
   z-index: 1;
   position: absolute;
-  top: 10%;
+  top: 6%;
   right: 10%;
   color: #aaaaaa;
   font-weight: 400;
