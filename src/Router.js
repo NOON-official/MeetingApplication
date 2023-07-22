@@ -3,7 +3,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import Main from './pages/index';
 import App from './App';
 import Guide from './pages/guide';
-import Matching from './pages/matching';
 import MatchingMyteam from './pages/matching/myteam';
 import MatchingOtherteam from './pages/matching/otherteam';
 import MatchingRefuse from './pages/matching/refuse';
@@ -35,6 +34,9 @@ import ApplyInformation from './pages/apply/information';
 import ApplyUniversity from './pages/apply/university';
 import Apply6 from './pages/apply/6';
 import Apply9Page from './pages/apply/9teamProfile';
+import MatchingApplied from './pages/matching/applied';
+import MatchingReceived from './pages/matching/received';
+import MatchingSucceed from './pages/matching/succeed';
 
 const Router = createBrowserRouter([
   {
@@ -49,9 +51,18 @@ const Router = createBrowserRouter([
         path: 'guide',
         element: <Guide />,
       },
+
       {
-        path: 'matching',
-        element: <Matching />,
+        path: 'matching/applied',
+        element: <MatchingApplied />,
+      },
+      {
+        path: 'matching/received',
+        element: <MatchingReceived />,
+      },
+      {
+        path: 'matching/succeeded',
+        element: <MatchingSucceed />,
       },
       {
         path: 'matching/myteam',
