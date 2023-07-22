@@ -4,27 +4,21 @@ import styled from 'styled-components';
 import { Carousel } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ApplyLayout from '../../layout/ApplyLayout';
 
+import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
 import theme from '../../style/theme';
-import { ReactComponent as Plus } from '../../asset/svg/Plus.svg';
-import { ReactComponent as Profile1 } from '../../asset/svg/Profile1.svg';
-import { ReactComponent as Profile2 } from '../../asset/svg/Profile2.svg';
-import { ReactComponent as Profile3 } from '../../asset/svg/Profile3.svg';
-import { ReactComponent as Profile4 } from '../../asset/svg/Profile4.svg';
+import { createTeam } from '../../features/apply/asyncAction';
 import ApplyButton from '../../components/ApplyButton';
-import Universities from '../../asset/Universities';
-import Mbti from '../../asset/Mbti';
 import backend from '../../util/backend';
 import MatchingCompleteModal from '../../components/Modal/MatchingCompleteModal';
-import { createTeam } from '../../features/apply/asyncAction';
+import SliderBoxMembers from '../../components/SliderBoxMembers';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
   const {
     areas,
-    availableDates,
+    teamAvailableDate,
     city,
     drink,
     intro,
@@ -33,13 +27,13 @@ export default function Apply9Page() {
     members,
     teamName,
   } = applydata;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   const [userPhone, setUserPhone] = useState('');
   const [userTeamId, setUserTeamId] = useState('');
-  const [matchingStatus, setMatchingStatus] = useState('');
   const [gender, setGender] = useState('');
 
   const setModal = (bool) => {
@@ -49,11 +43,9 @@ export default function Apply9Page() {
   const getInformation = useCallback(async () => {
     const userData = await backend.get('/users/my-info');
     const userteamid = await backend.get('/users/team-id');
-    const matchingstatus = await backend.get('/users/matchings/status');
     setGender(userData.data.gender);
     setUserPhone(userData.data.phone);
     setUserTeamId(userteamid.data.teamId);
-    setMatchingStatus(matchingstatus.data.matchingStatus);
   }, []);
 
   useEffect(() => {
@@ -68,48 +60,54 @@ export default function Apply9Page() {
     navigate('/apply/8kakaoId');
   };
 
-  const handleSubmit = useCallback(async () => {
-    if (matchingStatus === 'APPLIED') {
-      try {
-        await backend.patch(`/teams/${userTeamId}`, applydata);
-        window.alert('수정되었습니다!');
-      } catch (e) {
-        window.alert('수정중 오류가 발생하였습니다');
-      }
-    } else if (matchingStatus === null) {
-      dispatch(createTeam(applydata));
-      // window.alert('저장되었습니다!');
-      setOpenModal(true);
-    } else {
-      await backend.delete(`/teams/${userTeamId}`);
-      dispatch(createTeam(applydata));
-      window.alert('저장되었습니다!');
+  const filteredData = { ...applydata };
+  delete filteredData.finishedStep;
+  delete filteredData.city;
+
+  filteredData.members = filteredData.members.map((member) => {
+    if (typeof member.mbti === 'undefined') {
+      return {
+        ...member,
+        mbti: 17,
+      };
     }
-    if (userPhone === null) {
-      navigate('/apply/10phone');
+    return member;
+  });
+
+  const handleSubmit = useCallback(async () => {
+    // if (matchingStatus === 'APPLIED') {
+    //   try {
+    //     await backend.patch(`/teams/${userTeamId}`, applydata);
+    //     window.alert('수정되었습니다!');
+    //   } catch (e) {
+    //     window.alert('수정중 오류가 발생하였습니다');
+    //   }
+    // } else if (matchingStatus === null) {
+    //   dispatch(createTeam(applydata));
+    //   window.alert('저장되었습니다!');
+    //   setOpenModal(true);
+    // } else {
+    //   await backend.delete(`/teams/${userTeamId}`);
+    //   dispatch(createTeam(applydata));
+    //   window.alert('저장되었습니다!');
+    // }
+
+    try {
+      await dispatch(createTeam(filteredData));
+      if (userPhone === '') {
+        navigate('/apply/10phone');
+      } else {
+        setOpenModal(true);
+      }
+    } catch (e) {
+      console.log(e);
     }
   });
 
-  const profileimg = (role) => {
-    if (role === 1) {
-      return <Profile1 />;
-    }
-    if (role === 2) {
-      return <Profile4 />;
-    }
-    if (role === 3) {
-      return <Profile3 />;
-    }
-    if (role === 4) {
-      return <Profile2 />;
-    }
-    return <Plus />;
-  };
-
   let dates = '';
-  if (availableDates.includes(1) && availableDates.includes(2)) {
+  if (teamAvailableDate.includes(1) && teamAvailableDate.includes(2)) {
     dates = '모두 좋아요';
-  } else if (availableDates.includes(1)) {
+  } else if (teamAvailableDate.includes(1)) {
     dates = '평일';
   } else {
     dates = '주말';
@@ -121,19 +119,29 @@ export default function Apply9Page() {
     3: '부산',
   };
 
+  const AreaContent = {
+    1: '강남',
+    2: '건대',
+    3: '수원',
+    4: '신촌',
+    5: '인천',
+    6: '홍대',
+    7: '경대 북문',
+    8: '계대 앞',
+    9: '동성로',
+    10: '영대역',
+    11: '경대 앞',
+    12: '부산대 앞',
+    13: '서면',
+    14: '해운대',
+  };
+
   const AlcholContent = {
     1: '반 병',
     2: '한 병',
     3: '한 병 반',
     4: '두 병',
     5: '술고래',
-  };
-
-  const Member = {
-    1: '대표자',
-    2: '팀원 2',
-    3: '팀원 3',
-    4: '팀원 4',
   };
 
   return (
@@ -159,8 +167,8 @@ export default function Apply9Page() {
               <div>
                 <SubContent>{CityContent[city]}</SubContent>
                 <Content>
-                  {areas.map((area) => {
-                    return <span key={area}>{area}&nbsp;&nbsp;</span>;
+                  {areas.map((x) => {
+                    return <span key={x}>{AreaContent[x]}&nbsp;&nbsp;</span>;
                   })}
                 </Content>
               </div>
@@ -187,50 +195,7 @@ export default function Apply9Page() {
           <Title1>우리 팀 한 줄 어필</Title1>
           <Intro>{intro}</Intro>
         </TeamIntro>
-        <SCarousel2 dots>
-          {members.map((member, idx) => {
-            const { role, age, university, mbti, appearance } = member;
-            return (
-              <Container key={member}>
-                <Title2 />
-                <Box>
-                  <LeftBox>
-                    <Profile>{profileimg(role)}</Profile>
-                    <ProfileTitle>{Member[idx + 1]}</ProfileTitle>
-                  </LeftBox>
-                  <RightBox>
-                    <Info>
-                      <InfoTitle>나이</InfoTitle>
-                      <InfoContent>만 {age}세</InfoContent>
-                    </Info>
-                    <Info>
-                      <InfoTitle>대학교</InfoTitle>
-                      <InfoContent>
-                        {Universities[university - 1].name}
-                      </InfoContent>
-                    </Info>
-                    <Info>
-                      <InfoTitle>MBTI</InfoTitle>
-                      <InfoContent>
-                        {mbti === undefined || mbti === 17
-                          ? '만나서 알려드려요'
-                          : Mbti[mbti]?.name}
-                      </InfoContent>
-                    </Info>
-                    <Info>
-                      <InfoTitle>닮은꼴</InfoTitle>
-                      <InfoContent>
-                        {appearance === undefined
-                          ? '만나서 알려드려요'
-                          : appearance}
-                      </InfoContent>
-                    </Info>
-                  </RightBox>
-                </Box>
-              </Container>
-            );
-          })}
-        </SCarousel2>
+        <SliderBoxMembers members={members} />
       </TeamProfile>
       <Footer>
         <ButtonBox>

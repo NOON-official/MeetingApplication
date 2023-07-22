@@ -19,11 +19,13 @@ export default function Apply2() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
-  const { finishedStep, availableDates } = useSelector((store) => store.apply);
+  const { finishedStep, teamAvailableDate } = useSelector(
+    (store) => store.apply,
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [selectedDate, setSelectedDate] = useState(availableDates);
+  const [selectedDate, setSelectedDate] = useState(teamAvailableDate);
 
   useEffect(() => {
     if (finishedStep < 1) {
@@ -74,7 +76,7 @@ export default function Apply2() {
     }
     dispatch(
       submitStep2({
-        availableDates: selectedDate,
+        teamAvailableDate: selectedDate,
       }),
     );
     navigate('/apply/3area');
