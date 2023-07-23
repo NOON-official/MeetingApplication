@@ -25,7 +25,7 @@ export default function MyTeamProfileModal(props) {
     4: '두 병',
     5: '술고래',
   };
-  console.log(profile);
+
   return (
     <div>
       {open ? (
