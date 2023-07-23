@@ -11,11 +11,32 @@ import DateText from './DateText';
 
 export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
   const [teamProfile, setTeamProfile] = useState(null);
+  const [myTeamId, setMyTeamId] = useState(null);
 
   const getProfile = useCallback(async () => {
     const profile = await backend.get(`/teams/${teamId}`);
     setTeamProfile(profile.data);
+    const myId = await backend.get(`/users/team-id`);
+    setMyTeamId(myId.data.teamId);
   }, []);
+
+  const applyMatching = async () => {
+    try {
+      await backend.post(`/matchings/${myTeamId}/${teamId}`);
+      closeModal();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const refuseTeam = async () => {
+    try {
+      await backend.put(`/teams/${teamId}`);
+      closeModal();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     getProfile();
@@ -78,8 +99,12 @@ export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
           </TeamProfile>
           <Footer>
             <ButtonBox>
-              <ApplyButton>신청하기</ApplyButton>
-              <ApplyButton>다시 안 보기</ApplyButton>
+              <ApplyButton onClick={() => applyMatching()}>
+                신청하기
+              </ApplyButton>
+              <ApplyButton onClick={() => refuseTeam()}>
+                다시 안 보기
+              </ApplyButton>
             </ButtonBox>
           </Footer>
         </SModal>
