@@ -3,13 +3,19 @@ import styled from 'styled-components';
 
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMarkBlack } from '../../asset/svg/UniversityMarkBlack.svg';
+import { ReactComponent as Share } from '../../asset/svg/Share.svg';
 import SliderBoxMembers from '../SliderBoxMembers';
-import ApplyButton from '../ApplyButton';
 import backend from '../../util/backend';
 import AreaText from './AreaText';
 import DateText from './DateText';
+import ApplyButton from '../ApplyButton';
 
-export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
+export default function OtherTeamProfileModal({
+  open,
+  closeModal,
+  teamId,
+  succeed,
+}) {
   const [teamProfile, setTeamProfile] = useState(null);
   const [myTeamId, setMyTeamId] = useState(null);
 
@@ -97,16 +103,28 @@ export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
             </TextBox>
             <SliderBoxMembers members={teamProfile.members} />
           </TeamProfile>
-          <Footer>
-            <ButtonBox>
-              <ApplyButton onClick={() => applyMatching()}>
-                신청하기
-              </ApplyButton>
-              <ApplyButton onClick={() => refuseTeam()}>
-                다시 안 보기
-              </ApplyButton>
-            </ButtonBox>
-          </Footer>
+
+          {succeed ? (
+            <Footer>
+              <ButtonBox>
+                <ShareButton>
+                  <SShare />
+                  팀원들에게 공유하기
+                </ShareButton>
+              </ButtonBox>
+            </Footer>
+          ) : (
+            <Footer>
+              <ButtonBox>
+                <ApplyButton onClick={() => applyMatching()}>
+                  신청하기
+                </ApplyButton>
+                <ApplyButton onClick={() => refuseTeam()}>
+                  다시 안 보기
+                </ApplyButton>
+              </ButtonBox>
+            </Footer>
+          )}
         </SModal>
       ) : null}
     </div>
@@ -206,7 +224,26 @@ const Footer = styled.div`
 const ButtonBox = styled.div`
   width: 90%;
   display: flex;
-  justify-content: center;
   justify-content: space-between;
   margin-top: 5%;
+`;
+
+const ShareButton = styled.div`
+  position: sticky;
+  bottom: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  margin-top: 5%;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #eb8888;
+  font-size: 18px;
+  font-weight: 400;
+`;
+
+const SShare = styled(Share)`
+  margin-right: 4%;
 `;
