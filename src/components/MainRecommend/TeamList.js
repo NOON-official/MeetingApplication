@@ -40,6 +40,7 @@ export default function OtherTeamList(props) {
               open={modalState.find((state) => state.teamId === id).open}
               closeModal={() => closeModal(id)}
               teamId={id}
+              succeed={false}
             />
             <TeamCard>
               <Title>
