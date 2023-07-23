@@ -93,6 +93,7 @@ export default function MatchingSucceed() {
                     open={modalState2.find((state) => state.teamId === id).open}
                     closeModal={() => closeModal2(id)}
                     teamId={id}
+                    succeed
                   />
                   <ApplicationDate>
                     {dayjs(matchedAt).format('M월 DD일')}
@@ -246,7 +247,7 @@ const ButtonBox = styled.div`
 `;
 
 const Button1 = styled.button`
-  padding: 5px 7px;
+  padding: 5px 10px;
   border: none;
   border-radius: 15px;
   color: #ffffff;
@@ -257,12 +258,12 @@ const Button1 = styled.button`
   cursor: pointer;
 
   @media (max-width: 365px) {
-    padding: 5px 10px;
+    padding: 5px 20px;
   }
 `;
 
 const Button2 = styled.button`
-  padding: 5px 7px;
+  padding: 5px 10px;
   border: none;
   border-radius: 15px;
   color: #eb8888;
@@ -274,7 +275,7 @@ const Button2 = styled.button`
 
   @media (max-width: 365px) {
     margin-top: 5%;
-    padding: 5px 10px;
+    padding: 5px 20px;
   }
 `;
 

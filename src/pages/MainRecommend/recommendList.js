@@ -48,6 +48,7 @@ export default function RecommendList() {
               open={modalState.find((state) => state.teamId === id).open}
               closeModal={() => closeModal(id)}
               teamId={id}
+              succeed={false}
             />
             <Title>
               <TeamName>{teamName}</TeamName>
