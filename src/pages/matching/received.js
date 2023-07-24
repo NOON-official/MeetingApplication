@@ -30,7 +30,7 @@ export default function MatchingReceived() {
     },
   ];
 
-  const [receivedData, setReceivedData] = useState(DATA);
+  const [receivedData, setReceivedData] = useState([]);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfileList, setDeleteProfileList] = useState([]);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -45,7 +45,7 @@ export default function MatchingReceived() {
   }, []);
 
   useEffect(() => {
-    // getReceivedData();
+    getReceivedData();
   }, []);
 
   return (
