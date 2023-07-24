@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
@@ -7,6 +8,7 @@ import OtherTeamNumberModal from '../../components/Modal/OtherTeamNumberModal';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
+import backend from '../../util/backend';
 
 export default function MatchingSucceed() {
   const DATAS = [
@@ -18,33 +20,20 @@ export default function MatchingSucceed() {
       memberCount: 3,
       intro: '안녕하세요',
       isVerified: true,
-      matchedAt: '2023-07-15T21:37:26.886Z',
-      contact: 'meet',
+      matchedAt: '2023-01-20T21:37:26.886Z',
     },
     {
       id: 2,
-      matchingId: 3,
+      matchingId: 2,
       teamName: '아름이와 아이들',
       age: 27,
       memberCount: 2,
       intro: '안녕하세요',
       isVerified: false,
-      matchedAt: '2023-07-17T21:37:26.886Z',
-      contact: '0109934',
-    },
-    {
-      id: 3,
-      matchingId: 3,
-      teamName: '서울서울서울',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      matchedAt: '2023-07-14T21:37:26.886Z',
-      contact: '12341234',
+      matchedAt: '2023-01-20T21:37:26.886Z',
     },
   ];
-
+  const [succeedData, setSucceedData] = useState(DATAS);
   const [modalState, openModal, closeModal] = useModalState(DATAS);
   const [modalState2, openModal2, closeModal2] = useModalState(DATAS);
 
@@ -57,9 +46,18 @@ export default function MatchingSucceed() {
     return Math.ceil((dueDate - currentDate) / (24 * 60 * 60 * 1000));
   };
 
+  const getSucceedData = async () => {
+    const succeed = await backend.get(`/users/matchings/succeeded`);
+    setSucceedData(succeed.data);
+  };
+
+  useEffect(() => {
+    // getSucceedData();
+  }, []);
+
   return (
     <MatchingLayout>
-      {DATAS ? (
+      {succeedData ? (
         <>
           <Container>
             <Text>
@@ -69,7 +67,7 @@ export default function MatchingSucceed() {
             </Text>
           </Container>
           <Container2>
-            {DATAS.map((team) => {
+            {succeedData.map((team) => {
               const {
                 id,
                 teamName,
@@ -78,7 +76,6 @@ export default function MatchingSucceed() {
                 intro,
                 isVerified,
                 matchedAt,
-                contact,
               } = team;
 
               return (
@@ -87,7 +84,7 @@ export default function MatchingSucceed() {
                     open={modalState.find((state) => state.teamId === id).open}
                     closeModal={() => closeModal(id)}
                     teamName={teamName}
-                    contact={contact}
+                    teamId={id}
                   />
                   <OtherTeamProfileModal
                     open={modalState2.find((state) => state.teamId === id).open}
