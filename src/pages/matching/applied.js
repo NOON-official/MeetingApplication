@@ -40,8 +40,8 @@ export default function MatchingApplied() {
   const [deleteRefuseProfileList, setDeleteRefuseProfileList] = useState([]);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  const [applyData, setApplyData] = useState(data);
-  const [refuseData, setRefuseData] = useState(data);
+  const [applyData, setApplyData] = useState([]);
+  const [refuseData, setRefuseData] = useState([]);
 
   const setModal = (bool) => {
     setOpenDeleteModal(bool);
@@ -55,7 +55,7 @@ export default function MatchingApplied() {
   }, []);
 
   useEffect(() => {
-    // getApplyData();
+    getApplyData();
   }, []);
 
   const handleTabChange = (tabIdx) => {

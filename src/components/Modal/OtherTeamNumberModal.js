@@ -1,9 +1,31 @@
 import { Modal } from 'antd';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
+import backend from '../../util/backend';
 
 export default function OtherTeamNumberModal(props) {
-  const { open, closeModal, teamName, contact } = props;
+  const { open, closeModal, teamName, teamId } = props;
+
+  const [contact, setContact] = useState(1);
+
+  const getContactDate = async () => {
+    const contactData = await backend.get(`/teams/${teamId}/contact`);
+    setContact(contactData.data);
+  };
+
+  useEffect(() => {
+    // getContactDate();
+  }, []);
+
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('클립보드에 복사되었습니다');
+    } catch (err) {
+      alert('복사에 실패하였습니다. 잠시 후 다시 시도해주세요');
+    }
+  };
 
   return (
     <div>
@@ -28,7 +50,7 @@ export default function OtherTeamNumberModal(props) {
                 </Normal>
                 <Text>
                   <KakaoId>{contact}</KakaoId>
-                  <SCopy />
+                  <SCopy onClick={() => handleCopy(contact)} />
                 </Text>
               </Section>
             </TextBox>
@@ -106,4 +128,5 @@ const KakaoId = styled.span``;
 
 const SCopy = styled(Copy)`
   margin-left: 10px;
+  cursor: pointer;
 `;
