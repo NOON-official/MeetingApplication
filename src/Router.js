@@ -37,6 +37,7 @@ import Apply9Page from './pages/apply/9teamProfile';
 import MatchingApplied from './pages/matching/applied';
 import MatchingReceived from './pages/matching/received';
 import MatchingSucceed from './pages/matching/succeed';
+import StudentCard from './pages/myinfo/studentcard';
 
 const Router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo',
         element: <MyInfo />,
+      },
+      {
+        path: 'myinfo/studentcard',
+        element: <StudentCard />,
       },
       {
         path: 'myinfo/account',
