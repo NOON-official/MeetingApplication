@@ -92,14 +92,16 @@ function MyInfo() {
       <Section>
         <MyProfileBox>
           <Glasses />
-          <Text>내 정보 보러가기</Text>
-          <SRightArrow />
+          <SLink to="/myinfo/account">
+            <Text>내 정보 보러가기</Text>
+            <SRightArrow />
+          </SLink>
         </MyProfileBox>
       </Section>
       <Section>
         <MenuBox>
           <MenuItem>
-            <Link>
+            <Link to="/myinfo/studentcard">
               <LinkButton>
                 학교 인증 <RightArrow />
               </LinkButton>
@@ -247,7 +249,6 @@ export default MyInfo;
 
 const MyProfileBox = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 90%;
   margin-top: 5%;
@@ -255,6 +256,14 @@ const MyProfileBox = styled.div`
   border: none;
   border-radius: 10px;
   background-color: #e5e5e5;
+`;
+
+const SLink = styled(Link)`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000000e5;
 `;
 
 const Text = styled.span`

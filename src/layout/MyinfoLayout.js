@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import MyinfoHeader from './header/MyinfoHeader';
+import BottomTabs from './header/BottomTabs';
 
 export default function MyinfoLayout({ children, title }) {
   return (
@@ -8,6 +9,9 @@ export default function MyinfoLayout({ children, title }) {
         <MyinfoHeader title={title} />
       </Header>
       <Content>{children}</Content>
+      <Footer>
+        <BottomTabs />
+      </Footer>
     </Container>
   );
 }
@@ -30,4 +34,10 @@ const Content = styled.div`
   height: 100%;
   background-color: ${(props) => props.theme.background};
   overflow-y: scroll;
+`;
+
+const Footer = styled.div`
+  max-width: 425px;
+  width: 100%;
+  background-color: ${(props) => props.theme.background};
 `;
