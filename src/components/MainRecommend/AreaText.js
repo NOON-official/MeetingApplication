@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Area from '../../asset/Area';
 
 export default function AreaText({ areaProps }) {
   const AreaContent = {
@@ -23,13 +22,12 @@ export default function AreaText({ areaProps }) {
   return (
     <div>
       <AreaCity>
-        {
-          Area.find((x) => x.content.some((item) => item.id === areaProps[0]))
-            .title
-        }
+        {/* {Area.find(
+          (x) => x.content.some((item) => item.id === areaProps[0]).title,
+        )} */}
       </AreaCity>
       <SubContent>
-        {areaProps.map((x) => {
+        {areaProps?.map((x) => {
           return <span key={x}>{AreaContent[x]}&nbsp;&nbsp;</span>;
         })}
       </SubContent>

@@ -17,20 +17,21 @@ export default function OtherTeamProfileModal({
   succeed,
 }) {
   const [teamProfile, setTeamProfile] = useState(null);
-  const [myTeamId, setMyTeamId] = useState(null);
+
+  const myTeamId = localStorage.getItem('myTeamId');
 
   const getProfile = useCallback(async () => {
     const profile = await backend.get(`/teams/${teamId}`);
     setTeamProfile(profile.data);
-    const myId = await backend.get(`/users/team-id`);
-    setMyTeamId(myId.data.teamId);
   }, []);
 
   const applyMatching = async () => {
     try {
       await backend.post(`/matchings/${myTeamId}/${teamId}`);
+      alert('신청이 완료되었습니다!');
       closeModal();
     } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
       console.log(err);
     }
   };
@@ -69,15 +70,15 @@ export default function OtherTeamProfileModal({
           onCancel={() => closeModal()}
         >
           <TeamProfile>
-            <TeamName>{teamProfile.teamName}</TeamName>
+            <TeamName>{teamProfile?.teamName}</TeamName>
             <TextBox>
               <Title>상대 팀 한 줄 어필</Title>
-              <Content>{teamProfile.intro}</Content>
+              <Content>{teamProfile?.intro}</Content>
             </TextBox>
             <TextBox>
               <Container>
                 <Title>상대 팀 기본 정보</Title>
-                {teamProfile.isVerified ? (
+                {teamProfile?.isVerified ? (
                   <>
                     <SUniversityMark />
                     <UniversityMarkText>대학 인증 완료</UniversityMarkText>
@@ -87,21 +88,21 @@ export default function OtherTeamProfileModal({
               <TeamInfo>
                 <Subtitle>일정</Subtitle>
                 <SubContent>
-                  <DateText availableDates={teamProfile.teamAvailableDate} />
+                  <DateText availableDates={teamProfile?.teamAvailableDate} />
                 </SubContent>
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>지역</Subtitle>
-                <AreaText areaProps={teamProfile.areas} />
+                <AreaText areaProps={teamProfile?.areas} />
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>주량</Subtitle>
-                <SubContent>{`${AlcholContent[teamProfile.drink]} (Lv.${
-                  teamProfile.drink
+                <SubContent>{`${AlcholContent[teamProfile?.drink]} (Lv.${
+                  teamProfile?.drink
                 })`}</SubContent>
               </TeamInfo>
             </TextBox>
-            <SliderBoxMembers members={teamProfile.members} />
+            <SliderBoxMembers members={teamProfile?.members} />
           </TeamProfile>
 
           {succeed ? (
