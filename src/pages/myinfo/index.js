@@ -8,6 +8,7 @@ import { ReactComponent as KakaoTalk } from '../../asset/svg/KakaoTalk.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
 import { ReactComponent as QuestionCircle } from '../../asset/svg/QuestionCircle.svg';
+import { ReactComponent as Glasses } from '../../asset/svg/Glasses.svg';
 import coffeeGreyImg from '../../asset/img/coffee-grey.png';
 import coffeeImg from '../../asset/img/coffee.png';
 import Section from '../../components/Section';
@@ -89,26 +90,57 @@ function MyInfo() {
     <MainLayout>
       {contextHolder}
       <Section>
+        <MyProfileBox>
+          <Glasses />
+          <Text>내 정보 보러가기</Text>
+          <SRightArrow />
+        </MyProfileBox>
+      </Section>
+      <Section>
         <MenuBox>
           <MenuItem>
-            <Link to="/myinfo/account">
+            <Link>
               <LinkButton>
-                계정관리 <RightArrow />
+                학교 인증 <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/myinfo/ticket">
+            <Link to="/">
               <LinkButton>
-                이용권 현황 <RightArrow />
+                서비스 소개
+                <RightArrow />
+              </LinkButton>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/guide">
+              <LinkButton>
+                서비스 가이드
+                <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link to="/myinfo/ticket/coupon">
               <LinkButton>
-                쿠폰 등록
+                이용권 구매
                 <RightArrow />
+              </LinkButton>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link>
+              <LinkButton>
+                미팅 후기
+                <RightArrow />
+              </LinkButton>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link>
+              <LinkButton>
+                이벤트 <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
@@ -212,6 +244,26 @@ function MyInfo() {
 }
 
 export default MyInfo;
+
+const MyProfileBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin-top: 5%;
+  padding: 5%;
+  border: none;
+  border-radius: 10px;
+  background-color: #e5e5e5;
+`;
+
+const Text = styled.span`
+  margin-left: 3%;
+`;
+
+const SRightArrow = styled(RightArrow)`
+  margin-left: auto;
+`;
 
 const CouponBox = styled.div`
   display: flex;
