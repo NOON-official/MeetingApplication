@@ -14,8 +14,7 @@ import RecommendModal from '../../components/Modal/RecommendModal';
 
 export default function Recommend() {
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
-  const [teamProfile, setTeamProfile] = useState();
-  const [myTeamId, setMyTeamId] = useState('');
+  const myTeamId = localStorage.getItem('myTeamId');
   const navigate = useNavigate();
 
   const setModal = (bool) => {
@@ -25,8 +24,8 @@ export default function Recommend() {
   const getInformation = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
     const profile = await backend.get(`/teams/${teamid.data.teamId}`);
-    setMyTeamId(teamid.data.teamId);
-    setTeamProfile(profile.data);
+    localStorage.setItem('myTeamId', teamid.data.teamId);
+    localStorage.setItem('myProfile', JSON.stringify(profile.data));
   }, []);
 
   useEffect(() => {
@@ -36,12 +35,7 @@ export default function Recommend() {
   return (
     <>
       <RecommendModal />
-      <MyTeamProfileModal
-        open={openMyTeamProfile}
-        setModal={setModal}
-        teamId={myTeamId}
-        profile={teamProfile}
-      />
+      <MyTeamProfileModal open={openMyTeamProfile} setModal={setModal} />
       {myTeamId ? (
         <Section>
           <MainButton onClick={() => setOpenMyTeamProfile(true)}>
@@ -79,7 +73,7 @@ export default function Recommend() {
 
       <Timer />
 
-      {myTeamId ? <RecommendList /> : <NoProfile />}
+      {myTeamId ? <RecommendList teamId={myTeamId} /> : <NoProfile />}
     </>
   );
 }

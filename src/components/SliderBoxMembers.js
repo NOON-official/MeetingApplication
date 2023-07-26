@@ -38,7 +38,7 @@ export default function SliderBoxMembers({ members }) {
 
   return (
     <SCarousel2 dots>
-      {members.map((member, idx) => {
+      {members?.map((member, idx) => {
         const { role, age, university, mbti, appearance } = member;
 
         return (
@@ -56,7 +56,9 @@ export default function SliderBoxMembers({ members }) {
                 </Info>
                 <Info>
                   <InfoTitle>대학교</InfoTitle>
-                  <InfoContent>{Universities[university - 1].name}</InfoContent>
+                  <InfoContent>
+                    {Universities[university - 1]?.name}
+                  </InfoContent>
                 </Info>
                 <Info>
                   <InfoTitle>MBTI</InfoTitle>
