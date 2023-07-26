@@ -34,8 +34,8 @@ export default function MatchingSucceed() {
     },
   ];
   const [succeedData, setSucceedData] = useState(DATAS);
-  const [modalState, openModal, closeModal] = useModalState(DATAS);
-  const [modalState2, openModal2, closeModal2] = useModalState(DATAS);
+  const [modalState, openModal, closeModal] = useModalState(succeedData);
+  const [modalState2, openModal2, closeModal2] = useModalState(succeedData);
 
   const remainingDays = (date) => {
     const appliedDate = new Date(date);

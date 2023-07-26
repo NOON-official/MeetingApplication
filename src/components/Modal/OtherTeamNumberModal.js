@@ -15,7 +15,7 @@ export default function OtherTeamNumberModal(props) {
   };
 
   useEffect(() => {
-    // getContactDate();
+    getContactDate();
   }, []);
 
   const handleCopy = async (text) => {

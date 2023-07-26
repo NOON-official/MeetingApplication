@@ -13,7 +13,9 @@ import AreaText from './AreaText';
 import DateText from './DateText';
 
 export default function MyTeamProfileModal(props) {
-  const { open, setModal, teamId, profile } = props;
+  const { open, setModal } = props;
+  const myTeamId = localStorage.getItem('myTeamId');
+  const profile = JSON.parse(localStorage.getItem('myProfile'));
 
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
@@ -49,7 +51,7 @@ export default function MyTeamProfileModal(props) {
             setModal={() => {
               setIsStopMatchingModalOpen((prev) => !prev);
             }}
-            teamId={teamId}
+            teamId={myTeamId}
           />
           {profile && (
             <TeamProfile>

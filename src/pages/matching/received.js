@@ -7,29 +7,6 @@ import backend from '../../util/backend';
 import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
 
 export default function MatchingReceived() {
-  const DATA = [
-    {
-      id: 1,
-      matchingId: 1,
-      teamName: '기웅내세요',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 2,
-      matchingId: 2,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-  ];
-
   const [receivedData, setReceivedData] = useState([]);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfileList, setDeleteProfileList] = useState([]);
@@ -62,7 +39,7 @@ export default function MatchingReceived() {
               {clickEditBtn ? (
                 <EditBtn>
                   <Delete
-                    selected={deleteProfileList.length > 0}
+                    selected={deleteProfileList?.length > 0}
                     onClick={() => setDeleteModal(true)}
                   >
                     삭제
@@ -82,8 +59,8 @@ export default function MatchingReceived() {
             </Header>
             {clickEditBtn ? (
               <Text>
-                <Pink>{deleteProfileList.length}</Pink>/{receivedData?.length}개
-                선택
+                <Pink>{deleteProfileList?.length}</Pink>/{receivedData?.length}
+                개 선택
               </Text>
             ) : (
               <Text>상대팀의 프로필을 살펴본 뒤 미팅 의사를 알려주세요 😉</Text>
