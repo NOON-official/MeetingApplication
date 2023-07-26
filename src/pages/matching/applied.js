@@ -11,28 +11,6 @@ import backend from '../../util/backend';
 import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
 
 export default function MatchingApplied() {
-  const data = [
-    {
-      id: 1,
-      matchingId: 1,
-      teamName: '기웅내세요',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 2,
-      matchingId: 3,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-  ];
   const { accessToken } = useSelector((state) => state.user);
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);

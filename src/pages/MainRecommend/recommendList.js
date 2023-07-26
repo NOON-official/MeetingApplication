@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
-import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
+import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
 
-export default function RecommendList() {
+export default function RecommendList({ teamId }) {
   const teamList = [
     {
       id: 1,
@@ -22,15 +22,6 @@ export default function RecommendList() {
       memberCount: 2,
       intro: '안녕하세요',
       isVerified: false,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 3,
-      teamName: '기웅내세요',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
       appliedAt: '2023-01-20T21:37:26.886Z',
     },
   ];
