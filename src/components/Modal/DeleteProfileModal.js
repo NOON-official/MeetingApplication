@@ -6,22 +6,38 @@ import backend from '../../util/backend';
 import { ReactComponent as ExclamationMark } from '../../asset/svg/ExclamationMark.svg';
 import CompleteDeleteProfileModal from './CompleteDeleteProfileModal';
 
-export default function DeleteProfileModal({ open, setModal, data }) {
+export default function DeleteProfileModal({ open, setModal, tab, data }) {
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
 
   const deleteProfile = async () => {
-    try {
-      // 배열의 data를 하나씩 백엔드로 요청
-      await Promise.all(
-        data.map(async (value) => {
-          await backend.delete(`/users/matching/received/${value}`);
-        }),
-      );
-      // 모든 프로미스 실행 완료된 후 실행됨
-      setOpenCompleteModal(true);
-    } catch (e) {
-      console.error(e);
-      window.alert('삭제 중 오류가 발생하였습니다');
+    if (tab === 1) {
+      try {
+        // 배열의 data를 하나씩 백엔드로 요청
+        await Promise.all(
+          data.map(async (value) => {
+            await backend.delete(`/users/matchings/applied/${value}`);
+          }),
+        );
+        // 모든 프로미스 실행 완료된 후 실행됨
+        setOpenCompleteModal(true);
+      } catch (e) {
+        console.error(e);
+        window.alert('삭제 중 오류가 발생하였습니다');
+      }
+    } else {
+      try {
+        // 배열의 data를 하나씩 백엔드로 요청
+        await Promise.all(
+          data.map(async (value) => {
+            await backend.delete(`/users/matchings/received/${value}`);
+          }),
+        );
+        // 모든 프로미스 실행 완료된 후 실행됨
+        setOpenCompleteModal(true);
+      } catch (e) {
+        console.error(e);
+        window.alert('삭제 중 오류가 발생하였습니다');
+      }
     }
   };
 

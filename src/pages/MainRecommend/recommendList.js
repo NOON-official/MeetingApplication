@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import useModalState from '../../hooks/useModalState';
 import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
+import backend from '../../util/backend';
 
 export default function RecommendList({ teamId }) {
   const teamList = [
@@ -27,6 +29,15 @@ export default function RecommendList({ teamId }) {
   ];
 
   const [modalState, openModal, closeModal] = useModalState(teamList);
+
+  const getList = async () => {
+    const recommend = await backend.get(`/users/teams/today`);
+    // console.log(recommend);
+  };
+
+  useEffect(() => {
+    getList();
+  }, []);
 
   return (
     <Container>
