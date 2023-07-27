@@ -42,13 +42,14 @@ function Main() {
   const getInfo = async () => {
     try {
       const info = await backend.get('/users/my-info');
+      console.log(info.data);
       if (info.data.university === null) {
         localStorage.setItem('needMoreInfo', 'true');
       } else {
         localStorage.setItem('needMoreInfo', 'false');
       }
     } catch (err) {
-      localStorage.setItem('needMoreInfo', 'false');
+      localStorage.setItem('needMoreInfo', 'true');
     }
   };
 
@@ -87,32 +88,32 @@ function Main() {
 
   return (
     <MainLayout>
+      <PrimaryModal
+        title=" "
+        open={needMoreInfo === 'true'}
+        footer={null}
+        closeIcon
+      >
+        <Space
+          direction="vertical"
+          style={{
+            padding: '15px 0',
+            textAlign: 'center',
+            width: '100%',
+          }}
+        >
+          <span>새로운 회원 정보가 필요해요!</span>
+          <PrimaryButton
+            onClick={() => {
+              navigate('/apply/information');
+            }}
+          >
+            입력하러 가기
+          </PrimaryButton>
+        </Space>
+      </PrimaryModal>
       {!accessToken ? (
         <div style={{ textAlign: 'center', marginBottom: '10%' }}>
-          <PrimaryModal
-            title=" "
-            open={needMoreInfo === 'true'}
-            footer={null}
-            closeIcon
-          >
-            <Space
-              direction="vertical"
-              style={{
-                padding: '15px 0',
-                textAlign: 'center',
-                width: '100%',
-              }}
-            >
-              <span>새로운 회원 정보가 필요해요!</span>
-              <PrimaryButton
-                onClick={() => {
-                  navigate('/apply/information');
-                }}
-              >
-                입력하러 가기
-              </PrimaryButton>
-            </Space>
-          </PrimaryModal>
           <Section>
             <CountTitle>
               <MainTitle>

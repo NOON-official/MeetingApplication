@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 import styled from 'styled-components';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
@@ -7,8 +8,9 @@ import OtherTeamProfileModal from './OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
 
 export default function OtherTeamList(props) {
-  const { teamList, clickEditBtn, deleteProfile, setDeleteProfile } = props;
-
+  const { state, teamList, clickEditBtn, deleteProfile, setDeleteProfile } =
+    props;
+  // console.log(state);
   const [modalState, openModal, closeModal] = useModalState(teamList);
 
   const editUI = (id) => {
@@ -31,16 +33,24 @@ export default function OtherTeamList(props) {
   return (
     <Container>
       {teamList.map((team) => {
-        const { id, teamName, age, memberCount, intro, isVerified } = team;
+        const {
+          id,
+          teamName,
+          age,
+          memberCount,
+          intro,
+          isVerified,
+          matchingId,
+        } = team;
 
         return (
           <TeamCardWrapper key={id}>
-            {deleteProfile.includes(id) && clickEditBtn && <TeamCardOverlay />}
+            {deleteProfile.includes(matchingId) && clickEditBtn && <TeamCardOverlay />}
             <OtherTeamProfileModal
-              open={modalState.find((state) => state.teamId === id).open}
+              open={modalState.find((x) => x.teamId === id).open}
               closeModal={() => closeModal(id)}
               teamId={id}
-              succeed={false}
+              state={state}
             />
             <TeamCard>
               <Title>
@@ -53,7 +63,7 @@ export default function OtherTeamList(props) {
               </Subtitle>
               <Info>{`${intro}`}</Info>
               {clickEditBtn ? (
-                editUI(id)
+                editUI(matchingId)
               ) : (
                 <Button onClick={() => openModal(id)}>자세히 보기</Button>
               )}

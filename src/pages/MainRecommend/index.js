@@ -1,5 +1,4 @@
 import { useEffect, useCallback, useState } from 'react';
-
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as MainDoc } from '../../asset/svg/MainDoc.svg';
@@ -23,9 +22,12 @@ export default function Recommend() {
 
   const getInformation = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
-    const profile = await backend.get(`/teams/${teamid.data.teamId}`);
-    localStorage.setItem('myTeamId', teamid.data.teamId);
-    localStorage.setItem('myProfile', JSON.stringify(profile.data));
+
+    if (teamid.data.teamId !== null) {
+      localStorage.setItem('myTeamId', teamid.data.teamId);
+      const profile = await backend.get(`/teams/${teamid.data.teamId}`);
+      localStorage.setItem('myProfile', JSON.stringify(profile.data));
+    }
   }, []);
 
   useEffect(() => {
