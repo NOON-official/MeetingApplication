@@ -64,8 +64,7 @@ export default function MatchingApplied() {
       </MainLayout>
     );
   }
-  console.log(applyData);
-  console.log(deleteProfileList);
+
   return (
     <MatchingLayout>
       <DeleteProfileModal
