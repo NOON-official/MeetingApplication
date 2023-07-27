@@ -15,22 +15,19 @@ export default function OtherTeamProfileModal({
   closeModal,
   teamId,
   state,
+  matchingId,
 }) {
   const [teamProfile, setTeamProfile] = useState(null);
-
-  const myTeamId = localStorage.getItem('myTeamId');
 
   const getProfile = useCallback(async () => {
     const profile = await backend.get(`/teams/${teamId}`);
     setTeamProfile(profile.data);
   }, []);
 
-  // console.log(teamId);
-
   const applyMatching = async () => {
     try {
-      await backend.post(`/matchings/${myTeamId}/${teamId}`);
-      alert('신청이 완료되었습니다!');
+      await backend.put(`/matchings/${matchingId}/teams/${teamId}/accept`);
+      alert('수락되었습니다!');
       closeModal();
     } catch (err) {
       alert('잠시 후에 다시 시도해주세요');
@@ -40,9 +37,11 @@ export default function OtherTeamProfileModal({
 
   const refuseTeam = async () => {
     try {
-      await backend.put(`/teams/${teamId}`);
+      await backend.put(`/matchings/${matchingId}/teams/${teamId}/refuse`);
+      alert('거절했습니다');
       closeModal();
     } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
       console.log(err);
     }
   };

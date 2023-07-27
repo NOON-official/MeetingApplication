@@ -17,8 +17,6 @@ export default function MatchingSucceed() {
   const [modalState2, openModal2, closeModal2] = useModalState(succeedData);
   dayjs.extend(utc); // dayjs utc 플러그인 사용하여 로컬시간으로 변환
 
-  const [modal1, setModal1] = useState(false);
-
   const remainingDays = (date) => {
     const today = dayjs();
     const dueDate = dayjs(date).add(7, 'day');
@@ -28,15 +26,12 @@ export default function MatchingSucceed() {
 
   const getSucceedData = async () => {
     const succeed = await backend.get(`/users/matchings/succeeded`);
-    // console.log(succeed.data.teams);
     setSucceedData(succeed.data.teams);
   };
 
   useEffect(() => {
     getSucceedData();
   }, []);
-
-  // console.log(succeedData);
 
   return (
     <MatchingLayout>
@@ -64,19 +59,23 @@ export default function MatchingSucceed() {
               return (
                 <TeamCard key={id}>
                   <OtherTeamNumberModal
-                    open={modal1}
-                    closeModal={() => setModal1(false)}
+                    open={
+                      modalState.find((state) => state.teamId === id)?.open ||
+                      false
+                    }
+                    closeModal={() => closeModal(id)}
                     teamName={teamName}
                     teamId={id}
                   />
-                  {/* <OtherTeamProfileModal
+                  <OtherTeamProfileModal
                     open={
-                      modalState2?.find((state) => state.teamId === id).open
+                      modalState2.find((state) => state.teamId === id)?.open ||
+                      false
                     }
                     closeModal={() => closeModal2(id)}
                     teamId={id}
-                    succeed
-                  /> */}
+                    state={'succeed'}
+                  />
                   <ApplicationDate>
                     {dayjs(matchedAt).format('M월 DD일')}
                     <RemainingDate>
@@ -98,7 +97,7 @@ export default function MatchingSucceed() {
                     </Subtitle>
                     <Info>{`${intro}`}</Info>
                     <ButtonBox>
-                      <Button1 onClick={() => setModal1(true)}>
+                      <Button1 onClick={() => openModal(id)}>
                         연락처 확인
                       </Button1>
                       <Button2 onClick={() => openModal2(id)}>

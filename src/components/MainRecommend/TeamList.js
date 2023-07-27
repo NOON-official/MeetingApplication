@@ -10,7 +10,7 @@ import useModalState from '../../hooks/useModalState';
 export default function OtherTeamList(props) {
   const { state, teamList, clickEditBtn, deleteProfile, setDeleteProfile } =
     props;
-  // console.log(state);
+
   const [modalState, openModal, closeModal] = useModalState(teamList);
 
   const editUI = (id) => {
@@ -45,11 +45,14 @@ export default function OtherTeamList(props) {
 
         return (
           <TeamCardWrapper key={id}>
-            {deleteProfile.includes(matchingId) && clickEditBtn && <TeamCardOverlay />}
+            {deleteProfile.includes(matchingId) && clickEditBtn && (
+              <TeamCardOverlay />
+            )}
             <OtherTeamProfileModal
-              open={modalState.find((x) => x.teamId === id).open}
+              open={modalState.find((x) => x.teamId === id)?.open || false}
               closeModal={() => closeModal(id)}
               teamId={id}
+              matchingId={matchingId}
               state={state}
             />
             <TeamCard>

@@ -18,7 +18,6 @@ export default function MatchingReceived() {
 
   const getReceivedData = useCallback(async () => {
     const receive = await backend.get(`/users/matchings/received`);
-    console.log(receive.data.teams);
     setReceivedData(receive.data.teams);
   }, []);
 
@@ -68,7 +67,7 @@ export default function MatchingReceived() {
             )}
           </Container>
           <OtherTeamList
-            state={'reveived'}
+            state={'received'}
             teamList={receivedData}
             clickEditBtn={clickEditBtn}
             deleteProfile={deleteProfileList}
