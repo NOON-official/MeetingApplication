@@ -8,7 +8,7 @@ export default function CompleteDeleteProfileModal({ open, setModal }) {
     if (open) {
       const timeout = setTimeout(() => {
         setModal(false);
-      }, 1000);
+      }, 1500);
 
       return () => clearTimeout(timeout);
     }

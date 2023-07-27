@@ -7,11 +7,11 @@ import backend from '../../util/backend';
 export default function OtherTeamNumberModal(props) {
   const { open, closeModal, teamName, teamId } = props;
 
-  const [contact, setContact] = useState(1);
+  const [contact, setContact] = useState();
 
   const getContactDate = async () => {
     const contactData = await backend.get(`/teams/${teamId}/contact`);
-    setContact(contactData.data);
+    setContact(contactData.data.kakaoId);
   };
 
   useEffect(() => {

@@ -64,12 +64,14 @@ export default function MatchingApplied() {
       </MainLayout>
     );
   }
-
+  console.log(applyData);
+  console.log(deleteProfileList);
   return (
     <MatchingLayout>
       <DeleteProfileModal
         open={openDeleteModal}
         setModal={setModal}
+        tab={selectTab}
         data={selectTab === 1 ? deleteProfileList : deleteRefuseProfileList}
       />
       {applyData.length !== 0 ? (
@@ -117,6 +119,7 @@ export default function MatchingApplied() {
             )}
           </Container>
           <OtherTeamList
+            state={'apply'}
             teamList={selectTab === 1 ? applyData : refuseData}
             clickEditBtn={clickEditBtn}
             deleteProfile={
