@@ -14,7 +14,7 @@ export default function OtherTeamProfileModal({
   open,
   closeModal,
   teamId,
-  succeed,
+  state,
 }) {
   const [teamProfile, setTeamProfile] = useState(null);
 
@@ -24,6 +24,8 @@ export default function OtherTeamProfileModal({
     const profile = await backend.get(`/teams/${teamId}`);
     setTeamProfile(profile.data);
   }, []);
+
+  // console.log(teamId);
 
   const applyMatching = async () => {
     try {
@@ -105,27 +107,24 @@ export default function OtherTeamProfileModal({
             <SliderBoxMembers members={teamProfile?.members} />
           </TeamProfile>
 
-          {succeed ? (
-            <Footer>
+          <Footer>
+            {state === 'received' ? (
+              <ButtonBox>
+                <ApplyButton onClick={() => applyMatching()}>
+                  수락하기
+                </ApplyButton>
+                <ApplyButton onClick={() => refuseTeam()}>거절하기</ApplyButton>
+              </ButtonBox>
+            ) : null}
+            {state === 'succeed' ? (
               <ButtonBox>
                 <ShareButton>
                   <SShare />
                   팀원들에게 공유하기
                 </ShareButton>
               </ButtonBox>
-            </Footer>
-          ) : (
-            <Footer>
-              <ButtonBox>
-                <ApplyButton onClick={() => applyMatching()}>
-                  신청하기
-                </ApplyButton>
-                <ApplyButton onClick={() => refuseTeam()}>
-                  다시 안 보기
-                </ApplyButton>
-              </ButtonBox>
-            </Footer>
-          )}
+            ) : null}
+          </Footer>
         </SModal>
       ) : null}
     </div>

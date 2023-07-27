@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import utc from 'dayjs-plugin-utc';
 import { useEffect, useState } from 'react';
 import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
@@ -11,49 +12,31 @@ import useModalState from '../../hooks/useModalState';
 import backend from '../../util/backend';
 
 export default function MatchingSucceed() {
-  const DATAS = [
-    {
-      id: 1,
-      matchingId: 1,
-      teamName: '기웅내세요',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      matchedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 2,
-      matchingId: 2,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      matchedAt: '2023-01-20T21:37:26.886Z',
-    },
-  ];
-  const [succeedData, setSucceedData] = useState(DATAS);
+  const [succeedData, setSucceedData] = useState([]);
   const [modalState, openModal, closeModal] = useModalState(succeedData);
   const [modalState2, openModal2, closeModal2] = useModalState(succeedData);
+  dayjs.extend(utc); // dayjs utc 플러그인 사용하여 로컬시간으로 변환
+
+  const [modal1, setModal1] = useState(false);
 
   const remainingDays = (date) => {
-    const appliedDate = new Date(date);
-    const dueDate = new Date(appliedDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const today = dayjs();
+    const dueDate = dayjs(date).add(7, 'day');
 
-    const currentDate = new Date();
-
-    return Math.ceil((dueDate - currentDate) / (24 * 60 * 60 * 1000));
+    return dueDate.diff(today, 'day');
   };
 
   const getSucceedData = async () => {
     const succeed = await backend.get(`/users/matchings/succeeded`);
-    setSucceedData(succeed.data);
+    // console.log(succeed.data.teams);
+    setSucceedData(succeed.data.teams);
   };
 
   useEffect(() => {
-    // getSucceedData();
+    getSucceedData();
   }, []);
+
+  // console.log(succeedData);
 
   return (
     <MatchingLayout>
@@ -81,17 +64,19 @@ export default function MatchingSucceed() {
               return (
                 <TeamCard key={id}>
                   <OtherTeamNumberModal
-                    open={modalState.find((state) => state.teamId === id).open}
-                    closeModal={() => closeModal(id)}
+                    open={modal1}
+                    closeModal={() => setModal1(false)}
                     teamName={teamName}
                     teamId={id}
                   />
-                  <OtherTeamProfileModal
-                    open={modalState2.find((state) => state.teamId === id).open}
+                  {/* <OtherTeamProfileModal
+                    open={
+                      modalState2?.find((state) => state.teamId === id).open
+                    }
                     closeModal={() => closeModal2(id)}
                     teamId={id}
                     succeed
-                  />
+                  /> */}
                   <ApplicationDate>
                     {dayjs(matchedAt).format('M월 DD일')}
                     <RemainingDate>
@@ -113,7 +98,7 @@ export default function MatchingSucceed() {
                     </Subtitle>
                     <Info>{`${intro}`}</Info>
                     <ButtonBox>
-                      <Button1 onClick={() => openModal(id)}>
+                      <Button1 onClick={() => setModal1(true)}>
                         연락처 확인
                       </Button1>
                       <Button2 onClick={() => openModal2(id)}>
