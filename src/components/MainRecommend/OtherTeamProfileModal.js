@@ -18,6 +18,7 @@ export default function OtherTeamProfileModal({
   matchingId,
 }) {
   const [teamProfile, setTeamProfile] = useState(null);
+  const myTeamId = localStorage.getItem('myTeamId');
 
   const getProfile = useCallback(async () => {
     const profile = await backend.get(`/teams/${teamId}`);
@@ -25,6 +26,28 @@ export default function OtherTeamProfileModal({
   }, []);
 
   const applyMatching = async () => {
+    try {
+      await backend.post(`/matchings/${myTeamId}/${teamId}`);
+      alert('신청되었습니다!');
+      closeModal();
+    } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
+      console.log(err);
+    }
+  };
+
+  const stopSeeProfile = async () => {
+    try {
+      await backend.put(`/teams/${teamId}`);
+      alert('추천 리스트에서 사라집니다');
+      closeModal();
+    } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
+      console.log(err);
+    }
+  };
+
+  const acceptMatching = async () => {
     try {
       await backend.put(`/matchings/${matchingId}/teams/${teamId}/accept`);
       alert('수락되었습니다!');
@@ -107,9 +130,19 @@ export default function OtherTeamProfileModal({
           </TeamProfile>
 
           <Footer>
-            {state === 'received' ? (
+            {state === 'recommend' ? (
               <ButtonBox>
                 <ApplyButton onClick={() => applyMatching()}>
+                  신청하기
+                </ApplyButton>
+                <ApplyButton onClick={() => stopSeeProfile()}>
+                  다시 안 보기
+                </ApplyButton>
+              </ButtonBox>
+            ) : null}
+            {state === 'received' ? (
+              <ButtonBox>
+                <ApplyButton onClick={() => acceptMatching()}>
                   수락하기
                 </ApplyButton>
                 <ApplyButton onClick={() => refuseTeam()}>거절하기</ApplyButton>
