@@ -42,8 +42,8 @@ export default function StopMatchingModal({ open, setModal, teamId }) {
             </TextBox>
             <SButton
               onClick={() => {
-                setModal(false);
                 deleteMatching();
+                setModal(false);
               }}
             >
               중단할래요

@@ -1,24 +1,14 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { ReactComponent as MainDoc } from '../../asset/svg/MainDoc.svg';
-import { ReactComponent as UniversityMarkPink } from '../../asset/svg/UniversityMarkPink.svg';
-import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
 import backend from '../../util/backend';
 import NoProfile from '../../components/MainRecommend/NoProfile';
 import Timer from './timer';
-import MyTeamProfileModal from '../../components/MainRecommend/MyTeamProfileModal';
 import RecommendList from './recommendList';
 import RecommendModal from '../../components/Modal/RecommendModal';
+import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
 
 export default function Recommend() {
-  const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
   const myTeamId = localStorage.getItem('myTeamId');
-  const navigate = useNavigate();
-
-  const setModal = (bool) => {
-    setOpenMyTeamProfile(bool);
-  };
 
   const getInformation = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
@@ -37,31 +27,13 @@ export default function Recommend() {
   return (
     <>
       <RecommendModal />
-      <MyTeamProfileModal open={openMyTeamProfile} setModal={setModal} />
       {myTeamId ? (
         <Section>
-          <MainButton onClick={() => setOpenMyTeamProfile(true)}>
-            <SMainDoc />
-            <BtnMainTitle>우리 팀 프로필 조회</BtnMainTitle>
-          </MainButton>
-          <MainButton>
-            <SUniversityMarkPink />
-            <BtnTitle onClick={() => navigate('/myinfo/studentcard')}>
-              <BtnMainTitle>학교 인증하러 가기</BtnMainTitle>
-              <BtnSubtitle>아직 학교 인증 전이에요</BtnSubtitle>
-            </BtnTitle>
-          </MainButton>
+          <MainMatchingHeader title="프로필 조회" />
         </Section>
       ) : (
         <Section>
-          <MainButton onClick={() => navigate('/apply/1')}>
-            <SMainGroup />
-            <BtnMainTitle>우리 팀 프로필 만들기</BtnMainTitle>
-          </MainButton>
-          <MainButton>
-            <SMainDoc />
-            <BtnMainTitle>우리 팀 프로필 조회</BtnMainTitle>
-          </MainButton>
+          <MainMatchingHeader title="프로필 만들기" />
         </Section>
       )}
 
@@ -85,50 +57,8 @@ const Section = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 90%;
-  margin: 5% auto;
-`;
-
-const MainButton = styled.button`
-  display: flex;
-  align-items: center;
-  margin-top: 5%;
   width: 100%;
-  height: 70px;
-  padding: 30px;
-  border: none;
-  border-radius: 10px;
-  background-color: #ffe8e8;
-  cursor: pointer;
-`;
-
-const SMainGroup = styled(MainGroup)`
-  margin-right: 15px;
-`;
-
-const SMainDoc = styled(MainDoc)`
-  margin-right: 15px;
-`;
-
-const SUniversityMarkPink = styled(UniversityMarkPink)`
-  margin-right: 15px;
-`;
-
-const BtnTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-`;
-
-const BtnMainTitle = styled.div`
-  font-weight: 500;
-`;
-
-const BtnSubtitle = styled.div`
-  color: #777777;
-  font-size: 12px;
-  font-weight: 300;
+  margin: 5% auto;
 `;
 
 const Container = styled.div`
