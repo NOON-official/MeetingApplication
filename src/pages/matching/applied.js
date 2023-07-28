@@ -17,6 +17,7 @@ export default function MatchingApplied() {
   const [deleteProfileList, setDeleteProfileList] = useState([]);
   const [deleteRefuseProfileList, setDeleteRefuseProfileList] = useState([]);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const myTeamId = localStorage.getItem('myTeamId');
 
   const [applyData, setApplyData] = useState([]);
   const [refuseData, setRefuseData] = useState([]);
@@ -27,14 +28,16 @@ export default function MatchingApplied() {
 
   const getApplyData = useCallback(async () => {
     const apply = await backend.get(`/users/matchings/applied`);
+    console.log('apply', apply.data.teams);
     setApplyData(apply.data.teams);
     const refuse = await backend.get(`/users/matchings/refused`);
+    console.log('refuse', refuse.data.teams);
     setRefuseData(refuse.data.teams);
   }, []);
 
   useEffect(() => {
-    getApplyData();
-  }, []);
+    if (myTeamId) getApplyData();
+  }, [myTeamId]);
 
   const handleTabChange = (tabIdx) => {
     if (selectTab === 1 && tabIdx === 2) {

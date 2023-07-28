@@ -1,10 +1,28 @@
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import theme from '../../style/theme';
+import { createTeam } from '../../features/apply/asyncAction';
 
 export default function MatchingCompleteModal({ open, setModal }) {
+  const { ...applydata } = useSelector((store) => store.apply);
+  const filteredData = { ...applydata };
+  delete filteredData.finishedStep;
+  delete filteredData.city;
+
+  filteredData.members = filteredData.members.map((member) => {
+    if (typeof member.mbti === 'undefined') {
+      return {
+        ...member,
+        mbti: 17,
+      };
+    }
+    return member;
+  });
+
   const navi = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -25,6 +43,7 @@ export default function MatchingCompleteModal({ open, setModal }) {
             </TextBox>
             <SButton
               onClick={() => {
+                dispatch(createTeam(filteredData));
                 setModal(false);
                 navi('/');
               }}
