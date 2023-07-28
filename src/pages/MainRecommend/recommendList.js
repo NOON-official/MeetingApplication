@@ -1,38 +1,18 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import useModalState from '../../hooks/useModalState';
 import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
 import backend from '../../util/backend';
 
-export default function RecommendList({ teamId }) {
-  const teamList = [
-    {
-      id: 1,
-      teamName: '기웅내세요',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 2,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-  ];
-
+export default function RecommendList() {
+  const [teamList, setTeamList] = useState([]);
   const [modalState, openModal, closeModal] = useModalState(teamList);
 
   const getList = async () => {
     const recommend = await backend.get(`/users/teams/today`);
-    // console.log(recommend);
+    setTeamList(recommend.data.team);
   };
 
   useEffect(() => {
@@ -41,13 +21,15 @@ export default function RecommendList({ teamId }) {
 
   return (
     <Container>
-      {teamList.map((team) => {
+      {teamList?.map((team) => {
         const { id, teamName, age, memberCount, intro, isVerified } = team;
 
         return (
           <TeamCard key={id}>
             <OtherTeamProfileModal
-              open={modalState.find((state) => state.teamId === id).open}
+              open={
+                modalState.find((state) => state.teamId === id)?.open || false
+              }
               closeModal={() => closeModal(id)}
               teamId={id}
               succeed={false}

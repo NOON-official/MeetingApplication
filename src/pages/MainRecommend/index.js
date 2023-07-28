@@ -46,7 +46,7 @@ export default function Recommend() {
           </MainButton>
           <MainButton>
             <SUniversityMarkPink />
-            <BtnTitle>
+            <BtnTitle onClick={() => navigate('/myinfo/studentcard')}>
               <BtnMainTitle>학교 인증하러 가기</BtnMainTitle>
               <BtnSubtitle>아직 학교 인증 전이에요</BtnSubtitle>
             </BtnTitle>
@@ -75,7 +75,7 @@ export default function Recommend() {
 
       <Timer />
 
-      {myTeamId ? <RecommendList teamId={myTeamId} /> : <NoProfile />}
+      {myTeamId ? <RecommendList /> : <NoProfile />}
     </>
   );
 }
