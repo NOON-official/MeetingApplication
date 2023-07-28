@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useCallback, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import TopHeader from './header/TopHeader';
 import BottomTabs from './header/BottomTabs';
 import MyTeamProfile from '../components/MainRecommend/MyTeamProfileModal';
@@ -12,6 +12,8 @@ export default function MatchingLayout({ children }) {
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
   const [teamProfile, setTeamProfile] = useState();
   const [myTeamId, setMyTeamId] = useState('');
+
+  const navigate = useNavigate();
 
   const setModal = (bool) => {
     setOpenMyTeamProfile(bool);
@@ -62,7 +64,7 @@ export default function MatchingLayout({ children }) {
           </MainButton>
           <MainButton>
             <SUniversityMarkPink />
-            <BtnTitle>
+            <BtnTitle onClick={() => navigate('/myinfo/studentcard')}>
               <BtnMainTitle>학교 인증하러 가기</BtnMainTitle>
               <BtnSubtitle>아직 학교 인증 전이에요</BtnSubtitle>
             </BtnTitle>

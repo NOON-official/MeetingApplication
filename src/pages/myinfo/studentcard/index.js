@@ -30,7 +30,7 @@ export default function StudentCard() {
               placeholder="dkdkd"
               id="fileInput"
             />
-            <InputLabel for="fileInput">
+            <InputLabel htmlFor="fileInput">
               <Camera />
             </InputLabel>
           </ImgUpload>
