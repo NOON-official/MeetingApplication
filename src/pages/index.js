@@ -42,14 +42,13 @@ function Main() {
   const getInfo = async () => {
     try {
       const info = await backend.get('/users/my-info');
-      console.log(info.data);
       if (info.data.university === null) {
         localStorage.setItem('needMoreInfo', 'true');
       } else {
         localStorage.setItem('needMoreInfo', 'false');
       }
     } catch (err) {
-      localStorage.setItem('needMoreInfo', 'true');
+      localStorage.setItem('needMoreInfo', 'false');
     }
   };
 
