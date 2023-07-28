@@ -1,34 +1,33 @@
 import styled from 'styled-components';
 import { useCallback, useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import TopHeader from './header/TopHeader';
 import BottomTabs from './header/BottomTabs';
 import MyTeamProfile from '../components/MainRecommend/MyTeamProfileModal';
 import { ReactComponent as MainDoc } from '../asset/svg/MainDoc.svg';
 import { ReactComponent as UniversityMarkPink } from '../asset/svg/UniversityMarkPink.svg';
 import backend from '../util/backend';
+import MainMatchingHeader from './header/MainMatchingHeader';
 
 export default function MatchingLayout({ children }) {
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
-  const [teamProfile, setTeamProfile] = useState();
-  const [myTeamId, setMyTeamId] = useState('');
-
-  const navigate = useNavigate();
+  const [teamProfile, setTeamProfile] = useState([]);
+  const myTeamId = localStorage.getItem('myTeamId');
 
   const setModal = (bool) => {
     setOpenMyTeamProfile(bool);
   };
 
   const getInformation = useCallback(async () => {
-    const teamid = await backend.get(`/users/team-id`);
-    const profile = await backend.get(`/teams/${teamid.data.teamId}`);
-    setMyTeamId(teamid.data.teamId);
+    const profile = await backend.get(`/teams/${myTeamId}`);
     setTeamProfile(profile.data);
-  }, []);
+  }, [myTeamId]);
 
   useEffect(() => {
-    getInformation();
-  }, []);
+    if (myTeamId) {
+      getInformation();
+    }
+  }, [myTeamId]);
 
   const activeStyle = {
     padding: '4px',
@@ -58,17 +57,16 @@ export default function MatchingLayout({ children }) {
           profile={teamProfile}
         />
         <Section>
-          <MainButton onClick={() => setOpenMyTeamProfile(true)}>
-            <SMainDoc />
-            <BtnMainTitle>우리 팀 프로필 조회</BtnMainTitle>
-          </MainButton>
-          <MainButton>
-            <SUniversityMarkPink />
-            <BtnTitle onClick={() => navigate('/myinfo/studentcard')}>
-              <BtnMainTitle>학교 인증하러 가기</BtnMainTitle>
-              <BtnSubtitle>아직 학교 인증 전이에요</BtnSubtitle>
-            </BtnTitle>
-          </MainButton>
+          {myTeamId ? (
+            <Section>
+              <MainMatchingHeader title="프로필 조회" />
+            </Section>
+          ) : (
+            <Section>
+              <MainMatchingHeader title="프로필 만들기" />
+            </Section>
+          )}
+
           <Header2>
             <NavLink
               to="/matching/applied"

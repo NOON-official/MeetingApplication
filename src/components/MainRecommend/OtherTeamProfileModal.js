@@ -23,13 +23,14 @@ export default function OtherTeamProfileModal({
   const getProfile = useCallback(async () => {
     const profile = await backend.get(`/teams/${teamId}`);
     setTeamProfile(profile.data);
-  }, []);
+  }, [teamId]);
 
   const applyMatching = async () => {
     try {
       await backend.post(`/matchings/${myTeamId}/${teamId}`);
       alert('신청되었습니다!');
       closeModal();
+      window.location.reload();
     } catch (err) {
       alert('잠시 후에 다시 시도해주세요');
       console.log(err);
@@ -41,17 +42,20 @@ export default function OtherTeamProfileModal({
       await backend.put(`/teams/${teamId}`);
       alert('추천 리스트에서 사라집니다');
       closeModal();
+      window.location.reload();
     } catch (err) {
       alert('잠시 후에 다시 시도해주세요');
       console.log(err);
     }
   };
 
+  // 매칭 수락하기
   const acceptMatching = async () => {
     try {
       await backend.put(`/matchings/${matchingId}/teams/${teamId}/accept`);
       alert('수락되었습니다!');
       closeModal();
+      window.location.reload();
     } catch (err) {
       alert('잠시 후에 다시 시도해주세요');
       console.log(err);
@@ -63,6 +67,7 @@ export default function OtherTeamProfileModal({
       await backend.put(`/matchings/${matchingId}/teams/${teamId}/refuse`);
       alert('거절했습니다');
       closeModal();
+      window.location.reload();
     } catch (err) {
       alert('잠시 후에 다시 시도해주세요');
       console.log(err);
