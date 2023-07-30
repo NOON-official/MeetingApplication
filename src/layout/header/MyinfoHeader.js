@@ -16,7 +16,7 @@ export default function MyinfoHeader({ title }) {
     else if (window.location.pathname === '/myinfo/ticket') {
       navigate('/myinfo');
     } else {
-      navigate(-1);
+      navigate('/myinfo');
     }
   }, [navigate]);
 
@@ -31,7 +31,7 @@ export default function MyinfoHeader({ title }) {
 
 const Container = styled.div`
   padding: 20px 10px;
-  background-color: #f8f3f3;
+  background-color: ${(props) => props.theme.white};
   height: 4vh;
   display: flex;
   justify-content: space-between;
@@ -39,14 +39,17 @@ const Container = styled.div`
 `;
 
 const IconButton = styled(Button)`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
   > svg {
     vertical-align: middle;
     margin-right: 16px;
   }
   > span {
     vertical-align: middle;
-    font-weight: 600;
-    font-size: 14px;
-    color: #777777;
+    font-weight: 500;
+    font-size: 16px;
   }
 `;
