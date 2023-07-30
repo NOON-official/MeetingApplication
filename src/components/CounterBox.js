@@ -18,19 +18,25 @@ const CounterBox = ({ end }) => {
     }, 20);
   }, [end]);
 
-  const memberCount = useMemo(
+  const memberCountArr = useMemo(
     () => `${count || 0}`.padStart(end.toString().length, '0').split(''),
     [count],
   );
 
+  const memberCount = memberCountArr.map((str, idx) => ({
+    id: idx + 1,
+    content: str,
+  }));
+
   return (
     <UserCountText>
       {memberCount?.map((m) => {
-        return <CountBox>{m}</CountBox>;
+        return <CountBox key={m.id}>{m.content}</CountBox>;
       })}
     </UserCountText>
   );
 };
+
 const UserCountText = styled.span`
   display: flex;
 `;
@@ -47,4 +53,5 @@ const CountBox = styled.span`
   font-size: 13px;
   background: rgba(223, 223, 223, 0.3);
 `;
+
 export default CounterBox;
