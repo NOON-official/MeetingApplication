@@ -1,39 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
-import { ReactComponent as Camera } from '../../../asset/svg/Camera.svg';
+import { ReactComponent as ChooseImg } from '../../../asset/svg/ChooseImg.svg';
+import ApplyButton from '../../../components/ApplyButton';
 
 export default function StudentCard() {
+  const [imgFile, setImgFile] = useState(null);
+  const [imgSrc, setImgSrc] = useState(null);
+
+  const onUpload = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImgSrc(reader.result);
+        setImgFile(file);
+        resolve();
+      };
+    });
+  };
+
   return (
     <MyinfoLayout title="학교 인증">
       <Section>
-        <Header>
-          <Title>학교 인증</Title>
-          <UniversityMark />
-        </Header>
-        <Subtitle>
-          학교 인증 후 뱃지를 달아드려요
-          <br /> 학교 인증한 팀은 매칭 확률이 높아져요!
-        </Subtitle>
+        <Title>
+          학교 인증 완료 팀은 &lt;우리 팀 추천 매칭&gt;이
+          <br /> 업데이트 될 때 최우선 순위로 노출돼요! 😉
+        </Title>
 
         <Content>
-          <BlackText>학생증으로 인증하기</BlackText>
+          <Header>
+            <BlackText>학생증으로 인증하기</BlackText>
+            <UniversityMark />
+          </Header>
           <GrayText>
             학생증 이미지를 업로드해 주시면 <br />
-            검토 후에 승인해 드려요 (24시간 이내)
+            24시간 이내에 검토하여 승인해 드릴게요
           </GrayText>
           <ImgUpload>
-            <InputTag
-              type="file"
-              accept="image/*"
-              placeholder="dkdkd"
-              id="fileInput"
-            />
-            <InputLabel htmlFor="fileInput">
-              <Camera />
-            </InputLabel>
+            {imgSrc ? null : (
+              <>
+                <InputTag
+                  type="file"
+                  accept="image/*"
+                  id="fileInput"
+                  onChange={(e) => onUpload(e)}
+                  // style={{ border: '1px solid red' }}
+                />
+                <LightGrayText>
+                  20MG 이하의 이미지 1장을 <br /> 업로드 할 수 있어요
+                </LightGrayText>
+                <InputLabel htmlFor="fileInput">
+                  <ChooseImg />
+                </InputLabel>
+              </>
+            )}
+            <ImgPreview src={imgSrc} />
           </ImgUpload>
+
+          {imgSrc ? <ApplyButton>수정하기</ApplyButton> : null}
 
           <GrayText>유의사항</GrayText>
           <GrayText2>
@@ -48,36 +78,35 @@ export default function StudentCard() {
 }
 
 const Section = styled.div`
-  margin: 3%;
-  padding: 5%;
-  border-radius: 10px;
+  padding: 6%;
   background-color: #ffffff;
-  height: 90%;
 `;
 
 const Header = styled.div`
   display: flex;
+  align-items: center;
+  margin-bottom: 5%;
 `;
 
 const Title = styled.div`
-  margin-right: 3%;
-  font-size: 20px;
-  font-weight: 600;
-`;
-
-const Subtitle = styled.div`
-  margin-top: 5%;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 19px;
+  border-bottom: 0.7px solid #bdbdbd;
+  padding-bottom: 6%;
+  width: 85%;
+  margin: 0 auto;
+  font-weight: 500;
+  text-align: center;
+  line-height: 20px;
+  letter-spacing: 1px;
 `;
 
 const Content = styled.div`
+  width: 85%;
+  margin: 0 auto;
   margin-top: 10%;
 `;
 
 const BlackText = styled.div`
-  margin-bottom: 3%;
+  margin-right: 3%;
   font-weight: 500;
 `;
 
@@ -97,12 +126,24 @@ const GrayText2 = styled.ul`
 const List = styled.li``;
 
 const ImgUpload = styled.div`
+  display: flex;
   position: relative;
   margin: 5% 0;
   width: 100%;
-  height: 60px;
+  height: 130px;
   border: 1px solid #bdbdbd;
   border-radius: 6px;
+`;
+
+const LightGrayText = styled.div`
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #bdbdbd;
+  font-size: 13px;
+  text-align: center;
+  line-height: 16px;
 `;
 
 const InputTag = styled.input`
@@ -111,14 +152,27 @@ const InputTag = styled.input`
   left: 0;
   width: 100%;
   height: 100%;
-  margin: 5% 0;
   opacity: 0;
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+  /* z-index: 10; */
   cursor: pointer;
+`;
+
+const ImgPreview = styled.img`
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
 `;
 
 const InputLabel = styled.label`
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
