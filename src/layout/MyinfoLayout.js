@@ -32,7 +32,7 @@ const Content = styled.div`
   max-width: 425px;
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.white};
   overflow-y: scroll;
 `;
 
