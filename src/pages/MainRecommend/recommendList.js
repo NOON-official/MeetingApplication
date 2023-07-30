@@ -11,12 +11,12 @@ export default function RecommendList() {
   const [modalState, openModal, closeModal] = useModalState(teamList);
 
   const getList = async () => {
-    const recommend = await backend.get(`/users/teams/today`);
-    setTeamList(recommend.data.team);
+    const recommend = await backend.get(`/users/teams/recommended`);
+    setTeamList(recommend.data.teams);
   };
 
   useEffect(() => {
-    // getList();
+    getList();
   }, []);
 
   return (
@@ -32,7 +32,7 @@ export default function RecommendList() {
               }
               closeModal={() => closeModal(id)}
               teamId={id}
-              succeed={false}
+              state="recommend"
             />
             <Title>
               <TeamName>{teamName}</TeamName>
@@ -63,7 +63,7 @@ const TeamCard = styled.div`
   width: 42%;
   margin: 2% 0;
   padding: 3%;
-  border: 1px solid #d74683;
+  border: 1px solid ${(props) => (props.isOpen ? '#ececec' : '#D74683')};
   border-radius: 6px;
   background-color: #ffffff;
 `;
