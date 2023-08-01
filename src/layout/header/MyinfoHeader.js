@@ -21,7 +21,7 @@ export default function MyinfoHeader({ title }) {
   }, [navigate]);
 
   return (
-    <Container>
+    <Container title={title}>
       <IconButton type="text" icon={<LeftArrow />} onClick={goBack}>
         {title}
       </IconButton>
@@ -30,24 +30,28 @@ export default function MyinfoHeader({ title }) {
 }
 
 const Container = styled.div`
-  padding: 20px 10px;
-  background-color: ${(props) => props.theme.white};
-  height: 4vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
+  max-width: 425px;
+  height: 4vh;
+  padding: 20px 0;
+  background-color: ${(props) =>
+    props.title === '학교 인증' ? props.theme.white : props.theme.background};
 `;
 
 const IconButton = styled(Button)`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+  margin-left: 5%;
   width: 100%;
   > svg {
     vertical-align: middle;
-    margin-right: 16px;
   }
   > span {
+    margin-right: 45%;
     vertical-align: middle;
     font-weight: 500;
     font-size: 16px;

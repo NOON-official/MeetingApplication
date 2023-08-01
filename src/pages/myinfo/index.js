@@ -251,6 +251,7 @@ const MyProfileBox = styled.div`
   display: flex;
   align-items: center;
   width: 90%;
+  height: 35px;
   margin-top: 5%;
   padding: 5%;
   border: none;
