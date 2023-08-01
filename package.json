@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@tosspayments/payment-sdk": "^1.4.0",
     "antd": "^5.1.5",
+    "aws-sdk": "^2.1426.0",
     "axios": "^1.2.2",
     "dayjs": "^1.11.7",
     "dayjs-plugin-utc": "^0.1.2",
