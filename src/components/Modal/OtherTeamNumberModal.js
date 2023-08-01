@@ -1,4 +1,4 @@
-import { Modal } from 'antd';
+import { Modal, notification } from 'antd';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
@@ -8,6 +8,7 @@ export default function OtherTeamNumberModal(props) {
   const { open, closeModal, teamName, teamId } = props;
 
   const [contact, setContact] = useState();
+  const [api, contextHolder] = notification.useNotification();
 
   const getContactDate = async () => {
     const contactData = await backend.get(`/teams/${teamId}/contact`);
@@ -18,17 +19,18 @@ export default function OtherTeamNumberModal(props) {
     getContactDate();
   }, []);
 
-  const handleCopy = async (text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('클립보드에 복사되었습니다');
-    } catch (err) {
-      alert('복사에 실패하였습니다. 잠시 후 다시 시도해주세요');
-    }
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    api.open({
+      key: 'clipboard',
+      message: `클립보드에 복사되었습니다`,
+      placement: 'bottom',
+    });
   };
 
   return (
     <div>
+      {contextHolder}
       {open ? (
         <SModal
           open={open}
