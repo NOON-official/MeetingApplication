@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Button } from 'antd';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 import { ReactComponent as ChooseImg } from '../../../asset/svg/ChooseImg.svg';
-import ApplyButton from '../../../components/ApplyButton';
 
 export default function StudentCard() {
   const [imgFile, setImgFile] = useState(null);
@@ -11,7 +11,6 @@ export default function StudentCard() {
 
   const onUpload = (e) => {
     const file = e.target.files[0];
-    console.log(file);
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -43,14 +42,16 @@ export default function StudentCard() {
             24시간 이내에 검토하여 승인해 드릴게요
           </GrayText>
           <ImgUpload>
-            {imgSrc ? null : (
+            {imgSrc ? (
+              <ImgPreview src={imgSrc} />
+            ) : (
               <>
                 <InputTag
                   type="file"
                   accept="image/*"
                   id="fileInput"
+                  multiple
                   onChange={(e) => onUpload(e)}
-                  // style={{ border: '1px solid red' }}
                 />
                 <LightGrayText>
                   20MG 이하의 이미지 1장을 <br /> 업로드 할 수 있어요
@@ -60,10 +61,25 @@ export default function StudentCard() {
                 </InputLabel>
               </>
             )}
-            <ImgPreview src={imgSrc} />
           </ImgUpload>
 
-          {imgSrc ? <ApplyButton>수정하기</ApplyButton> : null}
+          {imgSrc && (
+            <>
+              <InputTag
+                type="file"
+                accept="image/*"
+                id="fileInput"
+                multiple
+                onChange={(e) => onUpload(e)}
+              />
+              <ButtonBox>
+                <SInputLabel htmlFor="fileInput">
+                  <ChangeButton>변경하기</ChangeButton>
+                </SInputLabel>
+                <UploadButton>업로드하기</UploadButton>
+              </ButtonBox>
+            </>
+          )}
 
           <GrayText>유의사항</GrayText>
           <GrayText2>
@@ -96,7 +112,7 @@ const Title = styled.div`
   font-weight: 500;
   text-align: center;
   line-height: 20px;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
 `;
 
 const Content = styled.div`
@@ -141,7 +157,7 @@ const LightGrayText = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   color: #bdbdbd;
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
   line-height: 16px;
 `;
@@ -155,17 +171,17 @@ const InputTag = styled.input`
   opacity: 0;
   border: 1px solid #bdbdbd;
   border-radius: 6px;
-  /* z-index: 10; */
+  z-index: 1;
   cursor: pointer;
 `;
 
 const ImgPreview = styled.img`
   object-fit: contain;
-  width: 100%;
-  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 100%;
+  height: 100%;
   transform: translate(-50%, -50%);
   border: none;
 `;
@@ -176,4 +192,35 @@ const InputLabel = styled.label`
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 5% auto 6%;
+`;
+
+const SInputLabel = styled.label``;
+
+const ChangeButton = styled(Button).attrs({ type: 'button' })`
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid ${(props) => props.theme.lightPink};
+  color: ${(props) => props.theme.lightPink};
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+const UploadButton = styled(Button).attrs({ type: 'button' })`
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #eb8888;
+  font-size: 14px;
+  font-weight: 400;
 `;
