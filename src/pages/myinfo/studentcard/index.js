@@ -1,13 +1,38 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
+import AWS from 'aws-sdk';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 import { ReactComponent as ChooseImg } from '../../../asset/svg/ChooseImg.svg';
+import {
+  useGetMyInfoQuery,
+  useGetUserReferralIdQuery,
+} from '../../../features/backendApi';
+import backend from '../../../util/backend';
 
 export default function StudentCard() {
+  const ACCESS_KEY = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
+  const REGION = process.env.REACT_APP_AWS_REGION;
+  const SECRET_ACCESS_KEY = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
+  const S3_BUCKET = 'studentidcard';
+
+  AWS.config.update({
+    region: REGION,
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_ACCESS_KEY,
+  });
+
   const [imgFile, setImgFile] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
+  const [selectedUrl, setSelectedUrl] = useState(null);
+
+  const { data: myInfo } = useGetMyInfoQuery();
+  const { data: referralIdData } = useGetUserReferralIdQuery();
+  const referralId = useMemo(
+    () => referralIdData?.referralId || '',
+    [referralIdData],
+  );
 
   const onUpload = (e) => {
     const file = e.target.files[0];
@@ -22,6 +47,30 @@ export default function StudentCard() {
         resolve();
       };
     });
+  };
+
+  const upload = () => {
+    const up = new AWS.S3.ManagedUpload({
+      params: {
+        ACL: 'public-read',
+        Bucket: S3_BUCKET,
+        Key: `${myInfo.nickname}${referralId}`,
+        Body: imgFile,
+      },
+    });
+
+    const promise = up.promise();
+
+    promise
+      .then((data) => {
+        console.log(data.Location);
+        try {
+          backend.post(`/auth/student-card`, { studentCardUrl: data.Location });
+        } catch (err) {
+          console.log(err);
+        }
+      })
+      .catch((err) => alert('이미지 로드에 실패했습니다!'));
   };
 
   return (
@@ -64,21 +113,12 @@ export default function StudentCard() {
           </ImgUpload>
 
           {imgSrc && (
-            <>
-              <InputTag
-                type="file"
-                accept="image/*"
-                id="fileInput"
-                multiple
-                onChange={(e) => onUpload(e)}
-              />
-              <ButtonBox>
-                <SInputLabel htmlFor="fileInput">
-                  <ChangeButton>변경하기</ChangeButton>
-                </SInputLabel>
-                <UploadButton>업로드하기</UploadButton>
-              </ButtonBox>
-            </>
+            <ButtonBox>
+              <SInputLabel onClick={() => setImgSrc(null)}>
+                <ChangeButton>변경하기</ChangeButton>
+              </SInputLabel>
+              <UploadButton onClick={upload}>업로드하기</UploadButton>
+            </ButtonBox>
           )}
 
           <GrayText>유의사항</GrayText>
@@ -112,7 +152,6 @@ const Title = styled.div`
   font-weight: 500;
   text-align: center;
   line-height: 20px;
-  /* letter-spacing: 1px; */
 `;
 
 const Content = styled.div`
