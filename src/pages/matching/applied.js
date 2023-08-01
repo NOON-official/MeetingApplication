@@ -28,15 +28,15 @@ export default function MatchingApplied() {
 
   const getApplyData = useCallback(async () => {
     const apply = await backend.get(`/users/matchings/applied`);
-    console.log('apply', apply.data.teams);
     setApplyData(apply.data.teams);
     const refuse = await backend.get(`/users/matchings/refused`);
-    console.log('refuse', refuse.data.teams);
     setRefuseData(refuse.data.teams);
   }, []);
 
   useEffect(() => {
-    if (myTeamId) getApplyData();
+    if (accessToken && myTeamId) {
+      getApplyData();
+    }
   }, [myTeamId]);
 
   const handleTabChange = (tabIdx) => {
