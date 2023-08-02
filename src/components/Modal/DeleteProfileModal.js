@@ -4,21 +4,17 @@ import { useState } from 'react';
 import theme from '../../style/theme';
 import backend from '../../util/backend';
 import { ReactComponent as ExclamationMark } from '../../asset/svg/ExclamationMark.svg';
-import CompleteDeleteProfileModal from './CompleteDeleteProfileModal';
+import AutomaticModal from './AutomaticModal';
 
-export default function DeleteProfileModal({ open, setModal, tab, data }) {
+export default function DeleteProfileModal({ open, setModal, state, data }) {
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
 
   const deleteProfile = async () => {
-    if (tab === 1) {
+    if (state === 'applied') {
       try {
-        // 배열의 data를 하나씩 백엔드로 요청
-        await Promise.all(
-          data.map(async (value) => {
-            await backend.delete(`/users/matchings/applied/${value}`);
-          }),
-        );
-        // 모든 프로미스 실행 완료된 후 실행됨
+        await backend.delete(`/users/matchings/applied`, {
+          data: { matchingIds: data },
+        });
         setOpenCompleteModal(true);
       } catch (e) {
         console.error(e);
@@ -26,13 +22,9 @@ export default function DeleteProfileModal({ open, setModal, tab, data }) {
       }
     } else {
       try {
-        // 배열의 data를 하나씩 백엔드로 요청
-        await Promise.all(
-          data.map(async (value) => {
-            await backend.delete(`/users/matchings/received/${value}`);
-          }),
-        );
-        // 모든 프로미스 실행 완료된 후 실행됨
+        await backend.delete(`/users/matchings/received`, {
+          data: { matchingIds: data },
+        });
         setOpenCompleteModal(true);
       } catch (e) {
         console.error(e);
@@ -43,9 +35,10 @@ export default function DeleteProfileModal({ open, setModal, tab, data }) {
 
   return (
     <div>
-      <CompleteDeleteProfileModal
+      <AutomaticModal
         open={openCompleteModal}
         setModal={setOpenCompleteModal}
+        title="삭제되었어요"
       />
       {open ? (
         <Modal
