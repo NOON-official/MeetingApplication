@@ -165,7 +165,7 @@ function MyInfo() {
           type="text"
           onClick={() => {
             dispatch(logout());
-            localStorage.removeItem('needMoreInfo');
+            localStorage.clear();
           }}
         >
           로그아웃
