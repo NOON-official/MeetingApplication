@@ -30,6 +30,7 @@ export default function MatchingReceived() {
       <DeleteProfileModal
         open={deleteModal}
         setModal={setModal}
+        state="received"
         data={deleteProfileList}
       />
       {receivedData.length !== 0 ? (
