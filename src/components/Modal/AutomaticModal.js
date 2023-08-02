@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckBigSize.svg';
 
-export default function CompleteDeleteProfileModal({ open, setModal }) {
+export default function AutomaticModal({ open, setModal, title }) {
   useEffect(() => {
     if (open) {
       const timeout = setTimeout(() => {
@@ -29,7 +29,7 @@ export default function CompleteDeleteProfileModal({ open, setModal }) {
           <Container>
             <SCheckInvalid />
             <TextBox>
-              <BlackText>삭제되었어요</BlackText>
+              <BlackText>{title}</BlackText>
             </TextBox>
           </Container>
         </SModal>
