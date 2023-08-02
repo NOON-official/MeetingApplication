@@ -1,14 +1,11 @@
 import { Button, Card, Col, Row, Space } from 'antd';
-import dayjs from 'dayjs';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Accordion from '../../../components/Accordion';
 import PrimaryModal from '../../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../../components/PrimaryButton';
 import Section from '../../../components/Section';
-import { MEMBER_COUNT_LABELS } from '../../../config/constants';
 import {
   useGetMyInfoQuery,
   useGetUserTeamsQuery,
@@ -23,7 +20,7 @@ export default function Account() {
   const { data: teamsData } = useGetUserTeamsQuery();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  console.log(myInfo);
   const deleteAccount = useCallback(async () => {
     try {
       await backend.delete('/auth/account', {
@@ -41,11 +38,19 @@ export default function Account() {
   return (
     <MyinfoLayout title="계정 관리">
       <Section my="12px">
-        <Subtitle>내 정보</Subtitle>
         <InfoCard>
+          <Subtitle>내 정보</Subtitle>
           <Row>
             <Col span={4}>이름</Col>
             <Col span={20}>{myInfo?.nickname}</Col>
+          </Row>
+          <Row>
+            <Col span={4}>성별</Col>
+            <Col span={20}>{myInfo?.gender === 'male' ? '남성' : '여성'}</Col>
+          </Row>
+          <Row>
+            <Col span={4}>대학교</Col>
+            {/* <Col span={20}>{Universities.{myInfo?.university -1}}</Col> */}
           </Row>
           <Row>
             <Col span={4}>전화번호</Col>
@@ -60,7 +65,7 @@ export default function Account() {
           </Row>
         </InfoCard>
       </Section>
-      <Section>
+      {/* <Section>
         <Accordion
           title={<AccordionTitle>신청 내역</AccordionTitle>}
           content={
@@ -89,7 +94,7 @@ export default function Account() {
             </HistoryContainer>
           }
         />
-      </Section>
+      </Section> */}
       <Section my="8px" style={{ textAlign: 'right' }}>
         <ResignButton type="text" onClick={() => setResignModalOpened(true)}>
           회원 탈퇴
