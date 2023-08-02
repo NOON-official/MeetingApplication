@@ -117,6 +117,15 @@ export default function StudentCard() {
         </Title>
 
         <Content>
+          <VerifyBox>
+            <TeamName>아름이와 아이들</TeamName>
+            <Mark>
+              <UniversityMark />
+              <PinkText>학교 인증 완료</PinkText>
+            </Mark>
+          </VerifyBox>
+        </Content>
+        <Content>
           <Header>
             <BlackText>학생증으로 인증하기</BlackText>
             <UniversityMark />
@@ -167,6 +176,36 @@ export default function StudentCard() {
     </MyinfoLayout>
   );
 }
+
+const VerifyBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  border: 1px solid #ffc6c6;
+  border-radius: 14px;
+  background-color: #ffe8e8;
+`;
+
+const TeamName = styled.span`
+  padding: 1% 3%;
+  border-radius: 3px;
+  background: #ececec;
+  font-size: 15px;
+`;
+
+const Mark = styled.div``;
+
+const PinkText = styled.span`
+  margin-left: 5%;
+  background: linear-gradient(90deg, #ccb5f3 0%, #ff9595 100%);
+  background-clip: text;
+  font-size: 14px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
 
 const Section = styled.div`
   padding: 6%;
