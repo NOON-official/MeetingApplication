@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import AWS from 'aws-sdk';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
+import { ReactComponent as UniversityMarkGray } from '../../../asset/svg/UniversityMarkDarkGray.svg';
 import { ReactComponent as ChooseImg } from '../../../asset/svg/ChooseImg.svg';
 import {
   useGetMyInfoQuery,
@@ -146,8 +147,15 @@ export default function StudentCard() {
                   multiple
                   onChange={(e) => selectFile(e)}
                 />
-                <LightGrayText>
+                {/* <LightGrayText>
                   20MG 이하의 이미지 1장을 <br /> 업로드 할 수 있어요
+                  </LightGrayText> */}
+                <LightGrayText>
+                  <BigSizeText>
+                    <SUniversityMarkGray />
+                    학생증 승인이 반려되었어요
+                  </BigSizeText>
+                  하단의 유의사항을 살펴보신 뒤 다시 업로드 해주세요!
                 </LightGrayText>
                 <InputLabel htmlFor="fileInput">
                   <ChooseImg />
@@ -182,29 +190,37 @@ const VerifyBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100px;
+  width: 90%;
+  padding: 5%;
   border: 1px solid #ffc6c6;
   border-radius: 14px;
   background-color: #ffe8e8;
 `;
 
 const TeamName = styled.span`
-  padding: 1% 3%;
+  padding: 2% 5%;
   border-radius: 3px;
   background: #ececec;
-  font-size: 15px;
+  font-size: 16px;
 `;
 
-const Mark = styled.div``;
+const Mark = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 5%;
+`;
 
 const PinkText = styled.span`
   margin-left: 5%;
+  // 글자 색
   background: linear-gradient(90deg, #ccb5f3 0%, #ff9595 100%);
   background-clip: text;
-  font-size: 14px;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-size: 17px;
+  font-weight: 400;
 `;
 
 const Section = styled.div`
@@ -264,7 +280,12 @@ const ImgUpload = styled.div`
   border-radius: 6px;
 `;
 
+const SUniversityMarkGray = styled(UniversityMarkGray)`
+  margin-right: 3%;
+`;
+
 const LightGrayText = styled.div`
+  width: 100%;
   position: absolute;
   top: 35%;
   left: 50%;
@@ -273,6 +294,15 @@ const LightGrayText = styled.div`
   font-size: 12px;
   text-align: center;
   line-height: 16px;
+`;
+
+const BigSizeText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1%;
+  font-size: 17px;
+  font-weight: 500;
 `;
 
 const InputTag = styled.input`

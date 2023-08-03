@@ -5,6 +5,7 @@ import { ReactComponent as MainDoc } from '../../asset/svg/MainDoc.svg';
 import { ReactComponent as UniversityMarkDarkGray } from '../../asset/svg/UniversityMarkDarkGray.svg';
 import MyTeamProfileModal from '../../components/MainRecommend/MyTeamProfileModal';
 import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
+import { ReactComponent as TingImg } from '../../asset/svg/TingImg.svg';
 
 export default function MainMatchingHeader({ title }) {
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
@@ -36,9 +37,11 @@ export default function MainMatchingHeader({ title }) {
           </BtnTitle>
         </MainButton>
       </ButtonBox>
-      <MainButton2>
-        <SMainDoc />
+      <MainButton2 onClick={() => navigate('/myinfo/ting')}>
+        <STingImg />
         <BtnMainTitle>보유 팅</BtnMainTitle>
+        <TingCount>12팅</TingCount>
+        <SeeMoreBtn>자세히 보기</SeeMoreBtn>
       </MainButton2>
     </>
   );
@@ -104,4 +107,25 @@ const BtnSubtitle = styled.div`
   color: #777777;
   font-size: 12px;
   font-weight: 300;
+`;
+
+const STingImg = styled(TingImg)`
+  width: 20px;
+  margin-right: 15px;
+`;
+
+const TingCount = styled.span`
+  margin-left: 5%;
+  color: #eb8888;
+  font-size: 16px;
+  font-weight: 500;
+`;
+
+const SeeMoreBtn = styled.div`
+  margin-left: auto;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 7px;
+  color: #eb8888;
+  background-color: #ffd2d2;
 `;

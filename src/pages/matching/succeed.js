@@ -26,7 +26,6 @@ export default function MatchingSucceed() {
 
   const getSucceedData = async () => {
     const succeed = await backend.get(`/users/matchings/succeeded`);
-    console.log(succeed.data.teams);
     setSucceedData(succeed.data.teams);
   };
 

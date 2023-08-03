@@ -102,6 +102,7 @@ function Main() {
           </PrimaryButton>
         </Space>
       </PrimaryModal>
+
       {!accessToken ? (
         <div style={{ textAlign: 'center', marginBottom: '10%' }}>
           <Section>
@@ -227,6 +228,7 @@ function Main() {
       ) : (
         <Recommend />
       )}
+
       <div>{ChannelTalk.hideChannelButton()}</div>
     </MainLayout>
   );

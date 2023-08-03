@@ -33,7 +33,9 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${(props) =>
-    props.title === '학교 인증' ? props.theme.white : props.theme.background};
+    props.title === '학교 인증' || props.title === '보유 팅'
+      ? props.theme.white
+      : props.theme.background};
   overflow-y: scroll;
 `;
 

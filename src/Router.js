@@ -38,6 +38,7 @@ import MatchingApplied from './pages/matching/applied';
 import MatchingReceived from './pages/matching/received';
 import MatchingSucceed from './pages/matching/succeed';
 import StudentCard from './pages/myinfo/studentcard';
+import Ting from './pages/myinfo/ting';
 
 const Router = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo/ticket/history',
         element: <TicketHistoryPage />,
+      },
+      {
+        path: 'myinfo/ting',
+        element: <Ting />,
       },
       {
         path: 'apply/agree',
