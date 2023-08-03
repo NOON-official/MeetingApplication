@@ -1,18 +1,12 @@
 import styled from 'styled-components';
-import { Button, Col, notification, Row } from 'antd';
+import { Button, notification } from 'antd';
 import { useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MainLayout from '../../layout/MainLayout';
-import { ReactComponent as KakaoTalk } from '../../asset/svg/KakaoTalk.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
-import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
-import { ReactComponent as QuestionCircle } from '../../asset/svg/QuestionCircle.svg';
 import { ReactComponent as Glasses } from '../../asset/svg/Glasses.svg';
-import coffeeGreyImg from '../../asset/img/coffee-grey.png';
-import coffeeImg from '../../asset/img/coffee.png';
 import Section from '../../components/Section';
-import PrimaryModal from '../../components/Modal/PrimaryModal';
 import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
 import { logout } from '../../features/user/asyncActions';
 import SigninView from '../../components/Auth/SigninView';
@@ -171,7 +165,7 @@ function MyInfo() {
           로그아웃
         </LogoutButton>
       </Section>
-      <Section>
+      {/* <Section>
         <InvitationTitle>친구 초대 이벤트</InvitationTitle>
         <CouponBox>
           <InvitationSubtitle>
@@ -208,8 +202,8 @@ function MyInfo() {
             </TooltipButton>
           </div>
         </CouponBox>
-      </Section>
-      <Section my="12px">
+      </Section> */}
+      {/* <Section my="12px">
         <Row gutter={16}>
           <Col span={12}>
             <CopyButton block onClick={copyToClipboard}>
@@ -222,8 +216,8 @@ function MyInfo() {
             </KakaoButton>
           </Col>
         </Row>
-      </Section>
-      <PrimaryModal
+      </Section> */}
+      {/* <PrimaryModal
         title="유의사항"
         open={isNoticeOpened}
         onCancel={() => setIsNoticeOpened(false)}
@@ -240,7 +234,7 @@ function MyInfo() {
             참여 대상에서 제외할 수 있습니다.
           </li>
         </NoticeDescription>
-      </PrimaryModal>
+      </PrimaryModal> */}
     </MainLayout>
   );
 }
