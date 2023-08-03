@@ -12,7 +12,6 @@ export default function Recommend() {
 
   const getInformation = useCallback(async () => {
     const teamid = await backend.get(`/users/team-id`);
-    console.log(teamid.data.teamId);
 
     if (teamid.data.teamId !== null) {
       localStorage.setItem('myTeamId', teamid.data.teamId);
