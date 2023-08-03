@@ -38,21 +38,23 @@ const Container = styled.div`
   height: 4vh;
   padding: 20px 0;
   background-color: ${(props) =>
-    props.title === '학교 인증' ? props.theme.white : props.theme.background};
+    props.title === '학교 인증' || props.title === '보유 팅'
+      ? props.theme.white
+      : props.theme.background};
 `;
 
 const IconButton = styled(Button)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 5%;
   width: 100%;
-  > svg {
-    vertical-align: middle;
-  }
-  > span {
-    margin-right: 45%;
-    vertical-align: middle;
+  position: relative;
+
+  span:last-child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-weight: 500;
     font-size: 16px;
   }
