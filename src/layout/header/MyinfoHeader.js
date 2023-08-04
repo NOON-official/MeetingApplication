@@ -38,7 +38,9 @@ const Container = styled.div`
   height: 4vh;
   padding: 20px 0;
   background-color: ${(props) =>
-    props.title === '학교 인증' || props.title === '보유 팅'
+    props.title === '학교 인증' ||
+    props.title === '보유 팅' ||
+    props.title === '팅 충전하기'
       ? props.theme.white
       : props.theme.background};
 `;

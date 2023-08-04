@@ -56,15 +56,15 @@ export default function MyTeamProfileModal(props) {
           {profile && (
             <>
               <TeamProfile>
-                <TeamName>{profile?.teamName}</TeamName>
+                <TeamName>{profile.teamName}</TeamName>
                 <TextBox>
                   <Title>한 줄 어필</Title>
-                  <Content>{profile?.intro}</Content>
+                  <Content>{profile.intro}</Content>
                 </TextBox>
                 <TextBox>
                   <Container>
                     <Title>기본 정보</Title>
-                    {profile.isVerified ? (
+                    {profile.approval ? (
                       <>
                         <SUniversityMark />
                         <UniversityMarkText>대학 인증 완료</UniversityMarkText>

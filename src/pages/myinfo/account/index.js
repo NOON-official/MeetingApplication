@@ -31,7 +31,7 @@ export default function Account() {
     } catch (e) {
       window.alert('탈퇴중 오류가 발생하였습니다');
     }
-  });
+  }, []);
 
   return (
     <MyinfoLayout title="내 정보">
@@ -51,8 +51,12 @@ export default function Account() {
               <Col span={5}>대학교</Col>
               <Col span={18}>
                 {Universities[myInfo.university - 1]?.name}
-                <SUniversityMarkPink />
-                <Mark>학교 인증 완료</Mark>
+                {myInfo.approval && (
+                  <>
+                    <SUniversityMarkPink />
+                    <Mark>학교 인증 완료</Mark>
+                  </>
+                )}
               </Col>
             </Row>
             <Row>
