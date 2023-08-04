@@ -38,5 +38,6 @@ module.exports = {
     ...a11yOff,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-alert': 'off',
+    'react/jsx-curly-brace-presence': 'off',
   },
 };

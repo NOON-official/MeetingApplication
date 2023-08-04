@@ -9,10 +9,14 @@ export default function StopMatchingModal({ open, setModal, teamId }) {
     try {
       await backend.delete(`/teams/${teamId}`);
       window.localStorage.removeItem('apply-data');
+      window.localStorage.removeItem('myTeamId');
+      window.localStorage.removeItem('myProfile');
       window.alert('취소되었습니다');
+      setModal(false);
     } catch (e) {
       console.error(e);
       window.alert('취소중 오류가 발생하였습니다');
+      setModal(false);
     }
   });
 
@@ -38,8 +42,8 @@ export default function StopMatchingModal({ open, setModal, teamId }) {
             </TextBox>
             <SButton
               onClick={() => {
-                setModal(false);
                 deleteMatching();
+                setModal(false);
               }}
             >
               중단할래요

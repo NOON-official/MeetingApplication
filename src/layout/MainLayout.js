@@ -7,7 +7,6 @@ function MainLayout({ children }) {
     <Container>
       <Header>
         <TopHeader />
-        {/* <MainTabs /> */}
       </Header>
       <Content>{children}</Content>
       <Footer>
@@ -31,7 +30,6 @@ const Header = styled.header`
 `;
 
 const Content = styled.div`
-  border: 1px solid blue;
   max-width: 425px;
   width: 100%;
   height: 100%;
