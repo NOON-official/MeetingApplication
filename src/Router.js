@@ -40,6 +40,7 @@ import MatchingSucceed from './pages/matching/succeed';
 import StudentCard from './pages/myinfo/studentcard';
 import Ting from './pages/myinfo/ting';
 import Review from './pages/myinfo/review';
+import ChargeTing from './pages/myinfo/ting/chargeTing';
 
 const Router = createBrowserRouter([
   {
@@ -122,6 +123,10 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo/ting',
         element: <Ting />,
+      },
+      {
+        path: 'myinfo/chargeting',
+        element: <ChargeTing />,
       },
       {
         path: 'myinfo/review',

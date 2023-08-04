@@ -37,6 +37,7 @@ export default function StudentCard() {
 
   const { data: myInfo } = useGetMyInfoQuery();
   const { data: referralIdData } = useGetUserReferralIdQuery();
+
   const referralId = useMemo(
     () => referralIdData?.referralId || '',
     [referralIdData],
@@ -67,7 +68,7 @@ export default function StudentCard() {
         params: {
           ACL: 'public-read',
           Bucket: S3_BUCKET,
-          Key: `${myInfo.nickname}${referralId}.jpg`,
+          Key: `${myInfo?.nickname}${referralId}.jpg`,
           Body: imgFile,
         },
       });
@@ -88,6 +89,7 @@ export default function StudentCard() {
               studentCardUrl: data.Location,
             });
             setOpenCompleteModal(true);
+            window.location.reload();
           } catch (err) {
             console.log(err);
           }
@@ -117,69 +119,162 @@ export default function StudentCard() {
           <br /> 업데이트 될 때 최우선 순위로 노출돼요! 😉
         </Title>
 
-        <Content>
-          <VerifyBox>
-            <TeamName>아름이와 아이들</TeamName>
-            <Mark>
+        {myInfo?.isVerified === false && (
+          // 신청내역 없을 때
+          <Content>
+            <Header>
+              <BlackText>학생증으로 인증하기</BlackText>
+              <UniversityMark />
+            </Header>
+            <GrayText>
+              학생증 이미지를 업로드해 주시면 <br />
+              24시간 이내에 검토하여 승인해 드릴게요
+            </GrayText>
+            <ImgUpload>
+              {imgSrc ? (
+                <ImgPreview src={imgSrc} />
+              ) : (
+                <>
+                  <InputTag
+                    type="file"
+                    accept="image/*"
+                    id="fileInput"
+                    multiple
+                    onChange={(e) => selectFile(e)}
+                  />
+                  <LightGrayText>
+                    20MG 이하의 이미지 1장을 <br /> 업로드 할 수 있어요
+                  </LightGrayText>
+                  <InputLabel htmlFor="fileInput">
+                    <ChooseImg />
+                  </InputLabel>
+                </>
+              )}
+            </ImgUpload>
+
+            {imgSrc && (
+              <ButtonBox>
+                <SInputLabel onClick={() => setImgSrc(null)}>
+                  <ChangeButton>변경하기</ChangeButton>
+                </SInputLabel>
+                <UploadButton onClick={upload}>업로드하기</UploadButton>
+              </ButtonBox>
+            )}
+
+            <GrayText>유의사항</GrayText>
+            <GrayText2>
+              <List>
+                ∙ 실물 학생증 사진, 모바일 학생증 캡쳐본 모두 가능해요
+              </List>
+              <List>∙ 대학교, 학과, 학번, 이름이 모두 보여야 승인돼요</List>
+              <List>∙ 미팅 신청자와 학생증에 기재된 이름이 일치해야 해요</List>
+            </GrayText2>
+          </Content>
+        )}
+
+        {myInfo?.isVerified === true && myInfo?.approval === null && (
+          // 신청했으나 승인 기다릴 때
+          <Content>
+            <Header>
+              <BlackText>학생증으로 인증하기</BlackText>
+              <UniversityMark />
+            </Header>
+            <GrayText>
+              학생증 이미지를 업로드해 주시면 <br />
+              24시간 이내에 검토하여 승인해 드릴게요
+            </GrayText>
+            <ImgUpload>
+              <CheckingText>
+                업로드해 주신 학생증을 검토 중이에요! 🔍
+              </CheckingText>
+            </ImgUpload>
+
+            {imgSrc && (
+              <ButtonBox>
+                <SInputLabel onClick={() => setImgSrc(null)}>
+                  <ChangeButton>변경하기</ChangeButton>
+                </SInputLabel>
+                <UploadButton onClick={upload}>업로드하기</UploadButton>
+              </ButtonBox>
+            )}
+
+            <GrayText>유의사항</GrayText>
+            <GrayText2>
+              <List>
+                ∙ 실물 학생증 사진, 모바일 학생증 캡쳐본 모두 가능해요
+              </List>
+              <List>∙ 대학교, 학과, 학번, 이름이 모두 보여야 승인돼요</List>
+              <List>∙ 미팅 신청자와 학생증에 기재된 이름이 일치해야 해요</List>
+            </GrayText2>
+          </Content>
+        )}
+
+        {myInfo?.isVerified === true && myInfo?.approval === false && (
+          // 신청했으나 반려됨
+          <Content>
+            <Header>
+              <BlackText>학생증으로 인증하기</BlackText>
+              <UniversityMark />
+            </Header>
+            <GrayText>
+              학생증 이미지를 업로드해 주시면 <br />
+              24시간 이내에 검토하여 승인해 드릴게요
+            </GrayText>
+            <ImgUpload>
+              {imgSrc ? (
+                <ImgPreview src={imgSrc} />
+              ) : (
+                <>
+                  <InputTag
+                    type="file"
+                    accept="image/*"
+                    id="fileInput"
+                    multiple
+                    onChange={(e) => selectFile(e)}
+                  />
+                  <LightGrayText>
+                    <BigSizeText>
+                      <SUniversityMarkGray />
+                      학생증 승인이 반려되었어요
+                    </BigSizeText>
+                    하단의 유의사항을 살펴보신 뒤 다시 업로드 해주세요!
+                  </LightGrayText>
+                  <InputLabel htmlFor="fileInput">
+                    <ChooseImg />
+                  </InputLabel>
+                </>
+              )}
+            </ImgUpload>
+
+            {imgSrc && (
+              <ButtonBox>
+                <SInputLabel onClick={() => setImgSrc(null)}>
+                  <ChangeButton>변경하기</ChangeButton>
+                </SInputLabel>
+                <UploadButton onClick={upload}>업로드하기</UploadButton>
+              </ButtonBox>
+            )}
+
+            <GrayText>유의사항</GrayText>
+            <GrayText2>
+              <List>
+                ∙ 실물 학생증 사진, 모바일 학생증 캡쳐본 모두 가능해요
+              </List>
+              <List>∙ 대학교, 학과, 학번, 이름이 모두 보여야 승인돼요</List>
+              <List>∙ 미팅 신청자와 학생증에 기재된 이름이 일치해야 해요</List>
+            </GrayText2>
+          </Content>
+        )}
+
+        {myInfo?.isVerified === true && myInfo?.approval === true && (
+          // 인증 완료됨
+          <Content>
+            <VerifyBox>
               <UniversityMark />
               <PinkText>학교 인증 완료</PinkText>
-            </Mark>
-          </VerifyBox>
-        </Content>
-        <Content>
-          <Header>
-            <BlackText>학생증으로 인증하기</BlackText>
-            <UniversityMark />
-          </Header>
-          <GrayText>
-            학생증 이미지를 업로드해 주시면 <br />
-            24시간 이내에 검토하여 승인해 드릴게요
-          </GrayText>
-          <ImgUpload>
-            {imgSrc ? (
-              <ImgPreview src={imgSrc} />
-            ) : (
-              <>
-                <InputTag
-                  type="file"
-                  accept="image/*"
-                  id="fileInput"
-                  multiple
-                  onChange={(e) => selectFile(e)}
-                />
-                {/* <LightGrayText>
-                  20MG 이하의 이미지 1장을 <br /> 업로드 할 수 있어요
-                  </LightGrayText> */}
-                <LightGrayText>
-                  <BigSizeText>
-                    <SUniversityMarkGray />
-                    학생증 승인이 반려되었어요
-                  </BigSizeText>
-                  하단의 유의사항을 살펴보신 뒤 다시 업로드 해주세요!
-                </LightGrayText>
-                <InputLabel htmlFor="fileInput">
-                  <ChooseImg />
-                </InputLabel>
-              </>
-            )}
-          </ImgUpload>
-
-          {imgSrc && (
-            <ButtonBox>
-              <SInputLabel onClick={() => setImgSrc(null)}>
-                <ChangeButton>변경하기</ChangeButton>
-              </SInputLabel>
-              <UploadButton onClick={upload}>업로드하기</UploadButton>
-            </ButtonBox>
-          )}
-
-          <GrayText>유의사항</GrayText>
-          <GrayText2>
-            <List>∙ 실물 학생증 사진, 모바일 학생증 캡쳐본 모두 가능해요</List>
-            <List>∙ 대학교, 학과, 학번, 이름이 모두 보여야 승인돼요</List>
-            <List>∙ 미팅 신청자와 학생증에 기재된 이름이 일치해야 해요</List>
-          </GrayText2>
-        </Content>
+            </VerifyBox>
+          </Content>
+        )}
       </Section>
     </MyinfoLayout>
   );
@@ -187,29 +282,13 @@ export default function StudentCard() {
 
 const VerifyBox = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  padding: 5%;
-  border: 1px solid #ffc6c6;
-  border-radius: 14px;
-  background-color: #ffe8e8;
-`;
-
-const TeamName = styled.span`
-  padding: 2% 5%;
-  border-radius: 3px;
-  background: #ececec;
-  font-size: 16px;
-`;
-
-const Mark = styled.div`
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 5%;
+  padding: 10% 0;
+  border: 1px solid #ffc6c6;
+  border-radius: 14px;
+  background-color: #ffe8e8;
 `;
 
 const PinkText = styled.span`
@@ -235,7 +314,6 @@ const Header = styled.div`
 `;
 
 const Title = styled.div`
-  border-bottom: 0.7px solid #bdbdbd;
   padding-bottom: 6%;
   width: 85%;
   margin: 0 auto;
@@ -245,9 +323,10 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
-  width: 85%;
+  width: 90%;
   margin: 0 auto;
-  margin-top: 10%;
+  padding-top: 10%;
+  border-top: 0.7px solid #bdbdbd;
 `;
 
 const BlackText = styled.div`
@@ -272,12 +351,18 @@ const List = styled.li``;
 
 const ImgUpload = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   margin: 5% 0;
   width: 100%;
   height: 130px;
   border: 1px solid #bdbdbd;
   border-radius: 6px;
+`;
+
+const CheckingText = styled.div`
+  color: #aeaeae;
 `;
 
 const SUniversityMarkGray = styled(UniversityMarkGray)`
