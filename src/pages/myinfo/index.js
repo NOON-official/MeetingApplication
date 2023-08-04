@@ -102,7 +102,7 @@ function MyInfo() {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/">
+            <Link to="https://moingclub.notion.site/2023-ver-9c7eacd16070426fab83478adfd4c091">
               <LinkButton>
                 서비스 소개
                 <RightArrow />
@@ -126,7 +126,7 @@ function MyInfo() {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link>
+            <Link to="/myinfo/review">
               <LinkButton>
                 미팅 후기
                 <RightArrow />
