@@ -107,7 +107,7 @@ export default function OtherTeamProfileModal({
             <TextBox>
               <Container>
                 <Title>상대 팀 기본 정보</Title>
-                {teamProfile?.isVerified ? (
+                {teamProfile?.approval ? (
                   <>
                     <SUniversityMark />
                     <UniversityMarkText>대학 인증 완료</UniversityMarkText>

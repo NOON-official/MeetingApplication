@@ -28,7 +28,7 @@ const MenuBox = styled.div`
   flex-direction: column;
   justify-content: center;
   background-color: white;
-  border: 1px solid #f1ecec;
+  /* border: 1px solid #f1ecec; */
   border-radius: 10px;
   margin-top: 20px;
   padding: 4px 20px;
