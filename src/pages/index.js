@@ -4,7 +4,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { Button, Carousel, Space } from 'antd';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
@@ -33,7 +33,6 @@ function Main() {
   const { accessToken } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const [matchingStatus, setMatchingStatus] = useState('');
   const { data: userCountData } = useGetTeamMembersCountTotalQuery();
   const { data: agreementsData } = useGetUserAgreementsQuery();
 
@@ -48,71 +47,64 @@ function Main() {
         localStorage.setItem('needMoreInfo', 'false');
       }
     } catch (err) {
-      localStorage.setItem('needMoreInfo', 'false');
+      console.log(err);
     }
   };
 
   useEffect(() => {
-    getInfo();
-  }, []);
-
-  const getMatchingInfo = useCallback(async () => {
-    const matchingstatus = await backend.get('/users/matchings/status');
-    setMatchingStatus(matchingstatus.data.matchingStatus);
-  }, []);
+    if (accessToken) {
+      getInfo();
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     if (referralId !== null) {
       sessionStorage.setItem('referralId', referralId);
     }
-    // getMatchingInfo();
-  }, [getMatchingInfo, referralId]);
+  }, [referralId]);
 
   const handleStart = useCallback(() => {
     if (!accessToken) {
       navigate('/myinfo');
-    } else if (['NOT_RESPONDED', null].includes(matchingStatus)) {
-      if (!agreementsData) {
-        navigate('/apply/agree');
-      } else {
-        navigate(`/apply/1`);
-      }
+    } else if (!agreementsData) {
+      navigate('/apply/agree');
     } else {
-      window.alert('현재 매칭이 진행 중이라 새로운 미팅신청이 불가합니다');
+      navigate(`/apply/1`);
     }
-  }, [accessToken, matchingStatus, navigate, agreementsData, finishedStep]);
+  }, [accessToken, agreementsData]);
 
   const slider1 = useRef(null);
   const slider2 = useRef(null);
 
   return (
     <MainLayout>
+      <PrimaryModal
+        title=" "
+        open={needMoreInfo === 'true'}
+        footer={null}
+        closeIcon
+      >
+        <Space
+          direction="vertical"
+          style={{
+            padding: '15px 0',
+            textAlign: 'center',
+            width: '100%',
+          }}
+        >
+          <span>새로운 회원 정보가 필요해요!</span>
+          <PrimaryButton
+            onClick={() => {
+              navigate('/apply/information');
+            }}
+          >
+            입력하러 가기
+          </PrimaryButton>
+        </Space>
+      </PrimaryModal>
+
       {!accessToken ? (
         <div style={{ textAlign: 'center', marginBottom: '10%' }}>
-          <PrimaryModal
-            title=" "
-            open={needMoreInfo === 'true'}
-            footer={null}
-            closeIcon
-          >
-            <Space
-              direction="vertical"
-              style={{
-                padding: '15px 0',
-                textAlign: 'center',
-                width: '100%',
-              }}
-            >
-              <span>새로운 회원 정보가 필요해요!</span>
-              <PrimaryButton
-                onClick={() => {
-                  navigate('/apply/information');
-                }}
-              >
-                입력하러 가기
-              </PrimaryButton>
-            </Space>
-          </PrimaryModal>
           <Section>
             <CountTitle>
               <MainTitle>
@@ -123,49 +115,9 @@ function Main() {
             </CountTitle>
             <ImgBox>
               <MainImg />
-              {/* <SImg
-              src={PresentBox}
-              onClick={() => {
-                navigate('/myinfo');
-              }}
-            /> */}
             </ImgBox>
           </Section>
           <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
-          {/* <Section my="50px" style={{ marginBottom: '25px' }}>
-          <TopTitle>현재 성비</TopTitle>
-          <MatchingBox>
-            <SubTitle>3 : 3 미팅</SubTitle>
-            <TotalBar>
-              <Number>{5}</Number>
-              <LeftBar>
-                <LeftBarProgress progress={1 / 2} />
-              </LeftBar>
-              <RightBar>
-                <RightBarProgress progress={1 / 2} />
-              </RightBar>
-              <Number>{5}</Number>
-            </TotalBar>
-          </MatchingBox>
-        </Section> */}
-          {/* <Section my="35px" style={{ marginTop: '50px' }}>
-          <TopTitle>소요 시간</TopTitle>
-          <TimeBox>
-            <SubTitle2>최근 7일 동안 평균</SubTitle2>
-            <AverageTime>
-              <CImg src={Clock} />
-              <AverageTimeNumber>
-                <Pink>
-                  {String(matchingAverageTime?.hours).padStart(2, '0')}시간{' '}
-                  {String(matchingAverageTime?.minutes).padStart(2, '0')}분
-                </Pink>{' '}
-              </AverageTimeNumber>
-              <AverageTimeDescription>
-                안에 매칭되었어요!
-              </AverageTimeDescription>
-            </AverageTime>
-          </TimeBox>
-        </Section> */}
           <Section>
             <Review>
               미팅 후기
@@ -272,18 +224,11 @@ function Main() {
               <SliderRArrow onClick={() => slider2.current.next()} />
             </Slider>
           </Section>
-          {/* <Section my="50px" center style={{ marginBottom: '30px' }}>
-          <SImg2 src={Main1} />
-          <SImg2 src={Main2} />
-          <SImg2 src={Main3} />
-          <SImg2 src={Main4} />
-          <SImg2 src={Main5} />
-          <SImg2 src={Main6} />
-        </Section> */}
         </div>
       ) : (
         <Recommend />
       )}
+
       <div>{ChannelTalk.hideChannelButton()}</div>
     </MainLayout>
   );

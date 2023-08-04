@@ -1,9 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useModalState(teamList) {
   const [modalState, setModalState] = useState(
     teamList?.map((team) => ({ teamId: team.id, open: false })),
   );
+
+  useEffect(() => {
+    if (teamList) {
+      const initialModalState = teamList.map((team) => ({
+        teamId: team.id,
+        open: false,
+      }));
+      setModalState(initialModalState);
+    }
+  }, [teamList]);
 
   const openModal = (teamId) => {
     setModalState((prev) =>

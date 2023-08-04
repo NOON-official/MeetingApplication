@@ -1,12 +1,36 @@
-import { Modal } from 'antd';
+import { Modal, notification } from 'antd';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
+import backend from '../../util/backend';
 
 export default function OtherTeamNumberModal(props) {
-  const { open, closeModal, teamName, contact } = props;
+  const { open, closeModal, teamName, teamId } = props;
+
+  const [contact, setContact] = useState();
+  const [api, contextHolder] = notification.useNotification();
+
+  const getContactDate = async () => {
+    const contactData = await backend.get(`/teams/${teamId}/contact`);
+    setContact(contactData.data.kakaoId);
+  };
+
+  useEffect(() => {
+    getContactDate();
+  }, []);
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    api.open({
+      key: 'clipboard',
+      message: `클립보드에 복사되었습니다`,
+      placement: 'bottom',
+    });
+  };
 
   return (
     <div>
+      {contextHolder}
       {open ? (
         <SModal
           open={open}
@@ -28,7 +52,7 @@ export default function OtherTeamNumberModal(props) {
                 </Normal>
                 <Text>
                   <KakaoId>{contact}</KakaoId>
-                  <SCopy />
+                  <SCopy onClick={() => handleCopy(contact)} />
                 </Text>
               </Section>
             </TextBox>
@@ -106,4 +130,5 @@ const KakaoId = styled.span``;
 
 const SCopy = styled(Copy)`
   margin-left: 10px;
+  cursor: pointer;
 `;
