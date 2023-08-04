@@ -33,7 +33,6 @@ export default function Apply9Page() {
 
   const [openModal, setOpenModal] = useState(false);
   const [userPhone, setUserPhone] = useState('');
-  const [userTeamId, setUserTeamId] = useState('');
   const [gender, setGender] = useState('');
 
   const setModal = (bool) => {
@@ -42,10 +41,8 @@ export default function Apply9Page() {
 
   const getInformation = useCallback(async () => {
     const userData = await backend.get('/users/my-info');
-    const userteamid = await backend.get('/users/team-id');
     setGender(userData.data.gender);
     setUserPhone(userData.data.phone);
-    setUserTeamId(userteamid.data.teamId);
   }, []);
 
   useEffect(() => {
@@ -75,28 +72,11 @@ export default function Apply9Page() {
   });
 
   const handleSubmit = useCallback(async () => {
-    // if (matchingStatus === 'APPLIED') {
-    //   try {
-    //     await backend.patch(`/teams/${userTeamId}`, applydata);
-    //     window.alert('수정되었습니다!');
-    //   } catch (e) {
-    //     window.alert('수정중 오류가 발생하였습니다');
-    //   }
-    // } else if (matchingStatus === null) {
-    //   dispatch(createTeam(applydata));
-    //   window.alert('저장되었습니다!');
-    //   setOpenModal(true);
-    // } else {
-    //   await backend.delete(`/teams/${userTeamId}`);
-    //   dispatch(createTeam(applydata));
-    //   window.alert('저장되었습니다!');
-    // }
-
     try {
-      await dispatch(createTeam(filteredData));
-      if (userPhone === '') {
+      if (userPhone === null) {
         navigate('/apply/10phone');
       } else {
+        await dispatch(createTeam(filteredData));
         setOpenModal(true);
       }
     } catch (e) {
