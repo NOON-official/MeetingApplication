@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import utc from 'dayjs-plugin-utc';
+import { useEffect, useState } from 'react';
 import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
@@ -7,59 +9,33 @@ import OtherTeamNumberModal from '../../components/Modal/OtherTeamNumberModal';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
+import backend from '../../util/backend';
 
 export default function MatchingSucceed() {
-  const DATAS = [
-    {
-      id: 1,
-      matchingId: 1,
-      teamName: '기웅내세요',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      matchedAt: '2023-07-15T21:37:26.886Z',
-      contact: 'meet',
-    },
-    {
-      id: 2,
-      matchingId: 3,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      matchedAt: '2023-07-17T21:37:26.886Z',
-      contact: '0109934',
-    },
-    {
-      id: 3,
-      matchingId: 3,
-      teamName: '서울서울서울',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      matchedAt: '2023-07-14T21:37:26.886Z',
-      contact: '12341234',
-    },
-  ];
-
-  const [modalState, openModal, closeModal] = useModalState(DATAS);
-  const [modalState2, openModal2, closeModal2] = useModalState(DATAS);
+  const [succeedData, setSucceedData] = useState([]);
+  const [modalState, openModal, closeModal] = useModalState(succeedData);
+  const [modalState2, openModal2, closeModal2] = useModalState(succeedData);
+  dayjs.extend(utc); // dayjs utc 플러그인 사용하여 로컬시간으로 변환
 
   const remainingDays = (date) => {
-    const appliedDate = new Date(date);
-    const dueDate = new Date(appliedDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const today = dayjs();
+    const dueDate = dayjs(date).add(7, 'day');
 
-    const currentDate = new Date();
-
-    return Math.ceil((dueDate - currentDate) / (24 * 60 * 60 * 1000));
+    return dueDate.diff(today, 'day');
   };
+
+  const getSucceedData = async () => {
+    const succeed = await backend.get(`/users/matchings/succeeded`);
+    setSucceedData(succeed.data.teams);
+  };
+
+  useEffect(() => {
+    getSucceedData();
+  }, []);
 
   return (
     <MatchingLayout>
-      {DATAS ? (
+      {succeedData ? (
         <>
           <Container>
             <Text>
@@ -69,7 +45,7 @@ export default function MatchingSucceed() {
             </Text>
           </Container>
           <Container2>
-            {DATAS.map((team) => {
+            {succeedData.map((team) => {
               const {
                 id,
                 teamName,
@@ -78,21 +54,27 @@ export default function MatchingSucceed() {
                 intro,
                 isVerified,
                 matchedAt,
-                contact,
               } = team;
 
               return (
                 <TeamCard key={id}>
                   <OtherTeamNumberModal
-                    open={modalState.find((state) => state.teamId === id).open}
+                    open={
+                      modalState.find((state) => state.teamId === id)?.open ||
+                      false
+                    }
                     closeModal={() => closeModal(id)}
                     teamName={teamName}
-                    contact={contact}
+                    teamId={id}
                   />
                   <OtherTeamProfileModal
-                    open={modalState2.find((state) => state.teamId === id).open}
+                    open={
+                      modalState2.find((state) => state.teamId === id)?.open ||
+                      false
+                    }
                     closeModal={() => closeModal2(id)}
                     teamId={id}
+                    state={'succeed'}
                   />
                   <ApplicationDate>
                     {dayjs(matchedAt).format('M월 DD일')}
@@ -246,7 +228,7 @@ const ButtonBox = styled.div`
 `;
 
 const Button1 = styled.button`
-  padding: 5px 7px;
+  padding: 5px 10px;
   border: none;
   border-radius: 15px;
   color: #ffffff;
@@ -257,12 +239,12 @@ const Button1 = styled.button`
   cursor: pointer;
 
   @media (max-width: 365px) {
-    padding: 5px 10px;
+    padding: 5px 20px;
   }
 `;
 
 const Button2 = styled.button`
-  padding: 5px 7px;
+  padding: 5px 10px;
   border: none;
   border-radius: 15px;
   color: #eb8888;
@@ -274,7 +256,7 @@ const Button2 = styled.button`
 
   @media (max-width: 365px) {
     margin-top: 5%;
-    padding: 5px 10px;
+    padding: 5px 20px;
   }
 `;
 

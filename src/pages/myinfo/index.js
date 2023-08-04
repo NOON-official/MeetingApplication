@@ -1,17 +1,12 @@
 import styled from 'styled-components';
-import { Button, Col, notification, Row } from 'antd';
+import { Button, notification } from 'antd';
 import { useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MainLayout from '../../layout/MainLayout';
-import { ReactComponent as KakaoTalk } from '../../asset/svg/KakaoTalk.svg';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
-import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
-import { ReactComponent as QuestionCircle } from '../../asset/svg/QuestionCircle.svg';
-import coffeeGreyImg from '../../asset/img/coffee-grey.png';
-import coffeeImg from '../../asset/img/coffee.png';
+import { ReactComponent as Glasses } from '../../asset/svg/Glasses.svg';
 import Section from '../../components/Section';
-import PrimaryModal from '../../components/Modal/PrimaryModal';
 import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
 import { logout } from '../../features/user/asyncActions';
 import SigninView from '../../components/Auth/SigninView';
@@ -89,26 +84,59 @@ function MyInfo() {
     <MainLayout>
       {contextHolder}
       <Section>
+        <MyProfileBox>
+          <Glasses />
+          <SLink to="/myinfo/account">
+            <Text>내 정보 보러가기</Text>
+            <SRightArrow />
+          </SLink>
+        </MyProfileBox>
+      </Section>
+      <Section>
         <MenuBox>
           <MenuItem>
-            <Link to="/myinfo/account">
+            <Link to="/myinfo/studentcard">
               <LinkButton>
-                계정관리 <RightArrow />
+                학교 인증 <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/myinfo/ticket">
+            <Link to="/">
               <LinkButton>
-                이용권 현황 <RightArrow />
+                서비스 소개
+                <RightArrow />
+              </LinkButton>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/guide">
+              <LinkButton>
+                서비스 가이드
+                <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link to="/myinfo/ticket/coupon">
               <LinkButton>
-                쿠폰 등록
+                이용권 구매
                 <RightArrow />
+              </LinkButton>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link>
+              <LinkButton>
+                미팅 후기
+                <RightArrow />
+              </LinkButton>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link>
+              <LinkButton>
+                이벤트 <RightArrow />
               </LinkButton>
             </Link>
           </MenuItem>
@@ -131,13 +159,13 @@ function MyInfo() {
           type="text"
           onClick={() => {
             dispatch(logout());
-            localStorage.removeItem('needMoreInfo');
+            localStorage.clear();
           }}
         >
           로그아웃
         </LogoutButton>
       </Section>
-      <Section>
+      {/* <Section>
         <InvitationTitle>친구 초대 이벤트</InvitationTitle>
         <CouponBox>
           <InvitationSubtitle>
@@ -174,8 +202,8 @@ function MyInfo() {
             </TooltipButton>
           </div>
         </CouponBox>
-      </Section>
-      <Section my="12px">
+      </Section> */}
+      {/* <Section my="12px">
         <Row gutter={16}>
           <Col span={12}>
             <CopyButton block onClick={copyToClipboard}>
@@ -188,8 +216,8 @@ function MyInfo() {
             </KakaoButton>
           </Col>
         </Row>
-      </Section>
-      <PrimaryModal
+      </Section> */}
+      {/* <PrimaryModal
         title="유의사항"
         open={isNoticeOpened}
         onCancel={() => setIsNoticeOpened(false)}
@@ -206,12 +234,40 @@ function MyInfo() {
             참여 대상에서 제외할 수 있습니다.
           </li>
         </NoticeDescription>
-      </PrimaryModal>
+      </PrimaryModal> */}
     </MainLayout>
   );
 }
 
 export default MyInfo;
+
+const MyProfileBox = styled.div`
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 35px;
+  margin-top: 5%;
+  padding: 5%;
+  border: none;
+  border-radius: 10px;
+  background-color: #e5e5e5;
+`;
+
+const SLink = styled(Link)`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000000e5;
+`;
+
+const Text = styled.span`
+  margin-left: 3%;
+`;
+
+const SRightArrow = styled(RightArrow)`
+  margin-left: auto;
+`;
 
 const CouponBox = styled.div`
   display: flex;

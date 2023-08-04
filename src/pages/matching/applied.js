@@ -8,16 +8,23 @@ import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
+import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);
-  const [deleteProfile, setDeleteProfile] = useState([]);
-  const [deleteRefuseProfile, setDeleteRefuseProfile] = useState([]);
+  const [deleteProfileList, setDeleteProfileList] = useState([]);
+  const [deleteRefuseProfileList, setDeleteRefuseProfileList] = useState([]);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const myTeamId = localStorage.getItem('myTeamId');
 
   const [applyData, setApplyData] = useState([]);
-  const [refuseData, setRefuseData] = useState(null);
+  const [refuseData, setRefuseData] = useState([]);
+
+  const setModal = (bool) => {
+    setOpenDeleteModal(bool);
+  };
 
   const getApplyData = useCallback(async () => {
     const apply = await backend.get(`/users/matchings/applied`);
@@ -27,14 +34,16 @@ export default function MatchingApplied() {
   }, []);
 
   useEffect(() => {
-    getApplyData();
-  }, []);
+    if (accessToken && myTeamId) {
+      getApplyData();
+    }
+  }, [myTeamId]);
 
   const handleTabChange = (tabIdx) => {
     if (selectTab === 1 && tabIdx === 2) {
-      setDeleteProfile([]);
+      setDeleteProfileList([]);
     } else if (selectTab === 2 && tabIdx === 1) {
-      setDeleteRefuseProfile([]);
+      setDeleteRefuseProfileList([]);
     }
     setSelectTab(tabIdx);
   };
@@ -43,7 +52,7 @@ export default function MatchingApplied() {
     <Text>
       {clickEditBtn ? (
         <>
-          <Pink>{deleteProfile.length}</Pink>/{applyData?.length}개 선택
+          <Pink>{deleteProfileList.length}</Pink>/{applyData?.length}개 선택
         </>
       ) : (
         <>최대 24시간 이내에 상대팀의 미팅 의사를 확인해 볼게요 ⏱</>
@@ -61,6 +70,12 @@ export default function MatchingApplied() {
 
   return (
     <MatchingLayout>
+      <DeleteProfileModal
+        open={openDeleteModal}
+        setModal={setModal}
+        state="applied"
+        data={selectTab === 1 ? deleteProfileList : deleteRefuseProfileList}
+      />
       {applyData.length !== 0 ? (
         <>
           <Container>
@@ -79,12 +94,17 @@ export default function MatchingApplied() {
               </Tab>
               {clickEditBtn ? (
                 <EditBtn>
-                  <Delete selected={deleteProfile.length > 0}>삭제</Delete>
+                  <Delete
+                    selected={deleteProfileList.length > 0}
+                    onClick={() => setOpenDeleteModal(true)}
+                  >
+                    삭제
+                  </Delete>
                   <Cancel
                     onClick={() => {
                       setClickEditBtn(false);
-                      if (selectTab === 1) setDeleteProfile([]);
-                      else setDeleteRefuseProfile([]);
+                      if (selectTab === 1) setDeleteProfileList([]);
+                      else setDeleteRefuseProfileList([]);
                     }}
                   >
                     취소
@@ -101,13 +121,16 @@ export default function MatchingApplied() {
             )}
           </Container>
           <OtherTeamList
+            state={'apply'}
             teamList={selectTab === 1 ? applyData : refuseData}
             clickEditBtn={clickEditBtn}
             deleteProfile={
-              selectTab === 1 ? deleteProfile : deleteRefuseProfile
+              selectTab === 1 ? deleteProfileList : deleteRefuseProfileList
             }
             setDeleteProfile={
-              selectTab === 1 ? setDeleteProfile : setDeleteRefuseProfile
+              selectTab === 1
+                ? setDeleteProfileList
+                : setDeleteRefuseProfileList
             }
           />
         </>
