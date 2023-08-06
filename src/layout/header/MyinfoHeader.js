@@ -9,11 +9,11 @@ export default function MyinfoHeader({ title }) {
 
   const goBack = useCallback(() => {
     // 이용권 구매 페이지인 경우
-    if (window.location.pathname === '/myinfo/ticket/buy') {
-      navigate('/myinfo/ticket');
+    if (window.location.pathname === '/myinfo/ting/buy') {
+      navigate('/myinfo/ting');
     }
     // 이용권 현황 페이지인 경우
-    else if (window.location.pathname === '/myinfo/ticket') {
+    else if (window.location.pathname === '/myinfo/ting') {
       navigate('/myinfo');
     } else {
       navigate('/myinfo');
@@ -36,7 +36,7 @@ const Container = styled.div`
   margin: 0 auto;
   max-width: 425px;
   height: 4vh;
-  padding: 20px 0;
+  padding: 20px;
   background-color: ${(props) =>
     props.title === '학교 인증' ||
     props.title === '보유 팅' ||
