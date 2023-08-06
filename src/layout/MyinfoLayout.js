@@ -18,14 +18,15 @@ export default function MyinfoLayout({ children, title }) {
 
 const Container = styled.div`
   height: 100vh;
-  background-color: ${(props) => props.theme.background};
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: ${(props) => props.theme.background};
 `;
 
 const Header = styled.header`
   width: 100%;
+  max-width: 425px;
 `;
 
 const Content = styled.div`

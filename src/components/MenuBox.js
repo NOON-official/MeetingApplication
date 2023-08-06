@@ -34,7 +34,7 @@ const MenuBox = styled.div`
   padding: 4px 20px;
 
   > ${MenuItem} {
-    border-bottom: 3px solid #f8f3f3;
+    border-bottom: 1px solid #f8f3f3;
     :last-child {
       border: none;
     }

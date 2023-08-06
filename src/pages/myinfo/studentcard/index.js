@@ -14,6 +14,7 @@ import CompleteUploadModal from '../../../components/Modal/CompleteUploadModal';
 import AutomaticModal from '../../../components/Modal/AutomaticModal';
 import BigFileModal from '../../../components/Modal/BigFileModal';
 import backend from '../../../util/backend';
+import Section from '../../../components/Section';
 
 export default function StudentCard() {
   const [openModal, setOpenModal] = useState(false);
@@ -302,10 +303,10 @@ const PinkText = styled.span`
   font-weight: 400;
 `;
 
-const Section = styled.div`
-  padding: 6%;
-  background-color: #ffffff;
-`;
+// const Section = styled.div`
+//   padding: 6%;
+//   background-color: #ffffff;
+// `;
 
 const Header = styled.div`
   display: flex;
