@@ -125,7 +125,7 @@ const Router = createBrowserRouter([
         element: <Ting />,
       },
       {
-        path: 'myinfo/chargeting',
+        path: 'myinfo/ting/buy',
         element: <ChargeTing />,
       },
       {
