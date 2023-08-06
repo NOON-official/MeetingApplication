@@ -6,7 +6,13 @@ import backend from '../../util/backend';
 import { ReactComponent as ExclamationMark } from '../../asset/svg/ExclamationMark.svg';
 import AutomaticModal from './AutomaticModal';
 
-export default function DeleteProfileModal({ open, setModal, state, data }) {
+export default function DeleteProfileModal({
+  open,
+  setModal,
+  state,
+  data,
+  fetchData,
+}) {
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
 
   const deleteProfile = async () => {
@@ -16,6 +22,7 @@ export default function DeleteProfileModal({ open, setModal, state, data }) {
           data: { matchingIds: data },
         });
         setOpenCompleteModal(true);
+        fetchData();
       } catch (e) {
         console.error(e);
         window.alert('삭제 중 오류가 발생하였습니다');
@@ -26,6 +33,7 @@ export default function DeleteProfileModal({ open, setModal, state, data }) {
           data: { matchingIds: data },
         });
         setOpenCompleteModal(true);
+        fetchData();
       } catch (e) {
         console.error(e);
         window.alert('삭제 중 오류가 발생하였습니다');
