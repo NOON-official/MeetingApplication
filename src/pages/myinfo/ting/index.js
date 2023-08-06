@@ -33,7 +33,7 @@ export default function Ting() {
             <Pink>4팅</Pink> 사용
           </Bold>
         </Content>
-        <ChargeTingBtn onClick={() => navigate('/myinfo/chargeting')}>
+        <ChargeTingBtn onClick={() => navigate('/myinfo/ting/buy')}>
           팅 충전하러 가기
         </ChargeTingBtn>
       </Section>

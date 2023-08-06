@@ -53,7 +53,7 @@ export default function Guide() {
 
   return (
     <MyinfoLayout title="서비스 가이드">
-      <Section my="32px">
+      <Section my="3%" mx="10%">
         <Container>
           {guides.map((guide) => (
             <Accordion
