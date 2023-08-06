@@ -2,18 +2,15 @@ import { useEffect, useCallback, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from 'antd';
-import dayjs from 'dayjs';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import MenuBox, { MenuItem } from '../../../components/MenuBox';
-import Section, { SectionTitle } from '../../../components/Section';
+import Section from '../../../components/Section';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as FreindHalf } from '../../../asset/svg/FreindHalf.svg';
-import { ReactComponent as Checkbox } from '../../../asset/svg/Checkbox.svg';
-import { ReactComponent as CheckboxChecked } from '../../../asset/svg/CheckboxChecked.svg';
+import { ReactComponent as Checkbox } from '../../../asset/svg/CheckboxUnfilled.svg';
+import { ReactComponent as CheckboxChecked } from '../../../asset/svg/CheckboxFilled.svg';
 import Accordion from '../../../components/Accordion';
-import PrimaryButton from '../../../components/PrimaryButton';
-import CouponItem from '../../../components/CouponItem';
 import {
   useGetUserCouponsQuery,
   useGetCouponsPageDataQuery,
@@ -136,13 +133,14 @@ export default function ChargeTing() {
 
   return (
     <MyinfoLayout title="팅 충전하기">
-      <SectionTitle>
-        <Title>얼만큼 충전할까요?</Title>
-        <TingImg />
-      </SectionTitle>
+      <Section my="10px" mx="30px">
+        <Title>
+          얼만큼 충전할까요?&nbsp;&nbsp;
+          <TingImg />
+        </Title>
+      </Section>
       <Section>
         <MenuBox>
-          {/* <SFreindHalf /> */}
           {pageData?.Products.map((product) => (
             <MenuItem key={product.id}>
               <CheckboxButton onClick={() => setSelectedProductId(product.id)}>
@@ -153,6 +151,7 @@ export default function ChargeTing() {
                     <Checkbox />
                   )}
                   <ProductTitleText>{product.name}</ProductTitleText>
+                  <STingImg />
                 </ProductTitleBox>
                 <ProductPriceBox>
                   {product.originalPrice !== product.price && (
@@ -169,7 +168,7 @@ export default function ChargeTing() {
           ))}
         </MenuBox>
       </Section>
-      <Section my="24px">
+      {/* <Section my="24px">
         <Accordion
           isShown
           title={<AccordionTitle>쿠폰 적용</AccordionTitle>}
@@ -199,25 +198,24 @@ export default function ChargeTing() {
             </CouponList>
           }
         />
-      </Section>
-      <Section my="20px" center>
+      </Section> */}
+      {/* <Section my="20px" center>
         <TotalPriceBox>
           <span>최종 결제 금액</span>
           <span>{totalAmount.toLocaleString()}원</span>
         </TotalPriceBox>
-      </Section>
+      </Section> */}
       <Section my="20px" center>
-        <PrimaryButton onClick={makePayment}>구매하기</PrimaryButton>
+        <ChargeBtn onClick={makePayment}>충전하기</ChargeBtn>
       </Section>
-      <Section my="68px">
+      <Section my="50px" mx="30px">
         <WarningAccordion
           title={<AccordionTitle>유의사항</AccordionTitle>}
           content={
             <WarningDescription>
-              <li>환불은 구매 후 10일 이내 채널톡 문의 주시면 가능합니다.</li>
-              <li>구매한 이용권은 매칭이 최종 성사되면 자동 차감됩니다.</li>
-              <li>상대방이 거절할 경우 이용권은 자동으로 환급됩니다.</li>
-              <li>쿠폰 사용 후 환불 요청 시 쿠폰은 환급되지 않습니다.</li>
+              <li>환불은 2일 이내 채널톡으로 문의 주시면 가능합니다.</li>
+              <li>구매한 팅은 신청/수락 시 자동 차감됩니다.</li>
+              <li>쿠폰으로 최종 결제 시 해당 쿠폰에 관한 권리는 소멸됩니다.</li>
             </WarningDescription>
           }
         />
@@ -227,8 +225,10 @@ export default function ChargeTing() {
 }
 
 const Title = styled.div`
-  margin-right: 3%;
+  display: flex;
+  align-items: center;
   font-size: 20px;
+  font-weight: 600;
 `;
 
 const CheckboxButton = styled(Button).attrs({
@@ -248,24 +248,32 @@ const ProductTitleBox = styled.div`
 `;
 const ProductTitleText = styled.span`
   color: #777777;
-  font-size: 14px;
-  margin-left: 18px;
+  font-size: 16px;
+  margin: 0 10px 0 18px;
 `;
 
 const ProductPriceBox = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 45%;
 
   > span.discount {
-    color: #a0a0a0;
+    color: #eb8888;
     text-decoration-line: line-through;
-    font-size: 9px;
+    font-size: 13px;
+    font-weight: 400;
   }
   > span.price {
+    margin-left: auto;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     color: #777777;
   }
+`;
+
+const STingImg = styled(TingImg)`
+  width: 16px;
 `;
 
 const AccordionTitle = styled.span`
@@ -325,4 +333,16 @@ const SFreindHalf = styled(FreindHalf)`
   position: absolute;
   top: -7%;
   right: 1%;
+`;
+
+const ChargeBtn = styled(Button)`
+  background-color: #eb8888;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  /* padding: 10px; */
+  width: 80%;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 300;
 `;

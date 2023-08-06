@@ -75,6 +75,7 @@ export default function MatchingApplied() {
         setModal={setModal}
         state="applied"
         data={selectTab === 1 ? deleteProfileList : deleteRefuseProfileList}
+        fetchData={getApplyData}
       />
       {applyData.length !== 0 ? (
         <>
