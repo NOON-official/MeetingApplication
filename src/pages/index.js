@@ -4,12 +4,11 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Carousel, Space } from 'antd';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
 import { ReactComponent as SliderLArrow } from '../asset/svg/SliderLArrow.svg';
-import { ReactComponent as WriteReview } from '../asset/svg/WriteReview.svg';
 import { ReactComponent as SliderRArrow } from '../asset/svg/SliderRArrow.svg';
 import MainLayout from '../layout/MainLayout';
 import Section from '../components/Section';
@@ -18,7 +17,6 @@ import backend from '../util/backend';
 import {
   // useGetTeamCountQuery,
   useGetTeamMembersCountTotalQuery,
-  useGetUserAgreementsQuery,
 } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
 import PrimaryModal from '../components/Modal/PrimaryModal';
@@ -29,12 +27,12 @@ import Review from './myinfo/review/review';
 function Main() {
   const params = new URLSearchParams(window.location.search);
   const referralId = params.get('referralId');
+  const navigate = useNavigate();
   const { finishedStep } = useSelector((store) => store.apply);
   const { accessToken } = useSelector((state) => state.user);
-  const navigate = useNavigate();
+  const [agreementsData, setAgreementsData] = useState(false);
 
   const { data: userCountData } = useGetTeamMembersCountTotalQuery();
-  const { data: agreementsData } = useGetUserAgreementsQuery();
 
   const needMoreInfo = localStorage.getItem('needMoreInfo');
 
@@ -51,9 +49,15 @@ function Main() {
     }
   };
 
+  const getAgreements = async () => {
+    const agreements = await backend.get('/users/agreements');
+    setAgreementsData(agreements.data);
+  };
+
   useEffect(() => {
     if (accessToken) {
       getInfo();
+      getAgreements();
     }
   }, [accessToken]);
 
@@ -73,7 +77,6 @@ function Main() {
     }
   }, [accessToken, agreementsData]);
 
-  const slider1 = useRef(null);
   const slider2 = useRef(null);
 
   return (
@@ -221,15 +224,6 @@ const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   }
 `;
 
-// const Review = styled.div`
-//   padding-left: 15%;
-//   display: flex;
-//   align-items: center;
-//   font-weight: 400;
-//   font-size: 15px;
-//   color: #000000;
-// `;
-
 const Slider = styled.div`
   margin-top: 10px;
   width: 100%;
@@ -245,13 +239,6 @@ const Slider = styled.div`
 const SCarousel = styled(Carousel)`
   width: 270px;
   height: 180px;
-`;
-
-const SWriteReview = styled(WriteReview)`
-  margin-left: 10px;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const AwardTitle = styled.div`
