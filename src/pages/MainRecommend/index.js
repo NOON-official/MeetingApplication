@@ -1,28 +1,13 @@
-import { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import backend from '../../util/backend';
 import NoProfile from '../../components/MainRecommend/NoProfile';
 import Timer from './timer';
 import RecommendList from './recommendList';
 import RecommendModal from '../../components/Modal/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
+import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 
 export default function Recommend() {
-  const myTeamId = localStorage.getItem('myTeamId');
-
-  const getInformation = useCallback(async () => {
-    const teamid = await backend.get(`/users/team-id`);
-
-    if (teamid.data.teamId !== null) {
-      localStorage.setItem('myTeamId', teamid.data.teamId);
-      const profile = await backend.get(`/teams/${teamid.data.teamId}`);
-      localStorage.setItem('myProfile', JSON.stringify(profile.data));
-    }
-  }, []);
-
-  useEffect(() => {
-    getInformation();
-  }, []);
+  const { data: myTeamId } = useGetUserTeamIdDataQuery();
 
   return (
     <>

@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as TingImg } from '../../../asset/svg/TingImg.svg';
 
 export default function Ting() {
+  const navigate = useNavigate();
+
   return (
     <MyinfoLayout title="보유 팅">
       <Section>
@@ -30,7 +33,9 @@ export default function Ting() {
             <Pink>4팅</Pink> 사용
           </Bold>
         </Content>
-        <ChargeTingBtn>팅 충전하러 가기</ChargeTingBtn>
+        <ChargeTingBtn onClick={() => navigate('/myinfo/ting/buy')}>
+          팅 충전하러 가기
+        </ChargeTingBtn>
       </Section>
     </MyinfoLayout>
   );

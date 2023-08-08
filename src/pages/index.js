@@ -4,37 +4,35 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Carousel, Space } from 'antd';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
 import { ReactComponent as SliderLArrow } from '../asset/svg/SliderLArrow.svg';
-import { ReactComponent as WriteReview } from '../asset/svg/WriteReview.svg';
 import { ReactComponent as SliderRArrow } from '../asset/svg/SliderRArrow.svg';
 import MainLayout from '../layout/MainLayout';
 import Section from '../components/Section';
-import SliderBox from '../components/SliderBox';
 import SliderBox2 from '../components/SliderBox2';
 import backend from '../util/backend';
 import {
   // useGetTeamCountQuery,
   useGetTeamMembersCountTotalQuery,
-  useGetUserAgreementsQuery,
 } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
 import PrimaryModal from '../components/Modal/PrimaryModal';
 import PrimaryButton from '../components/PrimaryButton';
 import Recommend from './MainRecommend';
+import Review from './myinfo/review/review';
 
 function Main() {
   const params = new URLSearchParams(window.location.search);
   const referralId = params.get('referralId');
+  const navigate = useNavigate();
   const { finishedStep } = useSelector((store) => store.apply);
   const { accessToken } = useSelector((state) => state.user);
-  const navigate = useNavigate();
+  const [agreementsData, setAgreementsData] = useState(false);
 
   const { data: userCountData } = useGetTeamMembersCountTotalQuery();
-  const { data: agreementsData } = useGetUserAgreementsQuery();
 
   const needMoreInfo = localStorage.getItem('needMoreInfo');
 
@@ -51,9 +49,15 @@ function Main() {
     }
   };
 
+  const getAgreements = async () => {
+    const agreements = await backend.get('/users/agreements');
+    setAgreementsData(agreements.data);
+  };
+
   useEffect(() => {
     if (accessToken) {
       getInfo();
+      getAgreements();
     }
   }, [accessToken]);
 
@@ -73,7 +77,6 @@ function Main() {
     }
   }, [accessToken, agreementsData]);
 
-  const slider1 = useRef(null);
   const slider2 = useRef(null);
 
   return (
@@ -119,68 +122,7 @@ function Main() {
           </Section>
           <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
           <Section>
-            <Review>
-              미팅 후기
-              <SWriteReview
-                onClick={() => {
-                  window.open('https://forms.gle/Yk6tNrXkLbKseSqc9');
-                }}
-              />
-            </Review>
-            <Slider>
-              <SliderLArrow onClick={() => slider1.current.prev()} />
-              <SCarousel dots={false} ref={slider1} autoplay={4}>
-                <SliderBox
-                  gender="여성"
-                  age="초반"
-                  star="5"
-                  text={
-                    '처음 해본 미팅이었는데 되게 괜찮은 분들이\n나오셨어요!! 너무 재밌었고 그런 분들만\n나오시면 정말 자주 나갈것 같아요 ㅋㅋㅋ\n매칭 시스템도 깔끔하고 좋은것 같아요'
-                  }
-                />
-                <SliderBox
-                  gender="남성"
-                  age="중반"
-                  star="5"
-                  text={
-                    '재밌었고 좋았어요! 거기서 마음에 드는\n분을 만나 이번주 주말에 애프터로 만나기로\n했어요! 이용료도 부담스럽진 않았어서 더욱\n괜찮았습니다 시간도 오래 안걸리고요👍'
-                  }
-                />
-                <SliderBox
-                  gender="여성"
-                  age="초반"
-                  star="4"
-                  text={
-                    '지인추천이 아니라 처음에는 살짝 걱정\n되더라구요 그런데 실제로 만나보니 정말\n유쾌하고 좋은 분들이 나오셔서 좋은 시간\n보내고 왔어요! 감사합니다'
-                  }
-                />
-                <SliderBox
-                  gender="남성"
-                  age="후반"
-                  star="4"
-                  text={
-                    '주변에 미팅 잡아달라고 할 사람 없으면\n쓰기 좋은 듯 소개팅도 해줬으면 좋겠다'
-                  }
-                />
-                <SliderBox
-                  gender="여성"
-                  age="중반"
-                  star="5"
-                  text={
-                    '미팅 잡히는 속도가 빨라서 좋았습니다.\n가기 전에 어느정도 상대방의 정보를\n미리 알 수 있어서 좋았습니다. 이걸로 미팅\n초반에 어색할 때 얘기하기도 재밌었어요ㅎ'
-                  }
-                />
-                <SliderBox
-                  gender="남성"
-                  age="중반"
-                  star="5"
-                  text={
-                    '좋은 인연들을 만났고 이후에도 또 약속을\n잡고 연락을 하며 이어나가고 있습니다.\n장소, 날짜, 성향 등을 미리 알고 미팅하니\n더 조율하기도 좋고 편했던 것 같습니다.'
-                  }
-                />
-              </SCarousel>
-              <SliderRArrow onClick={() => slider1.current.next()} />
-            </Slider>
+            <Review />
             <AwardTitle>
               <BAwarditle>우리 팀 한 줄 어필 AWARDS</BAwarditle>
               <SAwardTitle>
@@ -282,15 +224,6 @@ const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   }
 `;
 
-const Review = styled.div`
-  padding-left: 15%;
-  display: flex;
-  align-items: center;
-  font-weight: 400;
-  font-size: 15px;
-  color: #000000;
-`;
-
 const Slider = styled.div`
   margin-top: 10px;
   width: 100%;
@@ -306,13 +239,6 @@ const Slider = styled.div`
 const SCarousel = styled(Carousel)`
   width: 270px;
   height: 180px;
-`;
-
-const SWriteReview = styled(WriteReview)`
-  margin-left: 10px;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const AwardTitle = styled.div`
