@@ -1,33 +1,19 @@
 import styled from 'styled-components';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import TopHeader from './header/TopHeader';
 import BottomTabs from './header/BottomTabs';
 import MyTeamProfile from '../components/MainRecommend/MyTeamProfileModal';
-import { ReactComponent as MainDoc } from '../asset/svg/MainDoc.svg';
-import { ReactComponent as UniversityMarkPink } from '../asset/svg/UniversityMarkPink.svg';
-import backend from '../util/backend';
 import MainMatchingHeader from './header/MainMatchingHeader';
+import { useGetUserTeamIdDataQuery } from '../features/backendApi';
 
 export default function MatchingLayout({ children }) {
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
-  const [teamProfile, setTeamProfile] = useState([]);
-  const myTeamId = localStorage.getItem('myTeamId');
+  const { data: myTeamId } = useGetUserTeamIdDataQuery();
 
   const setModal = (bool) => {
     setOpenMyTeamProfile(bool);
   };
-
-  const getInformation = useCallback(async () => {
-    const profile = await backend.get(`/teams/${myTeamId}`);
-    setTeamProfile(profile.data);
-  }, [myTeamId]);
-
-  useEffect(() => {
-    if (myTeamId) {
-      getInformation();
-    }
-  }, [myTeamId]);
 
   const activeStyle = {
     padding: '4px',
@@ -50,12 +36,7 @@ export default function MatchingLayout({ children }) {
         <TopHeader />
       </Header>
       <Content>
-        <MyTeamProfile
-          open={openMyTeamProfile}
-          setModal={setModal}
-          teamId={myTeamId}
-          profile={teamProfile}
-        />
+        <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
         <Section>
           {myTeamId ? (
             <Section>
@@ -120,44 +101,6 @@ const Section = styled.div`
   background-color: #ffffff;
 `;
 
-const MainButton = styled.button`
-  display: flex;
-  align-items: center;
-  margin-top: 5%;
-  width: 90%;
-  height: 70px;
-  padding: 30px;
-  border: none;
-  border-radius: 10px;
-  background-color: #ffe8e8;
-  cursor: pointer;
-`;
-
-const SMainDoc = styled(MainDoc)`
-  margin-right: 15px;
-`;
-
-const SUniversityMarkPink = styled(UniversityMarkPink)`
-  margin-right: 15px;
-`;
-
-const BtnTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-`;
-
-const BtnMainTitle = styled.div`
-  font-weight: 500;
-`;
-
-const BtnSubtitle = styled.div`
-  color: #777777;
-  font-size: 12px;
-  font-weight: 300;
-`;
-
 const Header2 = styled.div`
   display: flex;
   justify-content: space-around;
@@ -167,7 +110,6 @@ const Header2 = styled.div`
 `;
 
 const Content = styled.div`
-  border: 1px solid blue;
   max-width: 425px;
   width: 100%;
   height: 100%;

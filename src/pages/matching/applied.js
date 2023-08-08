@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ChannelTalk from '../../asset/ChannelTalk';
 import MatchingLayout from '../../layout/MatchingLayout';
 import SigninView from '../../components/Auth/SigninView';
@@ -9,15 +10,18 @@ import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
 import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
+import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
+  const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const navigate = useNavigate();
+
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfileList, setDeleteProfileList] = useState([]);
   const [deleteRefuseProfileList, setDeleteRefuseProfileList] = useState([]);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const myTeamId = localStorage.getItem('myTeamId');
 
   const [applyData, setApplyData] = useState([]);
   const [refuseData, setRefuseData] = useState([]);
@@ -139,7 +143,7 @@ export default function MatchingApplied() {
         <NoMeetingContainer>
           <Title>신청한 미팅이 없어요</Title>
           <SSadFace />
-          <Button>
+          <Button onClick={() => navigate('/apply/1')}>
             <CreateTeamBtn>신청하러 가기</CreateTeamBtn>
           </Button>
         </NoMeetingContainer>
