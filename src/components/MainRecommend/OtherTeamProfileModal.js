@@ -9,6 +9,7 @@ import backend from '../../util/backend';
 import AreaText from './AreaText';
 import DateText from './DateText';
 import ApplyButton from '../ApplyButton';
+import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 
 export default function OtherTeamProfileModal({
   open,
@@ -18,7 +19,7 @@ export default function OtherTeamProfileModal({
   matchingId,
 }) {
   const [teamProfile, setTeamProfile] = useState(null);
-  const myTeamId = localStorage.getItem('myTeamId');
+  const { data: myTeamId } = useGetUserTeamIdDataQuery();
 
   const getProfile = useCallback(async () => {
     const profile = await backend.get(`/teams/${teamId}`);
@@ -27,7 +28,7 @@ export default function OtherTeamProfileModal({
 
   const applyMatching = async () => {
     try {
-      await backend.post(`/matchings/${myTeamId}/${teamId}`);
+      await backend.post(`/matchings/${myTeamId.teamId}/${teamId}`);
       alert('신청되었습니다!');
       closeModal();
       window.location.reload();
@@ -107,7 +108,7 @@ export default function OtherTeamProfileModal({
             <TextBox>
               <Container>
                 <Title>상대 팀 기본 정보</Title>
-                {teamProfile?.isVerified ? (
+                {teamProfile?.approval ? (
                   <>
                     <SUniversityMark />
                     <UniversityMarkText>대학 인증 완료</UniversityMarkText>
