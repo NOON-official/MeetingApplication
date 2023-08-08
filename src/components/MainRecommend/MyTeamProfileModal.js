@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from 'antd';
@@ -11,14 +11,25 @@ import StopMatchingModal from '../Modal/StopMatchingModal';
 import SliderBoxMembers from '../SliderBoxMembers';
 import AreaText from './AreaText';
 import DateText from './DateText';
+import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
+import backend from '../../util/backend';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal } = props;
-  const myTeamId = localStorage.getItem('myTeamId');
-  const profile = JSON.parse(localStorage.getItem('myProfile'));
+  const { data: myTeamId } = useGetUserTeamIdDataQuery();
 
+  const [myProfile, setMyProfile] = useState(null);
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
+
+  const getProfile = async () => {
+    const profile = await backend.get(`/teams/${myTeamId?.teamId}`);
+    setMyProfile(profile.data);
+  };
+
+  useEffect(() => {
+    if (myTeamId) getProfile();
+  }, [myTeamId]);
 
   const AlcholContent = {
     1: '반 병',
@@ -51,20 +62,20 @@ export default function MyTeamProfileModal(props) {
             setModal={() => {
               setIsStopMatchingModalOpen((prev) => !prev);
             }}
-            teamId={myTeamId}
+            teamId={myTeamId.teamId}
           />
-          {profile && (
+          {myProfile && (
             <>
               <TeamProfile>
-                <TeamName>{profile.teamName}</TeamName>
+                <TeamName>{myProfile.teamName}</TeamName>
                 <TextBox>
                   <Title>한 줄 어필</Title>
-                  <Content>{profile.intro}</Content>
+                  <Content>{myProfile.intro}</Content>
                 </TextBox>
                 <TextBox>
                   <Container>
                     <Title>기본 정보</Title>
-                    {profile.approval ? (
+                    {myProfile.approval ? (
                       <>
                         <SUniversityMark />
                         <UniversityMarkText>대학 인증 완료</UniversityMarkText>
@@ -79,21 +90,21 @@ export default function MyTeamProfileModal(props) {
                   <TeamInfo>
                     <Subtitle>일정</Subtitle>
                     <SubContent>
-                      <DateText availableDates={profile.teamAvailableDate} />
+                      <DateText availableDates={myProfile.teamAvailableDate} />
                     </SubContent>
                   </TeamInfo>
                   <TeamInfo>
                     <Subtitle>지역</Subtitle>
-                    <AreaText areaProps={profile.areas} />
+                    <AreaText areaProps={myProfile.areas} />
                   </TeamInfo>
                   <TeamInfo>
                     <Subtitle>주량</Subtitle>
-                    <SubContent>{`${AlcholContent[profile.drink]} (Lv.${
-                      profile.drink
+                    <SubContent>{`${AlcholContent[myProfile.drink]} (Lv.${
+                      myProfile.drink
                     })`}</SubContent>
                   </TeamInfo>
                 </TextBox>
-                <SliderBoxMembers members={profile.members} />
+                <SliderBoxMembers members={myProfile.members} />
               </TeamProfile>
               <Footer>
                 <ButtonBox>
