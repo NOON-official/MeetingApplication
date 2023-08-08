@@ -10,6 +10,8 @@ const Section = styled.section`
 `;
 
 export const SectionTitle = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 14px;
   font-weight: 600;
   color: ${(props) => props.theme.grey};
