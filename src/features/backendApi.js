@@ -41,6 +41,9 @@ export const backendApi = createApi({
     getUserAgreements: builder.query({
       query: () => `users/agreements`,
     }),
+    getUserTingCount: builder.query({
+      query: () => `users/tings/count`,
+    }),
     getOrdersPageData: builder.query({
       query: () => `orders/pagedata`,
     }),
@@ -75,6 +78,7 @@ export const {
   useGetUserInvitationCountQuery,
   useGetUserReferralIdQuery,
   useGetUserAgreementsQuery,
+  useGetUserTingCountQuery,
   useGetOrdersPageDataQuery,
   useGetCouponsPageDataQuery,
   useGetTeamMembersCountOneWeekQuery,

@@ -5,16 +5,29 @@ import { ReactComponent as UniversityMarkGray } from '../../asset/svg/University
 import useModalState from '../../hooks/useModalState';
 import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
 import backend from '../../util/backend';
+import { useGetMyInfoQuery } from '../../features/backendApi';
+import StudentCardModal from '../../components/Modal/StudentCardModal';
 
 export default function RecommendList() {
+  const { data: myinfo } = useGetMyInfoQuery();
   const [teamList, setTeamList] = useState([]);
   const [modalState, openModal, closeModal] = useModalState(teamList);
+  const [studentCardModal, setStudentCardModal] = useState(false);
+
 
   const getList = async () => {
     const recommend = await backend.get(`/users/teams/recommended`);
     setTeamList(recommend.data.teams);
   };
 
+  const handleOpen = (id) => {
+    if (myinfo?.approval === 1) {
+      openModal(id);
+    } else {
+      setStudentCardModal(true);
+    }
+  };
+  
   useEffect(() => {
     getList();
   }, []);
@@ -26,6 +39,11 @@ export default function RecommendList() {
 
         return (
           <TeamCard key={id}>
+            <StudentCardModal
+              open={studentCardModal}
+              setModal={setStudentCardModal}
+            />
+
             <OtherTeamProfileModal
               open={
                 modalState.find((state) => state.teamId === id)?.open || false
@@ -43,7 +61,8 @@ export default function RecommendList() {
               <MemberCount>{`${memberCount}명`}</MemberCount>
             </Subtitle>
             <Info>{`${intro}`}</Info>
-            <Button onClick={() => openModal(id)}>자세히 보기</Button>
+            <Button onClick={() => handleOpen(id)}>자세히 보기</Button>
+
           </TeamCard>
         );
       })}

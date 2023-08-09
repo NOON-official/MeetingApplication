@@ -3,11 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ReactComponent as MainDoc } from '../../asset/svg/MainDoc.svg';
 import { ReactComponent as UniversityMarkDarkGray } from '../../asset/svg/UniversityMarkDarkGray.svg';
+
+import { ReactComponent as UniversityMarkPink } from '../../asset/svg/UniversityMark.svg';
 import MyTeamProfileModal from '../../components/MainRecommend/MyTeamProfileModal';
 import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
 import { ReactComponent as TingImg } from '../../asset/svg/TingImg.svg';
+import {
+  useGetMyInfoQuery,
+  useGetUserTingCountQuery,
+} from '../../features/backendApi';
 
 export default function MainMatchingHeader({ title }) {
+  const { data: ting } = useGetUserTingCountQuery();
+  const { data: myinfo } = useGetMyInfoQuery();
+
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
   const navigate = useNavigate();
 
@@ -29,18 +38,29 @@ export default function MainMatchingHeader({ title }) {
           {title === '프로필 조회' ? <SMainDoc /> : <SMainGroup />}
           <BtnMainTitle>{title}</BtnMainTitle>
         </MainButton>
-        <MainButton>
-          <SUniversityMarkDarkGray />
-          <BtnTitle onClick={() => navigate('/myinfo/studentcard')}>
-            <BtnMainTitle>학교 인증하기</BtnMainTitle>
-            <BtnSubtitle>학교 인증 전</BtnSubtitle>
-          </BtnTitle>
-        </MainButton>
+
+        {myinfo?.approval === 1 ? (
+          <MainButton>
+            <UniversityMarkPink />
+            <BtnTitle>
+              <BtnMainTitlePink>학교 인증 완료</BtnMainTitlePink>
+            </BtnTitle>
+          </MainButton>
+        ) : (
+          <MainButton>
+            <SUniversityMarkDarkGray />
+            <BtnTitle onClick={() => navigate('/myinfo/studentcard')}>
+              <BtnMainTitle>학교 인증하기</BtnMainTitle>
+              <BtnSubtitle>학교 인증 전</BtnSubtitle>
+            </BtnTitle>
+          </MainButton>
+        )}
+
       </ButtonBox>
       <MainButton2 onClick={() => navigate('/myinfo/ting')}>
         <STingImg />
         <BtnMainTitle>보유 팅</BtnMainTitle>
-        <TingCount>12팅</TingCount>
+        <TingCount>{ting?.tingCount}팅</TingCount>
         <SeeMoreBtn>자세히 보기</SeeMoreBtn>
       </MainButton2>
     </>
@@ -96,6 +116,14 @@ const BtnTitle = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+`;
+
+const BtnMainTitlePink = styled.div`
+  margin-left: 15px;
+  background: linear-gradient(90deg, #ccb5f3 0%, #ff9595 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const BtnMainTitle = styled.div`
