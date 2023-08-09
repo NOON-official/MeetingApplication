@@ -9,19 +9,19 @@ export default function MyinfoHeader({ title }) {
 
   const goBack = useCallback(() => {
     // 이용권 구매 페이지인 경우
-    if (window.location.pathname === '/myinfo/ticket/buy') {
-      navigate('/myinfo/ticket');
+    if (window.location.pathname === '/myinfo/ting/buy') {
+      navigate('/myinfo/ting');
     }
     // 이용권 현황 페이지인 경우
-    else if (window.location.pathname === '/myinfo/ticket') {
+    else if (window.location.pathname === '/myinfo/ting') {
       navigate('/myinfo');
     } else {
-      navigate(-1);
+      navigate('/myinfo');
     }
   }, [navigate]);
 
   return (
-    <Container>
+    <Container title={title}>
       <IconButton type="text" icon={<LeftArrow />} onClick={goBack}>
         {title}
       </IconButton>
@@ -30,23 +30,34 @@ export default function MyinfoHeader({ title }) {
 }
 
 const Container = styled.div`
-  padding: 20px 10px;
-  background-color: #f8f3f3;
-  height: 4vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
+  max-width: 425px;
+  height: 4vh;
+  padding: 20px;
+  background-color: ${(props) =>
+    props.title === '학교 인증' ||
+    props.title === '보유 팅' ||
+    props.title === '팅 충전하기'
+      ? props.theme.white
+      : props.theme.background};
 `;
 
 const IconButton = styled(Button)`
-  > svg {
-    vertical-align: middle;
-    margin-right: 16px;
-  }
-  > span {
-    vertical-align: middle;
-    font-weight: 600;
-    font-size: 14px;
-    color: #777777;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+
+  span:last-child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 500;
+    font-size: 16px;
   }
 `;

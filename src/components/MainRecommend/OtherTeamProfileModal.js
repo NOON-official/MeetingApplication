@@ -3,19 +3,77 @@ import styled from 'styled-components';
 
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMarkBlack } from '../../asset/svg/UniversityMarkBlack.svg';
+import { ReactComponent as Share } from '../../asset/svg/Share.svg';
 import SliderBoxMembers from '../SliderBoxMembers';
-import ApplyButton from '../ApplyButton';
 import backend from '../../util/backend';
 import AreaText from './AreaText';
 import DateText from './DateText';
+import ApplyButton from '../ApplyButton';
+import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 
-export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
+export default function OtherTeamProfileModal({
+  open,
+  closeModal,
+  teamId,
+  state,
+  matchingId,
+}) {
   const [teamProfile, setTeamProfile] = useState(null);
+  const { data: myTeamId } = useGetUserTeamIdDataQuery();
 
   const getProfile = useCallback(async () => {
     const profile = await backend.get(`/teams/${teamId}`);
     setTeamProfile(profile.data);
-  }, []);
+  }, [teamId]);
+
+  const applyMatching = async () => {
+    try {
+      await backend.post(`/matchings/${myTeamId.teamId}/${teamId}`);
+      alert('신청되었습니다!');
+      closeModal();
+      window.location.reload();
+    } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
+      console.log(err);
+    }
+  };
+
+  const stopSeeProfile = async () => {
+    try {
+      await backend.put(`/teams/${teamId}`);
+      alert('추천 리스트에서 사라집니다');
+      closeModal();
+      window.location.reload();
+    } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
+      console.log(err);
+    }
+  };
+
+  // 매칭 수락하기
+  const acceptMatching = async () => {
+    try {
+      await backend.put(`/matchings/${matchingId}/teams/${teamId}/accept`);
+      alert('수락되었습니다!');
+      closeModal();
+      window.location.reload();
+    } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
+      console.log(err);
+    }
+  };
+
+  const refuseTeam = async () => {
+    try {
+      await backend.put(`/matchings/${matchingId}/teams/${teamId}/refuse`);
+      alert('거절했습니다');
+      closeModal();
+      window.location.reload();
+    } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     getProfile();
@@ -42,15 +100,15 @@ export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
           onCancel={() => closeModal()}
         >
           <TeamProfile>
-            <TeamName>{teamProfile.teamName}</TeamName>
+            <TeamName>{teamProfile?.teamName}</TeamName>
             <TextBox>
               <Title>상대 팀 한 줄 어필</Title>
-              <Content>{teamProfile.intro}</Content>
+              <Content>{teamProfile?.intro}</Content>
             </TextBox>
             <TextBox>
               <Container>
                 <Title>상대 팀 기본 정보</Title>
-                {teamProfile.isVerified ? (
+                {teamProfile?.approval ? (
                   <>
                     <SUniversityMark />
                     <UniversityMarkText>대학 인증 완료</UniversityMarkText>
@@ -60,27 +118,50 @@ export default function OtherTeamProfileModal({ open, closeModal, teamId }) {
               <TeamInfo>
                 <Subtitle>일정</Subtitle>
                 <SubContent>
-                  <DateText availableDates={teamProfile.teamAvailableDate} />
+                  <DateText availableDates={teamProfile?.teamAvailableDate} />
                 </SubContent>
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>지역</Subtitle>
-                <AreaText areaProps={teamProfile.areas} />
+                <AreaText areaProps={teamProfile?.areas} />
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>주량</Subtitle>
-                <SubContent>{`${AlcholContent[teamProfile.drink]} (Lv.${
-                  teamProfile.drink
+                <SubContent>{`${AlcholContent[teamProfile?.drink]} (Lv.${
+                  teamProfile?.drink
                 })`}</SubContent>
               </TeamInfo>
             </TextBox>
-            <SliderBoxMembers members={teamProfile.members} />
+            <SliderBoxMembers members={teamProfile?.members} />
           </TeamProfile>
+
           <Footer>
-            <ButtonBox>
-              <ApplyButton>신청하기</ApplyButton>
-              <ApplyButton>다시 안 보기</ApplyButton>
-            </ButtonBox>
+            {state === 'recommend' ? (
+              <ButtonBox>
+                <ApplyButton onClick={() => applyMatching()}>
+                  신청하기
+                </ApplyButton>
+                <ApplyButton onClick={() => stopSeeProfile()}>
+                  다시 안 보기
+                </ApplyButton>
+              </ButtonBox>
+            ) : null}
+            {state === 'received' ? (
+              <ButtonBox>
+                <ApplyButton onClick={() => acceptMatching()}>
+                  수락하기
+                </ApplyButton>
+                <ApplyButton onClick={() => refuseTeam()}>거절하기</ApplyButton>
+              </ButtonBox>
+            ) : null}
+            {state === 'succeed' ? (
+              <ButtonBox>
+                <ShareButton>
+                  <SShare />
+                  팀원들에게 공유하기
+                </ShareButton>
+              </ButtonBox>
+            ) : null}
           </Footer>
         </SModal>
       ) : null}
@@ -181,7 +262,26 @@ const Footer = styled.div`
 const ButtonBox = styled.div`
   width: 90%;
   display: flex;
-  justify-content: center;
   justify-content: space-between;
   margin-top: 5%;
+`;
+
+const ShareButton = styled.div`
+  position: sticky;
+  bottom: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  margin-top: 5%;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #eb8888;
+  font-size: 18px;
+  font-weight: 400;
+`;
+
+const SShare = styled(Share)`
+  margin-right: 4%;
 `;

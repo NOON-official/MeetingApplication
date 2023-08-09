@@ -4,11 +4,17 @@ import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
+import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
 
 export default function MatchingReceived() {
   const [receivedData, setReceivedData] = useState([]);
   const [clickEditBtn, setClickEditBtn] = useState(false);
-  const [deleteProfile, setDeleteProfile] = useState([]);
+  const [deleteProfileList, setDeleteProfileList] = useState([]);
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const setModal = (bool) => {
+    setDeleteModal(bool);
+  };
 
   const getReceivedData = useCallback(async () => {
     const receive = await backend.get(`/users/matchings/received`);
@@ -21,17 +27,30 @@ export default function MatchingReceived() {
 
   return (
     <MatchingLayout>
+      <DeleteProfileModal
+        open={deleteModal}
+        setModal={setModal}
+        state="received"
+        data={deleteProfileList}
+        fetchData={getReceivedData}
+
+      />
       {receivedData.length !== 0 ? (
         <>
           <Container>
             <Header>
               {clickEditBtn ? (
                 <EditBtn>
-                  <Delete selected={deleteProfile.length > 0}>삭제</Delete>
+                  <Delete
+                    selected={deleteProfileList?.length > 0}
+                    onClick={() => setDeleteModal(true)}
+                  >
+                    삭제
+                  </Delete>
                   <Cancel
                     onClick={() => {
                       setClickEditBtn(false);
-                      setDeleteProfile([]);
+                      setDeleteProfileList([]);
                     }}
                   >
                     취소
@@ -43,19 +62,19 @@ export default function MatchingReceived() {
             </Header>
             {clickEditBtn ? (
               <Text>
-                <Pink>{deleteProfile.length}</Pink>/{receivedData?.length}개
-                선택
+                <Pink>{deleteProfileList?.length}</Pink>/{receivedData?.length}
+                개 선택
               </Text>
             ) : (
               <Text>상대팀의 프로필을 살펴본 뒤 미팅 의사를 알려주세요 😉</Text>
             )}
           </Container>
           <OtherTeamList
-            isRecommend={false}
+            state={'received'}
             teamList={receivedData}
             clickEditBtn={clickEditBtn}
-            deleteProfile={deleteProfile}
-            setDeleteProfile={setDeleteProfile}
+            deleteProfile={deleteProfileList}
+            setDeleteProfile={setDeleteProfileList}
           />
         </>
       ) : (

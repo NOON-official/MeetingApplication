@@ -1,53 +1,56 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
-import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
+import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
+import backend from '../../util/backend';
+import { useGetMyInfoQuery } from '../../features/backendApi';
+import StudentCardModal from '../../components/Modal/StudentCardModal';
 
 export default function RecommendList() {
-  const teamList = [
-    {
-      id: 1,
-      teamName: '기웅내세요',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 2,
-      teamName: '아름이와 아이들',
-      age: 27,
-      memberCount: 2,
-      intro: '안녕하세요',
-      isVerified: false,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-    {
-      id: 3,
-      teamName: '기웅내세요',
-      age: 24,
-      memberCount: 3,
-      intro: '안녕하세요',
-      isVerified: true,
-      appliedAt: '2023-01-20T21:37:26.886Z',
-    },
-  ];
-
+  const { data: myinfo } = useGetMyInfoQuery();
+  const [teamList, setTeamList] = useState([]);
   const [modalState, openModal, closeModal] = useModalState(teamList);
+  const [studentCardModal, setStudentCardModal] = useState(false);
+
+
+  const getList = async () => {
+    const recommend = await backend.get(`/users/teams/recommended`);
+    setTeamList(recommend.data.teams);
+  };
+
+  const handleOpen = (id) => {
+    if (myinfo?.approval === 1) {
+      openModal(id);
+    } else {
+      setStudentCardModal(true);
+    }
+  };
+  
+  useEffect(() => {
+    getList();
+  }, []);
 
   return (
     <Container>
-      {teamList.map((team) => {
+      {teamList?.map((team) => {
         const { id, teamName, age, memberCount, intro, isVerified } = team;
 
         return (
           <TeamCard key={id}>
+            <StudentCardModal
+              open={studentCardModal}
+              setModal={setStudentCardModal}
+            />
+
             <OtherTeamProfileModal
-              open={modalState.find((state) => state.teamId === id).open}
+              open={
+                modalState.find((state) => state.teamId === id)?.open || false
+              }
               closeModal={() => closeModal(id)}
               teamId={id}
+              state="recommend"
             />
             <Title>
               <TeamName>{teamName}</TeamName>
@@ -58,7 +61,8 @@ export default function RecommendList() {
               <MemberCount>{`${memberCount}명`}</MemberCount>
             </Subtitle>
             <Info>{`${intro}`}</Info>
-            <Button onClick={() => openModal(id)}>자세히 보기</Button>
+            <Button onClick={() => handleOpen(id)}>자세히 보기</Button>
+
           </TeamCard>
         );
       })}
@@ -78,7 +82,7 @@ const TeamCard = styled.div`
   width: 42%;
   margin: 2% 0;
   padding: 3%;
-  border: 1px solid #d74683;
+  border: 1px solid ${(props) => (props.isOpen ? '#ececec' : '#D74683')};
   border-radius: 6px;
   background-color: #ffffff;
 `;

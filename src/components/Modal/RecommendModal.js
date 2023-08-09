@@ -1,37 +1,35 @@
 import { Modal } from 'antd';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 import { ReactComponent as Magnifier } from '../../asset/svg/Magnifier.svg';
 
 export default function RecommendModal() {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    const now = new Date();
-    const targetTime = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-      23,
-      0,
-      0,
-    );
+    // 현재 시간
+    const now = dayjs();
+    // 밤 11시
+    const targetTime = now.set({ hour: 23, minute: 0, second: 0 });
 
     const lastPopupTime = localStorage.getItem('lastPopupTime');
+    const lastTime = lastPopupTime ? dayjs(parseInt(lastPopupTime, 10)) : null;
 
-    if (lastPopupTime) {
-      const lastTime = new Date(parseInt(lastPopupTime, 10));
-      if (now >= lastTime && now < targetTime) {
-        // 현재 시간이 이전 팝업이 뜬 시간 이후 && 밤 11시 전
-        setShowPopup(false);
-      } else {
-        setShowPopup(true);
-        localStorage.setItem('lastPopupTime', now.getTime().toString());
-      }
-    } else {
-      // 팝업 본 적 없을 때
+    // 현재 시간이 23시 이후인지
+    const isAfter11pm = now.isAfter(targetTime);
+
+    if (!lastTime || now.diff(lastTime, 'hour') >= 24) {
+      // 한 번도 팝업을 본 적 없는 경우 or 팝업 확인한지 24시간 이후
       setShowPopup(true);
-      localStorage.setItem('lastPopupTime', now.getTime().toString());
+      localStorage.setItem('lastPopupTime', now.valueOf().toString());
+    } else if (now.diff(lastTime, 'hour') < 24 && isAfter11pm) {
+      // 마지막 팝업 확인 시간으로부터 24시간 이내이고, 현재 시간이 23:00 ~ 23:59
+      setShowPopup(true);
+      localStorage.setItem('lastPopupTime', now.valueOf().toString());
+    } else {
+      // 마지막 팝업 확인 시간으로부터 24시간 이내이고, 현재 시간이 00:00 ~ 22:59
+      setShowPopup(false);
     }
   }, []);
 

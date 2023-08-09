@@ -41,7 +41,7 @@ const Text = styled.div`
 `;
 
 const Container = styled.div`
-  /* height: 5vh; */
+  max-width: 425px;
   border-top: 2px solid #bfbfbf;
   display: flex;
   justify-content: space-around;
