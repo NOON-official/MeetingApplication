@@ -6,8 +6,10 @@ import { ReactComponent as UniversityMarkDarkGray } from '../../asset/svg/Univer
 import MyTeamProfileModal from '../../components/MainRecommend/MyTeamProfileModal';
 import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
 import { ReactComponent as TingImg } from '../../asset/svg/TingImg.svg';
+import { useGetUserTingCountQuery } from '../../features/backendApi';
 
 export default function MainMatchingHeader({ title }) {
+  const { data: ting } = useGetUserTingCountQuery();
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
   const navigate = useNavigate();
 
@@ -40,7 +42,7 @@ export default function MainMatchingHeader({ title }) {
       <MainButton2 onClick={() => navigate('/myinfo/ting')}>
         <STingImg />
         <BtnMainTitle>보유 팅</BtnMainTitle>
-        <TingCount>12팅</TingCount>
+        <TingCount>{ting?.tingCount}팅</TingCount>
         <SeeMoreBtn>자세히 보기</SeeMoreBtn>
       </MainButton2>
     </>

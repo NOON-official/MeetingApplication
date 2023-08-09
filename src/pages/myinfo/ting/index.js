@@ -3,20 +3,19 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as TingImg } from '../../../asset/svg/TingImg.svg';
+import { useGetUserTingCountQuery } from '../../../features/backendApi';
 
 export default function Ting() {
   const navigate = useNavigate();
+  const { data: ting } = useGetUserTingCountQuery();
 
   return (
     <MyinfoLayout title="보유 팅">
       <Section>
         <TeamBox>
-          <TeamName>아름이와 아이들</TeamName>
-          <TingCount>
-            <TingImg />
-            <Count>12팅</Count>
-            보유
-          </TingCount>
+          <TingImg />
+          <Count>{ting.tingCount}팅</Count>
+          보유
         </TeamBox>
         <Title>
           <Pink>팅</Pink>으로 미팅 신청/수락을 할 수 있어요!
@@ -66,30 +65,14 @@ const Content = styled.div`
 
 const TeamBox = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   width: 70%;
-  padding: 3% 0;
+  padding: 4% 0;
   border: 1px solid #ffc6c6;
   border-radius: 14px;
   background-color: #ffe8e8;
-`;
-
-const TeamName = styled.span`
-  padding: 1% 3%;
-  border-radius: 3px;
-  background: #ececec;
-  font-size: 15px;
-`;
-
-const TingCount = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 50%;
-  margin-top: 5%;
 `;
 
 const Count = styled.span`
@@ -119,4 +102,5 @@ const ChargeTingBtn = styled.button`
   color: #ffffff;
   background-color: #eb8888;
   font-weight: 400;
+  cursor: pointer;
 `;
