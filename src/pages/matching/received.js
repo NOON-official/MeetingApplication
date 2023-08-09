@@ -33,6 +33,7 @@ export default function MatchingReceived() {
         state="received"
         data={deleteProfileList}
         fetchData={getReceivedData}
+
       />
       {receivedData.length !== 0 ? (
         <>

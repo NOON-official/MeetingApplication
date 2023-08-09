@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ReactComponent as MainDoc } from '../../asset/svg/MainDoc.svg';
 import { ReactComponent as UniversityMarkDarkGray } from '../../asset/svg/UniversityMarkDarkGray.svg';
+
 import { ReactComponent as UniversityMarkPink } from '../../asset/svg/UniversityMark.svg';
 import MyTeamProfileModal from '../../components/MainRecommend/MyTeamProfileModal';
 import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
@@ -15,6 +16,7 @@ import {
 export default function MainMatchingHeader({ title }) {
   const { data: ting } = useGetUserTingCountQuery();
   const { data: myinfo } = useGetMyInfoQuery();
+
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
   const navigate = useNavigate();
 
@@ -36,6 +38,7 @@ export default function MainMatchingHeader({ title }) {
           {title === '프로필 조회' ? <SMainDoc /> : <SMainGroup />}
           <BtnMainTitle>{title}</BtnMainTitle>
         </MainButton>
+
         {myinfo?.approval === 1 ? (
           <MainButton>
             <UniversityMarkPink />
@@ -52,6 +55,7 @@ export default function MainMatchingHeader({ title }) {
             </BtnTitle>
           </MainButton>
         )}
+
       </ButtonBox>
       <MainButton2 onClick={() => navigate('/myinfo/ting')}>
         <STingImg />

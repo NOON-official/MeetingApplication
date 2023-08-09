@@ -12,6 +12,7 @@ import FreeTingModal from '../../components/Modal/FreeTingModal';
 
 export default function ApplyUniversity() {
   const [tingModal, setTingModal] = useState(false);
+
   const [selectedUniversity, setSelectedUniversity] = useState('');
   const [searchKeyWord, setSearchKeyWord] = useState(0);
 
@@ -27,6 +28,7 @@ export default function ApplyUniversity() {
     }
   }, [selectedUniversity]);
 
+
   const SearchedUniv = Universities.filter(
     (c) => c.name.indexOf(searchKeyWord) > -1,
   );
@@ -38,6 +40,7 @@ export default function ApplyUniversity() {
   return (
     <ApplyLayout>
       <FreeTingModal open={tingModal} setModal={setTingModal} />
+
       <Title>
         <Maintitle>본인 학교를 확인해주세요.</Maintitle>
         <Subtitle>추후에 수정이 불가능하니 한 번 더 확인해 주세요!</Subtitle>
