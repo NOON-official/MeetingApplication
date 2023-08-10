@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
@@ -9,9 +8,10 @@ import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
 import Universities from '../../asset/Universities';
 import ChannelTalk from '../../asset/ChannelTalk';
 import backend from '../../util/backend';
+import FreeTingModal from '../../components/Modal/FreeTingModal';
 
 export default function ApplyUniversity() {
-  const navigate = useNavigate();
+  const [tingModal, setTingModal] = useState(false);
 
   const [selectedUniversity, setSelectedUniversity] = useState('');
   const [searchKeyWord, setSearchKeyWord] = useState(0);
@@ -22,11 +22,12 @@ export default function ApplyUniversity() {
         university: Number(selectedUniversity),
       });
       localStorage.setItem('needMoreInfo', 'false');
-      navigate('/apply/invite');
+      setTingModal(true);
     } catch (err) {
       alert('오류가 발생했습니다. 잠시 후에 시도해주세요.');
     }
-  });
+  }, [selectedUniversity]);
+
 
   const SearchedUniv = Universities.filter(
     (c) => c.name.indexOf(searchKeyWord) > -1,
@@ -38,6 +39,8 @@ export default function ApplyUniversity() {
 
   return (
     <ApplyLayout>
+      <FreeTingModal open={tingModal} setModal={setTingModal} />
+
       <Title>
         <Maintitle>본인 학교를 확인해주세요.</Maintitle>
         <Subtitle>추후에 수정이 불가능하니 한 번 더 확인해 주세요!</Subtitle>

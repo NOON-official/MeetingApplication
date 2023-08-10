@@ -3,7 +3,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import Main from './pages/index';
 import App from './App';
 import Guide from './pages/guide';
-import Matching from './pages/matching';
 import MatchingMyteam from './pages/matching/myteam';
 import MatchingOtherteam from './pages/matching/otherteam';
 import MatchingRefuse from './pages/matching/refuse';
@@ -35,6 +34,13 @@ import ApplyInformation from './pages/apply/information';
 import ApplyUniversity from './pages/apply/university';
 import Apply6 from './pages/apply/6';
 import Apply9Page from './pages/apply/9teamProfile';
+import MatchingApplied from './pages/matching/applied';
+import MatchingReceived from './pages/matching/received';
+import MatchingSucceed from './pages/matching/succeed';
+import StudentCard from './pages/myinfo/studentcard';
+import Ting from './pages/myinfo/ting';
+import Review from './pages/myinfo/review';
+import ChargeTing from './pages/myinfo/ting/chargeTing';
 
 const Router = createBrowserRouter([
   {
@@ -49,9 +55,18 @@ const Router = createBrowserRouter([
         path: 'guide',
         element: <Guide />,
       },
+
       {
-        path: 'matching',
-        element: <Matching />,
+        path: 'matching/applied',
+        element: <MatchingApplied />,
+      },
+      {
+        path: 'matching/received',
+        element: <MatchingReceived />,
+      },
+      {
+        path: 'matching/succeeded',
+        element: <MatchingSucceed />,
       },
       {
         path: 'matching/myteam',
@@ -68,6 +83,10 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo',
         element: <MyInfo />,
+      },
+      {
+        path: 'myinfo/studentcard',
+        element: <StudentCard />,
       },
       {
         path: 'myinfo/account',
@@ -100,6 +119,18 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo/ticket/history',
         element: <TicketHistoryPage />,
+      },
+      {
+        path: 'myinfo/ting',
+        element: <Ting />,
+      },
+      {
+        path: 'myinfo/ting/buy',
+        element: <ChargeTing />,
+      },
+      {
+        path: 'myinfo/review',
+        element: <Review />,
       },
       {
         path: 'apply/agree',
