@@ -41,6 +41,9 @@ export const backendApi = createApi({
     getUserAgreements: builder.query({
       query: () => `users/agreements`,
     }),
+    getUserTingCount: builder.query({
+      query: () => `users/tings/count`,
+    }),
     getOrdersPageData: builder.query({
       query: () => `orders/pagedata`,
     }),
@@ -59,9 +62,6 @@ export const backendApi = createApi({
     getUserTeamIdData: builder.query({
       query: () => `users/team-id`,
     }),
-    getMatchingStatus: builder.query({
-      query: () => `users/matchings/status`,
-    }),
     getMatchingAverageTime: builder.query({
       query: () => `matchings/average-time/one-week`,
     }),
@@ -78,12 +78,12 @@ export const {
   useGetUserInvitationCountQuery,
   useGetUserReferralIdQuery,
   useGetUserAgreementsQuery,
+  useGetUserTingCountQuery,
   useGetOrdersPageDataQuery,
   useGetCouponsPageDataQuery,
   useGetTeamMembersCountOneWeekQuery,
   useGetTeamMembersCountTotalQuery,
   useGetTeamCountQuery,
   useGetUserTeamIdDataQuery,
-  useGetMatchingStatusQuery,
   useGetMatchingAverageTimeQuery,
 } = backendApi;

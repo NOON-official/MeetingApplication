@@ -50,7 +50,7 @@ const TitleBox = styled.div`
 `;
 
 const Title = styled.span`
-  font-size: 12px;
+  font-size: 13px;
 `;
 
 const ContentBox = styled.div`

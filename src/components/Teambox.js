@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useCallback, useMemo, useState, useEffect } from 'react';
 
 import { Select, Modal, Input } from 'antd';
+import dayjs from 'dayjs';
 import theme from '../style/theme';
 import Mbti from '../asset/Mbti';
 import Universities from '../asset/Universities';
@@ -31,11 +32,11 @@ function Teambox({ member, setMember, name }) {
       setRole(1);
       const fetchData = async () => {
         const userData = await backend.get('/users/my-info');
-        setSelectedUniversity(Universities[userData.data.university - 1].name);
+        setSelectedUniversity(Universities[userData.data.university - 1]?.name);
         setMember((prev) => ({
           ...prev,
           role: 1,
-          age: new Date().getFullYear() - userData.data.birth,
+          age: dayjs().year() - userData.data.birth,
           university: userData.data.university,
         }));
       };

@@ -12,25 +12,25 @@ export default function ColumnSelectButton(props) {
     </Column>
   );
 }
+
 function AreaButton(props) {
   const { data, state, selectedArea } = props;
   const [clicked, setClicked] = useState(false);
   return (
     <Button
+      key={data}
       color={clicked ? 'white' : null}
       backgroundcolor={clicked ? '#EB8888' : null}
       onClick={() => {
         setClicked(!clicked);
-
         state([...selectedArea, data]);
       }}
-      key={data}
     >
-      {' '}
       {data}
     </Button>
   );
 }
+
 const Column = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,6 +39,7 @@ const Column = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 const Button = styled.div`
   display: flex;
   margin: 5px 0 5px 0;

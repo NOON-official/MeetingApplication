@@ -100,9 +100,11 @@ export default function Apply5Page() {
           value={introduce}
           bordered={false}
           style={{
+            border: '1px solid #f1ecec',
+            backgroundColor: '#ffffff',
             height: '150px',
             resize: 'none',
-            padding: '18px',
+            padding: '20px',
           }}
           showCount
           minLength={10}
@@ -179,17 +181,14 @@ const Text2 = styled.div`
 `;
 
 const STextArea = styled(Input.TextArea)`
-  background-color: white;
   width: 90%;
-  /* margin-top: 20%; */
-  border: 1px solid #f1ecec;
   border-radius: 10px;
 `;
 
 const Alert = styled.p`
-  z-index: 1;
+  z-index: 10;
   position: absolute;
-  top: 10%;
+  top: 6%;
   right: 10%;
   color: #aaaaaa;
   font-weight: 400;

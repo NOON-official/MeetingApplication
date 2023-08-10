@@ -10,6 +10,7 @@ import ChannelTalk from '../../asset/ChannelTalk';
 function InvitePage() {
   const referralId = sessionStorage.getItem('referralId');
   const [inviteCode, setInviteCode] = useState(referralId);
+
   const navigate = useNavigate();
 
   const handleInviteCode = useCallback(
@@ -18,6 +19,7 @@ function InvitePage() {
     },
     [inviteCode],
   );
+
   const NextPage = useCallback(async () => {
     if (inviteCode !== null) {
       try {
