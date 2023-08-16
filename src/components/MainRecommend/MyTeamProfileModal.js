@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
-
 import ApplyButton from '../ApplyButton';
 import ModifyProfileModal from '../Modal/ModifyProfileModal';
 import StopMatchingModal from '../Modal/StopMatchingModal';
@@ -22,13 +20,15 @@ export default function MyTeamProfileModal(props) {
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
 
-  const getProfile = async () => {
-    const profile = await backend.get(`/teams/${myTeamId?.teamId}`);
-    setMyProfile(profile.data);
-  };
-
   useEffect(() => {
-    if (myTeamId) getProfile();
+    const getProfile = async () => {
+      if (myTeamId?.teamId !== null && myTeamId?.teamId !== undefined) {
+        const profile = await backend.get(`/teams/${myTeamId?.teamId}`);
+        setMyProfile(profile.data);
+      }
+    };
+
+    getProfile();
   }, [myTeamId]);
 
   const AlcholContent = {
@@ -61,10 +61,11 @@ export default function MyTeamProfileModal(props) {
             open={isStopMatchingModalOpen}
             setModal={() => {
               setIsStopMatchingModalOpen((prev) => !prev);
+              setModal(false);
             }}
-            teamId={myTeamId.teamId}
+            teamId={myTeamId?.teamId}
           />
-          {myProfile && (
+          {myTeamId?.teamId !== null ? (
             <>
               <TeamProfile>
                 <TeamName>{myProfile.teamName}</TeamName>
@@ -117,7 +118,7 @@ export default function MyTeamProfileModal(props) {
                 </ButtonBox>
               </Footer>
             </>
-          )}
+          ) : null}
         </SModal>
       ) : null}
     </div>
