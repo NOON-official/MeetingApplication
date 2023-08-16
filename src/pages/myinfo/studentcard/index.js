@@ -210,7 +210,7 @@ export default function StudentCard() {
           </Content>
         )}
 
-        {myInfo?.isVerified === true && myInfo?.approval === false && (
+        {myInfo?.isVerified === true && !myInfo?.approval && (
           // 신청했으나 반려됨
           <Content>
             <Header>
@@ -267,7 +267,7 @@ export default function StudentCard() {
           </Content>
         )}
 
-        {myInfo?.isVerified === true && myInfo?.approval === true && (
+        {myInfo?.isVerified === true && myInfo?.approval && (
           // 인증 완료됨
           <Content>
             <VerifyBox>
