@@ -38,7 +38,7 @@ export default function StudentCard() {
 
   const { data: myInfo } = useGetMyInfoQuery();
   const { data: referralIdData } = useGetUserReferralIdQuery();
-
+  console.log(myInfo);
   const referralId = useMemo(
     () => referralIdData?.referralId || '',
     [referralIdData],
@@ -210,7 +210,7 @@ export default function StudentCard() {
           </Content>
         )}
 
-        {myInfo?.isVerified === true && !myInfo?.approval && (
+        {myInfo?.isVerified === true && myInfo?.approval === 0 && (
           // 신청했으나 반려됨
           <Content>
             <Header>
