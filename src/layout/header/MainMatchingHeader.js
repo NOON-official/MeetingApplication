@@ -39,7 +39,7 @@ export default function MainMatchingHeader({ title }) {
           <BtnMainTitle>{title}</BtnMainTitle>
         </MainButton>
 
-        {myinfo?.approval === 1 ? (
+        {myinfo?.approval ? (
           <MainButton>
             <UniversityMarkPink />
             <BtnTitle>
@@ -55,7 +55,6 @@ export default function MainMatchingHeader({ title }) {
             </BtnTitle>
           </MainButton>
         )}
-
       </ButtonBox>
       <MainButton2 onClick={() => navigate('/myinfo/ting')}>
         <STingImg />

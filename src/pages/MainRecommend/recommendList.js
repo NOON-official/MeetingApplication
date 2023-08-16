@@ -14,20 +14,19 @@ export default function RecommendList() {
   const [modalState, openModal, closeModal] = useModalState(teamList);
   const [studentCardModal, setStudentCardModal] = useState(false);
 
-
   const getList = async () => {
     const recommend = await backend.get(`/users/teams/recommended`);
     setTeamList(recommend.data.teams);
   };
 
   const handleOpen = (id) => {
-    if (myinfo?.approval === 1) {
+    if (myinfo?.approval) {
       openModal(id);
     } else {
       setStudentCardModal(true);
     }
   };
-  
+
   useEffect(() => {
     getList();
   }, []);
@@ -62,7 +61,6 @@ export default function RecommendList() {
             </Subtitle>
             <Info>{`${intro}`}</Info>
             <Button onClick={() => handleOpen(id)}>자세히 보기</Button>
-
           </TeamCard>
         );
       })}
