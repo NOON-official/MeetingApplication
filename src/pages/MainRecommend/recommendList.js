@@ -21,7 +21,7 @@ export default function RecommendList() {
   };
 
   const handleOpen = (id) => {
-    if (myinfo?.approval === 1) {
+    if (myinfo?.approval) {
       openModal(id);
     } else {
       setStudentCardModal(true);
