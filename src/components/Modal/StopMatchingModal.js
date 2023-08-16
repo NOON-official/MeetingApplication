@@ -9,8 +9,9 @@ export default function StopMatchingModal({ open, setModal, teamId }) {
     try {
       await backend.delete(`/teams/${teamId}`);
       window.localStorage.removeItem('apply-data');
-      window.alert('취소되었습니다');
+      window.alert('중단되었습니다');
       setModal(false);
+      window.location.reload();
     } catch (e) {
       console.error(e);
       window.alert('취소중 오류가 발생하였습니다');
@@ -41,7 +42,6 @@ export default function StopMatchingModal({ open, setModal, teamId }) {
             <SButton
               onClick={() => {
                 deleteMatching();
-                setModal(false);
               }}
             >
               중단할래요
