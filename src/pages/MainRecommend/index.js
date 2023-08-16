@@ -1,18 +1,32 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import NoProfile from '../../components/MainRecommend/NoProfile';
 import Timer from './timer';
 import RecommendList from './recommendList';
 import RecommendModal from '../../components/Modal/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
 import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
+import backend from '../../util/backend';
 
 export default function Recommend() {
   const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const [myProfile, setMyProfile] = useState(null);
+
+  useEffect(() => {
+    const getProfile = async () => {
+      if (myTeamId?.teamId !== null && myTeamId?.teamId !== undefined) {
+        const profile = await backend.get(`/teams/${myTeamId?.teamId}`);
+        setMyProfile(profile.data);
+      }
+    };
+
+    getProfile();
+  }, [myTeamId?.teamId]);
 
   return (
     <>
       <RecommendModal />
-      {myTeamId ? (
+      {myTeamId?.teamId !== null ? (
         <Section>
           <MainMatchingHeader title="프로필 조회" />
         </Section>
@@ -32,7 +46,7 @@ export default function Recommend() {
 
       <Timer />
 
-      {myTeamId ? <RecommendList /> : <NoProfile />}
+      {myProfile !== null ? <RecommendList /> : <NoProfile />}
     </>
   );
 }
