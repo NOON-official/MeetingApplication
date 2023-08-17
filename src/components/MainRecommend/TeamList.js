@@ -29,7 +29,7 @@ export default function OtherTeamList(props) {
       />
     );
   };
-  console.log(teamList);
+
   return (
     <Container>
       {teamList.map((team) => {

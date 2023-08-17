@@ -220,10 +220,11 @@ const Content = styled.div`
 const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const SUniversityMark = styled(UniversityMarkBlack)`
-  margin: 0 10px 0 30px;
+  margin-left: 20px;
 `;
 
 const UniversityMarkText = styled.div`
@@ -242,7 +243,7 @@ const Subtitle = styled.span`
   background-color: #ffeded;
   border-radius: 10px;
   padding: 3px 7px;
-  margin-right: 10%;
+  margin-right: 7%;
   font-weight: 600;
   font-size: 14px;
   color: #eb8888;

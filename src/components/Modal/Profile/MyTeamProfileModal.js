@@ -204,7 +204,7 @@ const Subtitle = styled.span`
   background-color: #ffeded;
   border-radius: 10px;
   padding: 3px 7px;
-  margin-right: 10%;
+  margin-right: 7%;
   font-weight: 600;
   font-size: 14px;
   color: #eb8888;
@@ -213,13 +213,6 @@ const Subtitle = styled.span`
 const SubContent = styled.div`
   font-size: 14px;
   font-weight: 500;
-`;
-
-const AreaCity = styled.div`
-  margin-bottom: 5px;
-  color: #777777;
-  font-weight: 400;
-  font-size: 14px;
 `;
 
 const Footer = styled.div`
