@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PrimaryModal from '../../../components/Modal/PrimaryModal';
-import PrimaryButton from '../../../components/PrimaryButton';
+import PrimaryButton from '../../../components/Button/PrimaryButton';
 import Section from '../../../components/Section';
 import { useGetMyInfoQuery } from '../../../features/backendApi';
 import { logout } from '../../../features/user/asyncActions';

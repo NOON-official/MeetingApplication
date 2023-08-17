@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMarkBlack } from '../../../asset/svg/UniversityMarkBlack.svg';
 import { ReactComponent as Share } from '../../../asset/svg/Share.svg';
-import SliderBoxMembers from '../../SliderBoxMembers';
+import SliderBoxMembers from '../../Slider/SliderBoxMembers';
 import backend from '../../../util/backend';
 import AreaText from '../../MainRecommend/AreaText';
 import DateText from '../../MainRecommend/DateText';
