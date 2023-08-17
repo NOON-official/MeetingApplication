@@ -10,13 +10,12 @@ import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
 import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
-import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
   const navigate = useNavigate();
 
+  const [myTeamId, setMyTeamId] = useState();
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfileList, setDeleteProfileList] = useState([]);
@@ -30,6 +29,11 @@ export default function MatchingApplied() {
     setOpenDeleteModal(bool);
   };
 
+  const getTeamId = useCallback(async () => {
+    const id = await backend.get(`/users/team-id`);
+    setMyTeamId(id.data.teamId);
+  }, []);
+
   const getApplyData = useCallback(async () => {
     const apply = await backend.get(`/users/matchings/applied`);
     setApplyData(apply.data.teams);
@@ -38,8 +42,11 @@ export default function MatchingApplied() {
   }, []);
 
   useEffect(() => {
-    if (accessToken && myTeamId) {
-      getApplyData();
+    if (accessToken) {
+      getTeamId();
+      if (myTeamId) {
+        getApplyData();
+      }
     }
   }, [myTeamId, accessToken]);
 
