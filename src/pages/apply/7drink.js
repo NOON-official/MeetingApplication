@@ -6,12 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from 'antd';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
-import ApplyButton from '../../components/ApplyButton';
-import ProgressBar from '../../components/ProgressBar';
+import ApplyButton from '../../components/Button/ApplyButton';
+import ProgressBar from '../../components/Apply/ProgressBar';
 import { submitStep7 } from '../../features/apply';
-import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
-import ChangeCountButton from '../../components/ChangeCountButton';
+import ChangeCountButton from '../../components/Button/ChangeCountButton';
 import { ReactComponent as Whale } from '../../asset/svg/Whale.svg';
 import { ReactComponent as Alchol } from '../../asset/svg/Alchol.svg';
 

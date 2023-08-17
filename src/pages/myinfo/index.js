@@ -62,9 +62,9 @@ function MyInfo() {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/myinfo/ticket/coupon">
+            <Link to="/myinfo/ting">
               <LinkButton>
-                이용권 구매
+                보유 팅
                 <RightArrow />
               </LinkButton>
             </Link>

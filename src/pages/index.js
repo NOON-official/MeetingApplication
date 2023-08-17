@@ -12,7 +12,7 @@ import { ReactComponent as SliderLArrow } from '../asset/svg/SliderLArrow.svg';
 import { ReactComponent as SliderRArrow } from '../asset/svg/SliderRArrow.svg';
 import MainLayout from '../layout/MainLayout';
 import Section from '../components/Section';
-import SliderBox2 from '../components/SliderBox2';
+import SliderBox2 from '../components/Slider/SliderBox2';
 import backend from '../util/backend';
 import {
   // useGetTeamCountQuery,
@@ -20,7 +20,7 @@ import {
 } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
 import PrimaryModal from '../components/Modal/PrimaryModal';
-import PrimaryButton from '../components/PrimaryButton';
+import PrimaryButton from '../components/Button/PrimaryButton';
 import Recommend from './MainRecommend';
 import Review from './myinfo/review/review';
 
