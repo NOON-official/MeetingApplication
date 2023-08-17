@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Modal } from 'antd';
-import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
-import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
-import ApplyButton from '../ApplyButton';
-import ModifyProfileModal from '../Modal/ModifyProfileModal';
-import StopMatchingModal from '../Modal/StopMatchingModal';
-import SliderBoxMembers from '../SliderBoxMembers';
-import AreaText from './AreaText';
-import DateText from './DateText';
-import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
-import backend from '../../util/backend';
+import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
+import { ReactComponent as UniversityMarkGray } from '../../../asset/svg/UniversityMarkGray.svg';
+import ApplyButton from '../../Button/ApplyButton';
+import ModifyProfileModal from './ModifyProfileModal';
+import StopMatchingModal from '../Matching/StopMatchingModal';
+import SliderBoxMembers from '../../SliderBoxMembers';
+import AreaText from '../../MainRecommend/AreaText';
+import DateText from '../../MainRecommend/DateText';
+import { useGetUserTeamIdDataQuery } from '../../../features/backendApi';
+import backend from '../../../util/backend';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal } = props;
@@ -65,7 +65,7 @@ export default function MyTeamProfileModal(props) {
             }}
             teamId={myTeamId?.teamId}
           />
-          {myTeamId?.teamId !== null ? (
+          {myProfile && (
             <>
               <TeamProfile>
                 <TeamName>{myProfile.teamName}</TeamName>
@@ -118,7 +118,7 @@ export default function MyTeamProfileModal(props) {
                 </ButtonBox>
               </Footer>
             </>
-          ) : null}
+          )}
         </SModal>
       ) : null}
     </div>

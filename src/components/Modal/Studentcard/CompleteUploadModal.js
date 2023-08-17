@@ -1,7 +1,7 @@
 import { Modal } from 'antd';
 import styled from 'styled-components';
 import { useState } from 'react';
-import AutomaticModal from './AutomaticModal';
+import AutomaticModal from '../AutomaticModal';
 
 export default function CompleteUploadModal({ open, setModal, progress }) {
   const [openCompleteModal, setOpenCompleteModal] = useState(false);

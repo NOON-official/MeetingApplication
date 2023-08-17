@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { ReactComponent as NotSelectCheck } from '../asset/svg/NotSelectCheck.svg';
-import { ReactComponent as OurTeamCheck } from '../asset/svg/OurTeamCheck.svg';
-import { ReactComponent as SelectCheck } from '../asset/svg/SelectCheck.svg';
+import { ReactComponent as NotSelectCheck } from '../../asset/svg/NotSelectCheck.svg';
+import { ReactComponent as OurTeamCheck } from '../../asset/svg/OurTeamCheck.svg';
+import { ReactComponent as SelectCheck } from '../../asset/svg/SelectCheck.svg';
 
 export default function ChangeCountButton(props) {
   const { count, changeCount, setChangeCount } = props;

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import TopHeader from './header/TopHeader';
 import BottomTabs from './header/BottomTabs';
-import MyTeamProfile from '../components/MainRecommend/MyTeamProfileModal';
+import MyTeamProfile from '../components/Modal/Profile/MyTeamProfileModal';
 import MainMatchingHeader from './header/MainMatchingHeader';
 import { useGetUserTeamIdDataQuery } from '../features/backendApi';
 

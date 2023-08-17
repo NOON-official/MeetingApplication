@@ -9,7 +9,7 @@ import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
-import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
+import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 
 export default function MatchingApplied() {
@@ -41,7 +41,7 @@ export default function MatchingApplied() {
     if (accessToken && myTeamId) {
       getApplyData();
     }
-  }, [myTeamId]);
+  }, [myTeamId, accessToken]);
 
   const handleTabChange = (tabIdx) => {
     if (selectTab === 1 && tabIdx === 2) {

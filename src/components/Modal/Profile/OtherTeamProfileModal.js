@@ -2,14 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from 'antd';
-import { ReactComponent as UniversityMarkBlack } from '../../asset/svg/UniversityMarkBlack.svg';
-import { ReactComponent as Share } from '../../asset/svg/Share.svg';
-import SliderBoxMembers from '../SliderBoxMembers';
-import backend from '../../util/backend';
-import AreaText from './AreaText';
-import DateText from './DateText';
-import ApplyButton from '../ApplyButton';
-import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
+import { ReactComponent as UniversityMarkBlack } from '../../../asset/svg/UniversityMarkBlack.svg';
+import { ReactComponent as Share } from '../../../asset/svg/Share.svg';
+import SliderBoxMembers from '../../SliderBoxMembers';
+import backend from '../../../util/backend';
+import AreaText from '../../MainRecommend/AreaText';
+import DateText from '../../MainRecommend/DateText';
+import ApplyButton from '../../Button/ApplyButton';
+import { useGetUserTeamIdDataQuery } from '../../../features/backendApi';
 
 export default function OtherTeamProfileModal({
   open,
@@ -26,6 +26,7 @@ export default function OtherTeamProfileModal({
     setTeamProfile(profile.data);
   }, [teamId]);
 
+  // 매칭 신청하기
   const applyMatching = async () => {
     try {
       await backend.post(`/matchings/${myTeamId.teamId}/${teamId}`);
@@ -38,6 +39,7 @@ export default function OtherTeamProfileModal({
     }
   };
 
+  // 프로필 그만보기
   const stopSeeProfile = async () => {
     try {
       await backend.put(`/teams/${teamId}`);
@@ -63,6 +65,7 @@ export default function OtherTeamProfileModal({
     }
   };
 
+  // 매칭 거절하기
   const refuseTeam = async () => {
     try {
       await backend.put(`/matchings/${matchingId}/teams/${teamId}/refuse`);
