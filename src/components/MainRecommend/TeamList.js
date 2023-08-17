@@ -29,19 +29,12 @@ export default function OtherTeamList(props) {
       />
     );
   };
-
+  console.log(teamList);
   return (
     <Container>
       {teamList.map((team) => {
-        const {
-          id,
-          teamName,
-          age,
-          memberCount,
-          intro,
-          isVerified,
-          matchingId,
-        } = team;
+        const { id, teamName, age, memberCount, intro, approval, matchingId } =
+          team;
 
         return (
           <TeamCardWrapper key={id}>
@@ -58,7 +51,7 @@ export default function OtherTeamList(props) {
             <TeamCard>
               <Title>
                 <TeamName>{teamName}</TeamName>
-                {isVerified ? <SUniversityMark /> : <SUniversityMarkGray />}
+                {approval ? <SUniversityMark /> : <SUniversityMarkGray />}
               </Title>
               <Subtitle>
                 <Age>{`평균 ${age}세`}</Age>

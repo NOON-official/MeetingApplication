@@ -52,7 +52,7 @@ export default function MatchingSucceed() {
                 age,
                 memberCount,
                 intro,
-                isVerified,
+                approval,
                 matchedAt,
               } = team;
 
@@ -85,11 +85,7 @@ export default function MatchingSucceed() {
                   <Content>
                     <Title>
                       <TeamName>{teamName}</TeamName>
-                      {isVerified ? (
-                        <SUniversityMark />
-                      ) : (
-                        <SUniversityMarkGray />
-                      )}
+                      {approval ? <SUniversityMark /> : <SUniversityMarkGray />}
                     </Title>
                     <Subtitle>
                       <Age>{`평균 ${age}세`}</Age>
