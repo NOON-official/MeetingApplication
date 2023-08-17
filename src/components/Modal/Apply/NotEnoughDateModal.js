@@ -1,9 +1,10 @@
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
-import { ReactComponent as ErrorChar } from '../../asset/svg/ErrorMessageCharacter.svg';
-import theme from '../../style/theme';
+import { ReactComponent as ErrorChar } from '../../../asset/svg/ErrorMessageCharacter.svg';
+import { ReactComponent as ModalTextDate } from '../../../asset/svg/ModalTextDate.svg';
+import theme from '../../../style/theme';
 
-export default function IsPageCompleteModal({ open, setModal }) {
+export default function NotEnoughDateModal({ open, setModal }) {
   return (
     <div>
       {open ? (
@@ -16,12 +17,7 @@ export default function IsPageCompleteModal({ open, setModal }) {
         >
           <Container>
             <ErrorChar />
-            <TextBox>
-              <BlackText>아직</BlackText>
-              <ColorText> 완료하지 않은 답변</ColorText>
-              <BlackText>이 있어요</BlackText>
-            </TextBox>
-            <SmallText>모든 항목에 응답해 주세요!</SmallText>
+            <ModalTextDate />
             <SButton onClick={() => setModal(false)}>닫기</SButton>
           </Container>
         </Modal>
@@ -40,9 +36,7 @@ const TextBox = styled.div`
   text-align: center;
 `;
 const BlackText = styled.span`
-  color: black;
-  color: #525252;
-  font-size: 30px;
+  font-size: 27px;
   font-family: 'Nanum JungHagSaeng';
 `;
 const ColorText = styled.span`

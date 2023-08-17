@@ -1,28 +1,10 @@
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import theme from '../../style/theme';
-import { createTeam } from '../../features/apply/asyncAction';
+import theme from '../../../style/theme';
 
-export default function MatchingCompleteModal({ open, setModal }) {
-  const { ...applydata } = useSelector((store) => store.apply);
-  const filteredData = { ...applydata };
-  delete filteredData.finishedStep;
-  delete filteredData.city;
-
-  filteredData.members = filteredData.members.map((member) => {
-    if (typeof member.mbti === 'undefined') {
-      return {
-        ...member,
-        mbti: 17,
-      };
-    }
-    return member;
-  });
-
+export default function ModifyProfileModal({ open, setModal }) {
   const navi = useNavigate();
-  const dispatch = useDispatch();
 
   return (
     <div>
@@ -32,23 +14,23 @@ export default function MatchingCompleteModal({ open, setModal }) {
           footer={null}
           centered
           width="380px"
-          closable={false}
+          closable
+          onCancel={() => setModal(false)}
         >
           <Container>
             <TextBox>
               <BlackText>
-                우리 팀 프로필이 모두 완성되었어요
-                <br /> 이제 바로 미팅할 수 있어요!
+                정보를 수정하시면 &lt;우리 팀 추천 매칭&gt;이 <br />
+                달라질 수 있어요. 그래도 수정하시겠어요?
               </BlackText>
             </TextBox>
             <SButton
               onClick={() => {
-                dispatch(createTeam(filteredData));
                 setModal(false);
-                navi('/');
+                navi('/apply/1');
               }}
             >
-              미팅하러 가기
+              수정하러 가기
             </SButton>
           </Container>
         </Modal>
@@ -69,9 +51,8 @@ const TextBox = styled.div`
 `;
 
 const BlackText = styled.span`
-  color: black;
-  color: #525252;
-  font-size: 18px;
+  color: #000000;
+  font-size: 16px;
 `;
 
 const ColorText = styled.span`

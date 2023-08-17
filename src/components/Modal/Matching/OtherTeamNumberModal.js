@@ -1,8 +1,8 @@
 import { Modal, notification } from 'antd';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { ReactComponent as Copy } from '../../asset/svg/Copy.svg';
-import backend from '../../util/backend';
+import { ReactComponent as Copy } from '../../../asset/svg/Copy.svg';
+import backend from '../../../util/backend';
 
 export default function OtherTeamNumberModal(props) {
   const { open, closeModal, teamName, teamId } = props;
