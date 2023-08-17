@@ -7,12 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
-import theme from '../../style/theme';
 import { createTeam } from '../../features/apply/asyncAction';
-import ApplyButton from '../../components/ApplyButton';
+import ApplyButton from '../../components/Button/ApplyButton';
 import backend from '../../util/backend';
-import MatchingCompleteModal from '../../components/Modal/MatchingCompleteModal';
-import SliderBoxMembers from '../../components/SliderBoxMembers';
+import MatchingCompleteModal from '../../components/Modal/Matching/MatchingCompleteModal';
+import SliderBoxMembers from '../../components/Slider/SliderBoxMembers';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
@@ -291,137 +290,6 @@ const Intro = styled.div`
   margin-top: 7%;
   line-height: 25px;
   font-size: 13px;
-`;
-
-const SCarousel2 = styled(Carousel)`
-  width: 100%;
-  background-color: ${theme.background};
-  border: 1px solid #f1ecec;
-  border-radius: 10px;
-
-  .slick-dots-bottom {
-    margin: 0;
-    top: 105%;
-  }
-  .slick-dots li button {
-    width: 10px;
-    height: 10px;
-    border-radius: 100%;
-    background-color: #d9d9d9;
-  }
-  .slick-dots li.slick-active button {
-    width: 10px;
-    height: 10px;
-    border-radius: 100%;
-    background: #eb8888;
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  height: 200px;
-`;
-
-const Title2 = styled.div`
-  width: 100%;
-  min-width: 100%;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  height: 35px;
-  background-color: ${theme.lightPink};
-`;
-
-const Box = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const LeftBox = styled.div`
-  padding: 0 5%;
-  width: 30%;
-  height: calc(200px - 35px);
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const Profile = styled.div`
-  &:hover {
-    cursor: pointer;
-  }
-  margin-top: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
-  background: #ffffff;
-  border: 1px solid #f1ecec;
-  border-radius: 50%;
-`;
-
-const ProfileTitle = styled.div`
-  width: 59px;
-  height: 27px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 200;
-  font-size: 13px;
-  border-radius: 7px;
-  color: white;
-  background-color: #eb8888;
-  font-family: 'SCoreDream';
-  margin-bottom: 15px;
-`;
-
-const RightBox = styled.div`
-  margin-top: 20% 0;
-  padding-right: 5%;
-  width: 60%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const Info = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding-bottom: 2px;
-  padding-left: 5px;
-  margin-bottom: 10px;
-  font-weight: 400;
-  font-size: 20px;
-  font-family: 'Nanum JungHagSaeng';
-  width: 100%;
-  max-width: 100%;
-  border-bottom: 1px solid #eb8888;
-`;
-
-const InfoTitle = styled.div`
-  width: 30%;
-  color: ${theme.pink};
-  font-family: 'SCoreDream';
-  font-size: 13px;
-  font-weight: 200;
-`;
-
-const InfoContent = styled.span`
-  width: 70%;
-  font-family: 'SCoreDream';
-  font-size: 13px;
-  font-weight: 200;
 `;
 
 const Footer = styled.div`

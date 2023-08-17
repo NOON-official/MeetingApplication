@@ -3,17 +3,17 @@ import { useCallback, useMemo, useState, useEffect } from 'react';
 
 import { Select, Modal, Input } from 'antd';
 import dayjs from 'dayjs';
-import theme from '../style/theme';
-import Mbti from '../asset/Mbti';
-import Universities from '../asset/Universities';
-import { ReactComponent as Plus } from '../asset/svg/Plus.svg';
-import { ReactComponent as Question } from '../asset/svg/Question.svg';
-import { ReactComponent as Profile1 } from '../asset/svg/Profile1.svg';
-import { ReactComponent as Profile2 } from '../asset/svg/Profile2.svg';
-import { ReactComponent as Profile3 } from '../asset/svg/Profile3.svg';
-import { ReactComponent as Profile4 } from '../asset/svg/Profile4.svg';
-import { ReactComponent as SearchIcon } from '../asset/svg/SearchIcon.svg';
-import backend from '../util/backend';
+import theme from '../../style/theme';
+import Mbti from '../../asset/Mbti';
+import Universities from '../../asset/Universities';
+import { ReactComponent as Plus } from '../../asset/svg/Plus.svg';
+import { ReactComponent as Question } from '../../asset/svg/Question.svg';
+import { ReactComponent as Profile1 } from '../../asset/svg/Profile1.svg';
+import { ReactComponent as Profile2 } from '../../asset/svg/Profile2.svg';
+import { ReactComponent as Profile3 } from '../../asset/svg/Profile3.svg';
+import { ReactComponent as Profile4 } from '../../asset/svg/Profile4.svg';
+import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
+import backend from '../../util/backend';
 
 function Teambox({ member, setMember, name }) {
   const { Option } = Select;

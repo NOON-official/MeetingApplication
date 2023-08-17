@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import useModalState from '../../hooks/useModalState';
-import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
+import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
 import backend from '../../util/backend';
 import {
   useGetMyInfoQuery,
   useGetUserTeamIdDataQuery,
 } from '../../features/backendApi';
-import StudentCardModal from '../../components/Modal/StudentCardModal';
+import StudentCardModal from '../../components/Modal/Studentcard/StudentCardModal';
 
 export default function RecommendList() {
   const { data: myTeamId } = useGetUserTeamIdDataQuery();
