@@ -9,13 +9,12 @@ export default function Ting() {
   const navigate = useNavigate();
   const { data: ting } = useGetUserTingCountQuery();
 
-
   return (
     <MyinfoLayout title="보유 팅">
       <Section>
         <TeamBox>
           <TingImg />
-          <Count>{ting.tingCount}팅</Count>
+          <Count>{ting?.tingCount}팅</Count>
           보유
         </TeamBox>
         <Title>
@@ -104,5 +103,4 @@ const ChargeTingBtn = styled.button`
   background-color: #eb8888;
   font-weight: 400;
   cursor: pointer;
-
 `;
