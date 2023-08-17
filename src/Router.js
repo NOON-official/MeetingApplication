@@ -3,13 +3,10 @@ import { createBrowserRouter } from 'react-router-dom';
 import Main from './pages/index';
 import App from './App';
 import Guide from './pages/guide';
-import MatchingMyteam from './pages/matching/myteam';
-import MatchingOtherteam from './pages/matching/otherteam';
-import MatchingRefuse from './pages/matching/refuse';
 import MyInfo from './pages/myinfo';
 import Account from './pages/myinfo/account';
-import Agree from './pages/apply/agree';
-import Invite from './pages/apply/invite';
+import Agree from './pages/auth/agree';
+import Invite from './pages/auth/invite';
 import Apply1 from './pages/apply/1';
 import Apply2 from './pages/apply/2';
 import Apply3Page from './pages/apply/3area';
@@ -20,19 +17,17 @@ import Apply7Page from './pages/apply/7drink';
 import Apply8Page from './pages/apply/8kakaoId';
 import Apply10Page from './pages/apply/10phone';
 import Certification from './pages/apply/certification';
-import Complete from './pages/apply/complete';
 import TicketBuyPage from './pages/myinfo/ticket/buy';
 import TicketCouponPage from './pages/myinfo/ticket/coupon';
 import TicketHistoryPage from './pages/myinfo/ticket/history';
-import AuthSigninPage from './pages/auth/signin';
+import AuthSigninPage from './pages/auth';
 import TicketPage from './pages/myinfo/ticket';
 import TicketBuySuccessPage from './pages/myinfo/ticket/buy/success';
 import TicketBuyFailPage from './pages/myinfo/ticket/buy/fail';
 import AccountPhoneChangePage from './pages/myinfo/account/phone';
-import KakakoLoginSuccessPage from './pages/auth/signin/kakao/success';
-import ApplyInformation from './pages/apply/information';
-import ApplyUniversity from './pages/apply/university';
-import Apply6 from './pages/apply/6';
+import KakakoLoginSuccessPage from './pages/auth/kakao/success';
+import ApplyInformation from './pages/auth/information';
+import ApplyUniversity from './pages/auth/university';
 import Apply9Page from './pages/apply/9teamProfile';
 import MatchingApplied from './pages/matching/applied';
 import MatchingReceived from './pages/matching/received';
@@ -55,7 +50,6 @@ const Router = createBrowserRouter([
         path: 'guide',
         element: <Guide />,
       },
-
       {
         path: 'matching/applied',
         element: <MatchingApplied />,
@@ -67,18 +61,6 @@ const Router = createBrowserRouter([
       {
         path: 'matching/succeeded',
         element: <MatchingSucceed />,
-      },
-      {
-        path: 'matching/myteam',
-        element: <MatchingMyteam />,
-      },
-      {
-        path: 'matching/otherteam',
-        element: <MatchingOtherteam />,
-      },
-      {
-        path: 'matching/refuse',
-        element: <MatchingRefuse />,
       },
       {
         path: 'myinfo',
@@ -165,10 +147,6 @@ const Router = createBrowserRouter([
         element: <Apply6Page />,
       },
       {
-        path: 'apply/6',
-        element: <Apply6 />,
-      },
-      {
         path: 'apply/7drink',
         element: <Apply7Page />,
       },
@@ -187,10 +165,6 @@ const Router = createBrowserRouter([
       {
         path: 'apply/certification',
         element: <Certification />,
-      },
-      {
-        path: 'apply/complete',
-        element: <Complete />,
       },
       {
         path: 'apply/information',

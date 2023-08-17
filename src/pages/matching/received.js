@@ -4,7 +4,7 @@ import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
-import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
+import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 
 export default function MatchingReceived() {
   const [receivedData, setReceivedData] = useState([]);
@@ -33,7 +33,6 @@ export default function MatchingReceived() {
         state="received"
         data={deleteProfileList}
         fetchData={getReceivedData}
-
       />
       {receivedData.length !== 0 ? (
         <>
@@ -93,7 +92,7 @@ const NoMeetingContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 20% auto;
+  margin: 15% auto;
 `;
 
 const Title = styled.div`
@@ -104,21 +103,6 @@ const Title = styled.div`
 
 const SSadFace = styled(SadFace)`
   width: 45%;
-`;
-
-const Button = styled.div`
-  width: 40%;
-`;
-
-const CreateTeamBtn = styled.button`
-  width: 100%;
-  padding: 10px 5px;
-  border: none;
-  border-radius: 20px;
-  background-color: #ffcdcd;
-  color: #eb8888;
-  font-size: 14px;
-  font-weight: 600;
 `;
 
 const Container = styled.div`

@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import useModalState from '../../hooks/useModalState';
-import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
+import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
 import backend from '../../util/backend';
 import {
   useGetMyInfoQuery,
   useGetUserTeamIdDataQuery,
 } from '../../features/backendApi';
-import StudentCardModal from '../../components/Modal/StudentCardModal';
+import StudentCardModal from '../../components/Modal/Studentcard/StudentCardModal';
 
 export default function RecommendList() {
   const { data: myTeamId } = useGetUserTeamIdDataQuery();
@@ -40,7 +40,7 @@ export default function RecommendList() {
   return (
     <Container>
       {teamList?.map((team) => {
-        const { id, teamName, age, memberCount, intro, isVerified } = team;
+        const { id, teamName, age, memberCount, intro, approval } = team;
 
         return (
           <TeamCard key={id}>
@@ -59,7 +59,7 @@ export default function RecommendList() {
             />
             <Title>
               <TeamName>{teamName}</TeamName>
-              {isVerified ? <SUniversityMark /> : <SUniversityMarkGray />}
+              {approval ? <SUniversityMark /> : <SUniversityMarkGray />}
             </Title>
             <Subtitle>
               <Age>{`평균 ${age}세`}</Age>

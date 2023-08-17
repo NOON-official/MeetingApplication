@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react';
 import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
-import OtherTeamNumberModal from '../../components/Modal/OtherTeamNumberModal';
+import OtherTeamNumberModal from '../../components/Modal/Matching/OtherTeamNumberModal';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
-import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
+import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
 import backend from '../../util/backend';
 
@@ -52,7 +52,7 @@ export default function MatchingSucceed() {
                 age,
                 memberCount,
                 intro,
-                isVerified,
+                approval,
                 matchedAt,
               } = team;
 
@@ -85,11 +85,7 @@ export default function MatchingSucceed() {
                   <Content>
                     <Title>
                       <TeamName>{teamName}</TeamName>
-                      {isVerified ? (
-                        <SUniversityMark />
-                      ) : (
-                        <SUniversityMarkGray />
-                      )}
+                      {approval ? <SUniversityMark /> : <SUniversityMarkGray />}
                     </Title>
                     <Subtitle>
                       <Age>{`평균 ${age}세`}</Age>
