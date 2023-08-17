@@ -10,13 +10,13 @@ export default function OtherTeamNumberModal(props) {
   const [contact, setContact] = useState();
   const [api, contextHolder] = notification.useNotification();
 
-  const getContactDate = async () => {
+  const getContactData = async () => {
     const contactData = await backend.get(`/teams/${teamId}/contact`);
     setContact(contactData.data.kakaoId);
   };
 
   useEffect(() => {
-    getContactDate();
+    getContactData();
   }, []);
 
   const handleCopy = (text) => {

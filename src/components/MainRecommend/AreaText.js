@@ -19,13 +19,19 @@ export default function AreaText({ areaProps }) {
     14: '해운대',
   };
 
+  const city = () => {
+    if (areaProps[0] < 7) {
+      return '서울 / 경기';
+    }
+    if (areaProps[0] < 11) {
+      return '대구';
+    }
+    return '부산';
+  };
+
   return (
     <div>
-      <AreaCity>
-        {/* {Area.find(
-          (x) => x.content.some((item) => item.id === areaProps[0]).title,
-        )} */}
-      </AreaCity>
+      <AreaCity>{city()}</AreaCity>
       <SubContent>
         {areaProps?.map((x) => {
           return <span key={x}>{AreaContent[x]}&nbsp;&nbsp;</span>;
