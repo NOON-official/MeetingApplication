@@ -40,7 +40,7 @@ export default function RecommendList() {
   return (
     <Container>
       {teamList?.map((team) => {
-        const { id, teamName, age, memberCount, intro, isVerified } = team;
+        const { id, teamName, age, memberCount, intro, approval } = team;
 
         return (
           <TeamCard key={id}>
@@ -59,7 +59,7 @@ export default function RecommendList() {
             />
             <Title>
               <TeamName>{teamName}</TeamName>
-              {isVerified ? <SUniversityMark /> : <SUniversityMarkGray />}
+              {approval ? <SUniversityMark /> : <SUniversityMarkGray />}
             </Title>
             <Subtitle>
               <Age>{`평균 ${age}세`}</Age>
