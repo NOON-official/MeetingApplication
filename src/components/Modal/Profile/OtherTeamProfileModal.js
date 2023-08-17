@@ -27,7 +27,7 @@ export default function OtherTeamProfileModal({
   }, [teamId]);
 
   // 매칭 신청하기
-  const applyMatching = async () => {
+  const applyMatching = useCallback(async () => {
     try {
       await backend.post(`/matchings/${myTeamId.teamId}/${teamId}`);
       alert('신청되었습니다!');
@@ -37,10 +37,10 @@ export default function OtherTeamProfileModal({
       alert('잠시 후에 다시 시도해주세요');
       console.log(err);
     }
-  };
+  }, [myTeamId, teamId]);
 
   // 프로필 그만보기
-  const stopSeeProfile = async () => {
+  const stopSeeProfile = useCallback(async () => {
     try {
       await backend.put(`/teams/${teamId}`);
       alert('추천 리스트에서 사라집니다');
@@ -50,10 +50,10 @@ export default function OtherTeamProfileModal({
       alert('잠시 후에 다시 시도해주세요');
       console.log(err);
     }
-  };
+  }, [teamId]);
 
   // 매칭 수락하기
-  const acceptMatching = async () => {
+  const acceptMatching = useCallback(async () => {
     try {
       await backend.put(`/matchings/${matchingId}/teams/${teamId}/accept`);
       alert('수락되었습니다!');
@@ -63,10 +63,10 @@ export default function OtherTeamProfileModal({
       alert('잠시 후에 다시 시도해주세요');
       console.log(err);
     }
-  };
+  }, [matchingId, teamId]);
 
   // 매칭 거절하기
-  const refuseTeam = async () => {
+  const refuseTeam = useCallback(async () => {
     try {
       await backend.put(`/matchings/${matchingId}/teams/${teamId}/refuse`);
       alert('거절했습니다');
@@ -76,11 +76,11 @@ export default function OtherTeamProfileModal({
       alert('잠시 후에 다시 시도해주세요');
       console.log(err);
     }
-  };
+  }, [matchingId, teamId]);
 
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [teamId]);
 
   const AlcholContent = {
     1: '반 병',
