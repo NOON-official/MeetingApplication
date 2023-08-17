@@ -5,7 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as Header } from '../../asset/svg/Header.svg';
 import theme from '../../style/theme';
-import KakaoLoginLink from '../../components/KakaoLoginLink';
+import KakaoLoginLink from '../../components/Auth/KakaoLoginLink';
 import { setAccessToken } from '../../features/user';
 
 export default function TopHeader() {

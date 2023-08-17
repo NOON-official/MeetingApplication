@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 import { Carousel } from 'antd';
 
-import theme from '../style/theme';
-import Universities from '../asset/Universities';
-import Mbti from '../asset/Mbti';
-import { ReactComponent as Plus } from '../asset/svg/Plus.svg';
-import { ReactComponent as Profile1 } from '../asset/svg/Profile1.svg';
-import { ReactComponent as Profile2 } from '../asset/svg/Profile2.svg';
-import { ReactComponent as Profile3 } from '../asset/svg/Profile3.svg';
-import { ReactComponent as Profile4 } from '../asset/svg/Profile4.svg';
+import theme from '../../style/theme';
+import Universities from '../../asset/Universities';
+import Mbti from '../../asset/Mbti';
+import { ReactComponent as Plus } from '../../asset/svg/Plus.svg';
+import { ReactComponent as Profile1 } from '../../asset/svg/Profile1.svg';
+import { ReactComponent as Profile2 } from '../../asset/svg/Profile2.svg';
+import { ReactComponent as Profile3 } from '../../asset/svg/Profile3.svg';
+import { ReactComponent as Profile4 } from '../../asset/svg/Profile4.svg';
 
 export default function SliderBoxMembers({ members }) {
   const profileimg = (role) => {

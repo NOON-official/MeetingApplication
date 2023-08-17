@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
-import Teambox from '../../components/Teambox';
-import ApplyButton from '../../components/ApplyButton';
-import ProgressBar from '../../components/ProgressBar';
-import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import Teambox from '../../components/Apply/Teambox';
+import ApplyButton from '../../components/Button/ApplyButton';
+import ProgressBar from '../../components/Apply/ProgressBar';
+import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import { submitStep4 } from '../../features/apply';
 import ChannelTalk from '../../asset/ChannelTalk';
 

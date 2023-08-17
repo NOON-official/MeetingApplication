@@ -6,7 +6,7 @@ import { ReactComponent as UniversityMarkGray } from '../../../asset/svg/Univers
 import ApplyButton from '../../Button/ApplyButton';
 import ModifyProfileModal from './ModifyProfileModal';
 import StopMatchingModal from '../Matching/StopMatchingModal';
-import SliderBoxMembers from '../../SliderBoxMembers';
+import SliderBoxMembers from '../../Slider/SliderBoxMembers';
 import AreaText from '../../MainRecommend/AreaText';
 import DateText from '../../MainRecommend/DateText';
 import { useGetUserTeamIdDataQuery } from '../../../features/backendApi';

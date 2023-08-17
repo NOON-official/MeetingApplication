@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react';
 import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
-import OtherTeamNumberModal from '../../components/Modal/OtherTeamNumberModal';
+import OtherTeamNumberModal from '../../components/Modal/Matching/OtherTeamNumberModal';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
-import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
+import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
 import backend from '../../util/backend';
 

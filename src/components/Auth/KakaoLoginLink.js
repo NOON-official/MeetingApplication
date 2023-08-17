@@ -1,4 +1,4 @@
-import { API_URL, CLIENT_URL } from '../config/constants';
+import { API_URL, CLIENT_URL } from '../../config/constants';
 
 export default function KakaoLoginLink({ children }) {
   return (
