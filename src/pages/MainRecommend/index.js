@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import NoProfile from '../../components/MainRecommend/NoProfile';
 import Timer from './timer';
 import RecommendList from './recommendList';
-import RecommendModal from '../../components/Modal/RecommendModal';
+import RecommendModal from '../../components/Modal/Matching/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
 import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 import backend from '../../util/backend';

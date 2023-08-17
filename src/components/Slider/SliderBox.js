@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as Star } from '../asset/svg/Star.svg';
+import { ReactComponent as Star } from '../../asset/svg/Star.svg';
 
 function CountingStar(n) {
   if (n === 1) {

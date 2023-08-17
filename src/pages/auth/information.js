@@ -5,7 +5,7 @@ import { Button, Select } from 'antd';
 import backend from '../../util/backend';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
-import BinaryButton from '../../components/BinaryButton';
+import BinaryButton from '../../components/Button/BinaryButton';
 import Age from '../../asset/Age';
 
 function ApplyInformation() {

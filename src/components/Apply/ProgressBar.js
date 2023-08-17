@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { ReactComponent as HappyFaceWithText2 } from '../asset/svg/HappyFaceWithText2.svg';
-import { ReactComponent as ProgressText3 } from '../asset/svg/ProgressText3.svg';
-import { ReactComponent as HappyFace } from '../asset/svg/HappyFace.svg';
-import { ReactComponent as HappyFaceWithText1 } from '../asset/svg/HappyFaceWithText1.svg';
+import { ReactComponent as HappyFaceWithText2 } from '../../asset/svg/HappyFaceWithText2.svg';
+import { ReactComponent as ProgressText3 } from '../../asset/svg/ProgressText3.svg';
+import { ReactComponent as HappyFace } from '../../asset/svg/HappyFace.svg';
+import { ReactComponent as HappyFaceWithText1 } from '../../asset/svg/HappyFaceWithText1.svg';
 
 const Progress = styled.div`
   margin-top: 40px;
