@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as Header } from '../../asset/svg/Header.svg';
-import { ReactComponent as Person } from '../../asset/svg/Person.svg';
 import theme from '../../style/theme';
 import KakaoLoginLink from '../../components/KakaoLoginLink';
 import { setAccessToken } from '../../features/user';
@@ -34,11 +33,7 @@ export default function TopHeader() {
         </Link>
       </Logo>
       <LoginBox>
-        {accessToken ? (
-          <Link to="/myinfo">
-            <Person />
-          </Link>
-        ) : (
+        {accessToken ? null : (
           <KakaoLoginLink>
             <LoginText>로그인</LoginText>
           </KakaoLoginLink>

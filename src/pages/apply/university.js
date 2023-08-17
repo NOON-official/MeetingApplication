@@ -28,7 +28,6 @@ export default function ApplyUniversity() {
     }
   }, [selectedUniversity]);
 
-
   const SearchedUniv = Universities.filter(
     (c) => c.name.indexOf(searchKeyWord) > -1,
   );

@@ -12,6 +12,7 @@ import {
   useGetMyInfoQuery,
   useGetUserTingCountQuery,
 } from '../../features/backendApi';
+import theme from '../../style/theme';
 
 export default function MainMatchingHeader({ title }) {
   const { data: ting } = useGetUserTingCountQuery();
@@ -74,11 +75,12 @@ const ButtonBox = styled.div`
 
 const MainButton = styled.button`
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 5%;
   width: 48%;
   height: 70px;
-  padding: 30px;
+  padding: 5%;
   border: none;
   border-radius: 10px;
   background-color: #ffe8e8;
@@ -87,11 +89,12 @@ const MainButton = styled.button`
 
 const MainButton2 = styled.button`
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 5%;
   width: 90%;
   height: 70px;
-  padding: 30px;
+  padding: 5%;
   border: none;
   border-radius: 10px;
   background-color: #ffe8e8;
@@ -99,15 +102,15 @@ const MainButton2 = styled.button`
 `;
 
 const SMainGroup = styled(MainGroup)`
-  margin-right: 15px;
+  margin-right: 10px;
 `;
 
 const SMainDoc = styled(MainDoc)`
-  margin-right: 15px;
+  margin-right: 10px;
 `;
 
 const SUniversityMarkDarkGray = styled(UniversityMarkDarkGray)`
-  margin-right: 15px;
+  margin-right: 10px;
 `;
 
 const BtnTitle = styled.div`
@@ -118,7 +121,9 @@ const BtnTitle = styled.div`
 `;
 
 const BtnMainTitlePink = styled.div`
-  margin-left: 15px;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 500;
   background: linear-gradient(90deg, #ccb5f3 0%, #ff9595 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -126,6 +131,8 @@ const BtnMainTitlePink = styled.div`
 `;
 
 const BtnMainTitle = styled.div`
+  color: ${theme.black};
+  font-size: 16px;
   font-weight: 500;
 `;
 
@@ -138,7 +145,7 @@ const BtnSubtitle = styled.div`
 
 const STingImg = styled(TingImg)`
   width: 20px;
-  margin-right: 15px;
+  margin-right: 10px;
 `;
 
 const TingCount = styled.span`
