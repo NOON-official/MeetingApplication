@@ -10,9 +10,9 @@ import {
   useGetMyInfoQuery,
   useGetUserReferralIdQuery,
 } from '../../../features/backendApi';
-import CompleteUploadModal from '../../../components/Modal/CompleteUploadModal';
+import CompleteUploadModal from '../../../components/Modal/Studentcard/CompleteUploadModal';
 import AutomaticModal from '../../../components/Modal/AutomaticModal';
-import BigFileModal from '../../../components/Modal/BigFileModal';
+import BigFileModal from '../../../components/Modal/Studentcard/BigFileModal';
 import backend from '../../../util/backend';
 import Section from '../../../components/Section';
 

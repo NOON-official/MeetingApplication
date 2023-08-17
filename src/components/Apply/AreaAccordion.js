@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ReactComponent as PinkDownArrow } from '../asset/svg/PinkDownArrow.svg';
-import { ReactComponent as PinkUpArrow } from '../asset/svg/PinkUpArrow.svg';
+import { ReactComponent as PinkDownArrow } from '../../asset/svg/PinkDownArrow.svg';
+import { ReactComponent as PinkUpArrow } from '../../asset/svg/PinkUpArrow.svg';
 
 export default function AreaAccordion(props) {
   const {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Award from '../asset/img/Award.png';
+import Award from '../../asset/img/Award.png';
 
 function SliderBox2({ rank, text }) {
   return (

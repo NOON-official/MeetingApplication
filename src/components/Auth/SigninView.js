@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import { ReactComponent as Seconds } from '../../asset/svg/30seconds.svg';
-import KakaoLoginLink from '../KakaoLoginLink';
+import KakaoLoginLink from './KakaoLoginLink';
 import { setAccessToken } from '../../features/user';
 
 export default function SigninView() {

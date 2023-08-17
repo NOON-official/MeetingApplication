@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
-import ApplyButton from '../../components/ApplyButton';
-import ProgressBar from '../../components/ProgressBar';
-import NotEnoughDateModal from '../../components/Modal/NotEnoughDateModal';
-import NotEnoughPlaceModal from '../../components/Modal/NotEnoughPlaceModal';
-import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import ApplyButton from '../../components/Button/ApplyButton';
+import ProgressBar from '../../components/Apply/ProgressBar';
+import NotEnoughDateModal from '../../components/Modal/Apply/NotEnoughDateModal';
+import NotEnoughPlaceModal from '../../components/Modal/Apply/NotEnoughPlaceModal';
+import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import { ReactComponent as Earth } from '../../asset/svg/Earth.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
 import { submitStep3 } from '../../features/apply';
-import AreaAccordion from '../../components/AreaAccordion';
+import AreaAccordion from '../../components/Apply/AreaAccordion';
 import Area from '../../asset/Area';
 
 export default function Apply3Page() {
