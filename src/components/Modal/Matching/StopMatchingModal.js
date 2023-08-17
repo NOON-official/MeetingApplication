@@ -1,8 +1,8 @@
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import { useCallback } from 'react';
-import theme from '../../style/theme';
-import backend from '../../util/backend';
+import theme from '../../../style/theme';
+import backend from '../../../util/backend';
 
 export default function StopMatchingModal({ open, setModal, teamId }) {
   const deleteMatching = useCallback(async () => {

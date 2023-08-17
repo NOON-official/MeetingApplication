@@ -1,12 +1,9 @@
 import { Button, Modal } from 'antd';
-import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
+import theme from '../../../style/theme';
+import { ReactComponent as ExclamationMark } from '../../../asset/svg/ExclamationMark.svg';
 
-export default function StudentCardModal({ open, setModal }) {
-  const navigate = useNavigate();
-
+export default function BigFileModal({ open, setModal }) {
   return (
     <div>
       {open ? (
@@ -20,20 +17,13 @@ export default function StudentCardModal({ open, setModal }) {
         >
           <Container>
             <TextBox>
-              <SSadFace />
+              <SExclamationMark />
               <BlackText>
-                학교 인증을 완료한 후에
-                <br />
-                상대 팀의 프로필을 살펴볼 수 있어요.
+                해당 이미지의 용량이 커서 <br /> 업로드 할 수 없어요 <br /> 다른
+                이미지를 선택해 주세요!
               </BlackText>
             </TextBox>
           </Container>
-          <ButtonBox>
-            <SButton onClick={() => navigate('/myinfo/studentcard')}>
-              인증하러 가기
-            </SButton>
-            <WhiteButton onClick={() => setModal(false)}>취소</WhiteButton>
-          </ButtonBox>
         </Modal>
       ) : null}
     </div>
@@ -41,6 +31,7 @@ export default function StudentCardModal({ open, setModal }) {
 }
 
 const Container = styled.div`
+  padding-top: 5%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -55,8 +46,8 @@ const TextBox = styled.div`
   text-align: center;
 `;
 
-const SSadFace = styled(SadFace)`
-  width: 40%;
+const SExclamationMark = styled(ExclamationMark)`
+  margin-bottom: 3%;
 `;
 
 const BlackText = styled.span`
@@ -65,26 +56,30 @@ const BlackText = styled.span`
 `;
 
 const ButtonBox = styled.div`
-  width: 100%;
   display: flex;
   justify-content: space-between;
+  width: 90%;
   margin-top: 5%;
 `;
 
-const SButton = styled(Button)`
-  width: 45%;
+const SButton1 = styled(Button)`
+  width: 48%;
   height: 50px;
   border: none;
   border-radius: 10px;
   color: white;
-  background-color: #eb8888;
+  background-color: ${theme.pink};
   font-size: 18px;
   font-weight: 400;
-  cursor: pointer;
 `;
 
-const WhiteButton = styled(SButton)`
+const SButton2 = styled(Button)`
+  width: 48%;
+  height: 50px;
   border: 1px solid #f2cbcb;
+  border-radius: 10px;
   color: #f2cbcb;
   background-color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
 `;

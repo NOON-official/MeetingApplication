@@ -5,7 +5,7 @@ import { ReactComponent as MainDoc } from '../../asset/svg/MainDoc.svg';
 import { ReactComponent as UniversityMarkDarkGray } from '../../asset/svg/UniversityMarkDarkGray.svg';
 
 import { ReactComponent as UniversityMarkPink } from '../../asset/svg/UniversityMark.svg';
-import MyTeamProfileModal from '../../components/MainRecommend/MyTeamProfileModal';
+import MyTeamProfileModal from '../../components/Modal/Profile/MyTeamProfileModal';
 import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
 import { ReactComponent as TingImg } from '../../asset/svg/TingImg.svg';
 import {
