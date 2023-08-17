@@ -26,15 +26,13 @@ export default function Recommend() {
   return (
     <>
       <RecommendModal />
-      {myTeamId?.teamId !== null ? (
-        <Section>
+      <Section>
+        {myProfile ? (
           <MainMatchingHeader title="프로필 조회" />
-        </Section>
-      ) : (
-        <Section>
+        ) : (
           <MainMatchingHeader title="프로필 만들기" />
-        </Section>
-      )}
+        )}
+      </Section>
 
       <Container>
         <Title>우리 팀 추천 매칭</Title>
@@ -55,14 +53,14 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  max-width: 425px;
   width: 100%;
-  margin: 5% auto;
+  height: 200px;
 `;
 
 const Container = styled.div`
   width: 90%;
-  margin: 5% auto;
+  margin: 0 auto;
 `;
 
 const Title = styled.div`

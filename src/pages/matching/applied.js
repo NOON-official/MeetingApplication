@@ -160,7 +160,7 @@ const NoMeetingContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 20% auto;
+  margin: 15% auto 0;
 `;
 
 const Title = styled.div`

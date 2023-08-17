@@ -38,7 +38,7 @@ export default function StudentCard() {
 
   const { data: myInfo } = useGetMyInfoQuery();
   const { data: referralIdData } = useGetUserReferralIdQuery();
-  console.log(myInfo);
+
   const referralId = useMemo(
     () => referralIdData?.referralId || '',
     [referralIdData],
