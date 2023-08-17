@@ -2,7 +2,7 @@ import { Modal } from 'antd';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import { ReactComponent as Magnifier } from '../../asset/svg/Magnifier.svg';
+import { ReactComponent as Magnifier } from '../../../asset/svg/Magnifier.svg';
 
 export default function RecommendModal() {
   const [showPopup, setShowPopup] = useState(false);

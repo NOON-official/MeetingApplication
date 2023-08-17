@@ -1,10 +1,10 @@
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
-import { ReactComponent as ErrorChar } from '../../asset/svg/ErrorMessageCharacter.svg';
-import { ReactComponent as ModalTextPlace } from '../../asset/svg/ModalTextPlace.svg';
-import theme from '../../style/theme';
+import { ReactComponent as ErrorChar } from '../../../asset/svg/ErrorMessageCharacter.svg';
+import { ReactComponent as MatchingText11 } from '../../../asset/svg/MatchingText11.svg';
+import theme from '../../../style/theme';
 
-export default function NotEnoughDateModal({ open, setModal }) {
+export default function NotEnoughIntroModal({ open, setModal }) {
   return (
     <div>
       {open ? (
@@ -17,7 +17,7 @@ export default function NotEnoughDateModal({ open, setModal }) {
         >
           <Container>
             <ErrorChar />
-            <ModalTextPlace />
+            <MatchingText11 />
             <SButton onClick={() => setModal(false)}>닫기</SButton>
           </Container>
         </Modal>
@@ -30,25 +30,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-`;
-const TextBox = styled.div`
-  width: 100%;
-  text-align: center;
-`;
-const BlackText = styled.span`
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-const ColorText = styled.span`
-  color: ${theme.pink};
-  font-size: 30px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const SmallText = styled.span`
-  font-weight: 400;
-  font-size: 13px;
-  color: #525252;
 `;
 
 const SButton = styled(Button)`

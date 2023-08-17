@@ -1,10 +1,10 @@
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import { useState } from 'react';
-import theme from '../../style/theme';
-import backend from '../../util/backend';
-import { ReactComponent as ExclamationMark } from '../../asset/svg/ExclamationMark.svg';
-import AutomaticModal from './AutomaticModal';
+import theme from '../../../style/theme';
+import backend from '../../../util/backend';
+import { ReactComponent as ExclamationMark } from '../../../asset/svg/ExclamationMark.svg';
+import AutomaticModal from '../AutomaticModal';
 
 export default function DeleteProfileModal({
   open,

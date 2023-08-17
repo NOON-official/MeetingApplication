@@ -4,7 +4,7 @@ import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
-import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
+import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 
 export default function MatchingReceived() {
   const [receivedData, setReceivedData] = useState([]);
