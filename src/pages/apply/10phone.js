@@ -6,7 +6,7 @@ import ApplyLayout from '../../layout/ApplyLayout';
 import backend from '../../util/backend';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
-import MatchingCompleteModal from '../../components/Modal/MatchingCompleteModal';
+import MatchingCompleteModal from '../../components/Modal/Matching/MatchingCompleteModal';
 
 export default function Apply10Page() {
   const [openModal, setOpenModal] = useState(false);

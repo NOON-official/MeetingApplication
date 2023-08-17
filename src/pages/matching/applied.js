@@ -9,14 +9,13 @@ import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
-import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
-import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
+import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
   const navigate = useNavigate();
 
+  const [myTeamId, setMyTeamId] = useState();
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfileList, setDeleteProfileList] = useState([]);
@@ -30,6 +29,11 @@ export default function MatchingApplied() {
     setOpenDeleteModal(bool);
   };
 
+  const getTeamId = useCallback(async () => {
+    const id = await backend.get(`/users/team-id`);
+    setMyTeamId(id.data.teamId);
+  }, []);
+
   const getApplyData = useCallback(async () => {
     const apply = await backend.get(`/users/matchings/applied`);
     setApplyData(apply.data.teams);
@@ -38,10 +42,13 @@ export default function MatchingApplied() {
   }, []);
 
   useEffect(() => {
-    if (accessToken && myTeamId) {
-      getApplyData();
+    if (accessToken) {
+      getTeamId();
+      if (myTeamId) {
+        getApplyData();
+      }
     }
-  }, [myTeamId]);
+  }, [myTeamId, accessToken]);
 
   const handleTabChange = (tabIdx) => {
     if (selectTab === 1 && tabIdx === 2) {
@@ -160,7 +167,7 @@ const NoMeetingContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 20% auto;
+  margin: 15% auto 0;
 `;
 
 const Title = styled.div`

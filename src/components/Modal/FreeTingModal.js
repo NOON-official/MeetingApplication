@@ -2,8 +2,8 @@ import { Modal } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Mailbox } from '../../asset/svg/Mailbox.svg';
 import { useGetMyInfoQuery } from '../../features/backendApi';
+import Mailbox from '../../asset/img/Mailbox.png';
 
 export default function FreeTingModal({ open, setModal }) {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ export default function FreeTingModal({ open, setModal }) {
                   우리 팀 프로필을 만든 후<br />
                   사용해보세요!
                 </SmallText>
-                <SMailbox />
+                <SImg src={Mailbox} />
               </Content>
             </TextBox>
           </Container>
@@ -62,7 +62,6 @@ const Container = styled.div`
 `;
 
 const TextBox = styled.div`
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -102,14 +101,19 @@ const ColorText = styled.span`
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  width: 100%;
   margin-top: 10px;
 `;
 
 const SmallText = styled.span`
+  margin-bottom: 4%;
   font-size: 14px;
   color: #525252;
+  font-weight: 300;
   font-family: 'GmarketSans';
 `;
 
-const SMailbox = styled(Mailbox)``;
+const SImg = styled.img`
+  width: 145px;
+`;

@@ -58,9 +58,9 @@ export default function AccountPhoneChangePage() {
     <MyinfoLayout title="전화번호 변경">
       <Title>
         <Maintitle>
-          <Pink>전화번호 인증 </Pink>후
+          <Pink>전화번호 변경 </Pink>하시려면
         </Maintitle>
-        <Maintitle>미팅 신청이 완료됩니다</Maintitle>
+        <Maintitle>인증해주세요</Maintitle>
       </Title>
       <Conatiner>
         <PhoneBox>
@@ -111,7 +111,7 @@ export default function AccountPhoneChangePage() {
 
 const Title = styled.div`
   width: 90%;
-  margin-top: 8%;
+  margin: 8% auto;
   height: 13%;
   min-height: 13%;
 `;
@@ -128,7 +128,7 @@ const Pink = styled.span`
 `;
 
 const Conatiner = styled.div`
-  margin-bottom: 35%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -183,32 +183,9 @@ const SubmitButton = styled(Button)`
 `;
 
 const Footer = styled.div`
+  margin: 30% auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 90%;
-  margin-bottom: 60%;
-`;
-
-const TextBox = styled.div`
-  width: 100%;
-  text-align: center;
-`;
-const BlackText = styled.span`
-  color: black;
-  font-size: 31px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-const ColorText = styled.span`
-  color: ${(props) => props.theme.pink};
-  font-size: 31px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const SButton = styled(Button)`
-  margin-top: 10%;
-  width: 100%;
-  height: 50px;
-  color: white;
-  background-color: ${(props) => props.theme.pink};
 `;
