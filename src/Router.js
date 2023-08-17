@@ -17,7 +17,6 @@ import Apply7Page from './pages/apply/7drink';
 import Apply8Page from './pages/apply/8kakaoId';
 import Apply10Page from './pages/apply/10phone';
 import Certification from './pages/apply/certification';
-import Complete from './pages/apply/complete';
 import TicketBuyPage from './pages/myinfo/ticket/buy';
 import TicketCouponPage from './pages/myinfo/ticket/coupon';
 import TicketHistoryPage from './pages/myinfo/ticket/history';
@@ -51,7 +50,6 @@ const Router = createBrowserRouter([
         path: 'guide',
         element: <Guide />,
       },
-
       {
         path: 'matching/applied',
         element: <MatchingApplied />,
@@ -167,10 +165,6 @@ const Router = createBrowserRouter([
       {
         path: 'apply/certification',
         element: <Certification />,
-      },
-      {
-        path: 'apply/complete',
-        element: <Complete />,
       },
       {
         path: 'apply/information',
