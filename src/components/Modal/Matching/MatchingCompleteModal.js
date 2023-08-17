@@ -74,11 +74,6 @@ const BlackText = styled.span`
   font-size: 18px;
 `;
 
-const ColorText = styled.span`
-  color: ${theme.pink};
-  font-size: 18px;
-`;
-
 const SButton = styled(Button)`
   margin-top: 10%;
   width: 100%;
