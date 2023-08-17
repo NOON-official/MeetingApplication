@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
-import ApplyButton from '../../components/ApplyButton';
-import ProgressBar from '../../components/ProgressBar';
+import ProgressBar from '../../components/Apply/ProgressBar';
 import { ReactComponent as Bottom } from '../../asset/svg/B.svg';
 import { submitStep1 } from '../../features/apply';
-import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import ApplyButton from '../../components/Button/ApplyButton';
+import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
 
 export default function Apply1Page() {
@@ -27,10 +27,6 @@ export default function Apply1Page() {
       window.alert('잘못된 접근입니다');
       navigate('/');
     }
-    // if (memberCount === 2) {
-    //   localStorage.removeItem('apply-data');
-    //   window.location.reload();
-    // }
   }, [accessToken]);
 
   const setModal = (bool) => {
