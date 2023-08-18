@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 
-export default function NoProfile() {
+export default function NoProfile({ children }) {
   const navigate = useNavigate();
 
   return (
     <Container>
-      <Title>프로필을 만든 후 확인할 수 있어요</Title>
+      <Title>{children}</Title>
       <SSadFace />
       <Button onClick={() => navigate('/apply/1')}>
         <CreateTeamBtn>만들러 가기</CreateTeamBtn>
@@ -23,7 +23,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 7% auto;
+  margin: 10% auto;
 `;
 
 const Title = styled.div`
@@ -33,7 +33,7 @@ const Title = styled.div`
 `;
 
 const SSadFace = styled(SadFace)`
-  margin: 5% 0;
+  width: 45%;
 `;
 
 const Button = styled.div`
