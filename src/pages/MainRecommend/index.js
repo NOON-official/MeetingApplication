@@ -27,7 +27,7 @@ export default function Recommend() {
     <>
       <RecommendModal />
       <Section>
-        {myProfile ? (
+        {myTeamId?.teamId !== null ? (
           <MainMatchingHeader title="프로필 조회" />
         ) : (
           <MainMatchingHeader title="프로필 만들기" />
@@ -44,7 +44,11 @@ export default function Recommend() {
 
       <Timer />
 
-      {myProfile !== null ? <RecommendList /> : <NoProfile />}
+      {myProfile !== null ? (
+        <RecommendList />
+      ) : (
+        <NoProfile>프로필을 만든 후 확인할 수 있어요</NoProfile>
+      )}
     </>
   );
 }
