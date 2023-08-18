@@ -35,7 +35,7 @@ export default function MatchingSucceed() {
 
   return (
     <MatchingLayout>
-      {succeedData ? (
+      {succeedData.length !== 0 ? (
         <>
           <Container>
             <Text>
@@ -262,11 +262,11 @@ const NoMeetingContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 20% auto;
+  margin: 10% auto;
 `;
 
 const Title2 = styled.div`
-  margin: 2% 0;
+  margin: 5% 0;
   font-size: 18px;
   font-weight: 500;
 `;
