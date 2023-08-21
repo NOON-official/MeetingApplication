@@ -4,7 +4,7 @@ import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import { ReactComponent as CheckBoxUnfilled } from '../../asset/svg/CheckboxUnfilled.svg';
 import { ReactComponent as CheckBoxFilled } from '../../asset/svg/CheckboxFilled.svg';
-import OtherTeamProfileModal from './OtherTeamProfileModal';
+import OtherTeamProfileModal from '../Modal/Profile/OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
 
 export default function OtherTeamList(props) {
@@ -33,15 +33,8 @@ export default function OtherTeamList(props) {
   return (
     <Container>
       {teamList.map((team) => {
-        const {
-          id,
-          teamName,
-          age,
-          memberCount,
-          intro,
-          isVerified,
-          matchingId,
-        } = team;
+        const { id, teamName, age, memberCount, intro, approval, matchingId } =
+          team;
 
         return (
           <TeamCardWrapper key={id}>
@@ -58,7 +51,7 @@ export default function OtherTeamList(props) {
             <TeamCard>
               <Title>
                 <TeamName>{teamName}</TeamName>
-                {isVerified ? <SUniversityMark /> : <SUniversityMarkGray />}
+                {approval ? <SUniversityMark /> : <SUniversityMarkGray />}
               </Title>
               <Subtitle>
                 <Age>{`평균 ${age}세`}</Age>

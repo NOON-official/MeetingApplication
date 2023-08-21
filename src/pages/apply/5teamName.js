@@ -5,11 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'antd';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
-import ApplyButton from '../../components/ApplyButton';
-import ProgressBar from '../../components/ProgressBar';
+import ApplyButton from '../../components/Button/ApplyButton';
+import ProgressBar from '../../components/Apply/ProgressBar';
 import { submitStep5 } from '../../features/apply';
-import NotEnoughIntroModal from '../../components/Modal/NotEnoughInroModal';
-import IsPageCompleteModal from '../../components/Modal/IsPageCompleteModal';
+import NotEnoughIntroModal from '../../components/Modal/Apply/NotEnoughInroModal';
+import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
 
 export default function Apply5Page() {
