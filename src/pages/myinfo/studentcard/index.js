@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { Button } from 'antd';
 import AWS from 'aws-sdk';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
@@ -10,17 +9,28 @@ import {
   useGetMyInfoQuery,
   useGetUserReferralIdQuery,
 } from '../../../features/backendApi';
-import CompleteUploadModal from '../../../components/Modal/CompleteUploadModal';
+import CompleteUploadModal from '../../../components/Modal/Studentcard/CompleteUploadModal';
 import AutomaticModal from '../../../components/Modal/AutomaticModal';
-import BigFileModal from '../../../components/Modal/BigFileModal';
+import BigFileModal from '../../../components/Modal/Studentcard/BigFileModal';
 import backend from '../../../util/backend';
 import Section from '../../../components/Section';
+import Guidelines from './guidelines';
+import Uploadsection from './uploadsection';
 
 export default function StudentCard() {
   const [openModal, setOpenModal] = useState(false);
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
   const [openBigfileModal, setOpenBigfileModal] = useState(false);
 
+  const { data: myInfo } = useGetMyInfoQuery();
+  const { data: referralIdData } = useGetUserReferralIdQuery();
+
+  const referralId = useMemo(
+    () => referralIdData?.referralId || '',
+    [referralIdData],
+  );
+
+  // aws s3 upload file
   const ACCESS_KEY = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
   const REGION = process.env.REACT_APP_AWS_REGION;
   const SECRET_ACCESS_KEY = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
@@ -35,14 +45,6 @@ export default function StudentCard() {
   const [imgFile, setImgFile] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
   const [percentage, setPercentage] = useState(0);
-
-  const { data: myInfo } = useGetMyInfoQuery();
-  const { data: referralIdData } = useGetUserReferralIdQuery();
-
-  const referralId = useMemo(
-    () => referralIdData?.referralId || '',
-    [referralIdData],
-  );
 
   const selectFile = (e) => {
     const file = e.target.files[0];
@@ -153,23 +155,8 @@ export default function StudentCard() {
               )}
             </ImgUpload>
 
-            {imgSrc && (
-              <ButtonBox>
-                <SInputLabel onClick={() => setImgSrc(null)}>
-                  <ChangeButton>변경하기</ChangeButton>
-                </SInputLabel>
-                <UploadButton onClick={upload}>업로드하기</UploadButton>
-              </ButtonBox>
-            )}
-
-            <GrayText>유의사항</GrayText>
-            <GrayText2>
-              <List>
-                ∙ 실물 학생증 사진, 모바일 학생증 캡쳐본 모두 가능해요
-              </List>
-              <List>∙ 대학교, 학과, 학번, 이름이 모두 보여야 승인돼요</List>
-              <List>∙ 미팅 신청자와 학생증에 기재된 이름이 일치해야 해요</List>
-            </GrayText2>
+            {imgSrc && <Uploadsection setImgSrc={setImgSrc} upload={upload} />}
+            <Guidelines />
           </Content>
         )}
 
@@ -190,23 +177,8 @@ export default function StudentCard() {
               </CheckingText>
             </ImgUpload>
 
-            {imgSrc && (
-              <ButtonBox>
-                <SInputLabel onClick={() => setImgSrc(null)}>
-                  <ChangeButton>변경하기</ChangeButton>
-                </SInputLabel>
-                <UploadButton onClick={upload}>업로드하기</UploadButton>
-              </ButtonBox>
-            )}
-
-            <GrayText>유의사항</GrayText>
-            <GrayText2>
-              <List>
-                ∙ 실물 학생증 사진, 모바일 학생증 캡쳐본 모두 가능해요
-              </List>
-              <List>∙ 대학교, 학과, 학번, 이름이 모두 보여야 승인돼요</List>
-              <List>∙ 미팅 신청자와 학생증에 기재된 이름이 일치해야 해요</List>
-            </GrayText2>
+            {imgSrc && <Uploadsection setImgSrc={setImgSrc} upload={upload} />}
+            <Guidelines />
           </Content>
         )}
 
@@ -247,27 +219,12 @@ export default function StudentCard() {
               )}
             </ImgUpload>
 
-            {imgSrc && (
-              <ButtonBox>
-                <SInputLabel onClick={() => setImgSrc(null)}>
-                  <ChangeButton>변경하기</ChangeButton>
-                </SInputLabel>
-                <UploadButton onClick={upload}>업로드하기</UploadButton>
-              </ButtonBox>
-            )}
-
-            <GrayText>유의사항</GrayText>
-            <GrayText2>
-              <List>
-                ∙ 실물 학생증 사진, 모바일 학생증 캡쳐본 모두 가능해요
-              </List>
-              <List>∙ 대학교, 학과, 학번, 이름이 모두 보여야 승인돼요</List>
-              <List>∙ 미팅 신청자와 학생증에 기재된 이름이 일치해야 해요</List>
-            </GrayText2>
+            {imgSrc && <Uploadsection setImgSrc={setImgSrc} upload={upload} />}
+            <Guidelines />
           </Content>
         )}
 
-        {myInfo?.isVerified === true && myInfo?.approval === true && (
+        {myInfo?.isVerified === true && myInfo?.approval && (
           // 인증 완료됨
           <Content>
             <VerifyBox>
@@ -303,11 +260,6 @@ const PinkText = styled.span`
   font-weight: 400;
 `;
 
-// const Section = styled.div`
-//   padding: 6%;
-//   background-color: #ffffff;
-// `;
-
 const Header = styled.div`
   display: flex;
   align-items: center;
@@ -340,15 +292,6 @@ const GrayText = styled.div`
   font-weight: 300;
   line-height: 18px;
 `;
-
-const GrayText2 = styled.ul`
-  margin: 3% 0;
-  font-size: 13px;
-  font-weight: 300;
-  line-height: 18px;
-`;
-
-const List = styled.li``;
 
 const ImgUpload = styled.div`
   display: flex;
@@ -421,35 +364,4 @@ const InputLabel = styled.label`
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 75%;
-  margin: 5% auto 6%;
-`;
-
-const SInputLabel = styled.label``;
-
-const ChangeButton = styled(Button).attrs({ type: 'button' })`
-  width: 100px;
-  height: 40px;
-  border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.lightPink};
-  color: ${(props) => props.theme.lightPink};
-  background-color: #ffffff;
-  font-size: 14px;
-  font-weight: 400;
-`;
-
-const UploadButton = styled(Button).attrs({ type: 'button' })`
-  width: 100px;
-  height: 40px;
-  border: none;
-  border-radius: 10px;
-  color: #ffffff;
-  background-color: #eb8888;
-  font-size: 14px;
-  font-weight: 400;
 `;

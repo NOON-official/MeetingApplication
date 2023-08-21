@@ -1,26 +1,38 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import NoProfile from '../../components/MainRecommend/NoProfile';
 import Timer from './timer';
 import RecommendList from './recommendList';
-import RecommendModal from '../../components/Modal/RecommendModal';
+import RecommendModal from '../../components/Modal/Matching/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
 import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
+import backend from '../../util/backend';
 
 export default function Recommend() {
   const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const [myProfile, setMyProfile] = useState(null);
+
+  useEffect(() => {
+    const getProfile = async () => {
+      if (myTeamId?.teamId !== null && myTeamId?.teamId !== undefined) {
+        const profile = await backend.get(`/teams/${myTeamId?.teamId}`);
+        setMyProfile(profile.data);
+      }
+    };
+
+    getProfile();
+  }, [myTeamId?.teamId]);
 
   return (
     <>
       <RecommendModal />
-      {myTeamId ? (
-        <Section>
+      <Section>
+        {myTeamId?.teamId !== null ? (
           <MainMatchingHeader title="프로필 조회" />
-        </Section>
-      ) : (
-        <Section>
+        ) : (
           <MainMatchingHeader title="프로필 만들기" />
-        </Section>
-      )}
+        )}
+      </Section>
 
       <Container>
         <Title>우리 팀 추천 매칭</Title>
@@ -32,7 +44,11 @@ export default function Recommend() {
 
       <Timer />
 
-      {myTeamId ? <RecommendList /> : <NoProfile />}
+      {myProfile !== null ? (
+        <RecommendList />
+      ) : (
+        <NoProfile>프로필을 만든 후 확인할 수 있어요</NoProfile>
+      )}
     </>
   );
 }
@@ -41,14 +57,14 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  max-width: 425px;
   width: 100%;
-  margin: 5% auto;
+  height: 200px;
 `;
 
 const Container = styled.div`
   width: 90%;
-  margin: 5% auto;
+  margin: 0 auto;
 `;
 
 const Title = styled.div`

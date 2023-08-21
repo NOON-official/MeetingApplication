@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import TopHeader from './header/TopHeader';
 import BottomTabs from './header/BottomTabs';
-import MyTeamProfile from '../components/MainRecommend/MyTeamProfileModal';
+import MyTeamProfile from '../components/Modal/Profile/MyTeamProfileModal';
 import MainMatchingHeader from './header/MainMatchingHeader';
 import { useGetUserTeamIdDataQuery } from '../features/backendApi';
 
@@ -38,14 +38,10 @@ export default function MatchingLayout({ children }) {
       <Content>
         <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
         <Section>
-          {myTeamId ? (
-            <Section>
-              <MainMatchingHeader title="프로필 조회" />
-            </Section>
+          {myTeamId?.teamId !== null ? (
+            <MainMatchingHeader title="프로필 조회" />
           ) : (
-            <Section>
-              <MainMatchingHeader title="프로필 만들기" />
-            </Section>
+            <MainMatchingHeader title="프로필 만들기" />
           )}
 
           <Header2>
@@ -94,10 +90,9 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   max-width: 425px;
   width: 100%;
-  margin: 0 auto;
   background-color: #ffffff;
 `;
 
@@ -105,7 +100,7 @@ const Header2 = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin-top: 6%;
+  margin-top: 5%;
   border-bottom: 1px solid #6a6a6a;
 `;
 
