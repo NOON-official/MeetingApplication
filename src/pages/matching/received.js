@@ -4,9 +4,12 @@ import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
-import DeleteProfileModal from '../../components/Modal/DeleteProfileModal';
+import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
+import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
+import NoProfile from '../../components/MainRecommend/NoProfile';
 
 export default function MatchingReceived() {
+  const { data: myTeamId } = useGetUserTeamIdDataQuery();
   const [receivedData, setReceivedData] = useState([]);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfileList, setDeleteProfileList] = useState([]);
@@ -25,6 +28,14 @@ export default function MatchingReceived() {
     getReceivedData();
   }, []);
 
+  if (!myTeamId?.teamId) {
+    return (
+      <MatchingLayout>
+        <NoProfile>프로필을 만든 후 신청을 받을 수 있어요</NoProfile>
+      </MatchingLayout>
+    );
+  }
+
   return (
     <MatchingLayout>
       <DeleteProfileModal
@@ -33,7 +44,6 @@ export default function MatchingReceived() {
         state="received"
         data={deleteProfileList}
         fetchData={getReceivedData}
-
       />
       {receivedData.length !== 0 ? (
         <>
@@ -93,7 +103,7 @@ const NoMeetingContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 20% auto;
+  margin: 15% auto;
 `;
 
 const Title = styled.div`
@@ -104,21 +114,6 @@ const Title = styled.div`
 
 const SSadFace = styled(SadFace)`
   width: 45%;
-`;
-
-const Button = styled.div`
-  width: 40%;
-`;
-
-const CreateTeamBtn = styled.button`
-  width: 100%;
-  padding: 10px 5px;
-  border: none;
-  border-radius: 20px;
-  background-color: #ffcdcd;
-  color: #eb8888;
-  font-size: 14px;
-  font-weight: 600;
 `;
 
 const Container = styled.div`

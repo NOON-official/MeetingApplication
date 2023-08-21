@@ -4,7 +4,7 @@ import { Carousel } from 'antd';
 import { ReactComponent as SliderLArrow } from '../../../asset/svg/SliderLArrow.svg';
 import { ReactComponent as WriteReview } from '../../../asset/svg/WriteReview.svg';
 import { ReactComponent as SliderRArrow } from '../../../asset/svg/SliderRArrow.svg';
-import SliderBox from '../../../components/SliderBox';
+import SliderBox from '../../../components/Slider/SliderBox';
 
 export default function Review() {
   const slider1 = useRef(null);

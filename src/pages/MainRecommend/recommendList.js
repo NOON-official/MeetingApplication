@@ -3,39 +3,44 @@ import { useEffect, useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import useModalState from '../../hooks/useModalState';
-import OtherTeamProfileModal from '../../components/MainRecommend/OtherTeamProfileModal';
+import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
 import backend from '../../util/backend';
-import { useGetMyInfoQuery } from '../../features/backendApi';
-import StudentCardModal from '../../components/Modal/StudentCardModal';
+import {
+  useGetMyInfoQuery,
+  useGetUserTeamIdDataQuery,
+} from '../../features/backendApi';
+import StudentCardModal from '../../components/Modal/Studentcard/StudentCardModal';
 
 export default function RecommendList() {
+  const { data: myTeamId } = useGetUserTeamIdDataQuery();
   const { data: myinfo } = useGetMyInfoQuery();
   const [teamList, setTeamList] = useState([]);
   const [modalState, openModal, closeModal] = useModalState(teamList);
   const [studentCardModal, setStudentCardModal] = useState(false);
 
-
-  const getList = async () => {
-    const recommend = await backend.get(`/users/teams/recommended`);
-    setTeamList(recommend.data.teams);
-  };
-
   const handleOpen = (id) => {
-    if (myinfo?.approval === 1) {
+    if (myinfo?.approval) {
       openModal(id);
     } else {
       setStudentCardModal(true);
     }
   };
-  
+
   useEffect(() => {
+    const getList = async () => {
+      if (myTeamId?.teamId !== null && myTeamId?.teamId !== undefined) {
+        const recommend = await backend.get(`/users/teams/recommended`);
+        setTeamList(recommend.data.teams);
+      }
+    };
+
     getList();
-  }, []);
+  }, [myTeamId]);
 
   return (
     <Container>
       {teamList?.map((team) => {
-        const { id, teamName, age, memberCount, intro, isVerified } = team;
+        const { id, teamName, age, memberCount, intro, approval } = team;
 
         return (
           <TeamCard key={id}>
@@ -54,7 +59,7 @@ export default function RecommendList() {
             />
             <Title>
               <TeamName>{teamName}</TeamName>
-              {isVerified ? <SUniversityMark /> : <SUniversityMarkGray />}
+              {approval ? <SUniversityMark /> : <SUniversityMarkGray />}
             </Title>
             <Subtitle>
               <Age>{`평균 ${age}세`}</Age>
@@ -62,7 +67,6 @@ export default function RecommendList() {
             </Subtitle>
             <Info>{`${intro}`}</Info>
             <Button onClick={() => handleOpen(id)}>자세히 보기</Button>
-
           </TeamCard>
         );
       })}
