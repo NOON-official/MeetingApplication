@@ -92,7 +92,7 @@ function Main() {
   return (
     <MainLayout>
       <div style={{ textAlign: 'center' }}>
-        <Section>
+        <Section style={{ marginBottom: '25px' }}>
           <CountTitle>
             <MainTitle>
               지금까지 &nbsp;
@@ -126,24 +126,6 @@ function Main() {
             </TotalBar>
           </MatchingBox>
         </Section> */}
-        <Section my="35px" style={{ marginTop: '50px' }}>
-          <TopTitle>소요 시간</TopTitle>
-          <TimeBox>
-            <SubTitle2>최근 7일 동안 평균</SubTitle2>
-            <AverageTime>
-              <CImg src={Clock} />
-              <AverageTimeNumber>
-                <Pink>
-                  {String(matchingAverageTime?.hours).padStart(2, '0')}시간{' '}
-                  {String(matchingAverageTime?.minutes).padStart(2, '0')}분
-                </Pink>{' '}
-              </AverageTimeNumber>
-              <AverageTimeDescription>
-                안에 매칭되었어요!
-              </AverageTimeDescription>
-            </AverageTime>
-          </TimeBox>
-        </Section>
         <Section>
           <Review>
             미팅 후기
