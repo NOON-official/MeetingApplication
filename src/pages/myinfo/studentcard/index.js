@@ -78,6 +78,7 @@ export default function StudentCard() {
 
   const upload = () => {
     const totalBytes = imgFile.size;
+    console.log(imgFile);
     if (totalBytes >= 20 * 1024 * 1024) {
       setOpenBigfileModal(true);
     } else {
@@ -98,16 +99,14 @@ export default function StudentCard() {
         setPercentage((uploadBytes / totalBytes) * 100);
       });
 
-      const promise = load.promise();
-
-      promise
+      load
+        .promise()
         .then((data) => {
           try {
             backend.post(`/auth/student-card`, {
               studentCardUrl: data.Location,
             });
             setOpenCompleteModal(true);
-            window.location.reload();
           } catch (err) {
             console.log(err);
           }
