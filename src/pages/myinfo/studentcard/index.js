@@ -46,21 +46,6 @@ export default function StudentCard() {
   const [imgSrc, setImgSrc] = useState(null);
   const [percentage, setPercentage] = useState(0);
 
-  // const selectFile = (e) => {
-  //   const file = e.target.files[0];
-
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-
-  //   return new Promise((resolve) => {
-  //     reader.onload = () => {
-  //       setImgSrc(reader.result);
-  //       setImgFile(file);
-  //       resolve();
-  //     };
-  //   });
-  // };
-
   const selectFile = (e) => {
     const file = e.target.files[0];
 
@@ -78,7 +63,7 @@ export default function StudentCard() {
 
   const upload = () => {
     const totalBytes = imgFile.size;
-    console.log(imgFile);
+
     if (totalBytes >= 20 * 1024 * 1024) {
       setOpenBigfileModal(true);
     } else {
@@ -107,6 +92,7 @@ export default function StudentCard() {
               studentCardUrl: data.Location,
             });
             setOpenCompleteModal(true);
+            window.location.reload();
           } catch (err) {
             console.log(err);
           }
