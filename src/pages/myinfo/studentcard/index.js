@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import AWS from 'aws-sdk';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
@@ -22,7 +22,7 @@ export default function StudentCard() {
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
   const [openBigfileModal, setOpenBigfileModal] = useState(false);
 
-  const { data: myInfo } = useGetMyInfoQuery();
+  const { data: myInfo, refetch } = useGetMyInfoQuery();
   const { data: referralIdData } = useGetUserReferralIdQuery();
 
   const referralId = useMemo(
@@ -86,13 +86,12 @@ export default function StudentCard() {
 
       load
         .promise()
-        .then((data) => {
+        .then(async (data) => {
           try {
-            backend.post(`/auth/student-card`, {
+            await backend.post(`/auth/student-card`, {
               studentCardUrl: data.Location,
             });
             setOpenCompleteModal(true);
-            window.location.reload();
           } catch (err) {
             console.log(err);
           }
@@ -100,6 +99,10 @@ export default function StudentCard() {
         .catch((err) => alert('이미지 로드에 실패했습니다!'));
     }
   };
+
+  useEffect(() => {
+    refetch();
+  }, [openCompleteModal, refetch]);
 
   return (
     <MyinfoLayout title="학교 인증">
@@ -176,8 +179,6 @@ export default function StudentCard() {
                 업로드해 주신 학생증을 검토 중이에요! 🔍
               </CheckingText>
             </ImgUpload>
-
-            {imgSrc && <Uploadsection setImgSrc={setImgSrc} upload={upload} />}
             <Guidelines />
           </Content>
         )}
