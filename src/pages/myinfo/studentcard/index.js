@@ -46,19 +46,34 @@ export default function StudentCard() {
   const [imgSrc, setImgSrc] = useState(null);
   const [percentage, setPercentage] = useState(0);
 
+  // const selectFile = (e) => {
+  //   const file = e.target.files[0];
+
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+
+  //   return new Promise((resolve) => {
+  //     reader.onload = () => {
+  //       setImgSrc(reader.result);
+  //       setImgFile(file);
+  //       resolve();
+  //     };
+  //   });
+  // };
+
   const selectFile = (e) => {
     const file = e.target.files[0];
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+    if (file) {
+      const reader = new FileReader();
 
-    return new Promise((resolve) => {
       reader.onload = () => {
         setImgSrc(reader.result);
         setImgFile(file);
-        resolve();
       };
-    });
+
+      reader.readAsDataURL(file);
+    }
   };
 
   const upload = () => {
