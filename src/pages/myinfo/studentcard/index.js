@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import AWS from 'aws-sdk';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
@@ -21,14 +21,19 @@ export default function StudentCard() {
   const [openModal, setOpenModal] = useState(false);
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
   const [openBigfileModal, setOpenBigfileModal] = useState(false);
+  // const [myInfo, setMyInfo] = useState();
 
-  const { data: myInfo } = useGetMyInfoQuery();
+  const { data: myInfo, refetch } = useGetMyInfoQuery();
   const { data: referralIdData } = useGetUserReferralIdQuery();
 
   const referralId = useMemo(
     () => referralIdData?.referralId || '',
     [referralIdData],
   );
+
+  useEffect(() => {
+    refetch();
+  }, [openCompleteModal, refetch]);
 
   // aws s3 upload file
   const ACCESS_KEY = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
@@ -86,13 +91,12 @@ export default function StudentCard() {
 
       load
         .promise()
-        .then((data) => {
+        .then(async (data) => {
           try {
-            backend.post(`/auth/student-card`, {
+            await backend.post(`/auth/student-card`, {
               studentCardUrl: data.Location,
             });
             setOpenCompleteModal(true);
-            window.location.reload();
           } catch (err) {
             console.log(err);
           }

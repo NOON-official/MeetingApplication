@@ -8,6 +8,7 @@ export default function AutomaticModal({ open, setModal, title }) {
     if (open) {
       const timeout = setTimeout(() => {
         setModal(false);
+        window.location.reload();
       }, 1500);
 
       return () => clearTimeout(timeout);
