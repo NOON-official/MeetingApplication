@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as Header } from '../../asset/svg/Header.svg';
@@ -8,11 +8,13 @@ import { ReactComponent as Person } from '../../asset/svg/Person.svg';
 import theme from '../../style/theme';
 import KakaoLoginLink from '../../components/KakaoLoginLink';
 import { setAccessToken } from '../../features/user';
+import AgeLimitationModal from '../../components/Modal/AgeLimitationModal';
 
 export default function TopHeader() {
   const { accessToken } = useSelector((state) => state.user);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     const access = searchParams.get('access');
@@ -26,8 +28,13 @@ export default function TopHeader() {
     }
   }, [dispatch, searchParams, setSearchParams]);
 
+  const setModal = (bool) => {
+    setOpenModal(bool);
+  };
+
   return (
     <Container>
+      <AgeLimitationModal open={openModal} setModal={setModal} />
       <Logo>
         <Link to="/">
           <Header />
@@ -39,9 +46,7 @@ export default function TopHeader() {
             <Person />
           </Link>
         ) : (
-          <KakaoLoginLink>
-            <LoginText>로그인</LoginText>
-          </KakaoLoginLink>
+          <LoginText onClick={() => setModal(true)}>로그인</LoginText>
         )}
       </LoginBox>
     </Container>
