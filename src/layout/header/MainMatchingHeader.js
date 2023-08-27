@@ -43,17 +43,12 @@ export default function MainMatchingHeader({ title }) {
         {myinfo?.approval ? (
           <MainButton>
             <UniversityMarkPink />
-            <BtnTitle>
-              <BtnMainTitlePink>학교 인증 완료</BtnMainTitlePink>
-            </BtnTitle>
+            <BtnMainTitlePink>학교 인증 완료</BtnMainTitlePink>
           </MainButton>
         ) : (
-          <MainButton>
+          <MainButton onClick={() => navigate('/myinfo/studentcard')}>
             <SUniversityMarkDarkGray />
-            <BtnTitle onClick={() => navigate('/myinfo/studentcard')}>
-              <BtnMainTitle>학교 인증하기</BtnMainTitle>
-              <BtnSubtitle>학교 인증 전</BtnSubtitle>
-            </BtnTitle>
+            <BtnMainTitleGray>학교 인증 전</BtnMainTitleGray>
           </MainButton>
         )}
       </ButtonBox>
@@ -87,20 +82,6 @@ const MainButton = styled.button`
   cursor: pointer;
 `;
 
-const MainButton2 = styled.button`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 5%;
-  width: 90%;
-  height: 70px;
-  padding: 5%;
-  border: none;
-  border-radius: 10px;
-  background-color: #ffe8e8;
-  cursor: pointer;
-`;
-
 const SMainGroup = styled(MainGroup)`
   margin-right: 10px;
 `;
@@ -113,34 +94,26 @@ const SUniversityMarkDarkGray = styled(UniversityMarkDarkGray)`
   margin-right: 10px;
 `;
 
-const BtnTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-`;
-
-const BtnMainTitlePink = styled.div`
-  margin-left: 10px;
+const BtnMainTitle = styled.span`
+  color: ${theme.black};
   font-size: 16px;
   font-weight: 500;
+`;
+
+const BtnMainTitlePink = styled(BtnMainTitle)`
+  margin-left: 10px;
   background: linear-gradient(90deg, #ccb5f3 0%, #ff9595 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
 
-const BtnMainTitle = styled.div`
-  color: ${theme.black};
-  font-size: 16px;
-  font-weight: 500;
+const BtnMainTitleGray = styled(BtnMainTitle)`
+  color: #777777;
 `;
 
-const BtnSubtitle = styled.div`
-  margin-top: 4%;
-  color: #777777;
-  font-size: 12px;
-  font-weight: 300;
+const MainButton2 = styled(MainButton)`
+  width: 90%;
 `;
 
 const STingImg = styled(TingImg)`

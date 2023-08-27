@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import MyinfoLayout from '../../../../layout/MyinfoLayout';
 
-export default function TicketBuyFailPage() {
+export default function TingBuyFailPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 

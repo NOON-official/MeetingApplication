@@ -6,7 +6,7 @@ import { ReactComponent as MainMyPage } from '../../asset/svg/MainMyPage.svg';
 
 export default function BottomTabs() {
   const homeMatch = useMatch('/');
-  const matchingMatch = useMatch('/matching');
+  const matchingMatch = useMatch('/matching/:id');
   const myinfoMatch = useMatch('/myinfo');
 
   return (
@@ -62,9 +62,13 @@ const Menu = styled.div`
 `;
 
 const SLink = styled(Link)`
-  color: ${(props) => `${props.isactive ? '#6A6A6A' : '#6A6A6A'}`};
+  color: ${(props) => `${props.isactive ? '#eb8888' : '#6A6A6A'}`};
   font-weight: 400;
   font-size: 13px;
   width: 100%;
   text-decoration: none;
+
+  > svg {
+    ${({ isactive }) => (isactive ? `fill: #eb8888` : `fill: #6A6A6A`)};
+  }
 `;
