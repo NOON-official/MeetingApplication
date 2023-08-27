@@ -1,10 +1,10 @@
-import { useCallback, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { STORAGE_KEY_ORDER_DATA } from '../../../../config/constants';
-import MyinfoLayout from '../../../../layout/MyinfoLayout';
 import backend from '../../../../util/backend';
+import MyinfoLayout from '../../../../layout/MyinfoLayout';
 
-export default function TicketBuySuccessPage() {
+export default function TingBuySuccessPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
