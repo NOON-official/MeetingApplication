@@ -107,6 +107,10 @@ const Subtitle = styled.div`
 `;
 
 const InfoCard = styled(Card)`
+  .ant-card-body {
+    padding: 20px 0 10px 20px;
+  }
+
   .ant-row {
     display: flex;
     justify-content: flex-start;
@@ -131,7 +135,7 @@ const InfoCard = styled(Card)`
     }
 
     :last-child {
-      padding-left: 20px;
+      padding-left: 15px;
       color: #777777;
       font-size: 14px;
     }
@@ -139,7 +143,7 @@ const InfoCard = styled(Card)`
 `;
 
 const SUniversityMarkPink = styled(UniversityMark)`
-  margin: 0 5px 0 15px;
+  margin: 0 5px 0 10px;
   width: 18px;
 `;
 

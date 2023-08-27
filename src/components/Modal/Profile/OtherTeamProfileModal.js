@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as UniversityMarkBlack } from '../../../asset/svg/UniversityMarkBlack.svg';
 import { ReactComponent as Share } from '../../../asset/svg/Share.svg';
 import SliderBoxMembers from '../../Slider/SliderBoxMembers';
@@ -18,6 +19,7 @@ export default function OtherTeamProfileModal({
   state,
   matchingId,
 }) {
+  const navigate = useNavigate();
   const [teamProfile, setTeamProfile] = useState(null);
   const { data: myTeamId } = useGetUserTeamIdDataQuery();
 
@@ -34,21 +36,30 @@ export default function OtherTeamProfileModal({
       closeModal();
       window.location.reload();
     } catch (err) {
-      alert('잠시 후에 다시 시도해주세요');
-      console.log(err);
+      if (err.response.data.message === 'insufficient ting') {
+        alert('팅이 부족합니다. 팅을 충전해주세요!');
+        navigate('/myinfo/ting/buy');
+      } else {
+        alert('잠시 후에 다시 시도해주세요');
+      }
     }
   }, [myTeamId, teamId]);
 
   // 프로필 그만보기
   const stopSeeProfile = useCallback(async () => {
-    try {
-      await backend.put(`/teams/${teamId}`);
-      alert('추천 리스트에서 사라집니다');
-      closeModal();
-      window.location.reload();
-    } catch (err) {
-      alert('잠시 후에 다시 시도해주세요');
-      console.log(err);
+    if (
+      window.confirm(
+        '이 팀은 이제 추천 매칭에서 볼 수 없어요. 그래도 진행하시겠어요?',
+      )
+    ) {
+      try {
+        await backend.put(`/teams/${teamId}`);
+        closeModal();
+        window.location.reload();
+      } catch (err) {
+        alert('잠시 후에 다시 시도해주세요');
+        console.log(err);
+      }
     }
   }, [teamId]);
 
@@ -67,14 +78,15 @@ export default function OtherTeamProfileModal({
 
   // 매칭 거절하기
   const refuseTeam = useCallback(async () => {
-    try {
-      await backend.put(`/matchings/${matchingId}/teams/${teamId}/refuse`);
-      alert('거절했습니다');
-      closeModal();
-      window.location.reload();
-    } catch (err) {
-      alert('잠시 후에 다시 시도해주세요');
-      console.log(err);
+    if (window.confirm('신청을 거절하시나요?')) {
+      try {
+        await backend.put(`/matchings/${matchingId}/teams/${teamId}/refuse`);
+        closeModal();
+        window.location.reload();
+      } catch (err) {
+        alert('잠시 후에 다시 시도해주세요');
+        console.log(err);
+      }
     }
   }, [matchingId, teamId]);
 
