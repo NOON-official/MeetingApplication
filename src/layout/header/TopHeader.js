@@ -5,7 +5,6 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as Header } from '../../asset/svg/Header.svg';
 import theme from '../../style/theme';
-import KakaoLoginLink from '../../components/Auth/KakaoLoginLink';
 import { setAccessToken } from '../../features/user';
 
 export default function TopHeader() {
@@ -32,13 +31,6 @@ export default function TopHeader() {
           <Header />
         </Link>
       </Logo>
-      <LoginBox>
-        {accessToken ? null : (
-          <KakaoLoginLink>
-            <LoginText>로그인</LoginText>
-          </KakaoLoginLink>
-        )}
-      </LoginBox>
     </Container>
   );
 }
@@ -57,21 +49,6 @@ const Container = styled.div`
   }
 `;
 
-const LoginBox = styled.button`
-  all: unset;
-  padding-right: ${theme.width * 5}px;
-  font-size: 15px;
-  :hover {
-    cursor: pointer;
-  }
-`;
-
 const Logo = styled.div`
   padding-left: ${theme.width * 5}px;
-`;
-
-const LoginText = styled.div`
-  font-weight: 400;
-  font-size: 11px;
-  color: #858585;
 `;

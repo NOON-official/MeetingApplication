@@ -99,7 +99,7 @@ export default function ChargeTing() {
       try {
         await backend.post('/orders', orderData);
         window.alert('이용권이 구매되었습니다');
-        navigate('../myinfo/ticket', { replace: true });
+        navigate('../myinfo/ting', { replace: true });
       } catch (e) {
         window.alert('오류가 발생하였습니다');
       }
@@ -115,8 +115,8 @@ export default function ChargeTing() {
         orderId,
         orderName: selectedProduct?.name,
         customerName: userData?.nickname,
-        successUrl: `${CLIENT_URL}/myinfo/ticket/buy/success`,
-        failUrl: `${CLIENT_URL}/myinfo/ticket/buy/fail`,
+        successUrl: `${CLIENT_URL}/myinfo/ting/buy/success`,
+        failUrl: `${CLIENT_URL}/myinfo/ting/buy/fail`,
       });
     } catch (error) {
       // 결제 고객이 결제창을 닫았을 경우 OR 사용자에 의해 취소된 경우
@@ -168,43 +168,7 @@ export default function ChargeTing() {
           ))}
         </MenuBox>
       </Section>
-      {/* <Section my="24px">
-        <Accordion
-          isShown
-          title={<AccordionTitle>쿠폰 적용</AccordionTitle>}
-          content={
-            <CouponList>
-              {coupons.length === 0 && (
-                <NoCouponText>사용 가능한 쿠폰이 없어요</NoCouponText>
-              )}
-              {coupons.map((coupon) => (
-                <CouponItem
-                  onClick={() => toggleCoupon(coupon)}
-                  checked={selectedCouponId === coupon.id}
-                  disabled={
-                    !coupon?.type?.applicableProducts?.includes(
-                      selectedProductId,
-                    )
-                  }
-                  title={coupon.type.name}
-                  expireText={
-                    coupon.expiresAt
-                      ? `${dayjs(coupon.expiresAt).format('YYYY. MM. DD')} 까지`
-                      : ' '
-                  }
-                  tipText={`*${coupon.type.condition}`}
-                />
-              ))}
-            </CouponList>
-          }
-        />
-      </Section> */}
-      {/* <Section my="20px" center>
-        <TotalPriceBox>
-          <span>최종 결제 금액</span>
-          <span>{totalAmount.toLocaleString()}원</span>
-        </TotalPriceBox>
-      </Section> */}
+
       <Section my="20px" center>
         <ChargeBtn onClick={makePayment}>충전하기</ChargeBtn>
       </Section>

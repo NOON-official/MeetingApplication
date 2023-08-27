@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import ChannelTalk from '../../asset/ChannelTalk';
 import MatchingLayout from '../../layout/MatchingLayout';
 import SigninView from '../../components/Auth/SigninView';
 import MainLayout from '../../layout/MainLayout';
@@ -14,7 +12,6 @@ import NoProfile from '../../components/MainRecommend/NoProfile';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
-  const navigate = useNavigate();
 
   const [myTeamId, setMyTeamId] = useState(null);
   const [selectTab, setSelectTab] = useState(1);
@@ -60,7 +57,7 @@ export default function MatchingApplied() {
     setSelectTab(tabIdx);
   };
 
-  const subtitle = () => (
+  const subtitle = (
     <Text>
       {clickEditBtn ? (
         <>
@@ -138,7 +135,7 @@ export default function MatchingApplied() {
               )}
             </Header>
             {selectTab === 1 ? (
-              subtitle()
+              subtitle
             ) : (
               <Text>아쉽게도 상대팀이 미팅을 거절했어요 😢</Text>
             )}
@@ -161,13 +158,8 @@ export default function MatchingApplied() {
         <NoMeetingContainer>
           <Title>신청한 미팅이 없어요</Title>
           <SSadFace />
-          <Button onClick={() => navigate('/apply/1')}>
-            <CreateTeamBtn>신청하러 가기</CreateTeamBtn>
-          </Button>
         </NoMeetingContainer>
       )}
-
-      <div>{ChannelTalk.hideChannelButton()}</div>
     </MatchingLayout>
   );
 }

@@ -36,6 +36,8 @@ import StudentCard from './pages/myinfo/studentcard';
 import Ting from './pages/myinfo/ting';
 import Review from './pages/myinfo/review';
 import ChargeTing from './pages/myinfo/ting/chargeTing';
+import TingBuySuccessPage from './pages/myinfo/ting/buy/success';
+import TingBuyFailPage from './pages/myinfo/ting/buy/fail';
 
 const Router = createBrowserRouter([
   {
@@ -109,6 +111,14 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo/ting/buy',
         element: <ChargeTing />,
+      },
+      {
+        path: 'myinfo/ting/buy/fail',
+        element: <TingBuyFailPage />,
+      },
+      {
+        path: 'myinfo/ting/buy/success',
+        element: <TingBuySuccessPage />,
       },
       {
         path: 'myinfo/review',
