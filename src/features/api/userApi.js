@@ -15,91 +15,46 @@ export const userApi = createApi({
   }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
-    getUserReferralId: builder.query({
-      query: () => ({ url: `users/referral-id` }),
-      providesTags: ['Users'],
-    }),
     getMyInfo: builder.query({
       query: () => ({ url: `users/my-info` }),
       providesTags: ['Users'],
     }),
-    getUserTingCount: builder.query({
-      query: () => ({ url: `users/tings/count` }),
-      providesTags: ['Users'],
+    patchUniversity: builder.mutation({
+      query({ ...patch }) {
+        return {
+          url: `users/university`,
+          method: 'PATCH',
+          body: patch,
+        };
+      },
+      invalidatesTags: ['Users'],
     }),
-    getUserAgreements: builder.query({
-      query: () => ({ url: `users/agreements` }),
-      providesTags: ['Users'],
+    postPhoneNumber: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `auth/phone`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users'],
     }),
-    getUserOrders: builder.query({
-      query: () => ({ url: `users/orders` }),
-      providesTags: ['Users'],
-    }),
-    getUserTeamIdData: builder.query({
-      query: () => ({ url: `users/team-id` }),
-      providesTags: ['Users'],
-    }),
-    getUserRecommend: builder.query({
-      query: () => ({ url: `users/teams/recommended` }),
-      providesTags: ['Users'],
-    }),
-    getUserMatchingApplied: builder.query({
-      query: () => ({ url: `users/matchings/applied` }),
-      providesTags: ['Users'],
-    }),
-    getUserMatchingReceived: builder.query({
-      query: () => ({ url: `users/matchings/received` }),
-      providesTags: ['Users'],
-    }),
-    getUserMatchingSucceed: builder.query({
-      query: () => ({ url: `users/matchings/secceeded` }),
-      providesTags: ['Users'],
-    }),
-    getUserCoupons: builder.query({
-      query: () => ({ url: `users/coupons` }),
-      providesTags: ['Users'],
-    }),
-    deleteUserApplied: builder.query({
-      query: () => ({
-        url: `users/matchings/applied`,
-      }),
-    }),
-
-    getUserTicketCount: builder.query({
-      query: () => `users/tickets/count`,
-    }),
-    getUserCouponCount: builder.query({
-      query: () => `users/coupons/count`,
-    }),
-    getUserInvitationCount: builder.query({
-      query: () => `users/invitations/count`,
-    }),
-    getOrdersPageData: builder.query({
-      query: () => `orders/pagedata`,
+    postPhoneCode: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `auth/phone/code`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users'],
     }),
   }),
 });
 
 export const {
-  useGetUserReferralIdQuery,
   useGetMyInfoQuery,
-  useGetUserTingCountQuery,
-  useGetUserAgreementsQuery,
-  useGetUserOrdersQuery,
-  useGetUserTeamIdDataQuery,
-  useGetUserRecommendQuery,
-  useGetUserMatchingAppliedQuery,
-  useGetUserMatchingReceivedQuery,
-  useGetUserMatchingSucceedQuery,
-
-  useGetUserTeamsQuery,
-  useGetUserTicketCountQuery,
-  useGetUserCouponsQuery,
-  useGetUserCouponCountQuery,
-  useGetUserInvitationCountQuery,
-  useGetOrdersPageDataQuery,
-  useGetCouponsPageDataQuery,
-  useGetTeamMembersCountOneWeekQuery,
-  useGetTeamMembersCountTotalQuery,
-  useGetTeamCountQuery,
+  usePatchUniversityMutation,
+  usePostPhoneNumberMutation,
+  usePostPhoneCodeMutation,
 } = userApi;

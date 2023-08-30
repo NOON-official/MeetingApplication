@@ -2,8 +2,8 @@ import { Modal } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useGetMyInfoQuery } from '../../features/backendApi';
 import Mailbox from '../../asset/img/Mailbox.png';
+import { useGetMyInfoQuery } from '../../features/api/userApi';
 
 export default function FreeTingModal({ open, setModal }) {
   const navigate = useNavigate();
