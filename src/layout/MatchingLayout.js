@@ -109,7 +109,7 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.background};
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const Footer = styled.div`
