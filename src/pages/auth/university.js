@@ -8,7 +8,7 @@ import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
 import Universities from '../../asset/Universities';
 import ChannelTalk from '../../asset/ChannelTalk';
 import FreeTingModal from '../../components/Modal/FreeTingModal';
-import { usePatchUniversityMutation } from '../../features/backendApi';
+import { usePatchUniversityMutation } from '../../features/api/userApi';
 
 export default function ApplyUniversity() {
   const [university] = usePatchUniversityMutation();

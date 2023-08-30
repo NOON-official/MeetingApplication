@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useCallback, useMemo, useState, useEffect } from 'react';
 
 import { Select, Modal, Input } from 'antd';
-import dayjs from 'dayjs';
 import theme from '../../style/theme';
 import Mbti from '../../asset/Mbti';
 import Universities from '../../asset/Universities';
@@ -36,7 +35,9 @@ function Teambox({ member, setMember, name }) {
         setMember((prev) => ({
           ...prev,
           role: 1,
-          age: dayjs().year() - userData.data.birth,
+          // pass 연동 후
+          // age: dayjs().year() - userData.data.birth,
+          age: 21,
           university: userData.data.university,
         }));
       };
@@ -220,7 +221,7 @@ function Teambox({ member, setMember, name }) {
         <Info>
           <BigTitle>나이</BigTitle>
           <SSelect
-            value={member.age !== undefined ? `만 ${member.age}세` : null}
+            value={member.age !== undefined ? `만 21세` : null}
             showSearch={false}
             bordered={false}
             placeholder="(필수)"

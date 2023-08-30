@@ -96,67 +96,62 @@ export default function MatchingApplied() {
         data={selectTab === 1 ? deleteProfileList : deleteRefuseProfileList}
         fetchData={getApplyData}
       />
-      {applyData.length !== 0 ? (
-        <>
-          <Container>
-            <Header>
-              <Tab
-                selected={selectTab === 1}
-                onClick={() => handleTabChange(1)}
+      <Container>
+        <Header>
+          <Tab selected={selectTab === 1} onClick={() => handleTabChange(1)}>
+            {`응답을 기다려요(${applyData.length})`}
+          </Tab>
+          <Tab selected={selectTab === 2} onClick={() => handleTabChange(2)}>
+            {`거절됐어요(${refuseData.length})`}
+          </Tab>
+
+          {clickEditBtn ? (
+            <EditBtn>
+              <Delete
+                selected={deleteProfileList.length > 0}
+                onClick={() => setOpenDeleteModal(true)}
               >
-                {`응답을 기다려요(${applyData.length})`}
-              </Tab>
-              <Tab
-                selected={selectTab === 2}
-                onClick={() => handleTabChange(2)}
+                삭제
+              </Delete>
+              <Cancel
+                onClick={() => {
+                  setClickEditBtn(false);
+                  if (selectTab === 1) setDeleteProfileList([]);
+                  else setDeleteRefuseProfileList([]);
+                }}
               >
-                {`거절됐어요(${refuseData.length})`}
-              </Tab>
-              {clickEditBtn ? (
-                <EditBtn>
-                  <Delete
-                    selected={deleteProfileList.length > 0}
-                    onClick={() => setOpenDeleteModal(true)}
-                  >
-                    삭제
-                  </Delete>
-                  <Cancel
-                    onClick={() => {
-                      setClickEditBtn(false);
-                      if (selectTab === 1) setDeleteProfileList([]);
-                      else setDeleteRefuseProfileList([]);
-                    }}
-                  >
-                    취소
-                  </Cancel>
-                </EditBtn>
-              ) : (
-                <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
-              )}
-            </Header>
-            {selectTab === 1 ? (
-              subtitle
-            ) : (
-              <Text>아쉽게도 상대팀이 미팅을 거절했어요 😢</Text>
-            )}
-          </Container>
-          <OtherTeamList
-            state={'apply'}
-            teamList={selectTab === 1 ? applyData : refuseData}
-            clickEditBtn={clickEditBtn}
-            deleteProfile={
-              selectTab === 1 ? deleteProfileList : deleteRefuseProfileList
-            }
-            setDeleteProfile={
-              selectTab === 1
-                ? setDeleteProfileList
-                : setDeleteRefuseProfileList
-            }
-          />
-        </>
-      ) : (
+                취소
+              </Cancel>
+            </EditBtn>
+          ) : (
+            <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
+          )}
+        </Header>
+        {selectTab === 1 && applyData.length !== 0 && subtitle}
+        {selectTab === 2 && refuseData.length !== 0 && (
+          <Text>아쉽게도 상대팀이 미팅을 거절했어요 😢</Text>
+        )}
+      </Container>
+      <OtherTeamList
+        state={'apply'}
+        teamList={selectTab === 1 ? applyData : refuseData}
+        clickEditBtn={clickEditBtn}
+        deleteProfile={
+          selectTab === 1 ? deleteProfileList : deleteRefuseProfileList
+        }
+        setDeleteProfile={
+          selectTab === 1 ? setDeleteProfileList : setDeleteRefuseProfileList
+        }
+      />
+      {selectTab === 1 && applyData.length === 0 && (
         <NoMeetingContainer>
-          <Title>신청한 미팅이 없어요</Title>
+          <Title>신청 중인 미팅이 없어요</Title>
+          <SSadFace />
+        </NoMeetingContainer>
+      )}
+      {selectTab === 2 && refuseData.length === 0 && (
+        <NoMeetingContainer>
+          <Title>거절 당한 미팅이 없어요</Title>
           <SSadFace />
         </NoMeetingContainer>
       )}

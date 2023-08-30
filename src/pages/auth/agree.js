@@ -136,7 +136,6 @@ const SA = styled.a`
 `;
 
 const Title = styled.div`
-  border: 1px solid red;
   width: 90%;
   margin-top: 13%;
   height: 13%;
@@ -155,8 +154,6 @@ const Pink = styled.span`
 `;
 
 const Container = styled.div`
-  border: 1px solid red;
-  /* margin-bottom: 35%; */
   display: flex;
   flex-direction: column;
   align-items: center;
