@@ -13,9 +13,41 @@ export const backendApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['Users'],
   endpoints: (builder) => ({
     getMyInfo: builder.query({
-      query: () => `users/my-info`,
+      query: () => ({ url: `users/my-info` }),
+      providesTags: ['Users'],
+    }),
+    patchUniversity: builder.mutation({
+      query({ ...patch }) {
+        return {
+          url: `users/university`,
+          method: 'PATCH',
+          body: patch,
+        };
+      },
+      invalidatesTags: ['Users'],
+    }),
+    postPhoneNumber: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `auth/phone`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users'],
+    }),
+    postPhoneCode: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `auth/phone/code`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users'],
     }),
     getUserTeams: builder.query({
       query: () => `users/teams`,
@@ -70,6 +102,9 @@ export const backendApi = createApi({
 
 export const {
   useGetMyInfoQuery,
+  usePatchUniversityMutation,
+  usePostPhoneNumberMutation,
+  usePostPhoneCodeMutation,
   useGetUserTeamsQuery,
   useGetUserTicketCountQuery,
   useGetUserCouponsQuery,

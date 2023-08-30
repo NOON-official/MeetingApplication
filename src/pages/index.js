@@ -98,7 +98,7 @@ function Main() {
           <span>새로운 회원 정보가 필요해요!</span>
           <PrimaryButton
             onClick={() => {
-              navigate('/apply/information');
+              navigate('/apply/university');
             }}
           >
             입력하러 가기
