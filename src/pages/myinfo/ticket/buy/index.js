@@ -18,13 +18,13 @@ import {
   useGetUserCouponsQuery,
   useGetCouponsPageDataQuery,
   useGetOrdersPageDataQuery,
-  useGetMyInfoQuery,
 } from '../../../../features/backendApi';
 import {
   CLIENT_URL,
   STORAGE_KEY_ORDER_DATA,
 } from '../../../../config/constants';
 import backend from '../../../../util/backend';
+import { useGetMyInfoQuery } from '../../../../features/api/userApi';
 
 export default function TicketBuyPage() {
   const navigate = useNavigate();

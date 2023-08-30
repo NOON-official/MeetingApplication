@@ -5,11 +5,9 @@ import { ReactComponent as UniversityMarkGray } from '../../asset/svg/University
 import useModalState from '../../hooks/useModalState';
 import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
 import backend from '../../util/backend';
-import {
-  useGetMyInfoQuery,
-  useGetUserTeamIdDataQuery,
-} from '../../features/backendApi';
+import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 import StudentCardModal from '../../components/Modal/Studentcard/StudentCardModal';
+import { useGetMyInfoQuery } from '../../features/api/userApi';
 
 export default function RecommendList() {
   const { data: myTeamId } = useGetUserTeamIdDataQuery();

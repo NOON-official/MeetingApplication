@@ -3,6 +3,7 @@ import user from './features/user';
 import apply from './features/apply';
 import matching from './features/matching';
 import { backendApi } from './features/backendApi';
+import { userApi } from './features/api/userApi';
 
 const store = configureStore({
   reducer: {
@@ -10,9 +11,12 @@ const store = configureStore({
     apply,
     matching,
     [backendApi.reducerPath]: backendApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(backendApi.middleware),
+    getDefaultMiddleware()
+      .concat(backendApi.middleware)
+      .concat(userApi.middleware),
 });
 
 export default store;
