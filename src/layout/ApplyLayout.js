@@ -33,5 +33,5 @@ const Content = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
