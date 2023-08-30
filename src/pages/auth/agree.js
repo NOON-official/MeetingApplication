@@ -45,7 +45,7 @@ function AgreePage() {
       marketing: agree4,
     });
     localStorage.setItem('needMoreInfo', 'true');
-    navigate('/apply/information');
+    navigate('/apply/university');
   });
 
   return (
@@ -56,7 +56,7 @@ function AgreePage() {
           <Pink>약관에 동의</Pink>해 주세요
         </Maintitle>
       </Title>
-      <Conatiner>
+      <Container>
         <SubmitButton onClick={handleAgree}>네, 모두 동의합니다</SubmitButton>
         <CheckBox>
           <CheckingContent
@@ -114,7 +114,7 @@ function AgreePage() {
             동의<Pink>&nbsp;&nbsp;(선택)</Pink>
           </CheckingContent>
         </CheckBox>
-      </Conatiner>
+      </Container>
       <Footer>
         <SubmitButton
           onClick={NextPage}
@@ -136,8 +136,9 @@ const SA = styled.a`
 `;
 
 const Title = styled.div`
+  border: 1px solid red;
   width: 90%;
-  margin-top: 8%;
+  margin-top: 13%;
   height: 13%;
   min-height: 13%;
 `;
@@ -153,8 +154,9 @@ const Pink = styled.span`
   color: ${(props) => props.theme.pink};
 `;
 
-const Conatiner = styled.div`
-  margin-bottom: 35%;
+const Container = styled.div`
+  border: 1px solid red;
+  /* margin-bottom: 35%; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -182,7 +184,6 @@ const CheckingContent = styled.div`
 `;
 
 const SubmitButton = styled(Button)`
-  margin-top: 5%;
   font-family: 'Nanum JungHagSaeng';
   color: #ffffff;
   font-weight: 400;
@@ -200,5 +201,5 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 90%;
-  margin-bottom: 50%;
+  margin: auto 0 10%;
 `;
