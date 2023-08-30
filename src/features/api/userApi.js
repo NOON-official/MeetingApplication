@@ -17,6 +17,7 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     getMyInfo: builder.query({
       query: () => ({ url: `users/my-info` }),
+      // transformResponse: (responseData) => responseData.data,
       providesTags: ['Users'],
     }),
     patchUniversity: builder.mutation({
@@ -49,6 +50,20 @@ export const userApi = createApi({
       },
       invalidatesTags: ['Users'],
     }),
+    getAgreements: builder.query({
+      query: () => ({ url: `users/agreements` }),
+      providesTags: ['Users'],
+    }),
+    postAgreements: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `users/agreements`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users'],
+    }),
   }),
 });
 
@@ -57,4 +72,6 @@ export const {
   usePatchUniversityMutation,
   usePostPhoneNumberMutation,
   usePostPhoneCodeMutation,
+  useGetAgreementsQuery,
+  usePostAgreementsMutation,
 } = userApi;

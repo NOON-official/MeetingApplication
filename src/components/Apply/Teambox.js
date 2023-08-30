@@ -512,7 +512,7 @@ const SearchList = styled.div`
   ::-webkit-scrollbar {
     display: none; /* 크롬, 사파리, 오페라, 엣지 */
   }
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
