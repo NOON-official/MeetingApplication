@@ -8,11 +8,9 @@ import { ReactComponent as UniversityMarkPink } from '../../asset/svg/University
 import MyTeamProfileModal from '../../components/Modal/Profile/MyTeamProfileModal';
 import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
 import { ReactComponent as TingImg } from '../../asset/svg/TingImg.svg';
-import {
-  useGetMyInfoQuery,
-  useGetUserTingCountQuery,
-} from '../../features/backendApi';
+import { useGetUserTingCountQuery } from '../../features/backendApi';
 import theme from '../../style/theme';
+import { useGetMyInfoQuery } from '../../features/api/userApi';
 
 export default function MainMatchingHeader({ title }) {
   const { data: ting } = useGetUserTingCountQuery();

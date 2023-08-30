@@ -9,7 +9,7 @@ import MatchingCompleteModal from '../../components/Modal/Matching/MatchingCompl
 import {
   usePostPhoneCodeMutation,
   usePostPhoneNumberMutation,
-} from '../../features/backendApi';
+} from '../../features/api/userApi';
 
 export default function Apply10Page() {
   const [phoneNumber] = usePostPhoneNumberMutation();

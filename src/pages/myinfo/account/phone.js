@@ -8,7 +8,7 @@ import { ReactComponent as CheckInvalid } from '../../../asset/svg/CheckInvalid.
 import {
   usePostPhoneCodeMutation,
   usePostPhoneNumberMutation,
-} from '../../../features/backendApi';
+} from '../../../features/api/userApi';
 
 export default function AccountPhoneChangePage() {
   const [phoneNumber] = usePostPhoneNumberMutation();
