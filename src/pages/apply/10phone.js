@@ -3,12 +3,18 @@ import styled from 'styled-components';
 import { Input, Button } from 'antd';
 import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
-import backend from '../../util/backend';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 import MatchingCompleteModal from '../../components/Modal/Matching/MatchingCompleteModal';
+import {
+  usePostPhoneCodeMutation,
+  usePostPhoneNumberMutation,
+} from '../../features/backendApi';
 
 export default function Apply10Page() {
+  const [phoneNumber] = usePostPhoneNumberMutation();
+  const [phoneCode] = usePostPhoneCodeMutation();
+
   const [openModal, setOpenModal] = useState(false);
   const [vaildcheck, setValidCheck] = useState(false);
 
@@ -30,7 +36,7 @@ export default function Apply10Page() {
 
   const requestAuthCode = useCallback(async () => {
     try {
-      await backend.post('/auth/phone', { phone: phoneInput });
+      await phoneNumber({ phone: phoneInput }).unwrap();
     } catch (e) {
       window.alert('인증코드 발송에 실패했습니다');
     }
@@ -46,10 +52,7 @@ export default function Apply10Page() {
 
   const validateAuthCode = useCallback(async () => {
     try {
-      await backend.post('/auth/phone/code', {
-        phone: phoneInput,
-        code: authCodeInput,
-      });
+      await phoneCode({ phone: phoneInput, code: authCodeInput }).unwrap();
       window.alert('인증이 완료되었습니다');
       setValidCheck(true);
     } catch (e) {
