@@ -17,7 +17,6 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     getMyInfo: builder.query({
       query: () => ({ url: `users/my-info` }),
-      // transformResponse: (responseData) => responseData.data,
       providesTags: ['Users'],
     }),
     patchUniversity: builder.mutation({
@@ -64,6 +63,11 @@ export const userApi = createApi({
       },
       invalidatesTags: ['Users'],
     }),
+    getTingCount: builder.query({
+      query: () => ({ url: `users/tings/count` }),
+      transformResponse: (response) => response.tingCount,
+      providesTags: ['Users'],
+    }),
   }),
 });
 
@@ -74,4 +78,5 @@ export const {
   usePostPhoneCodeMutation,
   useGetAgreementsQuery,
   usePostAgreementsMutation,
+  useGetTingCountQuery,
 } = userApi;
