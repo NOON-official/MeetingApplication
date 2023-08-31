@@ -39,7 +39,7 @@ const Content = styled.div`
     props.title === '팅 충전하기'
       ? props.theme.white
       : props.theme.background};
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const Footer = styled.div`
