@@ -1,13 +1,13 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from 'antd';
-import backend from '../../util/backend';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
+import { usePostAgreementsMutation } from '../../features/api/userApi';
 
 function AgreePage() {
   const [agree1, setAgree1] = useState(false);
@@ -16,19 +16,7 @@ function AgreePage() {
   const [agree4, setAgree4] = useState(false);
 
   const navigate = useNavigate();
-
-  const getInformation = useCallback(async () => {
-    try {
-      await backend.get('/users/agreements');
-      navigate('/');
-    } catch (e) {
-      navigate('/apply/agree');
-    }
-  }, [navigate]);
-
-  useEffect(() => {
-    getInformation();
-  }, []);
+  const [postAgreements] = usePostAgreementsMutation();
 
   const handleAgree = useCallback(() => {
     setAgree1(true);
@@ -37,15 +25,19 @@ function AgreePage() {
     setAgree4(true);
   }, [agree1, agree2, agree3, agree4]);
 
-  const NextPage = useCallback(() => {
-    backend.post('/users/agreements', {
-      service: agree1,
-      privacy: agree2,
-      age: agree3,
-      marketing: agree4,
-    });
-    localStorage.setItem('needMoreInfo', 'true');
-    navigate('/apply/information');
+  const NextPage = useCallback(async () => {
+    try {
+      await postAgreements({
+        service: agree1,
+        privacy: agree2,
+        age: agree3,
+        marketing: agree4,
+      }).unwrap();
+      localStorage.setItem('needMoreInfo', 'true');
+      navigate('/apply/university');
+    } catch (err) {
+      window.alert('잠시 후 시도주세요');
+    }
   });
 
   return (
@@ -56,8 +48,13 @@ function AgreePage() {
           <Pink>약관에 동의</Pink>해 주세요
         </Maintitle>
       </Title>
-      <Conatiner>
-        <SubmitButton onClick={handleAgree}>네, 모두 동의합니다</SubmitButton>
+      <Container>
+        <AllAgreeBtn
+          onClick={handleAgree}
+          selected={agree1 && agree2 && agree3 && agree4}
+        >
+          네, 모두 동의합니다
+        </AllAgreeBtn>
         <CheckBox>
           <CheckingContent
             onClick={() => {
@@ -114,7 +111,7 @@ function AgreePage() {
             동의<Pink>&nbsp;&nbsp;(선택)</Pink>
           </CheckingContent>
         </CheckBox>
-      </Conatiner>
+      </Container>
       <Footer>
         <SubmitButton
           onClick={NextPage}
@@ -153,7 +150,7 @@ const Pink = styled.span`
   color: ${(props) => props.theme.pink};
 `;
 
-const Conatiner = styled.div`
+const Container = styled.div`
   margin-bottom: 35%;
   display: flex;
   flex-direction: column;
@@ -193,6 +190,11 @@ const SubmitButton = styled(Button)`
   height: 50px;
   background: #eb8888;
   border-radius: 10px;
+`;
+
+const AllAgreeBtn = styled(SubmitButton)`
+  color: ${({ selected }) => (selected ? '#ffffff' : '#bbbbbb')};
+  background: ${({ selected }) => (selected ? '#eb8888' : '#ededed')};
 `;
 
 const Footer = styled.div`

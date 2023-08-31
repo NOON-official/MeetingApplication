@@ -10,7 +10,7 @@ import backend from '../../../util/backend';
 import AreaText from '../../MainRecommend/AreaText';
 import DateText from '../../MainRecommend/DateText';
 import ApplyButton from '../../Button/ApplyButton';
-import { useGetUserTeamIdDataQuery } from '../../../features/backendApi';
+import { useGetMyTeamIdQuery } from '../../../features/api/userApi';
 
 export default function OtherTeamProfileModal({
   open,
@@ -21,7 +21,7 @@ export default function OtherTeamProfileModal({
 }) {
   const navigate = useNavigate();
   const [teamProfile, setTeamProfile] = useState(null);
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const { data: myTeamId } = useGetMyTeamIdQuery();
 
   const getProfile = useCallback(async () => {
     const profile = await backend.get(`/teams/${teamId}`);
@@ -30,17 +30,19 @@ export default function OtherTeamProfileModal({
 
   // 매칭 신청하기
   const applyMatching = useCallback(async () => {
-    try {
-      await backend.post(`/matchings/${myTeamId.teamId}/${teamId}`);
-      alert('신청되었습니다!');
-      closeModal();
-      window.location.reload();
-    } catch (err) {
-      if (err.response.data.message === 'insufficient ting') {
-        alert('팅이 부족합니다. 팅을 충전해주세요!');
-        navigate('/myinfo/ting/buy');
-      } else {
-        alert('잠시 후에 다시 시도해주세요');
+    if (window.confirm('미팅을 신청하시면 2팅이 차감됩니다!')) {
+      try {
+        await backend.post(`/matchings/${myTeamId}/${teamId}`);
+        alert('신청되었습니다!');
+        closeModal();
+        window.location.reload();
+      } catch (err) {
+        if (err.response.data.message === 'insufficient ting') {
+          alert('팅이 부족합니다. 팅을 충전해주세요!');
+          navigate('/myinfo/ting/buy');
+        } else {
+          alert('잠시 후에 다시 시도해주세요');
+        }
       }
     }
   }, [myTeamId, teamId]);
@@ -65,14 +67,16 @@ export default function OtherTeamProfileModal({
 
   // 매칭 수락하기
   const acceptMatching = useCallback(async () => {
-    try {
-      await backend.put(`/matchings/${matchingId}/teams/${teamId}/accept`);
-      alert('수락되었습니다!');
-      closeModal();
-      window.location.reload();
-    } catch (err) {
-      alert('잠시 후에 다시 시도해주세요');
-      console.log(err);
+    if (window.confirm('미팅을 수락하시면, 4팅이 차감됩니다!')) {
+      try {
+        await backend.put(`/matchings/${matchingId}/teams/${teamId}/accept`);
+        alert('수락되었습니다!');
+        closeModal();
+        window.location.reload();
+      } catch (err) {
+        alert('잠시 후에 다시 시도해주세요');
+        console.log(err);
+      }
     }
   }, [matchingId, teamId]);
 
@@ -169,14 +173,14 @@ export default function OtherTeamProfileModal({
                 <ApplyButton onClick={() => refuseTeam()}>거절하기</ApplyButton>
               </ButtonBox>
             ) : null}
-            {state === 'succeed' ? (
+            {/* {state === 'succeed' ? (
               <ButtonBox>
                 <ShareButton>
                   <SShare />
                   팀원들에게 공유하기
                 </ShareButton>
               </ButtonBox>
-            ) : null}
+            ) : null} */}
           </Footer>
         </SModal>
       ) : null}
