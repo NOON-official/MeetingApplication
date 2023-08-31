@@ -30,7 +30,7 @@ function Main() {
   const { accessToken } = useSelector((state) => state.user);
   const { data: userCountData } = useGetTeamMembersCountTotalQuery();
   const { data: agreements } = useGetAgreementsQuery(undefined, {
-    skip: accessToken === null,
+    skip: !accessToken,
   });
 
   const needMoreInfo = localStorage.getItem('needMoreInfo');
