@@ -10,7 +10,7 @@ import backend from '../../../util/backend';
 import AreaText from '../../MainRecommend/AreaText';
 import DateText from '../../MainRecommend/DateText';
 import ApplyButton from '../../Button/ApplyButton';
-import { useGetUserTeamIdDataQuery } from '../../../features/backendApi';
+import { useGetMyTeamIdQuery } from '../../../features/api/userApi';
 
 export default function OtherTeamProfileModal({
   open,
@@ -21,7 +21,7 @@ export default function OtherTeamProfileModal({
 }) {
   const navigate = useNavigate();
   const [teamProfile, setTeamProfile] = useState(null);
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const { data: myTeamId } = useGetMyTeamIdQuery();
 
   const getProfile = useCallback(async () => {
     const profile = await backend.get(`/teams/${teamId}`);
@@ -32,7 +32,7 @@ export default function OtherTeamProfileModal({
   const applyMatching = useCallback(async () => {
     if (window.confirm('미팅을 신청하시면 2팅이 차감됩니다!')) {
       try {
-        await backend.post(`/matchings/${myTeamId.teamId}/${teamId}`);
+        await backend.post(`/matchings/${myTeamId}/${teamId}`);
         alert('신청되었습니다!');
         closeModal();
         window.location.reload();

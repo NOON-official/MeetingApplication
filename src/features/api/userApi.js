@@ -68,6 +68,15 @@ export const userApi = createApi({
       transformResponse: (response) => response.tingCount,
       providesTags: ['Users'],
     }),
+    getMyTeamId: builder.query({
+      query: () => ({ url: `users/team-id` }),
+      transformResponse: (response) => response.teamId,
+      providesTags: ['Users'],
+    }),
+    getMyProfile: builder.query({
+      query: (id) => ({ url: `teams/${id}` }),
+      providesTags: ['Users'],
+    }),
   }),
 });
 
@@ -79,4 +88,6 @@ export const {
   useGetAgreementsQuery,
   usePostAgreementsMutation,
   useGetTingCountQuery,
+  useGetMyTeamIdQuery,
+  useGetMyProfileQuery,
 } = userApi;

@@ -5,12 +5,14 @@ import { ReactComponent as UniversityMarkGray } from '../../asset/svg/University
 import useModalState from '../../hooks/useModalState';
 import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
 import backend from '../../util/backend';
-import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 import StudentCardModal from '../../components/Modal/Studentcard/StudentCardModal';
-import { useGetMyInfoQuery } from '../../features/api/userApi';
+import {
+  useGetMyInfoQuery,
+  useGetMyTeamIdQuery,
+} from '../../features/api/userApi';
 
 export default function RecommendList() {
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const { data: myTeamId } = useGetMyTeamIdQuery();
   const { data: myinfo } = useGetMyInfoQuery();
   const [teamList, setTeamList] = useState([]);
   const [modalState, openModal, closeModal] = useModalState(teamList);
@@ -26,7 +28,7 @@ export default function RecommendList() {
 
   useEffect(() => {
     const getList = async () => {
-      if (myTeamId?.teamId !== null && myTeamId?.teamId !== undefined) {
+      if (myTeamId && myTeamId !== undefined) {
         const recommend = await backend.get(`/users/teams/recommended`);
         setTeamList(recommend.data.teams);
       }
