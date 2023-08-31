@@ -5,11 +5,11 @@ import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
 import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
-import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 import NoProfile from '../../components/MainRecommend/NoProfile';
+import { useGetMyTeamIdQuery } from '../../features/api/userApi';
 
 export default function MatchingReceived() {
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const { data: myTeamId } = useGetMyTeamIdQuery();
   const [receivedData, setReceivedData] = useState([]);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfileList, setDeleteProfileList] = useState([]);
@@ -28,7 +28,7 @@ export default function MatchingReceived() {
     getReceivedData();
   }, []);
 
-  if (!myTeamId?.teamId) {
+  if (!myTeamId) {
     return (
       <MatchingLayout>
         <NoProfile>프로필을 만든 후 신청을 받을 수 있어요</NoProfile>

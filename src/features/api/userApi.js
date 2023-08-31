@@ -15,91 +15,79 @@ export const userApi = createApi({
   }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
-    getUserReferralId: builder.query({
-      query: () => ({ url: `users/referral-id` }),
-      providesTags: ['Users'],
-    }),
     getMyInfo: builder.query({
       query: () => ({ url: `users/my-info` }),
       providesTags: ['Users'],
     }),
-    getUserTingCount: builder.query({
-      query: () => ({ url: `users/tings/count` }),
-      providesTags: ['Users'],
+    patchUniversity: builder.mutation({
+      query({ ...patch }) {
+        return {
+          url: `users/university`,
+          method: 'PATCH',
+          body: patch,
+        };
+      },
+      invalidatesTags: ['Users'],
     }),
-    getUserAgreements: builder.query({
+    postPhoneNumber: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `auth/phone`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users'],
+    }),
+    postPhoneCode: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `auth/phone/code`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users'],
+    }),
+    getAgreements: builder.query({
       query: () => ({ url: `users/agreements` }),
       providesTags: ['Users'],
     }),
-    getUserOrders: builder.query({
-      query: () => ({ url: `users/orders` }),
+    postAgreements: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `users/agreements`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users'],
+    }),
+    getTingCount: builder.query({
+      query: () => ({ url: `users/tings/count` }),
+      transformResponse: (response) => response.tingCount,
       providesTags: ['Users'],
     }),
-    getUserTeamIdData: builder.query({
+    getMyTeamId: builder.query({
       query: () => ({ url: `users/team-id` }),
+      transformResponse: (response) => response.teamId,
       providesTags: ['Users'],
     }),
-    getUserRecommend: builder.query({
-      query: () => ({ url: `users/teams/recommended` }),
+    getMyProfile: builder.query({
+      query: (id) => ({ url: `teams/${id}` }),
       providesTags: ['Users'],
-    }),
-    getUserMatchingApplied: builder.query({
-      query: () => ({ url: `users/matchings/applied` }),
-      providesTags: ['Users'],
-    }),
-    getUserMatchingReceived: builder.query({
-      query: () => ({ url: `users/matchings/received` }),
-      providesTags: ['Users'],
-    }),
-    getUserMatchingSucceed: builder.query({
-      query: () => ({ url: `users/matchings/secceeded` }),
-      providesTags: ['Users'],
-    }),
-    getUserCoupons: builder.query({
-      query: () => ({ url: `users/coupons` }),
-      providesTags: ['Users'],
-    }),
-    deleteUserApplied: builder.query({
-      query: () => ({
-        url: `users/matchings/applied`,
-      }),
-    }),
-
-    getUserTicketCount: builder.query({
-      query: () => `users/tickets/count`,
-    }),
-    getUserCouponCount: builder.query({
-      query: () => `users/coupons/count`,
-    }),
-    getUserInvitationCount: builder.query({
-      query: () => `users/invitations/count`,
-    }),
-    getOrdersPageData: builder.query({
-      query: () => `orders/pagedata`,
     }),
   }),
 });
 
 export const {
-  useGetUserReferralIdQuery,
   useGetMyInfoQuery,
-  useGetUserTingCountQuery,
-  useGetUserAgreementsQuery,
-  useGetUserOrdersQuery,
-  useGetUserTeamIdDataQuery,
-  useGetUserRecommendQuery,
-  useGetUserMatchingAppliedQuery,
-  useGetUserMatchingReceivedQuery,
-  useGetUserMatchingSucceedQuery,
-
-  useGetUserTeamsQuery,
-  useGetUserTicketCountQuery,
-  useGetUserCouponsQuery,
-  useGetUserCouponCountQuery,
-  useGetUserInvitationCountQuery,
-  useGetOrdersPageDataQuery,
-  useGetCouponsPageDataQuery,
-  useGetTeamMembersCountOneWeekQuery,
-  useGetTeamMembersCountTotalQuery,
-  useGetTeamCountQuery,
+  usePatchUniversityMutation,
+  usePostPhoneNumberMutation,
+  usePostPhoneCodeMutation,
+  useGetAgreementsQuery,
+  usePostAgreementsMutation,
+  useGetTingCountQuery,
+  useGetMyTeamIdQuery,
+  useGetMyProfileQuery,
 } = userApi;
