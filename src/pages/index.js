@@ -4,7 +4,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { Button, Carousel, Space } from 'antd';
 import CounterBox from '../components/CounterBox';
 import { ReactComponent as MainImg } from '../asset/svg/MeetingHaek.svg';
@@ -13,53 +13,27 @@ import { ReactComponent as SliderRArrow } from '../asset/svg/SliderRArrow.svg';
 import MainLayout from '../layout/MainLayout';
 import Section from '../components/Section';
 import SliderBox2 from '../components/Slider/SliderBox2';
-import backend from '../util/backend';
-import {
-  // useGetTeamCountQuery,
-  useGetTeamMembersCountTotalQuery,
-} from '../features/backendApi';
+import { useGetTeamMembersCountTotalQuery } from '../features/backendApi';
 import ChannelTalk from '../asset/ChannelTalk';
 import PrimaryModal from '../components/Modal/PrimaryModal';
 import PrimaryButton from '../components/Button/PrimaryButton';
 import Recommend from './MainRecommend';
 import Review from './myinfo/review/review';
+import { useGetAgreementsQuery } from '../features/api/userApi';
 
 function Main() {
+  const navigate = useNavigate();
+  const slider2 = useRef(null);
   const params = new URLSearchParams(window.location.search);
   const referralId = params.get('referralId');
-  const navigate = useNavigate();
-  const { finishedStep } = useSelector((store) => store.apply);
-  const { accessToken } = useSelector((state) => state.user);
-  const [agreementsData, setAgreementsData] = useState(false);
 
+  const { accessToken } = useSelector((state) => state.user);
   const { data: userCountData } = useGetTeamMembersCountTotalQuery();
+  const { data: agreements } = useGetAgreementsQuery(undefined, {
+    skip: !accessToken,
+  });
 
   const needMoreInfo = localStorage.getItem('needMoreInfo');
-
-  const getInfo = async () => {
-    try {
-      const info = await backend.get('/users/my-info');
-      if (info.data.university === null) {
-        localStorage.setItem('needMoreInfo', 'true');
-      } else {
-        localStorage.setItem('needMoreInfo', 'false');
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const getAgreements = async () => {
-    const agreements = await backend.get('/users/agreements');
-    setAgreementsData(agreements.data);
-  };
-
-  useEffect(() => {
-    if (accessToken) {
-      getInfo();
-      getAgreements();
-    }
-  }, [accessToken]);
 
   useEffect(() => {
     if (referralId !== null) {
@@ -70,14 +44,12 @@ function Main() {
   const handleStart = useCallback(() => {
     if (!accessToken) {
       navigate('/myinfo');
-    } else if (!agreementsData) {
+    } else if (!agreements) {
       navigate('/apply/agree');
     } else {
       navigate(`/apply/1`);
     }
-  }, [accessToken, agreementsData]);
-
-  const slider2 = useRef(null);
+  }, [accessToken, agreements]);
 
   return (
     <MainLayout>
@@ -98,7 +70,7 @@ function Main() {
           <span>새로운 회원 정보가 필요해요!</span>
           <PrimaryButton
             onClick={() => {
-              navigate('/apply/information');
+              navigate('/apply/university');
             }}
           >
             입력하러 가기

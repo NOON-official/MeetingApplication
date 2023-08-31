@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as TingImg } from '../../../asset/svg/TingImg.svg';
-import { useGetUserTingCountQuery } from '../../../features/backendApi';
+import { useGetTingCountQuery } from '../../../features/api/userApi';
 
 export default function Ting() {
   const navigate = useNavigate();
-  const { data: ting } = useGetUserTingCountQuery();
+  const { data: ting } = useGetTingCountQuery();
 
   return (
     <MyinfoLayout title="보유 팅">
       <Section>
         <TeamBox>
           <TingImg />
-          <Count>{ting?.tingCount}팅</Count>
+          <Count>{ting}팅</Count>
           보유
         </TeamBox>
         <Title>
