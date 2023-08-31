@@ -9,11 +9,15 @@ import OtherTeamList from '../../components/MainRecommend/TeamList';
 import backend from '../../util/backend';
 import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 import NoProfile from '../../components/MainRecommend/NoProfile';
+import { useGetMyTeamIdQuery } from '../../features/api/userApi';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
 
-  const [myTeamId, setMyTeamId] = useState(null);
+  const { data: myTeamId } = useGetMyTeamIdQuery(undefined, {
+    skip: !accessToken,
+  });
+
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfileList, setDeleteProfileList] = useState([]);
@@ -27,26 +31,12 @@ export default function MatchingApplied() {
     setOpenDeleteModal(bool);
   };
 
-  const getTeamId = useCallback(async () => {
-    const id = await backend.get(`/users/team-id`);
-    setMyTeamId(id.data.teamId);
-  }, []);
-
   const getApplyData = useCallback(async () => {
     const apply = await backend.get(`/users/matchings/applied`);
     setApplyData(apply.data.teams);
     const refuse = await backend.get(`/users/matchings/refused`);
     setRefuseData(refuse.data.teams);
   }, []);
-
-  useEffect(() => {
-    if (accessToken) {
-      getTeamId();
-      if (myTeamId) {
-        getApplyData();
-      }
-    }
-  }, [myTeamId, accessToken]);
 
   const handleTabChange = (tabIdx) => {
     if (selectTab === 1 && tabIdx === 2) {
@@ -56,6 +46,12 @@ export default function MatchingApplied() {
     }
     setSelectTab(tabIdx);
   };
+
+  useEffect(() => {
+    if (myTeamId) {
+      getApplyData();
+    }
+  }, [myTeamId]);
 
   const subtitle = (
     <Text>
