@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
@@ -9,27 +9,32 @@ import StopMatchingModal from '../Matching/StopMatchingModal';
 import SliderBoxMembers from '../../Slider/SliderBoxMembers';
 import AreaText from '../../MainRecommend/AreaText';
 import DateText from '../../MainRecommend/DateText';
-import { useGetUserTeamIdDataQuery } from '../../../features/backendApi';
-import backend from '../../../util/backend';
+import {
+  useGetMyProfileQuery,
+  useGetMyTeamIdQuery,
+} from '../../../features/api/userApi';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal } = props;
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const { data: myTeamId } = useGetMyTeamIdQuery();
+  const { data: myProfile } = useGetMyProfileQuery(myTeamId, {
+    skip: !myTeamId,
+  });
 
-  const [myProfile, setMyProfile] = useState(null);
+  // const [myProfile, setMyProfile] = useState(null);
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
 
-  useEffect(() => {
-    const getProfile = async () => {
-      if (myTeamId?.teamId !== null && myTeamId?.teamId !== undefined) {
-        const profile = await backend.get(`/teams/${myTeamId?.teamId}`);
-        setMyProfile(profile.data);
-      }
-    };
+  // useEffect(() => {
+  //   const getProfile = async () => {
+  //     if (myTeamId !== null && myTeamId !== undefined) {
+  //       const profile = await backend.get(`/teams/${myTeamId}`);
+  //       setMyProfile(profile.data);
+  //     }
+  //   };
 
-    getProfile();
-  }, [myTeamId]);
+  //   getProfile();
+  // }, [myTeamId]);
 
   const AlcholContent = {
     1: '반 병',
@@ -63,7 +68,7 @@ export default function MyTeamProfileModal(props) {
               setIsStopMatchingModalOpen((prev) => !prev);
               setModal(false);
             }}
-            teamId={myTeamId?.teamId}
+            teamId={myTeamId}
           />
           {myProfile && (
             <>
