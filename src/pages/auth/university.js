@@ -7,20 +7,19 @@ import { ReactComponent as Bottom } from '../../asset/svg/B.svg';
 import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
 import Universities from '../../asset/Universities';
 import ChannelTalk from '../../asset/ChannelTalk';
-import backend from '../../util/backend';
 import FreeTingModal from '../../components/Modal/FreeTingModal';
+import { usePatchUniversityMutation } from '../../features/api/userApi';
 
 export default function ApplyUniversity() {
-  const [tingModal, setTingModal] = useState(false);
+  const [university] = usePatchUniversityMutation();
 
+  const [tingModal, setTingModal] = useState(false);
   const [selectedUniversity, setSelectedUniversity] = useState('');
   const [searchKeyWord, setSearchKeyWord] = useState(0);
 
-  const NextPage = useCallback(() => {
+  const NextPage = useCallback(async () => {
     try {
-      backend.patch('/users/university', {
-        university: Number(selectedUniversity),
-      });
+      await university({ university: Number(selectedUniversity) }).unwrap();
       localStorage.setItem('needMoreInfo', 'false');
       setTingModal(true);
     } catch (err) {
@@ -135,7 +134,6 @@ const SelectedBox = styled.div`
 `;
 
 const SelectedUniversity = styled.div`
-  margin-top: 3%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -187,7 +185,7 @@ const SearchList = styled.div`
   ::-webkit-scrollbar {
     display: none; /* 크롬, 사파리, 오페라, 엣지 */
   }
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -219,13 +217,12 @@ const Footer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  margin-top: 6%;
-  padding-bottom: 5%;
+  width: 90%;
+  margin: auto 0 10%;
 `;
 
 const ButtonBox = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: center;
   justify-content: space-between;

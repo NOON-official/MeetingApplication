@@ -5,29 +5,29 @@ import Timer from './timer';
 import RecommendList from './recommendList';
 import RecommendModal from '../../components/Modal/Matching/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
-import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
 import backend from '../../util/backend';
+import { useGetMyTeamIdQuery } from '../../features/api/userApi';
 
 export default function Recommend() {
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const { data: myTeamId } = useGetMyTeamIdQuery();
   const [myProfile, setMyProfile] = useState(null);
 
   useEffect(() => {
     const getProfile = async () => {
-      if (myTeamId?.teamId !== null && myTeamId?.teamId !== undefined) {
-        const profile = await backend.get(`/teams/${myTeamId?.teamId}`);
+      if (myTeamId && myTeamId !== undefined) {
+        const profile = await backend.get(`/teams/${myTeamId}`);
         setMyProfile(profile.data);
       }
     };
 
     getProfile();
-  }, [myTeamId?.teamId]);
+  }, [myTeamId]);
 
   return (
     <>
       <RecommendModal />
       <Section>
-        {myTeamId?.teamId !== null ? (
+        {myTeamId ? (
           <MainMatchingHeader title="프로필 조회" />
         ) : (
           <MainMatchingHeader title="프로필 만들기" />

@@ -5,10 +5,7 @@ import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../../asset/svg/UniversityMarkDarkGray.svg';
 import { ReactComponent as ChooseImg } from '../../../asset/svg/ChooseImg.svg';
-import {
-  useGetMyInfoQuery,
-  useGetUserReferralIdQuery,
-} from '../../../features/backendApi';
+import { useGetUserReferralIdQuery } from '../../../features/backendApi';
 import CompleteUploadModal from '../../../components/Modal/Studentcard/CompleteUploadModal';
 import AutomaticModal from '../../../components/Modal/AutomaticModal';
 import BigFileModal from '../../../components/Modal/Studentcard/BigFileModal';
@@ -16,6 +13,7 @@ import backend from '../../../util/backend';
 import Section from '../../../components/Section';
 import Guidelines from './guidelines';
 import Uploadsection from './uploadsection';
+import { useGetMyInfoQuery } from '../../../features/api/userApi';
 
 export default function StudentCard() {
   const [openModal, setOpenModal] = useState(false);
