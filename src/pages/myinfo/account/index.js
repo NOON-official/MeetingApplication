@@ -6,12 +6,12 @@ import styled from 'styled-components';
 import PrimaryModal from '../../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
 import Section from '../../../components/Section';
-import { useGetMyInfoQuery } from '../../../features/backendApi';
 import { logout } from '../../../features/user/asyncActions';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import backend from '../../../util/backend';
 import Universities from '../../../asset/Universities';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
+import { useGetMyInfoQuery } from '../../../features/api/userApi';
 
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
@@ -32,6 +32,8 @@ export default function Account() {
       window.alert('탈퇴중 오류가 발생하였습니다');
     }
   }, []);
+
+  console.log(myInfo);
 
   return (
     <MyinfoLayout title="내 정보">

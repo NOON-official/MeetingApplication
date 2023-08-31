@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { ReactComponent as Magnifier } from '../../../asset/svg/Magnifier.svg';
-import { useGetUserTeamIdDataQuery } from '../../../features/backendApi';
+import { useGetMyTeamIdQuery } from '../../../features/api/userApi';
 
 export default function RecommendModal() {
   const [showPopup, setShowPopup] = useState(false);
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const { data: myTeamId } = useGetMyTeamIdQuery();
 
   useEffect(() => {
     // 현재 시간
@@ -21,7 +21,7 @@ export default function RecommendModal() {
     // 현재 시간이 23시 이후인지
     const isAfter11pm = now.isAfter(targetTime);
 
-    if (myTeamId?.teamId) {
+    if (myTeamId) {
       if (!lastTime || now.diff(lastTime, 'hour') >= 24) {
         // 한 번도 팝업을 본 적 없는 경우 or 팝업 확인한지 24시간 이후
         setShowPopup(true);

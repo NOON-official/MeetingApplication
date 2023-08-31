@@ -8,15 +8,15 @@ import { ReactComponent as UniversityMarkPink } from '../../asset/svg/University
 import MyTeamProfileModal from '../../components/Modal/Profile/MyTeamProfileModal';
 import { ReactComponent as MainGroup } from '../../asset/svg/MainGroup.svg';
 import { ReactComponent as TingImg } from '../../asset/svg/TingImg.svg';
+import theme from '../../style/theme';
 import {
   useGetMyInfoQuery,
-  useGetUserTingCountQuery,
-} from '../../features/backendApi';
-import theme from '../../style/theme';
+  useGetTingCountQuery,
+} from '../../features/api/userApi';
 
 export default function MainMatchingHeader({ title }) {
-  const { data: ting } = useGetUserTingCountQuery();
   const { data: myinfo } = useGetMyInfoQuery();
+  const { data: ting } = useGetTingCountQuery();
 
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ export default function MainMatchingHeader({ title }) {
       <MainButton2 onClick={() => navigate('/myinfo/ting')}>
         <STingImg />
         <BtnMainTitle>보유 팅</BtnMainTitle>
-        <TingCount>{ting?.tingCount}팅</TingCount>
+        <TingCount>{ting}팅</TingCount>
         <SeeMoreBtn>자세히 보기</SeeMoreBtn>
       </MainButton2>
     </>
