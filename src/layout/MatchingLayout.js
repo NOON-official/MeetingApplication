@@ -5,11 +5,11 @@ import TopHeader from './header/TopHeader';
 import BottomTabs from './header/BottomTabs';
 import MyTeamProfile from '../components/Modal/Profile/MyTeamProfileModal';
 import MainMatchingHeader from './header/MainMatchingHeader';
-import { useGetUserTeamIdDataQuery } from '../features/backendApi';
+import { useGetMyTeamIdQuery } from '../features/api/userApi';
 
 export default function MatchingLayout({ children }) {
   const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
-  const { data: myTeamId } = useGetUserTeamIdDataQuery();
+  const { data: myTeamId } = useGetMyTeamIdQuery();
 
   const setModal = (bool) => {
     setOpenMyTeamProfile(bool);
@@ -38,7 +38,7 @@ export default function MatchingLayout({ children }) {
       <Content>
         <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
         <Section>
-          {myTeamId?.teamId !== null ? (
+          {myTeamId ? (
             <MainMatchingHeader title="프로필 조회" />
           ) : (
             <MainMatchingHeader title="프로필 만들기" />
@@ -109,7 +109,7 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.background};
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const Footer = styled.div`

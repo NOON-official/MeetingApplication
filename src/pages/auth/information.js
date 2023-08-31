@@ -8,6 +8,7 @@ import ChannelTalk from '../../asset/ChannelTalk';
 import BinaryButton from '../../components/Button/BinaryButton';
 import Age from '../../asset/Age';
 
+// pass 연동 후 삭제 예정!!!
 function ApplyInformation() {
   const { Option } = Select;
   const [man, setMan] = useState('');
@@ -100,9 +101,10 @@ const Subtitle = styled.label`
 
 const Content = styled.div`
   width: 90%;
-  min-height: 90vh;
+  height: 80%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 `;
 
@@ -134,7 +136,6 @@ const Info = styled.div`
   display: flex;
   align-items: center;
   padding-bottom: 2px;
-  /* padding-left: 8px; */
   font-weight: 400;
   font-size: 20px;
   font-family: 'Nanum JungHagSaeng';
@@ -162,8 +163,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 50%;
-  padding-bottom: 5%;
+  margin-top: auto;
 `;
 
 const ButtonBox = styled.div`
