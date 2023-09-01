@@ -2,38 +2,36 @@ import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import { useState } from 'react';
 import theme from '../../../style/theme';
-import backend from '../../../util/backend';
 import { ReactComponent as ExclamationMark } from '../../../asset/svg/ExclamationMark.svg';
 import AutomaticModal from '../AutomaticModal';
+import {
+  useDeleteApplyProfileMutation,
+  useDeleteReceivedProfileMutation,
+} from '../../../features/api/userApi';
 
-export default function DeleteProfileModal({
-  open,
-  setModal,
-  state,
-  data,
-  fetchData,
-}) {
+export default function DeleteProfileModal({ open, setModal, state, data }) {
+  const [deleteApplyProfile] = useDeleteApplyProfileMutation();
+  const [deleteReceiveProfile] = useDeleteReceivedProfileMutation();
+
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
 
   const deleteProfile = async () => {
     if (state === 'applied') {
       try {
-        await backend.delete(`/users/matchings/applied`, {
-          data: { matchingIds: data },
-        });
+        await deleteApplyProfile({
+          matchingIds: data,
+        }).unwrap();
         setOpenCompleteModal(true);
-        fetchData();
       } catch (e) {
         console.error(e);
         window.alert('삭제 중 오류가 발생하였습니다');
       }
     } else {
       try {
-        await backend.delete(`/users/matchings/received`, {
-          data: { matchingIds: data },
-        });
+        await deleteReceiveProfile({
+          matchingIds: data,
+        }).unwrap();
         setOpenCompleteModal(true);
-        fetchData();
       } catch (e) {
         console.error(e);
         window.alert('삭제 중 오류가 발생하였습니다');
