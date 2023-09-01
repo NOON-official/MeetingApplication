@@ -1,20 +1,22 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import useModalState from '../../hooks/useModalState';
 import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
-import backend from '../../util/backend';
 import StudentCardModal from '../../components/Modal/Studentcard/StudentCardModal';
 import {
   useGetMyInfoQuery,
   useGetMyTeamIdQuery,
+  useGetRecommendListQuery,
 } from '../../features/api/userApi';
 
 export default function RecommendList() {
   const { data: myTeamId } = useGetMyTeamIdQuery();
   const { data: myinfo } = useGetMyInfoQuery();
-  const [teamList, setTeamList] = useState([]);
+  const { data: teamList } = useGetRecommendListQuery(undefined, {
+    skip: !myTeamId,
+  });
   const [modalState, openModal, closeModal] = useModalState(teamList);
   const [studentCardModal, setStudentCardModal] = useState(false);
 
@@ -25,17 +27,6 @@ export default function RecommendList() {
       setStudentCardModal(true);
     }
   };
-
-  useEffect(() => {
-    const getList = async () => {
-      if (myTeamId && myTeamId !== undefined) {
-        const recommend = await backend.get(`/users/teams/recommended`);
-        setTeamList(recommend.data.teams);
-      }
-    };
-
-    getList();
-  }, [myTeamId]);
 
   return (
     <Container>
@@ -51,7 +42,7 @@ export default function RecommendList() {
 
             <OtherTeamProfileModal
               open={
-                modalState.find((state) => state.teamId === id)?.open || false
+                modalState?.find((state) => state.teamId === id)?.open || false
               }
               closeModal={() => closeModal(id)}
               teamId={id}
