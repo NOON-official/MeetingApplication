@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import utc from 'dayjs-plugin-utc';
-import { useEffect, useState } from 'react';
 import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
@@ -9,10 +8,11 @@ import OtherTeamNumberModal from '../../components/Modal/Matching/OtherTeamNumbe
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
-import backend from '../../util/backend';
+import { useGetSucceedDataQuery } from '../../features/api/userApi';
 
 export default function MatchingSucceed() {
-  const [succeedData, setSucceedData] = useState([]);
+  const { data: succeedData, isLoading } = useGetSucceedDataQuery();
+
   const [modalState, openModal, closeModal] = useModalState(succeedData);
   const [modalState2, openModal2, closeModal2] = useModalState(succeedData);
   dayjs.extend(utc); // dayjs utc 플러그인 사용하여 로컬시간으로 변환
@@ -24,14 +24,12 @@ export default function MatchingSucceed() {
     return dueDate.diff(today, 'day');
   };
 
-  const getSucceedData = async () => {
-    const succeed = await backend.get(`/users/matchings/succeeded`);
-    setSucceedData(succeed.data.teams);
-  };
-
-  useEffect(() => {
-    getSucceedData();
-  }, []);
+  if (isLoading)
+    return (
+      <MatchingLayout>
+        <Container>Loading...</Container>
+      </MatchingLayout>
+    );
 
   return (
     <MatchingLayout>
@@ -60,7 +58,7 @@ export default function MatchingSucceed() {
                 <TeamCard key={id}>
                   <OtherTeamNumberModal
                     open={
-                      modalState.find((state) => state.teamId === id)?.open ||
+                      modalState?.find((state) => state.teamId === id)?.open ||
                       false
                     }
                     closeModal={() => closeModal(id)}
@@ -69,7 +67,7 @@ export default function MatchingSucceed() {
                   />
                   <OtherTeamProfileModal
                     open={
-                      modalState2.find((state) => state.teamId === id)?.open ||
+                      modalState2?.find((state) => state.teamId === id)?.open ||
                       false
                     }
                     closeModal={() => closeModal2(id)}
