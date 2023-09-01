@@ -1,16 +1,22 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
-import backend from '../../util/backend';
 import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 import NoProfile from '../../components/MainRecommend/NoProfile';
-import { useGetMyTeamIdQuery } from '../../features/api/userApi';
+import {
+  useGetMyTeamIdQuery,
+  useGetReceivedDataQuery,
+} from '../../features/api/userApi';
 
 export default function MatchingReceived() {
   const { data: myTeamId } = useGetMyTeamIdQuery();
-  const [receivedData, setReceivedData] = useState([]);
+
+  const { data: receivedData, isLoading } = useGetReceivedDataQuery(undefined, {
+    skip: !myTeamId,
+  });
+
   const [clickEditBtn, setClickEditBtn] = useState(false);
   const [deleteProfileList, setDeleteProfileList] = useState([]);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -18,15 +24,6 @@ export default function MatchingReceived() {
   const setModal = (bool) => {
     setDeleteModal(bool);
   };
-
-  const getReceivedData = useCallback(async () => {
-    const receive = await backend.get(`/users/matchings/received`);
-    setReceivedData(receive.data.teams);
-  }, []);
-
-  useEffect(() => {
-    getReceivedData();
-  }, []);
 
   if (!myTeamId) {
     return (
@@ -36,6 +33,13 @@ export default function MatchingReceived() {
     );
   }
 
+  if (isLoading)
+    return (
+      <MatchingLayout>
+        <Container>Loading...</Container>
+      </MatchingLayout>
+    );
+
   return (
     <MatchingLayout>
       <DeleteProfileModal
@@ -43,7 +47,6 @@ export default function MatchingReceived() {
         setModal={setModal}
         state="received"
         data={deleteProfileList}
-        fetchData={getReceivedData}
       />
       {receivedData.length !== 0 ? (
         <>
@@ -80,7 +83,7 @@ export default function MatchingReceived() {
             )}
           </Container>
           <OtherTeamList
-            state={'received'}
+            state="received"
             teamList={receivedData}
             clickEditBtn={clickEditBtn}
             deleteProfile={deleteProfileList}
