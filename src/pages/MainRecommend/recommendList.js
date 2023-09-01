@@ -10,11 +10,12 @@ import {
   useGetMyTeamIdQuery,
   useGetRecommendListQuery,
 } from '../../features/api/userApi';
+import { ReactComponent as NoList } from '../../asset/svg/NoRecommend.svg';
 
 export default function RecommendList() {
   const { data: myTeamId } = useGetMyTeamIdQuery();
   const { data: myinfo } = useGetMyInfoQuery();
-  const { data: teamList } = useGetRecommendListQuery(undefined, {
+  const { data: teamList, isSuccess } = useGetRecommendListQuery(undefined, {
     skip: !myTeamId,
   });
   const [modalState, openModal, closeModal] = useModalState(teamList);
@@ -27,6 +28,18 @@ export default function RecommendList() {
       setStudentCardModal(true);
     }
   };
+
+  if (isSuccess && teamList.length === 0)
+    return (
+      <Container2>
+        <NoList />
+        <GrayText>
+          오늘의 우리 팀 추천 매칭을
+          <br />
+          모두 사용했어요
+        </GrayText>
+      </Container2>
+    );
 
   return (
     <Container>
@@ -71,6 +84,21 @@ const Container = styled.div`
   flex-wrap: wrap;
   width: 90%;
   margin: 2% auto;
+`;
+
+const GrayText = styled.div`
+  margin-top: 5%;
+  color: #808080;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 20px;
+`;
+
+const Container2 = styled(Container)`
+  margin: 10% auto;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const TeamCard = styled.div`
