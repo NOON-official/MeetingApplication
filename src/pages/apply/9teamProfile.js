@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
 import { Carousel } from 'antd';
@@ -9,9 +9,9 @@ import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
 import { createTeam } from '../../features/apply/asyncAction';
 import ApplyButton from '../../components/Button/ApplyButton';
-import backend from '../../util/backend';
 import MatchingCompleteModal from '../../components/Modal/Matching/MatchingCompleteModal';
 import SliderBoxMembers from '../../components/Slider/SliderBoxMembers';
+import { useGetMyInfoQuery } from '../../features/api/userApi';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
@@ -22,7 +22,6 @@ export default function Apply9Page() {
     drink,
     intro,
     kakaoId,
-    finishedStep,
     members,
     teamName,
   } = applydata;
@@ -30,27 +29,13 @@ export default function Apply9Page() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { data: myInfo } = useGetMyInfoQuery();
+
   const [openModal, setOpenModal] = useState(false);
-  const [userPhone, setUserPhone] = useState('');
-  const [gender, setGender] = useState('');
 
   const setModal = (bool) => {
     setOpenModal(bool);
   };
-
-  const getInformation = useCallback(async () => {
-    const userData = await backend.get('/users/my-info');
-    setGender(userData.data.gender);
-    setUserPhone(userData.data.phone);
-  }, []);
-
-  useEffect(() => {
-    if (finishedStep < 8) {
-      window.alert('잘못된 접근입니다');
-      navigate(`/apply/${finishedStep + 1}`);
-    }
-    getInformation();
-  }, [finishedStep]);
 
   const handleBefore = () => {
     navigate('/apply/8kakaoId');
@@ -72,7 +57,7 @@ export default function Apply9Page() {
 
   const handleSubmit = useCallback(async () => {
     try {
-      if (userPhone === null) {
+      if (myInfo.userPhone === null) {
         navigate('/apply/10phone');
       } else {
         await dispatch(createTeam(filteredData));
@@ -135,7 +120,7 @@ export default function Apply9Page() {
             </TeamTitle>
             <TeamInfo>
               <Subtitle>성별</Subtitle>
-              <Content>{gender === 'male' ? '남성' : '여성'}</Content>
+              <Content>{myInfo?.gender === 'male' ? '남성' : '여성'}</Content>
             </TeamInfo>
             <TeamInfo>
               <Subtitle>일정</Subtitle>

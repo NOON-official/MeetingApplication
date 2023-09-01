@@ -15,9 +15,6 @@ export const backendApi = createApi({
   }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
-    getUserTeams: builder.query({
-      query: () => `users/teams`,
-    }),
     getUserTicketCount: builder.query({
       query: () => `users/tickets/count`,
     }),
@@ -32,9 +29,6 @@ export const backendApi = createApi({
     }),
     getUserInvitationCount: builder.query({
       query: () => `users/invitations/count`,
-    }),
-    getUserReferralId: builder.query({
-      query: () => `users/referral-id`,
     }),
     getOrdersPageData: builder.query({
       query: () => `orders/pagedata`,
@@ -58,13 +52,11 @@ export const backendApi = createApi({
 });
 
 export const {
-  useGetUserTeamsQuery,
   useGetUserTicketCountQuery,
   useGetUserCouponsQuery,
   useGetUserCouponCountQuery,
   useGetUserOrdersQuery,
   useGetUserInvitationCountQuery,
-  useGetUserReferralIdQuery,
   useGetOrdersPageDataQuery,
   useGetCouponsPageDataQuery,
   useGetTeamMembersCountOneWeekQuery,
