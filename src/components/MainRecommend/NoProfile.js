@@ -24,7 +24,6 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   margin: 10% auto;
-  border: 1px solid blue;
 `;
 
 const Title = styled.div`

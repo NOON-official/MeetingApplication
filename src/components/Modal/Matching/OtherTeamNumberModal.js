@@ -1,23 +1,13 @@
 import { Modal, notification } from 'antd';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import { ReactComponent as Copy } from '../../../asset/svg/Copy.svg';
-import backend from '../../../util/backend';
+import { useGetContactNumberQuery } from '../../../features/api/userApi';
 
 export default function OtherTeamNumberModal(props) {
   const { open, closeModal, teamName, teamId } = props;
+  const { data: contact } = useGetContactNumberQuery(teamId);
 
-  const [contact, setContact] = useState();
   const [api, contextHolder] = notification.useNotification();
-
-  const getContactData = async () => {
-    const contactData = await backend.get(`/teams/${teamId}/contact`);
-    setContact(contactData.data.kakaoId);
-  };
-
-  useEffect(() => {
-    getContactData();
-  }, []);
 
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
