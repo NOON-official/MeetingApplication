@@ -13,7 +13,7 @@ export const userApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Users'],
+  tagTypes: ['Users', 'Apply'],
   endpoints: (builder) => ({
     getMyInfo: builder.query({
       query: () => ({ url: `users/my-info` }),
@@ -66,16 +66,97 @@ export const userApi = createApi({
     getTingCount: builder.query({
       query: () => ({ url: `users/tings/count` }),
       transformResponse: (response) => response.tingCount,
-      providesTags: ['Users'],
+      providesTags: ['Ting'],
     }),
     getMyTeamId: builder.query({
       query: () => ({ url: `users/team-id` }),
       transformResponse: (response) => response.teamId,
-      providesTags: ['Users'],
+      providesTags: ['Team'],
     }),
-    getMyProfile: builder.query({
+    getProfile: builder.query({
       query: (id) => ({ url: `teams/${id}` }),
-      providesTags: ['Users'],
+      providesTags: ['Team'],
+    }),
+    getRecommendList: builder.query({
+      query: () => ({ url: `users/teams/recommended` }),
+      transformResponse: (response) => response.teams,
+      providesTags: ['Team'],
+    }),
+    getApplyData: builder.query({
+      query: () => ({ url: `users/matchings/applied` }),
+      transformResponse: (response) => response.teams,
+      providesTags: ['Apply'],
+    }),
+    getRefusedData: builder.query({
+      query: () => ({ url: `users/matchings/refused` }),
+      transformResponse: (response) => response.teams,
+      providesTags: ['Refused'],
+    }),
+    getReceivedData: builder.query({
+      query: () => ({ url: `users/matchings/received` }),
+      transformResponse: (response) => response.teams,
+      providesTags: ['Received'],
+    }),
+    getSucceedData: builder.query({
+      query: () => ({ url: `users/matchings/succeeded` }),
+      transformResponse: (response) => response.teams,
+      providesTags: ['Succeed'],
+    }),
+    deleteApplyProfile: builder.mutation({
+      query({ ...data }) {
+        return {
+          url: `users/matchings/applied`,
+          method: 'DELETE',
+          body: data,
+        };
+      },
+      invalidatesTags: ['Apply'],
+    }),
+    deleteReceivedProfile: builder.mutation({
+      query({ ...data }) {
+        return {
+          url: `users/matchings/received`,
+          method: 'DELETE',
+          body: data,
+        };
+      },
+      invalidatesTags: ['Received'],
+    }),
+    postApplyMatching: builder.mutation({
+      query({ myTeamId, teamId }) {
+        return {
+          url: `matchings/${myTeamId}/${teamId}`,
+          method: 'POST',
+        };
+      },
+      invalidatesTags: ['Team', 'Apply', 'Ting'],
+    }),
+    putStopSeeProfile: builder.mutation({
+      query({ teamId }) {
+        return {
+          url: `teams/${teamId}`,
+          method: 'PUT',
+        };
+      },
+      invalidatesTags: ['Team'],
+    }),
+    putAcceptMatching: builder.mutation({
+      query({ matchingId, teamId }) {
+        return {
+          url: `matchings/${matchingId}/teams/${teamId}/accept`,
+          method: 'PUT',
+        };
+      },
+      invalidatesTags: ['Received', 'Succeed', 'Ting'],
+    }),
+    putRefuseMatching: builder.mutation({
+      query({ matchingId, teamId }) {
+        return {
+          url: `matchings/${matchingId}/teams/${teamId}/refuse`,
+          method: 'PUT',
+        };
+      },
+      invalidatesTags: ['Received'],
     }),
   }),
 });
@@ -89,5 +170,16 @@ export const {
   usePostAgreementsMutation,
   useGetTingCountQuery,
   useGetMyTeamIdQuery,
-  useGetMyProfileQuery,
+  useGetProfileQuery,
+  useGetRecommendListQuery,
+  useGetApplyDataQuery,
+  useGetRefusedDataQuery,
+  useGetReceivedDataQuery,
+  useGetSucceedDataQuery,
+  useDeleteApplyProfileMutation,
+  useDeleteReceivedProfileMutation,
+  usePostApplyMatchingMutation,
+  usePutStopSeeProfileMutation,
+  usePutAcceptMatchingMutation,
+  usePutRefuseMatchingMutation,
 } = userApi;
