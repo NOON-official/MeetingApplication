@@ -10,31 +10,19 @@ import SliderBoxMembers from '../../Slider/SliderBoxMembers';
 import AreaText from '../../MainRecommend/AreaText';
 import DateText from '../../MainRecommend/DateText';
 import {
-  useGetMyProfileQuery,
+  useGetProfileQuery,
   useGetMyTeamIdQuery,
 } from '../../../features/api/userApi';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal } = props;
   const { data: myTeamId } = useGetMyTeamIdQuery();
-  const { data: myProfile } = useGetMyProfileQuery(myTeamId, {
+  const { data: myProfile } = useGetProfileQuery(myTeamId, {
     skip: !myTeamId,
   });
 
-  // const [myProfile, setMyProfile] = useState(null);
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
-
-  // useEffect(() => {
-  //   const getProfile = async () => {
-  //     if (myTeamId !== null && myTeamId !== undefined) {
-  //       const profile = await backend.get(`/teams/${myTeamId}`);
-  //       setMyProfile(profile.data);
-  //     }
-  //   };
-
-  //   getProfile();
-  // }, [myTeamId]);
 
   const AlcholContent = {
     1: '반 병',
@@ -113,14 +101,14 @@ export default function MyTeamProfileModal(props) {
                 <SliderBoxMembers members={myProfile.members} />
               </TeamProfile>
               <Footer>
-                <ButtonBox>
-                  <ApplyButton onClick={() => setIsStopMatchingModalOpen(true)}>
+                {/* <ButtonBox> */}
+                {/* <ApplyButton onClick={() => setIsStopMatchingModalOpen(true)}>
                     매칭 중단하기
-                  </ApplyButton>
-                  <ApplyButton onClick={() => setIsModifyModalOpen(true)}>
-                    수정하기
-                  </ApplyButton>
-                </ButtonBox>
+                  </ApplyButton> */}
+                <ApplyButton2 onClick={() => setIsModifyModalOpen(true)}>
+                  수정하기
+                </ApplyButton2>
+                {/* </ButtonBox> */}
               </Footer>
             </>
           )}
@@ -234,5 +222,10 @@ const ButtonBox = styled.div`
   display: flex;
   justify-content: center;
   justify-content: space-between;
+  margin-top: 5%;
+`;
+
+const ApplyButton2 = styled(ApplyButton)`
+  width: 90%;
   margin-top: 5%;
 `;

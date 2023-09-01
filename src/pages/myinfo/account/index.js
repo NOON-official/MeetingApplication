@@ -33,8 +33,6 @@ export default function Account() {
     }
   }, []);
 
-  console.log(myInfo);
-
   return (
     <MyinfoLayout title="내 정보">
       {myInfo && (

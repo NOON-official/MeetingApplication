@@ -22,8 +22,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 100%;
   margin: 10% auto;
+  border: 1px solid blue;
 `;
 
 const Title = styled.div`
