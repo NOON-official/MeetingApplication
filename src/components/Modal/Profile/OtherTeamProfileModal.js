@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from 'antd';
@@ -6,11 +6,17 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as UniversityMarkBlack } from '../../../asset/svg/UniversityMarkBlack.svg';
 import { ReactComponent as Share } from '../../../asset/svg/Share.svg';
 import SliderBoxMembers from '../../Slider/SliderBoxMembers';
-import backend from '../../../util/backend';
 import AreaText from '../../MainRecommend/AreaText';
 import DateText from '../../MainRecommend/DateText';
 import ApplyButton from '../../Button/ApplyButton';
-import { useGetMyTeamIdQuery } from '../../../features/api/userApi';
+import {
+  useGetMyTeamIdQuery,
+  useGetProfileQuery,
+  usePostApplyMatchingMutation,
+  usePutAcceptMatchingMutation,
+  usePutRefuseMatchingMutation,
+  usePutStopSeeProfileMutation,
+} from '../../../features/api/userApi';
 
 export default function OtherTeamProfileModal({
   open,
@@ -20,22 +26,22 @@ export default function OtherTeamProfileModal({
   matchingId,
 }) {
   const navigate = useNavigate();
-  const [teamProfile, setTeamProfile] = useState(null);
-  const { data: myTeamId } = useGetMyTeamIdQuery();
 
-  const getProfile = useCallback(async () => {
-    const profile = await backend.get(`/teams/${teamId}`);
-    setTeamProfile(profile.data);
-  }, [teamId]);
+  const { data: myTeamId } = useGetMyTeamIdQuery();
+  const { data: teamProfile } = useGetProfileQuery(teamId);
+
+  const [apply] = usePostApplyMatchingMutation();
+  const [stop] = usePutStopSeeProfileMutation();
+  const [accept] = usePutAcceptMatchingMutation();
+  const [refuse] = usePutRefuseMatchingMutation();
 
   // 매칭 신청하기
   const applyMatching = useCallback(async () => {
     if (window.confirm('미팅을 신청하시면 2팅이 차감됩니다!')) {
       try {
-        await backend.post(`/matchings/${myTeamId}/${teamId}`);
+        await apply({ myTeamId, teamId }).unwrap();
         alert('신청되었습니다!');
         closeModal();
-        window.location.reload();
       } catch (err) {
         if (err.response.data.message === 'insufficient ting') {
           alert('팅이 부족합니다. 팅을 충전해주세요!');
@@ -55,12 +61,10 @@ export default function OtherTeamProfileModal({
       )
     ) {
       try {
-        await backend.put(`/teams/${teamId}`);
+        await stop({ teamId }).unwrap();
         closeModal();
-        window.location.reload();
       } catch (err) {
         alert('잠시 후에 다시 시도해주세요');
-        console.log(err);
       }
     }
   }, [teamId]);
@@ -69,34 +73,31 @@ export default function OtherTeamProfileModal({
   const acceptMatching = useCallback(async () => {
     if (window.confirm('미팅을 수락하시면, 4팅이 차감됩니다!')) {
       try {
-        await backend.put(`/matchings/${matchingId}/teams/${teamId}/accept`);
+        await accept({ matchingId, teamId }).unwrap();
         alert('수락되었습니다!');
         closeModal();
-        window.location.reload();
       } catch (err) {
-        alert('잠시 후에 다시 시도해주세요');
-        console.log(err);
+        if (err.response.data.message === 'insufficient ting') {
+          alert('팅이 부족합니다. 팅을 충전해주세요!');
+          navigate('/myinfo/ting/buy');
+        } else {
+          alert('잠시 후에 다시 시도해주세요');
+        }
       }
     }
   }, [matchingId, teamId]);
 
   // 매칭 거절하기
   const refuseTeam = useCallback(async () => {
-    if (window.confirm('신청을 거절하시나요?')) {
+    if (window.confirm('정말 신청을 거절하시나요?')) {
       try {
-        await backend.put(`/matchings/${matchingId}/teams/${teamId}/refuse`);
+        await refuse({ matchingId, teamId }).unwrap();
         closeModal();
-        window.location.reload();
       } catch (err) {
         alert('잠시 후에 다시 시도해주세요');
-        console.log(err);
       }
     }
   }, [matchingId, teamId]);
-
-  useEffect(() => {
-    getProfile();
-  }, [teamId]);
 
   const AlcholContent = {
     1: '반 병',
@@ -119,15 +120,15 @@ export default function OtherTeamProfileModal({
           onCancel={() => closeModal()}
         >
           <TeamProfile>
-            <TeamName>{teamProfile?.teamName}</TeamName>
+            <TeamName>{teamProfile.teamName}</TeamName>
             <TextBox>
               <Title>상대 팀 한 줄 어필</Title>
-              <Content>{teamProfile?.intro}</Content>
+              <Content>{teamProfile.intro}</Content>
             </TextBox>
             <TextBox>
               <Container>
                 <Title>상대 팀 기본 정보</Title>
-                {teamProfile?.approval ? (
+                {teamProfile.approval ? (
                   <>
                     <SUniversityMark />
                     <UniversityMarkText>대학 인증 완료</UniversityMarkText>
@@ -137,25 +138,24 @@ export default function OtherTeamProfileModal({
               <TeamInfo>
                 <Subtitle>일정</Subtitle>
                 <SubContent>
-                  <DateText availableDates={teamProfile?.teamAvailableDate} />
+                  <DateText availableDates={teamProfile.teamAvailableDate} />
                 </SubContent>
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>지역</Subtitle>
-                <AreaText areaProps={teamProfile?.areas} />
+                <AreaText areaProps={teamProfile.areas} />
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>주량</Subtitle>
-                <SubContent>{`${AlcholContent[teamProfile?.drink]} (Lv.${
-                  teamProfile?.drink
+                <SubContent>{`${AlcholContent[teamProfile.drink]} (Lv.${
+                  teamProfile.drink
                 })`}</SubContent>
               </TeamInfo>
             </TextBox>
-            <SliderBoxMembers members={teamProfile?.members} />
+            <SliderBoxMembers members={teamProfile.members} />
           </TeamProfile>
-
           <Footer>
-            {state === 'recommend' ? (
+            {state === 'recommend' && (
               <ButtonBox>
                 <ApplyButton onClick={() => applyMatching()}>
                   신청하기
@@ -164,15 +164,15 @@ export default function OtherTeamProfileModal({
                   다시 안 보기
                 </ApplyButton>
               </ButtonBox>
-            ) : null}
-            {state === 'received' ? (
+            )}
+            {state === 'received' && (
               <ButtonBox>
                 <ApplyButton onClick={() => acceptMatching()}>
                   수락하기
                 </ApplyButton>
                 <ApplyButton onClick={() => refuseTeam()}>거절하기</ApplyButton>
               </ButtonBox>
-            ) : null}
+            )}
             {/* {state === 'succeed' ? (
               <ButtonBox>
                 <ShareButton>

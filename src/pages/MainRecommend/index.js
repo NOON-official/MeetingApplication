@@ -1,27 +1,13 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import NoProfile from '../../components/MainRecommend/NoProfile';
 import Timer from './timer';
 import RecommendList from './recommendList';
 import RecommendModal from '../../components/Modal/Matching/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
-import backend from '../../util/backend';
 import { useGetMyTeamIdQuery } from '../../features/api/userApi';
 
 export default function Recommend() {
   const { data: myTeamId } = useGetMyTeamIdQuery();
-  const [myProfile, setMyProfile] = useState(null);
-
-  useEffect(() => {
-    const getProfile = async () => {
-      if (myTeamId && myTeamId !== undefined) {
-        const profile = await backend.get(`/teams/${myTeamId}`);
-        setMyProfile(profile.data);
-      }
-    };
-
-    getProfile();
-  }, [myTeamId]);
 
   return (
     <>
@@ -44,7 +30,7 @@ export default function Recommend() {
 
       <Timer />
 
-      {myProfile !== null ? (
+      {myTeamId ? (
         <RecommendList />
       ) : (
         <NoProfile>프로필을 만든 후 확인할 수 있어요</NoProfile>
