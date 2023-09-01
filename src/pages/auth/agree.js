@@ -34,7 +34,7 @@ function AgreePage() {
         marketing: agree4,
       }).unwrap();
       localStorage.setItem('needMoreInfo', 'true');
-      navigate('/apply/university');
+      navigate('/apply/information');
     } catch (err) {
       window.alert('잠시 후 시도주세요');
     }

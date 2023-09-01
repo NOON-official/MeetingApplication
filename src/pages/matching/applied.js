@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import MatchingLayout from '../../layout/MatchingLayout';
@@ -6,10 +6,13 @@ import SigninView from '../../components/Auth/SigninView';
 import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
-import backend from '../../util/backend';
 import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 import NoProfile from '../../components/MainRecommend/NoProfile';
-import { useGetMyTeamIdQuery } from '../../features/api/userApi';
+import {
+  useGetApplyDataQuery,
+  useGetMyTeamIdQuery,
+  useGetRefusedDataQuery,
+} from '../../features/api/userApi';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
@@ -17,6 +20,16 @@ export default function MatchingApplied() {
   const { data: myTeamId } = useGetMyTeamIdQuery(undefined, {
     skip: !accessToken,
   });
+  const { data: applyData, isLoading: applyDataLoading } = useGetApplyDataQuery(
+    undefined,
+    {
+      skip: !myTeamId,
+    },
+  );
+  const { data: refuseData, isLoading: refuseDataLoading } =
+    useGetRefusedDataQuery(undefined, {
+      skip: !myTeamId,
+    });
 
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);
@@ -24,19 +37,9 @@ export default function MatchingApplied() {
   const [deleteRefuseProfileList, setDeleteRefuseProfileList] = useState([]);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  const [applyData, setApplyData] = useState([]);
-  const [refuseData, setRefuseData] = useState([]);
-
   const setModal = (bool) => {
     setOpenDeleteModal(bool);
   };
-
-  const getApplyData = useCallback(async () => {
-    const apply = await backend.get(`/users/matchings/applied`);
-    setApplyData(apply.data.teams);
-    const refuse = await backend.get(`/users/matchings/refused`);
-    setRefuseData(refuse.data.teams);
-  }, []);
 
   const handleTabChange = (tabIdx) => {
     if (selectTab === 1 && tabIdx === 2) {
@@ -46,12 +49,6 @@ export default function MatchingApplied() {
     }
     setSelectTab(tabIdx);
   };
-
-  useEffect(() => {
-    if (myTeamId) {
-      getApplyData();
-    }
-  }, [myTeamId]);
 
   const subtitle = (
     <Text>
@@ -83,6 +80,13 @@ export default function MatchingApplied() {
     );
   }
 
+  if (applyDataLoading || refuseDataLoading)
+    return (
+      <MatchingLayout>
+        <Container>Loading...</Container>
+      </MatchingLayout>
+    );
+
   return (
     <MatchingLayout>
       <DeleteProfileModal
@@ -90,7 +94,6 @@ export default function MatchingApplied() {
         setModal={setModal}
         state="applied"
         data={selectTab === 1 ? deleteProfileList : deleteRefuseProfileList}
-        fetchData={getApplyData}
       />
       <Container>
         <Header>
