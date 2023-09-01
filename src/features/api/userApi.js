@@ -129,7 +129,7 @@ export const userApi = createApi({
           method: 'POST',
         };
       },
-      invalidatesTags: ['Team', 'Apply'],
+      invalidatesTags: ['Team', 'Apply', 'Ting'],
     }),
     putStopSeeProfile: builder.mutation({
       query({ teamId }) {
@@ -147,7 +147,7 @@ export const userApi = createApi({
           method: 'PUT',
         };
       },
-      invalidatesTags: ['Received'],
+      invalidatesTags: ['Received', 'Succeed', 'Ting'],
     }),
     putRefuseMatching: builder.mutation({
       query({ matchingId, teamId }) {
@@ -156,7 +156,7 @@ export const userApi = createApi({
           method: 'PUT',
         };
       },
-      invalidatesTags: ['Matching'],
+      invalidatesTags: ['Received'],
     }),
   }),
 });

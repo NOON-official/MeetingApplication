@@ -43,7 +43,8 @@ export default function OtherTeamProfileModal({
         alert('신청되었습니다!');
         closeModal();
       } catch (err) {
-        if (err.response.data.message === 'insufficient ting') {
+        console.log(err);
+        if (err.response?.data.message === 'insufficient ting') {
           alert('팅이 부족합니다. 팅을 충전해주세요!');
           navigate('/myinfo/ting/buy');
         } else {

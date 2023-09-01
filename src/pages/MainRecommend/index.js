@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import NoProfile from '../../components/MainRecommend/NoProfile';
+import { useNavigate } from 'react-router-dom';
 import Timer from './timer';
 import RecommendList from './recommendList';
 import RecommendModal from '../../components/Modal/Matching/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
 import { useGetMyTeamIdQuery } from '../../features/api/userApi';
+import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 
 export default function Recommend() {
+  const navigate = useNavigate();
   const { data: myTeamId } = useGetMyTeamIdQuery();
 
   return (
@@ -33,7 +35,9 @@ export default function Recommend() {
       {myTeamId ? (
         <RecommendList />
       ) : (
-        <NoProfile>프로필을 만든 후 확인할 수 있어요</NoProfile>
+        <Container2 onClick={() => navigate('/apply/1')}>
+          <Blur />
+        </Container2>
       )}
     </>
   );
@@ -65,4 +69,9 @@ const Subtitle = styled.div`
   font-size: 14px;
   font-weight: 300;
   line-height: 18px;
+`;
+
+const Container2 = styled.div`
+  margin: 0 auto;
+  width: 90%;
 `;
