@@ -20,6 +20,11 @@ import PrimaryButton from '../components/Button/PrimaryButton';
 import Recommend from './MainRecommend';
 import Review from './myinfo/review/review';
 import { useGetAgreementsQuery } from '../features/api/userApi';
+import Main1 from '../asset/img/ver2Main1.png';
+import Main2 from '../asset/img/ver2Main2.png';
+import Main3 from '../asset/img/ver2Main3.png';
+import Main4 from '../asset/img/ver2Main4.png';
+import Main5 from '../asset/img/ver2Main5.png';
 
 function Main() {
   const navigate = useNavigate();
@@ -62,12 +67,16 @@ function Main() {
         <Space
           direction="vertical"
           style={{
-            padding: '15px 0',
             textAlign: 'center',
             width: '100%',
+            backgroundColor: '#fff',
           }}
         >
-          <span>새로운 회원 정보가 필요해요!</span>
+          <span style={{ fontSize: '16px' }}>
+            잠깐!
+            <br />
+            새롭게 입력해야 하는 정보가 있어요
+          </span>
           <PrimaryButton
             onClick={() => {
               navigate('/apply/university');
@@ -79,7 +88,7 @@ function Main() {
       </PrimaryModal>
 
       {!accessToken ? (
-        <div style={{ textAlign: 'center', marginBottom: '10%' }}>
+        <div style={{ textAlign: 'center' }}>
           <Section>
             <CountTitle>
               <MainTitle>
@@ -92,7 +101,7 @@ function Main() {
               <MainImg />
             </ImgBox>
           </Section>
-          <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
+
           <Section>
             <Review />
             <AwardTitle>
@@ -137,7 +146,15 @@ function Main() {
               </SCarousel>
               <SliderRArrow onClick={() => slider2.current.next()} />
             </Slider>
+            <Imgs>
+              <SImg src={Main1} />
+              <SImg src={Main2} />
+              <SImg src={Main3} />
+              <SImg src={Main4} />
+              <SImg src={Main5} />
+            </Imgs>
           </Section>
+          <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
         </div>
       ) : (
         <Recommend />
@@ -186,7 +203,9 @@ const ImgBox = styled.div`
 
 const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   width: 75%;
-  margin: 10% auto;
+  position: sticky;
+  bottom: 100px;
+  margin: 0 auto;
   &.ant-btn {
     height: 56px;
     background-color: #ffa1a1;
@@ -232,4 +251,12 @@ const SAwardTitle = styled.div`
   font-weight: 300;
   font-size: 12px;
   color: #4a4a4a;
+`;
+
+const Imgs = styled.div`
+  margin-top: 50px;
+`;
+
+const SImg = styled.img`
+  width: 100%;
 `;

@@ -6,7 +6,7 @@ const PrimaryModal = styled(Modal)`
 
   .ant-modal-content,
   .ant-modal-header {
-    background-color: #ece9e9;
+    background-color: #fff;
   }
   .ant-modal-title {
     color: #777777;

@@ -2,9 +2,8 @@ import { Button, Modal } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMarkBig.svg';
 
-export default function StudentCardModal({ open, setModal }) {
+export default function SuccessMatchingModal({ open, setModal }) {
   const navigate = useNavigate();
 
   return (
@@ -20,19 +19,17 @@ export default function StudentCardModal({ open, setModal }) {
         >
           <Container>
             <TextBox>
-              <SUniversityMark />
               <BlackText>
-                <Bold>학교 인증</Bold>을 완료한 후에
-                <br />
-                상대 팀의 프로필을 살펴볼 수 있어요.
+                미팅을 수락했어요!🎉 <br />
+                이제 &lt;매칭 완료&gt;에서 상대팀의 연락처를 확인할 수 있어요!
               </BlackText>
             </TextBox>
           </Container>
           <ButtonBox>
-            <SButton onClick={() => navigate('/myinfo/studentcard')}>
-              인증하러 가기
+            <SButton onClick={() => navigate('/matching/success')}>
+              네, 알겠습니다!
             </SButton>
-            <WhiteButton onClick={() => setModal(false)}>취소</WhiteButton>
+            {/* <WhiteButton onClick={() => setModal(false)}>취소</WhiteButton> */}
           </ButtonBox>
         </Modal>
       ) : null}
@@ -55,17 +52,10 @@ const TextBox = styled.div`
   text-align: center;
 `;
 
-const SUniversityMark = styled(UniversityMark)`
-  margin-bottom: 2%;
-`;
-
 const BlackText = styled.span`
+  margin: 7% 0;
   color: #000000;
   font-size: 16px;
-`;
-
-const Bold = styled.span`
-  font-weight: 600;
 `;
 
 const ButtonBox = styled.div`
