@@ -1,20 +1,9 @@
 import { Modal } from 'antd';
 import styled from 'styled-components';
-import { useState } from 'react';
-import AutomaticModal from '../AutomaticModal';
 
 export default function CompleteUploadModal({ open, setModal, progress }) {
-  const [openCompleteModal, setOpenCompleteModal] = useState(false);
-
   return (
     <div>
-      {progress === 100 && (
-        <AutomaticModal
-          open={openCompleteModal}
-          setModal={setOpenCompleteModal}
-          title="업로드 완료!"
-        />
-      )}
       {open ? (
         <Modal
           open={open}

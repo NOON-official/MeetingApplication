@@ -1,10 +1,20 @@
 import { Button, Modal } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 
 export default function SuccessMatchingModal({ open, setModal }) {
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (open) {
+      const timeout = setTimeout(() => {
+        setModal(false);
+      }, 1500);
+
+      return () => clearTimeout(timeout);
+    }
+    return () => {};
+  }, [open]);
+
+  console.log(open);
 
   return (
     <div>
@@ -25,12 +35,12 @@ export default function SuccessMatchingModal({ open, setModal }) {
               </BlackText>
             </TextBox>
           </Container>
-          <ButtonBox>
+          {/* <ButtonBox>
             <SButton onClick={() => navigate('/matching/success')}>
               네, 알겠습니다!
             </SButton>
-            {/* <WhiteButton onClick={() => setModal(false)}>취소</WhiteButton> */}
-          </ButtonBox>
+            <WhiteButton onClick={() => setModal(false)}>취소</WhiteButton>
+          </ButtonBox> */}
         </Modal>
       ) : null}
     </div>
