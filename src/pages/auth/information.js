@@ -88,15 +88,14 @@ const Title = styled.div`
 const Maintitle = styled.div`
   width: 100%;
   margin-bottom: 5%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 22px;
 `;
 
 const Subtitle = styled.label`
   color: #aaaaaa;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 15px;
 `;
 
 const Content = styled.div`
@@ -138,7 +137,6 @@ const Info = styled.div`
   padding-bottom: 2px;
   font-weight: 400;
   font-size: 20px;
-  font-family: 'Nanum JungHagSaeng';
   width: 100%;
   max-width: 100%;
   height: 45px;
@@ -171,10 +169,9 @@ const ButtonBox = styled.div`
 `;
 
 const SubmitButton = styled(Button)`
-  font-family: 'Nanum JungHagSaeng';
   color: #ffffff;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 18px;
   text-align: center;
   border: none;
   width: 100%;
