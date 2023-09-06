@@ -1,11 +1,20 @@
 import { Button, Modal } from 'antd';
-import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Ting } from '../../../asset/svg/TingImg.svg';
+import { useCallback } from 'react';
+import { usePutStopSeeProfileMutation } from '../../../features/api/userApi';
+import { ReactComponent as ExclamationMark } from '../../../asset/svg/ExclamationMark.svg';
 
-export default function NotEnoughTingModal({ content, open, setModal }) {
-  const navigate = useNavigate();
+// 추천팀 다시 안 보기 기능
+export default function StopSeeProfileModal({ open, setModal, teamId }) {
+  const [stop] = usePutStopSeeProfileMutation();
+
+  const stopSeeProfile = useCallback(async () => {
+    try {
+      await stop({ teamId }).unwrap();
+    } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
+    }
+  }, [teamId]);
 
   return (
     <div>
@@ -20,17 +29,17 @@ export default function NotEnoughTingModal({ content, open, setModal }) {
         >
           <Container>
             <TextBox>
-              <STing />
+              <ExclamationMark />
               <BlackText>
-                앗, 팅이 부족해서 수락할 수 없어요🥲
-                <br /> {content}
+                &#39;다시 안 보기&#39;를 선택하시면
+                <br /> 이 팀은 이제 추천 매칭에서 볼 수 없어요.
+                <br />
+                그래도 진행하시겠어요?
               </BlackText>
             </TextBox>
           </Container>
           <ButtonBox>
-            <SButton onClick={() => navigate('/myinfo/ting/buy')}>
-              충전하러 가기
-            </SButton>
+            <SButton onClick={() => stopSeeProfile()}>다시 안 보기</SButton>
             <WhiteButton onClick={() => setModal(false)}>취소</WhiteButton>
           </ButtonBox>
         </Modal>
@@ -38,8 +47,8 @@ export default function NotEnoughTingModal({ content, open, setModal }) {
     </div>
   );
 }
-
 const Container = styled.div`
+  padding-top: 5%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -54,17 +63,10 @@ const TextBox = styled.div`
   text-align: center;
 `;
 
-const STing = styled(Ting)`
-  margin-bottom: 2%;
-`;
-
 const BlackText = styled.span`
+  margin-top: 5%;
   color: #000000;
   font-size: 16px;
-`;
-
-const Bold = styled.span`
-  font-weight: 600;
 `;
 
 const ButtonBox = styled.div`
