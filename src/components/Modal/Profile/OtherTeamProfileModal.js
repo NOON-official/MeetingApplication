@@ -13,8 +13,6 @@ import {
   useGetMyTeamIdQuery,
   useGetProfileQuery,
   usePostApplyMatchingMutation,
-  usePutAcceptMatchingMutation,
-  usePutRefuseMatchingMutation,
   usePutStopSeeProfileMutation,
 } from '../../../features/api/userApi';
 import RefuseMatchingModal from '../Matching/RefuseMatchingModal';
@@ -34,11 +32,8 @@ export default function OtherTeamProfileModal({
 
   const [apply] = usePostApplyMatchingMutation();
   const [stop] = usePutStopSeeProfileMutation();
-  const [accept] = usePutAcceptMatchingMutation();
-  const [refuse] = usePutRefuseMatchingMutation();
 
   const [openAcceptModal, setOpenAcceptModal] = useState(false);
-  const [tingModal, setTingModal] = useState(false);
   const [isRefuseModal, setIsRefuseModal] = useState(false);
 
   // 매칭 신청하기
