@@ -112,8 +112,8 @@ export default function Apply2() {
         />
       </ChooseBox>
 
-      <SEarth />
       <Footer>
+        <SEarth />
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
@@ -141,16 +141,12 @@ const Pink = styled.span`
 `;
 
 const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 5%;
-  padding-bottom: 5%;
+  width: 90%;
+  margin: auto 0 10%;
 `;
 
 const ButtonBox = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: center;
   justify-content: space-between;
@@ -165,5 +161,5 @@ const ChooseBox = styled.div`
 
 const SEarth = styled(Earth)`
   margin-top: 15%;
-  margin-left: 57%;
+  margin-left: 65%;
 `;
