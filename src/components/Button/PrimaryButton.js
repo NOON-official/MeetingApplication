@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const PrimaryButton = styled(Button)`
   height: auto;
-  font-family: 'Nanum JungHagSaeng';
   padding: 10px 50px;
   border-radius: 10px;
   background-color: ${(props) => props.theme.pink};
@@ -12,7 +11,7 @@ const PrimaryButton = styled(Button)`
 
   > span {
     font-weight: 400;
-    font-size: 24px;
+    font-size: 18px;
     color: white;
   }
 `;
