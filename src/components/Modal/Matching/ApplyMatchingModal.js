@@ -1,28 +1,22 @@
 import { Button, Modal } from 'antd';
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { usePutAcceptMatchingMutation } from '../../../features/api/userApi';
-import NotEnoughTingModal from './NotEnoughTingModal';
-import SuccessMatchingModal from '../Matching/SuccessMatchingModal';
+import { usePostApplyMatchingMutation } from '../../../features/api/userApi';
+import NotEnoughTingModal from '../Ting/NotEnoughTingModal';
 
-export default function AcceptTingModal({
+export default function ApplyMatchingModal({
   open,
   setModal,
-  matchingId,
+  myTeamId,
   teamId,
 }) {
-  const [accept, { isSuccess }] = usePutAcceptMatchingMutation();
+  const [apply] = usePostApplyMatchingMutation();
 
-  const [openSuccessMatchingModal, setOpenSuccessMatchingModal] =
-    useState(false);
   const [openNotEnoughTingModal, setOpenNotEnoughTingModal] = useState(false);
 
-  const acceptMatching = useCallback(async () => {
+  const applyMatching = useCallback(async () => {
     try {
-      await accept({ matchingId, teamId }).unwrap();
-      if (isSuccess) {
-        setOpenSuccessMatchingModal(true);
-      }
+      await apply({ myTeamId, teamId }).unwrap();
     } catch (err) {
       if (err.data.message === 'insufficient ting') {
         setOpenNotEnoughTingModal(true);
@@ -30,7 +24,7 @@ export default function AcceptTingModal({
         alert('잠시 후에 다시 시도해주세요');
       }
     }
-  }, [matchingId, teamId]);
+  }, [myTeamId, teamId]);
 
   return (
     <div>
@@ -43,26 +37,20 @@ export default function AcceptTingModal({
           closable
           onCancel={() => setModal(false)}
         >
-          {openSuccessMatchingModal && (
-            <SuccessMatchingModal
-              open={openSuccessMatchingModal}
-              setModal={() => setOpenSuccessMatchingModal((prev) => !prev)}
-            />
-          )}
           <NotEnoughTingModal
-            content="수락하려면 4팅이 필요해요!"
+            content="신청하려면 2팅이 필요해요!"
             open={openNotEnoughTingModal}
             setModal={() => setOpenNotEnoughTingModal((prev) => !prev)}
           />
           <Container>
             <TextBox>
               <BlackText>
-                정말 수락하시겠어요? <br /> 수락하시면 4팅이 사용돼요!
+                정말 신청하시겠어요? <br /> 신청하시면 2팅이 사용돼요!
               </BlackText>
             </TextBox>
           </Container>
           <ButtonBox>
-            <SButton onClick={() => acceptMatching()}>수락할래요</SButton>
+            <SButton onClick={() => applyMatching()}>신청할래요</SButton>
             <WhiteButton onClick={() => setModal(false)}>취소</WhiteButton>
           </ButtonBox>
         </Modal>
