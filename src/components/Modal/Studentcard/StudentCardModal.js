@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as SadFace } from '../../../asset/svg/SadFace.svg';
+import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMarkBig.svg';
 
 export default function StudentCardModal({ open, setModal }) {
   const navigate = useNavigate();
@@ -20,9 +20,9 @@ export default function StudentCardModal({ open, setModal }) {
         >
           <Container>
             <TextBox>
-              <SSadFace />
+              <SUniversityMark />
               <BlackText>
-                학교 인증을 완료한 후에
+                <Bold>학교 인증</Bold>을 완료한 후에
                 <br />
                 상대 팀의 프로필을 살펴볼 수 있어요.
               </BlackText>
@@ -55,13 +55,17 @@ const TextBox = styled.div`
   text-align: center;
 `;
 
-const SSadFace = styled(SadFace)`
-  width: 40%;
+const SUniversityMark = styled(UniversityMark)`
+  margin-bottom: 2%;
 `;
 
 const BlackText = styled.span`
   color: #000000;
   font-size: 16px;
+`;
+
+const Bold = styled.span`
+  font-weight: 600;
 `;
 
 const ButtonBox = styled.div`
