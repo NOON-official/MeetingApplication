@@ -38,7 +38,6 @@ export default function ApplyUniversity() {
   return (
     <ApplyLayout>
       <FreeTingModal open={tingModal} setModal={setTingModal} />
-
       <Title>
         <Maintitle>본인 대학교를 입력해주세요</Maintitle>
         <Subtitle>추후에 수정이 불가능하니 한 번 더 확인해 주세요!</Subtitle>
@@ -86,8 +85,8 @@ export default function ApplyUniversity() {
               ))}
         </SearchList>
       </CollegeBox>
-      <SBottom />
       <Footer>
+        <SBottom />
         <ButtonBox>
           <SubmitButton onClick={NextPage} disabled={!selectedUniversity}>
             다음
@@ -101,19 +100,17 @@ export default function ApplyUniversity() {
 
 const Title = styled.div`
   width: 90%;
-  margin-top: 13%;
-  height: 13%;
-  min-height: 13%;
+  margin: 10% 0;
 `;
 
 const Maintitle = styled.div`
   width: 100%;
+  margin-bottom: 5%;
   font-weight: 500;
   font-size: 22px;
 `;
 
 const Subtitle = styled.p`
-  margin-top: 4%;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 15px;

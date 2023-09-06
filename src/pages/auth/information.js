@@ -65,15 +65,13 @@ function ApplyInformation() {
             </SSelect>
           </Info>
         </ChooseBox>
-        <Footer>
-          <ButtonBox>
-            <SubmitButton onClick={NextPage} disabled={!selectAge}>
-              다음
-            </SubmitButton>
-          </ButtonBox>
-        </Footer>
-        <div>{ChannelTalk.hideChannelButton()}</div>
       </Content>
+      <Footer>
+        <SubmitButton onClick={NextPage} disabled={!selectAge}>
+          다음
+        </SubmitButton>
+        <div>{ChannelTalk.hideChannelButton()}</div>
+      </Footer>
     </ApplyLayout>
   );
 }
@@ -82,7 +80,7 @@ export default ApplyInformation;
 
 const Title = styled.div`
   width: 90%;
-  margin-top: 13%;
+  margin: 10% 0;
 `;
 
 const Maintitle = styled.div`
@@ -100,7 +98,6 @@ const Subtitle = styled.label`
 
 const Content = styled.div`
   width: 90%;
-  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -157,15 +154,8 @@ const SSelect = styled(Select)`
 `;
 
 const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: auto;
-`;
-
-const ButtonBox = styled.div`
-  width: 100%;
+  width: 90%;
+  margin: auto 0 10%;
 `;
 
 const SubmitButton = styled(Button)`
@@ -178,6 +168,7 @@ const SubmitButton = styled(Button)`
   height: 50px;
   background: #eb8888;
   border-radius: 10px;
+
   &:disabled {
     cursor: auto;
   }

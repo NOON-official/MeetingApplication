@@ -56,8 +56,9 @@ export default function Apply9Page() {
   });
 
   const handleSubmit = useCallback(async () => {
+    console.log(myInfo);
     try {
-      if (myInfo.userPhone === null) {
+      if (myInfo.phone === null) {
         navigate('/apply/10phone');
       } else {
         await dispatch(createTeam(filteredData));
@@ -282,8 +283,8 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
-  padding-bottom: 5%;
+  padding-top: 7%;
+  margin: auto 0 10%;
 `;
 
 const ButtonBox = styled.div`

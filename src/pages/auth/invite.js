@@ -58,8 +58,8 @@ function InvitePage() {
         >
           메인으로 가기
         </MainButton>
+        <div>{ChannelTalk.hideChannelButton()}</div>
       </Footer>
-      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -68,32 +68,28 @@ export default InvitePage;
 
 const Title = styled.div`
   width: 90%;
-  margin-top: 10%;
-  height: 13%;
-  min-height: 13%;
+  margin: 10% 0;
 `;
 
 const Maintitle = styled.div`
-  width: 95%;
+  width: 100%;
+  margin-bottom: 5%;
   font-weight: 500;
   font-size: 22px;
   line-height: 30px;
 `;
 
 const Subtitle = styled.p`
-  margin-top: 4%;
   color: #aaaaaa;
   font-weight: 400;
   font-size: 15px;
 `;
 
 const Conatiner = styled.div`
-  margin-top: 50px;
-  margin-bottom: 35%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
 `;
 
 const SInput = styled(Input)`
@@ -103,7 +99,6 @@ const SInput = styled(Input)`
 `;
 
 const SubmitButton = styled(Button)`
-  margin-top: 5%;
   color: #ffffff;
   font-weight: 400;
   font-size: 18px;
@@ -129,9 +124,6 @@ const MainButton = styled(Button)`
 `;
 
 const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 90%;
-  margin-bottom: 50%;
+  margin: auto 0 10%;
 `;
