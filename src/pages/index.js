@@ -209,7 +209,7 @@ const ImgBox = styled.div`
 const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
   width: 75%;
   position: sticky;
-  bottom: 300px;
+  bottom: 18rem;
   margin: 0 auto;
   &.ant-btn {
     height: 56px;
