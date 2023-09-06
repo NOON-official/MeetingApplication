@@ -38,7 +38,7 @@ export default function OtherTeamList(props) {
 
         return (
           <TeamCardWrapper key={id}>
-            {deleteProfile.includes(matchingId) && clickEditBtn && (
+            {deleteProfile?.includes(matchingId) && clickEditBtn && (
               <TeamCardOverlay />
             )}
             <OtherTeamProfileModal

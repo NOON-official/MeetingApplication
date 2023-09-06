@@ -5,7 +5,7 @@ import MatchingLayout from '../../layout/MatchingLayout';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import OtherTeamNumberModal from '../../components/Modal/Matching/OtherTeamNumberModal';
-import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
+import { ReactComponent as NoSucceedMatching } from '../../asset/svg/NoSucceedMatching.svg';
 import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
 import useModalState from '../../hooks/useModalState';
 import { useGetSucceedDataQuery } from '../../features/api/userApi';
@@ -107,7 +107,7 @@ export default function MatchingSucceed() {
       ) : (
         <NoMeetingContainer>
           <Title2>최종 성사된 미팅이 없어요</Title2>
-          <SSadFace />
+          <NoSucceedMatching />
         </NoMeetingContainer>
       )}
     </MatchingLayout>
@@ -260,15 +260,12 @@ const NoMeetingContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 10% auto;
+  margin: 15% auto;
 `;
 
 const Title2 = styled.div`
   margin: 5% 0;
-  font-size: 18px;
+  color: #9b9b9b;
+  font-size: 15px;
   font-weight: 500;
-`;
-
-const SSadFace = styled(SadFace)`
-  width: 45%;
 `;

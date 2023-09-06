@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
+import { ReactComponent as NoProfileIcon } from '../../asset/svg/NoProfileIcon.svg';
 
 export default function NoProfile({ children }) {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ export default function NoProfile({ children }) {
   return (
     <Container>
       <Title>{children}</Title>
-      <SSadFace />
+      <NoProfileIcon />
       <Button onClick={() => navigate('/apply/1')}>
         <CreateTeamBtn>만들러 가기</CreateTeamBtn>
       </Button>
@@ -23,21 +23,19 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 10% auto;
+  margin: 20% auto;
 `;
 
 const Title = styled.div`
-  margin: 5% 0;
-  font-size: 18px;
+  margin-bottom: 5%;
+  color: #9b9b9b;
+  font-size: 15px;
   font-weight: 500;
 `;
 
-const SSadFace = styled(SadFace)`
-  width: 45%;
-`;
-
 const Button = styled.div`
-  width: 40%;
+  margin-top: 5%;
+  width: 30%;
 `;
 
 const CreateTeamBtn = styled.button`
