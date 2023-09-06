@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { ReactComponent as UniversityMarkBlack } from '../../../asset/svg/UniversityMarkBlack.svg';
+import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 import { ReactComponent as Share } from '../../../asset/svg/Share.svg';
 import SliderBoxMembers from '../../Slider/SliderBoxMembers';
 import AreaText from '../../MainRecommend/AreaText';
@@ -12,13 +11,11 @@ import ApplyButton from '../../Button/ApplyButton';
 import {
   useGetMyTeamIdQuery,
   useGetProfileQuery,
-  usePostApplyMatchingMutation,
-  usePutAcceptMatchingMutation,
-  usePutRefuseMatchingMutation,
-  usePutStopSeeProfileMutation,
 } from '../../../features/api/userApi';
+import ApplyMatchingModal from '../Matching/ApplyMatchingModal';
 import RefuseMatchingModal from '../Matching/RefuseMatchingModal';
 import AcceptTingModal from '../Ting/AcceptTingModal';
+import StopSeeProfileModal from '../Matching/StopSeeProfileModal';
 
 export default function OtherTeamProfileModal({
   open,
@@ -27,54 +24,13 @@ export default function OtherTeamProfileModal({
   state,
   matchingId,
 }) {
-  const navigate = useNavigate();
-
   const { data: myTeamId } = useGetMyTeamIdQuery();
   const { data: teamProfile } = useGetProfileQuery(teamId);
 
-  const [apply] = usePostApplyMatchingMutation();
-  const [stop] = usePutStopSeeProfileMutation();
-  const [accept] = usePutAcceptMatchingMutation();
-  const [refuse] = usePutRefuseMatchingMutation();
-
+  const [openApplyModal, setOpenApplyModal] = useState(false);
+  const [openStopModal, setOpenStopModal] = useState(false);
   const [openAcceptModal, setOpenAcceptModal] = useState(false);
-  const [tingModal, setTingModal] = useState(false);
   const [isRefuseModal, setIsRefuseModal] = useState(false);
-
-  // 매칭 신청하기
-  const applyMatching = useCallback(async () => {
-    if (window.confirm('미팅을 신청하시면 2팅이 차감됩니다!')) {
-      try {
-        await apply({ myTeamId, teamId }).unwrap();
-        alert('신청되었습니다!');
-        closeModal();
-      } catch (err) {
-        console.log(err);
-        if (err.response?.data.message === 'insufficient ting') {
-          alert('팅이 부족합니다. 팅을 충전해주세요!');
-          navigate('/myinfo/ting/buy');
-        } else {
-          alert('잠시 후에 다시 시도해주세요');
-        }
-      }
-    }
-  }, [myTeamId, teamId]);
-
-  // 프로필 그만보기
-  const stopSeeProfile = useCallback(async () => {
-    if (
-      window.confirm(
-        '이 팀은 이제 추천 매칭에서 볼 수 없어요. 그래도 진행하시겠어요?',
-      )
-    ) {
-      try {
-        await stop({ teamId }).unwrap();
-        closeModal();
-      } catch (err) {
-        alert('잠시 후에 다시 시도해주세요');
-      }
-    }
-  }, [teamId]);
 
   const AlcholContent = {
     1: '반 병',
@@ -96,6 +52,17 @@ export default function OtherTeamProfileModal({
           closable
           onCancel={() => closeModal()}
         >
+          <ApplyMatchingModal
+            open={openApplyModal}
+            setModal={() => setOpenApplyModal((prev) => !prev)}
+            myTeamId={myTeamId}
+            teamId={teamId}
+          />
+          <StopSeeProfileModal
+            open={openStopModal}
+            setModal={() => setOpenStopModal((prev) => !prev)}
+            teamId={teamId}
+          />
           <AcceptTingModal
             open={openAcceptModal}
             setModal={() => setOpenAcceptModal((prev) => !prev)}
@@ -146,10 +113,10 @@ export default function OtherTeamProfileModal({
           <Footer>
             {state === 'recommend' && (
               <ButtonBox>
-                <ApplyButton onClick={() => applyMatching()}>
+                <ApplyButton onClick={() => setOpenApplyModal(true)}>
                   신청하기
                 </ApplyButton>
-                <ApplyButton onClick={() => stopSeeProfile()}>
+                <ApplyButton onClick={() => setOpenStopModal(true)}>
                   다시 안 보기
                 </ApplyButton>
               </ButtonBox>
@@ -227,15 +194,15 @@ const Content = styled.div`
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 
-const SUniversityMark = styled(UniversityMarkBlack)`
-  margin-left: 20px;
+const SUniversityMark = styled(UniversityMark)`
+  margin: 0 10px 0 30px;
 `;
 
 const UniversityMarkText = styled.div`
-  color: #777777;
+  color: #daadda;
   font-size: 14px;
 `;
 

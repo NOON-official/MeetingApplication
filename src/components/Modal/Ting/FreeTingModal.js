@@ -28,7 +28,7 @@ export default function FreeTingModal({ open, setModal }) {
             <TextBox>
               <BlackText>
                 <ColorText>
-                  무료 {myinfo?.gender === 'female' ? 20 : 6}팅
+                  무료 {myinfo?.gender === 'female' ? 30 : 5}팅
                 </ColorText>
                 이 도착했어요!
               </BlackText>
