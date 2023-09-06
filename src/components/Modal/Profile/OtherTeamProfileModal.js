@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as UniversityMarkBlack } from '../../../asset/svg/UniversityMarkBlack.svg';
+import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 import { ReactComponent as Share } from '../../../asset/svg/Share.svg';
 import SliderBoxMembers from '../../Slider/SliderBoxMembers';
 import AreaText from '../../MainRecommend/AreaText';
@@ -227,15 +227,15 @@ const Content = styled.div`
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 
-const SUniversityMark = styled(UniversityMarkBlack)`
-  margin-left: 20px;
+const SUniversityMark = styled(UniversityMark)`
+  margin: 0 10px 0 30px;
 `;
 
 const UniversityMarkText = styled.div`
-  color: #777777;
+  color: #daadda;
   font-size: 14px;
 `;
 
