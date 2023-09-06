@@ -7,8 +7,8 @@ import { ReactComponent as Bottom } from '../../asset/svg/B.svg';
 import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
 import Universities from '../../asset/Universities';
 import ChannelTalk from '../../asset/ChannelTalk';
-import FreeTingModal from '../../components/Modal/FreeTingModal';
 import { usePatchUniversityMutation } from '../../features/api/userApi';
+import FreeTingModal from '../../components/Modal/Ting/FreeTingModal';
 
 export default function ApplyUniversity() {
   const [university] = usePatchUniversityMutation();
@@ -40,7 +40,7 @@ export default function ApplyUniversity() {
       <FreeTingModal open={tingModal} setModal={setTingModal} />
 
       <Title>
-        <Maintitle>본인 학교를 확인해주세요.</Maintitle>
+        <Maintitle>본인 대학교를 입력해주세요</Maintitle>
         <Subtitle>추후에 수정이 불가능하니 한 번 더 확인해 주세요!</Subtitle>
       </Title>
       <CollegeBox>
@@ -62,7 +62,7 @@ export default function ApplyUniversity() {
           <SearchInput
             onChange={inputChange}
             name="universitySearch"
-            placeholder="학교를 검색해주세요"
+            placeholder="대학교를 검색해주세요"
             autoComplete="off"
           />
           <SearchIcon />
@@ -108,16 +108,15 @@ const Title = styled.div`
 
 const Maintitle = styled.div`
   width: 100%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 22px;
 `;
 
 const Subtitle = styled.p`
   margin-top: 4%;
   color: #aaaaaa;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 15px;
 `;
 
 const CollegeBox = styled.div`
@@ -138,9 +137,8 @@ const SelectedUniversity = styled.div`
   justify-content: space-between;
   align-items: center;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 15px;
   color: #ffffff;
-  width: 40%;
   height: 45px;
   background: #eb8888;
   border-radius: 10px;
@@ -169,13 +167,12 @@ const SearchInput = styled.input`
   display: flex;
   width: 90%;
   height: 100%;
-  font-size: 20px;
+  font-size: 15px;
   border: 0;
   outline: none;
   margin-left: 10px;
   background-color: transparent;
   color: #eb8888;
-  font-family: Nanum JungHagSaeng;
 `;
 
 const SearchList = styled.div`
@@ -204,7 +201,7 @@ const SearchedUniversity = styled.div`
   align-items: center;
   justify-content: flex-start;
   color: #eb8888;
-  font-size: 14px;
+  font-size: 15px;
   border-bottom: 1px solid #f6eeee;
   overflow-x: hidden;
 `;
@@ -230,10 +227,9 @@ const ButtonBox = styled.div`
 `;
 
 const SubmitButton = styled(Button)`
-  font-family: 'Nanum JungHagSaeng';
   color: #ffffff;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 18px;
   text-align: center;
   border: none;
   width: 100%;

@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as NoProfileIcon } from '../../asset/svg/NoProfileIcon.svg';
+import { ReactComponent as NoMatchingData } from '../../asset/svg/NoMatchingData.svg';
 
-export default function NoProfile({ children }) {
+export default function NoMatching({ children }) {
   const navigate = useNavigate();
 
   return (
     <Container>
       <Title>{children}</Title>
-      <NoProfileIcon />
-      <Button onClick={() => navigate('/apply/1')}>
-        <CreateTeamBtn>만들러 가기</CreateTeamBtn>
+      <NoMatchingData />
+      <Button onClick={() => navigate('/')}>
+        <CreateTeamBtn>신청하러 가기</CreateTeamBtn>
       </Button>
     </Container>
   );
@@ -22,8 +22,8 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  margin: 20% auto;
+  width: 90%;
+  margin: 15% auto 0;
 `;
 
 const Title = styled.div`
@@ -34,13 +34,13 @@ const Title = styled.div`
 `;
 
 const Button = styled.div`
-  margin-top: 5%;
   width: 30%;
 `;
 
 const CreateTeamBtn = styled.button`
   width: 100%;
-  padding: 10px 5px;
+  margin-top: 10%;
+  padding: 7px 5px;
   border: none;
   border-radius: 20px;
   background-color: #ffcdcd;

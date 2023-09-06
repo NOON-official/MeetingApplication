@@ -63,6 +63,11 @@ export const userApi = createApi({
       },
       invalidatesTags: ['Users'],
     }),
+    getUserReferralId: builder.query({
+      query: () => ({ url: `users/referral-id` }),
+      transformResponse: (response) => response.referralId,
+      providesTags: ['Users'],
+    }),
     getTingCount: builder.query({
       query: () => ({ url: `users/tings/count` }),
       transformResponse: (response) => response.tingCount,
@@ -158,6 +163,21 @@ export const userApi = createApi({
       },
       invalidatesTags: ['Received'],
     }),
+    getContactNumber: builder.query({
+      query: (teamId) => ({ url: `teams/${teamId}/contact` }),
+      transformResponse: (response) => response.kakaoId,
+      providesTags: ['Team'],
+    }),
+    postStudentCard: builder.mutation({
+      query({ ...data }) {
+        return {
+          url: `auth/student-card`,
+          method: 'POST',
+          body: data,
+        };
+      },
+      invalidatesTags: ['Users'],
+    }),
   }),
 });
 
@@ -167,6 +187,7 @@ export const {
   usePostPhoneNumberMutation,
   usePostPhoneCodeMutation,
   useGetAgreementsQuery,
+  useGetUserReferralIdQuery,
   usePostAgreementsMutation,
   useGetTingCountQuery,
   useGetMyTeamIdQuery,
@@ -182,4 +203,6 @@ export const {
   usePutStopSeeProfileMutation,
   usePutAcceptMatchingMutation,
   usePutRefuseMatchingMutation,
+  useGetContactNumberQuery,
+  usePostStudentCardMutation,
 } = userApi;
