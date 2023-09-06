@@ -36,14 +36,17 @@ function InvitePage() {
   return (
     <ApplyLayout>
       <Title>
-        <Maintitle>혹시 미팅학개론에 초대해주신 회원이 있나요?</Maintitle>
-        <Subtitle>회원 초대 코드가 있다면 알려주세요</Subtitle>
+        <Maintitle>
+          혹시 미팅학개론을 소개해주신
+          <br /> 회원님이 있나요?
+        </Maintitle>
+        <Subtitle>회원 초대 코드가 있다면 알려주세요!</Subtitle>
       </Title>
       <Conatiner>
         <SInput
           value={inviteCode}
           onChange={handleInviteCode}
-          placeholder="회원코드 입력하기 (선택)"
+          placeholder="초대 코드 입력하기 (선택)"
         />
       </Conatiner>
       <Footer>
@@ -72,16 +75,16 @@ const Title = styled.div`
 
 const Maintitle = styled.div`
   width: 95%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 30px;
 `;
 
 const Subtitle = styled.p`
   margin-top: 4%;
   color: #aaaaaa;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 15px;
 `;
 
 const Conatiner = styled.div`
@@ -101,10 +104,9 @@ const SInput = styled(Input)`
 
 const SubmitButton = styled(Button)`
   margin-top: 5%;
-  font-family: 'Nanum JungHagSaeng';
   color: #ffffff;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 18px;
   text-align: center;
   border: none;
   width: 100%;
@@ -115,10 +117,9 @@ const SubmitButton = styled(Button)`
 
 const MainButton = styled(Button)`
   margin-top: 5%;
-  font-family: 'Nanum JungHagSaeng';
   color: #f2cbcb;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 18px;
   text-align: center;
   border: 1px solid #f2cbcb;
   width: 100%;

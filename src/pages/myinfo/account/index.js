@@ -88,7 +88,7 @@ export default function Account() {
           direction="vertical"
           style={{ padding: '12px 0', textAlign: 'center' }}
         >
-          <span>
+          <span style={{ fontSize: '16px' }}>
             지금 탈퇴하시면 미팅학개론에서의 모든 기록이 사라져요. 그래도
             탈퇴하시겠어요?
           </span>

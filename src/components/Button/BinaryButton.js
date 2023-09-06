@@ -40,8 +40,7 @@ const SelectButton = styled.button`
   background-color: ${(props) => props.background_color};
   color: ${(props) => props.color};
   border-color: transparent;
-  font-family: 'Nanum JungHagSaeng';
-  font-size: 18px;
+  font-size: 15px;
   &:hover {
     cursor: pointer;
   }

@@ -1,11 +1,23 @@
 import { Button, Modal } from 'antd';
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMarkBig.svg';
+import { usePutRefuseMatchingMutation } from '../../../features/api/userApi';
 
-export default function StudentCardModal({ open, setModal }) {
-  const navigate = useNavigate();
+export default function RefuseMatchingModal({
+  open,
+  setModal,
+  matchingId,
+  teamId,
+}) {
+  const [refuse] = usePutRefuseMatchingMutation();
+
+  const refuseTeam = useCallback(async () => {
+    try {
+      await refuse({ matchingId, teamId }).unwrap();
+    } catch (err) {
+      alert('잠시 후에 다시 시도해주세요');
+    }
+  }, [matchingId, teamId]);
 
   return (
     <div>
@@ -20,18 +32,11 @@ export default function StudentCardModal({ open, setModal }) {
         >
           <Container>
             <TextBox>
-              <SUniversityMark />
-              <BlackText>
-                <Bold>학교 인증</Bold>을 완료한 후에
-                <br />
-                상대 팀의 프로필을 살펴볼 수 있어요.
-              </BlackText>
+              <BlackText>정말 신청을 거절하시겠어요?</BlackText>
             </TextBox>
           </Container>
           <ButtonBox>
-            <SButton onClick={() => navigate('/myinfo/studentcard')}>
-              인증하러 가기
-            </SButton>
+            <SButton onClick={refuseTeam}>거절할래요</SButton>
             <WhiteButton onClick={() => setModal(false)}>취소</WhiteButton>
           </ButtonBox>
         </Modal>
@@ -55,17 +60,10 @@ const TextBox = styled.div`
   text-align: center;
 `;
 
-const SUniversityMark = styled(UniversityMark)`
-  margin-bottom: 2%;
-`;
-
 const BlackText = styled.span`
+  margin: 7% 0;
   color: #000000;
   font-size: 16px;
-`;
-
-const Bold = styled.span`
-  font-weight: 600;
 `;
 
 const ButtonBox = styled.div`
