@@ -44,9 +44,7 @@ function AgreePage() {
     <ApplyLayout>
       <Title>
         <Maintitle>미팅학개론 이용을 위해</Maintitle>
-        <Maintitle>
-          <Pink>약관에 동의</Pink>해 주세요
-        </Maintitle>
+        <Maintitle>약관에 동의해 주세요</Maintitle>
       </Title>
       <Container>
         <AllAgreeBtn
@@ -141,9 +139,9 @@ const Title = styled.div`
 
 const Maintitle = styled.div`
   width: 100%;
-  font-family: 'Nanum JungHagSaeng';
-  font-weight: 400;
-  font-size: 35px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 30px;
 `;
 
 const Pink = styled.span`
@@ -180,10 +178,9 @@ const CheckingContent = styled.div`
 
 const SubmitButton = styled(Button)`
   margin-top: 5%;
-  font-family: 'Nanum JungHagSaeng';
   color: #ffffff;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 18px;
   text-align: center;
   border: none;
   width: 100%;
