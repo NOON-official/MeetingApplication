@@ -67,12 +67,16 @@ function Main() {
         <Space
           direction="vertical"
           style={{
-            padding: '15px 0',
             textAlign: 'center',
             width: '100%',
+            backgroundColor: '#fff',
           }}
         >
-          <span>새로운 회원 정보가 필요해요!</span>
+          <span style={{ fontSize: '16px' }}>
+            잠깐!
+            <br />
+            새롭게 입력해야 하는 정보가 있어요
+          </span>
           <PrimaryButton
             onClick={() => {
               navigate('/apply/university');
