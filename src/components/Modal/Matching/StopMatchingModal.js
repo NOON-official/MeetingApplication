@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import theme from '../../../style/theme';
 import backend from '../../../util/backend';
 
+// 매칭 중단하기 기능 제외
 export default function StopMatchingModal({ open, setModal, teamId }) {
   const deleteMatching = useCallback(async () => {
     try {

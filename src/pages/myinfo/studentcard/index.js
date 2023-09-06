@@ -1,32 +1,30 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AWS from 'aws-sdk';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../../asset/svg/UniversityMarkDarkGray.svg';
 import { ReactComponent as ChooseImg } from '../../../asset/svg/ChooseImg.svg';
-import { useGetUserReferralIdQuery } from '../../../features/backendApi';
 import CompleteUploadModal from '../../../components/Modal/Studentcard/CompleteUploadModal';
 import AutomaticModal from '../../../components/Modal/AutomaticModal';
 import BigFileModal from '../../../components/Modal/Studentcard/BigFileModal';
-import backend from '../../../util/backend';
 import Section from '../../../components/Section';
 import Guidelines from './guidelines';
 import Uploadsection from './uploadsection';
-import { useGetMyInfoQuery } from '../../../features/api/userApi';
+import {
+  useGetMyInfoQuery,
+  useGetUserReferralIdQuery,
+  usePostStudentCardMutation,
+} from '../../../features/api/userApi';
 
 export default function StudentCard() {
   const [openModal, setOpenModal] = useState(false);
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
   const [openBigfileModal, setOpenBigfileModal] = useState(false);
 
-  const { data: myInfo, refetch } = useGetMyInfoQuery();
-  const { data: referralIdData } = useGetUserReferralIdQuery();
-
-  const referralId = useMemo(
-    () => referralIdData?.referralId || '',
-    [referralIdData],
-  );
+  const { data: myInfo } = useGetMyInfoQuery();
+  const { data: referralId } = useGetUserReferralIdQuery();
+  const [studentCard] = usePostStudentCardMutation();
 
   // aws s3 upload file
   const ACCESS_KEY = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
@@ -62,6 +60,7 @@ export default function StudentCard() {
   const upload = () => {
     const totalBytes = imgFile.size;
 
+    // 업로드 파일 크기 20MB 제한
     if (totalBytes >= 20 * 1024 * 1024) {
       setOpenBigfileModal(true);
     } else {
@@ -77,18 +76,18 @@ export default function StudentCard() {
 
       let uploadBytes = 0;
 
+      // S3 업로드 속도 계산
       load.on('httpUploadProgress', (progress) => {
         uploadBytes = progress.loaded;
         setPercentage((uploadBytes / totalBytes) * 100);
       });
 
+      // S3 성공적으로 업로드 되면 url 백엔드 post 요청
       load
         .promise()
         .then(async (data) => {
           try {
-            await backend.post(`/auth/student-card`, {
-              studentCardUrl: data.Location,
-            });
+            await studentCard({ studentCardUrl: data.Location }).unwrap();
             setOpenCompleteModal(true);
           } catch (err) {
             console.log(err);
@@ -97,10 +96,6 @@ export default function StudentCard() {
         .catch((err) => alert('이미지 로드에 실패했습니다!'));
     }
   };
-
-  useEffect(() => {
-    refetch();
-  }, [openCompleteModal, refetch]);
 
   return (
     <MyinfoLayout title="학교 인증">
@@ -143,7 +138,6 @@ export default function StudentCard() {
                     type="file"
                     accept="image/*"
                     id="fileInput"
-                    multiple
                     onChange={(e) => selectFile(e)}
                   />
                   <LightGrayText>
@@ -201,7 +195,6 @@ export default function StudentCard() {
                     type="file"
                     accept="image/*"
                     id="fileInput"
-                    multiple
                     onChange={(e) => selectFile(e)}
                   />
                   <LightGrayText>
