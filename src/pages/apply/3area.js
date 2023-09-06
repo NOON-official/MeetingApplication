@@ -145,8 +145,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 5%;
-  padding-bottom: 5%;
+  margin: auto 0 10%;
 `;
 
 const ButtonBox = styled.div`
@@ -158,7 +157,6 @@ const ButtonBox = styled.div`
 `;
 
 const SEarth = styled(Earth)`
-  height: 90px;
   margin-top: 5%;
   margin-left: 57%;
 `;

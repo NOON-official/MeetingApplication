@@ -10,7 +10,7 @@ import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 export default function Recommend() {
   const navigate = useNavigate();
   const { data: myTeamId, isLoading } = useGetMyTeamIdQuery();
-
+  console.log(myTeamId);
   if (isLoading) return null;
 
   return (
