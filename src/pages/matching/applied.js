@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import MatchingLayout from '../../layout/MatchingLayout';
 import SigninView from '../../components/Auth/SigninView';
 import MainLayout from '../../layout/MainLayout';
-import { ReactComponent as SadFace } from '../../asset/svg/SadFace.svg';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 import NoProfile from '../../components/MainRecommend/NoProfile';
@@ -13,6 +12,7 @@ import {
   useGetMyTeamIdQuery,
   useGetRefusedDataQuery,
 } from '../../features/api/userApi';
+import NoMatching from './NoMatching';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
@@ -33,8 +33,7 @@ export default function MatchingApplied() {
 
   const [selectTab, setSelectTab] = useState(1);
   const [clickEditBtn, setClickEditBtn] = useState(false);
-  const [deleteProfileList, setDeleteProfileList] = useState([]);
-  const [deleteRefuseProfileList, setDeleteRefuseProfileList] = useState([]);
+  const [deleteRefuseList, setDeleteRefuseList] = useState([]);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const setModal = (bool) => {
@@ -42,25 +41,9 @@ export default function MatchingApplied() {
   };
 
   const handleTabChange = (tabIdx) => {
-    if (selectTab === 1 && tabIdx === 2) {
-      setDeleteProfileList([]);
-    } else if (selectTab === 2 && tabIdx === 1) {
-      setDeleteRefuseProfileList([]);
-    }
     setSelectTab(tabIdx);
+    setClickEditBtn(false);
   };
-
-  const subtitle = (
-    <Text>
-      {clickEditBtn ? (
-        <>
-          <Pink>{deleteProfileList.length}</Pink>/{applyData?.length}개 선택
-        </>
-      ) : (
-        <>최대 24시간 이내에 상대팀의 미팅 의사를 확인해 볼게요 ⏱</>
-      )}
-    </Text>
-  );
 
   // 로그인 안했을 때
   if (!accessToken) {
@@ -93,7 +76,7 @@ export default function MatchingApplied() {
         open={openDeleteModal}
         setModal={setModal}
         state="applied"
-        data={selectTab === 1 ? deleteProfileList : deleteRefuseProfileList}
+        data={deleteRefuseList}
       />
       <Container>
         <Header>
@@ -103,79 +86,63 @@ export default function MatchingApplied() {
           <Tab selected={selectTab === 2} onClick={() => handleTabChange(2)}>
             {`거절됐어요(${refuseData.length})`}
           </Tab>
-
-          {clickEditBtn ? (
+          {selectTab === 2 && (
             <EditBtn>
-              <Delete
-                selected={deleteProfileList.length > 0}
-                onClick={() => setOpenDeleteModal(true)}
-              >
-                삭제
-              </Delete>
-              <Cancel
-                onClick={() => {
-                  setClickEditBtn(false);
-                  if (selectTab === 1) setDeleteProfileList([]);
-                  else setDeleteRefuseProfileList([]);
-                }}
-              >
-                취소
-              </Cancel>
+              {clickEditBtn ? (
+                <>
+                  <Delete
+                    selected={deleteRefuseList.length > 0}
+                    onClick={() => setOpenDeleteModal(true)}
+                  >
+                    삭제
+                  </Delete>
+                  <Cancel
+                    onClick={() => {
+                      setClickEditBtn(false);
+                      setDeleteRefuseList([]);
+                    }}
+                  >
+                    취소
+                  </Cancel>
+                </>
+              ) : (
+                <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
+              )}
             </EditBtn>
-          ) : (
-            <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
           )}
         </Header>
-        {selectTab === 1 && applyData.length !== 0 && subtitle}
+        {selectTab === 1 && applyData.length !== 0 && (
+          <Text>최대 24시간 이내에 상대팀의 미팅 의사를 확인해 볼게요 ⏱</Text>
+        )}
         {selectTab === 2 && refuseData.length !== 0 && (
-          <Text>아쉽게도 상대팀이 미팅을 거절했어요 😢</Text>
+          <Text>
+            {clickEditBtn ? (
+              <>
+                <Pink>{deleteRefuseList.length}</Pink>/{refuseData.length}개
+                선택
+              </>
+            ) : (
+              <>아쉽게도 상대팀이 미팅을 거절했어요 😢</>
+            )}
+          </Text>
         )}
       </Container>
       <OtherTeamList
-        state={'apply'}
+        state="apply"
         teamList={selectTab === 1 ? applyData : refuseData}
         clickEditBtn={clickEditBtn}
-        deleteProfile={
-          selectTab === 1 ? deleteProfileList : deleteRefuseProfileList
-        }
-        setDeleteProfile={
-          selectTab === 1 ? setDeleteProfileList : setDeleteRefuseProfileList
-        }
+        deleteProfile={deleteRefuseList}
+        setDeleteProfile={setDeleteRefuseList}
       />
       {selectTab === 1 && applyData.length === 0 && (
-        <NoMeetingContainer>
-          <Title>신청 중인 미팅이 없어요</Title>
-          <SSadFace />
-        </NoMeetingContainer>
+        <NoMatching>신청한 미팅이 없어요</NoMatching>
       )}
       {selectTab === 2 && refuseData.length === 0 && (
-        <NoMeetingContainer>
-          <Title>거절 당한 미팅이 없어요</Title>
-          <SSadFace />
-        </NoMeetingContainer>
+        <NoMatching>거절 당한 미팅이 없어요</NoMatching>
       )}
     </MatchingLayout>
   );
 }
-
-const NoMeetingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  margin: 15% auto 0;
-`;
-
-const Title = styled.div`
-  margin: 2% 0;
-  font-size: 18px;
-  font-weight: 500;
-`;
-
-const SSadFace = styled(SadFace)`
-  width: 45%;
-`;
 
 const Button = styled.div`
   width: 40%;
