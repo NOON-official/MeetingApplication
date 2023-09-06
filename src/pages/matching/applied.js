@@ -144,21 +144,6 @@ export default function MatchingApplied() {
   );
 }
 
-const Button = styled.div`
-  width: 40%;
-`;
-
-const CreateTeamBtn = styled.button`
-  width: 100%;
-  padding: 10px 5px;
-  border: none;
-  border-radius: 20px;
-  background-color: #ffcdcd;
-  color: #eb8888;
-  font-size: 14px;
-  font-weight: 600;
-`;
-
 const Container = styled.div`
   width: 90%;
   margin: 5% auto 0;

@@ -11,7 +11,7 @@ import useModalState from '../../hooks/useModalState';
 import { useGetSucceedDataQuery } from '../../features/api/userApi';
 
 export default function MatchingSucceed() {
-  const { data: succeedData, isLoading } = useGetSucceedDataQuery();
+  const { data: succeedData, isSuccess } = useGetSucceedDataQuery();
 
   const [modalState, openModal, closeModal] = useModalState(succeedData);
   const [modalState2, openModal2, closeModal2] = useModalState(succeedData);
@@ -24,94 +24,92 @@ export default function MatchingSucceed() {
     return dueDate.diff(today, 'day');
   };
 
-  if (isLoading)
+  if (isSuccess)
     return (
       <MatchingLayout>
-        <Container>Loading...</Container>
+        {succeedData.length !== 0 ? (
+          <>
+            <Container>
+              <Text>
+                상대팀도 수락하여 미팅이 최종 성사되었어요!🎉
+                <br />
+                7일 동안 상대팀의 카카오톡 ID/전화번호 확인이 가능해요
+              </Text>
+            </Container>
+            <Container2>
+              {succeedData.map((team) => {
+                const {
+                  id,
+                  teamName,
+                  age,
+                  memberCount,
+                  intro,
+                  approval,
+                  matchedAt,
+                } = team;
+
+                return (
+                  <TeamCard key={id}>
+                    <OtherTeamNumberModal
+                      open={
+                        modalState?.find((state) => state.teamId === id)
+                          ?.open || false
+                      }
+                      closeModal={() => closeModal(id)}
+                      teamName={teamName}
+                      teamId={id}
+                    />
+                    <OtherTeamProfileModal
+                      open={
+                        modalState2?.find((state) => state.teamId === id)
+                          ?.open || false
+                      }
+                      closeModal={() => closeModal2(id)}
+                      teamId={id}
+                      state={'succeed'}
+                    />
+                    <ApplicationDate>
+                      {dayjs(matchedAt).format('M월 DD일')}
+                      <RemainingDate>
+                        {remainingDays(matchedAt)}일 남음
+                      </RemainingDate>
+                    </ApplicationDate>
+                    <Content>
+                      <Title>
+                        <TeamName>{teamName}</TeamName>
+                        {approval ? (
+                          <SUniversityMark />
+                        ) : (
+                          <SUniversityMarkGray />
+                        )}
+                      </Title>
+                      <Subtitle>
+                        <Age>{`평균 ${age}세`}</Age>
+                        <MemberCount>{`${memberCount}명`}</MemberCount>
+                      </Subtitle>
+                      <Info>{`${intro}`}</Info>
+                      <ButtonBox>
+                        <Button1 onClick={() => openModal(id)}>
+                          연락처 확인
+                        </Button1>
+                        <Button2 onClick={() => openModal2(id)}>
+                          자세히 보기
+                        </Button2>
+                      </ButtonBox>
+                    </Content>
+                  </TeamCard>
+                );
+              })}
+            </Container2>
+          </>
+        ) : (
+          <NoMeetingContainer>
+            <Title2>최종 성사된 미팅이 없어요</Title2>
+            <NoSucceedMatching />
+          </NoMeetingContainer>
+        )}
       </MatchingLayout>
     );
-
-  return (
-    <MatchingLayout>
-      {succeedData.length !== 0 ? (
-        <>
-          <Container>
-            <Text>
-              상대팀도 수락하여 미팅이 최종 성사되었어요!🎉
-              <br />
-              7일 동안 상대팀의 카카오톡 ID/전화번호 확인이 가능해요
-            </Text>
-          </Container>
-          <Container2>
-            {succeedData.map((team) => {
-              const {
-                id,
-                teamName,
-                age,
-                memberCount,
-                intro,
-                approval,
-                matchedAt,
-              } = team;
-
-              return (
-                <TeamCard key={id}>
-                  <OtherTeamNumberModal
-                    open={
-                      modalState?.find((state) => state.teamId === id)?.open ||
-                      false
-                    }
-                    closeModal={() => closeModal(id)}
-                    teamName={teamName}
-                    teamId={id}
-                  />
-                  <OtherTeamProfileModal
-                    open={
-                      modalState2?.find((state) => state.teamId === id)?.open ||
-                      false
-                    }
-                    closeModal={() => closeModal2(id)}
-                    teamId={id}
-                    state={'succeed'}
-                  />
-                  <ApplicationDate>
-                    {dayjs(matchedAt).format('M월 DD일')}
-                    <RemainingDate>
-                      {remainingDays(matchedAt)}일 남음
-                    </RemainingDate>
-                  </ApplicationDate>
-                  <Content>
-                    <Title>
-                      <TeamName>{teamName}</TeamName>
-                      {approval ? <SUniversityMark /> : <SUniversityMarkGray />}
-                    </Title>
-                    <Subtitle>
-                      <Age>{`평균 ${age}세`}</Age>
-                      <MemberCount>{`${memberCount}명`}</MemberCount>
-                    </Subtitle>
-                    <Info>{`${intro}`}</Info>
-                    <ButtonBox>
-                      <Button1 onClick={() => openModal(id)}>
-                        연락처 확인
-                      </Button1>
-                      <Button2 onClick={() => openModal2(id)}>
-                        자세히 보기
-                      </Button2>
-                    </ButtonBox>
-                  </Content>
-                </TeamCard>
-              );
-            })}
-          </Container2>
-        </>
-      ) : (
-        <NoMeetingContainer>
-          <Title2>최종 성사된 미팅이 없어요</Title2>
-          <NoSucceedMatching />
-        </NoMeetingContainer>
-      )}
-    </MatchingLayout>
-  );
 }
 
 const Container = styled.div`

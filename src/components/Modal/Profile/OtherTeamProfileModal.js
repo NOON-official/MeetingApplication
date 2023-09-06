@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from 'antd';
@@ -17,6 +17,8 @@ import {
   usePutRefuseMatchingMutation,
   usePutStopSeeProfileMutation,
 } from '../../../features/api/userApi';
+import RefuseMatchingModal from '../Matching/RefuseMatchingModal';
+import AcceptTingModal from '../Ting/AcceptTingModal';
 
 export default function OtherTeamProfileModal({
   open,
@@ -34,6 +36,10 @@ export default function OtherTeamProfileModal({
   const [stop] = usePutStopSeeProfileMutation();
   const [accept] = usePutAcceptMatchingMutation();
   const [refuse] = usePutRefuseMatchingMutation();
+
+  const [openAcceptModal, setOpenAcceptModal] = useState(false);
+  const [tingModal, setTingModal] = useState(false);
+  const [isRefuseModal, setIsRefuseModal] = useState(false);
 
   // 매칭 신청하기
   const applyMatching = useCallback(async () => {
@@ -70,36 +76,6 @@ export default function OtherTeamProfileModal({
     }
   }, [teamId]);
 
-  // 매칭 수락하기
-  const acceptMatching = useCallback(async () => {
-    if (window.confirm('미팅을 수락하시면, 4팅이 차감됩니다!')) {
-      try {
-        await accept({ matchingId, teamId }).unwrap();
-        alert('수락되었습니다!');
-        closeModal();
-      } catch (err) {
-        if (err.response.data.message === 'insufficient ting') {
-          alert('팅이 부족합니다. 팅을 충전해주세요!');
-          navigate('/myinfo/ting/buy');
-        } else {
-          alert('잠시 후에 다시 시도해주세요');
-        }
-      }
-    }
-  }, [matchingId, teamId]);
-
-  // 매칭 거절하기
-  const refuseTeam = useCallback(async () => {
-    if (window.confirm('정말 신청을 거절하시나요?')) {
-      try {
-        await refuse({ matchingId, teamId }).unwrap();
-        closeModal();
-      } catch (err) {
-        alert('잠시 후에 다시 시도해주세요');
-      }
-    }
-  }, [matchingId, teamId]);
-
   const AlcholContent = {
     1: '반 병',
     2: '한 병',
@@ -120,6 +96,18 @@ export default function OtherTeamProfileModal({
           closable
           onCancel={() => closeModal()}
         >
+          <AcceptTingModal
+            open={openAcceptModal}
+            setModal={() => setOpenAcceptModal((prev) => !prev)}
+            matchingId={matchingId}
+            teamId={teamId}
+          />
+          <RefuseMatchingModal
+            open={isRefuseModal}
+            setModal={() => setIsRefuseModal((prev) => !prev)}
+            matchingId={matchingId}
+            teamId={teamId}
+          />
           <TeamProfile>
             <TeamName>{teamProfile.teamName}</TeamName>
             <TextBox>
@@ -168,10 +156,12 @@ export default function OtherTeamProfileModal({
             )}
             {state === 'received' && (
               <ButtonBox>
-                <ApplyButton onClick={() => acceptMatching()}>
+                <ApplyButton onClick={() => setOpenAcceptModal(true)}>
                   수락하기
                 </ApplyButton>
-                <ApplyButton onClick={() => refuseTeam()}>거절하기</ApplyButton>
+                <ApplyButton onClick={() => setIsRefuseModal(true)}>
+                  거절하기
+                </ApplyButton>
               </ButtonBox>
             )}
             {/* {state === 'succeed' ? (
