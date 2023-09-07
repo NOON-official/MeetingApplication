@@ -20,7 +20,7 @@ export default function MyTeamProfileModal(props) {
   const { data: myProfile } = useGetProfileQuery(myTeamId, {
     skip: !myTeamId,
   });
-
+  console.log(myProfile);
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
 
