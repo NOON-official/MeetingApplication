@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMarkBig.svg';
+import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 
 export default function StudentCardModal({ open, setModal }) {
   const navigate = useNavigate();
@@ -56,6 +56,8 @@ const TextBox = styled.div`
 `;
 
 const SUniversityMark = styled(UniversityMark)`
+  width: 44px;
+  height: 44px;
   margin-bottom: 2%;
 `;
 
