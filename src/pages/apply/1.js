@@ -88,14 +88,14 @@ export default function Apply1Page() {
           </ThreePeople>
         </PeopleCountBox>
       </ChooseBox>
-      <SBottom />
       <Footer>
+        <SBottom />
         <ButtonBox>
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
+        <div>{ChannelTalk.hideChannelButton()}</div>
       </Footer>
-      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -158,20 +158,16 @@ const ThreePeople = styled.button`
 
 const SBottom = styled(Bottom)`
   margin-top: 10%;
-  margin-left: 57%;
+  margin-left: 65%;
 `;
 
 const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 5%;
-  padding-bottom: 5%;
+  width: 90%;
+  margin: auto 0 10%;
 `;
 
 const ButtonBox = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: center;
   justify-content: space-between;
