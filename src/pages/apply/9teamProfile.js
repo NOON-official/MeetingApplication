@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Carousel } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
@@ -14,25 +14,18 @@ import {
   useGetMyInfoQuery,
   usePostTeamsMutation,
 } from '../../features/api/userApi';
+import DateText from '../../components/MainRecommend/DateText';
+import AreaText from '../../components/MainRecommend/AreaText';
+import DrinkText from '../../components/MainRecommend/DrinkText';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
-  const {
-    areas,
-    teamAvailableDate,
-    city,
-    drink,
-    intro,
-    kakaoId,
-    members,
-    teamName,
-  } = applydata;
-  const [post] = usePostTeamsMutation();
-
+  const { areas, teamAvailableDate, drink, intro, kakaoId, members, teamName } =
+    applydata;
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const { data: myInfo } = useGetMyInfoQuery();
+  const [post] = usePostTeamsMutation();
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -62,7 +55,6 @@ export default function Apply9Page() {
     if (myInfo.phone) {
       try {
         await post(filteredData).unwrap();
-        // await dispatch(createTeam(filteredData));
         setOpenModal(true);
       } catch (e) {
         console.log(e);
@@ -70,54 +62,12 @@ export default function Apply9Page() {
     } else {
       try {
         await post(filteredData).unwrap();
-        // await dispatch(createTeam(filteredData));
-        // setOpenModal(true);
         navigate('/apply/10phone');
       } catch (e) {
         console.log(e);
       }
     }
   });
-
-  let dates = '';
-  if (teamAvailableDate.includes(1) && teamAvailableDate.includes(2)) {
-    dates = '모두 좋아요';
-  } else if (teamAvailableDate.includes(1)) {
-    dates = '평일';
-  } else {
-    dates = '주말';
-  }
-
-  const CityContent = {
-    1: '서울 / 경기',
-    2: '대구',
-    3: '부산',
-  };
-
-  const AreaContent = {
-    1: '강남',
-    2: '건대',
-    3: '수원',
-    4: '신촌',
-    5: '인천',
-    6: '홍대',
-    7: '경대 북문',
-    8: '계대 앞',
-    9: '동성로',
-    10: '영대역',
-    11: '경대 앞',
-    12: '부산대 앞',
-    13: '서면',
-    14: '해운대',
-  };
-
-  const AlcholContent = {
-    1: '반 병',
-    2: '한 병',
-    3: '한 병 반',
-    4: '두 병',
-    5: '술고래',
-  };
 
   return (
     <ApplyLayout>
@@ -135,18 +85,11 @@ export default function Apply9Page() {
             </TeamInfo>
             <TeamInfo>
               <Subtitle>일정</Subtitle>
-              <Content>{dates}</Content>
+              <DateText availableDates={teamAvailableDate} />
             </TeamInfo>
             <TeamInfo>
               <Subtitle>지역</Subtitle>
-              <div>
-                <SubContent>{CityContent[city]}</SubContent>
-                <Content>
-                  {areas.map((x) => {
-                    return <span key={x}>{AreaContent[x]}&nbsp;&nbsp;</span>;
-                  })}
-                </Content>
-              </div>
+              <AreaText areaProps={areas} />
             </TeamInfo>
           </TextBox>
           <TextBox>
@@ -156,9 +99,7 @@ export default function Apply9Page() {
             </TeamTitle>
             <TeamInfo>
               <Subtitle2>주량</Subtitle2>
-              <Content>
-                {AlcholContent[drink]} (Lv.{drink})
-              </Content>
+              <DrinkText drink={drink} />
             </TeamInfo>
             <TeamInfo>
               <Subtitle>카톡ID / 번호</Subtitle>
