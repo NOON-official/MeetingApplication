@@ -130,7 +130,7 @@ export default function Apply5Page() {
 const Title = styled.div`
   width: 90%;
   height: 30px;
-  margin-top: 7%;
+  margin: 7% 0 3%;
 `;
 
 const Title2 = styled.div`
@@ -200,8 +200,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
-  padding-bottom: 5%;
+  margin: auto 0 10%;
 `;
 
 const ButtonBox = styled.div`

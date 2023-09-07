@@ -7,11 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
-import { createTeam } from '../../features/apply/asyncAction';
 import ApplyButton from '../../components/Button/ApplyButton';
 import MatchingCompleteModal from '../../components/Modal/Matching/MatchingCompleteModal';
 import SliderBoxMembers from '../../components/Slider/SliderBoxMembers';
-import { useGetMyInfoQuery } from '../../features/api/userApi';
+import {
+  useGetMyInfoQuery,
+  usePostTeamsMutation,
+} from '../../features/api/userApi';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
@@ -25,6 +27,7 @@ export default function Apply9Page() {
     members,
     teamName,
   } = applydata;
+  const [post] = usePostTeamsMutation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -56,15 +59,23 @@ export default function Apply9Page() {
   });
 
   const handleSubmit = useCallback(async () => {
-    try {
-      if (myInfo.userPhone === null) {
-        navigate('/apply/10phone');
-      } else {
-        await dispatch(createTeam(filteredData));
+    if (myInfo.phone) {
+      try {
+        await post(filteredData).unwrap();
+        // await dispatch(createTeam(filteredData));
         setOpenModal(true);
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
+    } else {
+      try {
+        await post(filteredData).unwrap();
+        // await dispatch(createTeam(filteredData));
+        // setOpenModal(true);
+        navigate('/apply/10phone');
+      } catch (e) {
+        console.log(e);
+      }
     }
   });
 
@@ -282,8 +293,8 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
-  padding-bottom: 5%;
+  padding-top: 7%;
+  margin: auto 0 10%;
 `;
 
 const ButtonBox = styled.div`

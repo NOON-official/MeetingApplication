@@ -13,10 +13,11 @@ import { ReactComponent as Profile2 } from '../../asset/svg/Profile2.svg';
 import { ReactComponent as Profile3 } from '../../asset/svg/Profile3.svg';
 import { ReactComponent as Profile4 } from '../../asset/svg/Profile4.svg';
 import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
-import backend from '../../util/backend';
+import { useGetMyInfoQuery } from '../../features/api/userApi';
 
 function Teambox({ member, setMember, name }) {
   const { Option } = Select;
+  const { data: userData, isSuccess } = useGetMyInfoQuery();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
@@ -28,16 +29,15 @@ function Teambox({ member, setMember, name }) {
   );
 
   useEffect(() => {
-    if (Object.keys(member).length === 0 && name === '대표자') {
+    if (isSuccess && Object.keys(member).length === 0 && name === '대표자') {
       setRole(1);
       const fetchData = async () => {
-        const userData = await backend.get('/users/my-info');
-        setSelectedUniversity(Universities[userData.data.university - 1]?.name);
+        setSelectedUniversity(Universities[userData.university - 1]?.name);
         setMember((prev) => ({
           ...prev,
           role: 1,
-          age: dayjs().year() - userData.data.birth,
-          university: userData.data.university,
+          age: dayjs().year() - userData.birth + 1,
+          university: userData.university,
         }));
       };
       fetchData();
