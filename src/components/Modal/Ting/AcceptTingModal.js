@@ -11,8 +11,7 @@ export default function AcceptTingModal({
   matchingId,
   teamId,
 }) {
-  const [accept, { isSuccess }] = usePutAcceptMatchingMutation();
-
+  const [accept] = usePutAcceptMatchingMutation();
   const [openSuccessMatchingModal, setOpenSuccessMatchingModal] =
     useState(false);
   const [openNotEnoughTingModal, setOpenNotEnoughTingModal] = useState(false);
@@ -20,9 +19,7 @@ export default function AcceptTingModal({
   const acceptMatching = useCallback(async () => {
     try {
       await accept({ matchingId, teamId }).unwrap();
-      if (isSuccess) {
-        setOpenSuccessMatchingModal(true);
-      }
+      setOpenSuccessMatchingModal(true);
     } catch (err) {
       if (err.data.message === 'insufficient ting') {
         setOpenNotEnoughTingModal(true);
@@ -34,6 +31,10 @@ export default function AcceptTingModal({
 
   return (
     <div>
+      <SuccessMatchingModal
+        open={openSuccessMatchingModal}
+        setModal={() => setOpenSuccessMatchingModal((prev) => !prev)}
+      />
       {open ? (
         <Modal
           open={open}
@@ -43,12 +44,6 @@ export default function AcceptTingModal({
           closable
           onCancel={() => setModal(false)}
         >
-          {openSuccessMatchingModal && (
-            <SuccessMatchingModal
-              open={openSuccessMatchingModal}
-              setModal={() => setOpenSuccessMatchingModal((prev) => !prev)}
-            />
-          )}
           <NotEnoughTingModal
             content="수락하려면 4팅이 필요해요!"
             open={openNotEnoughTingModal}

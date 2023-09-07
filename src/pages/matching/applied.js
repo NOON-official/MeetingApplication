@@ -112,7 +112,7 @@ export default function MatchingApplied() {
           )}
         </Header>
         {selectTab === 1 && applyData.length !== 0 && (
-          <Text>최대 24시간 이내에 상대팀의 미팅 의사를 확인해 볼게요 ⏱</Text>
+          <Text>최대 48시간 이내에 상대팀의 미팅 의사를 확인해 볼게요 ⏱</Text>
         )}
         {selectTab === 2 && refuseData.length !== 0 && (
           <Text>

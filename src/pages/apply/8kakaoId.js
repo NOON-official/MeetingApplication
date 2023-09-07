@@ -139,7 +139,7 @@ const Content = styled.div`
   margin: 15px 0;
   font-weight: 600;
   font-size: 15px;
-  width: 90%;
+  width: 100%;
 `;
 
 const Title2 = styled.div`
@@ -158,6 +158,7 @@ const Maintitle2 = styled.div`
 const Subtitle2 = styled.div`
   font-size: 15px;
   margin-left: 5px;
+  line-height: 20px;
 `;
 
 const SubContent2 = styled.div`
@@ -172,7 +173,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-bottom: 5%;
+  margin: auto 0 10%;
 `;
 
 const ButtonBox = styled.div`
