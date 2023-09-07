@@ -12,7 +12,7 @@ import NoMatching from './NoMatching';
 export default function MatchingReceived() {
   const { data: myTeamId } = useGetMyTeamIdQuery();
 
-  const { data: receivedData, isLoading } = useGetReceivedDataQuery(undefined, {
+  const { data: receivedData, isSuccess } = useGetReceivedDataQuery(undefined, {
     skip: !myTeamId,
   });
 
@@ -24,29 +24,25 @@ export default function MatchingReceived() {
     );
   }
 
-  if (isLoading)
+  if (isSuccess)
     return (
       <MatchingLayout>
-        <Container>Loading...</Container>
+        {receivedData.length !== 0 ? (
+          <>
+            <Container>
+              <Header>
+                <Text>
+                  상대팀의 프로필을 살펴본 뒤 미팅 의사를 알려주세요 😉
+                </Text>
+              </Header>
+            </Container>
+            <OtherTeamList state="received" teamList={receivedData} />
+          </>
+        ) : (
+          <NoMatching>신청 받은 미팅이 없어요</NoMatching>
+        )}
       </MatchingLayout>
     );
-
-  return (
-    <MatchingLayout>
-      {receivedData.length !== 0 ? (
-        <>
-          <Container>
-            <Header>
-              <Text>상대팀의 프로필을 살펴본 뒤 미팅 의사를 알려주세요 😉</Text>
-            </Header>
-          </Container>
-          <OtherTeamList state="received" teamList={receivedData} />
-        </>
-      ) : (
-        <NoMatching>신청 받은 미팅이 없어요</NoMatching>
-      )}
-    </MatchingLayout>
-  );
 }
 
 const Container = styled.div`
