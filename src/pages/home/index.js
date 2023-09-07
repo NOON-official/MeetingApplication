@@ -7,7 +7,7 @@ import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
 import { useGetMyTeamIdQuery } from '../../features/api/userApi';
 import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 
-export default function Recommend() {
+export default function Home() {
   const navigate = useNavigate();
   const { data: myTeamId, isSuccess } = useGetMyTeamIdQuery();
 
