@@ -20,13 +20,13 @@ export default function MatchingApplied() {
   const { data: myTeamId } = useGetMyTeamIdQuery(undefined, {
     skip: !accessToken,
   });
-  const { data: applyData, isLoading: applyDataLoading } = useGetApplyDataQuery(
+  const { data: applyData, isSuccess: applyDataSuccess } = useGetApplyDataQuery(
     undefined,
     {
       skip: !myTeamId,
     },
   );
-  const { data: refuseData, isLoading: refuseDataLoading } =
+  const { data: refuseData, isSuccess: refuseDataSuccess } =
     useGetRefusedDataQuery(undefined, {
       skip: !myTeamId,
     });
@@ -63,85 +63,79 @@ export default function MatchingApplied() {
     );
   }
 
-  if (applyDataLoading || refuseDataLoading)
+  if (applyDataSuccess && refuseDataSuccess)
     return (
       <MatchingLayout>
-        <Container>Loading...</Container>
-      </MatchingLayout>
-    );
-
-  return (
-    <MatchingLayout>
-      <DeleteProfileModal
-        open={openDeleteModal}
-        setModal={setModal}
-        state="applied"
-        data={deleteRefuseList}
-      />
-      <Container>
-        <Header>
-          <Tab selected={selectTab === 1} onClick={() => handleTabChange(1)}>
-            {`응답을 기다려요(${applyData.length})`}
-          </Tab>
-          <Tab selected={selectTab === 2} onClick={() => handleTabChange(2)}>
-            {`거절됐어요(${refuseData.length})`}
-          </Tab>
-          {selectTab === 2 && (
-            <EditBtn>
+        <DeleteProfileModal
+          open={openDeleteModal}
+          setModal={setModal}
+          state="applied"
+          data={deleteRefuseList}
+        />
+        <Container>
+          <Header>
+            <Tab selected={selectTab === 1} onClick={() => handleTabChange(1)}>
+              {`응답을 기다려요(${applyData.length})`}
+            </Tab>
+            <Tab selected={selectTab === 2} onClick={() => handleTabChange(2)}>
+              {`거절됐어요(${refuseData.length})`}
+            </Tab>
+            {selectTab === 2 && refuseData.length !== 0 && (
+              <EditBtn>
+                {clickEditBtn ? (
+                  <>
+                    <Delete
+                      selected={deleteRefuseList.length > 0}
+                      onClick={() => setOpenDeleteModal(true)}
+                    >
+                      삭제
+                    </Delete>
+                    <Cancel
+                      onClick={() => {
+                        setClickEditBtn(false);
+                        setDeleteRefuseList([]);
+                      }}
+                    >
+                      취소
+                    </Cancel>
+                  </>
+                ) : (
+                  <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
+                )}
+              </EditBtn>
+            )}
+          </Header>
+          {selectTab === 1 && applyData.length !== 0 && (
+            <Text>최대 48시간 이내에 상대팀의 미팅 의사를 확인해 볼게요 ⏱</Text>
+          )}
+          {selectTab === 2 && refuseData.length !== 0 && (
+            <Text>
               {clickEditBtn ? (
                 <>
-                  <Delete
-                    selected={deleteRefuseList.length > 0}
-                    onClick={() => setOpenDeleteModal(true)}
-                  >
-                    삭제
-                  </Delete>
-                  <Cancel
-                    onClick={() => {
-                      setClickEditBtn(false);
-                      setDeleteRefuseList([]);
-                    }}
-                  >
-                    취소
-                  </Cancel>
+                  <Pink>{deleteRefuseList.length}</Pink>/{refuseData.length}개
+                  선택
                 </>
               ) : (
-                <EditBtn onClick={() => setClickEditBtn(true)}>편집</EditBtn>
+                <>아쉽게도 상대팀이 미팅을 거절했어요 😢</>
               )}
-            </EditBtn>
+            </Text>
           )}
-        </Header>
-        {selectTab === 1 && applyData.length !== 0 && (
-          <Text>최대 48시간 이내에 상대팀의 미팅 의사를 확인해 볼게요 ⏱</Text>
+        </Container>
+        <OtherTeamList
+          state="apply"
+          teamList={selectTab === 1 ? applyData : refuseData}
+          clickEditBtn={clickEditBtn}
+          deleteProfile={deleteRefuseList}
+          setDeleteProfile={setDeleteRefuseList}
+        />
+        {selectTab === 1 && applyData.length === 0 && (
+          <NoMatching>신청한 미팅이 없어요</NoMatching>
         )}
-        {selectTab === 2 && refuseData.length !== 0 && (
-          <Text>
-            {clickEditBtn ? (
-              <>
-                <Pink>{deleteRefuseList.length}</Pink>/{refuseData.length}개
-                선택
-              </>
-            ) : (
-              <>아쉽게도 상대팀이 미팅을 거절했어요 😢</>
-            )}
-          </Text>
+        {selectTab === 2 && refuseData.length === 0 && (
+          <NoMatching>거절 당한 미팅이 없어요</NoMatching>
         )}
-      </Container>
-      <OtherTeamList
-        state="apply"
-        teamList={selectTab === 1 ? applyData : refuseData}
-        clickEditBtn={clickEditBtn}
-        deleteProfile={deleteRefuseList}
-        setDeleteProfile={setDeleteRefuseList}
-      />
-      {selectTab === 1 && applyData.length === 0 && (
-        <NoMatching>신청한 미팅이 없어요</NoMatching>
-      )}
-      {selectTab === 2 && refuseData.length === 0 && (
-        <NoMatching>거절 당한 미팅이 없어요</NoMatching>
-      )}
-    </MatchingLayout>
-  );
+      </MatchingLayout>
+    );
 }
 
 const Container = styled.div`
