@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from 'antd';
+import { useDispatch } from 'react-redux';
 import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
 import { usePostAgreementsMutation } from '../../features/api/userApi';
+import backend from '../../util/backend';
+import { logout } from '../../features/user/asyncActions';
 
 function AgreePage() {
   const [agree1, setAgree1] = useState(false);
@@ -16,6 +19,7 @@ function AgreePage() {
   const [agree4, setAgree4] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [postAgreements] = usePostAgreementsMutation();
 
   const handleAgree = useCallback(() => {
@@ -36,7 +40,13 @@ function AgreePage() {
       localStorage.setItem('needMoreInfo', 'true');
       navigate('/apply/information');
     } catch (err) {
-      window.alert('잠시 후 시도주세요');
+      window.alert('처음부터 다시 시도해주세요');
+      await backend.delete('/auth/account', {
+        withCredentials: true,
+      });
+      dispatch(logout());
+      localStorage.clear();
+      navigate('/');
     }
   });
 
@@ -117,8 +127,8 @@ function AgreePage() {
         >
           다음
         </SubmitButton>
+        <div>{ChannelTalk.hideChannelButton()}</div>
       </Footer>
-      <div>{ChannelTalk.hideChannelButton()}</div>
     </ApplyLayout>
   );
 }
@@ -132,9 +142,7 @@ const SA = styled.a`
 
 const Title = styled.div`
   width: 90%;
-  margin-top: 8%;
-  height: 13%;
-  min-height: 13%;
+  margin: 10% 0;
 `;
 
 const Maintitle = styled.div`
@@ -149,7 +157,6 @@ const Pink = styled.span`
 `;
 
 const Container = styled.div`
-  margin-bottom: 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -177,7 +184,6 @@ const CheckingContent = styled.div`
 `;
 
 const SubmitButton = styled(Button)`
-  margin-top: 5%;
   color: #ffffff;
   font-weight: 400;
   font-size: 18px;
@@ -195,9 +201,6 @@ const AllAgreeBtn = styled(SubmitButton)`
 `;
 
 const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 90%;
-  margin-bottom: 50%;
+  margin: auto 0 10%;
 `;

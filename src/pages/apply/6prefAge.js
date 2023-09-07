@@ -184,8 +184,7 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 6%;
-  padding-bottom: 5%;
+  margin: auto 0 10%;
 `;
 
 const ButtonBox = styled.div`

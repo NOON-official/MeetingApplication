@@ -42,6 +42,12 @@ export default function OtherTeamProfileModal({
 
   return (
     <div>
+      <AcceptTingModal
+        open={openAcceptModal}
+        setModal={() => setOpenAcceptModal((prev) => !prev)}
+        matchingId={matchingId}
+        teamId={teamId}
+      />
       {open ? (
         <SModal
           open={open}
@@ -61,12 +67,6 @@ export default function OtherTeamProfileModal({
           <StopSeeProfileModal
             open={openStopModal}
             setModal={() => setOpenStopModal((prev) => !prev)}
-            teamId={teamId}
-          />
-          <AcceptTingModal
-            open={openAcceptModal}
-            setModal={() => setOpenAcceptModal((prev) => !prev)}
-            matchingId={matchingId}
             teamId={teamId}
           />
           <RefuseMatchingModal
