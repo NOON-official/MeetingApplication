@@ -27,6 +27,16 @@ export const userApi = createApi({
       query: () => ({ url: `users/my-info` }),
       providesTags: ['Users'],
     }),
+    postTeams: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `teams`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users', 'Teams'],
+    }),
     patchUniversity: builder.mutation({
       query({ ...patch }) {
         return {
@@ -181,6 +191,7 @@ export const userApi = createApi({
 
 export const {
   useGetMyInfoQuery,
+  usePostTeamsMutation,
   usePatchUniversityMutation,
   usePostPhoneNumberMutation,
   usePostPhoneCodeMutation,
