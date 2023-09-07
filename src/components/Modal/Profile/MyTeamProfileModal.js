@@ -13,6 +13,7 @@ import {
   useGetProfileQuery,
   useGetMyTeamIdQuery,
 } from '../../../features/api/userApi';
+import DrinkText from '../../MainRecommend/DrinkText';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal } = props;
@@ -20,17 +21,9 @@ export default function MyTeamProfileModal(props) {
   const { data: myProfile } = useGetProfileQuery(myTeamId, {
     skip: !myTeamId,
   });
-  console.log(myProfile);
+
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
-
-  const AlcholContent = {
-    1: '반 병',
-    2: '한 병',
-    3: '한 병 반',
-    4: '두 병',
-    5: '술고래',
-  };
 
   return (
     <div>
@@ -93,9 +86,7 @@ export default function MyTeamProfileModal(props) {
                   </TeamInfo>
                   <TeamInfo>
                     <Subtitle>주량</Subtitle>
-                    <SubContent>{`${AlcholContent[myProfile.drink]} (Lv.${
-                      myProfile.drink
-                    })`}</SubContent>
+                    <DrinkText drink={myProfile.drink} />
                   </TeamInfo>
                 </TextBox>
                 <SliderBoxMembers members={myProfile.members} />
