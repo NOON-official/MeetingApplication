@@ -13,11 +13,29 @@ export const userApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Users', 'Apply'],
+  tagTypes: [
+    'Users',
+    'Ting',
+    'Apply',
+    'Refused',
+    'Received',
+    'Succeed',
+    'Team',
+  ],
   endpoints: (builder) => ({
     getMyInfo: builder.query({
       query: () => ({ url: `users/my-info` }),
       providesTags: ['Users'],
+    }),
+    postTeams: builder.mutation({
+      query({ ...post }) {
+        return {
+          url: `teams`,
+          method: 'POST',
+          body: post,
+        };
+      },
+      invalidatesTags: ['Users', 'Teams'],
     }),
     patchUniversity: builder.mutation({
       query({ ...patch }) {
@@ -115,17 +133,7 @@ export const userApi = createApi({
           body: data,
         };
       },
-      invalidatesTags: ['Apply'],
-    }),
-    deleteReceivedProfile: builder.mutation({
-      query({ ...data }) {
-        return {
-          url: `users/matchings/received`,
-          method: 'DELETE',
-          body: data,
-        };
-      },
-      invalidatesTags: ['Received'],
+      invalidatesTags: ['Refused'],
     }),
     postApplyMatching: builder.mutation({
       query({ myTeamId, teamId }) {
@@ -152,7 +160,7 @@ export const userApi = createApi({
           method: 'PUT',
         };
       },
-      invalidatesTags: ['Received', 'Succeed', 'Ting'],
+      invalidatesTags: ['Ting', 'Succeed'],
     }),
     putRefuseMatching: builder.mutation({
       query({ matchingId, teamId }) {
@@ -183,6 +191,7 @@ export const userApi = createApi({
 
 export const {
   useGetMyInfoQuery,
+  usePostTeamsMutation,
   usePatchUniversityMutation,
   usePostPhoneNumberMutation,
   usePostPhoneCodeMutation,
@@ -198,7 +207,6 @@ export const {
   useGetReceivedDataQuery,
   useGetSucceedDataQuery,
   useDeleteApplyProfileMutation,
-  useDeleteReceivedProfileMutation,
   usePostApplyMatchingMutation,
   usePutStopSeeProfileMutation,
   usePutAcceptMatchingMutation,

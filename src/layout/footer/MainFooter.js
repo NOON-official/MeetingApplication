@@ -20,7 +20,6 @@ export default MainFooter;
 const Footer = styled.div`
   width: 100%;
   padding-top: 20px;
-  margin-top: 38px;
   border-top: 1px solid #d6d6d6;
   display: flex;
   flex-wrap: wrap;
@@ -36,15 +35,4 @@ const HeaderFooter = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   justify-content: space-around;
-`;
-const BottomFooter = styled.div`
-  width: 100%;
-  margin-top: 23px;
-  padding-bottom: 10px;
-`;
-const Info = styled.div`
-  margin-top: 8px;
-  font-weight: 400;
-  font-size: 7px;
-  color: #9f9f9f;
 `;

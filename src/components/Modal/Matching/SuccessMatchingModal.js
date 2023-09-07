@@ -1,20 +1,12 @@
 import { Button, Modal } from 'antd';
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useGetReceivedDataQuery } from '../../../features/api/userApi';
 
 export default function SuccessMatchingModal({ open, setModal }) {
-  useEffect(() => {
-    if (open) {
-      const timeout = setTimeout(() => {
-        setModal(false);
-      }, 1500);
-
-      return () => clearTimeout(timeout);
-    }
-    return () => {};
-  }, [open]);
-
-  console.log(open);
+  const navigate = useNavigate();
+  const { refetch } = useGetReceivedDataQuery();
 
   return (
     <div>
@@ -25,22 +17,30 @@ export default function SuccessMatchingModal({ open, setModal }) {
           centered
           width="380px"
           closable
-          onCancel={() => setModal(false)}
+          onCancel={() => {
+            refetch();
+            setModal(false);
+          }}
         >
           <Container>
             <TextBox>
               <BlackText>
                 미팅을 수락했어요!🎉 <br />
-                이제 &lt;매칭 완료&gt;에서 상대팀의 연락처를 확인할 수 있어요!
+                이제 &lt;매칭 완료&gt;에서 상대팀의
+                <br /> 연락처를 확인할 수 있어요!
               </BlackText>
             </TextBox>
           </Container>
-          {/* <ButtonBox>
-            <SButton onClick={() => navigate('/matching/success')}>
+          <ButtonBox>
+            <SButton
+              onClick={() => {
+                refetch();
+                navigate('/matching/succeeded');
+              }}
+            >
               네, 알겠습니다!
             </SButton>
-            <WhiteButton onClick={() => setModal(false)}>취소</WhiteButton>
-          </ButtonBox> */}
+          </ButtonBox>
         </Modal>
       ) : null}
     </div>
@@ -76,7 +76,7 @@ const ButtonBox = styled.div`
 `;
 
 const SButton = styled(Button)`
-  width: 45%;
+  width: 100%;
   height: 50px;
   border: none;
   border-radius: 10px;
