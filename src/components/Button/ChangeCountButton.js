@@ -20,7 +20,8 @@ export default function ChangeCountButton(props) {
       setChangeCount([]);
       return;
     }
-    setChangeCount([...changeCount, a, b]);
+    setChangeCount([]);
+    setChangeCount([a, b]);
   };
 
   const selectButton = (member, title) => {

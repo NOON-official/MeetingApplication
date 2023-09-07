@@ -4,14 +4,10 @@ import { useState } from 'react';
 import theme from '../../../style/theme';
 import { ReactComponent as ExclamationMark } from '../../../asset/svg/ExclamationMark.svg';
 import AutomaticModal from '../AutomaticModal';
-import {
-  useDeleteApplyProfileMutation,
-  useDeleteReceivedProfileMutation,
-} from '../../../features/api/userApi';
+import { useDeleteApplyProfileMutation } from '../../../features/api/userApi';
 
 export default function DeleteProfileModal({ open, setModal, state, data }) {
   const [deleteApplyProfile] = useDeleteApplyProfileMutation();
-  const [deleteReceiveProfile] = useDeleteReceivedProfileMutation();
 
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
 
@@ -19,16 +15,6 @@ export default function DeleteProfileModal({ open, setModal, state, data }) {
     if (state === 'applied') {
       try {
         await deleteApplyProfile({
-          matchingIds: data,
-        }).unwrap();
-        setOpenCompleteModal(true);
-      } catch (e) {
-        console.error(e);
-        window.alert('삭제 중 오류가 발생하였습니다');
-      }
-    } else {
-      try {
-        await deleteReceiveProfile({
           matchingIds: data,
         }).unwrap();
         setOpenCompleteModal(true);
