@@ -9,40 +9,39 @@ import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 
 export default function Recommend() {
   const navigate = useNavigate();
-  const { data: myTeamId, isLoading } = useGetMyTeamIdQuery();
-  console.log(myTeamId);
-  if (isLoading) return null;
+  const { data: myTeamId, isSuccess } = useGetMyTeamIdQuery();
 
-  return (
-    <>
-      <RecommendModal />
-      <Section>
+  if (isSuccess)
+    return (
+      <>
+        <RecommendModal />
+        <Section>
+          {myTeamId ? (
+            <MainMatchingHeader title="프로필 조회" />
+          ) : (
+            <MainMatchingHeader title="프로필 만들기" />
+          )}
+        </Section>
+
+        <Container>
+          <Title>우리 팀 추천 매칭</Title>
+          <Subtitle>
+            우리 팀 프로필에 맞는 팀들을 추천해 드려요 <br /> 매일 밤 11시에
+            추천 리스트가 업데이트 돼요!
+          </Subtitle>
+        </Container>
+
+        <Timer />
+
         {myTeamId ? (
-          <MainMatchingHeader title="프로필 조회" />
+          <RecommendList />
         ) : (
-          <MainMatchingHeader title="프로필 만들기" />
+          <Container2 onClick={() => navigate('/apply/1')}>
+            <Blur />
+          </Container2>
         )}
-      </Section>
-
-      <Container>
-        <Title>우리 팀 추천 매칭</Title>
-        <Subtitle>
-          우리 팀 프로필에 맞는 팀들을 추천해 드려요 <br /> 매일 밤 11시에 추천
-          리스트가 업데이트 돼요!
-        </Subtitle>
-      </Container>
-
-      <Timer />
-
-      {myTeamId ? (
-        <RecommendList />
-      ) : (
-        <Container2 onClick={() => navigate('/apply/1')}>
-          <Blur />
-        </Container2>
-      )}
-    </>
-  );
+      </>
+    );
 }
 
 const Section = styled.div`
