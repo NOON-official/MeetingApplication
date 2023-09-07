@@ -16,6 +16,7 @@ import ApplyMatchingModal from '../Matching/ApplyMatchingModal';
 import RefuseMatchingModal from '../Matching/RefuseMatchingModal';
 import AcceptTingModal from '../Ting/AcceptTingModal';
 import StopSeeProfileModal from '../Matching/StopSeeProfileModal';
+import DrinkText from '../../MainRecommend/DrinkText';
 
 export default function OtherTeamProfileModal({
   open,
@@ -31,14 +32,6 @@ export default function OtherTeamProfileModal({
   const [openStopModal, setOpenStopModal] = useState(false);
   const [openAcceptModal, setOpenAcceptModal] = useState(false);
   const [isRefuseModal, setIsRefuseModal] = useState(false);
-
-  const AlcholContent = {
-    1: '반 병',
-    2: '한 병',
-    3: '한 병 반',
-    4: '두 병',
-    5: '술고래',
-  };
 
   return (
     <div>
@@ -103,9 +96,7 @@ export default function OtherTeamProfileModal({
               </TeamInfo>
               <TeamInfo>
                 <Subtitle>주량</Subtitle>
-                <SubContent>{`${AlcholContent[teamProfile.drink]} (Lv.${
-                  teamProfile.drink
-                })`}</SubContent>
+                <DrinkText drink={teamProfile.drink} />
               </TeamInfo>
             </TextBox>
             <SliderBoxMembers members={teamProfile.members} />
