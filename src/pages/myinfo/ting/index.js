@@ -101,6 +101,7 @@ const ChargeTingBtn = styled.button`
   border-radius: 20px;
   color: #ffffff;
   background-color: #eb8888;
+  font-size: 16px;
   font-weight: 400;
   cursor: pointer;
 `;
