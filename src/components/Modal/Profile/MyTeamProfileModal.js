@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from 'antd';
-import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
-import { ReactComponent as UniversityMarkGray } from '../../../asset/svg/UniversityMarkGray.svg';
-import ApplyButton from '../../Button/ApplyButton';
-import ModifyProfileModal from './ModifyProfileModal';
-import StopMatchingModal from '../Matching/StopMatchingModal';
-import SliderBoxMembers from '../../Slider/SliderBoxMembers';
-import AreaText from '../../MainRecommend/AreaText';
-import DateText from '../../MainRecommend/DateText';
-import {
-  useGetProfileQuery,
-  useGetMyTeamIdQuery,
-} from '../../../features/api/userApi';
+import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
+import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
+import ApplyButton from '../ApplyButton';
+import ModifyProfileModal from '../Modal/ModifyProfileModal';
+import StopMatchingModal from '../Modal/StopMatchingModal';
+import SliderBoxMembers from '../SliderBoxMembers';
+import AreaText from './AreaText';
+import DateText from './DateText';
+import { useGetUserTeamIdDataQuery } from '../../features/backendApi';
+import backend from '../../util/backend';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal } = props;
@@ -23,6 +21,17 @@ export default function MyTeamProfileModal(props) {
 
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
+
+  useEffect(() => {
+    const getProfile = async () => {
+      if (myTeamId?.teamId !== null && myTeamId?.teamId !== undefined) {
+        const profile = await backend.get(`/teams/${myTeamId?.teamId}`);
+        setMyProfile(profile.data);
+      }
+    };
+
+    getProfile();
+  }, [myTeamId]);
 
   const AlcholContent = {
     1: '반 병',
@@ -93,9 +102,7 @@ export default function MyTeamProfileModal(props) {
                   </TeamInfo>
                   <TeamInfo>
                     <Subtitle>주량</Subtitle>
-                    <SubContent>{`${AlcholContent[myProfile.drink]} (Lv.${
-                      myProfile.drink
-                    })`}</SubContent>
+                    <DrinkText drink={myProfile.drink} />
                   </TeamInfo>
                 </TextBox>
                 <SliderBoxMembers members={myProfile.members} />
