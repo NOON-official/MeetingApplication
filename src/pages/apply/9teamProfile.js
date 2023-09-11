@@ -27,8 +27,6 @@ export default function Apply9Page() {
   const { data: myInfo } = useGetMyInfoQuery();
   const [post] = usePostTeamsMutation();
 
-  const { data: myInfo } = useGetMyInfoQuery();
-
   const [openModal, setOpenModal] = useState(false);
 
   const setModal = (bool) => {
