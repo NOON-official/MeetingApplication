@@ -36,12 +36,12 @@ export default function SigninView() {
       <ImageContainer>
         <BigO />
       </ImageContainer>
-
-      <SigninDescription>
+      <SigninMainDescription>로그인 후 이용해 주세요</SigninMainDescription>
+      <SigninSubDescription>
         미팅학개론을 이용하기 위해서는
         <br />
         카카오톡 로그인이 필요해요.
-      </SigninDescription>
+      </SigninSubDescription>
       <SSeconds />
       <KakaoButton onClick={() => setModal(true)} icon={<KakaoSignin />} block>
         카카오 로그인
@@ -54,7 +54,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 53px;
+  padding: 10%;
+  height: 90%;
+  background-color: #fbfaf9;
 `;
 
 const ImageContainer = styled.div`
@@ -64,12 +66,20 @@ const ImageContainer = styled.div`
   margin-bottom: 30px;
 `;
 
-const SigninDescription = styled.div`
-  font-family: 'Nanum JungHagSaeng';
-  font-size: 25px;
+const SigninMainDescription = styled.div`
+  margin-bottom: 30px;
+  color: #1a1a1a;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+`;
+
+const SigninSubDescription = styled.div`
+  font-size: 15px;
   text-align: center;
   color: #1a1a1a;
   margin-bottom: 30px;
+  line-height: 18px;
 `;
 
 const SSeconds = styled(Seconds)`
@@ -78,6 +88,7 @@ const SSeconds = styled(Seconds)`
 
 const KakaoButton = styled(Button)`
   background-color: #fee500;
+  width: 90%;
   height: auto;
   padding: 10px;
   border-radius: 10px;

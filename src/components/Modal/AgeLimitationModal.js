@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import Alert from '../../asset/img/alert.png';
 import theme from '../../style/theme';
-import KakaoLoginLink from '../KakaoLoginLink';
+import KakaoLoginLink from '../Auth/KakaoLoginLink';
 
 export default function AgeLimitationModal({ open, setModal }) {
   return (

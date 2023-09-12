@@ -17,6 +17,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const Header = styled.header`
@@ -26,10 +27,18 @@ const Header = styled.header`
 const Content = styled.div`
   max-width: 425px;
   background-color: rgb(245, 245, 245);
-  height: 100%;
+  height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  overflow-y: scroll;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: auto;
+
+  // 스크롤 기능은 있으나 안보이게
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+  &::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  }
 `;

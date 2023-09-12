@@ -13,13 +13,8 @@ export const backendApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['Users'],
   endpoints: (builder) => ({
-    getMyInfo: builder.query({
-      query: () => `users/my-info`,
-    }),
-    getUserTeams: builder.query({
-      query: () => `users/teams`,
-    }),
     getUserTicketCount: builder.query({
       query: () => `users/tickets/count`,
     }),
@@ -34,12 +29,6 @@ export const backendApi = createApi({
     }),
     getUserInvitationCount: builder.query({
       query: () => `users/invitations/count`,
-    }),
-    getUserReferralId: builder.query({
-      query: () => `users/referral-id`,
-    }),
-    getUserAgreements: builder.query({
-      query: () => `users/agreements`,
     }),
     getOrdersPageData: builder.query({
       query: () => `orders/pagedata`,
@@ -56,12 +45,6 @@ export const backendApi = createApi({
     getTeamCount: builder.query({
       query: () => `teams/count`,
     }),
-    getUserTeamIdData: builder.query({
-      query: () => `users/team-id`,
-    }),
-    getMatchingStatus: builder.query({
-      query: () => `users/matchings/status`,
-    }),
     getMatchingAverageTime: builder.query({
       query: () => `matchings/average-time/one-week`,
     }),
@@ -69,21 +52,15 @@ export const backendApi = createApi({
 });
 
 export const {
-  useGetMyInfoQuery,
-  useGetUserTeamsQuery,
   useGetUserTicketCountQuery,
   useGetUserCouponsQuery,
   useGetUserCouponCountQuery,
   useGetUserOrdersQuery,
   useGetUserInvitationCountQuery,
-  useGetUserReferralIdQuery,
-  useGetUserAgreementsQuery,
   useGetOrdersPageDataQuery,
   useGetCouponsPageDataQuery,
   useGetTeamMembersCountOneWeekQuery,
   useGetTeamMembersCountTotalQuery,
   useGetTeamCountQuery,
-  useGetUserTeamIdDataQuery,
-  useGetMatchingStatusQuery,
   useGetMatchingAverageTimeQuery,
 } = backendApi;

@@ -4,9 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as Header } from '../../asset/svg/Header.svg';
-import { ReactComponent as Person } from '../../asset/svg/Person.svg';
 import theme from '../../style/theme';
-import KakaoLoginLink from '../../components/KakaoLoginLink';
 import { setAccessToken } from '../../features/user';
 import AgeLimitationModal from '../../components/Modal/AgeLimitationModal';
 
@@ -40,15 +38,6 @@ export default function TopHeader() {
           <Header />
         </Link>
       </Logo>
-      <LoginBox>
-        {accessToken ? (
-          <Link to="/myinfo">
-            <Person />
-          </Link>
-        ) : (
-          <LoginText onClick={() => setModal(true)}>로그인</LoginText>
-        )}
-      </LoginBox>
     </Container>
   );
 }
@@ -57,6 +46,8 @@ const Container = styled.div`
   padding: 10px 30px;
   background-color: #f8f3f3;
   height: 4vh;
+  max-width: 425px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,21 +56,6 @@ const Container = styled.div`
   }
 `;
 
-const LoginBox = styled.button`
-  all: unset;
-  padding-right: ${theme.width * 5}px;
-  font-size: 15px;
-  :hover {
-    cursor: pointer;
-  }
-`;
-
 const Logo = styled.div`
   padding-left: ${theme.width * 5}px;
-`;
-
-const LoginText = styled.div`
-  font-weight: 400;
-  font-size: 11px;
-  color: #858585;
 `;

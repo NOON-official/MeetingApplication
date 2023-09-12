@@ -12,19 +12,19 @@ import { ReactComponent as FreindHalf } from '../../../../asset/svg/FreindHalf.s
 import { ReactComponent as Checkbox } from '../../../../asset/svg/Checkbox.svg';
 import { ReactComponent as CheckboxChecked } from '../../../../asset/svg/CheckboxChecked.svg';
 import Accordion from '../../../../components/Accordion';
-import PrimaryButton from '../../../../components/PrimaryButton';
+import PrimaryButton from '../../../../components/Button/PrimaryButton';
 import CouponItem from '../../../../components/CouponItem';
 import {
   useGetUserCouponsQuery,
   useGetCouponsPageDataQuery,
   useGetOrdersPageDataQuery,
-  useGetMyInfoQuery,
 } from '../../../../features/backendApi';
 import {
   CLIENT_URL,
   STORAGE_KEY_ORDER_DATA,
 } from '../../../../config/constants';
 import backend from '../../../../util/backend';
+import { useGetMyInfoQuery } from '../../../../features/api/userApi';
 
 export default function TicketBuyPage() {
   const navigate = useNavigate();

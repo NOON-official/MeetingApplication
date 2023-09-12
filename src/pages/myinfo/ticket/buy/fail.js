@@ -11,7 +11,7 @@ export default function TicketBuyFailPage() {
     if (searchParams.get('code') !== 'PAY_PROCESS_CANCELED') {
       window.alert(searchParams.get('message'));
     }
-    navigate('../myinfo/ticket/buy', { replace: true });
+    navigate('../myinfo/ting/buy', { replace: true });
   }, [navigate, searchParams]);
 
   return <MyinfoLayout title="이용권 구매" />;

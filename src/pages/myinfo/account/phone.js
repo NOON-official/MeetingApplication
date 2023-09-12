@@ -3,13 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Input, Button } from 'antd';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
-import backend from '../../../util/backend';
 import { ReactComponent as CheckValid } from '../../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../../asset/svg/CheckInvalid.svg';
+import {
+  usePostPhoneCodeMutation,
+  usePostPhoneNumberMutation,
+} from '../../../features/api/userApi';
 
 export default function AccountPhoneChangePage() {
-  const [vaildcheck, setValidCheck] = useState(false);
+  const [phoneNumber] = usePostPhoneNumberMutation();
+  const [phoneCode] = usePostPhoneCodeMutation();
 
+  const [vaildcheck, setValidCheck] = useState(false);
   const [phoneInput, setPhoneInput] = useState('');
   const [authCodeInput, setAuthCodeInput] = useState('');
   const [isAuthCodeSent, setIsAuthCodeSent] = useState(false);
@@ -22,9 +27,10 @@ export default function AccountPhoneChangePage() {
     },
     [phoneInput],
   );
+
   const requestAuthCode = useCallback(async () => {
     try {
-      await backend.post('/auth/phone', { phone: phoneInput });
+      await phoneNumber({ phone: phoneInput }).unwrap();
     } catch (e) {
       window.alert('인증코드 발송에 실패했습니다');
     }
@@ -41,26 +47,22 @@ export default function AccountPhoneChangePage() {
 
   const validateAuthCode = useCallback(async () => {
     try {
-      await backend.post('/auth/phone/code', {
-        phone: phoneInput,
-        code: authCodeInput,
-      });
-      window.alert('전화번호가 변경되었습니다');
-      navigate('/myinfo/account');
+      await phoneCode({ phone: phoneInput, code: authCodeInput }).unwrap();
+      window.alert('인증이 완료되었습니다');
       setValidCheck(true);
     } catch (e) {
       window.alert('인증번호가 틀렸습니다');
       setValidCheck(false);
     }
-  }, [authCodeInput]);
+  }, [phoneInput, authCodeInput]);
 
   return (
     <MyinfoLayout title="전화번호 변경">
       <Title>
         <Maintitle>
-          <Pink>전화번호 인증 </Pink>후
+          <Pink>전화번호 변경 </Pink>하시려면
         </Maintitle>
-        <Maintitle>미팅 신청이 완료됩니다</Maintitle>
+        <Maintitle>인증해주세요</Maintitle>
       </Title>
       <Conatiner>
         <PhoneBox>
@@ -81,26 +83,34 @@ export default function AccountPhoneChangePage() {
         >
           인증번호요청
         </SubmitButton>
-        {isAuthCodeSent && (
-          <PhoneBox>
-            인증번호
-            <PhoneNumber>
-              <InputBox>
-                <SInput
-                  value={authCodeInput}
-                  onChange={handleAuthCodeInput}
-                  placeholder="인증번호 입력"
-                />
-              </InputBox>
-              {vaildcheck ? <SCheckValid /> : <SCheckInvalid />}
-            </PhoneNumber>
-          </PhoneBox>
-        )}
-      </Conatiner>
-      <Footer>
+
+        <PhoneBox>
+          인증번호
+          <PhoneNumber>
+            <InputBox>
+              <SInput
+                value={authCodeInput}
+                onChange={handleAuthCodeInput}
+                placeholder="인증번호 입력"
+              />
+            </InputBox>
+            {vaildcheck ? <SCheckValid /> : <SCheckInvalid />}
+          </PhoneNumber>
+        </PhoneBox>
         <SubmitButton
           onClick={validateAuthCode}
           disabled={!authCodeInput || !regex.test(phoneInput) || vaildcheck}
+        >
+          인증번호확인
+        </SubmitButton>
+      </Conatiner>
+      <Footer>
+        <SubmitButton
+          onClick={() => {
+            window.alert('전화번호가 변경되었습니다');
+            navigate('/myinfo/account');
+          }}
+          disabled={!vaildcheck}
         >
           변경 완료
         </SubmitButton>
@@ -111,7 +121,7 @@ export default function AccountPhoneChangePage() {
 
 const Title = styled.div`
   width: 90%;
-  margin-top: 8%;
+  margin: 8% auto;
   height: 13%;
   min-height: 13%;
 `;
@@ -128,7 +138,7 @@ const Pink = styled.span`
 `;
 
 const Conatiner = styled.div`
-  margin-bottom: 35%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -187,28 +197,5 @@ const Footer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 90%;
-  margin-bottom: 60%;
-`;
-
-const TextBox = styled.div`
-  width: 100%;
-  text-align: center;
-`;
-const BlackText = styled.span`
-  color: black;
-  font-size: 31px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-const ColorText = styled.span`
-  color: ${(props) => props.theme.pink};
-  font-size: 31px;
-  font-family: 'Nanum JungHagSaeng';
-`;
-
-const SButton = styled(Button)`
-  margin-top: 10%;
-  width: 100%;
-  height: 50px;
-  color: white;
-  background-color: ${(props) => props.theme.pink};
+  margin: 15% auto;
 `;

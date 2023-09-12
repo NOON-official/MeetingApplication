@@ -1,0 +1,78 @@
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import Timer from './timer';
+import RecommendList from './recommendList';
+import RecommendModal from '../../components/Modal/Matching/RecommendModal';
+import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
+import { useGetMyTeamIdQuery } from '../../features/api/userApi';
+import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
+
+export default function Home() {
+  const navigate = useNavigate();
+  const { data: myTeamId, isSuccess } = useGetMyTeamIdQuery();
+
+  if (isSuccess)
+    return (
+      <>
+        <RecommendModal />
+        <Section>
+          {myTeamId ? (
+            <MainMatchingHeader title="프로필 조회" />
+          ) : (
+            <MainMatchingHeader title="프로필 만들기" />
+          )}
+        </Section>
+
+        <Container>
+          <Title>우리 팀 추천 매칭</Title>
+          <Subtitle>
+            우리 팀 프로필에 맞는 팀들을 추천해 드려요 <br /> 매일 밤 11시에
+            추천 리스트가 업데이트 돼요!
+          </Subtitle>
+        </Container>
+
+        <Timer />
+
+        {myTeamId ? (
+          <RecommendList />
+        ) : (
+          <Container2 onClick={() => navigate('/apply/1')}>
+            <Blur />
+          </Container2>
+        )}
+      </>
+    );
+}
+
+const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 425px;
+  width: 100%;
+  height: 200px;
+`;
+
+const Container = styled.div`
+  width: 90%;
+  margin: 0 auto;
+`;
+
+const Title = styled.div`
+  margin: 5% 0;
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+const Subtitle = styled.div`
+  margin: 5% 0;
+  color: #777777;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+`;
+
+const Container2 = styled.div`
+  margin: 0 auto;
+  width: 90%;
+`;
