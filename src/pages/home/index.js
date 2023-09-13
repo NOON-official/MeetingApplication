@@ -1,20 +1,54 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { Space } from 'antd';
 import Timer from './timer';
 import RecommendList from './recommendList';
 import RecommendModal from '../../components/Modal/Matching/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
 import { useGetMyTeamIdQuery } from '../../features/api/userApi';
 import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
+import PrimaryModal from '../../components/Modal/PrimaryModal';
+import PrimaryButton from '../../components/Button/PrimaryButton';
 
 export default function Home() {
   const navigate = useNavigate();
   const { data: myTeamId, isSuccess } = useGetMyTeamIdQuery();
 
+  const needMoreInfo = localStorage.getItem('needMoreInfo');
+
   if (isSuccess)
     return (
       <>
+        <PrimaryModal
+          title=" "
+          open={needMoreInfo === 'true'}
+          footer={null}
+          closeIcon
+        >
+          <Space
+            direction="vertical"
+            style={{
+              textAlign: 'center',
+              width: '100%',
+              backgroundColor: '#fff',
+            }}
+          >
+            <span style={{ fontSize: '16px' }}>
+              잠깐!
+              <br />
+              새롭게 입력해야 하는 정보가 있어요
+            </span>
+            <PrimaryButton
+              onClick={() => {
+                navigate('/apply/university');
+              }}
+            >
+              입력하러 가기
+            </PrimaryButton>
+          </Space>
+        </PrimaryModal>
         <RecommendModal />
+
         <Section>
           {myTeamId ? (
             <MainMatchingHeader title="프로필 조회" />
