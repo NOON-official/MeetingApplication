@@ -37,7 +37,6 @@ function AgreePage() {
         age: agree3,
         marketing: agree4,
       }).unwrap();
-      localStorage.setItem('needMoreInfo', 'true');
       navigate('/apply/information');
     } catch (err) {
       window.alert('처음부터 다시 시도해주세요');
