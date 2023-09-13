@@ -55,7 +55,7 @@ export default function MainMatchingHeader({ title }) {
       <MainButton2 onClick={() => navigate('/myinfo/ting')}>
         <STingImg />
         <BtnMainTitle>보유 팅</BtnMainTitle>
-        <TingCount>{ting}팅</TingCount>
+        <TingCount>{ting < 0 ? 0 : ting}팅</TingCount>
         <SeeMoreBtn>자세히 보기</SeeMoreBtn>
       </MainButton2>
     </>
