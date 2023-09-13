@@ -64,7 +64,7 @@ export default function MeetingIntro() {
         </ImgBox>
       </Section>
 
-      <Section style={{ textAlign: 'center' }}>
+      <Section>
         <Review />
         <AwardTitle>
           <BAwarditle>우리 팀 한 줄 어필 AWARDS</BAwarditle>
@@ -115,7 +115,9 @@ export default function MeetingIntro() {
           <SImg src={Main4} />
           <SImg src={Main5} />
         </Imgs>
-        <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
+        <Footer style={{ textAlign: 'center' }}>
+          <FixedButton onClick={handleStart}>지금 바로 미팅하기</FixedButton>
+        </Footer>
       </Section>
       <MainFooter />
       <BottomFooter />
@@ -158,10 +160,13 @@ const ImgBox = styled.div`
   }
 `;
 
-const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
-  width: 80%;
+const Footer = styled.div`
   position: sticky;
   bottom: 3%;
+`;
+
+const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
+  width: 80%;
   margin: 3% auto;
   &.ant-btn {
     height: 56px;
