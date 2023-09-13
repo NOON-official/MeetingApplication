@@ -5,23 +5,25 @@ import Timer from './timer';
 import RecommendList from './recommendList';
 import RecommendModal from '../../components/Modal/Matching/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
-import { useGetMyTeamIdQuery } from '../../features/api/userApi';
+import {
+  useGetMyInfoQuery,
+  useGetMyTeamIdQuery,
+} from '../../features/api/userApi';
 import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../components/Button/PrimaryButton';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { data: myTeamId, isSuccess } = useGetMyTeamIdQuery();
+  const { data: myInfo, isSuccess: myInfoSuccess } = useGetMyInfoQuery();
+  const { data: myTeamId, isSuccess: myTeamIdSuccess } = useGetMyTeamIdQuery();
 
-  const needMoreInfo = localStorage.getItem('needMoreInfo');
-
-  if (isSuccess)
+  if (myTeamIdSuccess && myInfoSuccess)
     return (
       <>
         <PrimaryModal
           title=" "
-          open={needMoreInfo === 'true'}
+          open={!myInfo.birth || !myInfo.university}
           footer={null}
           closeIcon
         >
@@ -40,7 +42,11 @@ export default function Home() {
             </span>
             <PrimaryButton
               onClick={() => {
-                navigate('/apply/university');
+                if (!myInfo.birth) {
+                  navigate('/apply/information');
+                } else if (!myInfo.university) {
+                  navigate('/apply/university');
+                }
               }}
             >
               입력하러 가기
