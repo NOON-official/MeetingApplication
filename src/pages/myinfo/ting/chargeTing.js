@@ -177,9 +177,12 @@ export default function ChargeTing() {
           title={<AccordionTitle>유의사항</AccordionTitle>}
           content={
             <WarningDescription>
-              <li>환불은 2일 이내 채널톡으로 문의 주시면 가능합니다.</li>
-              <li>구매한 팅은 신청/수락 시 자동 차감됩니다.</li>
-              <li>쿠폰으로 최종 결제 시 해당 쿠폰에 관한 권리는 소멸됩니다.</li>
+              <li>
+                환불은 결제 후 7일 이내에 &lt;1:1 채팅 문의&gt;를 통해
+                가능합니다.
+              </li>
+              <li>결제 후 사용하지 않은 팅만 환불이 가능합니다.</li>
+              <li>미팅 신청, 수락을 위해 사용한 팅은 환불이 어렵습니다.</li>
             </WarningDescription>
           }
         />
