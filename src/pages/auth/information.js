@@ -2,25 +2,26 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, Select } from 'antd';
-import backend from '../../util/backend';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
 import BinaryButton from '../../components/Button/BinaryButton';
 import Age from '../../asset/Age';
+import { usePatchInformationMutation } from '../../features/api/userApi';
 
 // pass 연동 후 삭제 예정!!!
 function ApplyInformation() {
   const { Option } = Select;
+  const [information] = usePatchInformationMutation();
   const [man, setMan] = useState('');
   const [selectAge, setSelectAge] = useState('');
   const navigate = useNavigate();
 
   const NextPage = useCallback(() => {
     try {
-      backend.patch('/users/my-info', {
+      information({
         birth: selectAge,
         gender: man === 1 ? 'male' : 'female',
-      });
+      }).unwrap();
       navigate('/apply/university');
     } catch {
       alert('오류가 발생했습니다. 잠시 후에 시도해주세요.');
