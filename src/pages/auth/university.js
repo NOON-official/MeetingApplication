@@ -20,7 +20,6 @@ export default function ApplyUniversity() {
   const NextPage = useCallback(async () => {
     try {
       await university({ university: Number(selectedUniversity) }).unwrap();
-      localStorage.setItem('needMoreInfo', 'false');
       setTingModal(true);
     } catch (err) {
       alert('오류가 발생했습니다. 잠시 후에 시도해주세요.');
