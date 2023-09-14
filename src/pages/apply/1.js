@@ -27,6 +27,7 @@ export default function Apply1Page() {
       window.alert('잘못된 접근입니다');
       navigate('/');
     }
+    localStorage.removeItem('apply-data');
   }, [accessToken]);
 
   const setModal = (bool) => {
