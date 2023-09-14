@@ -49,13 +49,13 @@ function CountingStar(n) {
   }
 }
 
-function SliderBox({ gender, age, star, text }) {
+function SliderBox({ gender, member, age, star, text }) {
   const count = Number(star);
   return (
     <Box>
       <Top>
         <Tag>{gender}</Tag>
-        <Tag>3:3</Tag>
+        <Tag>{member}</Tag>
         <Tag>20대 {age}</Tag>
       </Top>
       <StarBox>{CountingStar(count)}</StarBox>
