@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Carousel } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
@@ -17,12 +17,14 @@ import {
 import DateText from '../../components/MainRecommend/DateText';
 import AreaText from '../../components/MainRecommend/AreaText';
 import DrinkText from '../../components/MainRecommend/DrinkText';
+import { logout } from '../../features/user/asyncActions';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
   const { areas, teamAvailableDate, drink, intro, kakaoId, members, teamName } =
     applydata;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { data: myInfo } = useGetMyInfoQuery();
   const [post] = usePostTeamsMutation();
@@ -57,14 +59,24 @@ export default function Apply9Page() {
         await post(filteredData).unwrap();
         setOpenModal(true);
       } catch (e) {
-        console.log(e);
+        dispatch(logout());
+        localStorage.clear();
+        alert(
+          '죄송합니다. 신청 과정 중 에러가 발생했습니다. 다시 로그인해주세요!',
+        );
+        navigate('/');
       }
     } else {
       try {
         await post(filteredData).unwrap();
         navigate('/apply/10phone');
       } catch (e) {
-        console.log(e);
+        dispatch(logout());
+        localStorage.clear();
+        alert(
+          '죄송합니다. 신청 과정 중 에러가 발생했습니다. 다시 로그인해주세요!',
+        );
+        navigate('/');
       }
     }
   });
