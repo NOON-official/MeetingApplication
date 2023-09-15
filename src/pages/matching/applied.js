@@ -13,6 +13,7 @@ import {
   useGetRefusedDataQuery,
 } from '../../features/api/userApi';
 import NoMatching from './NoMatching';
+import ServiceErrModal from '../../components/Modal/ServiceErrModal';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
@@ -66,6 +67,7 @@ export default function MatchingApplied() {
   if (applyDataSuccess && refuseDataSuccess)
     return (
       <MatchingLayout>
+        <ServiceErrModal />
         <DeleteProfileModal
           open={openDeleteModal}
           setModal={setModal}

@@ -9,6 +9,7 @@ import Section from '../../components/Section';
 import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
 import { logout } from '../../features/user/asyncActions';
 import SigninView from '../../components/Auth/SigninView';
+import ServiceErrModal from '../../components/Modal/ServiceErrModal';
 
 function MyInfo() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function MyInfo() {
 
   return (
     <MainLayout>
+      <ServiceErrModal />
       <Section>
         <MyProfileBox>
           <Glasses />
