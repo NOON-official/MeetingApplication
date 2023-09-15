@@ -12,6 +12,7 @@ import {
 import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../components/Button/PrimaryButton';
+import ServiceErrModal from '../../components/Modal/ServiceErrModal';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function Home() {
   if (myTeamIdSuccess && myInfoSuccess)
     return (
       <>
+        <ServiceErrModal />
         <PrimaryModal
           title=" "
           open={!myInfo.birth || !myInfo.university}

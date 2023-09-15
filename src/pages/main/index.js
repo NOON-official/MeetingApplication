@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import MainLayout from '../../layout/MainLayout';
 import Home from '../home';
 import MeetingIntro from './MeetingIntro';
+import ServiceErrModal from '../../components/Modal/ServiceErrModal';
 
 function Main() {
   const params = new URLSearchParams(window.location.search);
@@ -16,7 +17,12 @@ function Main() {
     }
   }, [referralId]);
 
-  return <MainLayout>{accessToken ? <Home /> : <MeetingIntro />}</MainLayout>;
+  return (
+    <MainLayout>
+      <ServiceErrModal />
+      {accessToken ? <Home /> : <MeetingIntro />}
+    </MainLayout>
+  );
 }
 
 export default Main;
