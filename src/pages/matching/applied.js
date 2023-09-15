@@ -2,8 +2,6 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import MatchingLayout from '../../layout/MatchingLayout';
-import SigninView from '../../components/Auth/SigninView';
-import MainLayout from '../../layout/MainLayout';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
 import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 import NoProfile from '../../components/MainRecommend/NoProfile';
@@ -13,7 +11,7 @@ import {
   useGetRefusedDataQuery,
 } from '../../features/api/userApi';
 import NoMatching from './NoMatching';
-import ServiceErrModal from '../../components/Modal/ServiceErrModal';
+import MatchingIntro from './MatchingIntro';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
@@ -48,11 +46,7 @@ export default function MatchingApplied() {
 
   // 로그인 안했을 때
   if (!accessToken) {
-    return (
-      <MainLayout>
-        <SigninView />
-      </MainLayout>
-    );
+    return <MatchingIntro />;
   }
 
   // 로그인했으나 프로필 없을 때
@@ -67,7 +61,6 @@ export default function MatchingApplied() {
   if (applyDataSuccess && refuseDataSuccess)
     return (
       <MatchingLayout>
-        <ServiceErrModal />
         <DeleteProfileModal
           open={openDeleteModal}
           setModal={setModal}
