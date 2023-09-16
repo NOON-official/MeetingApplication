@@ -18,11 +18,21 @@ const initialState = {
   kakaoId: '',
 };
 
+const applyData = JSON.parse(localStorage.getItem(APPLY_STORAGE_KEY));
+const isPreviousVersion = applyData
+  ? Object.hasOwn(applyData, 'gender') ||
+    Object.hasOwn(applyData, 'universities') ||
+    Object.hasOwn(applyData, 'availableDates') ||
+    Object.hasOwn(applyData, 'prefSameUniversity')
+  : false;
+
+const initialApplyData = isPreviousVersion ? {} : { ...applyData };
+
 const applySlice = createSlice({
   name: 'apply',
   initialState: {
     ...initialState,
-    ...JSON.parse(localStorage.getItem(APPLY_STORAGE_KEY) || '{}'),
+    ...initialApplyData,
   },
   reducers: {
     submitStep1: (state, action) => {
