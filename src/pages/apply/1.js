@@ -7,7 +7,7 @@ import theme from '../../style/theme';
 import ApplyLayout from '../../layout/ApplyLayout';
 import ProgressBar from '../../components/Apply/ProgressBar';
 import { ReactComponent as Bottom } from '../../asset/svg/B.svg';
-import { submitStep1 } from '../../features/apply';
+import { submitStep1, APPLY_STORAGE_KEY } from '../../features/apply';
 import ApplyButton from '../../components/Button/ApplyButton';
 import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
@@ -27,7 +27,15 @@ export default function Apply1Page() {
       window.alert('잘못된 접근입니다');
       navigate('/');
     }
-    localStorage.removeItem('apply-data');
+    const applyData = JSON.parse(localStorage.getItem(APPLY_STORAGE_KEY));
+    const isPreviousVersion = applyData
+      ? Object.hasOwn(applyData, 'gender') ||
+        Object.hasOwn(applyData, 'universities') ||
+        Object.hasOwn(applyData, 'availableDates') ||
+        Object.hasOwn(applyData, 'prefSameUniversity')
+      : false;
+
+    if (isPreviousVersion) localStorage.removeItem('apply-data');
   }, [accessToken]);
 
   const setModal = (bool) => {
