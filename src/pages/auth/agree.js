@@ -71,7 +71,7 @@ function AgreePage() {
             {agree1 ? <CheckValid /> : <CheckInvalid />}
             {agree1 ? (
               <SA
-                href="https://furry-bank-197.notion.site/4e3c4d1f8306494b9a54fc2226e9a3b7"
+                href="https://www.notion.so/moingclub/4e3c4d1f8306494b9a54fc2226e9a3b7?pvs=4"
                 target="_blank"
                 rel="noreferrer"
               >
