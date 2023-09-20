@@ -4,10 +4,10 @@ function MainFooter() {
   return (
     <Footer>
       <HeaderFooter>
-        <SLink href="https://www.notion.so/moingclub/c83f4127e3c54b7080c333aa31a4cc03?pvs=4">
+        <SLink href="https://www.notion.so/moingclub/4e3c4d1f8306494b9a54fc2226e9a3b7?pvs=4">
           이용약관
         </SLink>
-        <SLink href="https://furry-bank-197.notion.site/c83f4127e3c54b7080c333aa31a4cc03">
+        <SLink href="https://www.notion.so/moingclub/c83f4127e3c54b7080c333aa31a4cc03?pvs=4">
           개인정보처리방침
         </SLink>
       </HeaderFooter>
