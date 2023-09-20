@@ -8,9 +8,10 @@ import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
-import { usePostAgreementsMutation } from '../../features/api/userApi';
-import backend from '../../util/backend';
-import { logout } from '../../features/user/asyncActions';
+import {
+  useGetHashQuery,
+  usePostAgreementsMutation,
+} from '../../features/api/userApi';
 
 function AgreePage() {
   const [agree1, setAgree1] = useState(false);
@@ -21,6 +22,8 @@ function AgreePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [postAgreements] = usePostAgreementsMutation();
+  const { data: hash } = useGetHashQuery();
+  console.log(hash);
 
   const handleAgree = useCallback(() => {
     setAgree1(true);
@@ -31,21 +34,56 @@ function AgreePage() {
 
   const NextPage = useCallback(async () => {
     try {
-      await postAgreements({
-        service: agree1,
-        privacy: agree2,
-        age: agree3,
-        marketing: agree4,
-      }).unwrap();
-      navigate('/apply/information');
+      // await postAgreements({
+      //   service: agree1,
+      //   privacy: agree2,
+      //   age: agree3,
+      //   marketing: agree4,
+      // }).unwrap();
+      // const res = await axios.post('/kcp_cert/cert_view.jsp', {
+      //   data: { ...hash, Ret_URL: `localhost:3000/apply/university` },
+      // });
+      // console.log(res);
+      // const res = await axios.get('/auth/up-hash');
+      // console.log(res);
+
+      const varForm = document.createElement('form');
+      varForm.target = 'Map';
+      varForm.action = 'https://cert.kcp.co.kr/kcp_cert/cert_view.jsp';
+      const data = {
+        ...hash,
+        Ret_URL: `http://localhost:3000/apply/university`,
+      };
+
+      const varDiv = document.createElement('div');
+      varDiv.name = 'hash';
+      varDiv.value = data;
+      varForm.appendChild(varDiv);
+
+      document.body.appendChild(varForm);
+      const map = window.open(
+        '',
+        'Map',
+        'status=0,title=0,height=600,width=800,scrollbars=1',
+      );
+      if (map) {
+        varForm.submit();
+      }
+      // window.open('https://cert.kcp.co.kr/kcp_cert/cert_view.jsp', {
+      //   state: {
+      //     ...hash,
+      //     Ret_URL: `localhost:3000/apply/university`,
+      //   },
+      // });
     } catch (err) {
-      window.alert('처음부터 다시 시도해주세요');
-      await backend.delete('/auth/account', {
-        withCredentials: true,
-      });
-      dispatch(logout());
-      localStorage.clear();
-      navigate('/');
+      console.log(err);
+      // window.alert('처음부터 다시 시도해주세요');
+      // await backend.delete('/auth/account', {
+      //   withCredentials: true,
+      // });
+      // dispatch(logout());
+      // localStorage.clear();
+      // navigate('/');
     }
   });
 
