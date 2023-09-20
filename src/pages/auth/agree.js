@@ -90,7 +90,7 @@ function AgreePage() {
             {agree2 ? <CheckValid /> : <CheckInvalid />}
             {agree2 ? (
               <SA
-                href="https://www.notion.so/c83f4127e3c54b7080c333aa31a4cc03"
+                href="https://www.notion.so/moingclub/c83f4127e3c54b7080c333aa31a4cc03?pvs=4"
                 target="_blank"
                 rel="noreferrer"
               >
