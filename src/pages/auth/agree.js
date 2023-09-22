@@ -23,7 +23,7 @@ function AgreePage() {
   const dispatch = useDispatch();
   const [postAgreements] = usePostAgreementsMutation();
   const { data: hash } = useGetHashQuery();
-  console.log(hash);
+  const token = localStorage.getItem('accessToken');
 
   const handleAgree = useCallback(() => {
     setAgree1(true);
@@ -40,41 +40,24 @@ function AgreePage() {
       //   age: agree3,
       //   marketing: agree4,
       // }).unwrap();
-      // const res = await axios.post('/kcp_cert/cert_view.jsp', {
-      //   data: { ...hash, Ret_URL: `localhost:3000/apply/university` },
-      // });
-      // console.log(res);
-      // const res = await axios.get('/auth/up-hash');
-      // console.log(res);
 
-      const varForm = document.createElement('form');
-      varForm.target = 'Map';
-      varForm.action = 'https://cert.kcp.co.kr/kcp_cert/cert_view.jsp';
-      const data = {
+      const dataToSend = {
         ...hash,
-        Ret_URL: `http://localhost:3000/apply/university`,
+        Ret_URL: `http://localhost:5000/api/auth/hash`,
+        param_opt_1: token,
       };
+      console.log(dataToSend);
+      const queryString = Object.keys(dataToSend)
+        .map(
+          (key) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(dataToSend[key])}`,
+        )
+        .join('&');
 
-      const varDiv = document.createElement('div');
-      varDiv.name = 'hash';
-      varDiv.value = data;
-      varForm.appendChild(varDiv);
-
-      document.body.appendChild(varForm);
-      const map = window.open(
-        '',
-        'Map',
-        'status=0,title=0,height=600,width=800,scrollbars=1',
+      window.open(
+        `https://cert.kcp.co.kr/kcp_cert/cert_view.jsp?${queryString}`,
+        '_parent',
       );
-      if (map) {
-        varForm.submit();
-      }
-      // window.open('https://cert.kcp.co.kr/kcp_cert/cert_view.jsp', {
-      //   state: {
-      //     ...hash,
-      //     Ret_URL: `localhost:3000/apply/university`,
-      //   },
-      // });
     } catch (err) {
       console.log(err);
       // window.alert('처음부터 다시 시도해주세요');
@@ -156,6 +139,9 @@ function AgreePage() {
             동의<Pink>&nbsp;&nbsp;(선택)</Pink>
           </CheckingContent>
         </CheckBox>
+        <form name="form_auth" method="post" acceptCharset="EUC-KR">
+          <div id="sbParam" style={{ display: 'none' }} />
+        </form>
       </Container>
       <Footer>
         <SubmitButton

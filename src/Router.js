@@ -38,6 +38,7 @@ import Review from './pages/myinfo/review';
 import ChargeTing from './pages/myinfo/ting/chargeTing';
 import TingBuySuccessPage from './pages/myinfo/ting/buy/success';
 import TingBuyFailPage from './pages/myinfo/ting/buy/fail';
+import Certify from './pages/auth/certify';
 
 const Router = createBrowserRouter([
   {
@@ -183,6 +184,10 @@ const Router = createBrowserRouter([
       {
         path: 'apply/university',
         element: <ApplyUniversity />,
+      },
+      {
+        path: 'apply/certify',
+        element: <Certify />,
       },
       {
         path: '/auth/signin',
