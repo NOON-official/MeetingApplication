@@ -12,6 +12,8 @@ import {
   useGetHashQuery,
   usePostAgreementsMutation,
 } from '../../features/api/userApi';
+import backend from '../../util/backend';
+import { logout } from '../../features/user/asyncActions';
 
 function AgreePage() {
   const [agree1, setAgree1] = useState(false);
@@ -23,7 +25,6 @@ function AgreePage() {
   const dispatch = useDispatch();
   const [postAgreements] = usePostAgreementsMutation();
   const { data: hash } = useGetHashQuery();
-  const token = localStorage.getItem('accessToken');
 
   const handleAgree = useCallback(() => {
     setAgree1(true);
@@ -34,19 +35,18 @@ function AgreePage() {
 
   const NextPage = useCallback(async () => {
     try {
-      // await postAgreements({
-      //   service: agree1,
-      //   privacy: agree2,
-      //   age: agree3,
-      //   marketing: agree4,
-      // }).unwrap();
+      await postAgreements({
+        service: agree1,
+        privacy: agree2,
+        age: agree3,
+        marketing: agree4,
+      }).unwrap();
 
       const dataToSend = {
         ...hash,
         Ret_URL: `http://localhost:5000/api/auth/hash`,
-        param_opt_1: token,
       };
-      console.log(dataToSend);
+
       const queryString = Object.keys(dataToSend)
         .map(
           (key) =>
@@ -59,14 +59,13 @@ function AgreePage() {
         '_parent',
       );
     } catch (err) {
-      console.log(err);
-      // window.alert('처음부터 다시 시도해주세요');
-      // await backend.delete('/auth/account', {
-      //   withCredentials: true,
-      // });
-      // dispatch(logout());
-      // localStorage.clear();
-      // navigate('/');
+      window.alert('처음부터 다시 시도해주세요');
+      await backend.delete('/auth/account', {
+        withCredentials: true,
+      });
+      dispatch(logout());
+      localStorage.clear();
+      navigate('/');
     }
   });
 
