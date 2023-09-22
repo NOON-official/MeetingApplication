@@ -1,18 +1,16 @@
 import { Button } from 'antd';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import { ReactComponent as Seconds } from '../../asset/svg/30seconds.svg';
 import { setAccessToken } from '../../features/user';
-import AgeLimitationModal from '../Modal/AgeLimitationModal';
 
 export default function SigninView() {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     const access = searchParams.get('access');
@@ -26,13 +24,8 @@ export default function SigninView() {
     }
   }, [searchParams]);
 
-  const setModal = (bool) => {
-    setOpenModal(bool);
-  };
-
   return (
     <Container>
-      <AgeLimitationModal open={openModal} setModal={setModal} />
       <ImageContainer>
         <BigO />
       </ImageContainer>
@@ -43,7 +36,7 @@ export default function SigninView() {
         카카오톡 로그인이 필요해요.
       </SigninSubDescription>
       <SSeconds />
-      <KakaoButton onClick={() => setModal(true)} icon={<KakaoSignin />} block>
+      <KakaoButton icon={<KakaoSignin />} block>
         카카오 로그인
       </KakaoButton>
     </Container>
