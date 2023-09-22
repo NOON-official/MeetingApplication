@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Carousel } from 'antd';
 import { useSearchParams } from 'react-router-dom';
@@ -11,11 +11,9 @@ import Matching5 from '../../asset/img/Matching5.png';
 import NoLoginLayout from '../../layout/NoLoginLayout';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import { ReactComponent as Seconds } from '../../asset/svg/30seconds.svg';
-import AgeLimitationModal from '../../components/Modal/AgeLimitationModal';
 import { setAccessToken } from '../../features/user';
 
 export default function MatchingIntro() {
-  const [openModal, setOpenModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
@@ -31,10 +29,6 @@ export default function MatchingIntro() {
     }
   }, [searchParams]);
 
-  const setModal = (bool) => {
-    setOpenModal(bool);
-  };
-
   const setting = {
     dots: true,
     dotPosition: 'top',
@@ -43,7 +37,6 @@ export default function MatchingIntro() {
 
   return (
     <NoLoginLayout>
-      <AgeLimitationModal open={openModal} setModal={setModal} />
       <Slider>
         <SCarousel {...setting}>
           <SImg src={Matching1} />
@@ -54,11 +47,7 @@ export default function MatchingIntro() {
             <SImg src={Matching5} />
             <LastSlide>
               <SSeconds />
-              <KakaoButton
-                onClick={() => setModal(true)}
-                icon={<KakaoSignin />}
-                block
-              >
+              <KakaoButton icon={<KakaoSignin />} block>
                 카카오 로그인
               </KakaoButton>
             </LastSlide>

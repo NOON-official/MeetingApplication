@@ -13,6 +13,7 @@ import {
 import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../components/Button/PrimaryButton';
+import { API_URL } from '../../config/constants';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export default function Home() {
               onClick={() => {
                 const dataToSend = {
                   ...hash,
-                  Ret_URL: `http://localhost:5000/api/auth/hash`,
+                  Ret_URL: `${API_URL}/auth/hash`,
                 };
 
                 const queryString = Object.keys(dataToSend)

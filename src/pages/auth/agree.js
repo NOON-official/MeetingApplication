@@ -14,6 +14,7 @@ import {
 } from '../../features/api/userApi';
 import backend from '../../util/backend';
 import { logout } from '../../features/user/asyncActions';
+import { API_URL } from '../../config/constants';
 
 function AgreePage() {
   const [agree1, setAgree1] = useState(false);
@@ -44,7 +45,7 @@ function AgreePage() {
 
       const dataToSend = {
         ...hash,
-        Ret_URL: `http://localhost:5000/api/auth/hash`,
+        Ret_URL: `${API_URL}/auth/hash`,
       };
 
       const queryString = Object.keys(dataToSend)
