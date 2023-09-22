@@ -14,6 +14,7 @@ import {
   useGetProfileQuery,
 } from '../../../features/api/userApi';
 import DrinkText from '../../MainRecommend/DrinkText';
+import MemberText from '../../MainRecommend/MemberText';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal } = props;
@@ -87,6 +88,13 @@ export default function MyTeamProfileModal(props) {
                   <TeamInfo>
                     <Subtitle>주량</Subtitle>
                     <DrinkText drink={myProfile.drink} />
+                  </TeamInfo>
+                  <TeamInfo>
+                    <Subtitle>인원</Subtitle>
+                    <MemberText
+                      count={myProfile.memberCount}
+                      more={myProfile.memberCounts}
+                    />
                   </TeamInfo>
                 </TextBox>
                 <SliderBoxMembers members={myProfile.members} />

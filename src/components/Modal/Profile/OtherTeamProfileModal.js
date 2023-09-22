@@ -17,6 +17,7 @@ import RefuseMatchingModal from '../Matching/RefuseMatchingModal';
 import AcceptTingModal from '../Ting/AcceptTingModal';
 import StopSeeProfileModal from '../Matching/StopSeeProfileModal';
 import DrinkText from '../../MainRecommend/DrinkText';
+import MemberText from '../../MainRecommend/MemberText';
 
 export default function OtherTeamProfileModal({
   open,
@@ -97,6 +98,13 @@ export default function OtherTeamProfileModal({
               <TeamInfo>
                 <Subtitle>주량</Subtitle>
                 <DrinkText drink={teamProfile.drink} />
+              </TeamInfo>
+              <TeamInfo>
+                <Subtitle>인원</Subtitle>
+                <MemberText
+                  count={teamProfile.memberCount}
+                  more={teamProfile.memberCounts}
+                />
               </TeamInfo>
             </TextBox>
             <SliderBoxMembers members={teamProfile.members} />
