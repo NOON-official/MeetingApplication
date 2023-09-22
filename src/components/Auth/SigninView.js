@@ -7,6 +7,7 @@ import { ReactComponent as BigO } from '../../asset/svg/BigO.svg';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import { ReactComponent as Seconds } from '../../asset/svg/30seconds.svg';
 import { setAccessToken } from '../../features/user';
+import KakaoLoginLink from './KakaoLoginLink';
 
 export default function SigninView() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -35,10 +36,12 @@ export default function SigninView() {
         <br />
         카카오톡 로그인이 필요해요.
       </SigninSubDescription>
-      <SSeconds />
-      <KakaoButton icon={<KakaoSignin />} block>
-        카카오 로그인
-      </KakaoButton>
+      <KakaoLink>
+        <SSeconds />
+        <KakaoButton icon={<KakaoSignin />} block>
+          카카오 로그인
+        </KakaoButton>
+      </KakaoLink>
     </Container>
   );
 }
@@ -73,6 +76,10 @@ const SigninSubDescription = styled.div`
   color: #1a1a1a;
   margin-bottom: 30px;
   line-height: 18px;
+`;
+
+const KakaoLink = styled(KakaoLoginLink)`
+  display: block;
 `;
 
 const SSeconds = styled(Seconds)`
