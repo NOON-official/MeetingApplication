@@ -11,8 +11,10 @@ import { submitStep1, APPLY_STORAGE_KEY } from '../../features/apply';
 import ApplyButton from '../../components/Button/ApplyButton';
 import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
+import BeforeApplyModal from '../../components/Modal/Apply/BeforeApplyModal';
 
 export default function Apply1Page() {
+  const [beforeApplyModal, setBeforeApplyModal] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const { accessToken } = useSelector((state) => state.user);
   const { memberCount } = useSelector((store) => store.apply);
@@ -61,6 +63,10 @@ export default function Apply1Page() {
 
   return (
     <ApplyLayout>
+      <BeforeApplyModal
+        open={beforeApplyModal}
+        setModal={() => setBeforeApplyModal((prev) => !prev)}
+      />
       <IsPageCompleteModal open={openModal} setModal={setModal} />
       <ProgressBar page={1} />
       <Title>

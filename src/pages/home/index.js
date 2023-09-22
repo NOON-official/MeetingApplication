@@ -6,24 +6,27 @@ import RecommendList from './recommendList';
 import RecommendModal from '../../components/Modal/Matching/RecommendModal';
 import MainMatchingHeader from '../../layout/header/MainMatchingHeader';
 import {
+  useGetHashQuery,
   useGetMyInfoQuery,
   useGetMyTeamIdQuery,
 } from '../../features/api/userApi';
 import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../components/Button/PrimaryButton';
+import { API_URL } from '../../config/constants';
 
 export default function Home() {
   const navigate = useNavigate();
   const { data: myInfo, isSuccess: myInfoSuccess } = useGetMyInfoQuery();
   const { data: myTeamId, isSuccess: myTeamIdSuccess } = useGetMyTeamIdQuery();
+  const { data: hash } = useGetHashQuery();
 
   if (myTeamIdSuccess && myInfoSuccess)
     return (
       <>
         <PrimaryModal
           title=" "
-          open={!myInfo.birth || !myInfo.university}
+          open={!myInfo.university}
           footer={null}
           closeIcon
         >
@@ -42,11 +45,24 @@ export default function Home() {
             </span>
             <PrimaryButton
               onClick={() => {
-                if (!myInfo.birth) {
-                  navigate('/apply/information');
-                } else if (!myInfo.university) {
-                  navigate('/apply/university');
-                }
+                const dataToSend = {
+                  ...hash,
+                  Ret_URL: `${API_URL}/auth/hash`,
+                };
+
+                const queryString = Object.keys(dataToSend)
+                  .map(
+                    (key) =>
+                      `${encodeURIComponent(key)}=${encodeURIComponent(
+                        dataToSend[key],
+                      )}`,
+                  )
+                  .join('&');
+
+                window.open(
+                  `https://cert.kcp.co.kr/kcp_cert/cert_view.jsp?${queryString}`,
+                  '_parent',
+                );
               }}
             >
               입력하러 가기
