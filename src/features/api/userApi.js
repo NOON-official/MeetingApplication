@@ -23,6 +23,10 @@ export const userApi = createApi({
     'Team',
   ],
   endpoints: (builder) => ({
+    getHash: builder.query({
+      query: () => ({ url: `auth/up-hash` }),
+      providesTags: ['Users'],
+    }),
     getMyInfo: builder.query({
       query: () => ({ url: `users/my-info` }),
       providesTags: ['Users'],
@@ -200,6 +204,7 @@ export const userApi = createApi({
 });
 
 export const {
+  useGetHashQuery,
   useGetMyInfoQuery,
   usePostTeamsMutation,
   usePatchInformationMutation,
