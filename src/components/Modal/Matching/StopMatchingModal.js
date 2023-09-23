@@ -14,7 +14,6 @@ export default function StopMatchingModal({ open, setModal, teamId }) {
       setModal(false);
       window.location.reload();
     } catch (e) {
-      console.error(e);
       window.alert('취소중 오류가 발생하였습니다');
       setModal(false);
     }
