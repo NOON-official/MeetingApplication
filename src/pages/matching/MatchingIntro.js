@@ -12,6 +12,7 @@ import NoLoginLayout from '../../layout/NoLoginLayout';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import { ReactComponent as Seconds } from '../../asset/svg/30seconds.svg';
 import { setAccessToken } from '../../features/user';
+import KakaoLoginLink from '../../components/Auth/KakaoLoginLink';
 
 export default function MatchingIntro() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,10 +47,12 @@ export default function MatchingIntro() {
           <div>
             <SImg src={Matching5} />
             <LastSlide>
-              <SSeconds />
-              <KakaoButton icon={<KakaoSignin />} block>
-                카카오 로그인
-              </KakaoButton>
+              <KakaoLink>
+                <SSeconds />
+                <KakaoButton icon={<KakaoSignin />} block>
+                  카카오 로그인
+                </KakaoButton>
+              </KakaoLink>
             </LastSlide>
           </div>
         </SCarousel>
@@ -103,6 +106,10 @@ const LastSlide = styled.div`
 
 const SSeconds = styled(Seconds)`
   margin-left: 22%;
+`;
+
+const KakaoLink = styled(KakaoLoginLink)`
+  display: block;
 `;
 
 const KakaoButton = styled(Button)`
