@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../../asset/svg/UniversityMarkGray.svg';
+import { ReactComponent as Info } from '../../../asset/svg/Info.svg';
 import ApplyButton from '../../Button/ApplyButton';
 import ModifyProfileModal from './ModifyProfileModal';
-import StopMatchingModal from '../Matching/StopMatchingModal';
 import SliderBoxMembers from '../../Slider/SliderBoxMembers';
 import AreaText from '../../MainRecommend/AreaText';
 import DateText from '../../MainRecommend/DateText';
@@ -15,6 +15,8 @@ import {
 } from '../../../features/api/userApi';
 import DrinkText from '../../MainRecommend/DrinkText';
 import MemberText from '../../MainRecommend/MemberText';
+import DeleteMyProfileModal from './DeleteMyProfileModal';
+import NoticeModal from './NoticeModal';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal } = props;
@@ -25,6 +27,7 @@ export default function MyTeamProfileModal(props) {
 
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
+  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
 
   return (
     <div>
@@ -44,18 +47,32 @@ export default function MyTeamProfileModal(props) {
               setIsModifyModalOpen((prev) => !prev);
             }}
           />
-          <StopMatchingModal
+          <DeleteMyProfileModal
             open={isStopMatchingModalOpen}
             setModal={() => {
               setIsStopMatchingModalOpen((prev) => !prev);
-              setModal(false);
             }}
             teamId={myTeamId}
+          />
+          <NoticeModal
+            open={isNoticeModalOpen}
+            setModal={() => {
+              setIsNoticeModalOpen((prev) => !prev);
+            }}
           />
           {myProfile && (
             <>
               <TeamProfile>
-                <TeamName>{myProfile.teamName}</TeamName>
+                <TeamIntro>
+                  <TeamName>{myProfile.teamName}</TeamName>
+                  <EditBtn onClick={() => setIsModifyModalOpen(true)}>
+                    수정
+                  </EditBtn>
+                  <EditBtn onClick={() => setIsStopMatchingModalOpen(true)}>
+                    삭제
+                  </EditBtn>
+                  <SInfo onClick={() => setIsNoticeModalOpen(true)} />
+                </TeamIntro>
                 <TextBox>
                   <Title>한 줄 어필</Title>
                   <Content>{myProfile.intro}</Content>
@@ -99,16 +116,16 @@ export default function MyTeamProfileModal(props) {
                 </TextBox>
                 <SliderBoxMembers members={myProfile.members} />
               </TeamProfile>
-              <Footer>
-                {/* <ButtonBox> */}
-                {/* <ApplyButton onClick={() => setIsStopMatchingModalOpen(true)}>
+              {/* <Footer> */}
+              {/* <ButtonBox> */}
+              {/* <ApplyButton onClick={() => setIsStopMatchingModalOpen(true)}>
                     매칭 중단하기
                   </ApplyButton> */}
-                <ApplyButton2 onClick={() => setIsModifyModalOpen(true)}>
+              {/* <ApplyButton2 onClick={() => setIsModifyModalOpen(true)}>
                   수정하기
-                </ApplyButton2>
-                {/* </ButtonBox> */}
-              </Footer>
+                </ApplyButton2> */}
+              {/* </ButtonBox> */}
+              {/* </Footer> */}
             </>
           )}
         </SModal>
@@ -119,7 +136,7 @@ export default function MyTeamProfileModal(props) {
 
 const SModal = styled(Modal)`
   .ant-modal-content {
-    padding: 1%;
+    padding: 5% 1%;
     background-color: #fbfaf9;
   }
 `;
@@ -129,16 +146,37 @@ const TeamProfile = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 6%;
+`;
+
+const TeamIntro = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 5% 0;
 `;
 
 const TeamName = styled.span`
-  margin: 5% auto;
   padding: 5px 10px;
   border-radius: 3px;
   background-color: #ffd3d3;
   font-weight: 600;
   font-size: 16px;
+`;
+
+const EditBtn = styled.button`
+  margin-left: 15px;
+  padding: 3px 7px;
+  border: none;
+  border-radius: 5px;
+  color: #777777;
+  background-color: #e6e6e6;
+  font-size: 14px;
+`;
+
+const SInfo = styled(Info)`
+  margin-left: 10px;
+  cursor: pointer;
 `;
 
 const TextBox = styled.div`

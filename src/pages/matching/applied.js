@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import MatchingLayout from '../../layout/MatchingLayout';
 import OtherTeamList from '../../components/MainRecommend/TeamList';
-import DeleteProfileModal from '../../components/Modal/Profile/DeleteProfileModal';
 import NoProfile from '../../components/MainRecommend/NoProfile';
 import {
   useGetApplyDataQuery,
@@ -12,6 +11,7 @@ import {
 } from '../../features/api/userApi';
 import NoMatching from './NoMatching';
 import MatchingIntro from './MatchingIntro';
+import DeleteOtherProfileModal from '../../components/Modal/Profile/DeleteOtherProfileModal';
 
 export default function MatchingApplied() {
   const { accessToken } = useSelector((state) => state.user);
@@ -61,7 +61,7 @@ export default function MatchingApplied() {
   if (applyDataSuccess && refuseDataSuccess)
     return (
       <MatchingLayout>
-        <DeleteProfileModal
+        <DeleteOtherProfileModal
           open={openDeleteModal}
           setModal={setModal}
           state="applied"

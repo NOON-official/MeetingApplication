@@ -39,7 +39,7 @@ export default function ModifyProfileModal({ open, setModal }) {
   );
 }
 const Container = styled.div`
-  padding-top: 5%;
+  padding-top: 10%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -53,17 +53,16 @@ const TextBox = styled.div`
 const BlackText = styled.span`
   color: #000000;
   font-size: 16px;
-`;
-
-const ColorText = styled.span`
-  color: ${theme.pink};
-  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
 `;
 
 const SButton = styled(Button)`
-  margin-top: 10%;
-  width: 100%;
+  margin-top: 5%;
+  width: 70%;
   height: 50px;
+  border: none;
+  border-radius: 10px;
   color: white;
   background-color: ${theme.pink};
   font-size: 18px;

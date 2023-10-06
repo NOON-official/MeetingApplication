@@ -6,7 +6,12 @@ import { ReactComponent as ExclamationMark } from '../../../asset/svg/Exclamatio
 import AutomaticModal from '../AutomaticModal';
 import { useDeleteApplyProfileMutation } from '../../../features/api/userApi';
 
-export default function DeleteProfileModal({ open, setModal, state, data }) {
+export default function DeleteOtherProfileModal({
+  open,
+  setModal,
+  state,
+  data,
+}) {
   const [deleteApplyProfile] = useDeleteApplyProfileMutation();
 
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
