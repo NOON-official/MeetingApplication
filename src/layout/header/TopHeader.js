@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { ReactComponent as Header } from '../../asset/svg/Header.svg';
+import { ReactComponent as Icon } from '../../asset/svg/Header.svg';
 import theme from '../../style/theme';
 import { setAccessToken } from '../../features/user';
 
@@ -25,18 +25,28 @@ export default function TopHeader() {
   }, [dispatch, searchParams, setSearchParams]);
 
   return (
-    <Container>
-      <Logo>
-        <Link to="/">
-          <Header />
-        </Link>
-      </Logo>
-    </Container>
+    <Header>
+      <Container>
+        <Logo>
+          <Link to="/">
+            <Icon />
+          </Link>
+        </Logo>
+      </Container>
+    </Header>
   );
 }
 
+const Header = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 425px;
+  z-index: 1;
+`;
+
 const Container = styled.div`
-  padding: 10px 30px;
+  padding: 1.5vh 30px;
   background-color: #f8f3f3;
   height: 4vh;
   max-width: 425px;

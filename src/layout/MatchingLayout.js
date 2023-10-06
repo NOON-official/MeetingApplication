@@ -32,9 +32,7 @@ export default function MatchingLayout({ children }) {
 
   return (
     <Container>
-      <Header>
-        <TopHeader />
-      </Header>
+      <TopHeader />
       <Content>
         <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
         <Section>
@@ -44,7 +42,7 @@ export default function MatchingLayout({ children }) {
             <MainMatchingHeader title="프로필 만들기" />
           )}
 
-          <Header2>
+          <Header>
             <NavLink
               to="/matching/applied"
               style={({ isActive }) => (isActive ? activeStyle : inActiveStyle)}
@@ -63,14 +61,12 @@ export default function MatchingLayout({ children }) {
             >
               매칭 완료
             </NavLink>
-          </Header2>
+          </Header>
         </Section>
 
         {children}
       </Content>
-      <Footer>
-        <BottomTabs />
-      </Footer>
+      <BottomTabs />
     </Container>
   );
 }
@@ -80,10 +76,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-`;
-
-const Header = styled.header`
-  width: 100%;
 `;
 
 const Section = styled.div`
@@ -96,7 +88,7 @@ const Section = styled.div`
   background-color: #ffffff;
 `;
 
-const Header2 = styled.div`
+const Header = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -105,15 +97,10 @@ const Header2 = styled.div`
 `;
 
 const Content = styled.div`
+  padding: 7vh 0 90px;
   max-width: 425px;
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.background};
   overflow-y: auto;
-`;
-
-const Footer = styled.div`
-  max-width: 425px;
-  width: 100%;
-  background-color: ${(props) => props.theme.background};
 `;

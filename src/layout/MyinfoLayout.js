@@ -9,9 +9,7 @@ export default function MyinfoLayout({ children, title }) {
         <MyinfoHeader title={title} />
       </Header>
       <Content title={title}>{children}</Content>
-      <Footer>
-        <BottomTabs />
-      </Footer>
+      <BottomTabs />
     </Container>
   );
 }
@@ -40,10 +38,4 @@ const Content = styled.div`
       ? props.theme.white
       : props.theme.background};
   overflow-y: auto;
-`;
-
-const Footer = styled.div`
-  max-width: 425px;
-  width: 100%;
-  background-color: ${(props) => props.theme.background};
 `;

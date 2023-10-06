@@ -4,9 +4,7 @@ import TopHeader from './header/TopHeader';
 export default function TeamProfileLayout({ children }) {
   return (
     <Container>
-      <Header>
-        <TopHeader />
-      </Header>
+      <TopHeader />
       <Content>{children}</Content>
     </Container>
   );

@@ -5,13 +5,9 @@ import BottomTabs from './header/BottomTabs';
 function NoLoginLayout({ children }) {
   return (
     <Container>
-      <Header>
-        <TopHeader />
-      </Header>
+      <TopHeader />
       <Content>{children}</Content>
-      <Footer>
-        <BottomTabs />
-      </Footer>
+      <BottomTabs />
     </Container>
   );
 }
@@ -25,14 +21,11 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Header = styled.header`
-  width: 100%;
-`;
-
 const Content = styled.div`
   max-width: 425px;
   width: 100%;
   height: 100%;
+  padding-top: 6vh;
   background-color: #ffffff;
   overflow: auto;
 
