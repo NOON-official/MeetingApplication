@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
@@ -28,6 +28,10 @@ export default function MyTeamProfileModal(props) {
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
   const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
+
+  useEffect(() => {
+    setModal(false);
+  }, [myTeamId]);
 
   return (
     <div>

@@ -2,18 +2,19 @@ import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import { useCallback } from 'react';
 import theme from '../../../style/theme';
-import backend from '../../../util/backend';
+import { useDeleteMyProfileMutation } from '../../../features/api/userApi';
 
 export default function DeleteMyProfileModal({ open, setModal, teamId }) {
+  const [deleteMyProfile] = useDeleteMyProfileMutation();
+
   const deleteMatching = useCallback(async () => {
     try {
-      await backend.delete(`/teams/${teamId}`);
+      await deleteMyProfile({ teamId }).unwrap();
       window.localStorage.removeItem('apply-data');
-      window.alert('중단되었습니다');
+      window.alert('삭제되었습니다');
       setModal(false);
-      window.location.reload();
     } catch (e) {
-      window.alert('취소중 오류가 발생하였습니다');
+      window.alert('삭제 중 오류가 발생하였습니다');
       setModal(false);
     }
   });

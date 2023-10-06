@@ -31,6 +31,7 @@ const Content = styled.div`
   max-width: 425px;
   width: 100%;
   height: 100%;
+  padding-bottom: 90px;
   background-color: ${(props) =>
     props.title === '학교 인증' ||
     props.title === '보유 팅' ||
@@ -38,4 +39,11 @@ const Content = styled.div`
       ? props.theme.white
       : props.theme.background};
   overflow-y: auto;
+
+  // 스크롤 기능은 있으나 안보이게
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+  &::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  }
 `;
