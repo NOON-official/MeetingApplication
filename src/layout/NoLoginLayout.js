@@ -9,9 +9,7 @@ function NoLoginLayout({ children }) {
         <TopHeader />
       </Header>
       <Content>{children}</Content>
-      <Footer>
-        <BottomTabs />
-      </Footer>
+      <BottomTabs />
     </Container>
   );
 }

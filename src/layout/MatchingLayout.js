@@ -68,9 +68,7 @@ export default function MatchingLayout({ children }) {
 
         {children}
       </Content>
-      <Footer>
-        <BottomTabs />
-      </Footer>
+      <BottomTabs />
     </Container>
   );
 }

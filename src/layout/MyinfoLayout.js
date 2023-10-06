@@ -9,9 +9,7 @@ export default function MyinfoLayout({ children, title }) {
         <MyinfoHeader title={title} />
       </Header>
       <Content title={title}>{children}</Content>
-      <Footer>
-        <BottomTabs />
-      </Footer>
+      <BottomTabs />
     </Container>
   );
 }

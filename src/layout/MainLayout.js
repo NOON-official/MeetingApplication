@@ -9,9 +9,7 @@ function MainLayout({ children }) {
         <TopHeader />
       </Header>
       <Content>{children}</Content>
-      <Footer>
-        <BottomTabs />
-      </Footer>
+      <BottomTabs />
     </Container>
   );
 }
@@ -31,7 +29,7 @@ const Header = styled.header`
 
 const Content = styled.div`
   max-width: 425px;
-  width: 100%;
+  width: 90%;
   height: 100%;
   background-color: ${(props) => props.theme.background};
   overflow: auto;
@@ -45,6 +43,8 @@ const Content = styled.div`
 `;
 
 const Footer = styled.div`
+  position: fixed;
+  bottom: 0;
   max-width: 425px;
   width: 100%;
   background-color: ${(props) => props.theme.background};
