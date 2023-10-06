@@ -36,7 +36,7 @@ function Teambox({ member, setMember, name }) {
         setMember((prev) => ({
           ...prev,
           role: 1,
-          age: dayjs().year() - userData.birth + 1,
+          age: dayjs().year() - userData.birth,
           university: userData.university,
         }));
       };
