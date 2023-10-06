@@ -50,7 +50,7 @@ export default function MeetingIntro() {
   }, [accessToken, agreements]);
 
   return (
-    <>
+    <Container>
       <Section>
         <CountTitle>
           <MainTitle>
@@ -122,9 +122,13 @@ export default function MeetingIntro() {
       <MainFooter />
       <BottomFooter />
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  padding: 6vh 0 90px;
+`;
 
 const CountTitle = styled.div`
   width: 100%;
@@ -162,7 +166,7 @@ const ImgBox = styled.div`
 
 const Footer = styled.div`
   position: sticky;
-  bottom: 3%;
+  bottom: 90px;
 `;
 
 const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
