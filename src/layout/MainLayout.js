@@ -5,9 +5,7 @@ import BottomTabs from './header/BottomTabs';
 function MainLayout({ children }) {
   return (
     <Container>
-      <Header>
-        <TopHeader />
-      </Header>
+      <TopHeader />
       <Content>{children}</Content>
       <BottomTabs />
     </Container>
@@ -23,14 +21,11 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Header = styled.header`
-  width: 100%;
-`;
-
 const Content = styled.div`
+  width: 100%;
   max-width: 425px;
-  width: 90%;
   height: 100%;
+  padding: 7vh 0 90px;
   background-color: ${(props) => props.theme.background};
   overflow: auto;
 
@@ -40,12 +35,4 @@ const Content = styled.div`
   &::-webkit-scrollbar {
     display: none; /* 크롬, 사파리, 오페라, 엣지 */
   }
-`;
-
-const Footer = styled.div`
-  position: fixed;
-  bottom: 0;
-  max-width: 425px;
-  width: 100%;
-  background-color: ${(props) => props.theme.background};
 `;

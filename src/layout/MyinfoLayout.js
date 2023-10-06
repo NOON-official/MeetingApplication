@@ -39,9 +39,3 @@ const Content = styled.div`
       : props.theme.background};
   overflow-y: auto;
 `;
-
-const Footer = styled.div`
-  max-width: 425px;
-  width: 100%;
-  background-color: ${(props) => props.theme.background};
-`;
