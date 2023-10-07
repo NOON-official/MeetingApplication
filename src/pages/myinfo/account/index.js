@@ -12,6 +12,7 @@ import backend from '../../../util/backend';
 import Universities from '../../../asset/Universities';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 import { useGetMyInfoQuery } from '../../../features/api/userApi';
+import EditProfile from '../../../components/MainRecommend/EditProfile';
 
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
@@ -36,42 +37,50 @@ export default function Account() {
   return (
     <MyinfoLayout title="내 정보">
       {myInfo && (
-        <Section my="12px">
-          <InfoCard>
-            <Subtitle>내 정보</Subtitle>
-            <Row>
-              <Col span={4}>이름</Col>
-              <Col span={15}>{myInfo.nickname}</Col>
-            </Row>
-            <Row>
-              <Col span={4}>성별</Col>
-              <Col span={15}>{myInfo.gender === 'male' ? '남성' : '여성'}</Col>
-            </Row>
-            <Row>
-              <Col span={5}>대학교</Col>
-              <Col span={18}>
-                {Universities[myInfo.university - 1]?.name}
-                {myInfo.approval && (
-                  <>
-                    <SUniversityMarkPink />
-                    <Mark>학교 인증 완료</Mark>
-                  </>
-                )}
-              </Col>
-            </Row>
-            <Row>
-              <Col span={6}>전화번호</Col>
-              <Col span={15}>
-                {myInfo.phone}
-                <PhoneChangeButton
-                  onClick={() => navigate('/myinfo/account/phone')}
-                >
-                  변경
-                </PhoneChangeButton>
-              </Col>
-            </Row>
-          </InfoCard>
-        </Section>
+        <>
+          <Section my="12px">
+            <InfoCard>
+              <Subtitle>내 정보</Subtitle>
+              <Row>
+                <Col span={4}>이름</Col>
+                <Col span={15}>{myInfo.nickname}</Col>
+              </Row>
+              <Row>
+                <Col span={4}>성별</Col>
+                <Col span={15}>
+                  {myInfo.gender === 'male' ? '남성' : '여성'}
+                </Col>
+              </Row>
+              <Row>
+                <Col span={5}>대학교</Col>
+                <Col span={18}>
+                  {Universities[myInfo.university - 1]?.name}
+                  {myInfo.approval && (
+                    <>
+                      <SUniversityMarkPink />
+                      <Mark>학교 인증 완료</Mark>
+                    </>
+                  )}
+                </Col>
+              </Row>
+              <Row>
+                <Col span={6}>전화번호</Col>
+                <Col span={15}>
+                  {myInfo.phone}
+                  <EditBtn onClick={() => navigate('/myinfo/account/phone')}>
+                    변경
+                  </EditBtn>
+                </Col>
+              </Row>
+            </InfoCard>
+          </Section>
+          <Section>
+            <ProfileCard>
+              <Subtitle>우리 팀 프로필</Subtitle>
+              <EditProfile />
+            </ProfileCard>
+          </Section>
+        </>
       )}
       <Section my="8px" style={{ textAlign: 'right' }}>
         <ResignButton type="text" onClick={() => setResignModalOpened(true)}>
@@ -100,7 +109,6 @@ export default function Account() {
 }
 
 const Subtitle = styled.div`
-  margin-bottom: 5%;
   font-size: 16px;
   color: ${(props) => props.theme.black};
   font-weight: 600;
@@ -115,7 +123,7 @@ const InfoCard = styled(Card)`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 5%;
+    margin: 5% 0;
   }
 
   .ant-col {
@@ -142,6 +150,15 @@ const InfoCard = styled(Card)`
   }
 `;
 
+const ProfileCard = styled(InfoCard)`
+  .ant-card-body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 0 15px 20px;
+  }
+`;
+
 const SUniversityMarkPink = styled(UniversityMark)`
   margin: 0 5px 0 10px;
   width: 18px;
@@ -153,13 +170,7 @@ const Mark = styled.div`
   font-size: 12px;
 `;
 
-const ResignButton = styled(Button)`
-  > span {
-    color: ${(props) => props.theme.grey};
-  }
-`;
-
-const PhoneChangeButton = styled.button`
+const EditBtn = styled.button`
   margin-left: 7%;
   padding: 5px 8px;
   border-radius: 5px;
@@ -168,4 +179,10 @@ const PhoneChangeButton = styled.button`
   font-weight: 400;
   font-size: 12px;
   color: #777777;
+`;
+
+const ResignButton = styled(Button)`
+  > span {
+    color: ${(props) => props.theme.grey};
+  }
 `;
