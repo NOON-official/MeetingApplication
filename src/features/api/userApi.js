@@ -108,11 +108,20 @@ export const userApi = createApi({
     getMyTeamId: builder.query({
       query: () => ({ url: `users/team-id` }),
       transformResponse: (response) => response.teamId,
-      providesTags: ['Team'],
+      providesTags: ['Team', 'Users'],
     }),
     getProfile: builder.query({
       query: (id) => ({ url: `teams/${id}` }),
-      providesTags: ['Team'],
+      providesTags: ['Team', 'Users'],
+    }),
+    deleteMyProfile: builder.mutation({
+      query({ teamId }) {
+        return {
+          url: `teams/${teamId}`,
+          method: 'DELETE',
+        };
+      },
+      invalidatesTags: ['Users', 'Team'],
     }),
     getRecommendList: builder.query({
       query: () => ({ url: `users/teams/recommended` }),
@@ -217,6 +226,7 @@ export const {
   useGetTingCountQuery,
   useGetMyTeamIdQuery,
   useGetProfileQuery,
+  useDeleteMyProfileMutation,
   useGetRecommendListQuery,
   useGetApplyDataQuery,
   useGetRefusedDataQuery,

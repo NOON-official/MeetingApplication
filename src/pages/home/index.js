@@ -129,6 +129,8 @@ const Subtitle = styled.div`
 `;
 
 const Container2 = styled.div`
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
   width: 90%;
 `;
