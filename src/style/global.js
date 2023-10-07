@@ -51,6 +51,7 @@ table {
 	border-spacing: 0;
 }
 button {
+	border: none;
 	cursor: pointer;
 }
 

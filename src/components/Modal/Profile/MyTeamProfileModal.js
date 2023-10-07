@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Modal } from 'antd';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../../asset/svg/UniversityMarkGray.svg';
-import ApplyButton from '../../Button/ApplyButton';
-import ModifyProfileModal from './ModifyProfileModal';
-import StopMatchingModal from '../Matching/StopMatchingModal';
 import SliderBoxMembers from '../../Slider/SliderBoxMembers';
 import AreaText from '../../MainRecommend/AreaText';
 import DateText from '../../MainRecommend/DateText';
@@ -15,6 +12,7 @@ import {
 } from '../../../features/api/userApi';
 import DrinkText from '../../MainRecommend/DrinkText';
 import MemberText from '../../MainRecommend/MemberText';
+import EditProfile from '../../MainRecommend/EditProfile';
 
 export default function MyTeamProfileModal(props) {
   const { open, setModal } = props;
@@ -23,8 +21,9 @@ export default function MyTeamProfileModal(props) {
     skip: !myTeamId,
   });
 
-  const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
-  const [isStopMatchingModalOpen, setIsStopMatchingModalOpen] = useState(false);
+  useEffect(() => {
+    setModal(false);
+  }, [myTeamId]);
 
   return (
     <div>
@@ -38,78 +37,55 @@ export default function MyTeamProfileModal(props) {
           closable
           onCancel={() => setModal(false)}
         >
-          <ModifyProfileModal
-            open={isModifyModalOpen}
-            setModal={() => {
-              setIsModifyModalOpen((prev) => !prev);
-            }}
-          />
-          <StopMatchingModal
-            open={isStopMatchingModalOpen}
-            setModal={() => {
-              setIsStopMatchingModalOpen((prev) => !prev);
-              setModal(false);
-            }}
-            teamId={myTeamId}
-          />
           {myProfile && (
-            <>
-              <TeamProfile>
+            <TeamProfile>
+              <TeamIntro>
                 <TeamName>{myProfile.teamName}</TeamName>
-                <TextBox>
-                  <Title>한 줄 어필</Title>
-                  <Content>{myProfile.intro}</Content>
-                </TextBox>
-                <TextBox>
-                  <Container>
-                    <Title>기본 정보</Title>
-                    {myProfile.approval ? (
-                      <>
-                        <SUniversityMark />
-                        <UniversityMarkText>대학 인증 완료</UniversityMarkText>
-                      </>
-                    ) : (
-                      <>
-                        <SUniversityMarkGray />
-                        <UniversityNoMarkText>대학 미인증</UniversityNoMarkText>
-                      </>
-                    )}
-                  </Container>
-                  <TeamInfo>
-                    <Subtitle>일정</Subtitle>
-                    <SubContent>
-                      <DateText availableDates={myProfile.teamAvailableDate} />
-                    </SubContent>
-                  </TeamInfo>
-                  <TeamInfo>
-                    <Subtitle>지역</Subtitle>
-                    <AreaText areaProps={myProfile.areas} />
-                  </TeamInfo>
-                  <TeamInfo>
-                    <Subtitle>주량</Subtitle>
-                    <DrinkText drink={myProfile.drink} />
-                  </TeamInfo>
-                  <TeamInfo>
-                    <Subtitle>인원</Subtitle>
-                    <MemberText
-                      count={myProfile.memberCount}
-                      more={myProfile.memberCounts}
-                    />
-                  </TeamInfo>
-                </TextBox>
-                <SliderBoxMembers members={myProfile.members} />
-              </TeamProfile>
-              <Footer>
-                {/* <ButtonBox> */}
-                {/* <ApplyButton onClick={() => setIsStopMatchingModalOpen(true)}>
-                    매칭 중단하기
-                  </ApplyButton> */}
-                <ApplyButton2 onClick={() => setIsModifyModalOpen(true)}>
-                  수정하기
-                </ApplyButton2>
-                {/* </ButtonBox> */}
-              </Footer>
-            </>
+                <EditProfile />
+              </TeamIntro>
+              <TextBox>
+                <Title>한 줄 어필</Title>
+                <Content>{myProfile.intro}</Content>
+              </TextBox>
+              <TextBox>
+                <Container>
+                  <Title>기본 정보</Title>
+                  {myProfile.approval ? (
+                    <>
+                      <SUniversityMark />
+                      <UniversityMarkText>대학 인증 완료</UniversityMarkText>
+                    </>
+                  ) : (
+                    <>
+                      <SUniversityMarkGray />
+                      <UniversityNoMarkText>대학 미인증</UniversityNoMarkText>
+                    </>
+                  )}
+                </Container>
+                <TeamInfo>
+                  <Subtitle>일정</Subtitle>
+                  <SubContent>
+                    <DateText availableDates={myProfile.teamAvailableDate} />
+                  </SubContent>
+                </TeamInfo>
+                <TeamInfo>
+                  <Subtitle>지역</Subtitle>
+                  <AreaText areaProps={myProfile.areas} />
+                </TeamInfo>
+                <TeamInfo>
+                  <Subtitle>주량</Subtitle>
+                  <DrinkText drink={myProfile.drink} />
+                </TeamInfo>
+                <TeamInfo>
+                  <Subtitle>인원</Subtitle>
+                  <MemberText
+                    count={myProfile.memberCount}
+                    more={myProfile.memberCounts}
+                  />
+                </TeamInfo>
+              </TextBox>
+              <SliderBoxMembers members={myProfile.members} />
+            </TeamProfile>
           )}
         </SModal>
       ) : null}
@@ -119,7 +95,7 @@ export default function MyTeamProfileModal(props) {
 
 const SModal = styled(Modal)`
   .ant-modal-content {
-    padding: 1%;
+    padding: 5% 1%;
     background-color: #fbfaf9;
   }
 `;
@@ -129,11 +105,17 @@ const TeamProfile = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 6%;
+`;
+
+const TeamIntro = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 5% 0;
 `;
 
 const TeamName = styled.span`
-  margin: 5% auto;
   padding: 5px 10px;
   border-radius: 3px;
   background-color: #ffd3d3;
@@ -205,26 +187,4 @@ const Subtitle = styled.span`
 const SubContent = styled.div`
   font-size: 14px;
   font-weight: 500;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 10%;
-  padding-bottom: 5%;
-`;
-
-const ButtonBox = styled.div`
-  width: 90%;
-  display: flex;
-  justify-content: center;
-  justify-content: space-between;
-  margin-top: 5%;
-`;
-
-const ApplyButton2 = styled(ApplyButton)`
-  width: 90%;
-  margin-top: 5%;
 `;

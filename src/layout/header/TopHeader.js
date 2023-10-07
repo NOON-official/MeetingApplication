@@ -46,9 +46,9 @@ const Header = styled.div`
 `;
 
 const Container = styled.div`
-  padding: 1.5vh 30px;
+  padding: 15px 30px;
   background-color: #f8f3f3;
-  height: 4vh;
+  height: 20px;
   max-width: 425px;
   margin: 0 auto;
   display: flex;

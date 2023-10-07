@@ -50,8 +50,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10%;
-  height: 90%;
+  padding: 0 10%;
+  height: 100%;
   background-color: #fbfaf9;
 `;
 

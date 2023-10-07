@@ -60,9 +60,10 @@ const SModal = styled(Modal)`
 `;
 
 const TeamName = styled.span`
-  padding: 4px 7px;
+  padding: 6px 13px;
   border-radius: 3px;
   background-color: rgba(255, 211, 211, 1);
+  font-size: 16px;
   font-weight: 600;
 `;
 

@@ -6,9 +6,9 @@ export default function Guidelines() {
     <>
       <GrayText>유의사항</GrayText>
       <GrayText2>
-        <List>∙ 실물 학생증 사진, 모바일 학생증 캡쳐본 모두 가능해요</List>
-        <List>∙ 대학교, 학과, 학번, 이름이 모두 보여야 승인돼요</List>
-        <List>∙ 미팅 신청자와 학생증에 기재된 이름이 일치해야 해요</List>
+        <List>실물 학생증 사진, 모바일 학생증 캡쳐본 모두 가능해요</List>
+        <List>대학교, 학과, 학번, 이름이 모두 보여야 승인돼요</List>
+        <List>미팅 신청자와 학생증에 기재된 이름이 일치해야 해요</List>
       </GrayText2>
     </>
   );
@@ -27,4 +27,13 @@ const GrayText2 = styled.ul`
   line-height: 18px;
 `;
 
-const List = styled.li``;
+const List = styled.li`
+  position: relative;
+  margin-left: 3%;
+  :before {
+    content: '∙';
+    position: absolute;
+    top: 0;
+    left: -10px;
+  }
+`;

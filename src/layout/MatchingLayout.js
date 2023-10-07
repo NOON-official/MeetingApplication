@@ -33,39 +33,36 @@ export default function MatchingLayout({ children }) {
   return (
     <Container>
       <TopHeader />
-      <Content>
-        <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
-        <Section>
-          {myTeamId ? (
-            <MainMatchingHeader title="프로필 조회" />
-          ) : (
-            <MainMatchingHeader title="프로필 만들기" />
-          )}
+      <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
+      <Section>
+        {myTeamId ? (
+          <MainMatchingHeader title="프로필 조회" />
+        ) : (
+          <MainMatchingHeader title="프로필 만들기" />
+        )}
 
-          <Header>
-            <NavLink
-              to="/matching/applied"
-              style={({ isActive }) => (isActive ? activeStyle : inActiveStyle)}
-            >
-              보낸 신청
-            </NavLink>
-            <NavLink
-              to="/matching/received"
-              style={({ isActive }) => (isActive ? activeStyle : inActiveStyle)}
-            >
-              받은 신청
-            </NavLink>
-            <NavLink
-              to="/matching/succeeded"
-              style={({ isActive }) => (isActive ? activeStyle : inActiveStyle)}
-            >
-              매칭 완료
-            </NavLink>
-          </Header>
-        </Section>
-
-        {children}
-      </Content>
+        <Header>
+          <NavLink
+            to="/matching/applied"
+            style={({ isActive }) => (isActive ? activeStyle : inActiveStyle)}
+          >
+            보낸 신청
+          </NavLink>
+          <NavLink
+            to="/matching/received"
+            style={({ isActive }) => (isActive ? activeStyle : inActiveStyle)}
+          >
+            받은 신청
+          </NavLink>
+          <NavLink
+            to="/matching/succeeded"
+            style={({ isActive }) => (isActive ? activeStyle : inActiveStyle)}
+          >
+            매칭 완료
+          </NavLink>
+        </Header>
+      </Section>
+      <Content>{children}</Content>
       <BottomTabs />
     </Container>
   );
@@ -76,6 +73,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const Section = styled.div`
@@ -83,8 +81,10 @@ const Section = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  max-width: 425px;
   width: 100%;
+  max-width: 425px;
+  height: 400px;
+  padding-top: 50px;
   background-color: #ffffff;
 `;
 
@@ -97,10 +97,17 @@ const Header = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 7vh 0 90px;
   max-width: 425px;
   width: 100%;
   height: 100%;
+  padding-bottom: 150px;
   background-color: ${(props) => props.theme.background};
   overflow-y: auto;
+
+  // 스크롤 기능은 있으나 안보이게
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+  &::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  }
 `;
