@@ -64,7 +64,6 @@ export default function MatchingApplied() {
         <DeleteOtherProfileModal
           open={openDeleteModal}
           setModal={setModal}
-          state="applied"
           data={deleteRefuseList}
         />
         <Container>
