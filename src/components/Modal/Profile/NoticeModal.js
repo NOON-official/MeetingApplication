@@ -1,23 +1,8 @@
 import { Modal } from 'antd';
 import styled from 'styled-components';
-import { useCallback } from 'react';
 import theme from '../../../style/theme';
-import backend from '../../../util/backend';
 
 export default function NoticeModal({ open, setModal, teamId }) {
-  const deleteMatching = useCallback(async () => {
-    try {
-      await backend.delete(`/teams/${teamId}`);
-      window.localStorage.removeItem('apply-data');
-      window.alert('중단되었습니다');
-      setModal(false);
-      window.location.reload();
-    } catch (e) {
-      window.alert('취소중 오류가 발생하였습니다');
-      setModal(false);
-    }
-  });
-
   return (
     <div>
       {open ? (
@@ -34,15 +19,15 @@ export default function NoticeModal({ open, setModal, teamId }) {
               <GreyText style={{ fontWeight: '500' }}>유의사항</GreyText>
               <GreyText>
                 <li>
-                  ∙ 삭제하시면 &lt;보낸신청&gt;과 &lt;받은 신청&gt; 내역이 모두
+                  삭제하시면 &lt;보낸신청&gt;과 &lt;받은 신청&gt; 내역이 모두
                   사라져요.
                 </li>
                 <li>
-                  ∙ 삭제하더라도 최종 성사된 상대 팀의 연락처와 프로필은 매칭
+                  삭제하더라도 최종 성사된 상대 팀의 연락처와 프로필은 매칭
                   완료에서 계속 확인할 수 있어요!
                 </li>
                 <li>
-                  ∙ 미팅학개론 이용 재개를 원하실 경우, 우리 팀 프로필을 다시
+                  미팅학개론 이용 재개를 원하실 경우, 우리 팀 프로필을 다시
                   만들어 주세요.
                 </li>
               </GreyText>
@@ -82,6 +67,13 @@ const GreyText = styled.div`
   line-height: normal;
 
   > li {
-    margin: 2% 0;
+    position: relative;
+    margin: 2% 0 2% 2%;
+    :before {
+      content: '∙';
+      position: absolute;
+      top: 0;
+      left: -10px;
+    }
   }
 `;
