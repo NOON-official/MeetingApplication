@@ -1,4 +1,4 @@
-import { Button, Modal } from 'antd';
+import { Modal } from 'antd';
 import styled from 'styled-components';
 import { useState } from 'react';
 import theme from '../../../style/theme';
@@ -6,22 +6,20 @@ import { ReactComponent as ExclamationMark } from '../../../asset/svg/Exclamatio
 import AutomaticModal from '../AutomaticModal';
 import { useDeleteApplyProfileMutation } from '../../../features/api/userApi';
 
-export default function DeleteProfileModal({ open, setModal, state, data }) {
+export default function DeleteOtherProfileModal({ open, setModal, data }) {
   const [deleteApplyProfile] = useDeleteApplyProfileMutation();
 
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
 
   const deleteProfile = async () => {
-    if (state === 'applied') {
-      try {
-        await deleteApplyProfile({
-          matchingIds: data,
-        }).unwrap();
-        setOpenCompleteModal(true);
-      } catch (e) {
-        console.error(e);
-        window.alert('삭제 중 오류가 발생하였습니다');
-      }
+    try {
+      await deleteApplyProfile({
+        matchingIds: data,
+      }).unwrap();
+      setOpenCompleteModal(true);
+    } catch (e) {
+      console.error(e);
+      window.alert('삭제 중 오류가 발생하였습니다');
     }
   };
 
@@ -105,10 +103,9 @@ const ButtonBox = styled.div`
   margin-top: 5%;
 `;
 
-const SButton1 = styled(Button)`
+const SButton1 = styled.button`
   width: 48%;
   height: 50px;
-  border: none;
   border-radius: 10px;
   color: white;
   background-color: ${theme.pink};
@@ -116,13 +113,8 @@ const SButton1 = styled(Button)`
   font-weight: 400;
 `;
 
-const SButton2 = styled(Button)`
-  width: 48%;
-  height: 50px;
+const SButton2 = styled(SButton1)`
   border: 1px solid #f2cbcb;
-  border-radius: 10px;
   color: #f2cbcb;
   background-color: #ffffff;
-  font-size: 18px;
-  font-weight: 400;
 `;

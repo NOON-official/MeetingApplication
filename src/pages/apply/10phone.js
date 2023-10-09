@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { Input, Button } from 'antd';
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 import MatchingCompleteModal from '../../components/Modal/Matching/MatchingCompleteModal';
@@ -10,6 +9,7 @@ import {
   usePostPhoneCodeMutation,
   usePostPhoneNumberMutation,
 } from '../../features/api/userApi';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply10Page() {
   const [phoneNumber] = usePostPhoneNumberMutation();
@@ -62,7 +62,7 @@ export default function Apply10Page() {
   }, [authCodeInput]);
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <MatchingCompleteModal open={openModal} setModal={setModal} />
       <Title>
         <Maintitle>
@@ -118,7 +118,7 @@ export default function Apply10Page() {
           매칭 신청 완료
         </SubmitButton>
       </Footer>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

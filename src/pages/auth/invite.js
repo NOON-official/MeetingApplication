@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import { Button, Input } from 'antd';
 import backend from '../../util/backend';
-import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 function InvitePage() {
   const referralId = sessionStorage.getItem('referralId');
@@ -34,7 +34,7 @@ function InvitePage() {
   });
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <Title>
         <Maintitle>
           혹시 미팅학개론을 소개해주신
@@ -60,7 +60,7 @@ function InvitePage() {
         </MainButton>
         <div>{ChannelTalk.hideChannelButton()}</div>
       </Footer>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

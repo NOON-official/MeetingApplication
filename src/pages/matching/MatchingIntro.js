@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Carousel } from 'antd';
 import { useSearchParams } from 'react-router-dom';
@@ -8,14 +8,13 @@ import Matching2 from '../../asset/img/Matching2.png';
 import Matching3 from '../../asset/img/Matching3.png';
 import Matching4 from '../../asset/img/Matching4.png';
 import Matching5 from '../../asset/img/Matching5.png';
-import NoLoginLayout from '../../layout/NoLoginLayout';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import { ReactComponent as Seconds } from '../../asset/svg/30seconds.svg';
-import AgeLimitationModal from '../../components/Modal/AgeLimitationModal';
 import { setAccessToken } from '../../features/user';
+import KakaoLoginLink from '../../components/Auth/KakaoLoginLink';
+import HeaderBottomLayout from '../../layout/HeaderBottomLayout';
 
 export default function MatchingIntro() {
-  const [openModal, setOpenModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
@@ -31,10 +30,6 @@ export default function MatchingIntro() {
     }
   }, [searchParams]);
 
-  const setModal = (bool) => {
-    setOpenModal(bool);
-  };
-
   const setting = {
     dots: true,
     dotPosition: 'top',
@@ -42,8 +37,7 @@ export default function MatchingIntro() {
   };
 
   return (
-    <NoLoginLayout>
-      <AgeLimitationModal open={openModal} setModal={setModal} />
+    <HeaderBottomLayout backgroundColor="#ffffff">
       <Slider>
         <SCarousel {...setting}>
           <SImg src={Matching1} />
@@ -53,28 +47,26 @@ export default function MatchingIntro() {
           <div>
             <SImg src={Matching5} />
             <LastSlide>
-              <SSeconds />
-              <KakaoButton
-                onClick={() => setModal(true)}
-                icon={<KakaoSignin />}
-                block
-              >
-                카카오 로그인
-              </KakaoButton>
+              <KakaoLink>
+                <SSeconds />
+                <KakaoButton icon={<KakaoSignin />} block>
+                  카카오 로그인
+                </KakaoButton>
+              </KakaoLink>
             </LastSlide>
           </div>
         </SCarousel>
       </Slider>
-    </NoLoginLayout>
+    </HeaderBottomLayout>
   );
 }
 
 const Slider = styled.div`
   margin-top: 10px;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  justify-content: space-between;
   align-items: center;
   &:hover {
     cursor: pointer;
@@ -84,6 +76,7 @@ const Slider = styled.div`
 const SCarousel = styled(Carousel)`
   width: 100vw;
   max-width: 425px;
+  z-index: 1;
 
   .slick-dots-top {
     margin-top: 20px;
@@ -114,6 +107,10 @@ const LastSlide = styled.div`
 
 const SSeconds = styled(Seconds)`
   margin-left: 22%;
+`;
+
+const KakaoLink = styled(KakaoLoginLink)`
+  display: block;
 `;
 
 const KakaoButton = styled(Button)`

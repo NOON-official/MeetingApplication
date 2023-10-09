@@ -36,7 +36,7 @@ function Teambox({ member, setMember, name }) {
         setMember((prev) => ({
           ...prev,
           role: 1,
-          age: dayjs().year() - userData.birth + 1,
+          age: dayjs().year() - userData.birth,
           university: userData.university,
         }));
       };
@@ -134,6 +134,8 @@ function Teambox({ member, setMember, name }) {
       <LeftBox>
         <Profile onClick={showModal}>{profileimg}</Profile>
         <SModal
+          centered
+          width="380px"
           footer={null}
           title="포지션 선택"
           open={isModalOpen}
@@ -549,11 +551,13 @@ const SModal = styled(Modal)`
 `;
 
 const Position = styled.div`
-  padding-bottom: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border: 1px solid #f1ecec;
   border-radius: 10px;
   margin-top: 20px;
-  width: 334px;
+  width: 100%;
   height: 257px;
   &:hover {
     border: 1px solid red;
@@ -562,7 +566,6 @@ const Position = styled.div`
 `;
 
 const WhiteBox = styled.div`
-  padding-top: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

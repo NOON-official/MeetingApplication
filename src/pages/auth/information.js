@@ -2,11 +2,11 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, Select } from 'antd';
-import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
 import BinaryButton from '../../components/Button/BinaryButton';
 import Age from '../../asset/Age';
 import { usePatchInformationMutation } from '../../features/api/userApi';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 // pass 연동 후 삭제 예정!!!
 function ApplyInformation() {
@@ -33,7 +33,7 @@ function ApplyInformation() {
   };
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <Title>
         <Maintitle>기본 정보를 입력해주세요.</Maintitle>
         <Subtitle>추후에 수정이 불가능하니 한 번 더 확인해 주세요!</Subtitle>
@@ -72,7 +72,7 @@ function ApplyInformation() {
         </SubmitButton>
         <div>{ChannelTalk.hideChannelButton()}</div>
       </Footer>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

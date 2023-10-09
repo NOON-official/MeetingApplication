@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/Button/ApplyButton';
 import ProgressBar from '../../components/Apply/ProgressBar';
 import NotEnoughDateModal from '../../components/Modal/Apply/NotEnoughDateModal';
@@ -15,6 +14,7 @@ import ChannelTalk from '../../asset/ChannelTalk';
 import { submitStep3 } from '../../features/apply';
 import AreaAccordion from '../../components/Apply/AreaAccordion';
 import Area from '../../asset/Area';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply3Page() {
   const [openModal1, setOpenModal1] = useState(false);
@@ -71,7 +71,7 @@ export default function Apply3Page() {
   }, [selectCity, selectArea]);
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <NotEnoughDateModal open={openModal1} setModal={setModal1} />
       <NotEnoughPlaceModal open={openModal2} setModal={setModal2} />
       <IsPageCompleteModal open={openModal3} setModal={setModal3} />
@@ -108,7 +108,7 @@ export default function Apply3Page() {
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

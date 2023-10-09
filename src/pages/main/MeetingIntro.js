@@ -19,7 +19,7 @@ import { useGetTeamMembersCountTotalQuery } from '../../features/backendApi';
 import { useGetAgreementsQuery } from '../../features/api/userApi';
 import MainFooter from '../../layout/footer/MainFooter';
 import BottomFooter from '../../layout/footer/BottomFooter';
-import ChannelTalk from '../../asset/ChannelTalk';
+import HeaderBottomLayout from '../../layout/HeaderBottomLayout';
 
 export default function MeetingIntro() {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ export default function MeetingIntro() {
   }, [accessToken, agreements]);
 
   return (
-    <>
+    <HeaderBottomLayout backgroundColor="#f8f3f3">
       <Section>
         <CountTitle>
           <MainTitle>
@@ -121,8 +121,7 @@ export default function MeetingIntro() {
       </Section>
       <MainFooter />
       <BottomFooter />
-      <div>{ChannelTalk.hideChannelButton()}</div>
-    </>
+    </HeaderBottomLayout>
   );
 }
 
@@ -162,7 +161,7 @@ const ImgBox = styled.div`
 
 const Footer = styled.div`
   position: sticky;
-  bottom: 3%;
+  bottom: 20px;
 `;
 
 const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`

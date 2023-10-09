@@ -5,7 +5,6 @@ import { Carousel } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
 import ApplyButton from '../../components/Button/ApplyButton';
 import MatchingCompleteModal from '../../components/Modal/Matching/MatchingCompleteModal';
@@ -18,11 +17,22 @@ import DateText from '../../components/MainRecommend/DateText';
 import AreaText from '../../components/MainRecommend/AreaText';
 import DrinkText from '../../components/MainRecommend/DrinkText';
 import { logout } from '../../features/user/asyncActions';
+import MemberText from '../../components/MainRecommend/MemberText';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
-  const { areas, teamAvailableDate, drink, intro, kakaoId, members, teamName } =
-    applydata;
+  const {
+    areas,
+    teamAvailableDate,
+    drink,
+    intro,
+    kakaoId,
+    members,
+    teamName,
+    memberCount,
+    memberCounts,
+  } = applydata;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -82,7 +92,7 @@ export default function Apply9Page() {
   });
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <MatchingCompleteModal open={openModal} setModal={setModal} />
       <TeamProfile>
         <SCarousel dots>
@@ -117,6 +127,10 @@ export default function Apply9Page() {
               <Subtitle>카톡ID / 번호</Subtitle>
               <Content>{kakaoId}</Content>
             </TeamInfo>
+            <TeamInfo>
+              <Subtitle2>인원</Subtitle2>
+              <MemberText count={memberCount} more={memberCounts} />
+            </TeamInfo>
           </TextBox>
         </SCarousel>
         <TeamIntro>
@@ -132,7 +146,7 @@ export default function Apply9Page() {
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 
@@ -202,7 +216,7 @@ const Subtitle = styled.span`
   background-color: #ffeded;
   border-radius: 10px;
   padding: 3px 7px;
-  margin-right: 10%;
+  margin-right: 30px;
   font-weight: 600;
   font-size: 14px;
   color: #eb8888;
@@ -212,19 +226,8 @@ const Content = styled.div`
   font-weight: 500;
 `;
 
-const Subtitle2 = styled.span`
-  background-color: #ffeded;
-  border-radius: 10px;
-  padding: 3px 7px;
-  margin-right: 25%;
-  font-weight: 600;
-  font-size: 14px;
-  color: #eb8888;
-`;
-
-const SubContent = styled.div`
-  color: #777777;
-  font-weight: 400;
+const Subtitle2 = styled(Subtitle)`
+  margin-right: 80px;
 `;
 
 const TeamIntro = styled.div`

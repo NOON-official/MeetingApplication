@@ -10,34 +10,40 @@ export default function BottomTabs() {
   const myinfoMatch = useMatch('/myinfo');
 
   return (
-    <Container>
-      <Menu isactive={homeMatch}>
-        <SLink to="/" isactive={homeMatch}>
-          <MainHome />
-          <Text>홈</Text>
-        </SLink>
-      </Menu>
+    <Footer>
+      <Container>
+        <Menu isactive={homeMatch}>
+          <SLink to="/" isactive={homeMatch}>
+            <MainHome />
+            <Text>홈</Text>
+          </SLink>
+        </Menu>
 
-      <Menu isactive={matchingMatch}>
-        <SLink to="/matching/applied" isactive={matchingMatch}>
-          <MainHeart />
-          <Text>매칭조회</Text>
-        </SLink>
-      </Menu>
+        <Menu isactive={matchingMatch}>
+          <SLink to="/matching/applied" isactive={matchingMatch}>
+            <MainHeart />
+            <Text>매칭조회</Text>
+          </SLink>
+        </Menu>
 
-      <Menu isactive={myinfoMatch}>
-        <SLink to="/myinfo" isactive={myinfoMatch}>
-          <MainMyPage />
-          <Text>마이 페이지</Text>
-        </SLink>
-      </Menu>
-    </Container>
+        <Menu isactive={myinfoMatch}>
+          <SLink to="/myinfo" isactive={myinfoMatch}>
+            <MainMyPage />
+            <Text>마이 페이지</Text>
+          </SLink>
+        </Menu>
+      </Container>
+    </Footer>
   );
 }
 
-const Text = styled.div`
-  margin-top: 10%;
-  font-size: 14px;
+const Footer = styled.div`
+  position: fixed;
+  bottom: 0;
+  max-width: 425px;
+  width: 100%;
+  background-color: ${(props) => props.theme.background};
+  z-index: 10;
 `;
 
 const Container = styled.div`
@@ -52,23 +58,25 @@ const Container = styled.div`
 const Menu = styled.div`
   display: flex;
   align-items: center;
-  text-align: center;
   justify-content: center;
-  border-radius: 10px;
   width: 23%;
-  /* height: 30px; */
-  /* background-color: ${(props) =>
-    `${props.isactive ? props.theme.pink : props.theme.background}`}; */
+  border-radius: 10px;
+  text-align: center;
 `;
 
 const SLink = styled(Link)`
+  width: 100%;
   color: ${(props) => `${props.isactive ? '#eb8888' : '#6A6A6A'}`};
   font-weight: 400;
   font-size: 13px;
-  width: 100%;
   text-decoration: none;
 
   > svg {
     ${({ isactive }) => (isactive ? `fill: #eb8888` : `fill: #6A6A6A`)};
   }
+`;
+
+const Text = styled.div`
+  margin-top: 10%;
+  font-size: 14px;
 `;

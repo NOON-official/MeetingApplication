@@ -2,28 +2,24 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import MainLayout from '../../layout/MainLayout';
 import { ReactComponent as RightArrow } from '../../asset/svg/RightArrow.svg';
 import { ReactComponent as Glasses } from '../../asset/svg/Glasses.svg';
 import Section from '../../components/Section';
 import MenuBox, { LinkButton, MenuItem } from '../../components/MenuBox';
 import { logout } from '../../features/user/asyncActions';
 import SigninView from '../../components/Auth/SigninView';
+import HeaderBottomLayout from '../../layout/HeaderBottomLayout';
 
 function MyInfo() {
   const dispatch = useDispatch();
   const { accessToken } = useSelector((state) => state.user);
 
   if (!accessToken) {
-    return (
-      <MainLayout>
-        <SigninView />
-      </MainLayout>
-    );
+    return <SigninView />;
   }
 
   return (
-    <MainLayout>
+    <HeaderBottomLayout>
       <Section>
         <MyProfileBox>
           <Glasses />
@@ -109,7 +105,7 @@ function MyInfo() {
           로그아웃
         </LogoutButton>
       </Section>
-    </MainLayout>
+    </HeaderBottomLayout>
   );
 }
 

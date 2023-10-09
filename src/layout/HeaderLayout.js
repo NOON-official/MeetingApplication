@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 import TopHeader from './header/TopHeader';
 
-export default function ApplyLayout({ children }) {
+export default function HeaderLayout({ children }) {
   return (
     <Container>
-      <Header>
-        <TopHeader />
-      </Header>
+      <TopHeader />
       <Content>{children}</Content>
     </Container>
   );
@@ -20,19 +18,16 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const Header = styled.header`
-  width: 100%;
-`;
-
 const Content = styled.div`
-  max-width: 425px;
-  background-color: rgb(245, 245, 245);
-  height: 100vh;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  height: 100%;
+  width: 100%;
+  max-width: 425px;
+  padding-top: 50px;
+  background-color: rgb(245, 245, 245);
   overflow-y: auto;
 
   // 스크롤 기능은 있으나 안보이게
