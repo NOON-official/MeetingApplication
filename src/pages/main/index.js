@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import MainLayout from '../../layout/MainLayout';
 import Home from '../home';
 import MeetingIntro from './MeetingIntro';
 
@@ -16,7 +15,7 @@ function Main() {
     }
   }, [referralId]);
 
-  return <MainLayout>{accessToken ? <Home /> : <MeetingIntro />}</MainLayout>;
+  return accessToken ? <Home /> : <MeetingIntro />;
 }
 
 export default Main;

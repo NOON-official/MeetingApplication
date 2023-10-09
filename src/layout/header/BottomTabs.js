@@ -43,6 +43,7 @@ const Footer = styled.div`
   max-width: 425px;
   width: 100%;
   background-color: ${(props) => props.theme.background};
+  z-index: 10;
 `;
 
 const Container = styled.div`

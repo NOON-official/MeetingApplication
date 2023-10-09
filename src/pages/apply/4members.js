@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/ApplyLayout';
 import Teambox from '../../components/Apply/Teambox';
 import ApplyButton from '../../components/Button/ApplyButton';
 import ProgressBar from '../../components/Apply/ProgressBar';
 import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import { submitStep4 } from '../../features/apply';
 import ChannelTalk from '../../asset/ChannelTalk';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply4Page() {
   const { finishedStep, members, memberCount } = useSelector(
@@ -136,7 +136,7 @@ export default function Apply4Page() {
   });
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
       <ProgressBar page={4} />
       <Title>
@@ -153,7 +153,7 @@ export default function Apply4Page() {
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

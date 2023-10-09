@@ -42,7 +42,7 @@ const Header = styled.div`
   top: 0;
   width: 100%;
   max-width: 425px;
-  z-index: 1;
+  z-index: 10;
 `;
 
 const Container = styled.div`

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Input } from 'antd';
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/Button/ApplyButton';
 import ProgressBar from '../../components/Apply/ProgressBar';
 import { submitStep8 } from '../../features/apply';
@@ -13,6 +12,7 @@ import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModa
 import ChannelTalk from '../../asset/ChannelTalk';
 import { ReactComponent as Bookmark } from '../../asset/svg/Bookmark.svg';
 import { ReactComponent as Bottom } from '../../asset/svg/Baloon.svg';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply8Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -51,7 +51,7 @@ export default function Apply8Page() {
   }, [Id]);
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
       <ProgressBar page={8} />
       <Title>
@@ -100,7 +100,7 @@ export default function Apply8Page() {
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

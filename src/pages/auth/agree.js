@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
@@ -15,6 +14,7 @@ import {
 import backend from '../../util/backend';
 import { logout } from '../../features/user/asyncActions';
 import { API_URL } from '../../config/constants';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 function AgreePage() {
   const [agree1, setAgree1] = useState(false);
@@ -71,7 +71,7 @@ function AgreePage() {
   });
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <Title>
         <Maintitle>미팅학개론 이용을 위해</Maintitle>
         <Maintitle>약관에 동의해 주세요</Maintitle>
@@ -152,7 +152,7 @@ function AgreePage() {
         </SubmitButton>
         <div>{ChannelTalk.hideChannelButton()}</div>
       </Footer>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 
