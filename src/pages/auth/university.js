@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
-import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as SearchIcon } from '../../asset/svg/SearchIcon.svg';
 import { ReactComponent as Bottom } from '../../asset/svg/B.svg';
 import { ReactComponent as Xbutton } from '../../asset/svg/Xbutton.svg';
@@ -9,6 +8,7 @@ import Universities from '../../asset/Universities';
 import ChannelTalk from '../../asset/ChannelTalk';
 import { usePatchUniversityMutation } from '../../features/api/userApi';
 import FreeTingModal from '../../components/Modal/Ting/FreeTingModal';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function ApplyUniversity() {
   const [university] = usePatchUniversityMutation();
@@ -35,7 +35,7 @@ export default function ApplyUniversity() {
   };
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <FreeTingModal open={tingModal} setModal={setTingModal} />
       <Title>
         <Maintitle>본인 대학교를 입력해주세요</Maintitle>
@@ -93,7 +93,7 @@ export default function ApplyUniversity() {
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

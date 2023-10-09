@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Slider } from 'antd';
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/Button/ApplyButton';
 import ProgressBar from '../../components/Apply/ProgressBar';
 import ChooseButton from '../../components/Button/ChooseButton';
 import { submitStep6 } from '../../features/apply';
 import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply6Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -95,7 +95,7 @@ export default function Apply6Page() {
   const formatter = (value) => `${value}세`;
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
       <ProgressBar page={6} />
       <Title>
@@ -146,7 +146,7 @@ export default function Apply6Page() {
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

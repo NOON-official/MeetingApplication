@@ -1,19 +1,11 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import TopHeader from './header/TopHeader';
-import BottomTabs from './header/BottomTabs';
-import MyTeamProfile from '../components/Modal/Profile/MyTeamProfileModal';
 import MainMatchingHeader from './header/MainMatchingHeader';
 import { useGetMyTeamIdQuery } from '../features/api/userApi';
+import HeaderBottomLayout from './HeaderBottomLayout';
 
 export default function MatchingLayout({ children }) {
-  const [openMyTeamProfile, setOpenMyTeamProfile] = useState(false);
   const { data: myTeamId } = useGetMyTeamIdQuery();
-
-  const setModal = (bool) => {
-    setOpenMyTeamProfile(bool);
-  };
 
   const activeStyle = {
     padding: '4px',
@@ -31,9 +23,7 @@ export default function MatchingLayout({ children }) {
   };
 
   return (
-    <Container>
-      <TopHeader />
-      <MyTeamProfile open={openMyTeamProfile} setModal={setModal} />
+    <HeaderBottomLayout>
       <Section>
         {myTeamId ? (
           <MainMatchingHeader title="프로필 조회" />
@@ -63,28 +53,16 @@ export default function MatchingLayout({ children }) {
         </Header>
       </Section>
       <Content>{children}</Content>
-      <BottomTabs />
-    </Container>
+    </HeaderBottomLayout>
   );
 }
-
-const Container = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  overflow: hidden;
-`;
 
 const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   max-width: 425px;
-  height: 400px;
-  padding-top: 50px;
   background-color: #ffffff;
 `;
 
@@ -99,15 +77,6 @@ const Header = styled.div`
 const Content = styled.div`
   max-width: 425px;
   width: 100%;
-  height: 100%;
-  padding-bottom: 150px;
+  padding-bottom: 85px;
   background-color: ${(props) => props.theme.background};
-  overflow-y: auto;
-
-  // 스크롤 기능은 있으나 안보이게
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
-  &::-webkit-scrollbar {
-    display: none; /* 크롬, 사파리, 오페라, 엣지 */
-  }
 `;

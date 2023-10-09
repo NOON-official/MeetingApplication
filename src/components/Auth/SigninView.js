@@ -8,6 +8,7 @@ import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import { ReactComponent as Seconds } from '../../asset/svg/30seconds.svg';
 import { setAccessToken } from '../../features/user';
 import KakaoLoginLink from './KakaoLoginLink';
+import HeaderBottomLayout from '../../layout/HeaderBottomLayout';
 
 export default function SigninView() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,33 +27,36 @@ export default function SigninView() {
   }, [searchParams]);
 
   return (
-    <Container>
-      <ImageContainer>
-        <BigO />
-      </ImageContainer>
-      <SigninMainDescription>로그인 후 이용해 주세요</SigninMainDescription>
-      <SigninSubDescription>
-        미팅학개론을 이용하기 위해서는
-        <br />
-        카카오톡 로그인이 필요해요.
-      </SigninSubDescription>
-      <KakaoLink>
-        <SSeconds />
-        <KakaoButton icon={<KakaoSignin />} block>
-          카카오 로그인
-        </KakaoButton>
-      </KakaoLink>
-    </Container>
+    <HeaderBottomLayout backgroundColor="#ffffff">
+      <Container>
+        <ImageContainer>
+          <BigO />
+        </ImageContainer>
+        <SigninMainDescription>로그인 후 이용해 주세요</SigninMainDescription>
+        <SigninSubDescription>
+          미팅학개론을 이용하기 위해서는
+          <br />
+          카카오톡 로그인이 필요해요.
+        </SigninSubDescription>
+        <KakaoLink>
+          <SSeconds />
+          <KakaoButton icon={<KakaoSignin />} block>
+            카카오 로그인
+          </KakaoButton>
+        </KakaoLink>
+      </Container>
+    </HeaderBottomLayout>
   );
 }
 
 const Container = styled.div`
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 10%;
-  height: 100%;
-  background-color: #fbfaf9;
+  align-items: center;
 `;
 
 const ImageContainer = styled.div`
