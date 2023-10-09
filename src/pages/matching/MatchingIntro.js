@@ -8,11 +8,11 @@ import Matching2 from '../../asset/img/Matching2.png';
 import Matching3 from '../../asset/img/Matching3.png';
 import Matching4 from '../../asset/img/Matching4.png';
 import Matching5 from '../../asset/img/Matching5.png';
-import NoLoginLayout from '../../layout/NoLoginLayout';
 import { ReactComponent as KakaoSignin } from '../../asset/svg/KakaoSignin.svg';
 import { ReactComponent as Seconds } from '../../asset/svg/30seconds.svg';
 import { setAccessToken } from '../../features/user';
 import KakaoLoginLink from '../../components/Auth/KakaoLoginLink';
+import HeaderBottomLayout from '../../layout/HeaderBottomLayout';
 
 export default function MatchingIntro() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,7 +37,7 @@ export default function MatchingIntro() {
   };
 
   return (
-    <NoLoginLayout>
+    <HeaderBottomLayout backgroundColor="#ffffff">
       <Slider>
         <SCarousel {...setting}>
           <SImg src={Matching1} />
@@ -57,16 +57,16 @@ export default function MatchingIntro() {
           </div>
         </SCarousel>
       </Slider>
-    </NoLoginLayout>
+    </HeaderBottomLayout>
   );
 }
 
 const Slider = styled.div`
   margin-top: 10px;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  justify-content: space-between;
   align-items: center;
   &:hover {
     cursor: pointer;
@@ -76,6 +76,7 @@ const Slider = styled.div`
 const SCarousel = styled(Carousel)`
   width: 100vw;
   max-width: 425px;
+  z-index: 1;
 
   .slick-dots-top {
     margin-top: 20px;

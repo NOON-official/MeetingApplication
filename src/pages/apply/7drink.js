@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Slider } from 'antd';
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/Button/ApplyButton';
 import ProgressBar from '../../components/Apply/ProgressBar';
 import { submitStep7 } from '../../features/apply';
@@ -14,6 +13,7 @@ import ChannelTalk from '../../asset/ChannelTalk';
 import ChangeCountButton from '../../components/Button/ChangeCountButton';
 import { ReactComponent as Whale } from '../../asset/svg/Whale.svg';
 import { ReactComponent as Alchol } from '../../asset/svg/Alchol.svg';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply7Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -103,7 +103,7 @@ export default function Apply7Page() {
   }, [alchol, changeCount]);
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <IsPageCompleteModal open={openModal} setModal={setModal} />
       <ProgressBar page={7} />
 
@@ -154,7 +154,7 @@ export default function Apply7Page() {
         </ButtonBox2>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

@@ -1,10 +1,10 @@
 import SigninView from '../../components/Auth/SigninView';
-import ApplyLayout from '../../layout/ApplyLayout';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function AuthSigninPage() {
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <SigninView />
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }

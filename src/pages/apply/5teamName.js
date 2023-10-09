@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'antd';
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/Button/ApplyButton';
 import ProgressBar from '../../components/Apply/ProgressBar';
 import { submitStep5 } from '../../features/apply';
 import NotEnoughIntroModal from '../../components/Modal/Apply/NotEnoughInroModal';
 import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
@@ -68,7 +68,7 @@ export default function Apply5Page() {
   };
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <NotEnoughIntroModal open={openModal} setModal={setModal} />
       <IsPageCompleteModal open={openModal2} setModal={setModal2} />
       <ProgressBar page={5} />
@@ -123,7 +123,7 @@ export default function Apply5Page() {
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

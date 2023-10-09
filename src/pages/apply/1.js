@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/ApplyLayout';
 import ProgressBar from '../../components/Apply/ProgressBar';
 import { ReactComponent as Bottom } from '../../asset/svg/B.svg';
 import { submitStep1, APPLY_STORAGE_KEY } from '../../features/apply';
@@ -12,6 +11,7 @@ import ApplyButton from '../../components/Button/ApplyButton';
 import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModal';
 import ChannelTalk from '../../asset/ChannelTalk';
 import BeforeApplyModal from '../../components/Modal/Apply/BeforeApplyModal';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply1Page() {
   const [beforeApplyModal, setBeforeApplyModal] = useState(true);
@@ -62,7 +62,7 @@ export default function Apply1Page() {
   }, [meetingMember]);
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <BeforeApplyModal
         open={beforeApplyModal}
         setModal={() => setBeforeApplyModal((prev) => !prev)}
@@ -109,9 +109,9 @@ export default function Apply1Page() {
           <ApplyButton onClick={handleBefore}>이전</ApplyButton>
           <ApplyButton onClick={handleSubmit}>다음</ApplyButton>
         </ButtonBox>
-        <div>{ChannelTalk.hideChannelButton()}</div>
       </Footer>
-    </ApplyLayout>
+      <div>{ChannelTalk.hideChannelButton()}</div>
+    </HeaderLayout>
   );
 }
 
@@ -177,6 +177,9 @@ const SBottom = styled(Bottom)`
 `;
 
 const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 90%;
   margin: auto 0 10%;
 `;

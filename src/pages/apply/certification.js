@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 
 import { Input, Button, Modal } from 'antd';
 import backend from '../../util/backend';
-import ApplyLayout from '../../layout/ApplyLayout';
 import { ReactComponent as CheckValid } from '../../asset/svg/CheckValid.svg';
 import { ReactComponent as ModalTextPhone } from '../../asset/svg/ModalTextPhone.svg';
 import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 function CertificationPage() {
   const [vaildcheck, setValidCheck] = useState(false);
@@ -62,7 +62,7 @@ function CertificationPage() {
   }, [authorizeNumber]);
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <Modal
         open={openModal}
         footer={null}
@@ -140,7 +140,7 @@ function CertificationPage() {
         </SubmitButton>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

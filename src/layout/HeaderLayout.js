@@ -1,21 +1,17 @@
 import styled from 'styled-components';
 import TopHeader from './header/TopHeader';
-import BottomTabs from './header/BottomTabs';
 
-function MainLayout({ children }) {
+export default function HeaderLayout({ children }) {
   return (
     <Container>
       <TopHeader />
       <Content>{children}</Content>
-      <BottomTabs />
     </Container>
   );
 }
-export default MainLayout;
 
 const Container = styled.div`
   height: 100vh;
-  background-color: ${(props) => props.theme.background};
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -23,12 +19,16 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
   width: 100%;
   max-width: 425px;
-  height: 100%;
-  padding: 7vh 0 90px;
-  background-color: ${(props) => props.theme.background};
-  overflow: auto;
+  padding-top: 50px;
+  background-color: rgb(245, 245, 245);
+  overflow-y: auto;
 
   // 스크롤 기능은 있으나 안보이게
   -ms-overflow-style: none; /* 인터넷 익스플로러 */

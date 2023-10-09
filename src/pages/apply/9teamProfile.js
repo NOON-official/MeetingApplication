@@ -5,7 +5,6 @@ import { Carousel } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ApplyLayout from '../../layout/ApplyLayout';
 import ChannelTalk from '../../asset/ChannelTalk';
 import ApplyButton from '../../components/Button/ApplyButton';
 import MatchingCompleteModal from '../../components/Modal/Matching/MatchingCompleteModal';
@@ -19,6 +18,7 @@ import AreaText from '../../components/MainRecommend/AreaText';
 import DrinkText from '../../components/MainRecommend/DrinkText';
 import { logout } from '../../features/user/asyncActions';
 import MemberText from '../../components/MainRecommend/MemberText';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply9Page() {
   const { ...applydata } = useSelector((store) => store.apply);
@@ -92,7 +92,7 @@ export default function Apply9Page() {
   });
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <MatchingCompleteModal open={openModal} setModal={setModal} />
       <TeamProfile>
         <SCarousel dots>
@@ -146,7 +146,7 @@ export default function Apply9Page() {
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 

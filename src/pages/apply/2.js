@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ChooseButton from '../../components/Button/ChooseButton';
 import theme from '../../style/theme';
-import ApplyLayout from '../../layout/ApplyLayout';
 import ApplyButton from '../../components/Button/ApplyButton';
 import ProgressBar from '../../components/Apply/ProgressBar';
 import NotEnoughDateModal from '../../components/Modal/Apply/NotEnoughDateModal';
@@ -14,6 +13,7 @@ import IsPageCompleteModal from '../../components/Modal/Apply/IsPageCompleteModa
 import { ReactComponent as Earth } from '../../asset/svg/Earth.svg';
 import ChannelTalk from '../../asset/ChannelTalk';
 import { submitStep2 } from '../../features/apply';
+import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply2() {
   const [openModal1, setOpenModal1] = useState(false);
@@ -83,7 +83,7 @@ export default function Apply2() {
   }, [selectedDate]);
 
   return (
-    <ApplyLayout>
+    <HeaderLayout>
       <NotEnoughDateModal open={openModal1} setModal={setModal1} />
       <NotEnoughPlaceModal open={openModal2} setModal={setModal2} />
       <IsPageCompleteModal open={openModal3} setModal={setModal3} />
@@ -120,7 +120,7 @@ export default function Apply2() {
         </ButtonBox>
       </Footer>
       <div>{ChannelTalk.hideChannelButton()}</div>
-    </ApplyLayout>
+    </HeaderLayout>
   );
 }
 
@@ -141,6 +141,9 @@ const Pink = styled.span`
 `;
 
 const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 90%;
   margin: auto 0 10%;
 `;

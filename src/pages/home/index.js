@@ -14,6 +14,7 @@ import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../components/Button/PrimaryButton';
 import { API_URL } from '../../config/constants';
+import HeaderBottomLayout from '../../layout/HeaderBottomLayout';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function Home() {
 
   if (myTeamIdSuccess && myInfoSuccess)
     return (
-      <>
+      <HeaderBottomLayout>
         <PrimaryModal
           title=" "
           open={!myInfo.university}
@@ -96,7 +97,7 @@ export default function Home() {
             <Blur />
           </Container2>
         )}
-      </>
+      </HeaderBottomLayout>
     );
 }
 
