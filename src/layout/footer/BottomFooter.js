@@ -37,8 +37,7 @@ export default BottomFooter;
 
 const Footer = styled.div`
   width: 90%;
-  margin: 30px 0 0 30px;
-  padding-bottom: 100px;
+  margin: 30px 0 10px 30px;
 `;
 
 const InfoTitle = styled.div`

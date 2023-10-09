@@ -161,7 +161,7 @@ const ImgBox = styled.div`
 
 const Footer = styled.div`
   position: sticky;
-  bottom: 100px;
+  bottom: 20px;
 `;
 
 const FixedButton = styled(Button).attrs({ type: 'primary', size: 'large' })`
