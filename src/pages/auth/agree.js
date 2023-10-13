@@ -14,6 +14,7 @@ import {
 import backend from '../../util/backend';
 import { logout } from '../../features/user/asyncActions';
 import HeaderLayout from '../../layout/HeaderLayout';
+import { API_URL } from '../../config/constants';
 
 function AgreePage() {
   const [agree1, setAgree1] = useState(false);
@@ -41,24 +42,23 @@ function AgreePage() {
         age: agree3,
         marketing: agree4,
       }).unwrap();
-      navigate('/apply/information');
       // pass 연동
-      // const dataToSend = {
-      //   ...hash,
-      //   Ret_URL: `${API_URL}/auth/hash`,
-      // };
+      const dataToSend = {
+        ...hash,
+        Ret_URL: `${API_URL}/auth/hash`,
+      };
 
-      // const queryString = Object.keys(dataToSend)
-      //   .map(
-      //     (key) =>
-      //       `${encodeURIComponent(key)}=${encodeURIComponent(dataToSend[key])}`,
-      //   )
-      //   .join('&');
+      const queryString = Object.keys(dataToSend)
+        .map(
+          (key) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(dataToSend[key])}`,
+        )
+        .join('&');
 
-      // window.open(
-      //   `https://cert.kcp.co.kr/kcp_cert/cert_view.jsp?${queryString}`,
-      //   '_parent',
-      // );
+      window.open(
+        `https://cert.kcp.co.kr/kcp_cert/cert_view.jsp?${queryString}`,
+        '_parent',
+      );
     } catch (err) {
       window.alert('처음부터 다시 시도해주세요');
       await backend.delete('/auth/account', {

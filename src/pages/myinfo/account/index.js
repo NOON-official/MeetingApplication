@@ -16,7 +16,6 @@ import {
   useGetMyInfoQuery,
 } from '../../../features/api/userApi';
 import EditProfile from '../../../components/MainRecommend/EditProfile';
-import { API_URL } from '../../../config/constants';
 
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
@@ -45,30 +44,7 @@ export default function Account() {
         <>
           <Section my="12px">
             <InfoCard>
-              <Subtitle
-                onClick={() => {
-                  const dataToSend = {
-                    ...hash,
-                    Ret_URL: `${API_URL}/auth/hash`,
-                  };
-
-                  const queryString = Object.keys(dataToSend)
-                    .map(
-                      (key) =>
-                        `${encodeURIComponent(key)}=${encodeURIComponent(
-                          dataToSend[key],
-                        )}`,
-                    )
-                    .join('&');
-
-                  window.open(
-                    `https://cert.kcp.co.kr/kcp_cert/cert_view.jsp?${queryString}`,
-                    '_parent',
-                  );
-                }}
-              >
-                내 정보
-              </Subtitle>
+              <Subtitle>내 정보</Subtitle>
               <Row>
                 <Col span={4}>이름</Col>
                 <Col span={15}>{myInfo.nickname}</Col>

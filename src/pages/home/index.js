@@ -14,6 +14,7 @@ import { ReactComponent as Blur } from '../../asset/svg/RecommendBlur.svg';
 import PrimaryModal from '../../components/Modal/PrimaryModal';
 import PrimaryButton from '../../components/Button/PrimaryButton';
 import HeaderBottomLayout from '../../layout/HeaderBottomLayout';
+import { API_URL } from '../../config/constants';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -45,25 +46,24 @@ export default function Home() {
             </span>
             <PrimaryButton
               onClick={() => {
-                navigate('/apply/information');
-                // const dataToSend = {
-                //   ...hash,
-                //   Ret_URL: `${API_URL}/auth/hash`,
-                // };
+                const dataToSend = {
+                  ...hash,
+                  Ret_URL: `${API_URL}/auth/hash`,
+                };
 
-                // const queryString = Object.keys(dataToSend)
-                //   .map(
-                //     (key) =>
-                //       `${encodeURIComponent(key)}=${encodeURIComponent(
-                //         dataToSend[key],
-                //       )}`,
-                //   )
-                //   .join('&');
+                const queryString = Object.keys(dataToSend)
+                  .map(
+                    (key) =>
+                      `${encodeURIComponent(key)}=${encodeURIComponent(
+                        dataToSend[key],
+                      )}`,
+                  )
+                  .join('&');
 
-                // window.open(
-                //   `https://cert.kcp.co.kr/kcp_cert/cert_view.jsp?${queryString}`,
-                //   '_parent',
-                // );
+                window.open(
+                  `https://cert.kcp.co.kr/kcp_cert/cert_view.jsp?${queryString}`,
+                  '_parent',
+                );
               }}
             >
               입력하러 가기
