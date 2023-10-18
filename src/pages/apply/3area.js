@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,7 +20,7 @@ export default function Apply3Page() {
   const [openModal1, setOpenModal1] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
-  const { finishedStep, areas, city } = useSelector((store) => store.apply);
+  const { areas, city } = useSelector((store) => store.apply);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,13 +32,6 @@ export default function Apply3Page() {
   const handleButtonClick = (index) => {
     setOpenIndex(index === openIndex ? null : index);
   };
-
-  useEffect(() => {
-    if (finishedStep < 2) {
-      window.alert('잘못된 접근입니다');
-      navigate(`/apply/${finishedStep + 1}`);
-    }
-  }, [finishedStep]);
 
   const setModal1 = (bool) => {
     setOpenModal1(bool);
