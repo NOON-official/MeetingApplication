@@ -27,7 +27,7 @@ export default function Home() {
       <HeaderBottomLayout>
         <PrimaryModal
           title=" "
-          open={!myInfo.university}
+          open={!myInfo.university || !myInfo.phone}
           footer={null}
           closeIcon
         >
