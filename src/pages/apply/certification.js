@@ -1,7 +1,6 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 import { Input, Button, Modal } from 'antd';
 import backend from '../../util/backend';
@@ -11,9 +10,9 @@ import { ReactComponent as CheckInvalid } from '../../asset/svg/CheckInvalid.svg
 import ChannelTalk from '../../asset/ChannelTalk';
 import HeaderLayout from '../../layout/HeaderLayout';
 
+// 전화번호 인증페이지 (PASS 연동 후 사용안함)
 function CertificationPage() {
   const [vaildcheck, setValidCheck] = useState(false);
-  const { finishedStep } = useSelector((store) => store.apply);
 
   const [p, setP] = useState('');
   const [authorizeNumber, setAuthorizeNumber] = useState('');
@@ -21,13 +20,6 @@ function CertificationPage() {
   const [submitOk1, setSubmitOk1] = useState(false);
   const navigate = useNavigate();
   const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-
-  useEffect(() => {
-    if (finishedStep < 5) {
-      window.alert('잘못된 접근입니다');
-      navigate(`/apply/${finishedStep + 1}`);
-    }
-  }, [finishedStep]);
 
   const handlePhoneNumber = useCallback(
     (e) => {

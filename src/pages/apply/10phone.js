@@ -11,6 +11,7 @@ import {
 } from '../../features/api/userApi';
 import HeaderLayout from '../../layout/HeaderLayout';
 
+// 전화번호 인증페이지 (PASS 연동 후 사용안함)
 export default function Apply10Page() {
   const [phoneNumber] = usePostPhoneNumberMutation();
   const [phoneCode] = usePostPhoneCodeMutation();

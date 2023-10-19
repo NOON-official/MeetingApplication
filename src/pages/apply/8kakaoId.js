@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,18 +16,11 @@ import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply8Page() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, kakaoId } = useSelector((store) => store.apply);
+  const { kakaoId } = useSelector((store) => store.apply);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [Id, setId] = useState(kakaoId);
-
-  useEffect(() => {
-    if (finishedStep < 7) {
-      window.alert('잘못된 접근입니다');
-      navigate(`/apply/${finishedStep + 1}`);
-    }
-  }, [finishedStep]);
 
   const setModal = (bool) => {
     setOpenModal(bool);

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,7 +17,7 @@ import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply7Page() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, drink, memberCount, memberCounts } = useSelector(
+  const { drink, memberCount, memberCounts } = useSelector(
     (store) => store.apply,
   );
   const dispatch = useDispatch();
@@ -25,13 +25,6 @@ export default function Apply7Page() {
 
   const [alchol, setAlchol] = useState(drink);
   const [changeCount, setChangeCount] = useState(memberCounts);
-
-  useEffect(() => {
-    if (finishedStep < 6) {
-      window.alert('잘못된 접근입니다');
-      navigate(`/apply/${finishedStep + 1}`);
-    }
-  }, [finishedStep]);
 
   const marks2 = {
     1: {
