@@ -27,7 +27,12 @@ export default function MatchingSucceed() {
   if (isSuccess)
     return (
       <MatchingLayout>
-        {succeedData.length !== 0 ? (
+        {succeedData.length === 0 ? (
+          <NoMeetingContainer>
+            <Title2>최종 성사된 미팅이 없어요</Title2>
+            <NoSucceedMatching />
+          </NoMeetingContainer>
+        ) : (
           <>
             <Container>
               <Text>
@@ -66,7 +71,7 @@ export default function MatchingSucceed() {
                       }
                       closeModal={() => closeModal2(id)}
                       teamId={id}
-                      state={'succeed'}
+                      state="succeed"
                     />
                     <ApplicationDate>
                       {dayjs(matchedAt).format('M월 DD일')}
@@ -102,11 +107,6 @@ export default function MatchingSucceed() {
               })}
             </Container2>
           </>
-        ) : (
-          <NoMeetingContainer>
-            <Title2>최종 성사된 미팅이 없어요</Title2>
-            <NoSucceedMatching />
-          </NoMeetingContainer>
         )}
       </MatchingLayout>
     );

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'antd';
@@ -16,18 +16,11 @@ export default function Apply5Page() {
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
 
-  const { finishedStep, intro, teamName } = useSelector((store) => store.apply);
+  const { intro, teamName } = useSelector((store) => store.apply);
   const [introduce, setIntroduce] = useState(intro);
   const [name, setName] = useState(teamName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (finishedStep < 4) {
-      window.alert('잘못된 접근입니다');
-      navigate(`/apply/${finishedStep + 1}`);
-    }
-  }, [finishedStep]);
 
   const handleChange = useCallback((e) => {
     setIntroduce(e.target.value);

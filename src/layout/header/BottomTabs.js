@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { Link, useMatch } from 'react-router-dom';
 import { ReactComponent as MainHome } from '../../asset/svg/MainHome.svg';
+import { ReactComponent as MainMeeting } from '../../asset/svg/MagnifierBlack.svg';
 import { ReactComponent as MainHeart } from '../../asset/svg/MainHeart.svg';
 import { ReactComponent as MainMyPage } from '../../asset/svg/MainMyPage.svg';
 
 export default function BottomTabs() {
   const homeMatch = useMatch('/');
+  const meetingMatch = useMatch('/meeting');
   const matchingMatch = useMatch('/matching/:id');
   const myinfoMatch = useMatch('/myinfo');
 
@@ -19,10 +21,17 @@ export default function BottomTabs() {
           </SLink>
         </Menu>
 
+        <Menu isactive={meetingMatch}>
+          <SLink to="/meeting" isactive={meetingMatch}>
+            <MainMeeting />
+            <Text>추천 미팅</Text>
+          </SLink>
+        </Menu>
+
         <Menu isactive={matchingMatch}>
           <SLink to="/matching/applied" isactive={matchingMatch}>
             <MainHeart />
-            <Text>매칭조회</Text>
+            <Text>매칭 조회</Text>
           </SLink>
         </Menu>
 
@@ -58,7 +67,7 @@ const Container = styled.div`
 const Menu = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 23%;
   border-radius: 10px;
   text-align: center;
@@ -72,7 +81,10 @@ const SLink = styled(Link)`
   text-decoration: none;
 
   > svg {
-    ${({ isactive }) => (isactive ? `fill: #eb8888` : `fill: #6A6A6A`)};
+    ${({ isactive }) =>
+      isactive
+        ? `fill: #eb8888; stroke: #eb8888;`
+        : `fill: #6A6A6A; stroke: #6A6A6A;`};
   }
 `;
 
