@@ -62,7 +62,6 @@ export default function MatchingIntro() {
 }
 
 const Slider = styled.div`
-  margin-top: 10px;
   width: 100%;
   height: 100%;
   display: flex;
