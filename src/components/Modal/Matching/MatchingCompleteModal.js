@@ -46,7 +46,6 @@ export default function MatchingCompleteModal({ open, setModal }) {
                 dispatch(createTeam(filteredData));
                 setModal(false);
                 navi('/');
-                window.location.reload();
               }}
             >
               미팅하러 가기

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -15,18 +15,9 @@ import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply6Page() {
   const [openModal, setOpenModal] = useState(false);
-  const { finishedStep, prefAge, prefVibes } = useSelector(
-    (store) => store.apply,
-  );
+  const { prefAge, prefVibes } = useSelector((store) => store.apply);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (finishedStep < 5) {
-      window.alert('잘못된 접근입니다');
-      navigate(`/apply/${finishedStep + 1}`);
-    }
-  }, [finishedStep]);
 
   const marks = {
     20: { label: <SliderText>20</SliderText> },
@@ -67,6 +58,16 @@ export default function Apply6Page() {
     [prefMood],
   );
 
+  const selectAllMood = () => {
+    if (prefMood.includes(1) && prefMood.includes(2)) {
+      setPrefMood([]);
+      return;
+    }
+    setPrefMood([1, 2]);
+  };
+
+  const formatter = (value) => `${value}세`;
+
   const handleBefore = useCallback(() => {
     navigate('/apply/5teamName');
   });
@@ -84,15 +85,6 @@ export default function Apply6Page() {
     );
     navigate('/apply/7drink');
   }, [ageRange, prefMood]);
-
-  const selectAllMood = () => {
-    if (prefMood.includes(1) && prefMood.includes(2)) {
-      setPrefMood([]);
-      return;
-    }
-    setPrefMood([1, 2]);
-  };
-  const formatter = (value) => `${value}세`;
 
   return (
     <HeaderLayout>

@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import Main from './pages/main';
 import Guide from './pages/guide';
 import MyInfo from './pages/myinfo';
 import Account from './pages/myinfo/account';
@@ -38,6 +37,8 @@ import Review from './pages/myinfo/review';
 import ChargeTing from './pages/myinfo/ting/chargeTing';
 import TingBuySuccessPage from './pages/myinfo/ting/buy/success';
 import TingBuyFailPage from './pages/myinfo/ting/buy/fail';
+import Meeting from './pages/meeting';
+import Home from './pages/home';
 
 const Router = createBrowserRouter([
   {
@@ -46,7 +47,11 @@ const Router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Main />,
+        element: <Home />,
+      },
+      {
+        path: 'meeting',
+        element: <Meeting />,
       },
       {
         path: 'guide',

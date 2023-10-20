@@ -37,14 +37,14 @@ export default BottomFooter;
 
 const Footer = styled.div`
   width: 90%;
-  margin: 30px 0 10px 30px;
+  margin: 20px auto;
 `;
 
 const InfoTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 72%;
+  width: 90%;
   height: 35px;
   font-weight: 700;
   font-size: 10px;

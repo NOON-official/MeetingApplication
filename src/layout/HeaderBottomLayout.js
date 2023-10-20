@@ -25,8 +25,8 @@ const Content = styled.div`
   max-width: 425px;
   width: 100%;
   height: 100%;
-  padding-top: 50px;
-  padding-bottom: 85px;
+  margin-top: 50px;
+  margin-bottom: 85px;
   background-color: ${(props) => props.color};
   overflow-y: auto;
 

@@ -64,30 +64,16 @@ export default function Apply9Page() {
   });
 
   const handleSubmit = useCallback(async () => {
-    if (myInfo.phone) {
-      try {
-        await post(filteredData).unwrap();
-        setOpenModal(true);
-      } catch (e) {
-        dispatch(logout());
-        localStorage.clear();
-        alert(
-          '죄송합니다. 신청 과정 중 에러가 발생했습니다. 다시 로그인해주세요!',
-        );
-        navigate('/');
-      }
-    } else {
-      try {
-        await post(filteredData).unwrap();
-        navigate('/apply/10phone');
-      } catch (e) {
-        dispatch(logout());
-        localStorage.clear();
-        alert(
-          '죄송합니다. 신청 과정 중 에러가 발생했습니다. 다시 로그인해주세요!',
-        );
-        navigate('/');
-      }
+    try {
+      await post(filteredData).unwrap();
+      setOpenModal(true);
+    } catch (e) {
+      dispatch(logout());
+      localStorage.clear();
+      alert(
+        '죄송합니다. 신청 과정 중 에러가 발생했습니다. 다시 로그인해주세요!',
+      );
+      navigate('/');
     }
   });
 

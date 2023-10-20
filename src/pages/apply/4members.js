@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useMemo, useState, useCallback, useEffect } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,9 +13,7 @@ import ChannelTalk from '../../asset/ChannelTalk';
 import HeaderLayout from '../../layout/HeaderLayout';
 
 export default function Apply4Page() {
-  const { finishedStep, members, memberCount } = useSelector(
-    (store) => store.apply,
-  );
+  const { members, memberCount } = useSelector((store) => store.apply);
   const [openModal, setOpenModal] = useState(false);
   const [member1, setMember1] = useState(members[0] || {});
   const [member2, setMember2] = useState(members[1] || {});
@@ -24,13 +22,6 @@ export default function Apply4Page() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (finishedStep < 3) {
-      window.alert('잘못된 접근입니다');
-      navigate(`/apply/${finishedStep + 1}`);
-    }
-  }, [finishedStep]);
 
   const setModal = (bool) => {
     setOpenModal(bool);
