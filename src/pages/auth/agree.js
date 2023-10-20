@@ -13,8 +13,8 @@ import {
 } from '../../features/api/userApi';
 import backend from '../../util/backend';
 import { logout } from '../../features/user/asyncActions';
-import { API_URL } from '../../config/constants';
 import HeaderLayout from '../../layout/HeaderLayout';
+import { API_URL } from '../../config/constants';
 
 function AgreePage() {
   const [agree1, setAgree1] = useState(false);
@@ -42,7 +42,7 @@ function AgreePage() {
         age: agree3,
         marketing: agree4,
       }).unwrap();
-
+      // pass 연동
       const dataToSend = {
         ...hash,
         Ret_URL: `${API_URL}/auth/hash`,

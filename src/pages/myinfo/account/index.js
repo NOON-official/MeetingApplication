@@ -11,12 +11,16 @@ import MyinfoLayout from '../../../layout/MyinfoLayout';
 import backend from '../../../util/backend';
 import Universities from '../../../asset/Universities';
 import { ReactComponent as UniversityMark } from '../../../asset/svg/UniversityMark.svg';
-import { useGetMyInfoQuery } from '../../../features/api/userApi';
+import {
+  useGetHashQuery,
+  useGetMyInfoQuery,
+} from '../../../features/api/userApi';
 import EditProfile from '../../../components/MainRecommend/EditProfile';
 
 export default function Account() {
   const [resignModalOpened, setResignModalOpened] = useState(false);
   const { data: myInfo } = useGetMyInfoQuery();
+  const { data: hash } = useGetHashQuery();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

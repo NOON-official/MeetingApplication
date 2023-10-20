@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Button, Carousel } from 'antd';
 import { useCallback, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import CounterBox from '../../components/CounterBox';
 import { ReactComponent as MainImg } from '../../asset/svg/MeetingHaek.svg';
@@ -19,7 +20,9 @@ import { useGetTeamMembersCountTotalQuery } from '../../features/backendApi';
 import { useGetAgreementsQuery } from '../../features/api/userApi';
 import MainFooter from '../../layout/footer/MainFooter';
 import BottomFooter from '../../layout/footer/BottomFooter';
+
 import HeaderBottomLayout from '../../layout/HeaderBottomLayout';
+import { API_URL } from '../../config/constants';
 
 export default function Home() {
   const navigate = useNavigate();
