@@ -1,12 +1,9 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { ReactComponent as UniversityMark } from '../../asset/svg/UniversityMark.svg';
 import { ReactComponent as UniversityMarkGray } from '../../asset/svg/UniversityMarkGray.svg';
 import useModalState from '../../hooks/useModalState';
 import OtherTeamProfileModal from '../../components/Modal/Profile/OtherTeamProfileModal';
-import StudentCardModal from '../../components/Modal/Studentcard/StudentCardModal';
 import {
-  useGetMyInfoQuery,
   useGetMyTeamIdQuery,
   useGetRecommendListQuery,
 } from '../../features/api/userApi';
@@ -14,20 +11,10 @@ import { ReactComponent as NoList } from '../../asset/svg/NoRecommend.svg';
 
 export default function RecommendList() {
   const { data: myTeamId } = useGetMyTeamIdQuery();
-  const { data: myinfo } = useGetMyInfoQuery();
   const { data: teamList, isSuccess } = useGetRecommendListQuery(undefined, {
     skip: !myTeamId,
   });
   const [modalState, openModal, closeModal] = useModalState(teamList);
-  const [studentCardModal, setStudentCardModal] = useState(false);
-
-  const handleOpen = (id) => {
-    if (myinfo?.approval) {
-      openModal(id);
-    } else {
-      setStudentCardModal(true);
-    }
-  };
 
   if (isSuccess && teamList.length === 0)
     return (
@@ -48,11 +35,6 @@ export default function RecommendList() {
 
         return (
           <TeamCard key={id}>
-            <StudentCardModal
-              open={studentCardModal}
-              setModal={setStudentCardModal}
-            />
-
             <OtherTeamProfileModal
               open={
                 modalState?.find((state) => state.teamId === id)?.open || false
@@ -70,7 +52,7 @@ export default function RecommendList() {
               <MemberCount>{`${memberCount}명`}</MemberCount>
             </Subtitle>
             <Info>{`${intro}`}</Info>
-            <Button onClick={() => handleOpen(id)}>자세히 보기</Button>
+            <Button onClick={() => openModal(id)}>자세히 보기</Button>
           </TeamCard>
         );
       })}
