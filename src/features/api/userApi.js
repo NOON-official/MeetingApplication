@@ -209,6 +209,11 @@ export const userApi = createApi({
       },
       invalidatesTags: ['Users'],
     }),
+    getTingHistory: builder.query({
+      query: () => ({ url: `users/tings/history` }),
+      transformResponse: (response) => response.tingHistories,
+      providesTags: ['Ting'],
+    }),
   }),
 });
 
@@ -239,4 +244,5 @@ export const {
   usePutRefuseMatchingMutation,
   useGetContactNumberQuery,
   usePostStudentCardMutation,
+  useGetTingHistoryQuery,
 } = userApi;
