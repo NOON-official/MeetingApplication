@@ -39,6 +39,7 @@ import TingBuySuccessPage from './pages/myinfo/ting/buy/success';
 import TingBuyFailPage from './pages/myinfo/ting/buy/fail';
 import Meeting from './pages/meeting';
 import Home from './pages/home';
+import Event from './pages/myinfo/event';
 
 const Router = createBrowserRouter([
   {
@@ -128,6 +129,10 @@ const Router = createBrowserRouter([
       {
         path: 'myinfo/review',
         element: <Review />,
+      },
+      {
+        path: 'myinfo/event',
+        element: <Event />,
       },
       {
         path: 'apply/agree',
