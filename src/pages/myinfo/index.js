@@ -74,7 +74,7 @@ function MyInfo() {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link>
+            <Link to="/myinfo/event">
               <LinkButton>
                 이벤트 <RightArrow />
               </LinkButton>

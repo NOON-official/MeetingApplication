@@ -1,17 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 import MyinfoLayout from '../../../layout/MyinfoLayout';
 import { ReactComponent as TingImg } from '../../../asset/svg/TingImg.svg';
-import { useGetTingCountQuery } from '../../../features/api/userApi';
+import {
+  useGetTingCountQuery,
+  useGetTingHistoryQuery,
+} from '../../../features/api/userApi';
+import Section from '../../../components/Section';
+import Flex from '../../../components/Flex';
 
 export default function Ting() {
   const navigate = useNavigate();
   const { data: ting } = useGetTingCountQuery();
+  const { data: history, isSuccess } = useGetTingHistoryQuery();
 
   return (
     <MyinfoLayout title="보유 팅">
-      <Section>
+      <Section style={{ textAlign: 'center' }}>
         <TeamBox>
           <TingImg />
           <Count>{ting}팅</Count>
@@ -36,16 +43,83 @@ export default function Ting() {
           팅 충전하러 가기
         </ChargeTingBtn>
       </Section>
+      {isSuccess && (
+        <Section mx="50px" my="24px" style={{ textAlign: 'left' }}>
+          <Title>나의 팅 이용 내역</Title>
+          <HistoryListBox>
+            {history.length === 0 ? (
+              <NoOrderText>결제 내역이 없습니다</NoOrderText>
+            ) : (
+              history.map((order) => (
+                <HistoryItem key={order.id}>
+                  <Flex>
+                    <div>
+                      <HistoryTitle>{order.case}</HistoryTitle>
+                      <HistoryDate>
+                        {dayjs(order.createdAt).format('YYYY/MM/DD HH:mm:ss')}
+                      </HistoryDate>
+                    </div>
+                    <Flex>
+                      {order.usingTing < 0 ? (
+                        <HistoryPriceBlack>
+                          {order.usingTing} 팅
+                        </HistoryPriceBlack>
+                      ) : (
+                        <HistoryPrice>+ {order.usingTing} 팅</HistoryPrice>
+                      )}
+                    </Flex>
+                  </Flex>
+                </HistoryItem>
+              ))
+            )}
+          </HistoryListBox>
+        </Section>
+      )}
     </MyinfoLayout>
   );
 }
 
-const Section = styled.div`
+const HistoryListBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 10px 0;
+  gap: 16px;
+`;
+
+const HistoryItem = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 80%;
-  margin: 0 auto;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+`;
+
+const HistoryTitle = styled.div`
+  font-size: 15px;
+  font-weight: 400;
+`;
+
+const HistoryPrice = styled.div`
+  font-weight: 500;
+  font-size: 16px;
+  color: #eb8888;
+`;
+
+const HistoryPriceBlack = styled(HistoryPrice)`
+  color: #000000;
+`;
+
+const HistoryDate = styled.div`
+  margin-top: 7px;
+  font-size: 12px;
+  color: #999;
+`;
+
+const NoOrderText = styled.div`
+  font-size: 14px;
+  color: #777777;
+  padding: 12px 0;
+  text-align: center;
 `;
 
 const Title = styled.div`
@@ -54,10 +128,6 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 50%;
   margin: 2% 0;
   font-size: 15px;
   font-weight: 300;
