@@ -15,7 +15,7 @@ export default function Ting() {
   const navigate = useNavigate();
   const { data: ting } = useGetTingCountQuery();
   const { data: history, isSuccess } = useGetTingHistoryQuery();
-  console.log(history);
+
   return (
     <MyinfoLayout title="보유 팅">
       <Section style={{ textAlign: 'center' }}>
