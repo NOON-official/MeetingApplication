@@ -43,9 +43,9 @@ export default function Ting() {
           팅 충전하러 가기
         </ChargeTingBtn>
       </Section>
-      {isSuccess && (
-        <Section mx="50px" my="24px" style={{ textAlign: 'left' }}>
-          <Title>나의 팅 이용 내역</Title>
+      <Section mx="50px" my="24px" style={{ textAlign: 'left' }}>
+        <Title>나의 팅 이용 내역</Title>
+        {isSuccess && (
           <HistoryListBox>
             {history.length === 0 ? (
               <NoOrderText>결제 내역이 없습니다</NoOrderText>
@@ -65,7 +65,7 @@ export default function Ting() {
                           {order.usingTing} 팅
                         </HistoryPriceBlack>
                       ) : (
-                        <HistoryPrice>+ {order.usingTing} 팅</HistoryPrice>
+                        <HistoryPrice>+{order.usingTing} 팅</HistoryPrice>
                       )}
                     </Flex>
                   </Flex>
@@ -73,8 +73,8 @@ export default function Ting() {
               ))
             )}
           </HistoryListBox>
-        </Section>
-      )}
+        )}
+      </Section>
     </MyinfoLayout>
   );
 }
