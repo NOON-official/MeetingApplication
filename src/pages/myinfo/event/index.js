@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Col, Row, notification } from 'antd';
 import Section from '../../../components/Section';
@@ -13,23 +13,17 @@ import { useGetUserReferralIdQuery } from '../../../features/api/userApi';
 export default function Event() {
   const [api, contextHolder] = notification.useNotification();
   const [isNoticeOpened, setIsNoticeOpened] = useState(false);
-  const { data: referralIdData } = useGetUserReferralIdQuery();
-  const inviteCode = 'ABCD123';
-
-  const referralId = useMemo(
-    () => referralIdData?.referralId || '',
-    [referralIdData],
-  );
+  const { data: referralId } = useGetUserReferralIdQuery();
 
   const copyToClipboard = useCallback(() => {
-    navigator.clipboard.writeText(inviteCode);
+    navigator.clipboard.writeText(referralId);
     api.open({
       key: 'clipboard',
       message: `클립보드에 복사되었습니다`,
       placement: 'bottom',
       className: 'ant-notification-no-description',
     });
-  }, [inviteCode]);
+  }, [referralId]);
 
   const shareThroughKakao = useCallback(() => {
     const url = `${CLIENT_URL}/?referralId=${referralId}`;
@@ -93,7 +87,7 @@ export default function Event() {
         <Row gutter={16}>
           <Col span={12}>
             <CopyButton block onClick={copyToClipboard}>
-              {inviteCode} <Copy />
+              {referralId} <Copy />
             </CopyButton>
           </Col>
           <Col span={12}>
