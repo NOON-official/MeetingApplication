@@ -58,8 +58,8 @@ export default function Home() {
         <CountTitle>
           <MainTitle>
             지금까지 &nbsp;
-            <CounterBox end={userCountData?.memberCount || 0} /> 명이
-            미팅학개론과 함께했어요
+            <CounterBox end={userCountData?.userCount || 0} /> 명이 미팅학개론과
+            함께했어요
           </MainTitle>
         </CountTitle>
         <ImgBox>
